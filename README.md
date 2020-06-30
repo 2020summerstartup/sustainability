@@ -1,5 +1,3 @@
-I'm trying again omg -Katie
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
