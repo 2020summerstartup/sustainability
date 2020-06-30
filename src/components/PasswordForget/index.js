@@ -9,7 +9,7 @@ const PasswordForgetPage = () => (
   <div className="base-container">
     <h1>You forgot your password :(</h1>
     <div className="image">
-      <img src={pwImg} />
+      <img alt='' src={pwImg} />
     </div>
     <PasswordForgetForm />
   </div>

@@ -11,7 +11,7 @@ const AccountPage = () => (
       <div className="base-container">
         <h1>Your Account: {authUser.email}</h1>
         <div className="image">
-          <img src={accountImg} />
+          <img alt='' src={accountImg} />
         </div>
         <h3>Forgot Password?</h3>
         <PasswordForgetForm />

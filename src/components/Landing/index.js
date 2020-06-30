@@ -5,7 +5,7 @@ const LandingPage = () => (
   <div className="base-container">
     <h1>Hello future friend!</h1>
     <div className="image">
-      <img src={welcomeImg} />
+      <img alt='' src={welcomeImg} />
     </div>
     <h3>Hey you should sign up to use our awesome app! :)</h3>
   </div>
