@@ -1,6 +1,13 @@
 import app from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase/app';
+import "firebase/auth";
+import "firebase/firestore";
 import 'firebase/database';
+// import firebase from 'firebase/app';
+// import firebase/auth from 'firebase/auth';
+
+
+// };
 
 const config = {
   apiKey: "AIzaSyBzlwDriPb6sKitZ3b9gnX9n6NOMbkCi9s",
@@ -12,6 +19,9 @@ const config = {
   appId: "1:72202621299:web:d8d210e7b9cb4765dcb506",
   measurementId: "G-682PQBF33P"
 };
+
+
+
 
 class Firebase {
   constructor() {
@@ -40,6 +50,11 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
  
   users = () => this.db.ref('users');
+
+  
   }
 
+  // firebase.initializeApp(firebaseConfig);
+  // export const auth = firebase.auth();
+  // export const firestore = firebase.firestore();
 export default Firebase;
