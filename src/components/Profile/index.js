@@ -5,19 +5,13 @@ import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
 import accountImg from "../../img/account.svg";
  
-const AccountPage = () => (
+const ProfilePage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div className="base-container">
         <h1>Your Account: {authUser.email}</h1>
-        <div className="image">
-          <img alt='' src={accountImg} />
-        </div>
-        <h3>Forgot Password?</h3>
-        <PasswordForgetForm />
-        <h3>-------------------------------------------</h3>
-        <h3>Change Password?</h3>
-        <PasswordChangeForm />
+    <h3> POINTS ACQUIRED😊: {}</h3>
+       
       </div>
     )}
   </AuthUserContext.Consumer>
@@ -25,4 +19,4 @@ const AccountPage = () => (
  
 const condition = authUser => !!authUser;
  
-export default withAuthorization(condition)(AccountPage);
+export default withAuthorization(condition)(ProfilePage);

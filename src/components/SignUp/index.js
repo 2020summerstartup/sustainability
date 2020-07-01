@@ -9,7 +9,7 @@ const SignUpPage = () => (
   <div className="base-container">
     <h1 className="header">Register</h1>
     <div className="image">
-      <img src={signupImg} />
+      <img alt='' src={signupImg} />
     </div>
     <SignUpForm />
   </div>
@@ -116,6 +116,7 @@ class SignUpFormBase extends Component {
         <button disabled={isInvalid} type="submit" className="button">
           Sign Up
         </button>
+        
 
         {error && <p>{error.message}</p>}
       </form>
