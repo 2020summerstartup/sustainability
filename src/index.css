@@ -133,3 +133,15 @@ input:focus {
   display: inline-block;
   color: darkgreen;
 }
+
+/* Trying to add new fonts to the app */
+
+body {
+  font-family: 'Open Sans', sans-serif
+}
+.heading {
+  font-weight: 700;
+}
+.subheading {
+  font-weight: 400;
+}

@@ -1,16 +1,16 @@
 import React from 'react';
  
 import { AuthUserContext, withAuthorization } from '../Session';
-import { PasswordForgetForm } from '../PasswordForget';
-import PasswordChangeForm from '../PasswordChange';
-import accountImg from "../../img/account.svg";
+//import { PasswordForgetForm } from '../PasswordForget';
+//import PasswordChangeForm from '../PasswordChange';
+//import accountImg from "../../img/account.svg";
  
 const ProfilePage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div className="base-container">
         <h1>Your Account: {authUser.email}</h1>
-    <h3> POINTS ACQUIRED😊: {}</h3>
+    <h3> POINTS ACQUIRED <span role="img" aria-label="smiley">😊</span>: {}</h3>
        
       </div>
     )}

@@ -79,8 +79,8 @@ const NavigationAuth = () => (
           <li class="nav-item">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="trophy" className="icons" />
-              <Link to={ROUTES.ADMIN} class="link-text">
-                Admin
+              <Link to={ROUTES.COMPETE} class="link-text">
+                Compete
               </Link>
             </a>
           </li>

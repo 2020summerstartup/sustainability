@@ -1,5 +1,5 @@
 import React from "react";
-import SignOutButton from "../SignOut";
+//import SignOutButton from "../SignOut";
 
 // import your fontawesome library
 import "../FontAwesomeIcons";
