@@ -13,6 +13,9 @@ const AccountPage = () => (
         <div className="image">
           <img alt='' src={accountImg} />
         </div>
+        {/* I think we might want to eventually remove this, because most websites
+        only have a "forgot password" option on login. If they forgot their password
+        but they're logged in they can just change the password below. */}
         <h3>Forgot Password?</h3>
         <PasswordForgetForm />
         <h3>-------------------------------------------</h3>
