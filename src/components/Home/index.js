@@ -15,7 +15,6 @@ const HomePage = () => (
     <center><Counter/></center>
     <h2>Walk to Claremont Village</h2>
     <center><Counter/></center>
-    <p>Eventually, log sustainable actions here.</p>
   </div>
 );
 
