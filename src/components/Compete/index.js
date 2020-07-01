@@ -16,6 +16,7 @@ class CompetePage extends Component {
     return (
       <div>
         <h1>Competition! Yay!<span role="img" aria-label="Trophy">🏆</span></h1>
+        <center>New competitions coming soon...</center>
       </div>
     );
   }
