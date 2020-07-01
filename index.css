@@ -1,0 +1,153 @@
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.base-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 24px;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h3 {
+  font-size: 20px;
+  margin-top: 40px;
+  margin-bottom: 5px;
+}
+
+.image {
+  width: 21em;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+}
+
+input {
+  margin-top: 6px;
+  min-width: 18em;
+  height: 37px;
+  padding: 0px 10px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  background-color: #f3f3f3;
+  border: 0;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  transition: all 250ms ease-in-out;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0px 0px 12px 0.8px #00BFA6;
+}
+
+.button {
+  font-size: 21px;
+  padding: 5px 20px;
+  border: 0;
+  background-color: #00BFA6;
+  color: #fff;
+  border-radius: 3px;
+  transition: all 250ms ease-in-out;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.button:hover {
+    background-color: #009d8a;
+}
+
+.button:focus {
+    outline: none;
+}
+
+#navigation {
+  height: 10%;
+  background-color: lightgreen;
+  display: block;
+  /* position: static; */
+}
+
+#navBar {
+  height: 10%;
+  width: 100%;
+  position: absolute;
+  bottom:0;
+}
+
+#navigation ul {
+  height: 10%;
+  opacity: 0.5;
+}
+
+#navigation ul li{
+  display: inline-block;
+  color: darkgreen;
+}
+
+.buzzButton {
+  font-size: 15px;
+  border: 0;
+  background-color: ForestGreen;
+  color: #fff;
+  border-radius: 3px;
+  transition: all 250ms ease-in-out;
+  margin-top: 15px;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+}
+
+.buzzButton:hover {
+  background-color: LimeGreen;
+}
+
+.undoButton {
+  font-size: 15px;
+  border: 0;
+  background-color: #e60d0d;
+  color: #fff;
+  border-radius: 3px;
+  transition: all 250ms ease-in-out;
+  margin-top: 15px;
+  cursor: pointer;
+  height: 60px;
+  width: 60px;
+}
