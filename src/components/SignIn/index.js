@@ -7,7 +7,7 @@ import 'firebase/auth';
  
 import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
-import { withFirebase } from '../Firebase';
+import { withFirebase, signInWithRedirect } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import signinImg from "../../img/login3.svg";
  
@@ -93,7 +93,7 @@ class SignInFormBase extends Component {
         </button>
         <p className="text-center my-3">or</p>
         
-        <button onClick={() => signInWithGoogle()} className="googleBtn" >
+        <button onClick={() => signInWithRedirect()} className="googleBtn" >
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             alt="logo"
@@ -106,25 +106,7 @@ class SignInFormBase extends Component {
     );
   }
 }
-const provider = new firebase.auth.GoogleAuthProvider();
 
-export const signInWithGoogle = () => {
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-    }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
-}
 
 
 
