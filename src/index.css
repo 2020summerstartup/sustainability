@@ -178,6 +178,18 @@ input:focus {
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
+/* Trying to add new fonts to the app */
+
+body {
+  font-family: 'Open Sans', sans-serif
+}
+.heading {
+  font-weight: 700;
+}
+.subheading {
+  font-weight: 400;
+}
+
 
 /* .googleBtn {
   width: 225px;
