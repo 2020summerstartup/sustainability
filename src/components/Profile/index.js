@@ -1,9 +1,9 @@
 import React from 'react';
  
 import { AuthUserContext, withAuthorization } from '../Session';
-import { PasswordForgetForm } from '../PasswordForget';
-import PasswordChangeForm from '../PasswordChange';
-import accountImg from "../../img/account.svg";
+//import { PasswordForgetForm } from '../PasswordForget';
+//import PasswordChangeForm from '../PasswordChange';
+//import accountImg from "../../img/account.svg";
  
 const ProfilePage = () => (
   <AuthUserContext.Consumer>
