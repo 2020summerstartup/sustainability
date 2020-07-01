@@ -76,7 +76,6 @@ class SignUpFormBase extends Component {
     return (
       <form onSubmit={this.onSubmit} className="form">
         <div className="form-group">
-          <FontAwesomeIcon icon="user" />
           <input
             className="input-field"
             name="username"
