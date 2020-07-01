@@ -12,9 +12,9 @@ const HomePage = () => (
     <h3>Home Sweet Home</h3>
     <span role="img" aria-label="burger, recycle">🍔 ♻️</span>
     <h3>Recycle Water Bottle</h3>
-    <center><Counter/></center>
+    <center><Counter susAction={'waterBottle'}/></center>
     <h3>Walk to Claremont Village</h3>
-    <center><Counter/></center>
+    <center><Counter susAction={'cmontWalk'}/></center>
   </div>
 );
 

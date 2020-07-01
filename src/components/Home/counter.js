@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase"
 
-var grabbedData = localStorage.getItem('data');
+const susAction = props => props.susAction;
+
+var grabbedData = localStorage.getItem(susAction);
 
 class Counter extends Component{
     constructor(props){
         super(props)
         this.state = {
-            count: parseInt(localStorage.getItem('data'))
+            count: parseInt(localStorage.getItem(susAction))
         };
     }
 
@@ -15,24 +17,24 @@ class Counter extends Component{
         this.setState({
             count: this.state.count + 10
         })
-        grabbedData = localStorage.getItem('data')
-        localStorage.setItem('data', parseInt(grabbedData)+parseInt(10));
+        grabbedData = localStorage.getItem(susAction)
+        localStorage.setItem(susAction, parseInt(grabbedData)+parseInt(10));
     };
 
     decrement = () =>{
-        grabbedData = localStorage.getItem('data')
+        grabbedData = localStorage.getItem(susAction)
         if (this.state.count > 0){
         this.setState({
                 count: this.state.count - 10
         })
-        localStorage.setItem('data', parseInt(grabbedData)-parseInt(10));
+        localStorage.setItem(susAction, parseInt(grabbedData)-parseInt(10));
         }
         else{
             this.setState({
                 count: 0
             })
 
-        localStorage.setItem('data', 0);
+        localStorage.setItem(susAction, 0);
         }
     };
 
