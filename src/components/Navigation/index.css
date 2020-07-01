@@ -38,11 +38,11 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: #00bfa6;
+  background: var(--text-primary);
 }
 
 main {
-  margin-left: 5rem;
+  margin-left: 6.5rem;
   padding: 1rem;
 }
 
@@ -87,7 +87,7 @@ main {
   display: none;
   margin-left: 1rem;
   text-decoration: none;
-  font-size: 1.20rem;
+  font-size: 1.2rem;
 }
 
 .nav-link svg {
@@ -150,11 +150,11 @@ main {
 }
 
 .navbar:hover .icons {
-    color: #00bfa6;
-  }
+  color: #00bfa6;
+}
 
 .signout-btn {
-    display: none;
+  display: none;
 }
 
 /* Small screens */
@@ -163,34 +163,65 @@ main {
     bottom: 0;
     width: 100vw;
     height: 5rem;
+    position: fixed;
   }
 
   .logo {
     display: none;
   }
 
+  .nav-item {
+    display: flex;
+    justify-content: space-around;
+  }
+
   .navbar-nav {
+    display: flex;
     flex-direction: row;
+    align-items: center;
   }
 
   .nav-link {
+    flex-direction: column;
     justify-content: center;
+    text-align: center;
+    padding: 0;
   }
 
-  /* .nav-item:last-child {
-    margin-top: auto;
-  } */
+  .logout {
+    display: none
+  }
 
   main {
     margin: 0;
   }
+
+  .link-text {
+    display: inline;
+    text-align: center;
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .navbar:hover .link-text {
+    display: inline;
+    color: #00bfa6;
+  }
+
+  .icons {
+    position: relative;
+    top: 0.9rem;
+    margin: 0;
+  }
+
 }
+
 
 /* Large screens */
 @media only screen and (min-width: 600px) {
   .navbar {
     top: 0;
-    width: 5rem;
+    width: 6.5rem;
     height: 100vh;
   }
 
@@ -213,5 +244,5 @@ main {
 
   .navbar:hover .signout-btn {
     display: inline;
-}
+  }
 }
