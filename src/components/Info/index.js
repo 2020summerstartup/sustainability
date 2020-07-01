@@ -8,6 +8,12 @@ import React from 'react'; // Used to also import "{ Component }", removed becau
 const InfoPage = () => (
     <div className="base-container">
     <h1 className="header">Info Page</h1>
+    <h3><center>
+      I think we put sustainability info here? Like how the user's sustainible actions
+      are actually impacting the planet, what they can do to be more sustainable, the
+      most important actions for them to take right now.
+      </center>
+    </h3>
   </div>
 );
 
