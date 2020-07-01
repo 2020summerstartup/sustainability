@@ -95,6 +95,7 @@ class SignInFormBase extends Component {
         <div class="google-btn">
           <div onClick={() => signInWithGoogle()} class="google-icon-wrapper">
             <img
+              alt = ''
               class="google-icon"
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             />
@@ -129,19 +130,19 @@ export const signInWithGoogle = () => {
     .auth()
     .signInWithPopup(provider)
     .then(function (result) {
-      var token = result.credential.accessToken;
+      //var token = result.credential.accessToken;
       // The signed-in user info.
-      var user = result.user;
+      //var user = result.user;
       // ...
     })
     .catch(function (error) {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      //var errorCode = error.code;
+      //var errorMessage = error.message;
       // The email of the user's account used.
-      var email = error.email;
+      //var email = error.email;
       // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
+      //var credential = error.credential;
       // ...
     });
 };

@@ -40,6 +40,7 @@ class Counter extends Component{
         <div>
             <p>You have earned a total of {this.state.count} points from recycling water bottles!</p>
             <button className='buzzButton' onClick={this.increment}>BUZZ</button>
+            <span> </span>
             <button className='undoButton' onClick={this.decrement}>Undo</button>
         </div>
         );

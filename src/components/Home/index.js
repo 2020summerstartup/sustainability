@@ -12,9 +12,9 @@ const HomePage = () => (
     <h3>Home Sweet Home</h3>
     <span role="img" aria-label="recycle">♻️</span>
     <h2>Recycle Water Bottle</h2>
-    <Counter/>
+    <center><Counter/></center>
     <h3>Walk to Claremont Village</h3>
-    <Counter />
+    <center><Counter/></center>
     <p>Eventually, log sustainable actions here.</p>
   </div>
 );

@@ -10,7 +10,7 @@ const ProfilePage = () => (
     {authUser => (
       <div className="base-container">
         <h1>Your Account: {authUser.email}</h1>
-    <h3> POINTS ACQUIRED😊: {}</h3>
+    <h3> POINTS ACQUIRED <span role="img" aria-label="smiley">😊</span>: {}</h3>
        
       </div>
     )}
