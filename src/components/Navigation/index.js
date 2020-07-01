@@ -58,44 +58,57 @@ const NavigationAuth = () => (
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item hide">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="leaf" className="icons" />
-              <Link to={ROUTES.LANDING} class="link-text">Landing</Link>
+              <Link to={ROUTES.LANDING} class="link-text">
+                Landing
+              </Link>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="home" className="icons" />
-              <Link to={ROUTES.HOME} class="link-text">Home</Link>
+              <Link to={ROUTES.HOME} class="link-text">
+                Home
+              </Link>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="trophy" className="icons" />
-              <Link to={ROUTES.ADMIN} class="link-text">Admin</Link>
+              <Link to={ROUTES.ADMIN} class="link-text">
+                Admin
+              </Link>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="info" className="icons" />
-              <Link to={ROUTES.INFO} class="link-text">Info</Link>
+              <Link to={ROUTES.INFO} class="link-text">
+                Info
+              </Link>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="user" className="icons" />
-              <Link to={ROUTES.ACCOUNT} class="link-text">Account</Link>
+              <Link to={ROUTES.ACCOUNT} class="link-text">
+                Account
+              </Link>
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item logout">
             <a href="#" class="nav-link">
-              <FontAwesomeIcon icon="sign-out-alt" className="logout-icon icons" />
+              <FontAwesomeIcon
+                icon="sign-out-alt"
+                className="icons"
+              />
               <SignOutButton />
             </a>
           </li>
@@ -103,7 +116,6 @@ const NavigationAuth = () => (
       </nav>
     </body>
   </div>
-
 );
 
 // user is non-authorized
@@ -144,21 +156,24 @@ const NavigationNonAuth = () => (
           <li class="nav-item">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="leaf" className="icons" />
-              <Link to={ROUTES.LANDING} class="link-text">Landing</Link>
+              <Link to={ROUTES.LANDING} class="link-text">
+                Landing
+              </Link>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="user" className="icons" />
-              <Link to={ROUTES.SIGN_IN} class="link-text">Sign In</Link>
+              <Link to={ROUTES.SIGN_IN} class="link-text">
+                Sign In
+              </Link>
             </a>
           </li>
         </ul>
       </nav>
     </body>
   </div>
-
 );
 
 export default Navigation;

@@ -3,13 +3,17 @@ header {
   color: var(--bg-primary);
   height: 3rem;
   align-items: center;
+  width: 100%;
 }
 
 .header {
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .title {
+  position: relative;
+  top: 0.4rem;
   font-weight: bold;
   font-size: 1.5rem;
 }
