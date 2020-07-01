@@ -82,7 +82,7 @@ const NavigationAuth = () => (
           <li class="nav-item">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="info" className="icons" />
-              <Link to={ROUTES.ADMIN} class="link-text">Admin</Link>
+              <Link to={ROUTES.INFO} class="link-text">Info</Link>
             </a>
           </li>
 
@@ -95,8 +95,8 @@ const NavigationAuth = () => (
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <FontAwesomeIcon icon="heart" className="icons" />
-              <SignOutButton class="link-text"/>
+              <FontAwesomeIcon icon="sign-out-alt" className="logout-icon icons" />
+              <SignOutButton />
             </a>
           </li>
         </ul>

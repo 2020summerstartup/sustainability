@@ -181,10 +181,6 @@ main {
     margin-top: auto;
   } */
 
-  .signout-btn {
-    display: inline-block;
-}
-
   main {
     margin: 0;
   }
@@ -214,4 +210,8 @@ main {
   .navbar:hover .logo-text {
     left: 0px;
   }
+
+  .navbar:hover .signout-btn {
+    display: inline;
+}
 }
