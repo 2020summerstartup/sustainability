@@ -18,6 +18,12 @@ const AccountPage = () => (
         <h3>-------------------------------------------</h3>
         <h3>Change Password?</h3>
         <PasswordChangeForm />
+        {/* This white space is just here so the change password button is never covered
+        by the nav bar on the bottom of the screen (even on mobile devices). It's a somewhat
+        janky solution that we hope to fix later. */}
+        <h1></h1>
+        <h1></h1>
+        <h1></h1>
       </div>
     )}
   </AuthUserContext.Consumer>
