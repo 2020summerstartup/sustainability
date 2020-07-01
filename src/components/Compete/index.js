@@ -2,7 +2,7 @@ import React, { Component } from 'react';
  
 import { withFirebase } from '../Firebase';
  
-class AdminPage extends Component {
+class CompetePage extends Component {
   constructor(props) {
     super(props);
  
@@ -38,7 +38,7 @@ class AdminPage extends Component {
     const { users, loading } = this.state;
     return (
       <div>
-        <h1>Admin</h1>
+        <h1>Competition! Yay!</h1>
 
         {loading && <div>Loading ...</div>}
 
@@ -66,4 +66,4 @@ const UserList = ({ users }) => (
   </ul>
 );
  
-export default withFirebase(AdminPage);
+export default withFirebase(CompetePage);
