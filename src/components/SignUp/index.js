@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
-import { withFirebase } from "../Firebase";
+import { withFirebase, signInWithRedirect } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
@@ -120,14 +120,14 @@ class SignUpFormBase extends Component {
 
         {/* Sign up with Google Account */}
         <div class="google-btn">
-          <div onClick={() => signInWithGoogle()} class="google-icon-wrapper">
+          <div onClick={() => signInWithRedirect()} class="google-icon-wrapper">
             <img
               alt =''
               class="google-icon"
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             />
           </div>
-          <p onClick={() => signInWithGoogle()} class="btn-text">
+          <p onClick={() => signInWithRedirect()} class="btn-text">
             <b>Sign up with Google</b>
           </p>
         </div>
