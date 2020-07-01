@@ -42,7 +42,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 main {
-  margin-left: 5rem;
+  margin-left: 6.5rem;
   padding: 1rem;
 }
 
@@ -87,7 +87,7 @@ main {
   display: none;
   margin-left: 1rem;
   text-decoration: none;
-  font-size: 1.20rem;
+  font-size: 1.2rem;
 }
 
 .nav-link svg {
@@ -150,11 +150,11 @@ main {
 }
 
 .navbar:hover .icons {
-    color: #00bfa6;
-  }
+  color: #00bfa6;
+}
 
 .signout-btn {
-    display: none;
+  display: none;
 }
 
 /* Small screens */
@@ -175,6 +175,7 @@ main {
 
   .nav-link {
     justify-content: center;
+    /* align-items: center; */
   }
 
   /* .nav-item:last-child {
@@ -190,7 +191,7 @@ main {
 @media only screen and (min-width: 600px) {
   .navbar {
     top: 0;
-    width: 5rem;
+    width: 6.5rem;
     height: 100vh;
   }
 
@@ -213,5 +214,5 @@ main {
 
   .navbar:hover .signout-btn {
     display: inline;
-}
+  }
 }
