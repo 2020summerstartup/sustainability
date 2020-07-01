@@ -10,11 +10,7 @@ import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
-// const Login = ({history}) => {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setErrors] = useState("");
-// }
+import "./Google-btn.css";
 
 const SignInPage = () => (
   <div className="base-container">
@@ -105,19 +101,6 @@ class SignInFormBase extends Component {
           </p>
         </div>
 
-        {/* <div className="google-btn">
-          <div>
-            <button onClick={() => signInWithGoogle()} className="google-icon-wrapper">
-              <img
-                className="google-icon"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                alt="logo"
-              />
-              Login With Google
-            </button>
-          </div>
-        </div> */}
-
         {error && <p>{error.message}</p>}
       </form>
     );
@@ -146,24 +129,6 @@ export const signInWithGoogle = () => {
       // ...
     });
 };
-
-// const signInWithGoogle = () => {
-//   const provider = new firebase.auth.GoogleAuthProvider();
-//   firebase
-//   .auth()
-//   .setPersistence(firebase.auth.Auth.Persistence.SESSION)
-//   .then(() => {
-//     firebase
-//     .auth()
-//     .signInWithPopup(provider)
-//     .then(result => {
-//       console.log(result)
-//       history.push('/reports')
-//       Auth.setLoggedIn(true)
-//     })
-//     .catch(e => setErrors(e.message))
-//   });
-// }
 
 const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
 

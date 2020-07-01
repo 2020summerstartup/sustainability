@@ -22,6 +22,11 @@ code {
   --transition-speed: 600ms;
 }
 
+.base-container {
+  margin-bottom: 5rem;
+  padding: 1rem;
+}
+
 body {
   color: black;
   background-color: white;
@@ -189,11 +194,12 @@ main {
   }
 
   .logout {
-    display: none
+    display: none;
   }
 
-  main {
-    margin: 0;
+  .base-container {
+    margin-bottom: 5rem;
+    padding: 1rem;
   }
 
   .link-text {
@@ -213,9 +219,7 @@ main {
     top: 0.9rem;
     margin: 0;
   }
-
 }
-
 
 /* Large screens */
 @media only screen and (min-width: 600px) {
