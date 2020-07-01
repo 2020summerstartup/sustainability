@@ -13,7 +13,7 @@ const HomePage = () => (
     <span role="img" aria-label="recycle">♻️</span>
     <h2>Recycle Water Bottle</h2>
     <center><Counter/></center>
-    <h3>Walk to Claremont Village</h3>
+    <h2>Walk to Claremont Village</h2>
     <center><Counter/></center>
     <p>Eventually, log sustainable actions here.</p>
   </div>
