@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import produce, { applyPatches } from "immer";
+import produce from "immer";
 
 class Counter extends Component{
     userData;
-    undo = []
     constructor(props){
         super(props)
         this.handleChange = this.handleChange.bind(this);
@@ -19,12 +18,11 @@ class Counter extends Component{
             this.state,
             draft => {
                 draft.count = this.state.count + 10
-                draft.items.push({name: this.state.count,})
+                draft.items.push({name: 10,})
             },
-            this.handleAddPatch
         )
         this.setState(nextState);
-        localStorage.setItem("data", JSON.stringify({count: nextState.count,}))
+        localStorage.setItem("data", JSON.stringify({count: nextState.count, items: nextState.items}))
     };
 
     walk = (e) =>{
@@ -33,12 +31,11 @@ class Counter extends Component{
             this.state,
             draft => {
                 draft.count = this.state.count + 15
-                draft.items.push({name: this.state.count,})
+                draft.items.push({name: 15,})
             },
-            this.handleAddPatch
         )
         this.setState(nextState);
-        localStorage.setItem("data", JSON.stringify({count: nextState.count,}))
+        localStorage.setItem("data", JSON.stringify({count: nextState.count, items: nextState.items}))
     };
 
     handleChange = (e) => {
@@ -50,25 +47,26 @@ class Counter extends Component{
      
         if (localStorage.getItem('data')) {
             this.setState({
-                count: this.userData.count
+                count: this.userData.count,
+                items: this.userData.items,
         })
     } else {
         this.setState({
             count: 0,
+            items: [],
         })
     }
     }
 
-    handleAddPatch = (patch, inversePatches) =>{
-        this.undo.push(inversePatches)
-    }
-
     handleUndo = () => {
-        const undo = this.undo.pop()
-        if (!undo) return;
-        this.setState(applyPatches(this.state, undo))
-        console.log(undo)
-        localStorage.setItem("data", JSON.stringify({count: undo[1].value,}))
+        const items = JSON.parse(localStorage.getItem('data')).items
+        if (this.state.count === 0) return;
+        const last = items.pop()
+        this.setState({
+            count: this.state.count-last.name, 
+            items: items
+        })
+        localStorage.setItem("data", JSON.stringify({count: this.state.count-last.name, items: items}))
     }
 
     render(){
