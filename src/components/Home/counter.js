@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 import produce from "immer";
 
-// TODO: Outstanding issue: The user has to start by pressing "undo" to initialize the score to 0 instead of NaN.
-// No idea how to initialize the counter the first time without it being overwritten every time the user opens the
-// file. Maybe I can jank something together with "if val== NaN, then val = 0" or something?? Will try later.
-
 class Counter extends Component{
     userData;
     constructor(props){
@@ -76,10 +72,10 @@ class Counter extends Component{
     render(){
     return (
         <div>
-            <p>You have earned a total of {this.state.count} points from this sustainable action!</p>
-            <button className='buzzButton' onClick={this.increment}>BUZZ</button>
-            <span> </span>
-            <button className='undoButton' onClick={this.decrement}><span role="img" aria-label="undo">↩️</span></button>
+            <p>You have earned a total of {this.state.count} points!</p>
+            <button className='buzzButton' onClick={this.recycle} onChange={this.handleChange}>Recycle Water Bottle</button>
+            <button className='buzzButton' onClick={this.walk} onChange={this.handleChange}>Walk to Claremont Village</button>
+            <button className='undoButton' onClick={this.handleUndo}>Undo</button>
         </div>
         );
     }
