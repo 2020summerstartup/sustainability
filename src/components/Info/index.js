@@ -4,6 +4,8 @@ import React from 'react'; // Used to also import "{ Component }", removed becau
  
 // import { withAuthorization } from '../Session';
 // import firebase from "../Firebase"
+
+// import ProgressDeck from './ProgressDeck';
  
 const InfoPage = () => (
     <div className="base-container">
@@ -14,6 +16,7 @@ const InfoPage = () => (
       most important actions for them to take right now.
       </center>
     </h3>
+    {/* <ProgressDeck /> */}
   </div>
 );
 
