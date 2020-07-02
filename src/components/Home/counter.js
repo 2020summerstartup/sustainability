@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase"
 
+// TODO: Outstanding issue: The user has to start by pressing "undo" to initialize the score to 0 instead of NaN.
+// No idea how to initialize the counter the first time without it being overwritten every time the user opens the
+// file. Maybe I can jank something together with "if val== NaN, then val = 0" or something?? Will try later.
+
 class Counter extends Component{
     constructor(props){
         super(props)
