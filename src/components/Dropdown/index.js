@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import onClickOutside from 'react-onclickoutside';
+import React, { useState } from "react";
+import onClickOutside from "react-onclickoutside";
 
+// This file exports everything to maindd.js
 function Dropdown({ title, items, multiSelect = false }) {
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState([]);
@@ -8,7 +9,7 @@ function Dropdown({ title, items, multiSelect = false }) {
   Dropdown.handleClickOutside = () => setOpen(false);
 
   function handleOnClick(item) {
-    if (!selection.some(current => current.id === item.id)) {
+    if (!selection.some((current) => current.id === item.id)) {
       if (!multiSelect) {
         setSelection([item]);
       } else if (multiSelect) {
@@ -17,14 +18,14 @@ function Dropdown({ title, items, multiSelect = false }) {
     } else {
       let selectionAfterRemoval = selection;
       selectionAfterRemoval = selectionAfterRemoval.filter(
-        current => current.id !== item.id
+        (current) => current.id !== item.id
       );
       setSelection([...selectionAfterRemoval]);
     }
   }
 
   function isItemInSelection(item) {
-    if (selection.some(current => current.id === item.id)) {
+    if (selection.some((current) => current.id === item.id)) {
       return true;
     }
     return false;
@@ -43,16 +44,20 @@ function Dropdown({ title, items, multiSelect = false }) {
           <p className="dd-header__title--bold">{title}</p>
         </div>
         <div className="dd-header__action">
-          <p>{open ? 'Close' : 'Open'}</p>
+          <p>{open ? "▲" : "▼"}</p>
         </div>
       </div>
       {open && (
         <ul className="dd-list">
-          {items.map(item => (
+          {items.map((item) => (
             <li className="dd-list-item" key={item.id}>
-              <button type="button" onClick={() => handleOnClick(item)}>
+              <button
+                className="dd-list-btn"
+                type="button"
+                onClick={() => handleOnClick(item)}
+              >
                 <span>{item.value}</span>
-                <span>{isItemInSelection(item) && 'Selected'}</span>
+                <span>{isItemInSelection(item) && "Selected"}</span>
               </button>
             </li>
           ))}

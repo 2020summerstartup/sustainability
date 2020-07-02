@@ -2,18 +2,43 @@ import React from 'react';
 import './index.css';
 import Dropdown from './index';
 
+// Choose your dorm!
 const items = [
   {
     id: 1,
-    value: 'Case',
+    value: 'Atwood',
   },
   {
     id: 2,
-    value: 'Drinkward',
+    value: 'Case',
   },
   {
     id: 3,
+    value: 'Drinkward',
+  },
+  {
+    id: 4,
     value: 'East',
+  },
+  {
+    id: 5,
+    value: 'Linde',
+  },
+  {
+    id: 6,
+    value: 'North',
+  },
+  {
+    id: 7,
+    value: 'Sontag',
+  },
+  {
+    id: 8,
+    value: 'South',
+  },
+  {
+    id: 9,
+    value: 'West',
   },
 ];
 
@@ -26,7 +51,8 @@ function App() {
             😊😊😊
         </span>
       </h1>
-      <Dropdown title="Select dorm" items={items} multiSelect />
+      {/* if we want to create dropdown for multiselect, pass in "multiselect" after items */}
+      <Dropdown title="Select your dorm" items={items}/>
     </div>
   );
 }
