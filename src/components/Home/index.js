@@ -14,7 +14,7 @@ const HomePage = () => (
     <h3><b>Recycle Water Bottle</b></h3>
     <center><Counter susAction={'waterBottle'}/></center>
     <h3><b>Walk to Claremont Village</b></h3>
-    <p>(Just not during the first 2 weeks on campus!)</p>
+    <p>(Just not during the first two weeks on campus!)</p>
     <center><Counter susAction={'cmontWalk'}/></center>
   </div>
 );

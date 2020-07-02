@@ -45,7 +45,7 @@ class Counter extends Component{
             <p>You have earned a total of {this.state.count} points from this sustainable action!</p>
             <button className='buzzButton' onClick={this.increment}>BUZZ</button>
             <span> </span>
-            <button className='undoButton' onClick={this.decrement}>Undo</button>
+            <button className='undoButton' onClick={this.decrement}><span role="img" aria-label="undo">↩️</span></button>
         </div>
         );
     }
