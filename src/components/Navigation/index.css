@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -10,7 +10,7 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
+} */
 
 :root {
   font-size: 16px;
@@ -20,11 +20,6 @@ code {
   --bg-primary: #23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;
-}
-
-.base-container {
-  margin-bottom: 5rem;
-  padding: 1rem;
 }
 
 body {
@@ -248,5 +243,10 @@ main {
 
   .navbar:hover .signout-btn {
     display: inline;
+  }
+
+  .base-container {
+    margin-left: 5rem;
+    padding: 1rem;
   }
 }
