@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase"
 
-const susAction = props => props.susAction;
-
-var grabbedData = localStorage.getItem(susAction);
-
 class Counter extends Component{
     constructor(props){
         super(props)
         this.state = {
-            count: parseInt(localStorage.getItem(susAction))
+            count: parseInt(localStorage.getItem(this.props.susAction))
         };
     }
 
@@ -17,24 +13,22 @@ class Counter extends Component{
         this.setState({
             count: this.state.count + 10
         })
-        grabbedData = localStorage.getItem(susAction)
-        localStorage.setItem(susAction, parseInt(grabbedData)+parseInt(10));
+        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))+parseInt(10));
     };
 
     decrement = () =>{
-        grabbedData = localStorage.getItem(susAction)
         if (this.state.count > 0){
         this.setState({
                 count: this.state.count - 10
         })
-        localStorage.setItem(susAction, parseInt(grabbedData)-parseInt(10));
+        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))-parseInt(10));
         }
         else{
             this.setState({
                 count: 0
             })
 
-        localStorage.setItem(susAction, 0);
+        localStorage.setItem(this.props.susAction, 0);
         }
     };
 
@@ -50,7 +44,7 @@ class Counter extends Component{
         <div>
             <p>You have earned a total of {this.state.count} points from this sustainable action!</p>
             <button className='buzzButton' onClick={this.increment}>BUZZ</button>
-            <span> </span>
+            <span> { this.props.susAction } </span>
             <button className='undoButton' onClick={this.decrement}>Undo</button>
         </div>
         );
