@@ -14,6 +14,7 @@ const HomePage = () => (
     <span role="img" aria-label="recycle">♻️</span>
     {/* Total points earned. */}
     You have earned a total of { parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk')) } points for your sustainable actions. Thank you!
+    
     {/* Individual sustainable actions. */}
     <h3><b>Recycle Water Bottle</b></h3>
     <center><Counter susAction={'waterBottle'}/></center>
@@ -24,5 +25,5 @@ const HomePage = () => (
 );
 
 const condition = authUser => !!authUser;
- 
+
 export default withAuthorization(condition)(HomePage);
