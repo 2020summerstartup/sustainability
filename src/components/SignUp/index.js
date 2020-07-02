@@ -6,6 +6,7 @@ import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
 import { signInWithRedirect } from "../SignIn";
+import { Dropdown2 } from "../Dropdown";
 
 // import your fontawesome library
 import "../FontAwesomeIcons";
@@ -27,6 +28,7 @@ const INITIAL_STATE = {
   email: "",
   passwordOne: "",
   passwordTwo: "",
+  dorm: "",
   error: null,
 };
 
@@ -112,7 +114,20 @@ class SignUpFormBase extends Component {
             placeholder="Confirm Password"
           />
         </div>
-
+        <div className="form-group" id ="Dropdown2" onClick="Dropdown2()">
+          {/* {()=>Dropdown2()} */}
+          
+          {/* <button onClick={() => Dropdown2()}>
+            Select Dorm
+          </button> */}
+          {/* <input
+            name="dormName"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Select your dorm!"
+          /> */}
+        </div>
         <button disabled={isInvalid} type="submit" className="button">
           Sign Up
         </button>

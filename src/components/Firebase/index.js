@@ -23,7 +23,7 @@ export default Firebase;
 //         // An error happened.
 //     });
 // }
-export const provider = new firebase.auth.GoogleAuthProvider();
-export const auth = firebase.auth();
+// export const provider = new firebase.auth.GoogleAuthProvider();
+// export const auth = firebase.auth();
  
 export { FirebaseContext, withFirebase };
