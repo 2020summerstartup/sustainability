@@ -6,6 +6,7 @@ import firebase from "../Firebase"
 // file. Maybe I can jank something together with "if val== NaN, then val = 0" or something?? Will try later.
 
 // adding comment as a test
+// a second test comment
 
 class Counter extends Component{
     constructor(props){
