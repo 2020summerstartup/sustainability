@@ -24,7 +24,7 @@ class Counter extends Component{
         this.setState(nextState);
         localStorage.setItem("data", JSON.stringify({count: nextState.count, items: nextState.items}))
     };
-
+ 
     walk = (e) =>{
         e.preventDefault()
         const nextState = produce(
