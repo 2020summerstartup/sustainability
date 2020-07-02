@@ -14,25 +14,24 @@ class Counter extends Component{
     }
 
     increment = () =>{
-        this.setState({
-            count: this.state.count + 10
-        })
         localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))+parseInt(10));
+        this.setState({
+            count: parseInt(localStorage.getItem(this.props.susAction))
+        })
     };
 
     decrement = () =>{
         if (this.state.count > 0){
-        this.setState({
-                count: this.state.count - 10
-        })
-        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))-parseInt(10));
+            localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))-parseInt(10));
+            this.setState({
+                count: parseInt(localStorage.getItem(this.props.susAction))
+            })
         }
         else{
             this.setState({
                 count: 0
             })
-
-        localStorage.setItem(this.props.susAction, 0);
+            localStorage.setItem(this.props.susAction, 0);
         }
     };
 
