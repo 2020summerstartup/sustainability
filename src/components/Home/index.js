@@ -12,7 +12,8 @@ const HomePage = () => (
     <h1>Home Sweet Home</h1>
     <h3>Track your sustainable actions here!</h3>
     <span role="img" aria-label="recycle">♻️</span>
-    {/* Total points earned. */}
+    {/* Total points earned. TODO: Make this update automatically, instead of only on
+    page reload. I'll deal with this later (I want to update this whole thing to use the new counter first). */}
     You have earned a total of { parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk')) } points for your sustainable actions. Thank you!
     
     {/* Individual sustainable actions. */}
