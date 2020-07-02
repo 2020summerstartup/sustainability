@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
-import { withFirebase, signInWithRedirect } from "../Firebase";
+import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
-import { signInWithGoogle } from "../SignIn";
+import { signInWithRedirect } from "../SignIn";
 
 // import your fontawesome library
 import "../FontAwesomeIcons";

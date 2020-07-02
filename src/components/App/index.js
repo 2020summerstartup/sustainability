@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import Header from '../Header';
+ 
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
@@ -9,7 +8,7 @@ import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
-import CompetePage from '../Compete';
+// import AdminPage from '../Admin';
 import InfoPage from '../Info';
 import ProfilePage from '../Profile';
  
@@ -19,7 +18,6 @@ import { withAuthentication } from '../Session';
 const App = () => (
   <Router>
     <div>
-      <Header />
       <Navigation />
  
       <hr />
@@ -33,7 +31,7 @@ const App = () => (
       />
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-      <Route path={ROUTES.COMPETE} component={CompetePage} />
+      {/* <Route path={ROUTES.ADMIN} component={AdminPage} /> */}
       <Route path={ROUTES.INFO} component={InfoPage} />
       <Route path={ROUTES.PROFILE} component={ProfilePage} />
     </div>
