@@ -1,83 +1,57 @@
 import React, {Component} from 'react';
-import produce from "immer";
+import firebase from "../Firebase"
+
+// TODO: Outstanding issue: The user has to start by pressing "undo" to initialize the score to 0 instead of NaN.
+// No idea how to initialize the counter the first time without it being overwritten every time the user opens the
+// file. Maybe I can jank something together with "if val== NaN, then val = 0" or something?? Will try later.
 
 // adding comment as a test
 
 class Counter extends Component{
-    userData;
     constructor(props){
         super(props)
-        this.handleChange = this.handleChange.bind(this);
         this.state = {
-            count: 0,
-            items: [],
+            count: parseInt(localStorage.getItem(this.props.susAction))
         };
     }
 
-    recycle = (e) =>{
-        e.preventDefault()
-        const nextState = produce(
-            this.state,
-            draft => {
-                draft.count = this.state.count + 10
-                draft.items.push({name: 10,})
-            },
-        )
-        this.setState(nextState);
-        localStorage.setItem("data", JSON.stringify({count: nextState.count, items: nextState.items}))
-    };
- 
-    walk = (e) =>{
-        e.preventDefault()
-        const nextState = produce(
-            this.state,
-            draft => {
-                draft.count = this.state.count + 15
-                draft.items.push({name: 15,})
-            },
-        )
-        this.setState(nextState);
-        localStorage.setItem("data", JSON.stringify({count: nextState.count, items: nextState.items}))
+    increment = () =>{
+        this.setState({
+            count: this.state.count + 10
+        })
+        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))+parseInt(10));
     };
 
-    handleChange = (e) => {
-        this.setState({[e.target.name]:e.target.name})
-    }
-
-    componentDidMount() {
-        this.userData = JSON.parse(localStorage.getItem('data'));
-     
-        if (localStorage.getItem('data')) {
+    decrement = () =>{
+        if (this.state.count > 0){
+        this.setState({
+                count: this.state.count - 10
+        })
+        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))-parseInt(10));
+        }
+        else{
             this.setState({
-                count: this.userData.count,
-                items: this.userData.items,
-        })
-    } else {
-        this.setState({
-            count: 0,
-            items: [],
-        })
-    }
-    }
+                count: 0
+            })
 
-    handleUndo = () => {
-        const items = JSON.parse(localStorage.getItem('data')).items
-        if (this.state.count === 0) return;
-        const last = items.pop()
-        this.setState({
-            count: this.state.count-last.name, 
-            items: items
-        })
-        localStorage.setItem("data", JSON.stringify({count: this.state.count-last.name, items: items}))
-    }
+        localStorage.setItem(this.props.susAction, 0);
+        }
+    };
 
+    writeUserData(email, count) {
+        firebase.database().ref('users/' + email).set({
+          email: email,
+          count: count
+        });
+      }
+    
     render(){
     return (
         <div>
-            <p>You have earned a total of {this.state.count} points!</p>
-            <button className='buzzButton' onClick={this.recycle} onChange={this.handleChange}>Recycle Water Bottle</button>
-            <button className='buzzButton' onClick={this.walk} onChange={this.handleChange}>Walk to Claremont Village</button>
-            <button className='undoButton' onClick={this.handleUndo}>Undo</button>
+            <p>You have earned a total of {this.state.count} points from this sustainable action!</p>
+            <button className='buzzButton' onClick={this.increment}>BUZZ</button>
+            <span> </span>
+            <button className='undoButton' onClick={this.decrement}><span role="img" aria-label="undo">↩️</span></button>
         </div>
         );
     }
