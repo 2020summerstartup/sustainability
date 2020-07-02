@@ -6,7 +6,7 @@ import "firebase/auth";
 
 import { SignUpLink } from "../SignUp";
 import { PasswordForgetLink } from "../PasswordForget";
-import { withFirebase } from "../Firebase";
+import { withFirebase, signInWithRedirect } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
@@ -82,6 +82,8 @@ class SignInFormBase extends Component {
             placeholder="Password"
           />
         </div>
+
+
         <button className="button" disabled={isInvalid} type="submit">
           Sign In
         </button>
@@ -89,14 +91,14 @@ class SignInFormBase extends Component {
 
         {/* Sign in with Google Account */}
         <div class="google-btn">
-          <div onClick={() => signInWithGoogle()} class="google-icon-wrapper">
+          <div onClick={() => signInWithRedirect()} class="google-icon-wrapper">
             <img
               alt = ''
               class="google-icon"
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             />
           </div>
-          <p onClick={() => signInWithGoogle()} class="btn-text">
+          <p onClick={() => signInWithRedirect()} class="btn-text">
             <b>Sign in with Google</b>
           </p>
         </div>
@@ -106,29 +108,7 @@ class SignInFormBase extends Component {
     );
   }
 }
-const provider = new firebase.auth.GoogleAuthProvider();
-
-export const signInWithGoogle = () => {
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(function (result) {
-      //var token = result.credential.accessToken;
-      // The signed-in user info.
-      //var user = result.user;
-      // ...
-    })
-    .catch(function (error) {
-      // Handle Errors here.
-      //var errorCode = error.code;
-      //var errorMessage = error.message;
-      // The email of the user's account used.
-      //var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      //var credential = error.credential;
-      // ...
-    });
-};
+   
 
 const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
 

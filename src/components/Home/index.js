@@ -11,10 +11,8 @@ const HomePage = () => (
     <h1>Home Page</h1>
     <h3>Home Sweet Home</h3>
     <span role="img" aria-label="burger, recycle">🍔 ♻️</span>
-    <h3>Recycle Water Bottle</h3>
-    <center><Counter susAction={'waterBottle'}/></center>
-    <h3>Walk to Claremont Village</h3>
-    <center><Counter susAction={'cmontWalk'}/></center>
+    <h3>Accumulate points for sustainable actions!</h3>
+    <center><Counter/></center>
   </div>
 );
 

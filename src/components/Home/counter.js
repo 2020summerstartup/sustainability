@@ -1,51 +1,83 @@
 import React, {Component} from 'react';
-import firebase from "../Firebase"
+import produce, { applyPatches } from "immer";
 
 class Counter extends Component{
+    userData;
+    undo = []
     constructor(props){
         super(props)
+        this.handleChange = this.handleChange.bind(this);
         this.state = {
-            count: parseInt(localStorage.getItem(this.props.susAction))
+            count: 0,
+            items: [],
         };
     }
 
-    increment = () =>{
-        this.setState({
-            count: this.state.count + 10
-        })
-        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))+parseInt(10));
+    recycle = (e) =>{
+        e.preventDefault()
+        const nextState = produce(
+            this.state,
+            draft => {
+                draft.count = this.state.count + 10
+                draft.items.push({name: this.state.count,})
+            },
+            this.handleAddPatch
+        )
+        this.setState(nextState);
+        localStorage.setItem("data", JSON.stringify({count: nextState.count,}))
     };
 
-    decrement = () =>{
-        if (this.state.count > 0){
-        this.setState({
-                count: this.state.count - 10
-        })
-        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))-parseInt(10));
-        }
-        else{
+    walk = (e) =>{
+        e.preventDefault()
+        const nextState = produce(
+            this.state,
+            draft => {
+                draft.count = this.state.count + 15
+                draft.items.push({name: this.state.count,})
+            },
+            this.handleAddPatch
+        )
+        this.setState(nextState);
+        localStorage.setItem("data", JSON.stringify({count: nextState.count,}))
+    };
+
+    handleChange = (e) => {
+        this.setState({[e.target.name]:e.target.name})
+    }
+
+    componentDidMount() {
+        this.userData = JSON.parse(localStorage.getItem('data'));
+     
+        if (localStorage.getItem('data')) {
             this.setState({
-                count: 0
-            })
+                count: this.userData.count
+        })
+    } else {
+        this.setState({
+            count: 0,
+        })
+    }
+    }
 
-        localStorage.setItem(this.props.susAction, 0);
-        }
-    };
+    handleAddPatch = (patch, inversePatches) =>{
+        this.undo.push(inversePatches)
+    }
 
-    writeUserData(email, count) {
-        firebase.database().ref('users/' + email).set({
-          email: email,
-          count: count
-        });
-      }
-    
+    handleUndo = () => {
+        const undo = this.undo.pop()
+        if (!undo) return;
+        this.setState(applyPatches(this.state, undo))
+        console.log(undo)
+        localStorage.setItem("data", JSON.stringify({count: undo[1].value,}))
+    }
+
     render(){
     return (
         <div>
-            <p>You have earned a total of {this.state.count} points from this sustainable action!</p>
-            <button className='buzzButton' onClick={this.increment}>BUZZ</button>
-            <span> </span>
-            <button className='undoButton' onClick={this.decrement}>Undo</button>
+            <p>You have earned a total of {this.state.count} points!</p>
+            <button className='buzzButton' onClick={this.recycle} onChange={this.handleChange}>Recycle Water Bottle</button>
+            <button className='buzzButton' onClick={this.walk} onChange={this.handleChange}>Walk to Claremont Village</button>
+            <button className='undoButton' onClick={this.handleUndo}>Undo</button>
         </div>
         );
     }
