@@ -11,6 +11,7 @@ const HomePage = () => (
     <h1>Home Sweet Home</h1>
     <h3>Track your sustainable actions here!</h3>
     <span role="img" aria-label="recycle">♻️</span>
+    You have earned a total of XXX points for your sustainable actions. Thank you!
     <h3><b>Recycle Water Bottle</b></h3>
     <center><Counter susAction={'waterBottle'}/></center>
     <h3><b>Walk to Claremont Village</b></h3>
