@@ -20,6 +20,16 @@ class Counter extends Component{
         })
     };
 
+    // Trying to incorporate Jessica's counter here
+    // This function works, but as soon as I change it to incrementX and give it a parameter the page just won't load.
+    // I'm not sure what's actually going wrong with it yet.
+    incrementFive = () =>{
+        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))+5);
+        this.setState({
+            count: parseInt(localStorage.getItem(this.props.susAction))
+        })
+    };
+
     decrement = () =>{
         if (this.state.count > 0){
             localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))-parseInt(10));
