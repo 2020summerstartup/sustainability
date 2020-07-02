@@ -6,6 +6,9 @@ import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
 import { signInWithRedirect } from "../SignIn";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+ 
 import { Dropdown2 } from "../Dropdown";
 
 // import your fontawesome library
@@ -40,15 +43,16 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne } = this.state;
+    const { username, email, passwordOne, dorm } = this.state;
 
     this.props.firebase
-      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .doCreateUserWithEmailAndPassword(email, passwordOne, dorm)
       .then((authUser) => {
         // Create a user in your Firebase realtime database
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
+          dorm,
         });
       })
       .then(() => {
@@ -67,13 +71,14 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const { username, email, passwordOne, passwordTwo, dorm, error } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      username === "";
+      username === "" ||
+      dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
     return (
       <form onSubmit={this.onSubmit} className="form">
@@ -114,12 +119,18 @@ class SignUpFormBase extends Component {
             placeholder="Confirm Password"
           />
         </div>
-        <div className="form-group" id ="Dropdown2" onClick="Dropdown2()">
+        <div className="form-group"  >
+        <input  
+            name="dorm"
+            value={dorm}
+            onChange={this.onChange}
+            type="dorm"
+            placeholder="Dorm Name"
+          />
           {/* {()=>Dropdown2()} */}
           
-          {/* <button onClick={() => Dropdown2()}>
-            Select Dorm
-          </button> */}
+          {/* Select dorm! */}
+           
           {/* <input
             name="dormName"
             value={passwordTwo}
