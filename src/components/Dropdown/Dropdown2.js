@@ -60,7 +60,8 @@ function Dropdown2() {
       borderBottom: "1px solid rgba(0, 0, 0, 0.125)",
     
       "&:hover": {
-        color: state.isDisabled ? "grey" : "black",
+        color: state.isDisabled ? "lightgrey" : "black",
+        fontWeight: state.isFocused ? "bold" : "normal",
         backgroundColor: state.isDisabled ? "white" : "#00bfa6",
       },
     }),
