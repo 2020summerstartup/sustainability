@@ -1,5 +1,5 @@
 import React from "react";
-import { reactProgress } from "react-progress-deck";
+// import { progressDeck } from "react-progress-deck";
 
 // propTypes: {
 //     imageUrl: PropTypes.string,  //image view badge. the main image url
@@ -12,10 +12,14 @@ import { reactProgress } from "react-progress-deck";
 //     size: PropTypes.string //width of the deck
 //   }
 
-<ProgressDeck
-  imageUrl="https://c3.staticflickr.com/3/2917/14333867272_acc4372727_b.jpg"
-  description="Check in 5 different place in Yosemite"
-  title="Yosemite Ninjia"
-  size={350}
-  percentage={0.5}
-/>;
+// const ProgressDeck = () => (
+//   <ProgressDeck
+//     imageUrl="https://c3.staticflickr.com/3/2917/14333867272_acc4372727_b.jpg"
+//     description="Check in 5 different place in Yosemite"
+//     title="Yosemite Ninjia"
+//     size={350}
+//     percentage={0.5}
+//   />
+// );
+
+// export default ProgressDeck;
