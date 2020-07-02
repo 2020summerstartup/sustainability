@@ -4,6 +4,7 @@ import { AuthUserContext, withAuthorization } from "../Session";
 import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 import Dropdown from "../Dropdown/maindd";
+import Dropdown2 from "../Dropdown/Dropdown2";
 import accountImg from "../../img/account.svg";
 
 const AccountPage = () => (
@@ -13,6 +14,7 @@ const AccountPage = () => (
         <div className="base-container">
           <h1>Your Account: {authUser.email}</h1>
           <Dropdown />
+          <Dropdown2 />
           <div className="image">
             <img alt="" src={accountImg} />
           </div>
