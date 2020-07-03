@@ -8,12 +8,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./index.css";
 
-const Header = () => (
-  <header>
-    <div className="title">
-      GO GREEN or GO HOME <FontAwesomeIcon icon="leaf" />
-    </div>
-  </header>
-);
+// import material ui
+import { AppBar, Toolbar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  header: {
+    background: '#00bfa6',
+    margin: '0',
+    padding: '0',
+  },
+});
+
+const Header = () => {
+  const classes = useStyles();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}></AppBar>
+    </>
+  );
+};
 
 export default Header;
