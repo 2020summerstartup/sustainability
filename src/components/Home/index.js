@@ -1,16 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Counter from "./counter";
 
 import ActionCard from "../ActionCard";
+import ActionsData from "../ActionsData"
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { withAuthorization } from "../Session";
 
 const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
   actionContainer: {
     paddingTop: "10px",
     paddingLeft: "20px",
@@ -20,28 +18,30 @@ const useStyles = makeStyles({
 
 const HomePage = () => {
   const classes = useStyles();
+  const [actionData, setActionData] = useState(ActionsData);
+
   return (
     <div className="base-container">
       <script>var user =</script>
       <h1>Home Page</h1>
       <div className={classes.root}>
-        <Grid container spacing={4} className={classes.actionContainer}>
-          <Grid item xs={12} sm={6} md={4}>
+        <Grid container spacing={3} className={classes.actionContainer}>
+          <Grid item xs={12} md={6} lg={4}>
             <ActionCard />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <ActionCard />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <ActionCard />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <ActionCard />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <ActionCard />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <ActionCard />
           </Grid>
         </Grid>

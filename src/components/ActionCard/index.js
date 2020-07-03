@@ -15,6 +15,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Grid from "@material-ui/core/Grid";
 
+import ActionsData from "../ActionsData";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
@@ -37,6 +39,13 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: "#00bfa6",
   },
+  cardContent: {
+    textAlign: "left",
+    paddingBottom: "0",
+  },
+  cardActions: {
+    paddingTop: "0",
+  },
 }));
 
 export default function RecipeReviewCard() {
@@ -51,6 +60,7 @@ export default function RecipeReviewCard() {
     <Grid>
       <Card className={classes.root}>
         <CardHeader
+          className={classes.cardContent}
           // avatar={
           //   <Avatar aria-label="recipe" className={classes.avatar}>
           //     R
@@ -71,7 +81,7 @@ export default function RecipeReviewCard() {
           mussels, if you like.
         </Typography>
       </CardContent> */}
-        <CardActions disableSpacing>
+        <CardActions disableSpacing className={classes.cardActions}>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
