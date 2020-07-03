@@ -25,8 +25,6 @@ code {
 body {
   color: black;
   background-color: white;
-  margin: 0;
-  padding: 0;
 }
 
 body::-webkit-scrollbar {
@@ -245,8 +243,14 @@ main {
     display: inline;
   }
 
-  .base-container {
-    margin-left: 5rem;
+  body {
+    margin-right: 5rem;
     padding: 1rem;
+  }
+
+  .base-container {
+    margin-right: 6.5rem;
+    padding-right: 2rem;
+    padding-left: 8.5rem;
   }
 }
