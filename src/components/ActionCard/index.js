@@ -1,5 +1,4 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -15,12 +14,38 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Grid from "@material-ui/core/Grid";
 
-import ActionsData from "../ActionsData";
+import Toolbar from "@material-ui/core/Toolbar";
+import TextField from "@material-ui/core/TextField";
+import SearchIcon from "@material-ui/icons/Search";
+import { fade, makeStyles } from "@material-ui/core/styles";
+
+import ActionData from "../ActionData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
     backgroundColor: "var(--text-secondary)",
+  },
+  searchContainer: {
+    display: "flex",
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    paddingLeft: "20px",
+    paddingRight: "20px",
+    marginTop: "5px",
+    marginBottom: "5px",
+  },
+  searchIcon: {
+    alignSelf: "flex-end",
+    marginBottom: "5px",
+  },
+  searchInput: {
+    width: "200px",
+    margin: "5px",
+  },
+  actionContainer: {
+    paddingTop: "10px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
   },
   media: {
     height: 0,
@@ -48,75 +73,111 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+const ActionCard = (props) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [actionData, setActionData] = useState(ActionData);
+  const [filter, setFilter] = useState("");
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleSearchChange = (e) => {
+    setFilter(e.target.value);
   };
 
-  return (
-    <Grid>
-      <Card className={classes.root}>
-        <CardHeader
-          className={classes.cardContent}
-          // avatar={
-          //   <Avatar aria-label="recipe" className={classes.avatar}>
-          //     R
-          //   </Avatar>
-          // }
-          action={
-            <IconButton aria-label="settings">
-              <AddCircleIcon fontSize="large" />
-            </IconButton>
-          }
-          title="Recycle Water Bottle"
-          subheader="Earn 10 Points!"
-        />
-        {/* <CardContent>
+  const getActionCard = (actionId) => {
+    console.log(actionData[`${actionId}`]);
+    const { title, points } = actionData[`${actionId}`];
+
+    const handleExpandClick = () => {
+      setExpanded(!expanded);
+    };
+
+    return (
+      <Grid item xs={12} md={6} lg={4} key={actionId}>
+        <Card className={classes.root}>
+          <CardHeader
+            className={classes.cardContent}
+            // avatar={
+            //   <Avatar aria-label="recipe" className={classes.avatar}>
+            //     R
+            //   </Avatar>
+            // }
+            action={
+              <IconButton aria-label="settings">
+                <AddCircleIcon fontSize="large" />
+              </IconButton>
+            }
+            title={`${title}`}
+            subheader={`${points}`}
+          />
+          {/* <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook
           together with your guests. Add 1 cup of frozen peas along with the
           mussels, if you like.
         </Typography>
       </CardContent> */}
-        <CardActions disableSpacing className={classes.cardActions}>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <CardMedia
-              className={classes.media}
-              image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQglBrvos1eYpEK-0d41uUgv_tmIgENlB_-GQ&usqp=CAU"
-              title="Recycle water bottle image"
-            />
-            <Typography paragraph>Impact:</Typography>
-            <Typography paragraph>
-              Plastic water bottles are becoming a growing segment of the
-              municipal solid waste stream in the United States. The American
-              Chemistry Council estimates that the average consumer uses 166
-              plastic water bottles each year and that 2.5 million plastic
-              bottles are thrown away every hour. While plastic water bottles
-              offer convenience, they also create unnecessary waste in
-              landfills. By recycling your plastic water bottles, you can
-              positively impact the environment in several ways.
-            </Typography>
-          </CardContent>
-        </Collapse>
-      </Card>
-    </Grid>
+          <CardActions disableSpacing className={classes.cardActions}>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded,
+              })}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </CardActions>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <CardMedia
+                className={classes.media}
+                image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQglBrvos1eYpEK-0d41uUgv_tmIgENlB_-GQ&usqp=CAU"
+                title="Recycle water bottle image"
+              />
+              <Typography paragraph>Impact:</Typography>
+              <Typography paragraph>
+                Plastic water bottles are becoming a growing segment of the
+                municipal solid waste stream in the United States. The American
+                Chemistry Council estimates that the average consumer uses 166
+                plastic water bottles each year and that 2.5 million plastic
+                bottles are thrown away every hour. While plastic water bottles
+                offer convenience, they also create unnecessary waste in
+                landfills. By recycling your plastic water bottles, you can
+                positively impact the environment in several ways.
+              </Typography>
+            </CardContent>
+          </Collapse>
+        </Card>
+      </Grid>
+    );
+  };
+
+  return (
+    <>
+      <Toolbar>
+        <div className={classes.searchContainer}>
+          <SearchIcon className={classes.searchIcon} />
+          <TextField
+            onChange={handleSearchChange}
+            className={classes.searchInput}
+            label="Actions"
+            variant="standard"
+          />
+        </div>
+      </Toolbar>
+      <Grid container spacing={3} className={classes.actionContainer}>
+        {Object.keys(actionData).map(
+          (actionId) =>
+            actionData[actionId].title.includes(filter) &&
+            getActionCard(actionId)
+        )}
+      </Grid>
+    </>
   );
-}
+};
+
+export default ActionCard;
