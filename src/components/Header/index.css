@@ -1,25 +1,25 @@
-/* .header {
+.header {
     flex-direction: row;
     justify-content: space-between;
-} */
+}
 
-/* .title {
+.title {
   position: relative;
   top: 0.4rem;
   font-weight: bold;
   font-size: 1.5rem;
-} */
+}
 
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .title {
-    padding: 1rem;
+    margin-left: 1rem;
   }
 }
 
 /* Large screens */
 @media only screen and (min-width: 600px) {
   .title {
-    padding: 7rem;
+    margin-left: 7rem;
   }
 }
