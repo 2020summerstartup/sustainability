@@ -12,19 +12,19 @@ import "./index.css";
 // import material ui
 import { AppBar, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import EcoIcon from '@material-ui/icons/Eco';
 
 const useStyles = makeStyles((theme) => ({
   header: {
     background: "#00bfa6",
-    height: "3rem",
   },
   title: {
-    marginTop: '0.25rem',
+    marginTop: '0.5rem',
     margin: '1rem',
     [theme.breakpoints.up('sm')]: {
       marginLeft: '7.5rem',
     },
-  }
+  },
 }));
 
 const Header = () => {
@@ -34,6 +34,7 @@ const Header = () => {
       <AppBar position="static" className={classes.header}>
         <Typography variant="h6" className={classes.title} noWrap>
           Sustainability Competition App
+          <EcoIcon fontSize="medium" className={classes.leaf}/>
         </Typography>
       </AppBar>
     </>
