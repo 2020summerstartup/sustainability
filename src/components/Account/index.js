@@ -1,5 +1,7 @@
 import React from "react";
 
+import SignOutButton from "../SignOut";
+
 import { AuthUserContext, withAuthorization } from "../Session";
 import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
@@ -13,6 +15,7 @@ const AccountPage = () => (
       {(authUser) => (
         <div className="base-container">
           <h1>Your Account: {authUser.email}</h1>
+          <SignOutButton />
           <Dropdown />
           <Dropdown2 />
           <div className="image">

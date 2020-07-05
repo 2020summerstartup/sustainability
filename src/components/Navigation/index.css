@@ -239,7 +239,11 @@ main {
     width: 16rem;
   }
 
-  .navbar:hover .page-link .link-text {
+  .page-text {
+    display: none;
+  }
+
+  .navbar:hover .page-text {
     display: inline;
     color: #00bfa6;
   }
@@ -254,22 +258,27 @@ main {
 
   .navbar:hover .signout-btn {
     display: inline;
+    margin-left: 6rem;
   }
+
+  .nav-item:last-child {
+    margin-top: auto;
+  }  
 
   .icons {
     visibility: visible;
     margin: 0;
     padding: 0 !important;
-    position: relative;
+    position: absolute;
     top: 2rem;
-    left: -2rem;
+    left: 0.75rem;
   }
 
   .page-text {
     margin: 0;
     padding: 0;
     position: relative;
-    bottom: 2rem;
+    bottom: -0.25rem;
     left: 4.5rem;
   }
 

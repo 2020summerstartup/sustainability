@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../Session";
+import SignOutButton from "../SignOut";
 
 import "./index.css";
 
@@ -61,7 +62,7 @@ const NavigationAuth = () => (
             <a href="#" class="nav-link">
               <Link to={ROUTES.HOME} class="link-text">
                 <FontAwesomeIcon icon="home" className="icons" />{" "}
-                <p class="page-text">Actions</p>
+                <p class="page-text">Home</p>
               </Link>
             </a>
           </li>
@@ -79,7 +80,7 @@ const NavigationAuth = () => (
             <a href="#" class="nav-link">
               <Link to={ROUTES.INFO} class="link-text">
                 <FontAwesomeIcon icon="info" className="icons" />
-                <p class="page-text">About</p>
+                <p class="page-text">Info</p>
               </Link>
             </a>
           </li>
@@ -93,12 +94,12 @@ const NavigationAuth = () => (
             </a>
           </li>
 
-          {/* <li class="nav-item logout">
+          <li class="nav-item logout">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="sign-out-alt" className="icons" />
               <SignOutButton />
             </a>
-          </li> */}
+          </li>
         </ul>
       </nav>
     </body>
