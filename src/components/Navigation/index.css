@@ -82,7 +82,6 @@ main {
 }
 
 .link-text {
-  display: none;
   margin-left: 1rem;
   text-decoration: none;
   font-size: 1.2rem;
@@ -188,7 +187,6 @@ main {
     margin-bottom: 0;
   }
 
-
   .logout {
     display: none;
   }
@@ -238,7 +236,7 @@ main {
     width: 16rem;
   }
 
-  .navbar:hover .link-text {
+  .navbar:hover .page-link .link-text {
     display: inline;
     color: #00bfa6;
   }
@@ -253,6 +251,23 @@ main {
 
   .navbar:hover .signout-btn {
     display: inline;
+  }
+
+  .icons {
+    visibility: visible;
+    margin: 0;
+    padding: 0 !important;
+    position: relative;
+    top: 2rem;
+    left: -2rem;
+  }
+
+  .page-text {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    bottom: 2rem;
+    left: 4.5rem;
   }
 
   body {

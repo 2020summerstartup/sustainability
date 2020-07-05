@@ -58,15 +58,6 @@ const NavigationAuth = () => (
             </a>
           </li>
 
-          <li class="nav-item hide">
-            <a href="#" class="nav-link">
-              <FontAwesomeIcon icon="leaf" className="icons" />
-              <Link to={ROUTES.LANDING} class="link-text">
-                Landing
-              </Link>
-            </a>
-          </li>
-
           <li class="nav-item">
             <a href="#" class="nav-link">
               <Link to={ROUTES.HOME} class="link-text">
@@ -101,12 +92,12 @@ const NavigationAuth = () => (
             </a>
           </li>
 
-          <li class="nav-item logout">
+          {/* <li class="nav-item logout">
             <a href="#" class="nav-link">
               <FontAwesomeIcon icon="sign-out-alt" className="icons" />
               <SignOutButton />
             </a>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </body>
