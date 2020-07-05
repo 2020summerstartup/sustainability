@@ -69,46 +69,41 @@ const NavigationAuth = () => (
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <FontAwesomeIcon icon="home" className="icons" />
               <Link to={ROUTES.HOME} class="link-text">
-                Home
+                <FontAwesomeIcon icon="home" className="icons" /> <p class="page-text">Actions</p>
               </Link>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <FontAwesomeIcon icon="trophy" className="icons" />
               <Link to={ROUTES.COMPETE} class="link-text">
-                Compete
+                <FontAwesomeIcon icon="trophy" className="icons" /> <p class="page-text">Compete</p>
               </Link>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <FontAwesomeIcon icon="info" className="icons" />
               <Link to={ROUTES.INFO} class="link-text">
-                Info
+                <FontAwesomeIcon icon="info" className="icons" />
+                <p class="page-text">About</p>
               </Link>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <FontAwesomeIcon icon="user" className="icons" />
               <Link to={ROUTES.ACCOUNT} class="link-text">
-                Account
+                <FontAwesomeIcon icon="user" className="icons" />
+                <p class="page-text">Account</p>
               </Link>
             </a>
           </li>
 
           <li class="nav-item logout">
             <a href="#" class="nav-link">
-              <FontAwesomeIcon
-                icon="sign-out-alt"
-                className="icons"
-              />
+              <FontAwesomeIcon icon="sign-out-alt" className="icons" />
               <SignOutButton />
             </a>
           </li>

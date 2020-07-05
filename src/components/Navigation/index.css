@@ -160,7 +160,7 @@ main {
   .navbar {
     bottom: 0;
     width: 100vw;
-    height: 5rem;
+    height: 4rem;
     position: fixed;
   }
 
@@ -183,8 +183,11 @@ main {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding: 0;
+    padding: 0 !important;
+    height: 4rem;
+    margin-bottom: 0;
   }
+
 
   .logout {
     display: none;
@@ -192,14 +195,15 @@ main {
 
   .base-container {
     margin-bottom: 5rem;
-    padding: 1rem;
   }
 
   .link-text {
     display: inline;
     text-align: center;
+    padding: 0;
     margin: 0;
     font-size: 1rem;
+    height: 4rem;
   }
 
   .navbar:hover .link-text {
@@ -209,8 +213,16 @@ main {
 
   .icons {
     position: relative;
-    top: 0.9rem;
+    top: 0rem;
     margin: 0;
+    padding: 0;
+  }
+
+  .page-text {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    bottom: 2rem;
   }
 }
 
@@ -250,7 +262,7 @@ main {
 
   .base-container {
     margin-right: 6.5rem;
-    padding-right: 1rem;
-    padding-left: 7.5rem;
+    padding-right: 2rem;
+    padding-left: 8.5rem;
   }
 }

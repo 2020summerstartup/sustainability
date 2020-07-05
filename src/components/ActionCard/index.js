@@ -43,9 +43,9 @@ const useStyles = makeStyles((theme) => ({
     margin: "5px",
   },
   actionContainer: {
-    paddingTop: "10px",
-    paddingLeft: "20px",
-    paddingRight: "20px",
+    paddingTop: "1rem",
+    paddingLeft: "2rem",
+    paddingRight: "2rem",
   },
   media: {
     height: 0,
