@@ -19,7 +19,7 @@ import { withFirebase } from '../Firebase';
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    background: "#00bfa6",
+    background: "primary",
   },
   title: {
     marginTop: "0.5rem",

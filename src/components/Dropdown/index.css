@@ -56,7 +56,7 @@ body {
 }
 
 .dd-header:focus {
-  background-color: #00bfa6;
+  background-color: var(--theme);
   color: white;
   outline: none;
 }

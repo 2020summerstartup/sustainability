@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
   },
   searchInput: {
-    width: "200px",
+    width: "25rem",
     margin: "5px",
   },
   actionContainer: {
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   avatar: {
-    backgroundColor: "#00bfa6",
+    backgroundColor: "var(--theme)",
   },
   cardContent: {
     textAlign: "left",
@@ -160,13 +160,20 @@ const ActionCard = (props) => {
     <>
       <Toolbar>
         <div className={classes.searchContainer}>
-          <SearchIcon className={classes.searchIcon} />
-          <TextField
-            onChange={handleSearchChange}
-            className={classes.searchInput}
-            label="Actions"
-            variant="standard"
-          />
+          <Grid container spacing={1} alignItems="flex-end">
+            <Grid item>
+              <SearchIcon className={classes.searchIcon} />
+            </Grid>
+            <Grid item>
+              <TextField
+                onChange={handleSearchChange}
+                className={classes.searchInput}
+                label="Search Actions"
+                variant="standard"
+                color="primary"
+              />
+            </Grid>
+          </Grid>
         </div>
       </Toolbar>
       <Grid container spacing={3} className={classes.actionContainer}>

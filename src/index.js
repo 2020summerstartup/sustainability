@@ -1,19 +1,32 @@
 // "The BIG index"
+import React from "react";
+import ReactDOM from "react-dom";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
-import React from 'react';
-import ReactDOM from 'react-dom';
- 
-import './index.css';
-import * as serviceWorker from './serviceWorker';
- 
-import App from './components/App';
-import Firebase, { FirebaseContext } from './components/Firebase';
- 
+import "./index.css";
+import * as serviceWorker from "./serviceWorker";
+
+import App from "./components/App";
+import Firebase, { FirebaseContext } from "./components/Firebase";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#00bfa6",
+    },
+    // secondary: {
+    //   main: "#0044ff",
+    // },
+  },
+});
+
 ReactDOM.render(
-  <FirebaseContext.Provider value ={new Firebase()}>
-    <App />
-  </FirebaseContext.Provider>, 
-  document.getElementById('root'),
-  );
- 
+  <FirebaseContext.Provider value={new Firebase()}>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </FirebaseContext.Provider>,
+  document.getElementById("root")
+);
+
 serviceWorker.unregister();

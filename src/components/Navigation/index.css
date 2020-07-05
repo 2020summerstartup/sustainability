@@ -15,6 +15,7 @@ code {
 :root {
   font-size: 16px;
   font-family: "Open Sans";
+  --theme: #00bfa6;
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --bg-primary: #23232e;
@@ -93,7 +94,7 @@ main {
 }
 
 .fa-primary {
-  color: #00bfa6;
+  color: var(--theme);
 }
 
 .fa-secondary {
@@ -146,7 +147,7 @@ main {
 }
 
 .navbar:hover .icons {
-  color: #00bfa6;
+  color: var(--theme);
 }
 
 .signout-btn {
@@ -209,7 +210,7 @@ main {
 
   .navbar:hover .link-text {
     display: inline;
-    color: #00bfa6;
+    color: var(--theme);
   }
 
   .icons {
@@ -245,7 +246,7 @@ main {
 
   .navbar:hover .page-text {
     display: inline;
-    color: #00bfa6;
+    color: var(--theme);
   }
 
   .navbar:hover .logo svg {
@@ -254,7 +255,7 @@ main {
 
   .navbar:hover .logo-text {
     left: 0px;
-    color: #00bfa6;
+    color: var(--theme);
   }
 
   .navbar:hover .signout-btn {
