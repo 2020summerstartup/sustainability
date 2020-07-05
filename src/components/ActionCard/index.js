@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   searchIcon: {
     alignSelf: "flex-end",
-    marginBottom: "5px",
+    marginBottom: "0.5rem",
   },
   searchInput: {
     width: "15rem",
