@@ -254,6 +254,7 @@ main {
 
   .navbar:hover .logo-text {
     left: 0px;
+    color: #00bfa6;
   }
 
   .navbar:hover .signout-btn {
