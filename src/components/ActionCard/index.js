@@ -39,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
   },
   searchInput: {
-    width: "25rem",
-    margin: "5px",
+    width: "15rem",
+    margin: "0.5rem",
+    marginTop: "0",
   },
   actionContainer: {
     paddingTop: "1rem",
@@ -171,6 +172,7 @@ const ActionCard = (props) => {
                 label="Search Actions"
                 variant="standard"
                 color="primary"
+                InputProps={{ disableUnderline: true }}
               />
             </Grid>
           </Grid>
