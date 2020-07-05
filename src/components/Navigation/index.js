@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../Session";
 
@@ -61,7 +60,8 @@ const NavigationAuth = () => (
           <li class="nav-item">
             <a href="#" class="nav-link">
               <Link to={ROUTES.HOME} class="link-text">
-                <FontAwesomeIcon icon="home" className="icons" /> <p class="page-text">Actions</p>
+                <FontAwesomeIcon icon="home" className="icons" />{" "}
+                <p class="page-text">Actions</p>
               </Link>
             </a>
           </li>
@@ -69,7 +69,8 @@ const NavigationAuth = () => (
           <li class="nav-item">
             <a href="#" class="nav-link">
               <Link to={ROUTES.COMPETE} class="link-text">
-                <FontAwesomeIcon icon="trophy" className="icons" /> <p class="page-text">Compete</p>
+                <FontAwesomeIcon icon="trophy" className="icons" />{" "}
+                <p class="page-text">Compete</p>
               </Link>
             </a>
           </li>
@@ -141,18 +142,18 @@ const NavigationNonAuth = () => (
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <FontAwesomeIcon icon="leaf" className="icons" />
               <Link to={ROUTES.LANDING} class="link-text">
-                Landing
+                <FontAwesomeIcon icon="leaf" className="icons" />
+                <p class="page-text">Landing</p>
               </Link>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <FontAwesomeIcon icon="user" className="icons" />
               <Link to={ROUTES.SIGN_IN} class="link-text">
-                Sign In
+                <FontAwesomeIcon icon="user" className="icons" />
+                <p class="page-text">Sign In</p>
               </Link>
             </a>
           </li>

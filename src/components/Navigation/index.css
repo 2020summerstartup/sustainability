@@ -48,7 +48,6 @@ main {
   position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease;
-  /* overflow: scroll; */
 }
 
 .navbar-nav {
@@ -157,10 +156,12 @@ main {
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
-    bottom: 0;
-    width: 100vw;
-    height: 4rem;
     position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    overflow-x: hidden;
   }
 
   .logo {
@@ -193,6 +194,8 @@ main {
 
   .base-container {
     margin-bottom: 5rem;
+    overflow-x: hidden;
+    /* padding-bottom: 5rem; */
   }
 
   .link-text {
