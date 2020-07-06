@@ -21,6 +21,8 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData";
 
+// Current task: Change points so that it just says the number.
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
@@ -100,8 +102,8 @@ const ActionCard = () => {
       if (isNaN(localStorage.getItem(currSusAction))) {
         localStorage.setItem(currSusAction, 0);
       }
-      // add 10 (TODO: eventually update this to whatever the specific point val is) to the saved point total
-      localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(10));
+      // add specified number of points to the saved point total
+      localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
       window.location.reload(true); // Reload window when value changes
     };
 
@@ -123,7 +125,8 @@ const ActionCard = () => {
               </IconButton>
             }
             title={`${title}`}
-            subheader={`${points}`}
+            //subheader={`${points}`}
+            subheader = {'Earn '.concat(`${points}`, " Points!")}
           />
           {/* <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
