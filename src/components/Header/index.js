@@ -22,11 +22,12 @@ const useStyles = makeStyles((theme) => ({
     background: "primary",
   },
   title: {
+    color: "white",
     marginTop: "0.5rem",
-    marginLeft: "0.5rem",
-    margin: "1rem",
+    marginLeft: "0rem",
+    marginBottom: "0.5rem",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: "7.5rem",
+      marginLeft: "6.5rem",
     },
   },
 }));
@@ -38,7 +39,7 @@ const Header = ({ firebase }) => {
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" className={classes.title} noWrap>
-            Sustainability Competition App
+            Sustainability Competition
             <EcoIcon fontSize="medium" className={classes.leaf} />
           </Typography>
           {/* <Button color="inherit" onClick={firebase.doSignOut} className={classes.signout}>Sign Out</Button> */}
