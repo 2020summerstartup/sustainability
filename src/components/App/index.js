@@ -12,7 +12,7 @@ import AccountPage from '../Account';
 import CompetePage from '../Compete';
 import InfoPage from '../Info';
 import ProfilePage from '../Profile';
- 
+
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
