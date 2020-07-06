@@ -8,7 +8,7 @@ const dorms = [
   {
     value: 1,
     label: "Atwood",
-    isDisabled: true,
+    //isDisabled: true,
   },
   {
     value: 2,
@@ -25,7 +25,7 @@ const dorms = [
   {
     value: 5,
     label: "Linde",
-    isDisabled: true,
+    //isDisabled: true,
   },
   {
     value: 6,
@@ -77,6 +77,11 @@ function Dropdown2() {
       },
     }),
   };
+
+  // Note from Katie: I was working on saving dorm info here, but it didn't seem to work. Unsure if I'll come back to this code tbqh.
+  // var userDorm =  toString({selectedValue});
+  // localStorage.setItem("userDorm", userDorm);
+  // console.log('userDorm', localStorage.getItem(userDorm));
 
   return (
     <div>
