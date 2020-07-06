@@ -6,10 +6,10 @@ import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
 import { signInWithRedirect } from "../SignIn";
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+// import Dropdown from 'react-dropdown';
+// import 'react-dropdown/style.css';
  
-import { Dropdown2 } from "../Dropdown";
+// import { Dropdown2 } from "../Dropdown";
 
 // import your fontawesome library
 import "../FontAwesomeIcons";

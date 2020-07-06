@@ -8,7 +8,7 @@ import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
-// import AdminPage from '../Admin';
+import SettingsPage from '../Setting';
 import InfoPage from '../Info';
 import ProfilePage from '../Profile';
  
@@ -31,7 +31,7 @@ const App = () => (
       />
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-      {/* <Route path={ROUTES.ADMIN} component={AdminPage} /> */}
+      <Route path={ROUTES.SETTING} component={SettingsPage} />
       <Route path={ROUTES.INFO} component={InfoPage} />
       <Route path={ROUTES.PROFILE} component={ProfilePage} />
     </div>
