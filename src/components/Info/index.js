@@ -46,6 +46,7 @@ const InfoPage = () => (
       size={350}
       percentage={0.5}
     /> */}
+    
   </div>
 );
 

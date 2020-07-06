@@ -5,9 +5,6 @@ import firebase from "../Firebase"
 // No idea how to initialize the counter the first time without it being overwritten every time the user opens the
 // file. Maybe I can jank something together with "if val== NaN, then val = 0" or something?? Will try later.
 
-// adding comment as a test
-// a second test comment
-
 class Counter extends Component{
     constructor(props){
         super(props)
@@ -17,25 +14,34 @@ class Counter extends Component{
     }
 
     increment = () =>{
-        this.setState({
-            count: this.state.count + 10
-        })
         localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))+parseInt(10));
+        this.setState({
+            count: parseInt(localStorage.getItem(this.props.susAction))
+        })
+    };
+
+    // Trying to incorporate Jessica's counter here
+    // This function works, but as soon as I change it to incrementX and give it a parameter the page just won't load.
+    // I'm not sure what's actually going wrong with it yet.
+    incrementFive = () =>{
+        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))+5);
+        this.setState({
+            count: parseInt(localStorage.getItem(this.props.susAction))
+        })
     };
 
     decrement = () =>{
         if (this.state.count > 0){
-        this.setState({
-                count: this.state.count - 10
-        })
-        localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))-parseInt(10));
+            localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))-parseInt(10));
+            this.setState({
+                count: parseInt(localStorage.getItem(this.props.susAction))
+            })
         }
         else{
             this.setState({
                 count: 0
             })
-
-        localStorage.setItem(this.props.susAction, 0);
+            localStorage.setItem(this.props.susAction, 0);
         }
     };
 
