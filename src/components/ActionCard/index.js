@@ -21,8 +21,6 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData";
 
-// Current task: Change points so that it just says the number.
-
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
@@ -120,7 +118,7 @@ const ActionCard = () => {
             action={
               <IconButton
                 onClick = {increment}
-                aria-label="settings" >
+                aria-label="settings" title='Complete this sustainable action!' >
                 <AddCircleIcon fontSize="large" />
               </IconButton>
             }
@@ -136,7 +134,7 @@ const ActionCard = () => {
         </Typography>
       </CardContent> */}
           <CardActions disableSpacing className={classes.cardActions}>
-            <IconButton aria-label="add to favorites">
+            <IconButton aria-label="add to favorites" title ='Add to favorites'>
               <FavoriteIcon />
             </IconButton>
             <IconButton
@@ -146,6 +144,7 @@ const ActionCard = () => {
               onClick={handleExpandClick}
               aria-expanded={expanded}
               aria-label="show more"
+              title = 'Learn more'
             >
               <ExpandMoreIcon />
             </IconButton>
