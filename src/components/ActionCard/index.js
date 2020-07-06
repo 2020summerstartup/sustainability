@@ -21,16 +21,6 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData";
 
-// Increment function that I want to try to use:
-// function increment() {
-//   console.log('increment func ran');
-//   localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))+parseInt(10));
-//   this.setState({
-//       count: parseInt(localStorage.getItem(this.props.susAction))
-//   })
-//    window.location.reload(true);
-// };
-
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
@@ -84,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ActionCard = (props) => {
+const ActionCard = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [actionData, setActionData] = useState(ActionData);
@@ -96,10 +86,23 @@ const ActionCard = (props) => {
 
   const getActionCard = (actionId) => {
     console.log(actionData[`${actionId}`]);
-    const { title, points } = actionData[`${actionId}`];
+    const { title, points, susAction } = actionData[`${actionId}`];
+    const currSusAction = `${susAction}`;
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
+    };
+
+    const increment = () => {
+      // Note from Katie to other programmers: The following if statement is super important, even though it usually doesn't
+      // do anything. When a new susAction is added, the local storage value is initially NaN, and then we can't increment/
+      // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
+      if (isNaN(localStorage.getItem(currSusAction))) {
+        localStorage.setItem(currSusAction, 0);
+      }
+      // add 10 (TODO: eventually update this to whatever the specific point val is) to the saved point total
+      localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(10));
+      window.location.reload(true); // Reload window when value changes
     };
 
     return (
@@ -114,7 +117,7 @@ const ActionCard = (props) => {
             // }
             action={
               <IconButton
-                // onClick = {increment}
+                onClick = {increment}
                 aria-label="settings" >
                 <AddCircleIcon fontSize="large" />
               </IconButton>

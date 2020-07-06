@@ -3,12 +3,13 @@ export default {
     title: "Recycle Water Bottle",
     id: 1,
     points: "Earn 10 Points!",
-    susAction: 'watterBottle',
+    susAction: 'waterBottle',
   },
   "2": {
     title: "Walk to the Village",
     id: 2,
     points: "Earn 30 Points!",
+    susAction: 'cmontWalk',
   },
   "3": {
     title: "Bring your own reusable straw",

@@ -44,14 +44,12 @@ const HomePage = () => (
     You have earned a total of <b>{ total }</b> points for your sustainable actions. Thank you!
     {/* Emoji that we probably shouldn't include: <span role="img" aria-label="recycle">♻️</span> */}
     <ActionCard />
-    {/* Total points earned. TODO: Make this update automatically, instead of only on
-    page reload. I'll deal with this later (I want to update this whole thing to use the new counter first). */}
     <h1> </h1>
     {/* Individual sustainable actions. */}
-    <h3><b>Recycle Water Bottle</b></h3>
+    {/* <h3><b>Recycle Water Bottle</b></h3>
     <center><Counter susAction={'waterBottle'}/></center>
     <h3><b>Walk to Claremont Village</b></h3>
-    <center><Counter susAction={'cmontWalk'}/></center>
+    <center><Counter susAction={'cmontWalk'}/></center> */}
   </div>
 );
 
