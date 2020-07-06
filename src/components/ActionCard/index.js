@@ -21,6 +21,16 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData";
 
+// Increment function that I want to try to use:
+// function increment() {
+//   console.log('increment func ran');
+//   localStorage.setItem(this.props.susAction, parseInt(localStorage.getItem(this.props.susAction))+parseInt(10));
+//   this.setState({
+//       count: parseInt(localStorage.getItem(this.props.susAction))
+//   })
+//    window.location.reload(true);
+// };
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
@@ -103,7 +113,9 @@ const ActionCard = (props) => {
             //   </Avatar>
             // }
             action={
-              <IconButton aria-label="settings">
+              <IconButton
+                // onClick = {increment}
+                aria-label="settings" >
                 <AddCircleIcon fontSize="large" />
               </IconButton>
             }

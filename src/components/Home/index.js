@@ -41,13 +41,12 @@ const HomePage = () => (
       var user = 
     </script>
     <h1><b>Track sustainable actions here!</b></h1>
-    {/* <span role="img" aria-label="recycle">♻️</span> */}
+    You have earned a total of <b>{ total }</b> points for your sustainable actions. Thank you!
+    {/* Emoji that we probably shouldn't include: <span role="img" aria-label="recycle">♻️</span> */}
     <ActionCard />
     {/* Total points earned. TODO: Make this update automatically, instead of only on
     page reload. I'll deal with this later (I want to update this whole thing to use the new counter first). */}
     <h1> </h1>
-    You have earned a total of { total } points for your sustainable actions. Thank you!
-
     {/* Individual sustainable actions. */}
     <h3><b>Recycle Water Bottle</b></h3>
     <center><Counter susAction={'waterBottle'}/></center>

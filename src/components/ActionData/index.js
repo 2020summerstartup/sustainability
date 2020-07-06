@@ -3,6 +3,7 @@ export default {
     title: "Recycle Water Bottle",
     id: 1,
     points: "Earn 10 Points!",
+    susAction: 'watterBottle',
   },
   "2": {
     title: "Walk to the Village",
