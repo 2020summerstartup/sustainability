@@ -7,25 +7,25 @@
   }
   .google-icon-wrapper {
     position: absolute;
-    margin-top: 1px;
-    margin-left: 1px;
-    width: 40px;
-    height: 40px;
+    margin-top: 2px;
+    margin-left: 2px;
+    width: 38px;
+    height: 38px;
     border-radius: 2px;
     background-color: #fff;
   }
   
   .google-icon {
     position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
+    margin-top: 9px;
+    margin-left: -8px;
     width: 18px;
     height: 18px;
   }
   
   .btn-text {
     float: right;
-    margin: 11px 11px 0 0;
+    margin: 13px 11px 0 0;
     color: white;
     font-size: 14px;
     letter-spacing: 0.2px;
