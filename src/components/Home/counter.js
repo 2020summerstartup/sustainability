@@ -18,6 +18,7 @@ class Counter extends Component{
         this.setState({
             count: parseInt(localStorage.getItem(this.props.susAction))
         })
+        window.location.reload(true);
     };
 
     // Trying to incorporate Jessica's counter here
@@ -28,6 +29,7 @@ class Counter extends Component{
         this.setState({
             count: parseInt(localStorage.getItem(this.props.susAction))
         })
+        window.location.reload(true);
     };
 
     decrement = () =>{
@@ -43,6 +45,7 @@ class Counter extends Component{
             })
             localStorage.setItem(this.props.susAction, 0);
         }
+        window.location.reload(true);
     };
 
     writeUserData(email, count) {
