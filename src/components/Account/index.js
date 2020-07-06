@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.css";
 
 import SignOutButton from "../SignOut";
 
@@ -15,11 +16,11 @@ const AccountPage = () => (
       {(authUser) => (
         <div className="base-container">
           <h1>Your Account: {authUser.email}</h1>
-          <SignOutButton />
+          <SignOutButton className="signout-btn" />
           <Dropdown />
           <Dropdown2 />
           <div className="image">
-            <img alt="" src={accountImg} />
+            <img alt="your account" src={accountImg} />
           </div>
           {/* I think we might want to eventually remove this, because most websites
         only have a "forgot password" option on login. If they forgot their password
