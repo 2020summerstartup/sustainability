@@ -141,7 +141,7 @@ const NavigationNonAuth = () => (
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item non-auth">
             <a href="#" class="nav-link">
               <Link to={ROUTES.LANDING} class="link-text">
                 <FontAwesomeIcon icon="leaf" className="icons" />
@@ -150,7 +150,7 @@ const NavigationNonAuth = () => (
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item non-auth">
             <a href="#" class="nav-link">
               <Link to={ROUTES.SIGN_IN} class="link-text">
                 <FontAwesomeIcon icon="user" className="icons" />
