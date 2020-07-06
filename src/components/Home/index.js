@@ -6,14 +6,15 @@ import CountUp from "react-countup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
+import Confetti from "react-confetti";
 
 import { withAuthorization } from "../Session";
 
 const CustomToast = ({ closeToast }) => {
   return (
     <div>
-      <p>Check your progress! Congrats!</p>
-      <button onClick={closeToast}>OK</button>
+      <p>Log more sustainable actions!</p>
+      <button onClick={closeToast} className="button">OK</button>
     </div>
   );
 };
@@ -27,6 +28,7 @@ const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
+// need this for modal to not get error in console
 Modal.setAppElement("#root");
 // Text to display on the homepage
 function HomePage() {
@@ -36,13 +38,17 @@ function HomePage() {
     <div className="base-container">
       <script>var user =</script>
       <h1>Home Sweet Home</h1>
-
-      <h3>Testing:</h3>
+  
+      {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
         {<CountUp start={0} end={100} duration={5}></CountUp>} points! &nbsp;
-        <button onClick={notify1} className="button">Click me!</button>
-        <button onClick={notify2} className="button">No, Click me!</button>
+        <button onClick={notify1} className="button">
+          Click me!
+        </button> &nbsp;
+        <button onClick={notify2} className="button">
+          No, Click me!
+        </button>
       </h3>
       <button onClick={() => setModalIsOpen(true)} className="button">
         Check Your Progress
@@ -56,19 +62,28 @@ function HomePage() {
           },
           content: {
             color: "var(--theme)",
+            overflow: "hidden",
           },
         }}
       >
+        <Confetti
+          width={1500}
+          numberOfPieces={2000}
+          recycle={false}
+          opacity={0.7}
+          // colors={["grey", "white", "green", "black"]}
+        />
         <h2>Your Progress: </h2>
         <p>Points for Recycling Water Bottle: </p>
         <p>Points for Walking to the Village: </p>
         <h3>Total Points: </h3>
         <h1></h1>
         <div>
-          <button onClick={() => setModalIsOpen(false)} className="button">Close</button>
+          <button onClick={() => setModalIsOpen(false)} className="button">
+            Close
+          </button>
         </div>
       </Modal>
-      
       <ActionCard />
       <h3>Track your sustainable actions here!</h3>
       <span role="img" aria-label="recycle">
