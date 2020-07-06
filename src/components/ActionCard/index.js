@@ -88,7 +88,7 @@ const ActionCard = (props) => {
   name.charAt(0).toUpperCase() + name.slice(1);
 
   const getActionCard = (actionId) => {
-    console.log(actionData[`${actionId}`]);
+    // console.log(actionData[`${actionId}`]);
     const { title, points } = actionData[`${actionId}`];
 
     const handleExpandClick = () => {
