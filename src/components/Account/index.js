@@ -6,31 +6,51 @@ import SignOutButton from "../SignOut";
 import { AuthUserContext, withAuthorization } from "../Session";
 import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
-import Dropdown from "../Dropdown/maindd";
-import Dropdown2 from "../Dropdown/Dropdown2";
+import Dropdown2 from "../Dropdown";
 import accountImg from "../../img/account.svg";
+import { Link } from 'react-router-dom';
+import * as ROUTES from "../../constants/routes";
+// import your fontawesome library
+import "../FontAwesomeIcons";
+// import when you need to use icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as firebase from 'firebase';
+
+
 
 const AccountPage = () => (
   <div>
     <AuthUserContext.Consumer>
       {(authUser) => (
         <div className="base-container">
+          {/* <h1> Welcome to your account page, {firebase.database().ref('/users/' + post.name).once('value').then(function(snapshot) {
+    const username = (snapshot.val() && snapshot.val().username)})}</h1> */}
           <h1>Your Account: {authUser.email}</h1>
+          <h3>{authUser.dorm} dorm!!</h3>
+          {/* insert picture of dorm */}
+          <h5>{authUser.points} points earned so far! Great job! </h5>
+
+          <h5>Need to change your dorm or password?</h5>
+          <ul>
+              <li>
+                  
+                    <Link to={ROUTES.SETTING}>
+                      <button className ="signout-btn" >
+                        Account Settings
+                    </button>
+                    </Link>
+                  
+               </li>
+          </ul>
+          
+        
+          
           <SignOutButton className="signout-btn" />
-          <Dropdown />
-          <Dropdown2 />
-          <div className="image">
-            <img alt="your account" src={accountImg} />
-          </div>
-          {/* I think we might want to eventually remove this, because most websites
-        only have a "forgot password" option on login. If they forgot their password
-        but they're logged in they can just change the password below. */}
-          <h3>Forgot Password?</h3>
-          <PasswordForgetForm />
-          <h3>-------------------------------------------</h3>
-          <h3>Change Password?</h3>
-          <PasswordChangeForm />
-        </div>
+          
+          
+        </div>    
+           
+        
       )}
     </AuthUserContext.Consumer>
   </div>

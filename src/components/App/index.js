@@ -12,6 +12,7 @@ import AccountPage from '../Account';
 import CompetePage from '../Compete';
 import InfoPage from '../Info';
 import ProfilePage from '../Profile';
+import SettingPage from '../Setting';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
@@ -34,6 +35,7 @@ const App = () => (
       <Route path={ROUTES.COMPETE} component={CompetePage} />
       <Route path={ROUTES.INFO} component={InfoPage} />
       <Route path={ROUTES.PROFILE} component={ProfilePage} />
+      <Route path={ROUTES.SETTING} component={SettingPage} />
     </div>
   </Router>
 );
