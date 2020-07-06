@@ -1,14 +1,6 @@
-header {
-  background: #00bfa6;
-  color: var(--bg-primary);
-  height: 3rem;
-  align-items: center;
-  width: 100%;
-}
-
 .header {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .title {

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from "react";
 import Counter from './counter';
- 
+import ActionCard from "../ActionCard";
+
 import { withAuthorization } from '../Session';
 
 // Text to display on the homepage
@@ -10,6 +11,7 @@ const HomePage = () => (
       var user = 
     </script>
     <h1>Home Sweet Home</h1>
+    <ActionCard />
     <h3>Track your sustainable actions here!</h3>
     <span role="img" aria-label="recycle">♻️</span>
     {/* Total points earned. TODO: Make this update automatically, instead of only on

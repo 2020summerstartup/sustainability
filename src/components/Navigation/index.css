@@ -15,6 +15,7 @@ code {
 :root {
   font-size: 16px;
   font-family: "Open Sans";
+  --theme: #00bfa6;
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --bg-primary: #23232e;
@@ -48,7 +49,6 @@ main {
   position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease;
-  /* overflow: scroll; */
 }
 
 .navbar-nav {
@@ -82,7 +82,6 @@ main {
 }
 
 .link-text {
-  display: none;
   margin-left: 1rem;
   text-decoration: none;
   font-size: 1.2rem;
@@ -95,7 +94,7 @@ main {
 }
 
 .fa-primary {
-  color: #00bfa6;
+  color: var(--theme);
 }
 
 .fa-secondary {
@@ -148,7 +147,7 @@ main {
 }
 
 .navbar:hover .icons {
-  color: #00bfa6;
+  color: var(--theme);
 }
 
 .signout-btn {
@@ -158,10 +157,12 @@ main {
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
-    bottom: 0;
-    width: 100vw;
-    height: 5rem;
     position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    overflow: hidden;
   }
 
   .logo {
@@ -183,7 +184,9 @@ main {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding: 0;
+    padding: 0 !important;
+    height: 4rem;
+    margin-bottom: 0;
   }
 
   .logout {
@@ -192,25 +195,36 @@ main {
 
   .base-container {
     margin-bottom: 5rem;
-    padding: 1rem;
+    overflow-x: hidden;
+    /* padding-bottom: 5rem; */
   }
 
   .link-text {
     display: inline;
     text-align: center;
+    padding: 0;
     margin: 0;
     font-size: 1rem;
+    height: 4rem;
   }
 
   .navbar:hover .link-text {
     display: inline;
-    color: #00bfa6;
+    color: var(--theme);
   }
 
   .icons {
     position: relative;
-    top: 0.9rem;
+    top: 0rem;
     margin: 0;
+    padding: 0;
+  }
+
+  .page-text {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    bottom: 2rem;
   }
 }
 
@@ -226,9 +240,13 @@ main {
     width: 16rem;
   }
 
-  .navbar:hover .link-text {
+  .page-text {
+    display: none;
+  }
+
+  .navbar:hover .page-text {
     display: inline;
-    color: #00bfa6;
+    color: var(--theme);
   }
 
   .navbar:hover .logo svg {
@@ -237,10 +255,33 @@ main {
 
   .navbar:hover .logo-text {
     left: 0px;
+    color: var(--theme);
   }
 
   .navbar:hover .signout-btn {
     display: inline;
+    margin-left: 6rem;
+  }
+
+  .nav-item:last-child {
+    margin-top: auto;
+  }  
+
+  .icons {
+    visibility: visible;
+    margin: 0;
+    padding: 0 !important;
+    position: absolute;
+    top: 2rem;
+    left: 0.75rem;
+  }
+
+  .page-text {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    bottom: -0.25rem;
+    left: 4.5rem;
   }
 
   body {
