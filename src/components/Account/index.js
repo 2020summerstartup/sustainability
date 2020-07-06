@@ -1,5 +1,8 @@
 import React from "react";
 import "./index.css";
+import { Link } from "react-router-dom";
+
+import * as ROUTES from "../../constants/routes";
 
 import SignOutButton from "../SignOut";
 
@@ -16,19 +19,7 @@ const AccountPage = () => (
       {(authUser) => (
         <div className="base-container">
           <h1>Your Account: {authUser.email}</h1>
-          {/* <Dropdown /> */}
-          <Dropdown2 />
-          <div className="image">
-            <img alt="your account" src={accountImg} />
-          </div>
-          {/* I think we might want to eventually remove this, because most websites
-        only have a "forgot password" option on login. If they forgot their password
-        but they're logged in they can just change the password below. */}
-          <h3>Forgot Password?</h3>
-          <PasswordForgetForm />
-          <h3>-------------------------------------------</h3>
-          <h3>Change Password?</h3>
-          <PasswordChangeForm />
+          <Link to={ROUTES.SETTING}><button>Settings</button></Link>
         </div>
       )}
     </AuthUserContext.Consumer>

@@ -11,6 +11,7 @@ import AccountPage from '../Account';
 import SettingsPage from '../Setting';
 import InfoPage from '../Info';
 import ProfilePage from '../Profile';
+import Header from '../Header';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
