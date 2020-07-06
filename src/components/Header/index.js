@@ -42,8 +42,6 @@ const Header = ({ firebase }) => {
             Sustainability Competition
             <EcoIcon fontSize="medium" className={classes.leaf} />
           </Typography>
-          {/* <Button color="inherit" onClick={firebase.doSignOut} className={classes.signout}>Sign Out</Button> */}
-          {/* <SignOutButton /> */}
         </Toolbar>
       </AppBar>
     </>
