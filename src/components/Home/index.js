@@ -4,8 +4,13 @@ import ActionCard from "../ActionCard";
 
 import { withAuthorization } from '../Session';
 
-// // Initialize total points variable
-var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'));
+// Initialize total points variable
+// TODO: I want this to update without us having to manually add every sus action. Not sure how...
+var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
++ parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseGroceryBag'))
++ parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
++ parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
++ parseInt(localStorage.getItem('ecoClean'));
 
 // The following commented out code didn't work, but I want to keep the record of it for now
 // to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)

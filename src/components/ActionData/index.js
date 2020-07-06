@@ -15,35 +15,42 @@ export default {
     title: "Bring your own reusable straw",
     id: 3,
     points: "Earn 15 Points!",
+    susAction: 'reuseStraw',
   },
   "4": {
     title: "Bring reusable bag for groceries",
     id: 4,
     points: "Earn 10 Points!",
+    susAction: 'reuseGroceryBag',
   },
   "5": {
-    title: "Shop at the farmers market",
+    title: "Shop at the farmer's market",
     id: 5,
     points: "Earn 35 Points!",
+    susAction: 'frmersMarket',
   },
   "6": {
     title: "Re-brew your tea leaves",
     id: 6,
     points: "Earn 10 Points!",
+    susAction: 'rebrewTea',
   },
   "7": {
     title: "No food waste from meal",
     id: 7,
     points: "Earn 20 Points!",
+    susAction: 'noFoodWaste',
   },
   "8": {
     title: "Participate in Meatless-Mondays",
     id: 8,
     points: "Earn 20 Points!",
+    susAction: 'meatlessMon',
   },
   "9": {
     title: "Eco-friendly cleaning products",
     id: 9,
     points: "Earn 10 Points!",
+    susAction: 'ecoClean',
   },
 };
