@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 // import "././index.css";
 import { Link } from "react-router-dom";
+import southdorm from "./southdorm.jpg";
 
 import * as ROUTES from "../../constants/routes";
 
@@ -19,14 +20,27 @@ const AccountPage = () => (
   <div>
     <AuthUserContext.Consumer>
       {(authUser) => (
-        <div className="base-container">
-          <div className = "accountHeader">ACCOUNT</div>
+        <div className="grid">
+          {/* <div>ACCOUNT INFO</div>
           <h1>Your Account: {authUser.email}</h1>
-          <h3>You're from *insert dorm* {authUser.dorm} dorm!</h3>
+          
+          <h3>You've earned *insert user's points*{authUser.points}, way to go!</h3>
+          <h3>Your dorm is in *user dorm place*{authUser.dormplace} place with *user dorm points* {authUser.dormPoints}points!</h3>
+          <h3>You're representing *insert dorm* {authUser.dorm} dorm</h3>
           <h3>*insert dorm pic*</h3>
+          <img src = {southdorm} />
 
+          Entered the wrong dorm? Change your account password?
           <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+          <SignOutButton className="signout-btn" /> */}
+          <div >
+          Account blah blah blah
         </div>
+        <div>
+          BLAHHHHh BLAHHHH
+        </div>
+        </div>
+        
       )}
     </AuthUserContext.Consumer>
   </div>
