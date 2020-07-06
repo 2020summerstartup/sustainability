@@ -4,3 +4,7 @@
         display: inline;
     }
 }
+.accountHeader {
+    text-align: left;
+    font-size: 30px;
+}

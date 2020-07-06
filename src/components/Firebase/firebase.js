@@ -2,6 +2,8 @@ import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
 import 'firebase/database';
+import Axios from 'axios'
+
 // import firebase from 'firebase/app';
 // import firebase/auth from 'firebase/auth';
 
@@ -53,7 +55,11 @@ class Firebase {
   
   }
 
-  // firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
+
+  const db = firebase.firestore();
   // export const auth = firebase.auth();
   // export const firestore = firebase.firestore();
 export default Firebase;
+
+export { Axios, db }
