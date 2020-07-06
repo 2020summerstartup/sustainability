@@ -18,7 +18,7 @@ class Counter extends Component{
         this.setState({
             count: parseInt(localStorage.getItem(this.props.susAction))
         })
-        window.location.reload(true);
+         window.location.reload(true);
     };
 
     // Trying to incorporate Jessica's counter here
