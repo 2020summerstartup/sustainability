@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Spring } from "react-spring/renderprops";
 
-const goal = {
+const points = {
   background: "#00bf96",
   color: "white",
   padding: "1.5rem",
@@ -13,7 +13,7 @@ export default function Points() {
     <Spring from={{ opacity: 0 }} from={{ opacity: 1 }}>
       {(props) => (
         <div style={props}>
-          <div style={goal}>
+          <div style={points}>
             <h1>How to Participate & Earn Points</h1>
             <p>
               Sign up with your HMC gmail! Look on our actions page for
