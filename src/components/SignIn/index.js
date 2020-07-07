@@ -6,7 +6,7 @@ import "firebase/auth";
 
 import { SignUpLink } from "../SignUp";
 import { PasswordForgetLink } from "../PasswordForget";
-import { withFirebase} from "../Firebase";
+import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
@@ -119,15 +119,19 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signInWithRedirect = () => {
   firebase.auth().signInWithRedirect(provider);
-}
+};
 
 export const signOutFirebase = () => {
-  firebase.auth().signOut().then(function() {
+  firebase
+    .auth()
+    .signOut()
+    .then(function () {
       // Sign-out successful.
-  }).catch(function(error) {
+    })
+    .catch(function (error) {
       // An error happened.
-  });
-}
+    });
+};
 const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
 
 export { SignInForm };

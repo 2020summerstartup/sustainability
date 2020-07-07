@@ -20,8 +20,73 @@ const AccountPage = () => (
   <div>
     <AuthUserContext.Consumer>
       {(authUser) => (
-        // <div class="base"
-        <div className="grid">
+        <div class="base-container">
+
+          <div class="wrapper1">
+            Welcome, *insert username*{authUser.username}! 
+            *insert profile pic*
+          </div> 
+          <div class="wrapper2">
+            <div>   
+              <div>
+              You've earned 
+              </div>  
+              <div>
+              ______ Points {authUser.points},
+              </div> 
+              <div>
+              way to go!</div>    
+              
+            </div>
+            <div>
+            You're representing ______ {authUser.dorm} dorm
+            
+            </div>
+
+            <div>
+              Your dorm is in ____ place!
+            </div>
+            <div>
+            <img src = {southdorm} />
+            </div>
+            <div class="wrapper3">
+            <div>
+              Account info:
+            </div>
+            <div>
+              Email address: {authUser.email}
+            </div>
+            <div>
+              Need to change dorms or change your password?
+            </div>
+
+            <div>
+            <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+            </div>
+          </div>
+          {/* <div class="wrapper3">
+            <div>
+              Account info:
+            </div>
+            <div>
+              Email address: *insert user email*
+            </div>
+            <div>
+              Need to change dorms or change your password?
+            </div>
+
+            <div>
+            <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+            </div> */}
+        
+              
+
+
+
+
+            
+          </div>
+        {/* <div className="grid"> </div>
           <div>ACCOUNT INFO</div>
           <h1>Your Account: {authUser.email}</h1>
           
@@ -36,8 +101,18 @@ const AccountPage = () => (
           
           <SignOutButton className="signout-btn" />
          
+          
+          <div class = "wrapper">
+            
+          <div class="box">box1</div>
+          <div class="box">box2</div>
+          <div class="box">box3</div>
+          <div class="box">box4</div>
+           */}
+          <div class="bottom">
+            <SignOutButton />
           </div>
-
+           </div>
       )}
     </AuthUserContext.Consumer>
   </div>
