@@ -4,10 +4,49 @@ import ActionCard from "../ActionCard";
 
 import { withAuthorization } from '../Session';
 
+// Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
+// do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
+// decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
+if (isNaN(localStorage.getItem('waterBottle')) || localStorage.getItem('waterBottle') == null) {
+  localStorage.setItem('waterBottle', 0);
+}
+if (isNaN(localStorage.getItem('cmontWalk')) || localStorage.getItem('cmontWalk') == null) {
+  localStorage.setItem('cmontWalk', 0);
+}
+if (isNaN(localStorage.getItem('reuseStraw')) || localStorage.getItem('reuseStraw') == null) {
+  localStorage.setItem('reuseStraw', 0);
+}
+if (isNaN(localStorage.getItem('reuseBag')) || localStorage.getItem('reuseBag') == null) {
+  localStorage.setItem('reuseBag', 0);
+}
+if (isNaN(localStorage.getItem('frmersMarket')) || localStorage.getItem('frmersMarket') == null) {
+  localStorage.setItem('frmersMarket', 0);
+}
+if (isNaN(localStorage.getItem('rebrewTea')) || localStorage.getItem('rebrewTea') == null) {
+  localStorage.setItem('rebrewTea', 0);
+}
+if (isNaN(localStorage.getItem('noFoodWaste')) || localStorage.getItem('noFoodWaste') == null) {
+  localStorage.setItem('noFoodWaste', 0);
+}
+if (isNaN(localStorage.getItem('meatlessMon')) || localStorage.getItem('meatlessMon') == null) {
+  localStorage.setItem('meatlessMon', 0);
+}
+if (isNaN(localStorage.getItem('ecoClean')) || localStorage.getItem('ecoClean') == null) {
+  localStorage.setItem('ecoClean', 0);
+}
+
 // Initialize total points variable
 // TODO: I want this to update without us having to manually add every sus action. Not sure how...
 var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
-+ parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseGroceryBag'))
++ parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
++ parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
++ parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
++ parseInt(localStorage.getItem('ecoClean'));
+
+// Initialize total points variable
+// TODO: I want this to update without us having to manually add every sus action. Not sure how...
+var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
++ parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
 + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
 + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
 + parseInt(localStorage.getItem('ecoClean'));

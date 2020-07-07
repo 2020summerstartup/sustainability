@@ -21,7 +21,7 @@ export default {
     title: "Bring reusable bag for groceries",
     id: 4,
     points: 10,
-    susAction: 'reuseGroceryBag',
+    susAction: 'reuseBag',
   },
   "5": {
     title: "Shop at the farmer's market",
