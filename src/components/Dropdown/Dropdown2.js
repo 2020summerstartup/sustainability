@@ -119,11 +119,11 @@
 // export default onClickOutside(Dropdown, clickOutsideConfig);
 // // export { Dropdown2 };
 
-      "&:hover": {
-        borderColor: state.isFocused ? "#00bfa6" : "#00bfa6",
-      },
-    }),
-  };
+  //     "&:hover": {
+  //       borderColor: state.isFocused ? "#00bfa6" : "#00bfa6",
+  //     },
+  //   }),
+  // };
 
   // Note from Katie: I was working on saving dorm info here, but it didn't seem to work. Unsure if I'll come back to this code tbqh.
   // var userDorm =  toString({selectedValue});
