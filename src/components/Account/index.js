@@ -54,7 +54,7 @@ const AccountPage = () => (
               Account info:
             </div>
             <div>
-              Email address: *insert user email*
+              Email address: {authUser.email}
             </div>
             <div>
               Need to change dorms or change your password?

@@ -100,6 +100,7 @@ class SignInFormBase extends Component {
           <p onClick={() => signInWithRedirect()} class="btn-text">
             <b>Sign in with Google</b>
           </p>
+          
         </div>
 
         {error && <p>{error.message}</p>}
