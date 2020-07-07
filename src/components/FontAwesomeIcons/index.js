@@ -11,6 +11,7 @@ import {
   faSignOutAlt,
   faEnvelope,
   faLock,
+  faUnlockAlt,
   faEye,
   faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -24,6 +25,7 @@ library.add(
   faSignOutAlt,
   faEnvelope,
   faLock,
+  faUnlockAlt,
   faEye,
   faEyeSlash
 );
