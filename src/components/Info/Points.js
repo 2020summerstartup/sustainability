@@ -11,12 +11,12 @@ export class Points extends Component {
       >
         {(props) => (
           <div style={props}>
-            <div style={c2Style}>
+            <div style={points}>
               <h1>How to Participate & Earn Points</h1>
               <p>
-                Sign up with your HMC gmail! Look on our actions page for //
+                Sign up with your HMC gmail! Look on our actions page for
                 sustainable practices that you can earn points for and hit the
-                // "BUZZ" button everytime you complete the action!
+                "BUZZ" button everytime you complete the action!
               </p>
             </div>
           </div>
@@ -26,7 +26,7 @@ export class Points extends Component {
   }
 }
 
-const c2Style = {
+const points = {
   background: "#00bf96",
   color: "white",
   padding: "1.5rem",
