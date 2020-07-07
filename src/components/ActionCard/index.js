@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ActionCard = (props) => {
+const ActionCard = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [actionData, setActionData] = useState(ActionData);
@@ -84,12 +84,29 @@ const ActionCard = (props) => {
     setFilter(e.target.value);
   };
 
+  const toFirstCharUppercase = (name) =>
+  name.charAt(0).toUpperCase() + name.slice(1);
+
   const getActionCard = (actionId) => {
+
     console.log(actionData[`${actionId}`]);
-    const { title, points } = actionData[`${actionId}`];
+    const { title, points, susAction } = actionData[`${actionId}`];
+    const currSusAction = `${susAction}`;
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
+    };
+
+    const increment = () => {
+      // Note from Katie to other programmers: The following if statement is super important, even though it usually doesn't
+      // do anything. When a new susAction is added, the local storage value is initially NaN, and then we can't increment/
+      // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
+      if (isNaN(localStorage.getItem(currSusAction))) {
+        localStorage.setItem(currSusAction, 0);
+      }
+      // add specified number of points to the saved point total
+      localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
+      window.location.reload(true); // Reload window when value changes
     };
 
     return (
@@ -103,12 +120,15 @@ const ActionCard = (props) => {
             //   </Avatar>
             // }
             action={
-              <IconButton aria-label="settings">
+              <IconButton
+                onClick = {increment}
+                aria-label="settings" title='Complete this sustainable action!' >
                 <AddCircleIcon fontSize="large" />
               </IconButton>
             }
             title={`${title}`}
-            subheader={`${points}`}
+            //subheader={`${points}`}
+            subheader = {'Earn '.concat(`${points}`, " Points!")}
           />
           {/* <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -118,7 +138,7 @@ const ActionCard = (props) => {
         </Typography>
       </CardContent> */}
           <CardActions disableSpacing className={classes.cardActions}>
-            <IconButton aria-label="add to favorites">
+            <IconButton aria-label="add to favorites" title ='Add to favorites'>
               <FavoriteIcon />
             </IconButton>
             <IconButton
@@ -128,6 +148,7 @@ const ActionCard = (props) => {
               onClick={handleExpandClick}
               aria-expanded={expanded}
               aria-label="show more"
+              title = 'Learn more'
             >
               <ExpandMoreIcon />
             </IconButton>
@@ -181,7 +202,7 @@ const ActionCard = (props) => {
       <Grid container spacing={3} className={classes.actionContainer}>
         {Object.keys(actionData).map(
           (actionId) =>
-            actionData[actionId].title.includes(filter) &&
+            actionData[actionId].title.toLowerCase().includes(filter) &&
             getActionCard(actionId)
         )}
       </Grid>

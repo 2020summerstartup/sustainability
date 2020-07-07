@@ -37,14 +37,7 @@ const AccountPage = () => (
           <SignOutButton className="signout-btn" />
          
           </div>
-        //   <div class = "wrapper">
-        //   Account blah blah blah
-        // </div>
-        // <div>
-        //   BLAHHHHh BLAHHHH
-        // </div>
-        // </div>
-        
+
       )}
     </AuthUserContext.Consumer>
   </div>
