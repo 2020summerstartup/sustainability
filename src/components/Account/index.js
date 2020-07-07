@@ -20,8 +20,9 @@ const AccountPage = () => (
   <div>
     <AuthUserContext.Consumer>
       {(authUser) => (
+        // <div class="base"
         <div className="grid">
-          {/* <div>ACCOUNT INFO</div>
+          <div>ACCOUNT INFO</div>
           <h1>Your Account: {authUser.email}</h1>
           
           <h3>You've earned *insert user's points*{authUser.points}, way to go!</h3>
@@ -32,14 +33,17 @@ const AccountPage = () => (
 
           Entered the wrong dorm? Change your account password?
           <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
-          <SignOutButton className="signout-btn" /> */}
-          <div >
-          Account blah blah blah
-        </div>
-        <div>
-          BLAHHHHh BLAHHHH
-        </div>
-        </div>
+          
+          <SignOutButton className="signout-btn" />
+         
+          </div>
+        //   <div class = "wrapper">
+        //   Account blah blah blah
+        // </div>
+        // <div>
+        //   BLAHHHHh BLAHHHH
+        // </div>
+        // </div>
         
       )}
     </AuthUserContext.Consumer>

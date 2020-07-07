@@ -11,8 +11,10 @@
 
     .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
         grid-gap: 1rem;
+        justify-content: center;
+        flex-direction: column;
         
       }
       .grid > div {
@@ -25,3 +27,5 @@
         margin: 2rem;
         font: 12px system-ui;
       }
+
+      /* .wrapper */
