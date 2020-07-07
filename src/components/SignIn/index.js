@@ -12,6 +12,11 @@ import signinImg from "../../img/login3.svg";
 
 import "./Google-btn.css";
 
+// import your fontawesome library
+import "../FontAwesomeIcons";
+// import when you need to use icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const SignInPage = () => (
   <div className="base-container">
     <h1 className="header">Hello! Please Sign in :)</h1>
@@ -65,6 +70,7 @@ class SignInFormBase extends Component {
     return (
       <form onSubmit={this.onSubmit} className="form">
         <div className="form-group">
+          <FontAwesomeIcon icon="envelope" className="icon envelope" />
           <input
             name="email"
             value={email}
@@ -74,6 +80,7 @@ class SignInFormBase extends Component {
           />
         </div>
         <div className="form-group">
+          <FontAwesomeIcon icon="lock" className="icon" />
           <input
             name="password"
             value={password}
@@ -92,7 +99,7 @@ class SignInFormBase extends Component {
         <div class="google-btn">
           <div onClick={() => signInWithRedirect()} class="google-icon-wrapper">
             <img
-              alt = ''
+              alt=""
               class="google-icon"
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             />
@@ -107,7 +114,6 @@ class SignInFormBase extends Component {
     );
   }
 }
-   
 
 const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
 
