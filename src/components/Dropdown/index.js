@@ -8,7 +8,7 @@ const dorms = [
   {
     value: 1,
     label: "Atwood",
-    isDisabled: true,
+    //isDisabled: true,
   },
   {
     value: 2,
@@ -25,7 +25,7 @@ const dorms = [
   {
     value: 5,
     label: "Linde",
-    isDisabled: true,
+    //isDisabled: true,
   },
   {
     value: 6,
