@@ -4,7 +4,7 @@ import "./index.css";
 import SignOutButton from "../SignOut";
 
 import { AuthUserContext, withAuthorization } from "../Session";
-import { PasswordForgetForm } from "../PasswordForget";
+// import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 import Dropdown from "../Dropdown/maindd";
 import Dropdown2 from "../Dropdown/Dropdown2";

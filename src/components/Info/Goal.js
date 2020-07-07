@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { Spring } from "react-spring/renderprops";
 
-export default function Component1() {
+export default function Goal() {
   return (
     <Spring
       from={{ opacity: 0, marginTop: -500 }}
