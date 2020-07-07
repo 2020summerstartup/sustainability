@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import "./index.css";
 
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
@@ -83,6 +84,7 @@ class SignUpFormBase extends Component {
     return (
       <form onSubmit={this.onSubmit} className="form">
         <div className="form-group">
+          <FontAwesomeIcon icon="user" className="icon" />
           <input
             className="input-field"
             name="username"
@@ -93,7 +95,9 @@ class SignUpFormBase extends Component {
           />
         </div>
         <div className="form-group">
+          <FontAwesomeIcon icon="envelope" className="icon envelope" />
           <input
+            className="input-field"
             name="email"
             value={email}
             onChange={this.onChange}
@@ -102,7 +106,9 @@ class SignUpFormBase extends Component {
           />
         </div>
         <div className="form-group">
+          <FontAwesomeIcon icon="unlock-alt" className="icon" />
           <input
+            className="input-field"
             name="passwordOne"
             value={passwordOne}
             onChange={this.onChange}
@@ -111,7 +117,9 @@ class SignUpFormBase extends Component {
           />
         </div>
         <div className="form-group">
+          <FontAwesomeIcon icon="lock" className="icon" />
           <input
+            className="input-field"
             name="passwordTwo"
             value={passwordTwo}
             onChange={this.onChange}
@@ -148,7 +156,7 @@ class SignUpFormBase extends Component {
         <div class="google-btn">
           <div onClick={() => signInWithRedirect()} class="google-icon-wrapper">
             <img
-              alt =''
+              alt=""
               class="google-icon"
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             />
