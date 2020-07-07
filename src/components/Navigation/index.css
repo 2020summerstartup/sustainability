@@ -265,7 +265,11 @@ main {
 
   .nav-item:last-child {
     margin-top: auto;
-  }  
+  }
+  
+  .non-auth:last-child {
+    margin-top: 0;
+  }
 
   .icons {
     visibility: visible;

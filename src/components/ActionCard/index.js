@@ -84,7 +84,11 @@ const ActionCard = () => {
     setFilter(e.target.value);
   };
 
+  const toFirstCharUppercase = (name) =>
+  name.charAt(0).toUpperCase() + name.slice(1);
+
   const getActionCard = (actionId) => {
+
     console.log(actionData[`${actionId}`]);
     const { title, points, susAction } = actionData[`${actionId}`];
     const currSusAction = `${susAction}`;
@@ -198,7 +202,7 @@ const ActionCard = () => {
       <Grid container spacing={3} className={classes.actionContainer}>
         {Object.keys(actionData).map(
           (actionId) =>
-            actionData[actionId].title.includes(filter) &&
+            actionData[actionId].title.toLowerCase().includes(filter) &&
             getActionCard(actionId)
         )}
       </Grid>
