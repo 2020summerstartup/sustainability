@@ -2,14 +2,8 @@ import React from "react";
 import "./index.css";
 import { withFirebase } from '../Firebase';
 
-import { withFirebase } from '../Firebase';
-
 // import material ui
-<<<<<<< HEAD
 import { AppBar, Toolbar } from "@material-ui/core";
-=======
-import { AppBar, Toolbar, Button } from "@material-ui/core";
->>>>>>> 091198835095f53445670ebcb862d6a7a319c992
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import EcoIcon from "@material-ui/icons/Eco";
