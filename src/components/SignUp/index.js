@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
-import { withFirebase, signInWithRedirect } from "../Firebase";
+import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
-import { signInWithGoogle } from "../SignIn";
+import { signInWithRedirect } from "../SignIn";
+// import Dropdown from 'react-dropdown';
+// import 'react-dropdown/style.css';
+ 
+// import { Dropdown2 } from "../Dropdown";
 
 // import your fontawesome library
 import "../FontAwesomeIcons";
@@ -27,6 +31,7 @@ const INITIAL_STATE = {
   email: "",
   passwordOne: "",
   passwordTwo: "",
+  dorm: "",
   error: null,
 };
 
@@ -38,15 +43,16 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne } = this.state;
+    const { username, email, passwordOne, dorm } = this.state;
 
     this.props.firebase
-      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .doCreateUserWithEmailAndPassword(email, passwordOne, dorm)
       .then((authUser) => {
         // Create a user in your Firebase realtime database
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
+          dorm,
         });
       })
       .then(() => {
@@ -65,13 +71,14 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const { username, email, passwordOne, passwordTwo, dorm, error } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      username === "";
+      username === "" ||
+      dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
     return (
       <form onSubmit={this.onSubmit} className="form">
@@ -112,7 +119,26 @@ class SignUpFormBase extends Component {
             placeholder="Confirm Password"
           />
         </div>
-
+        <div className="form-group"  >
+        <input  
+            name="dorm"
+            value={dorm}
+            onChange={this.onChange}
+            type="dorm"
+            placeholder="Dorm Name"
+          />
+          {/* {()=>Dropdown2()} */}
+          
+          {/* Select dorm! */}
+           
+          {/* <input
+            name="dormName"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Select your dorm!"
+          /> */}
+        </div>
         <button disabled={isInvalid} type="submit" className="button">
           Sign Up
         </button>

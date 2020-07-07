@@ -1,7 +1,29 @@
-import React, { useState } from "react";
-import "./index.css";
+// import React, { useState } from "react";
+// import onClickOutside from "react-onclickoutside";
 
-import Select from "react-select";
+// // This file exports everything to maindd.js
+// function Dropdown({ title, items, multiSelect = false }) {
+//   const [open, setOpen] = useState(false);
+//   const [selection, setSelection] = useState([]);
+//   const toggle = () => setOpen(!open);
+//   Dropdown.handleClickOutside = () => setOpen(false);
+
+
+  function handleOnClick(item) {
+    if (!selection.some((current) => current.id === item.id)) {
+      if (!multiSelect) {
+        setSelection([item]);
+      } else if (multiSelect) {
+        setSelection([...selection, item]);
+      }
+    } else {
+      let selectionAfterRemoval = selection;
+      selectionAfterRemoval = selectionAfterRemoval.filter(
+        (current) => current.id !== item.id
+      );
+      setSelection([...selectionAfterRemoval]);
+    }
+  }
 
 // Choose your dorm!
 const dorms = [
@@ -45,32 +67,57 @@ const dorms = [
   },
 ];
 
-function Dropdown2() {
-  const [selectedValue, setSelectedValue] = useState(null);
-  const handleChange = (obj) => {
-    setSelectedValue(obj.label.replace(/"([^"]+)":/g, "$1:"));
-    // the .replace was supposed to get rid of quotes but it didn't work
-  };
 
-  const customStyles = {
-    option: (styles, state) => ({
-      ...styles,
-      color: state.isSelected ? "#FFF" : styles.color,
-      backgroundColor: state.isSelected ? "#00bfa6" : "white",
-      borderBottom: "1px solid rgba(0, 0, 0, 0.125)",
-    
-      "&:hover": {
-        color: state.isDisabled ? "lightgrey" : "black",
-        fontWeight: state.isFocused ? "bold" : "normal",
-        backgroundColor: state.isDisabled ? "white" : "#00bfa6",
-      },
-    }),
-    control: (styles, state) => ({
-      ...styles,
-      boxShadow: state.isFocused ? "0 0 0 0.2rem #00bfa6)" : 0,
-      borderColor: state.isFocused ? "#D0EAE2" : "#CED4DA",
+//   function isItemInSelection(item) {
+//     if (selection.some((current) => current.id === item.id)) {
+//       return true;
+//     }
+//     return false;
+//   }
 
-      cursor: state.isDisabled ? "not-allowed" : "default",
+//   return (
+//     <div className="dd-wrapper">
+//       <div
+//         tabIndex={0}
+//         className="dd-header"
+//         role="button"
+//         onKeyPress={() => toggle(!open)}
+//         onClick={() => toggle(!open)}
+//       >
+//         <div className="dd-header__title">
+//           <p className="dd-header__title--bold">{title}</p>
+//         </div>
+//         <div className="dd-header__action">
+//           <p>{open ? "▲" : "▼"}</p>
+//         </div>
+//       </div>
+//       {open && (
+//         <ul className="dd-list">
+//           {items.map((item) => (
+//             <li className="dd-list-item" key={item.id}>
+//               <button
+//                 className="dd-list-btn"
+//                 type="button"
+//                 onClick={() => handleOnClick(item)}
+//               >
+//                 <span>{item.value}</span>
+//                 <span>{isItemInSelection(item) && "Selected"}</span>
+//               </button>
+//             </li>
+//           ))}
+//         </ul>
+//       )}
+//     </div>
+//   );
+// }
+
+// const clickOutsideConfig = {
+//   handleClickOutside: () => Dropdown.handleClickOutside,
+// };
+
+
+// export default onClickOutside(Dropdown, clickOutsideConfig);
+// // export { Dropdown2 };
 
       "&:hover": {
         borderColor: state.isFocused ? "#00bfa6" : "#00bfa6",

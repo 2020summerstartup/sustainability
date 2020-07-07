@@ -6,7 +6,7 @@ import "firebase/auth";
 
 import { SignUpLink } from "../SignUp";
 import { PasswordForgetLink } from "../PasswordForget";
-import { withFirebase, signInWithRedirect } from "../Firebase";
+import { withFirebase} from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
@@ -108,7 +108,19 @@ class SignInFormBase extends Component {
   }
 }
    
+const provider = new firebase.auth.GoogleAuthProvider();
 
+export const signInWithRedirect = () => {
+  firebase.auth().signInWithRedirect(provider);
+}
+
+export const signOutFirebase = () => {
+  firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+  }).catch(function(error) {
+      // An error happened.
+  });
+}
 const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
 
 export { SignInForm };
