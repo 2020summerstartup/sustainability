@@ -51,13 +51,17 @@ function Dropdown2() {
     setSelectedValue(obj.label.replace(/"([^"]+)":/g, "$1:"));
     // the .replace was supposed to get rid of quotes but it didn't work
   };
+
+  if (localStorage.getItem('selectedDorm') == null) {
+    localStorage.setItem('selectedDorm', "Not Selected");
+  }
+
+  // original if statement I wrote
   if (selectedValue != null) {
     localStorage.setItem('selectedDorm', selectedValue);
   } else {
     setSelectedValue(localStorage.getItem('selectedDorm'));
   }
-  console.log('selectedValue', selectedValue);
-  console.log('selectedDorm', localStorage.getItem('selectedDorm'));
 
   const customStyles = {
     option: (styles, state) => ({
