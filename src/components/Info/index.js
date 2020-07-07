@@ -6,7 +6,7 @@ import Rewards from "./Rewards";
 
 const InfoPage = () => (
   <div className="base-container">
-    <h1 className="header">Info Page</h1>
+    <h1 className="header">Information</h1>
     <center>
       <Goal />
       <p></p>
