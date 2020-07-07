@@ -117,7 +117,7 @@ function HomePage() {
       {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
-        {<CountUp start={0} end={100} duration={5}></CountUp>} points! &nbsp;
+        {<CountUp start={0} end={total} duration={5}></CountUp>} points! &nbsp;
         <button onClick={notify1} className="button">
           Click me!
         </button> &nbsp;
@@ -160,30 +160,6 @@ function HomePage() {
         </div>
       </Modal>
       <ActionCard />
-      <h3>Track your sustainable actions here!</h3>
-      <span role="img" aria-label="recycle">
-        ♻️
-      </span>
-      {/* Total points earned. TODO: Make this update automatically, instead of only on
-    page reload. I'll deal with this later (I want to update this whole thing to use the new counter first). */}
-      You have earned a total of{" "}
-      {parseInt(localStorage.getItem("waterBottle")) +
-        parseInt(localStorage.getItem("cmontWalk"))}{" "}
-      points for your sustainable actions. Thank you!
-      {/* Individual sustainable actions. */}
-      <h3>
-        <b>Recycle Water Bottle</b>
-      </h3>
-      <center>
-        <Counter susAction={"waterBottle"} />
-      </center>
-      <h3>
-        <b>Walk to Claremont Village</b>
-      </h3>
-      (Just not during the first two weeks on campus!)
-      <center>
-        <Counter susAction={"cmontWalk"} />
-      </center>
     </div>
   );
 }
