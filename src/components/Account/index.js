@@ -112,10 +112,7 @@ const AccountPage = () => (
           <div class="bottom">
             <SignOutButton />
           </div>
-          </div>
-          
-          
-        
+           </div>
       )}
     </AuthUserContext.Consumer>
   </div>
