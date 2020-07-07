@@ -29,10 +29,49 @@ const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
+// Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
+// do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
+// decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
+if (isNaN(localStorage.getItem('waterBottle')) || localStorage.getItem('waterBottle') == null) {
+  localStorage.setItem('waterBottle', 0);
+}
+if (isNaN(localStorage.getItem('cmontWalk')) || localStorage.getItem('cmontWalk') == null) {
+  localStorage.setItem('cmontWalk', 0);
+}
+if (isNaN(localStorage.getItem('reuseStraw')) || localStorage.getItem('reuseStraw') == null) {
+  localStorage.setItem('reuseStraw', 0);
+}
+if (isNaN(localStorage.getItem('reuseBag')) || localStorage.getItem('reuseBag') == null) {
+  localStorage.setItem('reuseBag', 0);
+}
+if (isNaN(localStorage.getItem('frmersMarket')) || localStorage.getItem('frmersMarket') == null) {
+  localStorage.setItem('frmersMarket', 0);
+}
+if (isNaN(localStorage.getItem('rebrewTea')) || localStorage.getItem('rebrewTea') == null) {
+  localStorage.setItem('rebrewTea', 0);
+}
+if (isNaN(localStorage.getItem('noFoodWaste')) || localStorage.getItem('noFoodWaste') == null) {
+  localStorage.setItem('noFoodWaste', 0);
+}
+if (isNaN(localStorage.getItem('meatlessMon')) || localStorage.getItem('meatlessMon') == null) {
+  localStorage.setItem('meatlessMon', 0);
+}
+if (isNaN(localStorage.getItem('ecoClean')) || localStorage.getItem('ecoClean') == null) {
+  localStorage.setItem('ecoClean', 0);
+}
+
 // Initialize total points variable
 // TODO: I want this to update without us having to manually add every sus action. Not sure how...
 var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
-+ parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseGroceryBag'))
++ parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
++ parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
++ parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
++ parseInt(localStorage.getItem('ecoClean'));
+
+// Initialize total points variable
+// TODO: I want this to update without us having to manually add every sus action. Not sure how...
+var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
++ parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
 + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
 + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
 + parseInt(localStorage.getItem('ecoClean'));
@@ -78,7 +117,7 @@ function HomePage() {
       {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
-        {<CountUp start={0} end={100} duration={5}></CountUp>} points! &nbsp;
+        {<CountUp start={0} end={total} duration={2}></CountUp>} points! &nbsp;
         <button onClick={notify1} className="button">
           Click me!
         </button> &nbsp;
@@ -121,30 +160,6 @@ function HomePage() {
         </div>
       </Modal>
       <ActionCard />
-      <h3>Track your sustainable actions here!</h3>
-      <span role="img" aria-label="recycle">
-        ♻️
-      </span>
-      {/* Total points earned. TODO: Make this update automatically, instead of only on
-    page reload. I'll deal with this later (I want to update this whole thing to use the new counter first). */}
-      You have earned a total of{" "}
-      {parseInt(localStorage.getItem("waterBottle")) +
-        parseInt(localStorage.getItem("cmontWalk"))}{" "}
-      points for your sustainable actions. Thank you!
-      {/* Individual sustainable actions. */}
-      <h3>
-        <b>Recycle Water Bottle</b>
-      </h3>
-      <center>
-        <Counter susAction={"waterBottle"} />
-      </center>
-      <h3>
-        <b>Walk to Claremont Village</b>
-      </h3>
-      (Just not during the first two weeks on campus!)
-      <center>
-        <Counter susAction={"cmontWalk"} />
-      </center>
     </div>
   );
 }
