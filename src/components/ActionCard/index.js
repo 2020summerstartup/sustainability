@@ -6,7 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-// import Avatar from "@material-ui/core/Avatar";
+import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -84,6 +84,9 @@ const ActionCard = () => {
     setFilter(e.target.value);
   };
 
+  const toFirstCharUppercase = (name) =>
+  name.charAt(0).toUpperCase() + name.slice(1);
+
   const getActionCard = (actionId) => {
 
     console.log(actionData[`${actionId}`]);
@@ -95,12 +98,6 @@ const ActionCard = () => {
     };
 
     const increment = () => {
-      // Note from Katie to other programmers: The following if statement is super important, even though it usually doesn't
-      // do anything. When a new susAction is added, the local storage value is initially NaN, and then we can't increment/
-      // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
-      if (isNaN(localStorage.getItem(currSusAction))) {
-        localStorage.setItem(currSusAction, 0);
-      }
       // add specified number of points to the saved point total
       localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
       window.location.reload(true); // Reload window when value changes
