@@ -27,6 +27,11 @@ class ContactForm extends React.Component {
       .catch((error) => alert(error));
 
     e.preventDefault();
+    this.setState({
+        name: '',
+        email: '',
+        message: '',
+      });
   };
 
   handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -45,7 +50,7 @@ class ContactForm extends React.Component {
               placeholder="Name"
               value={name}
               onChange={this.handleChange}
-            //   required
+              required
             />
           </p>
           <p>

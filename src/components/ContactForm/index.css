@@ -1,7 +1,6 @@
 .form-container {
   max-width: 35rem;
   width: 100%;
-  /* bottom: -40rem; */
   position: relative;
   background: #f9f9f9;
   padding: 2rem;
@@ -41,6 +40,10 @@
   -moz-transition: border-color 0.3s ease-in-out;
   transition: border-color 0.3s ease-in-out;
   border: 1px solid #aaa;
+}
+
+#contact textarea:focus {
+  outline: none;
 }
 
 @media screen and (max-width: 900px) {
