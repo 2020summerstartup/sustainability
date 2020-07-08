@@ -61,7 +61,7 @@ if (isNaN(localStorage.getItem('ecoClean')) || localStorage.getItem('ecoClean') 
 }
 
 // Initialize total points variable
-// TODO: I want this to update without us having to manually add every sus action. Not sure how...
+// TODO: I want this to update without us having to manually add every sus action. Change to a function somehow
 var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
 + parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
 + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
@@ -69,7 +69,7 @@ var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorag
 + parseInt(localStorage.getItem('ecoClean'));
 
 // Initialize total points variable
-// TODO: I want this to update without us having to manually add every sus action. Not sure how...
+// TODO: I want this to update without us having to manually add every sus action.
 var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
 + parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
 + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
@@ -117,7 +117,7 @@ function HomePage() {
       {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
-        {<CountUp start={0} end={total} duration={5}></CountUp>} points! &nbsp;
+        {<CountUp start={0} end={total} duration={2}></CountUp>} points! &nbsp;
         <button onClick={notify1} className="button">
           Click me!
         </button> &nbsp;

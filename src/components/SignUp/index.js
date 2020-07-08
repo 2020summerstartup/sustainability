@@ -9,7 +9,7 @@ import signupImg from "../../img/login2.svg";
 import { signInWithRedirect } from "../SignIn";
 // import Dropdown from 'react-dropdown';
 // import 'react-dropdown/style.css';
- 
+
 // import { Dropdown2 } from "../Dropdown";
 
 // import your fontawesome library
@@ -53,7 +53,6 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
-          dorm,
         });
       })
       .then(() => {
@@ -72,14 +71,14 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { username, email, passwordOne, passwordTwo, dorm, error } = this.state;
+    const { username, email, passwordOne, passwordTwo, error } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      username === "" ||
-      dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
+      username === "";
+    // dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
     return (
       <form onSubmit={this.onSubmit} className="form">
@@ -127,26 +126,26 @@ class SignUpFormBase extends Component {
             placeholder="Confirm Password"
           />
         </div>
-        <div className="form-group"  >
+        {/* <div className="form-group"  >
         <input  
             name="dorm"
             value={dorm}
             onChange={this.onChange}
             type="dorm"
             placeholder="Dorm Name"
-          />
-          {/* {()=>Dropdown2()} */}
-          
-          {/* Select dorm! */}
-           
-          {/* <input
+          /> */}
+        {/* {()=>Dropdown2()} */}
+
+        {/* Select dorm! */}
+
+        {/* <input
             name="dormName"
             value={passwordTwo}
             onChange={this.onChange}
             type="password"
             placeholder="Select your dorm!"
           /> */}
-        </div>
+        {/* </div> */}
         <button disabled={isInvalid} type="submit" className="button">
           Sign Up
         </button>

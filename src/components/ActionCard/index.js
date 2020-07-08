@@ -193,7 +193,7 @@ const ActionCard = () => {
       <Grid container spacing={3} className={classes.actionContainer}>
         {Object.keys(actionData).map(
           (actionId) =>
-            actionData[actionId].title.toLowerCase().includes(filter) &&
+            actionData[actionId].title.toLowerCase().includes(filter.toLowerCase()) &&
             getActionCard(actionId)
         )}
       </Grid>
