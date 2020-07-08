@@ -1,0 +1,92 @@
+.form-container {
+  max-width: 35rem;
+  width: 100%;
+  position: relative;
+  background: #f9f9f9;
+  padding: 2rem;
+  margin: 3rem 1rem;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  text-align: left;
+}
+
+.input-container {
+  border: medium none !important;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding-right: 0;
+  padding-top: 0.5rem;
+  width: 100%;
+}
+
+#contact input[type="text"],
+#contact input[type="email"],
+#contact textarea {
+  border: 1px solid #ccc;
+  background: #fff;
+  padding-left: 0.75rem;
+  width: 28rem;
+}
+
+#contact textarea {
+  width: 28.8rem;
+  height: 7rem;
+  padding-top: 0.75rem;
+}
+
+#contact input[type="text"]:hover,
+#contact input[type="email"]:hover,
+#contact textarea:hover {
+  -webkit-transition: border-color 0.3s ease-in-out;
+  -moz-transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
+  border: 1px solid #aaa;
+}
+
+#contact textarea:focus {
+  outline: none;
+}
+
+.comment {
+  position: relative;
+  bottom: 5rem;
+}
+
+/* for medium screens */
+@media screen and (max-width: 900px) {
+  .form-container {
+    width: 100%;
+    margin-bottom: 0rem;
+  }
+  #contact input[type="text"],
+  #contact input[type="email"] {
+    width: 23rem;
+  }
+  #contact textarea {
+    width: 24rem;
+  }
+}
+
+/* for small screens */
+@media screen and (max-width: 600px) {
+  #contact input[type="text"],
+  #contact input[type="email"] {
+    width: 16rem;
+  }
+  #contact textarea {
+    width: 19rem;
+  }
+}
+
+/* special style for comment icon */
+/* for bigger screens */
+@media screen and (min-width: 900px) {
+  #contact input[type="text"],
+  #contact input[type="email"],
+  #contact textarea {
+    margin-left: 1rem;
+  }
+  .contact-icon {
+    position: relative;
+    margin: 0;
+  }
+}
