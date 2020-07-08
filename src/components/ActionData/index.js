@@ -42,7 +42,7 @@ export default {
     susAction: 'noFoodWaste',
   },
   "8": {
-    title: "Participate in Meatless-Mondays",
+    title: "Participate in Meatless-Monday",
     id: 8,
     points: 20,
     susAction: 'meatlessMon',

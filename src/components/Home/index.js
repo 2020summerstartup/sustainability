@@ -87,7 +87,6 @@ function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [actionData, setActionData] = useState(ActionData);
   var message = '';
-  var newMessage;
 
   return (
     <div className="base-container">
@@ -129,14 +128,13 @@ function HomePage() {
           // colors={["grey", "white", "green", "black"]}
         />
         <h2>Your Progress: </h2>
-        {/* <p>Points for Recycling Water Bottle: { localStorage.getItem(ActionData[1].susAction) } </p> */}
         {
+          // I don't yet understand what "Object" is referring to here/how the program knows that.
           Object.keys(ActionData).map(
             (key) => {
-              // console.log('key num', key)
-              // console.log('test')
-              // So I'm pretty sure that I now know that \n will not be rendered. So I need some kind of break tag.
-              message += ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction))
+              // TODO: All the actions display on one line, and I couldn't get newline characters to work no matter
+              // what I did. Need to sort this out later. -Katie
+              message += ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
             }
           )
         }
