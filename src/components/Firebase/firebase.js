@@ -61,5 +61,6 @@ class Firebase {
   // export const auth = firebase.auth();
   // export const firestore = firebase.firestore();
 export default Firebase;
+export { Firebase };
 
 // export { Axios, db }

@@ -17,6 +17,10 @@ import "../FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+
+import { Firebase } from '../Firebase/firebase';
+
+
 const SignUpPage = () => (
   <div className="base-container">
     <h1 className="header">Register</h1>
@@ -54,6 +58,20 @@ class SignUpFormBase extends Component {
           username,
           email,
         });
+      })
+      // create a new document in users collection for each new signup
+      .then(() => {
+        Firebase.firetore().collection("users").doc(email).set({
+          //still unsuccessful --> 
+          // ERROR: _Firebase_firebase__WEBPACK_IMPORTED_MODULE_9__.Firebase.firetore is not a function
+          // email: this.email,
+          // dorm: this.dorm,
+          // points: {
+          //   //to be added later
+          //   totalPoints: ,
+          //   recycleBottle: ,
+          // }
+        })
       })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
