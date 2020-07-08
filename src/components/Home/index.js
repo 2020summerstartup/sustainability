@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Counter from "./counter";
+import Counter from "./counter"; // Remove this import soon
 import ActionCard from "../ActionCard";
+import ActionData from "../ActionData"; // katie added on 7/8
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
@@ -29,7 +30,7 @@ const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
-// Initialize each point counter to 0 instead of NaN or null
+// Initialize point counter to 0 instead of NaN or null
 function initPoints(susAction) {
   var action = localStorage.getItem(susAction);
   if (isNaN(action) || action == null) {
@@ -37,18 +38,13 @@ function initPoints(susAction) {
   }
 }
 
-// Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
+// Note from Katie to other programmers: The following statements are super important, even though they usually doesn't
 // do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
 // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
-initPoints('waterBottle');
-initPoints('cmontWalk');
-initPoints('reuseStraw');
-initPoints('reuseBag');
-initPoints('frmersMarket');
-initPoints('rebrewTea');
-initPoints('noFoodWaste');
-initPoints('meatlessMon');
-initPoints('ecoClean');
+for(const key in ActionData) {
+  initPoints(ActionData[key].susAction);
+  console.log('key', ActionData[key].susAction);
+}
 
 // Initialize total points variable
 // TODO: I want this to update without us having to manually add every sus action. Change to a function somehow
