@@ -43,16 +43,15 @@ function initPoints(susAction) {
 // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
 for(const key in ActionData) {
   initPoints(ActionData[key].susAction);
-  console.log('key', ActionData[key].susAction);
 }
 
-// Initialize total points variable
-// TODO: I want this to update without us having to manually add every sus action. Change to a function somehow
-var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
-+ parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
-+ parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
-+ parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
-+ parseInt(localStorage.getItem('ecoClean'));
+// Init the total variable
+var total = 0;
+
+// Loop over every element in ActionData, adding the save point values earn from each
+for(const key in ActionData) {
+  total += parseInt(localStorage.getItem(ActionData[key].susAction));
+}
 
 // The following commented out code didn't work, but I want to keep the record of it for now
 // to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)
