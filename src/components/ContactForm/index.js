@@ -1,4 +1,5 @@
 import React from "react";
+import './index.css';
 
 const encode = (data) => {
   return Object.keys(data)
@@ -20,7 +21,9 @@ class ContactForm extends React.Component {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "contact", ...this.state }),
     })
-      .then(() => alert("Success! Your message has been se"))
+      .then(() =>
+        alert("Success! Your message has been sent. We appreciate your input!")
+      )
       .catch((error) => alert(error));
 
     e.preventDefault();
@@ -31,39 +34,46 @@ class ContactForm extends React.Component {
   render() {
     const { name, email, message } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <p>
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={name}
-            onChange={this.handleChange}
-          />
-        </p>
-        <p>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={this.handleChange}
-          />
-        </p>
-        <p>
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            value={message}
-            onChange={this.handleChange}
-          />
-        </p>
-        <p>
-          <button type="submit" className="button">
-            Send
-          </button>
-        </p>
-      </form>
+      <div className="form-container">
+        <h5>Contact Us!</h5>
+        <p>Let us know your questions, comments, and concerns!</p>
+        <form onSubmit={this.handleSubmit} id="contact" className="input-container">
+          <p>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={name}
+              onChange={this.handleChange}
+            //   required
+            />
+          </p>
+          <p>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={this.handleChange}
+              required
+            />
+          </p>
+          <p>
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              value={message}
+              onChange={this.handleChange}
+              required
+            />
+          </p>
+          <p>
+            <button type="submit" className="button">
+              Send
+            </button>
+          </p>
+        </form>
+      </div>
     );
   }
 }
