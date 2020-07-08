@@ -29,7 +29,8 @@
     "react-spring": "^8.0.27",
     "react-toastify": "^6.0.8",
     "recompose": "^0.30.0",
-    "tailwindcss": "^1.4.6"
+    "tailwindcss": "^1.4.6",
+    "yarn": "^1.22.4"
   },
   "scripts": {
     "start": "react-scripts start",
