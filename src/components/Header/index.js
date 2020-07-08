@@ -3,7 +3,7 @@ import "./index.css";
 import { withFirebase } from '../Firebase';
 
 // import material ui
-import { AppBar, Toolbar, Button } from "@material-ui/core";
+import { AppBar, Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import EcoIcon from "@material-ui/icons/Eco";

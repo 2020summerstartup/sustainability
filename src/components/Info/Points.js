@@ -31,7 +31,7 @@ const points = {
   color: "white",
   padding: "1.5rem",
   borderRadius: "10px",
+  margin: "0 1.5rem",
 };
 
 export default Points;
-

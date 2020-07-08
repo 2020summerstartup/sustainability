@@ -10,7 +10,7 @@ const InfoPage = () => (
     <center>
       <Goal />
       <p></p>
-      <Points />      
+      <Points />
       <p></p>
       <Challenges />
       <p></p>
