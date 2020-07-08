@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 const ActionCard = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const [actionData, setActionData] = useState(ActionData);
+  const [actionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
 
   const handleSearchChange = (e) => {

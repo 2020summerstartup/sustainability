@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Counter from "./counter"; // Remove this import soon
 import ActionCard from "../ActionCard";
-import ActionData from "../ActionData"; // katie added on 7/8
+import ActionData from "../ActionData";
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
@@ -85,7 +84,6 @@ Modal.setAppElement("#root");
 // Text to display on the homepage
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [actionData, setActionData] = useState(ActionData);
   var message = '';
 
   return (
@@ -96,7 +94,7 @@ function HomePage() {
       {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
-        {<CountUp start={0} end={total} duration={2}></CountUp>} points! &nbsp;
+        {<CountUp start={0} end={total} duration={1}></CountUp>} points! &nbsp;
         <button onClick={notify1} className="button">
           Click me!
         </button> &nbsp;
@@ -135,12 +133,13 @@ function HomePage() {
               // TODO: All the actions display on one line, and I couldn't get newline characters to work no matter
               // what I did. Need to sort this out later. -Katie
               message += ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
+              return '' // It has to return a value. I think it isn't bad practice to do this? -Katie
             }
           )
         }
         <p> { message } </p>
         <h3>Total Points: { total } </h3>
-        <h1></h1>
+        <h1> </h1>
         <div>
           <button onClick={() => setModalIsOpen(false)} className="button">
             Close
