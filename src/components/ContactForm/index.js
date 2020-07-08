@@ -1,5 +1,10 @@
 import React from "react";
-import './index.css';
+import "./index.css";
+
+// import your fontawesome library
+import "../FontAwesomeIcons";
+// import when you need to use icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const encode = (data) => {
   return Object.keys(data)
@@ -14,7 +19,6 @@ class ContactForm extends React.Component {
   }
 
   /* Here’s the juicy bit for posting the form submission */
-
   handleSubmit = (e) => {
     fetch("/", {
       method: "POST",
@@ -27,11 +31,13 @@ class ContactForm extends React.Component {
       .catch((error) => alert(error));
 
     e.preventDefault();
+
+    //clear form after submit
     this.setState({
-        name: '',
-        email: '',
-        message: '',
-      });
+      name: "",
+      email: "",
+      message: "",
+    });
   };
 
   handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -42,8 +48,13 @@ class ContactForm extends React.Component {
       <div className="form-container">
         <h5>Contact Us!</h5>
         <p>Let us know your questions, comments, and concerns!</p>
-        <form onSubmit={this.handleSubmit} id="contact" className="input-container">
+        <form
+          onSubmit={this.handleSubmit}
+          id="contact"
+          className="input-container"
+        >
           <p>
+            <FontAwesomeIcon icon="user" className="contact-icon icon" />
             <input
               type="text"
               name="name"
@@ -54,6 +65,7 @@ class ContactForm extends React.Component {
             />
           </p>
           <p>
+            <FontAwesomeIcon icon="envelope" className="contact-icon icon envelope" />
             <input
               type="email"
               name="email"
@@ -64,6 +76,7 @@ class ContactForm extends React.Component {
             />
           </p>
           <p>
+          <FontAwesomeIcon icon="comment" className="contact-icon icon comment" />
             <textarea
               name="message"
               placeholder="Your Message"
