@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react"; // No longer imports { Component } because it was unused. Feel free to change.
 import { Spring } from "react-spring/renderprops";
 
 export default function Rewards() {

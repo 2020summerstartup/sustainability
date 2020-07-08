@@ -1,6 +1,6 @@
 import FirebaseContext, { withFirebase } from './context';
 import Firebase from './firebase';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
  
 export default Firebase;
 
