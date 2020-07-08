@@ -117,7 +117,7 @@ function HomePage() {
       {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
-        {<CountUp start={0} end={total} duration={5}></CountUp>} points! &nbsp;
+        {<CountUp start={0} end={total} duration={2}></CountUp>} points! &nbsp;
         <button onClick={notify1} className="button">
           Click me!
         </button> &nbsp;

@@ -3,10 +3,12 @@ import Goal from "./Goal";
 import Points from "./Points";
 import Challenges from "./Challenges";
 import Rewards from "./Rewards";
+import ContactForm from "../ContactForm";
 
 const InfoPage = () => (
   <div className="base-container">
-    <h1 className="header">Info Page</h1>
+    <h1 className="header">Information</h1>
+    <center>
       <Goal />
       <p></p>
       <Points />
@@ -14,6 +16,8 @@ const InfoPage = () => (
       <Challenges />
       <p></p>
       <Rewards />
+    </center>
+    <ContactForm />
   </div>
 );
 

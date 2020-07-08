@@ -52,6 +52,17 @@ function Dropdown2() {
     // the .replace was supposed to get rid of quotes but it didn't work
   };
 
+  if (localStorage.getItem('selectedDorm') == null) {
+    localStorage.setItem('selectedDorm', "Not Selected");
+  }
+
+  // original if statement I wrote
+  if (selectedValue != null) {
+    localStorage.setItem('selectedDorm', selectedValue);
+  } else {
+    setSelectedValue(localStorage.getItem('selectedDorm'));
+  }
+
   const customStyles = {
     option: (styles, state) => ({
       ...styles,
@@ -91,7 +102,7 @@ function Dropdown2() {
         placeholder="Select your dorm..."
       />
       <br />
-      <b>Your dorm: {JSON.stringify(selectedValue, null, 2)}</b>
+      <b>Your dorm: { localStorage.getItem('selectedDorm') }</b>
       <h1></h1>
     </div>
   );
