@@ -85,6 +85,9 @@ Modal.setAppElement("#root");
 // Text to display on the homepage
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [actionData, setActionData] = useState(ActionData);
+  var message = '';
+  var newMessage;
 
   return (
     <div className="base-container">
@@ -126,9 +129,19 @@ function HomePage() {
           // colors={["grey", "white", "green", "black"]}
         />
         <h2>Your Progress: </h2>
-        <p>Points for Recycling Water Bottle: </p>
-        <p>Points for Walking to the Village: </p>
-        <h3>Total Points: </h3>
+        {/* <p>Points for Recycling Water Bottle: { localStorage.getItem(ActionData[1].susAction) } </p> */}
+        {
+          Object.keys(ActionData).map(
+            (key) => {
+              // console.log('key num', key)
+              // console.log('test')
+              // So I'm pretty sure that I now know that \n will not be rendered. So I need some kind of break tag.
+              message += ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction))
+            }
+          )
+        }
+        <p> { message } </p>
+        <h3>Total Points: { total } </h3>
         <h1></h1>
         <div>
           <button onClick={() => setModalIsOpen(false)} className="button">
