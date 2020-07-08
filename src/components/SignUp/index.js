@@ -4,7 +4,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import signupImg from "../../img/login2.svg";
-import { Firebase } from '../Firebase/firebase'
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -17,8 +16,7 @@ const SignUpPage = () => (
 );
 
 const INITIAL_STATE = {
-  firstName: '',
-  lastName: '',
+  username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
@@ -42,20 +40,13 @@ class SignUpFormBase extends Component {
         return this.props.firebase
           .user(authUser.user.uid)
           .set({
+            username,
             email,
           });
       })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
-      })
-      .then((cred) => {
-          Firesbase.db.collection('users').doc(cred.user.uid).set({
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            //totalPoints: (find total point counter)
-          })
       })
       .catch(error => {
         this.setState({ error });
@@ -70,8 +61,7 @@ class SignUpFormBase extends Component {
 
   render() {
     const {
-      firstName,
-      lastName,
+      username,
       email,
       passwordOne,
       passwordTwo,
@@ -82,28 +72,17 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
       email === '' ||
-      firstName === '' ||
-      lastName === '';
-
+      username === '';
 
     return (
       <form onSubmit={this.onSubmit} className="form">
         <div className="form-group">
           <input 
-            name="firstName"
-            value={lastName}
+            name="username"
+            value={username}
             onChange={this.onChange}
             type="text"
-            placeholder="First Name"
-          />
-        </div>
-        <div className="form-group">
-          <input 
-            name="lastName"
-            value={lastName}
-            onChange={this.onChange}
-            type="text"
-            placeholder="Last Name"
+            placeholder="Full Name"
           />
         </div>
         <div className="form-group">
