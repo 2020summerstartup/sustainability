@@ -16,6 +16,9 @@ import { signInWithRedirect } from "../SignIn";
 import "../FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { firestore } from "firebase";
+
+import { Firebase, db } from '../Firebase/firebase'
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -61,6 +64,17 @@ class SignUpFormBase extends Component {
       })
       .catch((error) => {
         this.setState({ error });
+      }).then(() => {
+        db.collection('users').doc(email).set({
+          email,
+          username,
+          dorm,
+          points: {
+            task1: 0,
+            task2: 0,
+            totalPoints: 0,
+          }
+        })
       });
 
     event.preventDefault();
@@ -71,12 +85,13 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const { username, email, dorm, passwordOne, passwordTwo, error } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
+      dorm === "" ||
       username === "";
     // dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
@@ -108,6 +123,17 @@ class SignUpFormBase extends Component {
           <FontAwesomeIcon icon="unlock-alt" className="icon" />
           <input
             className="input-field"
+            name="dorm"
+            value={dorm}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Res Hall"
+          />
+        </div>
+        <div className="form-group">
+          <FontAwesomeIcon icon="unlock-alt" className="icon" />
+          <input
+            className="input-field"
             name="passwordOne"
             value={passwordOne}
             onChange={this.onChange}
@@ -126,26 +152,6 @@ class SignUpFormBase extends Component {
             placeholder="Confirm Password"
           />
         </div>
-        {/* <div className="form-group"  >
-        <input  
-            name="dorm"
-            value={dorm}
-            onChange={this.onChange}
-            type="dorm"
-            placeholder="Dorm Name"
-          /> */}
-        {/* {()=>Dropdown2()} */}
-
-        {/* Select dorm! */}
-
-        {/* <input
-            name="dormName"
-            value={passwordTwo}
-            onChange={this.onChange}
-            type="password"
-            placeholder="Select your dorm!"
-          /> */}
-        {/* </div> */}
         <button disabled={isInvalid} type="submit" className="button">
           Sign Up
         </button>
