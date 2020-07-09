@@ -57,12 +57,13 @@
     width: 100%;
     margin-bottom: 0rem;
   }
+
   #contact input[type="text"],
   #contact input[type="email"] {
-    width: 23rem;
+    width: 20rem;
   }
   #contact textarea {
-    width: 24rem;
+    width: 22rem;
   }
 }
 
@@ -70,16 +71,17 @@
 @media screen and (max-width: 600px) {
   #contact input[type="text"],
   #contact input[type="email"] {
-    width: 16rem;
+    min-width: 5rem;
+    max-width: 15rem;
   }
   #contact textarea {
-    width: 19rem;
+    width: 16.25rem;
   }
 }
 
-/* special style for comment icon */
+/* styling icons!!! */
 /* for bigger screens */
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 600px) {
   #contact input[type="text"],
   #contact input[type="email"],
   #contact textarea {
@@ -90,3 +92,48 @@
     margin: 0;
   }
 }
+
+/* for bigger phones screens */
+@media screen and (max-width: 600px) {  
+  #contact textarea {
+    margin-left: 0rem;
+  }
+}
+
+
+/* for smaller screens */
+@media screen and (max-width: 380px) {  
+  #contact textarea {
+    margin-left: 1.75rem;
+    
+  }
+  .contact-icon {
+    position: relative;
+    top: 2rem;
+  }
+
+  .user, .envelope {
+    position: relative;
+    top: 0;
+  }
+}
+
+/* for small phone screens */
+@media screen and (max-width: 380px) {  
+  #contact input[type="text"],
+  #contact input[type="email"],
+  #contact textarea {
+    margin-left: 1rem;
+    width: 12rem;
+  }  
+  #contact textarea {
+    margin-left: 2.8rem;
+    width: 13rem;
+  }
+  .comment {
+    position: absolute;
+    top: 20.75rem;
+  }
+}
+
+
