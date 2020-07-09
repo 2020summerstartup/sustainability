@@ -88,6 +88,7 @@ function HomePage() {
 
   return (
     <div className="base-container">
+      {/* Does the following line do anything? */}
       <script>var user =</script>
       <h1>Home Sweet Home</h1>
   
