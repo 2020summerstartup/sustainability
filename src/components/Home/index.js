@@ -121,6 +121,8 @@ function HomePage() {
           },
         }}
       >
+      <center>
+        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! -Katie */}
         <Confetti
           width={1500}
           numberOfPieces={2000}
@@ -128,7 +130,6 @@ function HomePage() {
           opacity={0.7}
           // colors={["grey", "white", "green", "black"]}
         />
-        <h2>Your Progress: </h2>
         {
           // I don't yet understand what "Object" is referring to here/how the program knows that.
           Object.keys(ActionData).map(
@@ -140,6 +141,7 @@ function HomePage() {
             }
           )
         }
+        <h2>Your Progress: </h2>
         {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
         <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
         <h3>Total Points: { total } </h3>
@@ -149,6 +151,7 @@ function HomePage() {
             Close
           </button>
         </div>
+      </center>
       </Modal>
       <ActionCard />
     </div>
