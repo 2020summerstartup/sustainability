@@ -8,7 +8,7 @@ import ContactForm from "../ContactForm";
 const InfoPage = () => (
   <div className="base-container">
     <h1 className="header">Information</h1>
-    <center>
+    {/* <center> */}
       <Goal />
       <p></p>
       <Points />
@@ -16,7 +16,7 @@ const InfoPage = () => (
       <Challenges />
       <p></p>
       <Rewards />
-    </center>
+    {/* </center> */}
     <ContactForm />
   </div>
 );

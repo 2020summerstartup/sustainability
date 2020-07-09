@@ -13,7 +13,10 @@ export default function Rewards() {
           <div style={goal}>
             <h1>Current Rewards</h1>
             <p>Coming soon... :)</p>
-            <p>Funded by ASHMC Sustainability and ESW!</p>
+            <p>
+              Funded by ASHMC Sustainability and Engineers of a Sustainable
+              World (ESW) organizations at Harvey Mudd!
+            </p>
           </div>
         </div>
       )}
