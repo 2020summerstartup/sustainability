@@ -3,7 +3,7 @@ import "./index.css";
 // import "././index.css";
 import { Link } from "react-router-dom";
 import southdorm from "./southdorm.jpg";
-
+// import ActionCard from 
 import * as ROUTES from "../../constants/routes";
 
 import SignOutButton from "../SignOut";
@@ -23,8 +23,8 @@ const AccountPage = () => (
         <div class="base-container">
 
           <div class="wrapper1">
-            Welcome, *insert username*{authUser.username}! 
-            *insert profile pic*
+            Welcome,{authUser.email}! 
+            {/* *insert profile pic* */}
           </div> 
           <div class="wrapper2">
             <div>   
@@ -32,7 +32,7 @@ const AccountPage = () => (
               You've earned 
               </div>  
               <div>
-              ______ Points {authUser.points},
+              { localStorage.getItem("waterBottle") } Points for recycling,
               </div> 
               <div>
               way to go!</div>    
