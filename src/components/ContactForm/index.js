@@ -54,7 +54,7 @@ class ContactForm extends React.Component {
           className="input-container"
         >
           <p>
-            <FontAwesomeIcon icon="user" className="contact-icon icon" />
+            <FontAwesomeIcon icon="user" className="contact-icon icon user" />
             <input
               type="text"
               name="name"
