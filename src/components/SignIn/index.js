@@ -89,6 +89,23 @@ class SignInFormBase extends Component {
         <p className="text-center my-3">or</p>
 
         {/* Sign in with Google Account */}
+
+        {/* <button 
+          onClick={() => signInWithRedirect()}
+          className="google-btn">  
+          <div className="google-icon-wrapper">
+            <img
+                alt = ''
+                class="google-icon"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              />   
+          </div> 
+          <div class="btn-text">
+          <b>Sign in with Google</b>
+          </div>  
+          
+            
+        </button> */}
         <div class="google-btn">
           <div onClick={() => signInWithRedirect()} class="google-icon-wrapper">
             <img

@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
  
 import { withFirebase } from '../Firebase';
+import { AuthUserContext, withAuthorization } from "../Session";
+
+const CompetePage = () => (
+  // constructor(props) {
+  //   super(props);
  
-class CompetePage extends Component {
-  constructor(props) {
-    super(props);
+  //   this.state = {
+  //     loading: false,
+  //     users: {},
+  //   };
+  // }
  
-    this.state = {
-      loading: false,
-      users: {},
-    };
-  }
- 
-  render() {
-    return (
-      <div className="base-container">
+  // render() {
+    <div>
+    <AuthUserContext>
+    {(authUser) => (
+      <div class="base-container">
+
+  
         <h1>Competition! Yay!<span role="img" aria-label="Trophy">🏆</span></h1>
         <center>New competitions coming soon...</center>
-      </div>
-    );
-  }
-}
+  
+        </div>
+    )}
+    </AuthUserContext>
  
-export default withFirebase(CompetePage);
+  </div>
+);
+// }
+
+const condition = (authUser) => !!authUser;
+
+export default withAuthorization(condition)(CompetePage);
