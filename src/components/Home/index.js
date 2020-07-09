@@ -84,10 +84,11 @@ Modal.setAppElement("#root");
 // Text to display on the homepage
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  var message = '';
+  var message = [];
 
   return (
     <div className="base-container">
+      {/* Does the following line do anything? */}
       <script>var user =</script>
       <h1>Home Sweet Home</h1>
   
@@ -132,12 +133,13 @@ function HomePage() {
             (key) => {
               // TODO: All the actions display on one line, and I couldn't get newline characters to work no matter
               // what I did. Need to sort this out later. -Katie
-              message += ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
+              message[parseInt(key) - 1] = ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
               return '' // It has to return a value. I think it isn't bad practice to do this? -Katie
             }
           )
         }
-        <p> { message } </p>
+        {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
+        <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
         <h3>Total Points: { total } </h3>
         <h1> </h1>
         <div>
