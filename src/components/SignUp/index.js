@@ -27,12 +27,17 @@ const SignUpPage = () => (
 );
 
 const INITIAL_STATE = {
-  username: "",
-  email: "",
-  passwordOne: "",
-  passwordTwo: "",
-  dorm: "",
-  error: null,
+  user: {
+    username: "",
+    email: "",
+    passwordOne: "",
+    passwordTwo: "",
+    dorm: "",
+    image: null
+  },
+
+  
+  error: null
 };
 
 class SignUpFormBase extends Component {
@@ -43,15 +48,24 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne, dorm } = this.state;
+    const { username, email, passwordOne, dorm, image } = this.state;
+    // const uploadTask = storage.ref(`images/${image.name}`).put(image);
+
+    // uploadTask.on('state_changed', () => {
+    //   // complete function ....
+    //   storage.ref('images').child(image.name).getDownloadURL().then(url => {
+    //       console.log(url);
+    //       this.setState({url});
+    //   })
+    // });
 
     this.props.firebase
-      .doCreateUserWithEmailAndPassword(email, passwordOne, dorm)
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
         // Create a user in your Firebase realtime database
         return this.props.firebase.user(authUser.user.uid).set({
           username,
-          email,
+          email
          
         });
       })
@@ -82,6 +96,7 @@ class SignUpFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit} className="form">
+        {/* <Image source={{uri:this.state.user.avatar}} /> */}
         <div className="form-group">
         <FontAwesomeIcon icon="user" className="icon" />
           <input

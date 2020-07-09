@@ -20,6 +20,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData";
+import "firebase/firestore";
+import 'firebase/database';
+import * as firebase from 'firebase';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,6 +78,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// componentDidMount() {
+//   const itemCards = firebase.database().ref('itemCards');
+//   itemCards.on('value', (snapshot) => {
+//     let itemCards = snapshot.val();
+//     let newState = [];
+//     for (let itemCard in itemWords) {
+//       newState.push({
+//       id: snap.key,
+//       title: snap.val().title,
+//       points: snap.val().points,
+//       susAction: snap.val().susAction
+//       });
+
+//     }
+//     this.setState({
+//       words: newState
+//     });
+//   });
+// }
+
+// componentWillMount(){
+//   console.log(this.app.database().ref().child('itemCards'))
+//   const currentCards = this.state.itemCards;
+//   this.database.on('child_added', snap => {
+//     currentCards.push({
+//       id: snap.key,
+//       title: snap.val().title,
+//       points: snap.val().points,
+//       susAction: snap.val().susAction,
+//     });
+
+//   }
+// }
+
+
 const ActionCard = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -86,6 +125,26 @@ const ActionCard = () => {
 
   const toFirstCharUppercase = (name) =>
   name.charAt(0).toUpperCase() + name.slice(1);
+
+  // useEffect( () => {
+  //   const itemRef = firebase.database().ref('itemCards');
+  //   itemRef.on('value', (snapshot) => {
+  //     let itemCards = snapshot.val();
+  //     let newState = [];
+  //     for (let itemCard in itemCards) {
+  //       newState.push({
+  //       id: itemCard,
+  //       title: itemCards[itemCard].title,
+  //       points: itemCards[itemCard].title,
+  //       susAction: itemCards[itemCard].susAction
+  //       });
+  
+  //     }
+  //     this.setState({
+  //       words: newState
+  //     });
+  //   });
+  // })
 
   const getActionCard = (actionId) => {
 
