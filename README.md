@@ -1,3 +1,8 @@
+Application for the Sustainability Competition at Harvey Mudd College. Users collect points for their selected dorms by logging sustainable actions.
+
+This project was made as part of Harvey Mudd College's Summer Start-Up Research Team.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
