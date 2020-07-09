@@ -1,48 +1,52 @@
-import React, { Component } from 'react';
- 
-import { withFirebase } from '../Firebase';
- 
+import React, { Component } from "react";
+import { withFirebase } from "../Firebase";
+
+// import your fontawesome library
+import "../FontAwesomeIcons";
+// import when you need to use icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const INITIAL_STATE = {
-  passwordOne: '',
-  passwordTwo: '',
+  passwordOne: "",
+  passwordTwo: "",
   error: null,
 };
- 
+
 class PasswordChangeForm extends Component {
   constructor(props) {
     super(props);
- 
+
     this.state = { ...INITIAL_STATE };
   }
- 
-  onSubmit = event => {
+
+  onSubmit = (event) => {
     const { passwordOne } = this.state;
- 
+
     this.props.firebase
       .doPasswordUpdate(passwordOne)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ error });
       });
- 
+
     event.preventDefault();
   };
- 
-  onChange = event => {
+
+  onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
- 
+
   render() {
     const { passwordOne, passwordTwo, error } = this.state;
- 
-    const isInvalid =
-      passwordOne !== passwordTwo || passwordOne === '';
- 
+
+    const isInvalid = passwordOne !== passwordTwo || passwordOne === "";
+
     return (
       <form onSubmit={this.onSubmit} className="form">
         <div className="form-group">
+          <FontAwesomeIcon icon="unlock-alt" className="icon" />
           <input
             name="passwordOne"
             value={passwordOne}
@@ -52,6 +56,7 @@ class PasswordChangeForm extends Component {
           />
         </div>
         <div className="form-group">
+          <FontAwesomeIcon icon="lock" className="icon" />
           <input
             name="passwordTwo"
             value={passwordTwo}
@@ -63,11 +68,11 @@ class PasswordChangeForm extends Component {
         <button disabled={isInvalid} type="submit" className="button">
           Change My Password
         </button>
- 
+
         {error && <p>{error.message}</p>}
       </form>
     );
   }
 }
- 
+
 export default withFirebase(PasswordChangeForm);

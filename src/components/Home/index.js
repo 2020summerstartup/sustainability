@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Counter from "./counter";
 import ActionCard from "../ActionCard";
+import ActionData from "../ActionData";
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
@@ -29,13 +29,28 @@ const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
-// Initialize total points variable
-// TODO: I want this to update without us having to manually add every sus action. Not sure how...
-var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
-+ parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseGroceryBag'))
-+ parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
-+ parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
-+ parseInt(localStorage.getItem('ecoClean'));
+// Initialize point counter to 0 instead of NaN or null
+function initPoints(susAction) {
+  var action = localStorage.getItem(susAction);
+  if (isNaN(action) || action == null) {
+    localStorage.setItem(susAction, 0);
+  }
+}
+
+// Note from Katie to other programmers: The following statements are super important, even though they usually doesn't
+// do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
+// decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
+for(const key in ActionData) {
+  initPoints(ActionData[key].susAction);
+}
+
+// Init the total variable
+var total = 0;
+
+// Loop over every element in ActionData, adding the save point values earn from each
+for(const key in ActionData) {
+  total += parseInt(localStorage.getItem(ActionData[key].susAction));
+}
 
 // The following commented out code didn't work, but I want to keep the record of it for now
 // to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)
@@ -69,6 +84,7 @@ Modal.setAppElement("#root");
 // Text to display on the homepage
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  var message = '';
 
   return (
     <div className="base-container">
@@ -78,7 +94,7 @@ function HomePage() {
       {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
-        {<CountUp start={0} end={100} duration={5}></CountUp>} points! &nbsp;
+        {<CountUp start={0} end={total} duration={1}></CountUp>} points! &nbsp;
         <button onClick={notify1} className="button">
           Click me!
         </button> &nbsp;
@@ -110,10 +126,20 @@ function HomePage() {
           // colors={["grey", "white", "green", "black"]}
         />
         <h2>Your Progress: </h2>
-        <p>Points for Recycling Water Bottle: </p>
-        <p>Points for Walking to the Village: </p>
-        <h3>Total Points: </h3>
-        <h1></h1>
+        {
+          // I don't yet understand what "Object" is referring to here/how the program knows that.
+          Object.keys(ActionData).map(
+            (key) => {
+              // TODO: All the actions display on one line, and I couldn't get newline characters to work no matter
+              // what I did. Need to sort this out later. -Katie
+              message += ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
+              return '' // It has to return a value. I think it isn't bad practice to do this? -Katie
+            }
+          )
+        }
+        <p> { message } </p>
+        <h3>Total Points: { total } </h3>
+        <h1> </h1>
         <div>
           <button onClick={() => setModalIsOpen(false)} className="button">
             Close
@@ -121,30 +147,6 @@ function HomePage() {
         </div>
       </Modal>
       <ActionCard />
-      <h3>Track your sustainable actions here!</h3>
-      <span role="img" aria-label="recycle">
-        ♻️
-      </span>
-      {/* Total points earned. TODO: Make this update automatically, instead of only on
-    page reload. I'll deal with this later (I want to update this whole thing to use the new counter first). */}
-      You have earned a total of{" "}
-      {parseInt(localStorage.getItem("waterBottle")) +
-        parseInt(localStorage.getItem("cmontWalk"))}{" "}
-      points for your sustainable actions. Thank you!
-      {/* Individual sustainable actions. */}
-      <h3>
-        <b>Recycle Water Bottle</b>
-      </h3>
-      <center>
-        <Counter susAction={"waterBottle"} />
-      </center>
-      <h3>
-        <b>Walk to Claremont Village</b>
-      </h3>
-      (Just not during the first two weeks on campus!)
-      <center>
-        <Counter susAction={"cmontWalk"} />
-      </center>
     </div>
   );
 }
