@@ -21,7 +21,7 @@ export default {
     title: "Bring Reusable Bag",
     id: 4,
     points: 10,
-    susAction: 'reuseGroceryBag',
+    susAction: 'reuseBag',
   },
   "5": {
     title: "Shop at the Farmers Market",
@@ -42,7 +42,7 @@ export default {
     susAction: 'noFoodWaste',
   },
   "8": {
-    title: "Participate in Meatless-Mondays",
+    title: "Participate in Meatless-Monday",
     id: 8,
     points: 20,
     susAction: 'meatlessMon',

@@ -8,7 +8,7 @@ const dorms = [
   {
     value: 1,
     label: "Atwood",
-    isDisabled: true,
+    // isDisabled: true,
   },
   {
     value: 2,
@@ -25,7 +25,7 @@ const dorms = [
   {
     value: 5,
     label: "Linde",
-    isDisabled: true,
+    // isDisabled: true,
   },
   {
     value: 6,
@@ -51,6 +51,17 @@ function Dropdown2() {
     setSelectedValue(obj.label.replace(/"([^"]+)":/g, "$1:"));
     // the .replace was supposed to get rid of quotes but it didn't work
   };
+
+  if (localStorage.getItem('selectedDorm') == null) {
+    localStorage.setItem('selectedDorm', "Not Selected");
+  }
+
+  // original if statement I wrote
+  if (selectedValue != null) {
+    localStorage.setItem('selectedDorm', selectedValue);
+  } else {
+    setSelectedValue(localStorage.getItem('selectedDorm'));
+  }
 
   const customStyles = {
     option: (styles, state) => ({
@@ -91,8 +102,8 @@ function Dropdown2() {
         placeholder="Select your dorm..."
       />
       <br />
-      <b>Your dorm: {JSON.stringify(selectedValue, null, 2)}</b>
-      <h1></h1>
+      <b>Your dorm: { localStorage.getItem('selectedDorm') }</b>
+      <h1> </h1>
     </div>
   );
 }

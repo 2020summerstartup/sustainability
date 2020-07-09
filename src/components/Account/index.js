@@ -9,12 +9,12 @@ import * as ROUTES from "../../constants/routes";
 import SignOutButton from "../SignOut";
 
 import { AuthUserContext, withAuthorization } from "../Session";
-import { PasswordForgetForm } from "../PasswordForget";
-import PasswordChangeForm from "../PasswordChange";
+// import { PasswordForgetForm } from "../PasswordForget";
+// import PasswordChangeForm from "../PasswordChange";
 // import Dropdown from "../Dropdown/maindd";
-import Dropdown2 from "../Dropdown/Dropdown2";
-import accountImg from "../../img/account.svg";
-import { auth } from "firebase";
+// import Dropdown2 from "../Dropdown/Dropdown2";
+// import accountImg from "../../img/account.svg";
+// import { auth } from "firebase";
 
 const AccountPage = () => (
   <div>
@@ -47,7 +47,7 @@ const AccountPage = () => (
               Your dorm is in ____ place!
             </div>
             <div>
-            <img src = {southdorm} />
+            <img alt = '' src = {southdorm} />
             </div>
             <div class="wrapper3">
             <div>

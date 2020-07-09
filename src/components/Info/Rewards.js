@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react"; // No longer imports { Component } because it was unused. Feel free to change.
 import { Spring } from "react-spring/renderprops";
 
 export default function Rewards() {
@@ -13,6 +13,7 @@ export default function Rewards() {
           <div style={goal}>
             <h1>Current Rewards</h1>
             <p>Coming soon... :)</p>
+            <p>Funded by ASHMC Sustainability and ESW!</p>
           </div>
         </div>
       )}
@@ -25,4 +26,6 @@ const goal = {
   color: "white",
   padding: "1.5rem",
   borderRadius: "10px",
+  margin: "0 1.5rem",
+  maxWidth: "35rem",
 };

@@ -6,11 +6,16 @@ import "firebase/auth";
 
 import { SignUpLink } from "../SignUp";
 import { PasswordForgetLink } from "../PasswordForget";
-import { withFirebase} from "../Firebase";
+import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
 import "./Google-btn.css";
+
+// import your fontawesome library
+import "../FontAwesomeIcons";
+// import when you need to use icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SignInPage = () => (
   <div className="base-container">
@@ -65,6 +70,7 @@ class SignInFormBase extends Component {
     return (
       <form onSubmit={this.onSubmit} className="form">
         <div className="form-group">
+          <FontAwesomeIcon icon="envelope" className="icon envelope" />
           <input
             name="email"
             value={email}
@@ -74,6 +80,7 @@ class SignInFormBase extends Component {
           />
         </div>
         <div className="form-group">
+          <FontAwesomeIcon icon="lock" className="icon" />
           <input
             name="password"
             value={password}
@@ -92,7 +99,7 @@ class SignInFormBase extends Component {
         <div class="google-btn">
           <div onClick={() => signInWithRedirect()} class="google-icon-wrapper">
             <img
-              alt = ''
+              alt=""
               class="google-icon"
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             />
@@ -100,7 +107,6 @@ class SignInFormBase extends Component {
           <p onClick={() => signInWithRedirect()} class="btn-text">
             <b>Sign in with Google</b>
           </p>
-          
         </div>
 
         {error && <p>{error.message}</p>}
@@ -108,20 +114,24 @@ class SignInFormBase extends Component {
     );
   }
 }
-   
+
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signInWithRedirect = () => {
   firebase.auth().signInWithRedirect(provider);
-}
+};
 
 export const signOutFirebase = () => {
-  firebase.auth().signOut().then(function() {
+  firebase
+    .auth()
+    .signOut()
+    .then(function () {
       // Sign-out successful.
-  }).catch(function(error) {
+    })
+    .catch(function (error) {
       // An error happened.
-  });
-}
+    });
+};
 const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
 
 export { SignInForm };

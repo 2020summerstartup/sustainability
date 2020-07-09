@@ -6,7 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
+// import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -77,19 +77,16 @@ const useStyles = makeStyles((theme) => ({
 const ActionCard = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const [actionData, setActionData] = useState(ActionData);
+  const [actionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
 
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
   };
 
-  const toFirstCharUppercase = (name) =>
-  name.charAt(0).toUpperCase() + name.slice(1);
-
   const getActionCard = (actionId) => {
-
-    console.log(actionData[`${actionId}`]);
+    // Commented following line out because it spammed console, feel free to add it back in
+    //console.log(actionData[`${actionId}`]);
     const { title, points, susAction } = actionData[`${actionId}`];
     const currSusAction = `${susAction}`;
 
@@ -98,12 +95,6 @@ const ActionCard = () => {
     };
 
     const increment = () => {
-      // Note from Katie to other programmers: The following if statement is super important, even though it usually doesn't
-      // do anything. When a new susAction is added, the local storage value is initially NaN, and then we can't increment/
-      // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
-      if (isNaN(localStorage.getItem(currSusAction))) {
-        localStorage.setItem(currSusAction, 0);
-      }
       // add specified number of points to the saved point total
       localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
       window.location.reload(true); // Reload window when value changes
@@ -202,7 +193,7 @@ const ActionCard = () => {
       <Grid container spacing={3} className={classes.actionContainer}>
         {Object.keys(actionData).map(
           (actionId) =>
-            actionData[actionId].title.toLowerCase().includes(filter) &&
+            actionData[actionId].title.toLowerCase().includes(filter.toLowerCase()) &&
             getActionCard(actionId)
         )}
       </Grid>
