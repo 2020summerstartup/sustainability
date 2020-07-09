@@ -51,6 +51,8 @@ var total = 0;
 for(const key in ActionData) {
   total += parseInt(localStorage.getItem(ActionData[key].susAction));
 }
+// Save the total point value in local storage (to be accessed elsewhere when we need to display total)
+localStorage.setItem('total', total);
 
 // The following commented out code didn't work, but I want to keep the record of it for now
 // to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)
