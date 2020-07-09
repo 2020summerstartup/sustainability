@@ -2,6 +2,8 @@ import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
 import 'firebase/database';
+import * as firebase from 'firebase';
+
 // import Axios from 'axios'
 
 // import firebase from 'firebase/app';
@@ -21,13 +23,12 @@ const config = {
   measurementId: "G-682PQBF33P"
 };
 
-
+const firebaseApp = app.initializeApp(config);
+const db = firebaseApp.firestore();
 
 
 class Firebase {
   constructor() {
-    app.initializeApp(config);
-
     this.auth = app.auth();
     this.db = app.database();
   }
@@ -62,5 +63,7 @@ class Firebase {
   // export const firestore = firebase.firestore();
 export default Firebase;
 export { Firebase };
+export { db };
+
 
 // export { Axios, db }
