@@ -18,9 +18,10 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 2rem;
 }
 
-h1 {
+/* h1 {
   font-size: 24px;
   font-family: "Open Sans", sans-serif;
   margin-top: 20px;
@@ -34,7 +35,7 @@ h3 {
   font-size: 20px;
   margin-top: 40px;
   margin-bottom: 5px;
-}
+} */
 
 .image {
   width: 21em;
@@ -75,14 +76,14 @@ input {
 
 input:focus {
     outline: none;
-    box-shadow: 0px 0px 12px 0.8px #00BFA6;
+    box-shadow: 0px 0px 12px 0.8px var(--theme);
 }
 
 .button {
   font-size: 21px;
   padding: 5px 20px;
   border: 0;
-  background-color: #00BFA6;
+  background-color: var(--theme);
   color: #fff;
   border-radius: 3px;
   transition: all 250ms ease-in-out;
