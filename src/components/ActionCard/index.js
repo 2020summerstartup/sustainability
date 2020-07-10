@@ -116,6 +116,10 @@ const ActionCard = () => {
       // console.log(action.susAction, action.points)
     };
 
+    const favAction = (input) => {
+      console.log('action will be favorited');
+    };
+
   return (
     <Fragment>
       <Grid container spacing={3} className={classes.actionContainer}>
@@ -141,7 +145,9 @@ const ActionCard = () => {
               />
               <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
+                  <FavoriteIcon
+                    onClick={favAction}
+                  />
                 </IconButton>
                 <IconButton
                   onClick={() => handleExpandClick(i)}
