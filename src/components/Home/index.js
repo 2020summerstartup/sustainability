@@ -28,6 +28,8 @@ const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
+var total = 0;
+
 // Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
 // do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
 // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
@@ -40,16 +42,19 @@ function initPoints(email) {
     }else{
       uploadUserPoint(email, ActionData[key].susAction, parseInt(localStorage.getItem(ActionData[key].susAction)))
     }
+    total += parseInt(localStorage.getItem(ActionData[key].susAction));
   }
+  console.log(total)
+  localStorage.setItem('total', total);
 }
 
-var total = 0;
+
 // Loop over every element in ActionData, adding the save point values earn from each
-for(const key in ActionData) {
-  total += parseInt(localStorage.getItem(ActionData[key].susAction));
-}
+// for(const key in ActionData) {
+//   total += parseInt(localStorage.getItem(ActionData[key].susAction));
+// }
 // Save the total point value in local storage (to be accessed elsewhere when we need to display total)
-localStorage.setItem('total', total);
+// localStorage.setItem('total', total);
 
 // Initialize total points variable
 // TODO: I want this to update without us having to manually add every sus action. Change to a function somehow
@@ -117,9 +122,12 @@ function HomePage() {
       }
     }, err => {
     console.log(`Encountered error: ${err}`);
-  });
+  }).then(() => {
+    console.log(localStorage.getItem("total"))
+  })
   
   var message = [];
+  total = localStorage.getItem("total")
 
   return (
     <div className="base-container">
