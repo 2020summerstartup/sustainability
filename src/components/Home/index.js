@@ -93,7 +93,6 @@ function HomePage() {
       {/* Does the following line do anything? */}
       <script>var user =</script>
       <h1>Home Sweet Home</h1>
-  
       {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
