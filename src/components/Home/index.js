@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../Session";
-import {getUser, createUser, uploadUserPoint} from "../Firebase";
+import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
 
 const CustomToast = ({ closeToast }) => {
   return (
@@ -38,19 +38,18 @@ function initPoints(email) {
     if (isNaN(action) || action == null) {
       localStorage.setItem(ActionData[key].susAction, 0);
     }else{
-      uploadUserPoint(email, ActionData[key].susAction, parseInt(localStorage.getItem(ActionData[key].susAction)), parseInt(localStorage.getItem("total")))
+      uploadUserPoint(email, ActionData[key].susAction, parseInt(localStorage.getItem(ActionData[key].susAction)))
     }
   }
 }
 
-// var total = 0;
+var total = 0;
 // Loop over every element in ActionData, adding the save point values earn from each
-// for(const key in ActionData) {
-//   total += parseInt(localStorage.getItem(ActionData[key].susAction));
-// }
+for(const key in ActionData) {
+  total += parseInt(localStorage.getItem(ActionData[key].susAction));
+}
 // Save the total point value in local storage (to be accessed elsewhere when we need to display total)
-// localStorage.setItem('total', total);
-
+localStorage.setItem('total', total);
 
 // Initialize total points variable
 // TODO: I want this to update without us having to manually add every sus action. Change to a function somehow
@@ -114,65 +113,82 @@ function HomePage() {
       } else {
         createUser(authContext.email);
         initPoints(authContext.email);
+        uploadUserTotalPoint(authContext.email, total);
       }
     }, err => {
     console.log(`Encountered error: ${err}`);
   });
   
-  var total = localStorage.getItem("total")
+  var message = [];
 
   return (
-    <div>
-      <div className="base-container">
-        <script>var user =</script>
-        <h1>Home Sweet Home</h1>
-    
-        {/* Testing for fun */}
-        <h3>
-          You have earned a total of&nbsp;
-          {<CountUp start={0} end={total} duration={2}></CountUp>} points! &nbsp;
-          <button onClick={notify1} className="button">
-            Click me!
-          </button> &nbsp;
-          <button onClick={notify2} className="button">
-            No, Click me!
-          </button>
-        </h3>
-        <button onClick={() => setModalIsOpen(true)} className="button">
-          Check Your Progress
+    <div className="base-container">
+      {/* Does the following line do anything? */}
+      <script>var user =</script>
+      <h1>Home Sweet Home</h1>
+      {/* Testing for fun */}
+      <h3>
+        You have earned a total of&nbsp;
+        {<CountUp start={0} end={total} duration={1}></CountUp>} points! &nbsp;
+        <button onClick={notify1} className="button">
+          Click me!
+        </button> &nbsp;
+        <button onClick={notify2} className="button">
+          No, Click me!
         </button>
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={() => setModalIsOpen(false)}
-          style={{
-            overlay: {
-              // backgroundColor: 'papayawhip'
-            },
-            content: {
-              color: "var(--theme)",
-              overflow: "hidden",
-            },
-          }}
-        >
-          <Confetti
-            width={1500}
-            numberOfPieces={2000}
-            recycle={false}
-            opacity={0.7}
-            // colors={["grey", "white", "green", "black"]}
-          />
-          <h2>Your Progress: </h2>
-          <p>Points for Recycling Water Bottle: </p>
-          <p>Points for Walking to the Village: </p>
-          <h3>Total Points: </h3>
-          <div>
-            <button onClick={() => setModalIsOpen(false)} className="button">
-              Close
-            </button>
-          </div>
-        </Modal>
-        <ActionCard />
-      </div>
+      </h3>
+      <button onClick={() => setModalIsOpen(true)} className="button">
+        Check Your Progress
+      </button>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        style={{
+          overlay: {
+            // backgroundColor: 'papayawhip'
+          },
+          content: {
+            color: "var(--theme)",
+            overflow: "hidden",
+          },
+        }}
+      >
+      <center>
+        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! -Katie */}
+        <Confetti
+          width={1500}
+          numberOfPieces={2000}
+          recycle={false}
+          opacity={0.7}
+          // colors={["grey", "white", "green", "black"]}
+        />
+        {
+          // I don't yet understand what "Object" is referring to here/how the program knows that.
+          Object.keys(ActionData).map(
+            (key) => {
+              // TODO: All the actions display on one line, and I couldn't get newline characters to work no matter
+              // what I did. Need to sort this out later. -Katie
+              message[parseInt(key) - 1] = ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
+              return '' // It has to return a value. I think it isn't bad practice to do this? -Katie
+            }
+          )
+        }
+        <h2 id='testId'>Your Progress: </h2>
+        <script>
+          document.getElementById("testId").innerHTML = "Hello JavaScript!";
+        </script>
+        {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
+        <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
+        <h3>Total Points: { total } </h3>
+        <h1> </h1>
+        <div>
+          <button onClick={() => setModalIsOpen(false)} className="button">
+            Close
+          </button>
+        </div>
+      </center>
+      </Modal>
+      <ActionCard />
     </div>
   );
 }

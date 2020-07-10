@@ -96,10 +96,15 @@ export const updateUserPoint = (userEmail, userAction, actionPoint) => {
 }
 
 // this method is called to synchronize local storage with Firestore
-export const uploadUserPoint = (userEmail, userAction, actionPoint, total) => {
+export const uploadUserPoint = (userEmail, userAction, actionPoint) => {
   console.log("uploading...")
   return firestore.collection('users').doc(userEmail).update({
     ['points.' + userAction]: actionPoint,
+  })
+}
+
+export const uploadUserTotalPoint = (userEmail, total) =>{
+  return firestore.collection('users').doc(userEmail).update({
     total: total,
   })
 }
