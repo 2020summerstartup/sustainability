@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
-
 import ActionCard from "../ActionCard";
-import ActionData from "../ActionData";
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
@@ -11,7 +9,7 @@ import Confetti from "react-confetti";
 
 
 import { AuthUserContext, withAuthorization } from "../Session";
-import {getUser} from "../Firebase";
+import {getUser, createUser, updateUser} from "../Firebase";
 
 const CustomToast = ({ closeToast }) => {
   return (
@@ -31,31 +29,72 @@ const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
-// Initialize point counter to 0 instead of NaN or null
-function initPoints(susAction) {
-  var action = localStorage.getItem(susAction);
-  if (isNaN(action) || action == null) {
-    localStorage.setItem(susAction, 0);
+// Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
+// do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
+// decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
+function initData(userEmail) {
+  if (isNaN(localStorage.getItem('waterBottle')) || localStorage.getItem('waterBottle') == null) {
+    localStorage.setItem('waterBottle', 0);
+  }else{
+    updateUser(userEmail, 'waterBottle', parseInt(localStorage.getItem('waterBottle')))
+  }
+  if (isNaN(localStorage.getItem('cmontWalk')) || localStorage.getItem('cmontWalk') == null) {
+    localStorage.setItem('cmontWalk', 0);
+  }else{
+    updateUser(userEmail, 'cmontWalk', parseInt(localStorage.getItem('cmontWalk')))
+  }
+  if (isNaN(localStorage.getItem('reuseStraw')) || localStorage.getItem('reuseStraw') == null) {
+    localStorage.setItem('reuseStraw', 0);
+  }else{
+    updateUser(userEmail, 'reuseStraw', parseInt(localStorage.getItem('reuseStraw')))
+  }
+  if (isNaN(localStorage.getItem('reuseBag')) || localStorage.getItem('reuseBag') == null) {
+    localStorage.setItem('reuseBag', 0);
+  }else{
+    updateUser(userEmail, 'reuseBag', parseInt(localStorage.getItem('reuseBag')))
+  }
+  if (isNaN(localStorage.getItem('frmersMarket')) || localStorage.getItem('frmersMarket') == null) {
+    localStorage.setItem('frmersMarket', 0);
+  }else{
+    updateUser(userEmail, 'frmersMarket', parseInt(localStorage.getItem('frmersMarket')))
+  }
+  if (isNaN(localStorage.getItem('rebrewTea')) || localStorage.getItem('rebrewTea') == null) {
+    localStorage.setItem('rebrewTea', 0);
+  }else{
+    updateUser(userEmail, 'rebrewTea', parseInt(localStorage.getItem('rebrewTea')))
+  }
+  if (isNaN(localStorage.getItem('noFoodWaste')) || localStorage.getItem('noFoodWaste') == null) {
+    localStorage.setItem('noFoodWaste', 0);
+  }else{
+    updateUser(userEmail, 'noFoodWaste', parseInt(localStorage.getItem('noFoodWaste')))
+  }
+  if (isNaN(localStorage.getItem('meatlessMon')) || localStorage.getItem('meatlessMon') == null) {
+    localStorage.setItem('meatlessMon', 0);
+  }else{
+    updateUser(userEmail, 'meatlessMon', parseInt(localStorage.getItem('meatlessMon')))
+  }
+  if (isNaN(localStorage.getItem('ecoClean')) || localStorage.getItem('ecoClean') == null) {
+    localStorage.setItem('ecoClean', 0);
+  }else{
+    updateUser(userEmail, 'ecoClean', parseInt(localStorage.getItem('ecoClean')))
   }
 }
 
-// Note from Katie to other programmers: The following statements are super important, even though they usually doesn't
-// do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
-// decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
-for(const key in ActionData) {
-  initPoints(ActionData[key].susAction);
-}
+// Initialize total points variable
+// TODO: I want this to update without us having to manually add every sus action. Change to a function somehow
+// var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
+// + parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
+// + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
+// + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
+// + parseInt(localStorage.getItem('ecoClean'));
 
-
-// Init the total variable
-// var total = 0;
-
-// Loop over every element in ActionData, adding the save point values earn from each
-// for(const key in ActionData) {
-//   total += parseInt(localStorage.getItem(ActionData[key].susAction));
-// }
-// Save the total point value in local storage (to be accessed elsewhere when we need to display total)
-// localStorage.setItem('total', total);
+// // Initialize total points variable
+// // TODO: I want this to update without us having to manually add every sus action.
+// var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
+// + parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
+// + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
+// + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
+// + parseInt(localStorage.getItem('ecoClean'));
 
 // The following commented out code didn't work, but I want to keep the record of it for now
 // to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)
@@ -95,78 +134,36 @@ Modal.setAppElement("#root");
 // Text to display on the homepage
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
   const authContext = useContext(AuthUserContext);
 
   getUser(authContext.email).onSnapshot(docSnapshot => {
-    assignData(docSnapshot.data());
-  }, err => {
+      if (docSnapshot.exists) {
+        assignData(docSnapshot.data())
+      } else {
+        createUser(authContext.email);
+        initData(authContext.email);
+      }
+    }, err => {
     console.log(`Encountered error: ${err}`);
   });
   
   var total = localStorage.getItem("total")
 
-  var message = [];
-
   return (
-    <div className="base-container">
-      {/* Does the following line do anything? */}
-      <script>var user =</script>
-      <h1>Home Sweet Home</h1>
-  
-      {/* Testing for fun */}
-      <h3>
-        You have earned a total of&nbsp;
-        {<CountUp start={0} end={total} duration={1}></CountUp>} points! &nbsp;
-        <button onClick={notify1} className="button">
-          Click me!
-        </button> &nbsp;
-        <button onClick={notify2} className="button">
-          No, Click me!
-        </button>
-      </h3>
-      <button onClick={() => setModalIsOpen(true)} className="button">
-        Check Your Progress
-      </button>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        style={{
-          overlay: {
-            // backgroundColor: 'papayawhip'
-          },
-          content: {
-            color: "var(--theme)",
-            overflow: "hidden",
-          },
-        }}
-      >
-        <Confetti
-          width={1500}
-          numberOfPieces={2000}
-          recycle={false}
-          opacity={0.7}
-          // colors={["grey", "white", "green", "black"]}
-        />
-        <h2>Your Progress: </h2>
-        {
-          // I don't yet understand what "Object" is referring to here/how the program knows that.
-          Object.keys(ActionData).map(
-            (key) => {
-              // TODO: All the actions display on one line, and I couldn't get newline characters to work no matter
-              // what I did. Need to sort this out later. -Katie
-              message[parseInt(key) - 1] = ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
-              return '' // It has to return a value. I think it isn't bad practice to do this? -Katie
-            }
-          )
-        }
-        {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
-        <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
-        <h3>Total Points: { total } </h3>
-        <h1> </h1>
-        <div>
-          <button onClick={() => setModalIsOpen(false)} className="button">
-            Close
+    <div>
+      <div className="base-container">
+        <script>var user =</script>
+        <h1>Home Sweet Home</h1>
+    
+        {/* Testing for fun */}
+        <h3>
+          You have earned a total of&nbsp;
+          {<CountUp start={0} end={total} duration={2}></CountUp>} points! &nbsp;
+          <button onClick={notify1} className="button">
+            Click me!
+          </button> &nbsp;
+          <button onClick={notify2} className="button">
+            No, Click me!
           </button>
         </h3>
         <button onClick={() => setModalIsOpen(true)} className="button">
