@@ -113,6 +113,7 @@ const ActionCard = () => {
       localStorage.setItem(action.susAction, parseInt(localStorage.getItem(action.susAction))+parseInt(action.points));
       // updateUser(authContext.email, action.susAction, action.points).then(() => 
       // window.location.reload(true)
+      // console.log(action.susAction, action.points)
     };
 
   return (
