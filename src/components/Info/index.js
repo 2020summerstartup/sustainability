@@ -15,12 +15,7 @@ const InfoPage = () => (
       <Challenges />
       <p></p>
       <Rewards />
-<<<<<<< HEAD
     {/* </center> */}
-    <ContactForm />
-=======
-    </center>
->>>>>>> 45225df9ec3890d046177000078e9e4dc15dc1a6
   </div>
 );
 

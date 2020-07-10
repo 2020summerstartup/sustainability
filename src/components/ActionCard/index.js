@@ -19,9 +19,9 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
-import ActionData from "../ActionData";
-import {updateUser} from "../Firebase"
-import { AuthUserContext} from "../Session";
+import ActionData from "../ActionData/index.json";
+import { updateUser } from "../Firebase";
+import { AuthUserContext } from "../Session";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,132 +76,66 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ActionCard = ({ action }, actionId) => {
+const ActionCard = () => {
   const classes = useStyles();
   const [expandedId, setExpandedId] = React.useState(-1);
-  const [actionData, setActionData] = useState(ActionData);
-  const [filter, setFilter] = useState("");
+  // const [actionData, setActionData] = useState(ActionData);
+  // const [actionData] = useState(ActionData);
+  // const [filter, setFilter] = useState("");
 
   // console.log(actionData[actionId]);
   // const { title, points, susAction } = actionData[actionId];
   // const currSusAction = susAction;
 
-  const authContext = useContext(AuthUserContext);
 
-  const getActionCard = (actionId) => {
-
-    console.log(actionData[`${actionId}`]);
-    const { title, points, susAction } = actionData[`${actionId}`];
-    const currSusAction = `${susAction}`; // I think this is just the same as susAction? TODO: Figure this out
-
-    const handleExpandClick = () => {
-      setExpanded(!expanded);
-    };
-
-    const increment = () => {
-      // add specified number of points to the saved point total
-      localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
-      updateUser(authContext.email, susAction, points).then(() => {window.location.reload(true)})
-    };
-
-    return (
-      <Grid item xs={12} md={6} lg={4} key={actionId}>
-        <Card className={classes.root}>
-          <CardHeader
-            className={classes.cardContent}
-            // avatar={
-            //   <Avatar aria-label="recipe" className={classes.avatar}>
-            //     R
-            //   </Avatar>
-            // }
-            action={
-              <IconButton
-                onClick = {increment}
-                aria-label="settings" title='Complete this sustainable action!' >
-                <AddCircleIcon fontSize="large" />
-              </IconButton>
-            }
-            title={`${title}`}
-            //subheader={`${points}`}
-            subheader = {'Earn '.concat(`${points}`, " Points!")}
-          />
-          {/* <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent> */}
-          <CardActions disableSpacing className={classes.cardActions}>
-            <IconButton aria-label="add to favorites" title ='Add to favorites'>
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-              title = 'Learn more'
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <CardMedia
-                className={classes.media}
-                image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQglBrvos1eYpEK-0d41uUgv_tmIgENlB_-GQ&usqp=CAU"
-                title="Recycle water bottle image"
-              />
-              <Typography paragraph>Impact:</Typography>
-              <Typography paragraph>
-                Plastic water bottles are becoming a growing segment of the
-                municipal solid waste stream in the United States. The American
-                Chemistry Council estimates that the average consumer uses 166
-                plastic water bottles each year and that 2.5 million plastic
-                bottles are thrown away every hour. While plastic water bottles
-                offer convenience, they also create unnecessary waste in
-                landfills. By recycling your plastic water bottles, you can
-                positively impact the environment in several ways.
-              </Typography>
-            </CardContent>
-          </Collapse>
-        </Card>
-      </Grid>
-    );
+  const handleExpandClick = (i) => {
+    setExpandedId(expandedId === i ? -1 : i);
   };
 
-  // const increment = (action) => {
-  //   // add specified number of points to the saved point total
-  //   localStorage.setItem(
-  //     currSusAction,
-  //     parseInt(localStorage.getItem(currSusAction)) + parseInt(points)
-  //   );
-  //   window.location.reload(true); // Reload window when value changes
+  const authContext = useContext(AuthUserContext);
+
+  // const getActionCard = (actionId) => {
+  //   // Commented following line out because it spammed console, feel free to add it back in
+  //   console.log(actionData[`${actionId}`]);
+  //   const { title, points, susAction } = actionData[`${actionId}`];
+  //   const currSusAction = `${susAction}`;
+
+  // KEEP THIS!!! UPDATED VERSION
+  //   const increment = () => {
+  //     // add specified number of points to the saved point total
+  //     localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
+  //     updateUser(authContext.email, susAction, points).then(() => {window.location.reload(true)})
+  //   };
   // };
+
+    // KEEP THIS!!! UPDATED VERSION
+    const increment = (action) => {
+      // add specified number of points to the saved point total
+      localStorage.setItem(action.susAction, parseInt(localStorage.getItem(action.susAction))+parseInt(action.points));
+      // updateUser(authContext.email, action.susAction, action.points).then(() => 
+      // window.location.reload(true)
+    };
 
   return (
     <Fragment>
       <Grid container spacing={3} className={classes.actionContainer}>
-        {keyPerAction.map((action, i) => (
+        {ActionData.map((action, i) => (
           <Grid item xs={12} md={6} lg={4}>
-            <Card className={classes.root} key={action}>
+            <Card className={classes.root} key={action.id}>
               <CardHeader
                 className={classes.cardContent}
                 action={
                   <IconButton
-                    // onClick={increment(action)}
+                    onClick={increment(action)}
                     aria-label="settings"
                     title="Complete this sustainable action!"
                   >
                     <AddCircleIcon fontSize="large" />
                   </IconButton>
                 }
-                title={ActionData[action.id].title}
+                title={action.title}
                 subheader={"Earn ".concat(
-                  ActionData[action.id].points,
+                  action.points,
                   " Points!"
                 )}
               />
@@ -221,12 +155,12 @@ const ActionCard = ({ action }, actionId) => {
                 <CardContent>
                   <CardMedia
                     className={classes.media}
-                    image={ActionData[action.id].image}
-                    title={ActionData[action.id].title}
+                    image={action.image}
+                    title={action.title}
                   />
                   <Typography variant="h4">Impact:</Typography>
                   <Typography variant="body">
-                  {ActionData[action.id].impact}
+                    {action.impact}
                   </Typography>
                 </CardContent>
               </Collapse>
@@ -239,3 +173,4 @@ const ActionCard = ({ action }, actionId) => {
 };
 
 export default ActionCard;
+
