@@ -21,7 +21,6 @@ const AccountPage = () => (
     <AuthUserContext.Consumer>
       {(authUser) => (
         <div class="base-container">
-
           <div class="wrapper1">
             Welcome, *insert username*{authUser.username}! 
             *insert profile pic*

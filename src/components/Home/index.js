@@ -1,15 +1,14 @@
 import React, { useState, useContext } from "react";
 import ActionCard from "../ActionCard";
+import ActionData from "../ActionData";
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
-
-
 import { AuthUserContext, withAuthorization } from "../Session";
-import {getUser, createUser, updateUser} from "../Firebase";
+import {getUser, createUser, uploadUserPoint} from "../Firebase";
 
 const CustomToast = ({ closeToast }) => {
   return (
@@ -32,53 +31,26 @@ const notify2 = () => {
 // Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
 // do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
 // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
-function initData(userEmail) {
-  if (isNaN(localStorage.getItem('waterBottle')) || localStorage.getItem('waterBottle') == null) {
-    localStorage.setItem('waterBottle', 0);
-  }else{
-    updateUser(userEmail, 'waterBottle', parseInt(localStorage.getItem('waterBottle')))
-  }
-  if (isNaN(localStorage.getItem('cmontWalk')) || localStorage.getItem('cmontWalk') == null) {
-    localStorage.setItem('cmontWalk', 0);
-  }else{
-    updateUser(userEmail, 'cmontWalk', parseInt(localStorage.getItem('cmontWalk')))
-  }
-  if (isNaN(localStorage.getItem('reuseStraw')) || localStorage.getItem('reuseStraw') == null) {
-    localStorage.setItem('reuseStraw', 0);
-  }else{
-    updateUser(userEmail, 'reuseStraw', parseInt(localStorage.getItem('reuseStraw')))
-  }
-  if (isNaN(localStorage.getItem('reuseBag')) || localStorage.getItem('reuseBag') == null) {
-    localStorage.setItem('reuseBag', 0);
-  }else{
-    updateUser(userEmail, 'reuseBag', parseInt(localStorage.getItem('reuseBag')))
-  }
-  if (isNaN(localStorage.getItem('frmersMarket')) || localStorage.getItem('frmersMarket') == null) {
-    localStorage.setItem('frmersMarket', 0);
-  }else{
-    updateUser(userEmail, 'frmersMarket', parseInt(localStorage.getItem('frmersMarket')))
-  }
-  if (isNaN(localStorage.getItem('rebrewTea')) || localStorage.getItem('rebrewTea') == null) {
-    localStorage.setItem('rebrewTea', 0);
-  }else{
-    updateUser(userEmail, 'rebrewTea', parseInt(localStorage.getItem('rebrewTea')))
-  }
-  if (isNaN(localStorage.getItem('noFoodWaste')) || localStorage.getItem('noFoodWaste') == null) {
-    localStorage.setItem('noFoodWaste', 0);
-  }else{
-    updateUser(userEmail, 'noFoodWaste', parseInt(localStorage.getItem('noFoodWaste')))
-  }
-  if (isNaN(localStorage.getItem('meatlessMon')) || localStorage.getItem('meatlessMon') == null) {
-    localStorage.setItem('meatlessMon', 0);
-  }else{
-    updateUser(userEmail, 'meatlessMon', parseInt(localStorage.getItem('meatlessMon')))
-  }
-  if (isNaN(localStorage.getItem('ecoClean')) || localStorage.getItem('ecoClean') == null) {
-    localStorage.setItem('ecoClean', 0);
-  }else{
-    updateUser(userEmail, 'ecoClean', parseInt(localStorage.getItem('ecoClean')))
+// Initialize point counter to 0 instead of NaN or null
+function initPoints(email) {
+  for(const key in ActionData) {
+    var action = localStorage.getItem(ActionData[key].susAction);
+    if (isNaN(action) || action == null) {
+      localStorage.setItem(ActionData[key].susAction, 0);
+    }else{
+      uploadUserPoint(email, ActionData[key].susAction, parseInt(localStorage.getItem(ActionData[key].susAction)), parseInt(localStorage.getItem("total")))
+    }
   }
 }
+
+// var total = 0;
+// Loop over every element in ActionData, adding the save point values earn from each
+// for(const key in ActionData) {
+//   total += parseInt(localStorage.getItem(ActionData[key].susAction));
+// }
+// Save the total point value in local storage (to be accessed elsewhere when we need to display total)
+// localStorage.setItem('total', total);
+
 
 // Initialize total points variable
 // TODO: I want this to update without us having to manually add every sus action. Change to a function somehow
@@ -141,7 +113,7 @@ function HomePage() {
         assignData(docSnapshot.data())
       } else {
         createUser(authContext.email);
-        initData(authContext.email);
+        initPoints(authContext.email);
       }
     }, err => {
     console.log(`Encountered error: ${err}`);
@@ -193,7 +165,6 @@ function HomePage() {
           <p>Points for Recycling Water Bottle: </p>
           <p>Points for Walking to the Village: </p>
           <h3>Total Points: </h3>
-          <h1></h1>
           <div>
             <button onClick={() => setModalIsOpen(false)} className="button">
               Close

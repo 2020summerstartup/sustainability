@@ -20,7 +20,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData";
-import {updateUser} from "../Firebase"
+import {updateUserPoint} from "../Firebase"
 import { AuthUserContext} from "../Session";
 
 const useStyles = makeStyles((theme) => ({
@@ -101,7 +101,9 @@ const ActionCard = () => {
     const increment = () => {
       // add specified number of points to the saved point total
       localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
-      updateUser(authContext.email, susAction, points).then(() => {window.location.reload(true)})
+      localStorage.setItem("total", parseInt(localStorage.getItem("total"))+parseInt(`${points}`));
+      // window.location.reload(true)
+      updateUserPoint(authContext.email, susAction, points).then(() => {window.location.reload(true)})
     };
 
     return (

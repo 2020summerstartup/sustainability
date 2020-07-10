@@ -1,7 +1,6 @@
 import FirebaseContext, { withFirebase } from './context';
 import Firebase from './firebase';
-import * as firebase from 'firebase';
-import {createUser, getUser, updateUser} from './firebase';
+import {createUser, getUser, updateUserPoint, uploadUserPoint} from './firebase';
  
 export default Firebase;
 
@@ -28,4 +27,4 @@ export default Firebase;
 // export const auth = firebase.auth();
  
 export { FirebaseContext, withFirebase };
-export {createUser, getUser, updateUser};
+export {createUser, getUser, updateUserPoint, uploadUserPoint};
