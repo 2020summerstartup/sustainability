@@ -13,7 +13,6 @@ import InfoPage from '../Info';
 import ProfilePage from '../Profile';
 import Header from '../Header';
 import CompetePage from '../Compete';
-import ATabs from '../Account Tabs';
 import TabPage from '../Tabs';
 
 import * as ROUTES from '../../constants/routes';
@@ -38,7 +37,6 @@ const App = () => (
       <Route path={ROUTES.INFO} component={InfoPage} />
       <Route path={ROUTES.PROFILE} component={ProfilePage} />
       <Route path={ROUTES.COMPETE} component={CompetePage} />
-      <Route path={ROUTES.ATABS} component={ATabs} />
       <Route path={ROUTES.TABS} component={TabPage} />
 
 
