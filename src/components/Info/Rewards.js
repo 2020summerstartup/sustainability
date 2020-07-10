@@ -22,7 +22,8 @@ export default function Rewards() {
 }
 
 const goal = {
-  background: "#00a8bf",
+  // I grabbed the background color from the monochrome spread here: https://www.colorhexa.com/24a113
+  background: "#155d0b",
   color: "white",
   padding: "1.5rem",
   borderRadius: "10px",

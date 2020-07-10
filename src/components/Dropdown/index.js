@@ -67,24 +67,24 @@ function Dropdown2() {
     option: (styles, state) => ({
       ...styles,
       color: state.isSelected ? "#FFF" : styles.color,
-      backgroundColor: state.isSelected ? "#00bfa6" : "white",
+      backgroundColor: state.isSelected ? "#24a113" : "white",
       borderBottom: "1px solid rgba(0, 0, 0, 0.125)",
     
       "&:hover": {
         color: state.isDisabled ? "lightgrey" : "black",
         fontWeight: state.isFocused ? "bold" : "normal",
-        backgroundColor: state.isDisabled ? "white" : "#00bfa6",
+        backgroundColor: state.isDisabled ? "white" : "#24a113",
       },
     }),
     control: (styles, state) => ({
       ...styles,
-      boxShadow: state.isFocused ? "0 0 0 0.2rem #00bfa6)" : 0,
+      boxShadow: state.isFocused ? "0 0 0 0.2rem #24a113)" : 0,
       borderColor: state.isFocused ? "#D0EAE2" : "#CED4DA",
 
       cursor: state.isDisabled ? "not-allowed" : "default",
 
       "&:hover": {
-        borderColor: state.isFocused ? "#00bfa6" : "#00bfa6",
+        borderColor: state.isFocused ? "#24a113" : "#24a113",
       },
     }),
   };

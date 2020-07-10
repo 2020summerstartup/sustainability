@@ -159,7 +159,7 @@ const ActionCard = () => {
 
     console.log(actionData[`${actionId}`]);
     const { title, points, susAction } = actionData[`${actionId}`];
-    const currSusAction = `${susAction}`; // I think this is just the same as susAction? TODO: Figure this out
+    //const currSusAction = `${susAction}`; // Turns out currSusAction is the same as susAction, so I've removed it. (Feel free to delete this entire line when you see it.)
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -167,7 +167,7 @@ const ActionCard = () => {
 
     const increment = () => {
       // add specified number of points to the saved point total
-      localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
+      localStorage.setItem(susAction, parseInt(localStorage.getItem(susAction))+parseInt(`${points}`));
       updateUser(authContext.email, susAction, points).then(() => {window.location.reload(true)})
     };
 

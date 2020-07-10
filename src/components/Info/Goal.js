@@ -25,7 +25,8 @@ export default function Goal() {
 }
 
 const goal = {
-  background: "#00bf76",
+  // I grabbed the background color from the monochrome spread here: https://www.colorhexa.com/24a113
+  background: "#34e41c",
   color: "white",
   padding: "1.5rem",
   borderRadius: "10px",
