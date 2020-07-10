@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Recycle Water Bottle",
+    "id": 1,
+    "points": 10,
+    "susAction": "waterBottle",
+    "image": "",
+    "impact": ""
+  },
+  {
+    "title": "Walk to the Village",
+    "id": 2,
+    "points": 30,
+    "susAction": "cmontWalk",
+    "image": "",
+    "impact": ""
+  },
+  {
+    "title": "Bring Your Own Reusable Straw",
+    "id": 3,
+    "points": 15,
+    "susAction": "reuseStraw",
+    "image": "",
+    "impact": ""
+  },
+  {
+    "title": "Bring Reusable Bag",
+    "id": 4,
+    "points": 10,
+    "susAction": "reuseBag",
+    "image": "",
+    "impact": ""
+  },
+  {
+    "title": "Shop at the Farmers Market",
+    "id": 5,
+    "points": 35,
+    "susAction": "frmersMarket",
+    "image": "",
+    "impact": ""
+  },
+  {
+    "title": "Re-brew Tea Leaves",
+    "id": 6,
+    "points": 10,
+    "susAction": "rebrewTea",
+    "image": "",
+    "impact": ""
+  },
+  {
+    "title": "No Food Waste from Meal",
+    "id": 7,
+    "points": 20,
+    "susAction": "noFoodWaste",
+    "image": "",
+    "impact": ""
+  },
+  {
+    "title": "Participate in Meatless-Mondays",
+    "id": 8,
+    "points": 20,
+    "susAction": "meatlessMon",
+    "image": "",
+    "impact": ""
+  },
+  {
+    "title": "Eco-friendly Cleaning Products",
+    "id": 9,
+    "points": 10,
+    "susAction": "ecoClean",
+    "image": "",
+    "impact": ""
+  }
+]

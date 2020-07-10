@@ -12,7 +12,6 @@ import {
   faEnvelope,
   faLock,
   faUnlockAlt,
-  faComment,
   faEye,
   faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -27,7 +26,6 @@ library.add(
   faEnvelope,
   faLock,
   faUnlockAlt,
-  faComment,
   faEye,
   faEyeSlash
 );
