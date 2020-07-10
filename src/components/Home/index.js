@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import ActionCard from "../ActionCard";
-import ActionData from "../ActionData";
+import ActionData from "../ActionData/OriginalData";
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";

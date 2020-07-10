@@ -1,5 +1,4 @@
-import React, { useState, useContext} from "react";
-import clsx from "clsx";
+import React, { Fragment, useState, useContext } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -19,10 +18,9 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
-import ActionData from "../ActionData";
-import {updateUserPoint} from "../Firebase"
-import { AuthUserContext} from "../Session";
-
+import ActionData from "../ActionData/index.json";
+import { updateUser } from "../Firebase";
+import { AuthUserContext } from "../Session";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,196 +75,101 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// componentDidMount() {
-//   const itemCards = firebase.database().ref('itemCards');
-//   itemCards.on('value', (snapshot) => {
-//     let itemCards = snapshot.val();
-//     let newState = [];
-//     for (let itemCard in itemWords) {
-//       newState.push({
-//       id: snap.key,
-//       title: snap.val().title,
-//       points: snap.val().points,
-//       susAction: snap.val().susAction
-//       });
-
-//     }
-//     this.setState({
-//       words: newState
-//     });
-//   });
-// }
-
-// componentWillMount(){
-//   console.log(this.app.database().ref().child('itemCards'))
-//   const currentCards = this.state.itemCards;
-//   this.database.on('child_added', snap => {
-//     currentCards.push({
-//       id: snap.key,
-//       title: snap.val().title,
-//       points: snap.val().points,
-//       susAction: snap.val().susAction,
-//     });
-
-//   }
-// }
-
-
 const ActionCard = () => {
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
-  const [actionData, setActionData] = useState(ActionData);
-  const [filter, setFilter] = useState("");
+  const [expandedId, setExpandedId] = React.useState(-1);
+  // const [actionData, setActionData] = useState(ActionData);
+  // const [actionData] = useState(ActionData);
+  // const [filter, setFilter] = useState("");
 
-  const handleSearchChange = (e) => {
-    setFilter(e.target.value);
+  // console.log(actionData[actionId]);
+  // const { title, points, susAction } = actionData[actionId];
+  // const currSusAction = susAction;
+
+
+  const handleExpandClick = (i) => {
+    setExpandedId(expandedId === i ? -1 : i);
   };
-
-
-//   const toFirstCharUppercase = (name) =>
-//   name.charAt(0).toUpperCase() + name.slice(1);
-
-  // useEffect( () => {
-  //   const itemRef = firebase.database().ref('itemCards');
-  //   itemRef.on('value', (snapshot) => {
-  //     let itemCards = snapshot.val();
-  //     let newState = [];
-  //     for (let itemCard in itemCards) {
-  //       newState.push({
-  //       id: itemCard,
-  //       title: itemCards[itemCard].title,
-  //       points: itemCards[itemCard].title,
-  //       susAction: itemCards[itemCard].susAction
-  //       });
-  
-  //     }
-  //     this.setState({
-  //       words: newState
-  //     });
-  //   });
-  // })
 
   const authContext = useContext(AuthUserContext);
 
+  // const getActionCard = (actionId) => {
+  //   // Commented following line out because it spammed console, feel free to add it back in
+  //   console.log(actionData[`${actionId}`]);
+  //   const { title, points, susAction } = actionData[`${actionId}`];
+  //   const currSusAction = `${susAction}`;
 
-  const getActionCard = (actionId) => {
+  // KEEP THIS!!! UPDATED VERSION
+  //   const increment = () => {
+  //     // add specified number of points to the saved point total
+  //     localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
+  //     updateUser(authContext.email, susAction, points).then(() => {window.location.reload(true)})
+  //   };
+  // };
 
-    console.log(actionData[`${actionId}`]);
-    const { title, points, susAction } = actionData[`${actionId}`];
-    //const currSusAction = `${susAction}`; // Turns out currSusAction is the same as susAction, so I've removed it. (Feel free to delete this entire line when you see it.)
-
-    const handleExpandClick = () => {
-      setExpanded(!expanded);
-    };
-
-    const increment = () => {
+    // KEEP THIS!!! UPDATED VERSION
+    const increment = (action) => {
       // add specified number of points to the saved point total
-      localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
-      localStorage.setItem("total", parseInt(localStorage.getItem("total"))+parseInt(`${points}`));
+      localStorage.setItem(action.susAction, parseInt(localStorage.getItem(action.susAction))+parseInt(action.points));
+      // updateUser(authContext.email, action.susAction, action.points).then(() => 
       // window.location.reload(true)
-      updateUserPoint(authContext.email, susAction, points).then(() => {window.location.reload(true)})
-
     };
-
-    return (
-      <Grid item xs={12} md={6} lg={4} key={actionId}>
-        <Card className={classes.root}>
-          <CardHeader
-            className={classes.cardContent}
-            // avatar={
-            //   <Avatar aria-label="recipe" className={classes.avatar}>
-            //     R
-            //   </Avatar>
-            // }
-            action={
-              <IconButton
-                onClick = {increment}
-                aria-label="settings" title='Complete this sustainable action!' >
-                <AddCircleIcon fontSize="large" />
-              </IconButton>
-            }
-            title={`${title}`}
-            //subheader={`${points}`}
-            subheader = {'Earn '.concat(`${points}`, " Points!")}
-          />
-          {/* <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent> */}
-          <CardActions disableSpacing className={classes.cardActions}>
-            <IconButton aria-label="add to favorites" title ='Add to favorites'>
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-              title = 'Learn more'
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <CardMedia
-                className={classes.media}
-                image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQglBrvos1eYpEK-0d41uUgv_tmIgENlB_-GQ&usqp=CAU"
-                title="Recycle water bottle image"
-              />
-              <Typography paragraph>Impact:</Typography>
-              <Typography paragraph>
-                Plastic water bottles are becoming a growing segment of the
-                municipal solid waste stream in the United States. The American
-                Chemistry Council estimates that the average consumer uses 166
-                plastic water bottles each year and that 2.5 million plastic
-                bottles are thrown away every hour. While plastic water bottles
-                offer convenience, they also create unnecessary waste in
-                landfills. By recycling your plastic water bottles, you can
-                positively impact the environment in several ways.
-              </Typography>
-            </CardContent>
-          </Collapse>
-        </Card>
-      </Grid>
-    );
-  };
 
   return (
-    <>
-      <Toolbar>
-        <div className={classes.searchContainer}>
-          <Grid container spacing={1} alignItems="flex-end">
-            <Grid item>
-              <SearchIcon className={classes.searchIcon} />
-            </Grid>
-            <Grid item>
-              <TextField
-                onChange={handleSearchChange}
-                className={classes.searchInput}
-                label="Search Actions"
-                variant="standard"
-                color="primary"
-                InputProps={{ disableUnderline: true }}
-              />
-            </Grid>
-          </Grid>
-        </div>
-      </Toolbar>
+    <Fragment>
       <Grid container spacing={3} className={classes.actionContainer}>
-        {Object.keys(actionData).map(
-          (actionId) =>
-            actionData[actionId].title.toLowerCase().includes(filter.toLowerCase()) &&
-            getActionCard(actionId)
-        )}
+        {ActionData.map((action, i) => (
+          <Grid item xs={12} md={6} lg={4}>
+            <Card className={classes.root} key={action.id}>
+              <CardHeader
+                className={classes.cardContent}
+                action={
+                  <IconButton
+                    onClick={increment(action)}
+                    aria-label="settings"
+                    title="Complete this sustainable action!"
+                  >
+                    <AddCircleIcon fontSize="large" />
+                  </IconButton>
+                }
+                title={action.title}
+                subheader={"Earn ".concat(
+                  action.points,
+                  " Points!"
+                )}
+              />
+              <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => handleExpandClick(i)}
+                  aria-expanded={expandedId === i}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <CardMedia
+                    className={classes.media}
+                    image={action.image}
+                    title={action.title}
+                  />
+                  <Typography variant="h4">Impact:</Typography>
+                  <Typography variant="body">
+                    {action.impact}
+                  </Typography>
+                </CardContent>
+              </Collapse>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
-    </>
+    </Fragment>
   );
 };
 
 export default ActionCard;
+
