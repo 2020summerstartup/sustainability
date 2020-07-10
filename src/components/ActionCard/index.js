@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -20,10 +20,15 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData";
+
 import "firebase/firestore";
 import 'firebase/database';
 import * as firebase from 'firebase';
 import { useEffect } from 'react';
+
+import {updateUser} from "../Firebase"
+import { AuthUserContext} from "../Session";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -116,15 +121,16 @@ const useStyles = makeStyles((theme) => ({
 const ActionCard = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const [actionData] = useState(ActionData);
+  const [actionData, setActionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
 
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
   };
 
-  const toFirstCharUppercase = (name) =>
-  name.charAt(0).toUpperCase() + name.slice(1);
+
+//   const toFirstCharUppercase = (name) =>
+//   name.charAt(0).toUpperCase() + name.slice(1);
 
   // useEffect( () => {
   //   const itemRef = firebase.database().ref('itemCards');
@@ -146,11 +152,14 @@ const ActionCard = () => {
   //   });
   // })
 
+  const authContext = useContext(AuthUserContext);
+
+
   const getActionCard = (actionId) => {
-    // Commented following line out because it spammed console, feel free to add it back in
-    //console.log(actionData[`${actionId}`]);
+
+    console.log(actionData[`${actionId}`]);
     const { title, points, susAction } = actionData[`${actionId}`];
-    const currSusAction = `${susAction}`;
+    const currSusAction = `${susAction}`; // I think this is just the same as susAction? TODO: Figure this out
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -159,7 +168,7 @@ const ActionCard = () => {
     const increment = () => {
       // add specified number of points to the saved point total
       localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
-      window.location.reload(true); // Reload window when value changes
+      updateUser(authContext.email, susAction, points).then(() => {window.location.reload(true)})
     };
 
     return (

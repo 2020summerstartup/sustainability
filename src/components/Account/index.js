@@ -11,6 +11,7 @@ import SignOutButton from "../SignOut";
 
 // import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
+
 import Dropdown2 from "../Dropdown";
 import accountImg from "../../img/account.svg";
 import TotalPoints from "./points.js";
@@ -94,6 +95,8 @@ function AccountPage() {
           <div class="base-container">
             <div class="profile">
               Profile
+
+  
             </div>
             <div class="accountName">
             {authUser.email}'s page! 
