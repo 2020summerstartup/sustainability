@@ -7,9 +7,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
-
-
-import { withAuthorization } from "../Session";
+import { AuthUserContext, withAuthorization } from "../Session";
+import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
 
 const CustomToast = ({ closeToast }) => {
   return (
@@ -29,30 +28,50 @@ const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
-// Initialize point counter to 0 instead of NaN or null
-function initPoints(susAction) {
-  var action = localStorage.getItem(susAction);
-  if (isNaN(action) || action == null) {
-    localStorage.setItem(susAction, 0);
-  }
-}
 
-// Note from Katie to other programmers: The following statements are super important, even though they usually doesn't
-// do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
-// decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
-for(const key in ActionData) {
-  initPoints(ActionData[key].susAction);
-}
-
-// Init the total variable
 var total = 0;
 
-// Loop over every element in ActionData, adding the save point values earn from each
-for(const key in ActionData) {
-  total += parseInt(localStorage.getItem(ActionData[key].susAction));
+// Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
+// do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
+// decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
+// Initialize point counter to 0 instead of NaN or null
+function initPoints(email) {
+  for(const key in ActionData) {
+    var action = localStorage.getItem(ActionData[key].susAction);
+    if (isNaN(action) || action == null) {
+      localStorage.setItem(ActionData[key].susAction, 0);
+    }else{
+      uploadUserPoint(email, ActionData[key].susAction, parseInt(localStorage.getItem(ActionData[key].susAction)))
+    }
+    total += parseInt(localStorage.getItem(ActionData[key].susAction));
+  }
+  localStorage.setItem('total', total);
 }
+
+
+// Loop over every element in ActionData, adding the save point values earn from each
+// for(const key in ActionData) {
+//   total += parseInt(localStorage.getItem(ActionData[key].susAction));
+// }
 // Save the total point value in local storage (to be accessed elsewhere when we need to display total)
-localStorage.setItem('total', total);
+// localStorage.setItem('total', total);
+
+// Initialize total points variable
+// TODO: I want this to update without us having to manually add every sus action. Change to a function somehow
+// var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
+// + parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
+// + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
+// + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
+// + parseInt(localStorage.getItem('ecoClean'));
+
+// // Initialize total points variable
+// // TODO: I want this to update without us having to manually add every sus action.
+// var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
+// + parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
+// + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
+// + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
+// + parseInt(localStorage.getItem('ecoClean'));
+
 
 // The following commented out code didn't work, but I want to keep the record of it for now
 // to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)
@@ -86,7 +105,26 @@ Modal.setAppElement("#root");
 // Text to display on the homepage
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const authContext = useContext(AuthUserContext);
+
+  getUser(authContext.email).onSnapshot(docSnapshot => {
+      if (docSnapshot.exists) {
+        assignData(docSnapshot.data())
+      } else {
+        createUser(authContext.email);
+        initPoints(authContext.email);
+        uploadUserTotalPoint(authContext.email, total);
+      }
+    }, err => {
+    console.log(`Encountered error: ${err}`);
+  }).then(() => {
+    console.log(localStorage.getItem("total"))
+  })
+  
   var message = [];
+  total = localStorage.getItem("total")
+
 
   return (
     <div className="base-container">
