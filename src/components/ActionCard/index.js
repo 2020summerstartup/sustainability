@@ -92,7 +92,7 @@ const ActionCard = () => {
 
     console.log(actionData[`${actionId}`]);
     const { title, points, susAction } = actionData[`${actionId}`];
-    const currSusAction = `${susAction}`;
+    const currSusAction = `${susAction}`; // I think this is just the same as susAction? TODO: Figure this out
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
