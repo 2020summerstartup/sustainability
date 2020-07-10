@@ -67,7 +67,7 @@ export const TotalPoints = React.memo(function GalaxyCard() {
         <Box py={3} px={2} className={styles.content}>
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoSubtitle>You have earned</InfoSubtitle>
-            <InfoTitle>{ localStorage.getItem("waterBottle") } Points</InfoTitle>
+            <InfoTitle>{ localStorage.getItem("total") } Points</InfoTitle>
             <InfoCaption>Way to go!</InfoCaption>
           </Info>
         </Box>
