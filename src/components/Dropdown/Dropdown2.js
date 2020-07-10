@@ -120,7 +120,7 @@
 // // export { Dropdown2 };
 
   //     "&:hover": {
-  //       borderColor: state.isFocused ? "#00bfa6" : "#00bfa6",
+  //       borderColor: state.isFocused ? "#24a113" : "#24a113",
   //     },
   //   }),
   // };
