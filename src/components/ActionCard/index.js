@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { Fragment, useState } from "react";
-=======
-import React, { useState, useContext} from "react";
->>>>>>> 45225df9ec3890d046177000078e9e4dc15dc1a6
+import React, { Fragment, useState, useContext } from "react";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -90,24 +86,6 @@ const ActionCard = ({ action }, actionId) => {
   // const { title, points, susAction } = actionData[actionId];
   // const currSusAction = susAction;
 
-<<<<<<< HEAD
-  // let path = window.location.pathname;
-
-  const keyPerAction = [
-    { id: "1" },
-    { id: "2" },
-    { id: "3" },
-    { id: "4" },
-    { id: "5" },
-    { id: "6" },
-    { id: "7" },
-    { id: "8" },
-    { id: "9" },
-  ];
-
-  const handleExpandClick = (i) => {
-    setExpandedId(expandedId === i ? -1 : i);
-=======
   const authContext = useContext(AuthUserContext);
 
   const getActionCard = (actionId) => {
@@ -193,7 +171,6 @@ const ActionCard = ({ action }, actionId) => {
         </Card>
       </Grid>
     );
->>>>>>> 45225df9ec3890d046177000078e9e4dc15dc1a6
   };
 
   // const increment = (action) => {
@@ -261,138 +238,4 @@ const ActionCard = ({ action }, actionId) => {
   );
 };
 
-<<<<<<< HEAD
 export default ActionCard;
-
-///////////////////////
-// const ActionCard = () => {
-//   const classes = useStyles();
-//   const [expanded, setExpanded] = useState(false);
-//   const [actionData, setActionData] = useState(ActionData);
-//   const [filter, setFilter] = useState("");
-
-//   const handleSearchChange = (e) => {
-//     setFilter(e.target.value);
-//   };
-
-//   const getActionCard = (actionId) => {
-
-//     console.log(actionData[`${actionId}`]);
-//     const { title, points, susAction } = actionData[`${actionId}`];
-//     const currSusAction = `${susAction}`;
-
-//     const handleExpandClick = () => {
-//       setExpanded(!expanded);
-//     };
-
-//     const increment = () => {
-//       // add specified number of points to the saved point total
-//       localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
-//       window.location.reload(true); // Reload window when value changes
-//     };
-
-//     return (
-//       <Grid item xs={12} md={6} lg={4} key={actionId}>
-//         <Card className={classes.root}>
-//           <CardHeader
-//             className={classes.cardContent}
-//             // avatar={
-//             //   <Avatar aria-label="recipe" className={classes.avatar}>
-//             //     R
-//             //   </Avatar>
-//             // }
-//             action={
-//               <IconButton
-//                 onClick = {increment}
-//                 aria-label="settings" title='Complete this sustainable action!' >
-//                 <AddCircleIcon fontSize="large" />
-//               </IconButton>
-//             }
-//             title={`${title}`}
-//             //subheader={`${points}`}
-//             subheader = {'Earn '.concat(`${points}`, " Points!")}
-//           />
-//           {/* <CardContent>
-//         <Typography variant="body2" color="textSecondary" component="p">
-//           This impressive paella is a perfect party dish and a fun meal to cook
-//           together with your guests. Add 1 cup of frozen peas along with the
-//           mussels, if you like.
-//         </Typography>
-//       </CardContent> */}
-//           <CardActions disableSpacing className={classes.cardActions}>
-//             <IconButton aria-label="add to favorites" title ='Add to favorites'>
-//               <FavoriteIcon />
-//             </IconButton>
-//             <IconButton
-//               className={clsx(classes.expand, {
-//                 [classes.expandOpen]: expanded,
-//               })}
-//               onClick={handleExpandClick}
-//               aria-expanded={expanded}
-//               aria-label="show more"
-//               title = 'Learn more'
-//             >
-//               <ExpandMoreIcon />
-//             </IconButton>
-//           </CardActions>
-//           <Collapse in={expanded} timeout="auto" unmountOnExit>
-//             <CardContent>
-//               <CardMedia
-//                 className={classes.media}
-//                 image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQglBrvos1eYpEK-0d41uUgv_tmIgENlB_-GQ&usqp=CAU"
-//                 title="Recycle water bottle image"
-//               />
-//               <Typography paragraph>Impact:</Typography>
-//               <Typography paragraph>
-//                 Plastic water bottles are becoming a growing segment of the
-//                 municipal solid waste stream in the United States. The American
-//                 Chemistry Council estimates that the average consumer uses 166
-//                 plastic water bottles each year and that 2.5 million plastic
-//                 bottles are thrown away every hour. While plastic water bottles
-//                 offer convenience, they also create unnecessary waste in
-//                 landfills. By recycling your plastic water bottles, you can
-//                 positively impact the environment in several ways.
-//               </Typography>
-//             </CardContent>
-//           </Collapse>
-//         </Card>
-//       </Grid>
-//     );
-//   };
-
-//   return (
-//     <>
-//       <Toolbar>
-//         <div className={classes.searchContainer}>
-//           <Grid container spacing={1} alignItems="flex-end">
-//             <Grid item>
-//               <SearchIcon className={classes.searchIcon} />
-//             </Grid>
-//             <Grid item>
-//               <TextField
-//                 onChange={handleSearchChange}
-//                 className={classes.searchInput}
-//                 label="Search Actions"
-//                 variant="standard"
-//                 color="primary"
-//                 InputProps={{ disableUnderline: true }}
-//               />
-//             </Grid>
-//           </Grid>
-//         </div>
-//       </Toolbar>
-//       <Grid container spacing={3} className={classes.actionContainer}>
-//         {Object.keys(actionData).map(
-//           (actionId) =>
-//             actionData[actionId].title.toLowerCase().includes(filter.toLowerCase()) &&
-//             getActionCard(actionId)
-//         )}
-//       </Grid>
-//     </>
-//   );
-// };
-
-// export default ActionCard;
-=======
-export default ActionCard;
->>>>>>> 45225df9ec3890d046177000078e9e4dc15dc1a6
