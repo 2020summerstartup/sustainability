@@ -4,32 +4,17 @@ import { withFirebase } from '../Firebase';
 import { AuthUserContext, withAuthorization } from "../Session";
 
 const CompetePage = () => (
-  // constructor(props) {
-  //   super(props);
- 
-  //   this.state = {
-  //     loading: false,
-  //     users: {},
-  //   };
-  // }
- 
-  // render() {
     <div>
     <AuthUserContext>
     {(authUser) => (
       <div class="base-container">
-
-  
         <h1>Competition! Yay!<span role="img" aria-label="Trophy">🏆</span></h1>
         <center>New competitions coming soon...</center>
-  
-        </div>
+      </div>
     )}
     </AuthUserContext>
- 
   </div>
 );
-// }
 
 const condition = (authUser) => !!authUser;
 
