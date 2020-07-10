@@ -118,8 +118,6 @@ function HomePage() {
       }
     }, err => {
     console.log(`Encountered error: ${err}`);
-  }).then(() => {
-    console.log(localStorage.getItem("total"))
   })
   
   var message = [];
