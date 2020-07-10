@@ -21,12 +21,11 @@ const config = {
   measurementId: "G-682PQBF33P"
 };
 
-
-
+app.initializeApp(config);
+const firestore = app.firestore()
 
 class Firebase {
   constructor() {
-    app.initializeApp(config);
 
     this.auth = app.auth();
     this.db = app.database();
@@ -61,5 +60,38 @@ class Firebase {
   // export const auth = firebase.auth();
   // export const firestore = firebase.firestore();
 export default Firebase;
+
+export const createUser = (userEmail) => {
+  return firestore.collection('users').doc(userEmail)
+      .set({
+          created: app.firestore.FieldValue.serverTimestamp(),
+          createdBy: userEmail,
+          total: 0,
+          points: {
+              "waterBottle": 0,
+              "cmontWalk": 0,
+              "reuseStraw": 0,
+              "reuseBag": 0,
+              "frmersMarket": 0,
+              "rebrewTea": 0,
+              "noFoodWaste": 0,
+              "meatlessMon": 0,
+              "ecoClean": 0,
+          },
+      });
+};
+
+export const getUser = (userEmail) => {
+  return firestore.collection('users').doc(userEmail)
+}
+
+export const updateUser = (userEmail, userAction, actionPoint) => {
+  console.log('updating...')
+  return firestore.collection('users').doc(userEmail).update({
+    ['points.' + userAction]: app.firestore.FieldValue.increment(actionPoint),
+    total: app.firestore.FieldValue.increment(actionPoint),
+  })
+}
+
 
 // export { Axios, db }

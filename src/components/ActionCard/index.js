@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -20,6 +20,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData";
+import {updateUser} from "../Firebase"
+import { AuthUserContext} from "../Session";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,6 +86,8 @@ const ActionCard = () => {
     setFilter(e.target.value);
   };
 
+  const authContext = useContext(AuthUserContext);
+
   const getActionCard = (actionId) => {
 
     console.log(actionData[`${actionId}`]);
@@ -97,7 +101,7 @@ const ActionCard = () => {
     const increment = () => {
       // add specified number of points to the saved point total
       localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
-      window.location.reload(true); // Reload window when value changes
+      updateUser(authContext.email, susAction, points).then(() => {window.location.reload(true)})
     };
 
     return (
