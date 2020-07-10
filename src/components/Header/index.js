@@ -31,7 +31,7 @@ const Header = ({ firebase }) => {
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" className={classes.title} noWrap>
             Sustainability Competition
-            <EcoIcon className={classes.leaf} /> {/* I removed "fontSize="medium"" from here because it threw a warning and didn't change the font size */}
+            <EcoIcon fontSize="medium" className={classes.leaf} />
           </Typography>
         </Toolbar>
       </AppBar>

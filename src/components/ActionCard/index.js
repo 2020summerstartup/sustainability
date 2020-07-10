@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 const ActionCard = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const [actionData] = useState(ActionData);
+  const [actionData, setActionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
 
   const handleSearchChange = (e) => {
@@ -89,8 +89,8 @@ const ActionCard = () => {
   const authContext = useContext(AuthUserContext);
 
   const getActionCard = (actionId) => {
-    // Commented following line out because it spammed console, feel free to add it back in
-    //console.log(actionData[`${actionId}`]);
+
+    console.log(actionData[`${actionId}`]);
     const { title, points, susAction } = actionData[`${actionId}`];
     const currSusAction = `${susAction}`;
 

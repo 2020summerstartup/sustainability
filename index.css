@@ -76,7 +76,7 @@ input {
 
 input:focus {
     outline: none;
-    /* box-shadow: 0px 0px 12px 0.8px var(--theme); */
+    box-shadow: 0px 0px 12px 0.8px var(--theme);
 }
 
 .button {

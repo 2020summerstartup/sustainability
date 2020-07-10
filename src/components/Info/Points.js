@@ -32,7 +32,6 @@ const points = {
   padding: "1.5rem",
   borderRadius: "10px",
   margin: "0 1.5rem",
-  maxWidth: "35rem",
 };
 
 export default Points;

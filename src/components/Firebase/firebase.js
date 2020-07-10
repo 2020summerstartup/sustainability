@@ -2,8 +2,6 @@ import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
 import 'firebase/database';
-import * as firebase from 'firebase';
-
 // import Axios from 'axios'
 
 // import firebase from 'firebase/app';
@@ -62,11 +60,9 @@ class Firebase {
   // export const auth = firebase.auth();
   // export const firestore = firebase.firestore();
 export default Firebase;
-export { Firebase };
-export { db };
-
 
 export const createUser = (userEmail) => {
+  console.log("creating...")
   return firestore.collection('users').doc(userEmail)
       .set({
           created: app.firestore.FieldValue.serverTimestamp(),
