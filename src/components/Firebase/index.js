@@ -1,7 +1,9 @@
 import FirebaseContext, { withFirebase } from './context';
 import Firebase from './firebase';
+
 import * as firebase from 'firebase';
 import {createUser, getUser, updateUser} from './firebase';
+
  
 export default Firebase;
 

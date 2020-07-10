@@ -23,6 +23,12 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- A little help for the Netlify post-processing bots -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -36,5 +42,38 @@
     -->
     <!-- Trying to add a new font to the app. -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+
+<script src="../src/components/Firebase/firebase"></script>
+<script src="../src/components/SignUp"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBzlwDriPb6sKitZ3b9gnX9n6NOMbkCi9s",
+    authDomain: "sustainabilitycompetition.firebaseapp.com",
+    databaseURL: "https://sustainabilitycompetition.firebaseio.com",
+    projectId: "sustainabilitycompetition",
+    storageBucket: "sustainabilitycompetition.appspot.com",
+    messagingSenderId: "72202621299",
+    appId: "1:72202621299:web:d8d210e7b9cb4765dcb506",
+    measurementId: "G-682PQBF33P"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  // Make firestore referncing easier
+  const db = firebase.firestore();
+
+
+</script>
   </body>
 </html>

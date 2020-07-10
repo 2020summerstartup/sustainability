@@ -103,7 +103,7 @@ function Dropdown2() {
       />
       <br />
       <b>Your dorm: { localStorage.getItem('selectedDorm') }</b>
-      <h1></h1>
+      <h1> </h1>
     </div>
   );
 }
