@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, assignData } from "react";
 import ActionCard from "../ActionCard";
 import ActionData from "../ActionData";
 
@@ -9,6 +9,8 @@ import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../Session";
 import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
+
+
 
 const CustomToast = ({ closeToast }) => {
   return (

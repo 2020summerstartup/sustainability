@@ -153,7 +153,7 @@ const ActionCard = () => {
 
     console.log(actionData[`${actionId}`]);
     const { title, points, susAction } = actionData[`${actionId}`];
-    //const currSusAction = `${susAction}`; // Turns out currSusAction is the same as susAction, so I've removed it. (Feel free to delete this entire line when you see it.)
+    const currSusAction = `${susAction}`; // Turns out currSusAction is the same as susAction, so I've removed it. (Feel free to delete this entire line when you see it.)
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
