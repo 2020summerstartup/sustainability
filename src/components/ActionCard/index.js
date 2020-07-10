@@ -23,6 +23,7 @@ import ActionData from "../ActionData";
 import {updateUserPoint} from "../Firebase"
 import { AuthUserContext} from "../Session";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
@@ -76,6 +77,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// componentDidMount() {
+//   const itemCards = firebase.database().ref('itemCards');
+//   itemCards.on('value', (snapshot) => {
+//     let itemCards = snapshot.val();
+//     let newState = [];
+//     for (let itemCard in itemWords) {
+//       newState.push({
+//       id: snap.key,
+//       title: snap.val().title,
+//       points: snap.val().points,
+//       susAction: snap.val().susAction
+//       });
+
+//     }
+//     this.setState({
+//       words: newState
+//     });
+//   });
+// }
+
+// componentWillMount(){
+//   console.log(this.app.database().ref().child('itemCards'))
+//   const currentCards = this.state.itemCards;
+//   this.database.on('child_added', snap => {
+//     currentCards.push({
+//       id: snap.key,
+//       title: snap.val().title,
+//       points: snap.val().points,
+//       susAction: snap.val().susAction,
+//     });
+
+//   }
+// }
+
+
 const ActionCard = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -86,13 +122,38 @@ const ActionCard = () => {
     setFilter(e.target.value);
   };
 
+
+//   const toFirstCharUppercase = (name) =>
+//   name.charAt(0).toUpperCase() + name.slice(1);
+
+  // useEffect( () => {
+  //   const itemRef = firebase.database().ref('itemCards');
+  //   itemRef.on('value', (snapshot) => {
+  //     let itemCards = snapshot.val();
+  //     let newState = [];
+  //     for (let itemCard in itemCards) {
+  //       newState.push({
+  //       id: itemCard,
+  //       title: itemCards[itemCard].title,
+  //       points: itemCards[itemCard].title,
+  //       susAction: itemCards[itemCard].susAction
+  //       });
+  
+  //     }
+  //     this.setState({
+  //       words: newState
+  //     });
+  //   });
+  // })
+
   const authContext = useContext(AuthUserContext);
+
 
   const getActionCard = (actionId) => {
 
     console.log(actionData[`${actionId}`]);
     const { title, points, susAction } = actionData[`${actionId}`];
-    const currSusAction = `${susAction}`;
+    const currSusAction = `${susAction}`; // I think this is just the same as susAction? TODO: Figure this out
 
     const handleExpandClick = () => {
       setExpanded(!expanded);

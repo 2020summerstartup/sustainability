@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import ActionCard from "../ActionCard";
 import ActionData from "../ActionData";
 
@@ -28,6 +28,7 @@ const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
+
 var total = 0;
 
 // Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
@@ -44,7 +45,6 @@ function initPoints(email) {
     }
     total += parseInt(localStorage.getItem(ActionData[key].susAction));
   }
-  console.log(total)
   localStorage.setItem('total', total);
 }
 
@@ -72,6 +72,7 @@ function initPoints(email) {
 // + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
 // + parseInt(localStorage.getItem('ecoClean'));
 
+
 // The following commented out code didn't work, but I want to keep the record of it for now
 // to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)
 // // If the counter changes (i.e. if the buzz or undo button is pressed), call refreshPage function
@@ -97,19 +98,14 @@ function initPoints(email) {
 //   // update at 2:43: I think the issue is that the function isn't actually running. Which I guess kind of makes
 //   // sense because this entire file runs once and then it stops until reload. So i probably have to move all of this
 //   // code into counter or something.
-function assignData(data){
-  localStorage.setItem("total", data.total)
-  const points = data.points
-  for (const [key, value] of Object.entries(points)) {
-    localStorage.setItem(key, value)
-  }
-}
+// }
 
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
 // Text to display on the homepage
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const authContext = useContext(AuthUserContext);
 
   getUser(authContext.email).onSnapshot(docSnapshot => {
@@ -128,6 +124,7 @@ function HomePage() {
   
   var message = [];
   total = localStorage.getItem("total")
+
 
   return (
     <div className="base-container">
