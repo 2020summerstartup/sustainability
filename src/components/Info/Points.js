@@ -27,7 +27,8 @@ export class Points extends Component {
 }
 
 const points = {
-  background: "#00bf96",
+  // I grabbed the background color from the monochrome spread here: https://www.colorhexa.com/24a113
+  background: "#29b816",
   color: "white",
   padding: "1.5rem",
   borderRadius: "10px",

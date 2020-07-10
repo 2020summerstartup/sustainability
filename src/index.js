@@ -12,7 +12,7 @@ import Firebase, { FirebaseContext } from "./components/Firebase";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#00bfa6",
+      main: "#24a113",
     },
     // secondary: {
     //   main: "#0044ff",
