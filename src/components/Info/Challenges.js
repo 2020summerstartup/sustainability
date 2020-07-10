@@ -27,7 +27,8 @@ export class Challenges extends Component {
 }
 
 const challenges = {
-  background: "#00bfb6",
+  // I grabbed the background color from the monochrome spread here: https://www.colorhexa.com/24a113
+  background: "#1f8a10",
   color: "white",
   padding: "1.5rem",
   borderRadius: "10px",
