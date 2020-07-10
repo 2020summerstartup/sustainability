@@ -1,5 +1,7 @@
 import React from 'react';
 import points from "../../img/points.svg";
+// import getPoints from "./Account";
+
 
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';

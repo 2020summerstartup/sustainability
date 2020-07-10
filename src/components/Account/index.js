@@ -8,7 +8,7 @@ import React from "react";
 // import Tabs from '@material-ui/core/Tabs';
 
 import SignOutButton from "../SignOut";
-
+// import { db } from "..,Firebase/firebase.js";
 // import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 
@@ -79,6 +79,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
+
+// export function getPoints() {
+// db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//         .get().addOnCompleteListener(task -> {
+//     if(task.isSuccessful() && task.getResult() != null){
+//         String points = task.getResult().getNumber("points);
+       
+//         //other stuff
+//     }else{
+//         //deal with error
+//     }
+//     return points;
+// })
+// };
 
 function AccountPage() {
    
