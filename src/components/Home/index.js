@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
 import ActionCard from "../ActionCard";
 import ActionData from "../ActionData";
 
@@ -9,7 +10,8 @@ import Modal from "react-modal";
 import Confetti from "react-confetti";
 
 
-import { withAuthorization } from "../Session";
+import { AuthUserContext, withAuthorization } from "../Session";
+import {getUser} from "../Firebase";
 
 const CustomToast = ({ closeToast }) => {
   return (
@@ -44,15 +46,16 @@ for(const key in ActionData) {
   initPoints(ActionData[key].susAction);
 }
 
+
 // Init the total variable
-var total = 0;
+// var total = 0;
 
 // Loop over every element in ActionData, adding the save point values earn from each
-for(const key in ActionData) {
-  total += parseInt(localStorage.getItem(ActionData[key].susAction));
-}
+// for(const key in ActionData) {
+//   total += parseInt(localStorage.getItem(ActionData[key].susAction));
+// }
 // Save the total point value in local storage (to be accessed elsewhere when we need to display total)
-localStorage.setItem('total', total);
+// localStorage.setItem('total', total);
 
 // The following commented out code didn't work, but I want to keep the record of it for now
 // to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)
@@ -79,13 +82,30 @@ localStorage.setItem('total', total);
 //   // update at 2:43: I think the issue is that the function isn't actually running. Which I guess kind of makes
 //   // sense because this entire file runs once and then it stops until reload. So i probably have to move all of this
 //   // code into counter or something.
-// }
+function assignData(data){
+  localStorage.setItem("total", data.total)
+  const points = data.points
+  for (const [key, value] of Object.entries(points)) {
+    localStorage.setItem(key, value)
+  }
+}
 
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
 // Text to display on the homepage
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const authContext = useContext(AuthUserContext);
+
+  getUser(authContext.email).onSnapshot(docSnapshot => {
+    assignData(docSnapshot.data());
+  }, err => {
+    console.log(`Encountered error: ${err}`);
+  });
+  
+  var total = localStorage.getItem("total")
+
   var message = [];
 
   return (
@@ -148,9 +168,43 @@ function HomePage() {
           <button onClick={() => setModalIsOpen(false)} className="button">
             Close
           </button>
-        </div>
-      </Modal>
-      <ActionCard />
+        </h3>
+        <button onClick={() => setModalIsOpen(true)} className="button">
+          Check Your Progress
+        </button>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          style={{
+            overlay: {
+              // backgroundColor: 'papayawhip'
+            },
+            content: {
+              color: "var(--theme)",
+              overflow: "hidden",
+            },
+          }}
+        >
+          <Confetti
+            width={1500}
+            numberOfPieces={2000}
+            recycle={false}
+            opacity={0.7}
+            // colors={["grey", "white", "green", "black"]}
+          />
+          <h2>Your Progress: </h2>
+          <p>Points for Recycling Water Bottle: </p>
+          <p>Points for Walking to the Village: </p>
+          <h3>Total Points: </h3>
+          <h1></h1>
+          <div>
+            <button onClick={() => setModalIsOpen(false)} className="button">
+              Close
+            </button>
+          </div>
+        </Modal>
+        <ActionCard />
+      </div>
     </div>
   );
 }

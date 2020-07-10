@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./index.css";
 
-import { withFirebase } from "../Firebase";
+import { withFirebase, createUser } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
@@ -48,6 +48,8 @@ class SignUpFormBase extends Component {
 
   onSubmit = (event) => {
     const { username, email, passwordOne, dorm } = this.state;
+
+    createUser(email);
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne, dorm)
