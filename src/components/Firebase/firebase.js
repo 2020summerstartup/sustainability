@@ -10,6 +10,10 @@ import 'firebase/database';
 
 // };
 
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");  
+
 const config = {
   apiKey: "AIzaSyBzlwDriPb6sKitZ3b9gnX9n6NOMbkCi9s",
   authDomain: "sustainabilitycompetition.firebaseapp.com",
@@ -45,6 +49,9 @@ class Firebase {
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password);
 
+
+  
+
   // *** User API ***
  
   user = uid => this.db.ref(`users/${uid}`);
@@ -54,6 +61,35 @@ class Firebase {
   
   }
 
+
+  // var db = firebase.firestore();
+
+  // db.collection("people").add({
+  //   first: "Kobe",
+  //   last: "Rico",
+  //   born: 2000
+  // })
+ 
+  // .then(function(docRef) {
+  //     console.log("Document written with ID: ", docRef.id);
+  // })
+  // .catch(function(error) {
+  //     console.error("Error adding document: ", error);
+  // });
+
+  // // Add a second document with a generated ID.
+  // db.collection("people").add({
+  //   first: "Alan",
+  //   middle: "Mathison",
+  //   last: "Turing",
+  //   born: 1912
+  // })
+  // .then(function(docRef) {
+  //   console.log("Document written with ID: ", docRef.id);
+  // })
+  // .catch(function(error) {
+  //   console.error("Error adding document: ", error);
+  // });
   // firebase.initializeApp(firebaseConfig);
 
   // const db = firebase.firestore();
