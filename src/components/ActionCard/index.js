@@ -19,7 +19,7 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
-import ActionData from "../ActionData";
+import ActionData from "../ActionData/index.json";
 import { updateUser } from "../Firebase";
 import { AuthUserContext } from "../Session";
 
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ActionCard = ({ action }, actionId) => {
+const ActionCard = () => {
   const classes = useStyles();
   const [expandedId, setExpandedId] = React.useState(-1);
   // const [actionData, setActionData] = useState(ActionData);
@@ -87,23 +87,12 @@ const ActionCard = ({ action }, actionId) => {
   // const { title, points, susAction } = actionData[actionId];
   // const currSusAction = susAction;
 
-  const keyPerAction = [
-    { id: "1" },
-    { id: "2" },
-    { id: "3" },
-    { id: "4" },
-    { id: "5" },
-    { id: "6" },
-    { id: "7" },
-    { id: "8" },
-    { id: "9" },
-  ];
 
   const handleExpandClick = (i) => {
     setExpandedId(expandedId === i ? -1 : i);
   };
 
-  // const authContext = useContext(AuthUserContext);
+  const authContext = useContext(AuthUserContext);
 
   // const getActionCard = (actionId) => {
   //   // Commented following line out because it spammed console, feel free to add it back in
@@ -119,26 +108,34 @@ const ActionCard = ({ action }, actionId) => {
   //   };
   // };
 
+    // KEEP THIS!!! UPDATED VERSION
+    const increment = (action) => {
+      // add specified number of points to the saved point total
+      localStorage.setItem(action.susAction, parseInt(localStorage.getItem(action.susAction))+parseInt(action.points));
+      // updateUser(authContext.email, action.susAction, action.points).then(() => 
+      // window.location.reload(true)
+    };
+
   return (
     <Fragment>
       <Grid container spacing={3} className={classes.actionContainer}>
-        {keyPerAction.map((action, i) => (
+        {ActionData.map((action, i) => (
           <Grid item xs={12} md={6} lg={4}>
             <Card className={classes.root} key={action.id}>
               <CardHeader
                 className={classes.cardContent}
                 action={
                   <IconButton
-                    // onClick={increment(action)}
+                    onClick={increment(action)}
                     aria-label="settings"
                     title="Complete this sustainable action!"
                   >
                     <AddCircleIcon fontSize="large" />
                   </IconButton>
                 }
-                title={ActionData[action.id].title}
+                title={action.title}
                 subheader={"Earn ".concat(
-                  ActionData[action.id].points,
+                  action.points,
                   " Points!"
                 )}
               />
@@ -158,12 +155,12 @@ const ActionCard = ({ action }, actionId) => {
                 <CardContent>
                   <CardMedia
                     className={classes.media}
-                    image={ActionData[action.id].image}
-                    title={ActionData[action.id].title}
+                    image={action.image}
+                    title={action.title}
                   />
                   <Typography variant="h4">Impact:</Typography>
                   <Typography variant="body">
-                    {ActionData[action.id].impact}
+                    {action.impact}
                   </Typography>
                 </CardContent>
               </Collapse>

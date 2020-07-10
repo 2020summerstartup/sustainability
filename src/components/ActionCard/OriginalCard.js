@@ -86,7 +86,7 @@ const ActionCard = () => {
 
   const getActionCard = (actionId) => {
 
-    console.log(actionData[`${actionId}`]);
+    // console.log(actionData[`${actionId}`]);
     const { title, points, susAction } = actionData[`${actionId}`];
     const currSusAction = `${susAction}`;
 
