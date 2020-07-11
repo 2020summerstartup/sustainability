@@ -99,7 +99,7 @@ main {
 }
 
 .fa-secondary {
-  color: #00b7a0;
+  color: var(--theme);
 }
 
 .fa-primary,
