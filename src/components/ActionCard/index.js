@@ -5,7 +5,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-// import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -126,7 +125,7 @@ const ActionCard = () => {
                 className={classes.searchInput}
                 label="Search Actions"
                 variant="standard"
-                color="primary"
+                borderColor="primary"
                 InputProps={{ disableUnderline: true }}
               />
             </Grid>
@@ -138,7 +137,7 @@ const ActionCard = () => {
           (action, i) =>
             action.title.toLowerCase().includes(filter.toLowerCase()) && (
               <Grid item xs={12} md={6} lg={4}>
-                <Card className={classes.root} key={action.id}>
+                <Card className={classes.root} key={action.title}>
                   <CardHeader
                     className={classes.cardContent}
                     action={
