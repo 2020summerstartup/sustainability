@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
+// Override regular table cells in material ui
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.primary.main,
@@ -18,6 +19,7 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
+// Override regular table rows in material ui
 const StyledTableRow = withStyles((theme) => ({
   root: {
     "&:nth-of-type(odd)": {
@@ -30,6 +32,7 @@ function createData(ranking, dorm, points) {
   return { ranking, dorm, points };
 }
 
+// Hard coded data for now, later will retrieve from Firebase
 const rows = [
   createData(1, "Case", 500),
   createData(2, "Drinkward", 400),
@@ -38,6 +41,7 @@ const rows = [
   createData(5, "North", 300),
 ];
 
+// Regular CSS styles
 const useStyles = makeStyles({
   tableContainer: {
     maxWidth: 600,
