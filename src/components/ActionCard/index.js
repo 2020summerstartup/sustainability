@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useContext } from "react";
+import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -157,9 +158,13 @@ const ActionCard = () => {
                       <FavoriteIcon />
                     </IconButton>
                     <IconButton
+                    className={clsx(classes.expand, {
+                      [classes.expandOpen]: !expandedId,
+                    })}
                       onClick={() => handleExpandClick(i)}
                       aria-expanded={expandedId === i}
-                      aria-label="show more"
+                      aria-label="Show More"
+                      title = 'Learn more'
                     >
                       <ExpandMoreIcon />
                     </IconButton>
