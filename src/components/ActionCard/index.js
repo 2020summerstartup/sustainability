@@ -5,7 +5,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-// import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -80,24 +79,17 @@ const ActionCard = () => {
   const [expandedId, setExpandedId] = React.useState(-1);
   // const [actionData, setActionData] = useState(ActionData);
   // const [actionData] = useState(ActionData);
-  // const [filter, setFilter] = useState("");
-
-  // console.log(actionData[actionId]);
-  // const { title, points, susAction } = actionData[actionId];
-  // const currSusAction = susAction;
-
+  const [filter, setFilter] = useState("");
 
   const handleExpandClick = (i) => {
     setExpandedId(expandedId === i ? -1 : i);
   };
 
-  const authContext = useContext(AuthUserContext);
+  const handleSearchChange = (e) => {
+    setFilter(e.target.value);
+  };
 
-  // const getActionCard = (actionId) => {
-  //   // Commented following line out because it spammed console, feel free to add it back in
-  //   console.log(actionData[`${actionId}`]);
-  //   const { title, points, susAction } = actionData[`${actionId}`];
-  //   const currSusAction = `${susAction}`;
+  const authContext = useContext(AuthUserContext);
 
   // KEEP THIS!!! UPDATED VERSION
   //   const increment = () => {
@@ -107,70 +99,89 @@ const ActionCard = () => {
   //   };
   // };
 
-    // KEEP THIS!!! UPDATED VERSION
-    const increment = (action) => {
-      // add specified number of points to the saved point total
-      localStorage.setItem(action.susAction, parseInt(localStorage.getItem(action.susAction))+parseInt(action.points));
-      // updateUser(authContext.email, action.susAction, action.points).then(() => 
-      // window.location.reload(true)
-      // console.log(action.susAction, action.points)
-    };
+  // KEEP THIS!!! UPDATED VERSION
+  const increment = (action) => {
+    // add specified number of points to the saved point total
+    localStorage.setItem(
+      action.susAction,
+      parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
+    );
+    // updateUser(authContext.email, action.susAction, action.points).then(() =>
+    // window.location.reload(true)
+    // console.log(action.susAction, action.points)
+  };
 
   return (
     <Fragment>
-      <Grid container spacing={3} className={classes.actionContainer}>
-        {ActionData.map((action, i) => (
-          <Grid item xs={12} md={6} lg={4}>
-            <Card className={classes.root} key={action.id}>
-              <CardHeader
-                className={classes.cardContent}
-                action={
-                  <IconButton
-                    onClick={increment(action)}
-                    aria-label="settings"
-                    title="Complete this sustainable action!"
-                  >
-                    <AddCircleIcon fontSize="large" />
-                  </IconButton>
-                }
-                title={action.title}
-                subheader={"Earn ".concat(
-                  action.points,
-                  " Points!"
-                )}
+      <Toolbar>
+        <div className={classes.searchContainer}>
+          <Grid container spacing={1} alignItems="flex-end">
+            <Grid item>
+              <SearchIcon className={classes.searchIcon} />
+            </Grid>
+            <Grid item>
+              <TextField
+                onChange={handleSearchChange}
+                className={classes.searchInput}
+                label="Search Actions"
+                variant="standard"
+                borderColor="primary"
+                InputProps={{ disableUnderline: true }}
               />
-              <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
-                </IconButton>
-                <IconButton
-                  onClick={() => handleExpandClick(i)}
-                  aria-expanded={expandedId === i}
-                  aria-label="show more"
-                >
-                  <ExpandMoreIcon />
-                </IconButton>
-              </CardActions>
-              <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
-                <CardContent>
-                  <CardMedia
-                    className={classes.media}
-                    image={action.image}
-                    title={action.title}
-                  />
-                  <Typography variant="h4">Impact:</Typography>
-                  <Typography variant="body">
-                    {action.impact}
-                  </Typography>
-                </CardContent>
-              </Collapse>
-            </Card>
+            </Grid>
           </Grid>
-        ))}
+        </div>
+      </Toolbar>
+      <Grid container spacing={3} className={classes.actionContainer}>
+        {ActionData.map(
+          (action, i) =>
+            action.title.toLowerCase().includes(filter.toLowerCase()) && (
+              <Grid item xs={12} md={6} lg={4}>
+                <Card className={classes.root} key={action.title}>
+                  <CardHeader
+                    className={classes.cardContent}
+                    action={
+                      <IconButton
+                        onClick={increment(action)}
+                        aria-label="settings"
+                        title="Complete this sustainable action!"
+                      >
+                        <AddCircleIcon fontSize="large" />
+                      </IconButton>
+                    }
+                    title={action.title}
+                    subheader={"Earn ".concat(action.points, " Points!")}
+                  />
+                  <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites">
+                      <FavoriteIcon />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => handleExpandClick(i)}
+                      aria-expanded={expandedId === i}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </IconButton>
+                  </CardActions>
+                  <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <CardMedia
+                        className={classes.media}
+                        image={action.image}
+                        title={action.title}
+                      />
+                      <Typography variant="h4">Impact:</Typography>
+                      <Typography variant="body">{action.impact}</Typography>
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
+            )
+        )}
       </Grid>
     </Fragment>
   );
 };
 
 export default ActionCard;
-
