@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import points from "../../img/points.svg";
 // import getPoints from "./Account";
-
+import { AuthUserContext, withAuthorization } from "../Session";
+import { getUser } from "../Firebase";
 
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
@@ -47,7 +48,13 @@ const useStyles = makeStyles(() => ({
 export const TotalPoints = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: 'top' });
   const styles = useStyles();
+
+
+
   return (
+    <div>
+    <AuthUserContext.Consumer>
+      {(authUser) => (
     <>
       <NoSsr>
         <GoogleFontLoader
@@ -68,13 +75,16 @@ export const TotalPoints = React.memo(function GalaxyCard() {
         />
         <Box py={3} px={2} className={styles.content}>
           <Info useStyles={useGalaxyInfoStyles}>
-            <InfoSubtitle>You have earned</InfoSubtitle>
+            <InfoSubtitle>You have earned  {getUser.points} </InfoSubtitle>
             <InfoTitle>{ localStorage.getItem("waterBottle") } Points</InfoTitle>
             <InfoCaption>Way to go!</InfoCaption>
           </Info>
         </Box>
       </Card>
     </>
+     )}
+     </AuthUserContext.Consumer>
+   </div>
   );
 });
 export default TotalPoints
