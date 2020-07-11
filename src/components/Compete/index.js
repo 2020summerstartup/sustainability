@@ -5,6 +5,7 @@ import { AuthUserContext, withAuthorization } from "../Session";
 
 import Leaderboard from "../Leaderboard";
 import Leaderboard2 from "../Leaderboard/Leaderboard2";
+import Leaderboard3 from "../Leaderboard/Leaderboard3";
 
 const CompetePage = () => (
   <div>
@@ -23,6 +24,7 @@ const CompetePage = () => (
           <p>See your dorm's ranking below! :)</p>
           <Leaderboard />
           <Leaderboard2 />
+          <Leaderboard3 />
         </div>
       )}
     </AuthUserContext>

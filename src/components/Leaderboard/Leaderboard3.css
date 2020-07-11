@@ -1,0 +1,211 @@
+div.scroller {
+	height: 100%;
+	overflow: auto;
+}
+div#app {
+	margin: 2rem 0;
+}
+.leaderboard {
+	margin: 0 auto;
+	width: 30rem;
+	/* background: linear-gradient(#555, #222); */
+	border-radius: 12px;
+	perspective: 400px;
+	transform-style: preserve-3d;
+	box-shadow: 0 7px 20px #242424;
+}
+.leaderboard h1 {
+	margin: 0;
+	text-align: center;
+	background: linear-gradient(#393939, #373737);
+	font-size: 1.5rem;
+	color: #e1e1e1;
+	padding: 1rem;
+	border-radius: 10px 10px 0 0;
+}
+.leaderboard ol {
+	padding: 0;
+	margin: 0;
+	counter-reset: leaderboard;
+	transform-style: preserve-3d;
+}
+.leaderboard ol li {
+	position: relative;
+	font-size: 1.25rem;
+	padding: 1.25rem 0.625rem 1.25rem 1.5rem;
+	cursor: pointer;
+	transform: translateZ(0) scale(1, 1);
+	transition: box-shadow .2s ease-in-out;
+	transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+	transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+	transform-style: preserve-3d;
+	box-shadow: 0 0 0.5rem 1px rgba(0, 0, 0, 0.15);
+}
+.leaderboard ol li::before, .leaderboard ol li::after {
+	opacity: 0;
+	transition: 0.2s ease-in-out;
+	content: '';
+	position: absolute;
+	z-index: 1;
+	background: linear-gradient(#111, #444);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.leaderboard ol li::before {
+	transform-origin: center left;
+	transform: rotateY(90deg);
+}
+.leaderboard ol li::after {
+	transform-origin: center right;
+	transform: rotateY(-90deg);
+}
+.leaderboard ol li mark {
+	counter-increment: leaderboard;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 1.25rem 0 1rem 6.75rem;
+	margin: 0;
+	background: none;
+	color: #fff;
+	width: 3rem;
+	height: 3rem;
+}
+.leaderboard ol li mark::before {
+	content: counter(leaderboard);
+	position: absolute;
+	top: 1.25rem;
+	left: 1.25rem;
+	width: 1.25rem;
+	height: 1.75rem;
+	font-size: 0.875rem;
+	line-height: 1.75rem;
+	color: #ddd;
+	background: rgba(0, 0, 0, 0.2);
+	border-radius: 1.25rem;
+	text-align: center;
+}
+/* first place */
+.leaderboard ol li:nth-child(1) mark::before {
+	background: rgba(204, 170,  102, 0.8);
+	font-weight: bold;
+	color: #fff;
+}
+/* second place */
+.leaderboard ol li:nth-child(2) mark::before {
+	background: #a6a6a6;
+	background: rgba(255, 255, 255, 0.4);
+	font-weight: bold;
+	color: #fff;
+}
+.leaderboard ol li:nth-child(3) mark::before {
+	background: rgba(0, 0, 0, 0.35);
+	font-weight: bold;
+}
+.leaderboard ol li small {
+	position: relative;
+	display: block;
+	text-align: right;
+	color: #ddd;
+}
+.leaderboard ol li small::after {
+	content: ' points';
+}
+.leaderboard ol li img {
+	position: absolute;
+	left: 3.5rem;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+	width: 2.5rem;
+	height: 2.5rem;
+	object-fit: cover;
+	border-radius: 50%;
+	box-shadow: 0 0 2px 0 #000;
+	background: #444 
+}
+.leaderboard ol li:nth-child(1) {
+	background: #606060;
+}
+.leaderboard ol li:nth-child(2) {
+	background: #5b5b5b;
+}
+.leaderboard ol li:nth-child(3) {
+	background: #565656;
+}
+.leaderboard ol li:nth-child(4) {
+	background: #515151;
+}
+.leaderboard ol li:nth-child(5) {
+	background: #4c4c4c;
+}
+.leaderboard ol li:nth-child(6) {
+	background: #474747;
+}
+.leaderboard ol li:nth-child(7) {
+	background: #424242;
+}
+.leaderboard ol li:nth-child(8) {
+	background: #3d3d3d;
+}
+.leaderboard ol li:nth-child(9) {
+	background: #383838;
+}
+.leaderboard ol li:nth-child(10) {
+	background: #333;
+}
+.leaderboard ol li:last-child {
+	border-radius: 0 0 10px 10px;
+}
+
+.leaderboard ol li:last-child::before, .leaderboard ol li:last-child::after {
+	border-radius: 0 0 10px 10px;
+}
+.leaderboard ol li:hover {
+	transform: translateZ(15px);
+	transition: box-shadow .2s ease-in-out;
+	transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+	transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+.leaderboard ol li:hover::before, .leaderboard ol li:hover::after {
+	opacity: 1;
+}
+.leaderboard ol li:hover:nth-child(1) {
+	box-shadow: 10px 0 -7px rgba(0, 0, 0, 0.1);
+}
+.leaderboard ol li:hover:nth-child(2) {
+	box-shadow: 9px 0 -7px rgba(0, 0, 0, 0.1);
+}
+.leaderboard ol li:hover:nth-child(3) {
+	box-shadow: 8px 0 -7px rgba(0, 0, 0, 0.1);
+}
+.leaderboard ol li:hover:nth-child(7) {
+	box-shadow: 7px 0 -7px rgba(0, 0, 0, 0.1);
+}
+.leaderboard ol li:hover:nth-child(5) {
+	box-shadow: 6px 0 -7px rgba(0, 0, 0, 0.1);
+}
+.leaderboard ol li:hover:nth-child(6) {
+	box-shadow: -6px 0 -7px rgba(0, 0, 0, 0.1);
+}
+.leaderboard ol li:hover:nth-child(7) {
+	box-shadow: -7px 0 -7px rgba(0, 0, 0, 0.1);
+}
+.leaderboard ol li:hover:nth-child(8) {
+	box-shadow: -8px 0 -7px rgba(0, 0, 0, 0.1);
+}
+.leaderboard ol li:hover:nth-child(9) {
+	box-shadow: -9px 0 -7px rgba(0, 0, 0, 0.1);
+}
+.leaderboard ol li:hover:nth-child(10) {
+	box-shadow: -10px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+@media only screen and (max-width: 600px) {
+    .leaderboard {
+        width: 90%;
+    }
+  }
