@@ -18,6 +18,15 @@ const theme = createMuiTheme({
     //   main: "#0044ff",
     // },
   },
+  overrides: {
+    MuiIconButton: {
+      root: {
+        "&:hover": {
+          backgroundColor: "transparent",
+        },
+      },
+    },
+  },
 });
 
 ReactDOM.render(

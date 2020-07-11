@@ -144,6 +144,8 @@ const ActionCard = () => {
                     action={
                       <IconButton
                         onClick={increment(action)}
+                        // Finally found how to get ride of random old green from click and hover!
+                        style={{ backgroundColor: "transparent" }}
                         aria-label="settings"
                         title="Complete this sustainable action!"
                       >
@@ -154,17 +156,21 @@ const ActionCard = () => {
                     subheader={"Earn ".concat(action.points, " Points!")}
                   />
                   <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
+                    <IconButton
+                      aria-label="add to favorites"
+                      style={{ backgroundColor: "transparent" }}
+                    >
                       <FavoriteIcon />
                     </IconButton>
                     <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: !expandedId,
-                    })}
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: !expandedId,
+                      })}
                       onClick={() => handleExpandClick(i)}
+                      style={{ backgroundColor: "transparent" }}
                       aria-expanded={expandedId === i}
                       aria-label="Show More"
-                      title = 'Learn more'
+                      title="Learn more"
                     >
                       <ExpandMoreIcon />
                     </IconButton>
