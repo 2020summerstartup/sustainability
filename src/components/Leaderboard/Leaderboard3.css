@@ -8,7 +8,7 @@ div#app {
 .leaderboard {
 	margin: 0 auto;
 	width: 30rem;
-	/* background: linear-gradient(#555, #222); */
+	background: linear-gradient(#555, #222);
 	border-radius: 12px;
 	perspective: 400px;
 	transform-style: preserve-3d;
