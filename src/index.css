@@ -38,6 +38,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: auto;
   overflow-x: hidden;
 }
 
@@ -105,3 +106,16 @@ body {
 .subheading {
   font-weight: 400;
 }
+
+/* Better native app experience  */
+@media (max-width: 991px) {
+  body {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+  *::-webkit-scrollbar {
+    width: 0px;
+   }
+}
+

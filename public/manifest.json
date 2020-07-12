@@ -3,9 +3,14 @@
   "name": "Green Team",
   "icons": [
     {
-      "src": "/images/greenteam.png",
-      "sizes": "792x792",
-      "type": "image/png"
+      "src": "/images/greenteam-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/greenteam-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
