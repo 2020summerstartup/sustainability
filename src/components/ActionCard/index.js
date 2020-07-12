@@ -24,7 +24,7 @@ import { AuthUserContext } from "../Session";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 280,
+    minWidth: "280",
     backgroundColor: "var(--text-secondary)",
   },
   searchContainer: {
@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: fade(theme.palette.common.white, 0.15),
     paddingLeft: "20px",
     paddingRight: "20px",
-    marginTop: "5px",
-    marginBottom: "5px",
+    marginTop: "1rem",
+    marginBottom: "0.5rem",
   },
   searchIcon: {
     alignSelf: "flex-end",
@@ -41,8 +41,10 @@ const useStyles = makeStyles((theme) => ({
   },
   searchInput: {
     width: "15rem",
-    margin: "0.5rem",
-    marginTop: "0",
+    // marginBottom: "-8px !important",
+    paddingBottom: "0",
+    underline: "0px !important",
+    // borderBottom: "#24a113"
   },
   actionContainer: {
     paddingTop: "1rem",
@@ -73,6 +75,14 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     paddingTop: "0",
   },
+  // underline: {
+  //   "&&&:before": {
+  //     borderBottom: `1px solid var(--theme)`
+  //   },
+  //   "&&:after": {
+  //     borderBottom: `1px solid var(--theme)`
+  //   }
+  // },
 }));
 
 const ActionCard = () => {
@@ -126,8 +136,8 @@ const ActionCard = () => {
                 className={classes.searchInput}
                 label="Search Actions"
                 variant="standard"
-                borderColor="primary"
                 InputProps={{ disableUnderline: true }}
+                InputProps={{classes:{underline: classes.underline}}}
               />
             </Grid>
           </Grid>
