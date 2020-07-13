@@ -34,7 +34,8 @@ const INITIAL_STATE = {
     passwordOne: "",
     passwordTwo: "",
     dorm: "",
-    image: null
+    image: null,
+    points: 0,
   },
 
   
@@ -49,7 +50,7 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne, dorm, image } = this.state;
+    const { username, email, passwordOne, dorm, image, points } = this.state;
     // const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
     // uploadTask.on('state_changed', () => {

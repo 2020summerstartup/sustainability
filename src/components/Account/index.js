@@ -120,6 +120,7 @@ function AccountPage() {
                   aria-label="scrollable force tabs example"
                   centered="true"
                 >
+
                   <Tab
                     label="Your Points"
                     icon={<PersonPinIcon />}
