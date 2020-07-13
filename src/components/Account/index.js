@@ -19,6 +19,7 @@ import DormCard from "./dorm.js";
 import FaveCard from "./fave.js";
 import SettingsPage from "../Setting";
 
+
 // import SignOutButton from "../SignOut";
 import { AuthUserContext, withAuthorization } from "../Session";
 import PropTypes from "prop-types";
@@ -145,7 +146,7 @@ function AccountPage() {
                     {...a11yProps(2)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  <Tab label=<SignOutButton /> {...a11yProps(3)} />
+                 
                 </Tabs>
               </AppBar>
               <TabPanel value={value} index={0}>
@@ -163,6 +164,9 @@ function AccountPage() {
               {/* <TabPanel value={value} index={3}>
                 Item Five
               </TabPanel> */}
+            </div>
+            <div class="bottom">
+              <SignOutButton />
             </div>
           </div>
         )}
