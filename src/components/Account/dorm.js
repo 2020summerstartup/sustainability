@@ -1,7 +1,7 @@
 import React from 'react';
-import points from "../../img/points.svg";
+// import points from "../../img/points.svg";
 import dorm from "../../img/dorm.svg";
-import { AuthUserContext, withAuthorization } from "../Session";
+import { AuthUserContext } from "../Session";
 
 
 import GoogleFontLoader from 'react-google-font-loader';

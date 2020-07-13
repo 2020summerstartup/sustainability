@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import points from "../../img/points.svg";
 // import getPoints from "./Account";
 import { AuthUserContext, withAuthorization } from "../Session";
-import { getUser } from "../Firebase";
 import pointsForAccount from "./points.js";
 
 import GoogleFontLoader from 'react-google-font-loader';
@@ -21,7 +20,6 @@ import {
 import { useGalaxyInfoStyles } from '@mui-treasury/styles/info/galaxy';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 
-import { AuthUserContext} from "../Session";
 import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
 import {initPoints, assignData} from "../Home"
 

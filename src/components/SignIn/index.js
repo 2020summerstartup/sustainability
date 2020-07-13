@@ -6,7 +6,7 @@ import "firebase/auth";
 
 import { SignUpLink } from "../SignUp";
 import { PasswordForgetLink } from "../PasswordForget";
-import { withFirebase, createUser, getUser } from "../Firebase";
+import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
