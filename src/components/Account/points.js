@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import points from "../../img/points.svg";
 // import getPoints from "./Account";
 import { AuthUserContext, withAuthorization } from "../Session";
-import { getUser } from "../Firebase";
 import pointsForAccount from "./points.js";
 
 import GoogleFontLoader from 'react-google-font-loader';
