@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext }from 'react';
 import points from "../../img/points.svg";
 
 import GoogleFontLoader from 'react-google-font-loader';
@@ -15,6 +15,10 @@ import {
 } from '@mui-treasury/components/info';
 import { useGalaxyInfoStyles } from '@mui-treasury/styles/info/galaxy';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
+
+import { AuthUserContext} from "../Session";
+import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
+import {initPoints, assignData} from "../Home"
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -45,6 +49,17 @@ const useStyles = makeStyles(() => ({
 export const TotalPoints = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: 'top' });
   const styles = useStyles();
+  const authContext = useContext(AuthUserContext)
+
+  getUser(authContext.email).onSnapshot(docSnapshot => {
+    if (docSnapshot.exists) {
+      assignData(docSnapshot.data())
+    } else {
+      alert("Sorry You don't have any data yet, please go to Home page");
+    }
+  }, err => {
+  console.log(`Encountered error: ${err}`);
+})
   return (
     <>
       <NoSsr>
@@ -67,7 +82,7 @@ export const TotalPoints = React.memo(function GalaxyCard() {
         <Box py={3} px={2} className={styles.content}>
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoSubtitle>You have earned</InfoSubtitle>
-            <InfoTitle>{ localStorage.getItem("waterBottle") } Points</InfoTitle>
+            <InfoTitle>{ localStorage.getItem("total") } Points</InfoTitle>
             <InfoCaption>Way to go!</InfoCaption>
           </Info>
         </Box>

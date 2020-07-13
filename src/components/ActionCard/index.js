@@ -161,7 +161,7 @@ const ActionCard = () => {
 
     const increment = () => {
       // add specified number of points to the saved point total
-      localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
+      localStorage.setItem(susAction, parseInt(localStorage.getItem(susAction))+parseInt(`${points}`));
       localStorage.setItem("total", parseInt(localStorage.getItem("total"))+parseInt(`${points}`));
       // window.location.reload(true)
       updateUserPoint(authContext.email, susAction, points).then(() => {window.location.reload(true)})

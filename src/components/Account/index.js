@@ -118,7 +118,7 @@ function AccountPage() {
                   <Tab label="Your Favorites" icon={<FavoriteIcon />} {...a11yProps(1)} />
                   <Tab label="Your Dorm" icon={<HouseIcon />} {...a11yProps(2)} />
                   <Tab label="Settings" icon={<SettingsIcon />} {...a11yProps(3)} />
-                  <Tab label= <SignOutButton /> {...a11yProps(4)} />
+                  <Tab label="Sign Out" icon={<SignOutButton />} {...a11yProps(4)} />
                   
                 </Tabs>
               </AppBar>

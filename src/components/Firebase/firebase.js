@@ -33,6 +33,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.database();
+    this.firestore = app.firestore()
   }
 
   // *** Auth API ***
@@ -49,7 +50,6 @@ class Firebase {
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password);
 
-
   
 
   // *** User API ***
@@ -57,8 +57,6 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
  
   users = () => this.db.ref('users');
-
-  
   }
 
 
@@ -124,7 +122,6 @@ export const getUser = (userEmail) => {
 
 // this method is called to increase points
 export const updateUserPoint = (userEmail, userAction, actionPoint) => {
-  console.log('updating...')
   return firestore.collection('users').doc(userEmail).update({
     ['points.' + userAction]: app.firestore.FieldValue.increment(actionPoint),
     total: app.firestore.FieldValue.increment(actionPoint),
@@ -133,7 +130,6 @@ export const updateUserPoint = (userEmail, userAction, actionPoint) => {
 
 // this method is called to synchronize local storage with Firestore
 export const uploadUserPoint = (userEmail, userAction, actionPoint) => {
-  console.log("uploading...")
   return firestore.collection('users').doc(userEmail).update({
     ['points.' + userAction]: actionPoint,
   })

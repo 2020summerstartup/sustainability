@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ActionCard from "../ActionCard";
 import ActionData from "../ActionData";
 
@@ -28,24 +28,32 @@ const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
-
-var total = 0;
+var total;
 
 // Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
 // do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
 // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
 // Initialize point counter to 0 instead of NaN or null
 function initPoints(email) {
+  total = 0;
   for(const key in ActionData) {
     var action = localStorage.getItem(ActionData[key].susAction);
     if (isNaN(action) || action == null) {
       localStorage.setItem(ActionData[key].susAction, 0);
     }else{
       uploadUserPoint(email, ActionData[key].susAction, parseInt(localStorage.getItem(ActionData[key].susAction)))
+      total += parseInt(localStorage.getItem(ActionData[key].susAction))
     }
-    total += parseInt(localStorage.getItem(ActionData[key].susAction));
   }
   localStorage.setItem('total', total);
+}
+
+function assignData(data){
+  localStorage.setItem("total", data.total)
+  const points = data.points
+  for (const [key, value] of Object.entries(points)) {
+    localStorage.setItem(key, value)
+  }
 }
 
 
@@ -118,8 +126,6 @@ function HomePage() {
       }
     }, err => {
     console.log(`Encountered error: ${err}`);
-  }).then(() => {
-    console.log(localStorage.getItem("total"))
   })
   
   var message = [];
@@ -201,3 +207,4 @@ function HomePage() {
 const condition = (authUser) => !!authUser;
 
 export default withAuthorization(condition)(HomePage);
+export {initPoints, assignData}
