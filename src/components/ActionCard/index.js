@@ -129,12 +129,13 @@ const ActionCard = () => {
 
     // updateUser(authContext.email, action.susAction, action.points).then(() =>
     // window.location.reload(true)
-    console.log('logged', action.susAction);
+    // console.log(action.susAction, action.points)
   };
 
   const favAction = (action) => {
     // Toggle favorited (so favorite if unfavorited and vice versa)
     favorited = !favorited;
+    console.log("favorited?", favorited, action.susAction);
     // Save the value (right now just one instead of one per action) in local storage
     localStorage.setItem('favorited', favorited);
     if (favorited) {
@@ -148,6 +149,9 @@ const ActionCard = () => {
 //     window.location.reload(true)
 //     // console.log(action.susAction, action.points)
 
+  };
+
+  const favNotify = (action) => {
   };
 
   return (
@@ -181,7 +185,7 @@ const ActionCard = () => {
                     className={classes.cardContent}
                     action={
                       <IconButton
-                      onClick={() => increment(action)}
+                        onClick={increment(action)}
                         // Finally found how to get ride of random old green from click and hover!
                         style={{ backgroundColor: "transparent" }}
                         aria-label="settings"
