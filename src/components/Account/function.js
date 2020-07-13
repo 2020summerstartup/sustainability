@@ -1,16 +1,16 @@
 import React from 'react';
 
-function points() {
-    if ({auth.actionPoints} === 0) {
-        return "Go to the home page and log points!";
+function pointsForAccount() {
+    if ({localStorage.getItem("total")} === 0) {
+        return <p>"Go to the home page and log points!"</p>
     }
-    else if ({auth.actionPoints} < 100 ) {
-        return "Great start, try to log more actions!";
+    else if ({localStorage.getItem("total")} < 100 ) {
+        return <p>"Great start, try to log more actions!"</p>
     }
     else {
-        return "Way to go, superstar!";
+        return <p>"Way to go, superstar!"</p>;
     }
-    return "Way to go!";
+    // return "Way to go!";
 }
 
-export default points;
+export default pointsForAccount;
