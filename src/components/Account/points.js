@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: '1rem',
     boxShadow: 'none',
     position: 'relative',
-    minWidth: 200,
+    minWidth: 400,
     minHeight: 360,
     '&:after': {
       content: '""',
@@ -77,8 +77,10 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
         <Box py={3} px={2} className={styles.content}>
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoSubtitle>You have earned</InfoSubtitle>
-        <InfoTitle>  { localStorage.getItem("total") } Points</InfoTitle>
-            <InfoCaption> <pointsForAccount /></InfoCaption>
+          <InfoTitle>  { localStorage.getItem("total") } Points</InfoTitle>
+          <InfoCaption> 
+            <p onClick={() => pointsForAccount()} class="btn-text"></p>
+          </InfoCaption>
             
           </Info>
         </Box>

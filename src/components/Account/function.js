@@ -1,6 +1,6 @@
 import React from 'react';
 
-function pointsForAccount() {
+const pointsForAccount = () => {
     if ({localStorage.getItem("total")} === 0) {
         return <p>"Go to the home page and log points!"</p>
     }
