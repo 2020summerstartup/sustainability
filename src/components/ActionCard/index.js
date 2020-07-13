@@ -124,11 +124,11 @@ const ActionCard = () => {
   };
 
   const favAction = () => {
-    // Invert favorited (so favorite if unfavorited and vice versa)
+    // Toggle favorited (so favorite if unfavorited and vice versa)
     favorited = !favorited;
-    console.log('Favorited?', favorited);
+    console.log("favorited?", favorited);
     // Save the value (right now just one instead of one per action) in local storage
-    //localStorage.setItem('favorited', favorited);
+    localStorage.setItem('favorited', favorited);
   };
 
   return (
