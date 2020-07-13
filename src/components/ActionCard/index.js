@@ -128,7 +128,7 @@ const ActionCard = () => {
     favorited = !favorited;
     console.log('Favorited?', favorited);
     // Save the value (right now just one instead of one per action) in local storage
-    localStorage.setItem('favorited', favorited);
+    //localStorage.setItem('favorited', favorited);
   };
 
   return (
