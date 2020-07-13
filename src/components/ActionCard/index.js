@@ -130,6 +130,7 @@ const ActionCard = () => {
     // updateUser(authContext.email, action.susAction, action.points).then(() =>
     // window.location.reload(true)
     // console.log(action.susAction, action.points)
+    console.log(action.susAction, localStorage.getItem(action.susAction));
   };
 
   const favAction = (action) => {
@@ -185,7 +186,7 @@ const ActionCard = () => {
                     className={classes.cardContent}
                     action={
                       <IconButton
-                        onClick={increment(action)}
+                      onClick={() => increment(action)}
                         // Finally found how to get ride of random old green from click and hover!
                         style={{ backgroundColor: "transparent" }}
                         aria-label="settings"
