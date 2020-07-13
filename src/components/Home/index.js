@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import ActionCard from "../ActionCard";
 import ActionData from "../ActionData/OriginalData";
+import HomeTabs from "../HomeTabs";
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
@@ -201,7 +202,10 @@ function HomePage() {
         </div>
       </center>
       </Modal>
-      <ActionCard />
+      <div>
+      < HomeTabs />
+      </div>
+      {/* <ActionCard /> */}
     </div>
   );
 }

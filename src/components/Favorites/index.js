@@ -1,8 +1,6 @@
-import React, { useContext } from 'react';
-import points from "../../img/points.svg";
-// import getPoints from "./Account";
+import React from 'react';
+import favorite from "../../img/favorite.svg";
 import { AuthUserContext, withAuthorization } from "../Session";
-import { getUser } from "../Firebase";
 
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
@@ -24,14 +22,14 @@ const useStyles = makeStyles(() => ({
     borderRadius: '1rem',
     boxShadow: 'none',
     position: 'relative',
-    minWidth: 200,
-    minHeight: 360,
+    minWidth: 500,
+    minHeight: 300,
     '&:after': {
       content: '""',
       display: 'block',
       position: 'absolute',
       width: '100%',
-      height: '64%',
+      height: '100%',
       bottom: 0,
       zIndex: 1,
       background: 'linear-gradient(to top, #000, rgba(0,0,0,0))',
@@ -45,11 +43,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const TotalPointsCard = React.memo(function GalaxyCard() {
+export const FaveCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: 'top' });
   const styles = useStyles();
-
-
 
   return (
     <div>
@@ -69,15 +65,15 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
           classes={mediaStyles}
           image={
            
-            points
+            favorite
  
           }
         />
         <Box py={3} px={2} className={styles.content}>
           <Info useStyles={useGalaxyInfoStyles}>
-            <InfoSubtitle>You have earned</InfoSubtitle>
-            <InfoTitle>{ localStorage.getItem("total") } Points</InfoTitle>
-            <InfoCaption>Way to go!</InfoCaption>
+            <InfoSubtitle>Your faves are here </InfoSubtitle>
+            <InfoTitle>Add more!</InfoTitle>
+            <InfoCaption>Go to actions tab and press the heart to add❤️</InfoCaption>
           </Info>
         </Box>
       </Card>
@@ -87,4 +83,4 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
    </div>
   );
 });
-export default TotalPointsCard;
+export default FaveCard;

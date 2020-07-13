@@ -14,7 +14,7 @@ import PasswordChangeForm from "../PasswordChange";
 
 import Dropdown2 from "../Dropdown";
 import accountImg from "../../img/account.svg";
-import TotalPoints from "./points.js";
+import TotalPointsCard from "./points.js";
 import DormCard from "./dorm.js";
 import FaveCard from "./fave.js";
 import SettingsPage from "../Setting";
@@ -113,11 +113,12 @@ function AccountPage() {
                 <Tabs
                   value={value}
                   onChange={handleChange}
-                  variant="scrollable"
-                  scrollButtons="on"
+                  variant="fullWidth"
+                  scrollButtons="off"
                   indicatorColor="primary"
-                  textColor="primary"
+                  textColor="inherited"
                   aria-label="scrollable force tabs example"
+                  centered="true"
                 >
                   <Tab
                     label="Your Points"
@@ -125,42 +126,42 @@ function AccountPage() {
                     {...a11yProps(0)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  <Tab
+                  {/* <Tab
                     label="Your Favorites"
                     icon={<FavoriteIcon />}
                     {...a11yProps(1)}
                     style={{ backgroundColor: "transparent" }}
-                  />
+                  /> */}
                   <Tab
                     label="Your Dorm"
                     icon={<HouseIcon />}
-                    {...a11yProps(2)}
+                    {...a11yProps(1)}
                     style={{ backgroundColor: "transparent" }}
                   />
                   <Tab
                     label="Settings"
                     icon={<SettingsIcon />}
-                    {...a11yProps(3)}
+                    {...a11yProps(2)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  <Tab label=<SignOutButton /> {...a11yProps(4)} />
+                  <Tab label=<SignOutButton /> {...a11yProps(3)} />
                 </Tabs>
               </AppBar>
               <TabPanel value={value} index={0}>
-                <TotalPoints />
+                <TotalPointsCard />
               </TabPanel>
+              {/* <TabPanel value={value} index={1}>
+                <FaveCard /> */}
+              {/* </TabPanel>  */}
               <TabPanel value={value} index={1}>
-                <FaveCard />
-              </TabPanel>
-              <TabPanel value={value} index={2}>
                 <DormCard />
               </TabPanel>
-              <TabPanel value={value} index={3}>
+              <TabPanel value={value} index={2}>
                 <SettingsPage />
               </TabPanel>
-              <TabPanel value={value} index={4}>
+              {/* <TabPanel value={value} index={3}>
                 Item Five
-              </TabPanel>
+              </TabPanel> */}
             </div>
           </div>
         )}
@@ -264,6 +265,7 @@ function AccountPage() {
 //     </AuthUserContext.Consumer>
 //   </div>
 // );
+
 
 const condition = (authUser) => !!authUser;
 
