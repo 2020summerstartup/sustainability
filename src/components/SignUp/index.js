@@ -21,7 +21,7 @@ const SignUpPage = () => (
   <div className="base-container">
     <h1 className="header">Register</h1>
     <div className="image">
-      <img alt="" src={signupImg} />
+      <img alt="sign up" src={signupImg} />
     </div>
     <SignUpForm />
   </div>

@@ -10,6 +10,8 @@ import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../Session";
 import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
 
+
+
 const CustomToast = ({ closeToast }) => {
   return (
     <div>

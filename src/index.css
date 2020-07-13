@@ -1,16 +1,3 @@
-/* @import "tailwindcss/base";
-
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities"; */
-/* 
-@tailwind base;
-
-@tailwind components;
-
-@tailwind utilities */
-/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> */
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap');
 
 .profile {
@@ -33,11 +20,13 @@
 body {
   margin: 0px 0px;
   padding: 0 0;
+  /* this is the default font for each platform */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: auto;
   overflow-x: hidden;
 }
 
@@ -105,3 +94,16 @@ body {
 .subheading {
   font-weight: 400;
 }
+
+/* Better native app experience  */
+@media (max-width: 991px) {
+  body {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+  *::-webkit-scrollbar {
+    width: 0px;
+   }
+}
+
