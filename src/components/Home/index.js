@@ -111,13 +111,13 @@ function assignData(data){
 //   // code into counter or something.
 // }
 
-function assignData(data){
-  localStorage.setItem("total", data.total)
-  const points = data.points
-  for (const [key, value] of Object.entries(points)) {
-    localStorage.setItem(key, value)
-  }
-}
+// function assignData(data){
+//   localStorage.setItem("total", data.total)
+//   const points = data.points
+//   for (const [key, value] of Object.entries(points)) {
+//     localStorage.setItem(key, value)
+//   }
+// }
 
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
