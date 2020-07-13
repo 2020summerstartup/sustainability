@@ -3,6 +3,7 @@ import points from "../../img/points.svg";
 import dorm from "../../img/dorm.svg";
 import { AuthUserContext, withAuthorization } from "../Session";
 
+
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
 import { makeStyles } from '@material-ui/core/styles';

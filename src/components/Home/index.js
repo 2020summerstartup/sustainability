@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import ActionCard from "../ActionCard";
-import ActionData from "../ActionData";
+import ActionData from "../ActionData/OriginalData";
+import HomeTabs from "../HomeTabs";
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
@@ -9,6 +10,8 @@ import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../Session";
 import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
+
+
 
 const CustomToast = ({ closeToast }) => {
   return (
@@ -108,6 +111,14 @@ function assignData(data){
 //   // code into counter or something.
 // }
 
+function assignData(data){
+  localStorage.setItem("total", data.total)
+  const points = data.points
+  for (const [key, value] of Object.entries(points)) {
+    localStorage.setItem(key, value)
+  }
+}
+
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
 // Text to display on the homepage
@@ -199,7 +210,10 @@ function HomePage() {
         </div>
       </center>
       </Modal>
-      <ActionCard />
+      <div>
+      < HomeTabs />
+      </div>
+      {/* <ActionCard /> */}
     </div>
   );
 }
@@ -207,4 +221,6 @@ function HomePage() {
 const condition = (authUser) => !!authUser;
 
 export default withAuthorization(condition)(HomePage);
+
 export {initPoints, assignData}
+

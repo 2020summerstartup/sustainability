@@ -17,7 +17,7 @@ const SettingsPage = () => (
         <div className="base-container">
           <h1>Your Account: {authUser.email}</h1>
           
-          <SignOutButton className="signout-btn" />
+          {/* <SignOutButton className="signout-btn" /> */}
           <h3>Change your dorm here!</h3>
           <Dropdown2 />
           <div className="image">
