@@ -167,21 +167,6 @@ class SignUpFormBase extends Component {
         <button disabled={isInvalid} type="submit" className="button">
           Sign Up
         </button>
-        <p className="text-center my-3">or</p>
-
-        {/* Sign up with Google Account */}
-        <div class="google-btn">
-          <div onClick={() => signInWithRedirect()} class="google-icon-wrapper">
-            <img
-              alt=""
-              class="google-icon"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            />
-          </div>
-          <p onClick={() => signInWithRedirect()} class="btn-text">
-            <b>Sign up with Google</b>
-          </p>
-        </div>
 
         {error && <p>{error.message}</p>}
       </form>
