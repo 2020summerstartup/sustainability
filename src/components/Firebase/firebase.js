@@ -10,7 +10,7 @@ import 'firebase/database';
 
 // };
 
-const firebase = require("firebase");
+// const firebase = require("firebase"); // Value never used
 // Required for side-effects
 require("firebase/firestore");  
 

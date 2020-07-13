@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState } from "react";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -19,8 +19,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
-import { updateUser } from "../Firebase";
-import { AuthUserContext } from "../Session";
+
+// I pulled these from Home's index.js
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,6 +93,13 @@ const ActionCard = () => {
   // const [actionData, setActionData] = useState(ActionData);
   // const [actionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
+  var favorited = localStorage.getItem('favorited'); // Is the action favorited? Eventually this will need to be loaded from firestore (I assume)
+  if (favorited == null || isNaN(favorited)) {
+    console.log("favorited was null or NaN");
+    favorited = false; // If not initiallized, initialize here
+  }
+  toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
+  // the one Amy wrote so I assume it's necessary here too) -Katie
 
   const handleExpandClick = (i) => {
     setExpandedId(expandedId === i ? -1 : i);
@@ -100,7 +109,6 @@ const ActionCard = () => {
     setFilter(e.target.value);
   };
 
-  const authContext = useContext(AuthUserContext);
 
 
   // KEEP THIS!!! UPDATED VERSION
@@ -118,9 +126,33 @@ const ActionCard = () => {
       action.susAction,
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
     );
-    updateUserPoint(authContext.email, action.susAction, parseInt(action.points)).then(() =>
-    window.location.reload(true)
+
+    // updateUser(authContext.email, action.susAction, action.points).then(() =>
+    // window.location.reload(true)
     // console.log(action.susAction, action.points)
+    console.log(action.susAction, localStorage.getItem(action.susAction));
+  };
+
+  const favAction = (action) => {
+    // Toggle favorited (so favorite if unfavorited and vice versa)
+    favorited = !favorited;
+    console.log("favorited?", favorited, action.susAction);
+    // Save the value (right now just one instead of one per action) in local storage
+    localStorage.setItem('favorited', favorited);
+    if (favorited) {
+      var message = action.title + " added to favorites"
+    } else {
+      var message = action.title + " removed from favorites"
+    }
+    toast(message, { autoClose: 8000 });
+
+//     updateUserPoint(authContext.email, action.susAction, parseInt(action.points)).then(() =>
+//     window.location.reload(true)
+//     // console.log(action.susAction, action.points)
+
+  };
+
+  const favNotify = (action) => {
   };
 
   return (
@@ -154,13 +186,13 @@ const ActionCard = () => {
                     className={classes.cardContent}
                     action={
                       <IconButton
-                        onClick={increment(action)}
+                      onClick={() => increment(action)}
                         // Finally found how to get ride of random old green from click and hover!
                         style={{ backgroundColor: "transparent" }}
                         aria-label="settings"
-                        title="Complete this sustainable action!"
+                        title="Complete this sustainable action"
                       >
-                        <AddCircleIcon fontSize="large" />
+                      <AddCircleIcon fontSize="large" />
                       </IconButton>
                     }
                     title={action.title}
@@ -170,6 +202,9 @@ const ActionCard = () => {
                     <IconButton
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
+                      // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
+                      onClick={() => favAction(action)}
+                      className="favoriteIcon" 
                     >
                       <FavoriteIcon />
                     </IconButton>

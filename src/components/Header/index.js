@@ -31,7 +31,7 @@ const Header = ({ firebase }) => {
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" className={classes.title} noWrap>
             Sustainability Competition
-            <EcoIcon fontSize="medium" className={classes.leaf} />
+            <EcoIcon className={classes.leaf} />
           </Typography>
         </Toolbar>
       </AppBar>
