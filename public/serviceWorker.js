@@ -9,7 +9,7 @@ const assets = [
   // "/src/components/Landing/index.js",
   // "welcome.svg",
   "/src/index.css",
-  "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css",
+  // "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css",
 ];
 
 // cache size limit function
@@ -56,7 +56,7 @@ self.addEventListener('fetch', evt => {
       return cacheRes || fetch(evt.request).then(fetchRes => {
         return caches.open(dynamicCacheName).then(cache => {
           cache.put(evt.request.url, fetchRes.clone());
-          limitCacheSize(dynamicCacheName, 10);
+          limitCacheSize(dynamicCacheName, 5);
           return fetchRes;
         })
       });
