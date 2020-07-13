@@ -91,6 +91,7 @@ const ActionCard = () => {
   // const [actionData, setActionData] = useState(ActionData);
   // const [actionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
+  var favorited = false; // Is the action favorited? Eventually this will need to be loaded from firestore (I assume).
 
   const handleExpandClick = (i) => {
     setExpandedId(expandedId === i ? -1 : i);
@@ -122,9 +123,13 @@ const ActionCard = () => {
     // console.log(action.susAction, action.points)
   };
 
-    const favAction = (input) => {
-      console.log('action will be favorited');
-    };
+  const favAction = () => {
+    // Invert favorited (so favorite if unfavorited and vice versa)
+    favorited = !favorited;
+    console.log('Favorited?', favorited);
+    // Save the value (right now just one instead of one per action) in local storage
+    localStorage.setItem('favorited', favorited);
+  };
 
   return (
     <Fragment>
@@ -161,9 +166,9 @@ const ActionCard = () => {
                         // Finally found how to get ride of random old green from click and hover!
                         style={{ backgroundColor: "transparent" }}
                         aria-label="settings"
-                        title="Complete this sustainable action!"
+                        title="Complete this sustainable action"
                       >
-                        <AddCircleIcon fontSize="large" />
+                      <AddCircleIcon fontSize="large" />
                       </IconButton>
                     }
                     title={action.title}
@@ -174,7 +179,11 @@ const ActionCard = () => {
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
                     >
-                      <FavoriteIcon />
+                      <FavoriteIcon
+                        onClick={
+                          favAction
+                        }
+                      />
                     </IconButton>
                     <IconButton
                       className={clsx(classes.expand, {
