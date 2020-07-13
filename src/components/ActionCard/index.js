@@ -20,6 +20,10 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
 
+// I pulled these from Home's index.js
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: "280",
@@ -94,6 +98,8 @@ const ActionCard = () => {
     console.log("favorited was null or NaN");
     favorited = false; // If not initiallized, initialize here
   }
+  toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
+  // the one Amy wrote so I assume it's necessary here too) -Katie
 
   const handleExpandClick = (i) => {
     setExpandedId(expandedId === i ? -1 : i);
@@ -124,12 +130,21 @@ const ActionCard = () => {
     // console.log(action.susAction, action.points)
   };
 
-  const favAction = () => {
+  const favAction = (action) => {
     // Toggle favorited (so favorite if unfavorited and vice versa)
     favorited = !favorited;
-    console.log("favorited?", favorited);
+    console.log("favorited?", favorited, action.susAction);
     // Save the value (right now just one instead of one per action) in local storage
     localStorage.setItem('favorited', favorited);
+    if (favorited) {
+      var message = action.title + " added to favorites"
+    } else {
+      var message = action.title + " removed from favorites"
+    }
+    toast(message, { autoClose: 8000 });
+  };
+
+  const favNotify = (action) => {
   };
 
   return (
@@ -179,9 +194,8 @@ const ActionCard = () => {
                     <IconButton
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
-                      onClick={
-                        favAction
-                      }
+                      // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
+                      onClick={() => favAction(action)}
                       className="favoriteIcon" 
                     >
                       <FavoriteIcon />
