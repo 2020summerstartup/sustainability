@@ -34,7 +34,8 @@ const INITIAL_STATE = {
     passwordOne: "",
     passwordTwo: "",
     dorm: "",
-    image: null
+    image: null,
+    points: 0,
   },
 
   
@@ -49,7 +50,7 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne, dorm, image } = this.state;
+    const { username, email, passwordOne, dorm, image, points } = this.state;
     // const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
     // uploadTask.on('state_changed', () => {
@@ -60,7 +61,7 @@ class SignUpFormBase extends Component {
     //   })
     // });
 
-    createUser(email);
+    createUser(email, dorm);
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -69,7 +70,6 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email
-         
         });
       })
       .then(() => {
@@ -88,12 +88,13 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const { username, email, dorm, passwordOne, passwordTwo, error } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
+      dorm === "" ||
       username === "";
     // dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
@@ -120,6 +121,17 @@ class SignUpFormBase extends Component {
             onChange={this.onChange}
             type="text"
             placeholder="Email Address"
+          />
+        </div>
+        <div className="form-group">
+          <FontAwesomeIcon icon="user" className="icon" />
+          <input
+            className="input-field"
+            name="dorm"
+            value={dorm}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Res Hall"
           />
         </div>
         <div className="form-group">
@@ -167,21 +179,6 @@ class SignUpFormBase extends Component {
         <button disabled={isInvalid} type="submit" className="button">
           Sign Up
         </button>
-        <p className="text-center my-3">or</p>
-
-        {/* Sign up with Google Account */}
-        <div class="google-btn">
-          <div onClick={() => signInWithRedirect()} class="google-icon-wrapper">
-            <img
-              alt=""
-              class="google-icon"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            />
-          </div>
-          <p onClick={() => signInWithRedirect()} class="btn-text">
-            <b>Sign up with Google</b>
-          </p>
-        </div>
 
         {error && <p>{error.message}</p>}
       </form>
