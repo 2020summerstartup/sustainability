@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState } from "react";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -19,8 +19,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
-import { updateUser } from "../Firebase";
-import { AuthUserContext } from "../Session";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,7 +99,6 @@ const ActionCard = () => {
     setFilter(e.target.value);
   };
 
-  const authContext = useContext(AuthUserContext);
 
   // KEEP THIS!!! UPDATED VERSION
   //   const increment = () => {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Spring } from "react-spring/renderprops";
 
 export default function Rewards() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import favorite from "../../img/favorite.svg";
-import { AuthUserContext, withAuthorization } from "../Session";
+import { AuthUserContext } from "../Session";
 
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
