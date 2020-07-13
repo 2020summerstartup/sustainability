@@ -60,7 +60,7 @@ class SignUpFormBase extends Component {
     //   })
     // });
 
-    createUser(email);
+    createUser(email, dorm);
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -69,7 +69,6 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email
-         
         });
       })
       .then(() => {
@@ -88,12 +87,13 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const { username, email, dorm, passwordOne, passwordTwo, error } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
+      dorm === "" ||
       username === "";
     // dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
@@ -120,6 +120,17 @@ class SignUpFormBase extends Component {
             onChange={this.onChange}
             type="text"
             placeholder="Email Address"
+          />
+        </div>
+        <div className="form-group">
+          <FontAwesomeIcon icon="user" className="icon" />
+          <input
+            className="input-field"
+            name="dorm"
+            value={dorm}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Res Hall"
           />
         </div>
         <div className="form-group">

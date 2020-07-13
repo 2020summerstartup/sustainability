@@ -97,13 +97,14 @@ class Firebase {
   // export const firestore = firebase.firestore();
 export default Firebase;
 
-export const createUser = (userEmail) => {
+export const createUser = (userEmail, dorm) => {
   console.log("creating...")
   return firestore.collection('users').doc(userEmail)
       .set({
           created: app.firestore.FieldValue.serverTimestamp(),
           createdBy: userEmail,
           total: 0,
+          userDorm: dorm,
           points: {
               "waterBottle": 0,
               "cmontWalk": 0,
@@ -117,6 +118,7 @@ export const createUser = (userEmail) => {
           },
       });
 };
+
 
 export const getUser = (userEmail) => {
   return firestore.collection('users').doc(userEmail)
@@ -146,4 +148,3 @@ export const uploadUserTotalPoint = (userEmail, total) =>{
 }
 
 
-// export { Axios, db }
