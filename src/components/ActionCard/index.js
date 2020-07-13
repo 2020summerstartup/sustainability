@@ -89,7 +89,11 @@ const ActionCard = () => {
   // const [actionData, setActionData] = useState(ActionData);
   // const [actionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
-  var favorited = false; // Is the action favorited? Eventually this will need to be loaded from firestore (I assume).
+  var favorited = localStorage.getItem('favorited'); // Is the action favorited? Eventually this will need to be loaded from firestore (I assume)
+  if (favorited == null || isNaN(favorited)) {
+    console.log("favorited was null or NaN");
+    favorited = false; // If not initiallized, initialize here
+  }
 
   const handleExpandClick = (i) => {
     setExpandedId(expandedId === i ? -1 : i);
@@ -175,12 +179,12 @@ const ActionCard = () => {
                     <IconButton
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
+                      onClick={
+                        favAction
+                      }
+                      className="favoriteIcon" 
                     >
-                      <FavoriteIcon
-                        onClick={
-                          favAction
-                        }
-                      />
+                      <FavoriteIcon />
                     </IconButton>
                     <IconButton
                       className={clsx(classes.expand, {
