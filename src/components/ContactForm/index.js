@@ -65,7 +65,10 @@ class ContactForm extends React.Component {
             />
           </p>
           <p>
-            <FontAwesomeIcon icon="envelope" className="contact-icon icon envelope" />
+            <FontAwesomeIcon
+              icon="envelope"
+              className="contact-icon icon envelope"
+            />
             <input
               type="email"
               name="email"
@@ -76,7 +79,10 @@ class ContactForm extends React.Component {
             />
           </p>
           <p>
-          <FontAwesomeIcon icon="comment" className="contact-icon icon comment" />
+            <FontAwesomeIcon
+              icon="comment"
+              className="contact-icon icon comment"
+            />
             <textarea
               name="message"
               placeholder="Your Message"

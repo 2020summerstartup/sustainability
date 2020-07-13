@@ -1,17 +1,32 @@
-import React, { Component } from 'react';
- 
-import { withFirebase } from '../Firebase';
+import React, { Component } from "react";
+
+import { withFirebase } from "../Firebase";
 import { AuthUserContext, withAuthorization } from "../Session";
 
+import Leaderboard from "../Leaderboard";
+import Leaderboard2 from "../Leaderboard/Leaderboard2";
+import Leaderboard3 from "../Leaderboard/Leaderboard3";
+
 const CompetePage = () => (
-    <div>
+  <div>
     <AuthUserContext>
-    {(authUser) => (
-      <div class="base-container">
-        <h1>Competition! Yay!<span role="img" aria-label="Trophy">🏆</span></h1>
-        <center>New competitions coming soon...</center>
-      </div>
-    )}
+      {(authUser) => (
+        <div class="base-container">
+          <h1>
+            Competition! Yay!
+            <span role="img" aria-label="Trophy">
+              🏆
+            </span>
+          </h1>
+          <center>New competitions coming soon...</center>
+          <h1></h1>
+          <h3>Leaderboard</h3>
+          <p>See your dorm's ranking below! :)</p>
+          <Leaderboard />
+          <Leaderboard2 />
+          <Leaderboard3 />
+        </div>
+      )}
     </AuthUserContext>
   </div>
 );

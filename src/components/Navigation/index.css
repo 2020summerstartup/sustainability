@@ -49,6 +49,7 @@ main {
   position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease;
+  z-index: 1;
 }
 
 .navbar-nav {
@@ -98,7 +99,7 @@ main {
 }
 
 .fa-secondary {
-  color: #00b7a0;
+  color: var(--theme);
 }
 
 .fa-primary,
