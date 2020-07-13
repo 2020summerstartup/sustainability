@@ -141,6 +141,7 @@ main {
   position: absolute;
   left: -999px;
   transition: var(--transition-speed);
+  color: var(--text-secondary);
 }
 
 .navbar:hover .logo svg {
@@ -243,13 +244,15 @@ main {
 
   .page-text {
     display: none;
+    /* visibility: hidden; */
   }
 
   .navbar:hover .page-text {
-    /* display: inline; */
+    display: inline;
     color: var(--theme);
-    -webkit-transition: opacity 600ms, visibility 600ms;
-    transition: opacity 600ms, visibility 600ms;
+    visibility: visible;
+    opacity: 1;
+    animation: fade 0.85s;
   }
 
   .navbar:hover .logo svg {
@@ -264,6 +267,7 @@ main {
   .navbar:hover .signout-btn {
     display: inline;
     margin-left: 6rem;
+    animation: fade 5s;
   }
 
   .nav-item:last-child {
@@ -301,5 +305,15 @@ main {
     padding-right: 2rem;
     padding-left: 8.5rem;
     padding-bottom: 2rem;
+  }
+}
+
+@keyframes fade {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
   }
 }
