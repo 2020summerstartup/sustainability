@@ -203,7 +203,9 @@ const ActionCard = () => {
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
                       // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
-                      onClick={() => favAction(action)}
+                      onClick={() =>
+                        favAction(action)
+                      }
                       className="favoriteIcon" 
                     >
                       <FavoriteIcon />

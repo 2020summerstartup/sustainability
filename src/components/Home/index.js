@@ -154,6 +154,7 @@ function HomePage() {
       <button onClick={() => setModalIsOpen(true)} className="button">
         Check Your Progress
       </button>
+      <p></p>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
