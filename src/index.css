@@ -26,7 +26,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-overflow-scrolling: auto;
+  /* -webkit-overflow-scrolling: auto; */
+  overflow-y: scroll;
   overflow-x: hidden;
 }
 
@@ -101,6 +102,8 @@ body {
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
+    /* suppposed to not allow the screen to overscroll on mobile */
+    overscroll-behavior: none;
   }
   *::-webkit-scrollbar {
     width: 0px;

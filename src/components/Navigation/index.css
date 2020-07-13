@@ -246,8 +246,10 @@ main {
   }
 
   .navbar:hover .page-text {
-    display: inline;
+    /* display: inline; */
     color: var(--theme);
+    -webkit-transition: opacity 600ms, visibility 600ms;
+    transition: opacity 600ms, visibility 600ms;
   }
 
   .navbar:hover .logo svg {
@@ -267,7 +269,7 @@ main {
   .nav-item:last-child {
     margin-top: auto;
   }
-  
+
   .non-auth:last-child {
     margin-top: 0;
   }
