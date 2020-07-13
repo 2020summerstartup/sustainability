@@ -105,9 +105,9 @@ function AccountPage() {
     <div>
       <AuthUserContext.Consumer>
         {(authUser) => (
-          <div class="base-container">
-            <div class="profile">Profile</div>
-            <div class="accountName">{authUser.email}'s page!</div>
+          <div className="base-container">
+            <div className="profile">Profile</div>
+            <div className="accountName">{authUser.email}'s page!</div>
             <div className={classes.root}>
               <AppBar position="static" color="default">
                 <Tabs
@@ -169,15 +169,15 @@ function AccountPage() {
   );
 }
 
-// <div class="base-container">
+// <div className="base-container">
 
-//   <div class="wrapper1">
+//   <div className="wrapper1">
 //     Welcome,{authUser.email}!
 // {
 //   /* *insert profile pic* */
 // }
 // </div>
-// <div class="wrapper2">
+// <div className="wrapper2">
 //   <div>
 //     <div>
 //     You've earned
@@ -200,7 +200,7 @@ function AccountPage() {
 //   <div>
 //   <img alt = '' src = {southdorm} />
 //   </div>
-//   <div class="wrapper3">
+//   <div className="wrapper3">
 //   <div>
 //     Account info:
 //   </div>
@@ -216,7 +216,7 @@ function AccountPage() {
 //   </div>
 // </div>
 // {
-//   /* <div class="wrapper3">
+//   /* <div className="wrapper3">
 //             <div>
 //               Account info:
 //             </div>
@@ -251,12 +251,12 @@ function AccountPage() {
           
           <div class = "wrapper">
             
-          <div class="box">box1</div>
-          <div class="box">box2</div>
-          <div class="box">box3</div>
-          <div class="box">box4</div>
+          <div className="box">box1</div>
+          <div className="box">box2</div>
+          <div className="box">box3</div>
+          <div className="box">box4</div>
            */
-// <div class="bottom">
+// <div className="bottom">
 //   <SignOutButton />
 // </div>
 //  </div>
