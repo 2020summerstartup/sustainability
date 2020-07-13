@@ -19,7 +19,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
-import { updateUser } from "../Firebase";
 
 // I pulled these from Home's index.js
 import { toast } from "react-toastify";
@@ -129,8 +128,8 @@ const ActionCard = () => {
     );
 
     // updateUser(authContext.email, action.susAction, action.points).then(() =>
-    // window.location.reload(true))
-    console.log("value", localStorage.getItem(action.susAction))
+    // window.location.reload(true)
+    console.log('logged', action.susAction);
   };
 
   const favAction = (action) => {
