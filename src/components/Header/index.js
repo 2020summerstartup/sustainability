@@ -14,9 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: "white",
-    marginTop: "0.5rem",
-    marginLeft: "0rem",
-    marginBottom: "0.5rem",
+    fontWeight: "bold",
+    margin: "0",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
     },
