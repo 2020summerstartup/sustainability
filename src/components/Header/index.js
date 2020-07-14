@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "../Header.modules.css";
 import { withFirebase } from '../Firebase';
 
 // import material ui
