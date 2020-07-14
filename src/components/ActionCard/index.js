@@ -45,10 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   searchInput: {
     width: "15rem",
-    // marginBottom: "-8px !important",
     paddingBottom: "0",
-    underline: "0px !important",
-    // borderBottom: "#24a113"
   },
   actionContainer: {
     paddingTop: "1rem",
@@ -79,14 +76,32 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     paddingTop: "0",
   },
+  // OMG I finally fixed the underline problem!!!
+  underline: {
+    "&:before": {
+      borderBottom: "2px solid var(--text-primary)",
+      marginBottom: "8px",
+    },
+    "&:hover:not($disabled):not($focused):not($error):before": {
+      borderBottom: "2px solid var(--theme)",
+      marginBottom: "8px",
+    },
+    "&:after": {
+      borderBottom: "2px solid var(--theme)",
+      marginBottom: "8px",
+    }
+  },
+  disabled: {},
+  focused: {},
+  error: {}
   // underline: {
   //   "&&&:before": {
-  //     borderBottom: `1px solid var(--theme)`
+  //     borderBottom: "none"
   //   },
   //   "&&:after": {
-  //     borderBottom: `1px solid var(--theme)`
+  //     borderBottom: "none"
   //   }
-  // },
+  // }
 }));
 
 const ActionCard = () => {
