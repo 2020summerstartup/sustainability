@@ -10,7 +10,7 @@ import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
-import "./Google-btn.css";
+import styles from "../SignIn.modules.css";
 
 // import your fontawesome library
 import "../FontAwesomeIcons";

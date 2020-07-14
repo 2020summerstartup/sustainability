@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./index.css";
+import styles from "../Dropdown.modules.css";
 
 import Select from "react-select";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import styles from "../Settings.module.css";
 
 import SignOutButton from "../SignOut";
 

@@ -1,4 +1,4 @@
-Small screens */
+/*Small screens */
 @media only screen and (max-width: 600px) {
     .signout-btn {
         display: inline;
@@ -14,4 +14,3 @@ Small screens */
     justify-content: center;
     align-self: end;
 }
-
