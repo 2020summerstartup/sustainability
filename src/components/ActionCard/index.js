@@ -76,6 +76,9 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     paddingTop: "0",
   },
+  favoriteIcon: {
+    color: "#DC143C",
+  },
   // OMG I finally fixed the underline problem!!!
   underline: {
     "&:before": {
@@ -94,14 +97,6 @@ const useStyles = makeStyles((theme) => ({
   disabled: {},
   focused: {},
   error: {}
-  // underline: {
-  //   "&&&:before": {
-  //     borderBottom: "none"
-  //   },
-  //   "&&:after": {
-  //     borderBottom: "none"
-  //   }
-  // }
 }));
 
 const ActionCard = () => {
@@ -150,6 +145,7 @@ const ActionCard = () => {
     })
     console.log(action.susAction, localStorage.getItem(action.susAction));
   };
+
   const favAction = (action) => {
     // Toggle favorited (so favorite if unfavorited and vice versa)
     favorited = !favorited;
@@ -161,7 +157,8 @@ const ActionCard = () => {
     } else {
       message = action.title + " removed from favorites"
     }
-    toast(message, { autoClose: 8000 });
+    toast(message, { autoClose: false });
+    // toast(message, { autoClose: 8000 });
 
   };
 
@@ -219,7 +216,8 @@ const ActionCard = () => {
                       onClick={() =>
                         favAction(action)
                       }
-                      className="favoriteIcon" 
+                      // style={{ color: "#DC143C" }}
+                      className={classes.favoriteIcon}
                     >
                       <FavoriteIcon />
                     </IconButton>
