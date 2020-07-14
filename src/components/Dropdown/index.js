@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "../Dropdown.modules.css";
 
 import { AuthUserContext, withAuthorization } from "../Session";
@@ -50,13 +50,13 @@ const dorms = [
 
 function Dropdown2() {
   const [selectedValue, setSelectedValue] = useState(null);
-  const authConext = useContext(AuthUserContext);
+  const authContext = useContext(AuthUserContext);
 
   const handleChange = (obj) => {
     const dorm = obj.label.replace(/"([^"]+)":/g, "$1:")
     setSelectedValue(dorm);
     localStorage.setItem('dorm', dorm);
-    updateUserDorm(authConext.email, dorm);
+    updateUserDorm(authContext.email, dorm);
     // the .replace was supposed to get rid of quotes but it didn't work
   };
   
