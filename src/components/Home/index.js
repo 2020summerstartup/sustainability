@@ -190,6 +190,7 @@ function HomePage() {
           )
         }
         <h2 id='testId'>Your Progress: </h2>
+        {/* Pretty sure the fullowing script is leftover from my testing. Unless you know it's important, feel free to delete! -Katie */}
         <script>
           document.getElementById("testId").innerHTML = "Hello JavaScript!";
         </script>
