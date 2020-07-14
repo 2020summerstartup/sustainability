@@ -1,4 +1,6 @@
 import React, { Fragment, useState, useContext } from "react";
+import "./index.css";
+
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -76,9 +78,6 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     paddingTop: "0",
   },
-  // favoriteIcon: {
-  //   color: "#DC143C",
-  // },
   // OMG I finally fixed the underline problem!!!
   underline: {
     "&:before": {
@@ -103,8 +102,7 @@ const ActionCard = () => {
   const classes = useStyles();
   const [expandedId, setExpandedId] = React.useState(-1);
   const authContext = useContext(AuthUserContext);
-  // const [actionData, setActionData] = useState(ActionData);
-  // const [actionData] = useState(ActionData);
+
   const [filter, setFilter] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
@@ -163,19 +161,14 @@ const ActionCard = () => {
     if (storedFav) {
       var message = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C";
+      toast(message, { autoClose: 5000 });
     } else {
       var message = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c";
+      toast.warn(message, { autoClose: 5000 });
     }
-    toast(message, { autoClose: 4000 });
-    localStorage.setItem(storageName, storedFav); // Save the updated favorite value
+    localStorage.setItem(storageName, storedFav);
   };
-
-  function toggle() {
-    var color = document.getElementById("favoriteIcon");
-    var backColor = color.style.backgroundColor;
-    color.style.backgroundColor = backColor === "black" ? "white" : "black";
-  }
 
   return (
     <Fragment>
