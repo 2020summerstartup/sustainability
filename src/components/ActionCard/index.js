@@ -20,7 +20,7 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
 import { updateUserPoint } from "../Firebase";
-import { AuthUserContext, withAuthorization} from "../Session";
+import { AuthUserContext, withAuthorization } from "../Session";
 
 // I pulled these from Home's index.js
 import { toast } from "react-toastify";
@@ -76,9 +76,9 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     paddingTop: "0",
   },
-  favoriteIcon: {
-    color: "#DC143C",
-  },
+  // favoriteIcon: {
+  //   color: "#DC143C",
+  // },
   // OMG I finally fixed the underline problem!!!
   underline: {
     "&:before": {
@@ -92,21 +92,21 @@ const useStyles = makeStyles((theme) => ({
     "&:after": {
       borderBottom: "2px solid var(--theme)",
       marginBottom: "8px",
-    }
+    },
   },
   disabled: {},
   focused: {},
-  error: {}
+  error: {},
 }));
 
 const ActionCard = () => {
   const classes = useStyles();
   const [expandedId, setExpandedId] = React.useState(-1);
-  const authContext = useContext(AuthUserContext)
+  const authContext = useContext(AuthUserContext);
   // const [actionData, setActionData] = useState(ActionData);
   // const [actionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
-  var favorited = localStorage.getItem('favorited'); // Is the action favorited? Eventually this will need to be loaded from firestore (I assume)
+  var favorited = localStorage.getItem("favorited"); // Is the action favorited? Eventually this will need to be loaded from firestore (I assume)
   if (favorited == null || isNaN(favorited)) {
     console.log("favorited was null or NaN");
     favorited = false; // If not initiallized, initialize here
@@ -121,8 +121,6 @@ const ActionCard = () => {
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
   };
-
-
 
   // KEEP THIS!!! UPDATED VERSION
   //   const increment = () => {
@@ -140,9 +138,13 @@ const ActionCard = () => {
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
     );
 
-    updateUserPoint(authContext.email, action.susAction, parseInt(action.points)).then(() => {
-      window.location.reload(true)
-    })
+    updateUserPoint(
+      authContext.email,
+      action.susAction,
+      parseInt(action.points)
+    ).then(() => {
+      window.location.reload(true);
+    });
     console.log(action.susAction, localStorage.getItem(action.susAction));
   };
 
@@ -151,19 +153,27 @@ const ActionCard = () => {
     favorited = !favorited;
     console.log("favorited?", favorited, action.susAction);
     // Save the value (right now just one instead of one per action) in local storage
-    localStorage.setItem('favorited', favorited);
+    localStorage.setItem("favorited", favorited);
+    // variable for getting color of fav icon
+    var favIconColor = document.getElementById("favoriteIcon");
     if (favorited) {
-      var message = action.title + " added to favorites"
+      var message = action.title + " added to favorites";
+      favIconColor.style.color = "#DC143C";
     } else {
-      message = action.title + " removed from favorites"
+      message = action.title + " removed from favorites";
+      favIconColor.style.color = "#6c6c6c";
     }
     toast(message, { autoClose: false });
     // toast(message, { autoClose: 8000 });
-
   };
 
-  const favNotify = (action) => {
-  };
+  function toggle() {
+    var color = document.getElementById("favoriteIcon");
+    var backColor = color.style.backgroundColor;
+    color.style.backgroundColor = backColor === "black" ? "white" : "black";
+  }
+
+  const favNotify = (action) => {};
 
   return (
     <Fragment>
@@ -180,7 +190,7 @@ const ActionCard = () => {
                 label="Search Actions"
                 variant="standard"
                 InputProps={{ disableUnderline: true }}
-                InputProps={{classes:{underline: classes.underline}}}
+                InputProps={{ classes: { underline: classes.underline } }}
               />
             </Grid>
           </Grid>
@@ -196,13 +206,13 @@ const ActionCard = () => {
                     className={classes.cardContent}
                     action={
                       <IconButton
-                      onClick={() => increment(action)}
+                        onClick={() => increment(action)}
                         // Finally found how to get ride of random old green from click and hover!
                         style={{ backgroundColor: "transparent" }}
                         aria-label="settings"
                         title="Complete this sustainable action"
                       >
-                      <AddCircleIcon fontSize="large" />
+                        <AddCircleIcon fontSize="large" />
                       </IconButton>
                     }
                     title={action.title}
@@ -213,10 +223,8 @@ const ActionCard = () => {
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
                       // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
-                      onClick={() =>
-                        favAction(action)
-                      }
-                      // style={{ color: "#DC143C" }}
+                      onClick={() => favAction(action)}
+                      id="favoriteIcon"
                       className={classes.favoriteIcon}
                     >
                       <FavoriteIcon />
