@@ -1,4 +1,6 @@
 import React, { Fragment, useState, useContext } from "react";
+import "./index.css";
+
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -76,9 +78,6 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     paddingTop: "0",
   },
-  // favoriteIcon: {
-  //   color: "#DC143C",
-  // },
   // OMG I finally fixed the underline problem!!!
   underline: {
     "&:before": {
@@ -103,8 +102,7 @@ const ActionCard = () => {
   const classes = useStyles();
   const [expandedId, setExpandedId] = React.useState(-1);
   const authContext = useContext(AuthUserContext);
-  // const [actionData, setActionData] = useState(ActionData);
-  // const [actionData] = useState(ActionData);
+
   const [filter, setFilter] = useState("");
   var favorited = localStorage.getItem("favorited"); // Is the action favorited? Eventually this will need to be loaded from firestore (I assume)
   if (favorited == null || isNaN(favorited)) {
@@ -157,21 +155,16 @@ const ActionCard = () => {
     // variable for getting color of fav icon
     var favIconColor = document.getElementById("favoriteIcon");
     if (favorited) {
-      var message = action.title + " added to favorites";
+      var message = action.title + " added to favorites!";
       favIconColor.style.color = "#DC143C";
+      toast(message, { autoClose: 5000 });
     } else {
-      message = action.title + " removed from favorites";
+      message = action.title + " removed from favorites!";
       favIconColor.style.color = "#6c6c6c";
+      toast.warn(message, { autoClose: 5000 });
     }
-    toast(message, { autoClose: false });
-    // toast(message, { autoClose: 8000 });
+    
   };
-
-  function toggle() {
-    var color = document.getElementById("favoriteIcon");
-    var backColor = color.style.backgroundColor;
-    color.style.backgroundColor = backColor === "black" ? "white" : "black";
-  }
 
   const favNotify = (action) => {};
 
