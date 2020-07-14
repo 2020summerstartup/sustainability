@@ -1,0 +1,126 @@
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import ChangePage from "../PasswordChange/changePage.js";
+import Dropdown2 from "../Dropdown";
+import styles from "../AccountHeader.modules.css";
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ApartmentIcon from '@material-ui/icons/Apartment';
+import EmailIcon from '@material-ui/icons/Email';
+import { Link } from "react-router-dom";
+
+import SignOutButton from "../SignOut";
+import * as ROUTES from "../../constants/routes";
+import PasswordChange from '../PasswordChange';
+
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
+});
+
+export default function SwipeableTemporaryDrawer() {
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <div
+    //   className={clsx(classes.list, {
+    //     [classes.fullList]: 
+    //     anchor === 'top' || anchor === 'bottom',
+    //   })} 
+    class="settings"
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+      {/* <ListItem button component={Link} to={ROUTES.HOME} className="link-text">
+        <ListItemText primary="Google" />
+   </ListItem> */}
+   <ListItem button component={Link} to={ROUTES.CHANGE} className="link-text">
+       <ListItemIcon>
+            <LockOpenIcon />
+       </ListItemIcon>
+       <ListItemText>
+           CHANGE PASSWORD
+       </ListItemText>
+   </ListItem>
+   <ListItem button component={Link} to={ROUTES.CHANGE} className="link-text">
+     <ListItemIcon>
+       <EmailIcon/>
+     </ListItemIcon>
+       <ListItemText>
+         Your email!
+       </ListItemText>
+   </ListItem>
+
+   <ListItem button component={Link} to={ROUTES.CHANGE} className="link-text">
+   <ListItemIcon>
+        <ApartmentIcon/>
+     </ListItemIcon>
+     <ListItemText >
+       Change your dorm here!
+     </ListItemText>
+     </ListItem>
+
+    <ListItem >
+   <ListItemText>
+     <SignOutButton/>
+   </ListItemText>
+    </ListItem>
+    
+     
+   
+      </List>
+      
+      
+    </div>
+  );
+
+  return (
+    <div align="left">
+       
+        <React.Fragment key={"right"}>
+          
+          <Button onClick={toggleDrawer("right", true)}>{<SettingsIcon/>}</Button>
+         
+          <SwipeableDrawer
+            anchor={"right"}
+            open={state["right"]}
+            onClose={toggleDrawer("right", false)}
+            onOpen={toggleDrawer("right", true)}
+          >
+            {list("right")}
+          </SwipeableDrawer>
+        </React.Fragment>
+      
+    </div>
+  );
+}

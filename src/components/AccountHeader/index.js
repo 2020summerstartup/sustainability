@@ -1,13 +1,13 @@
 import React from "react";
-import styles from "../Header.modules.css";
 import { withFirebase } from '../Firebase';
+
 
 // import material ui
 import { AppBar, Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import EcoIcon from "@material-ui/icons/Eco";
-
+import SwipeableTemporaryDrawer from './settings.js';
 const useStyles = makeStyles((theme) => ({
   header: {
     background: "primary",
@@ -25,20 +25,23 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const Header = ({ firebase }) => {
+const AccountHeader = ({ firebase }) => {
   const classes = useStyles();
   return (
     <>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" className={classes.title} noWrap>
-            Sustainability Competition
+            Yay
             <EcoIcon className={classes.leaf} />
           </Typography>
+          <div class="settings">
+          <SwipeableTemporaryDrawer/>
+          </div>
         </Toolbar>
       </AppBar>
     </>
   );
 };
 
-export default withFirebase(Header);
+export default withFirebase(AccountHeader);
