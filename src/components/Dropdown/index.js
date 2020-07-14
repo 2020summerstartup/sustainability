@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "../Dropdown.modules.css";
 
 import { AuthUserContext, withAuthorization } from "../Session";
