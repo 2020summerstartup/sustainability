@@ -21,12 +21,16 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
-import { updateUserPoint } from "../Firebase";
-import { AuthUserContext, withAuthorization } from "../Session";
+import { updateUserPoint, updateDormPoint, updateUserDorm } from "../Firebase";
+import { AuthUserContext, withAuthorization} from "../Session";
 
 // I pulled these from Home's index.js
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { getUser, assignData } from '../Firebase';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -139,7 +143,29 @@ const ActionCard = () => {
       window.location.reload(true);
     });
     console.log(action.susAction, localStorage.getItem(action.susAction));
+    console.log(authContext)
+    console.log('sus action', parseInt(action.point))
+
+    function assignData(data){
+      localStorage.setItem('dorm', data.userDorm)
+    }
+    console.log('user dorm is ', localStorage.getItem('dorm'))
+  
+
+    getUser(authContext.email).onSnapshot(docSnapshot => {
+      if (docSnapshot.exists) {
+        assignData(docSnapshot.data())
+      } else {
+        console.log('No dorm for user')
+      }
+    }, err => {
+    console.log(`Encountered error: ${err}`);
+  })
+
+  updateDormPoint(localStorage.getItem('dorm'), parseInt(action.points));
+
   };
+
 
   const favAction = (action) => {
     // Get the name and info of the stored action that we're working with
