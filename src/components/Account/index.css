@@ -1,4 +1,4 @@
-/*Small screens */
+/* Small screens */
 @media only screen and (max-width: 600px) {
     .signout-btn {
         display: inline;
@@ -9,7 +9,7 @@
     font-size: 30px;
 }
 
-.bottom {
+.signOutBottom {
     display: grid;
     justify-content: center;
     align-self: end;

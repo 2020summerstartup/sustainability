@@ -167,7 +167,7 @@ function AccountPage() {
                 Item Five
               </TabPanel> */}
             </div>
-            <div class="bottom">
+            <div class="signOutBottom">
               <SignOutButton />
             </div>
           </div>
