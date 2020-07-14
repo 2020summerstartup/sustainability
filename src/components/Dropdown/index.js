@@ -52,9 +52,10 @@ function Dropdown2() {
   const authConext = useContext(AuthUserContext);
 
   const handleChange = (obj) => {
-    setSelectedValue(obj.label.replace(/"([^"]+)":/g, "$1:"));
-    localStorage.setItem('dorm', selectedValue);
-    updateUserDorm(authConext.email, selectedValue);
+    const dorm = obj.label.replace(/"([^"]+)":/g, "$1:")
+    setSelectedValue(dorm);
+    localStorage.setItem('dorm', dorm);
+    updateUserDorm(authConext.email, dorm);
     // the .replace was supposed to get rid of quotes but it didn't work
   };
   
@@ -104,7 +105,6 @@ function Dropdown2() {
       />
       <br />
       <b>Your dorm: { localStorage.getItem('dorm') }</b>
-      <h1></h1>
     </div>
   );
 }

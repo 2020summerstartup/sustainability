@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import ActionCard from "../ActionCard";
+
 import ActionData from "../ActionData/OriginalData";
 import HomeTabs from "../HomeTabs";
 
@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../Session";
-import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
+import {getUser, createUser, uploadUserTotalPoint} from "../Firebase";
 
 
 
@@ -48,7 +48,13 @@ function initPoints(email) {
   localStorage.setItem('total', total);
 }
 
-
+function assignData(data){
+  localStorage.setItem("total", data.total)
+  const points = data.points
+  for (const [key, value] of Object.entries(points)) {
+    localStorage.setItem(key, value)
+  }
+}
 // Loop over every element in ActionData, adding the save point values earn from each
 // for(const key in ActionData) {
 //   total += parseInt(localStorage.getItem(ActionData[key].susAction));
