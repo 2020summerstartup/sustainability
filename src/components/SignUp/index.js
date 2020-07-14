@@ -124,7 +124,7 @@ class SignUpFormBase extends Component {
           />
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon="user" className="icon" />
+          <FontAwesomeIcon icon="home" className="icon" />
           <input
             className="input-field"
             name="dorm"
