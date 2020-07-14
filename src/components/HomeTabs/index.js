@@ -2,8 +2,7 @@ import React from 'react';
 import ActionCard from '../ActionCard';
 // import Favorites from './Favorites';
 import FaveCard from "../Favorites";
-// import actions from "../../img/actions.svg";
-import action from "../Icons/action.ico";
+
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";

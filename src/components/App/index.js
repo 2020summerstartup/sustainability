@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
  
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
@@ -13,17 +13,22 @@ import InfoPage from '../Info';
 import ProfilePage from '../Profile';
 import Header from '../Header';
 import CompetePage from '../Compete';
-import TabPage from '../Tabs';
 import OfflinePage from '../Offline';
+import AccountHeader from '../AccountHeader';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
 const App = () => (
   <Router>
-    
+     <Switch>
+      <Route exact path="/account" component={AccountHeader} />
+      <Route component={Header} />
+    </Switch> 
     <div className="main">
-      <Header />
+    
+    {/* {window.location.pathname !== "/account" ? <Header /> : <AccountHeader /> }  */}
+    
       <Navigation />
  
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
@@ -39,7 +44,6 @@ const App = () => (
       <Route path={ROUTES.INFO} component={InfoPage} />
       <Route path={ROUTES.PROFILE} component={ProfilePage} />
       <Route path={ROUTES.COMPETE} component={CompetePage} />
-      <Route path={ROUTES.TABS} component={TabPage} />
       <Route path={ROUTES.OFFLINE} component={OfflinePage} />
 
     </div>
