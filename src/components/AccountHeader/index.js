@@ -35,7 +35,9 @@ const AccountHeader = ({ firebase }) => {
             Yay
             <EcoIcon className={classes.leaf} />
           </Typography>
+          <div class="settings">
           <SwipeableTemporaryDrawer/>
+          </div>
         </Toolbar>
       </AppBar>
     </>

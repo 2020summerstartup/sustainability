@@ -15,6 +15,7 @@ import Header from '../Header';
 import CompetePage from '../Compete';
 import OfflinePage from '../Offline';
 import AccountHeader from '../AccountHeader';
+import ChangePage from "../PasswordChange/changePage.js";
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
@@ -45,6 +46,7 @@ const App = () => (
       <Route path={ROUTES.PROFILE} component={ProfilePage} />
       <Route path={ROUTES.COMPETE} component={CompetePage} />
       <Route path={ROUTES.OFFLINE} component={OfflinePage} />
+      <Route path={ROUTES.CHANGE} component={ChangePage} />
 
     </div>
   </Router>
