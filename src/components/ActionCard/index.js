@@ -19,6 +19,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
+import { updateUserPoint } from "../Firebase";
+import { AuthUserContext, withAuthorization} from "../Session";
 
 // I pulled these from Home's index.js
 import { toast } from "react-toastify";
@@ -127,12 +129,9 @@ const ActionCard = () => {
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
     );
 
-    // updateUser(authContext.email, action.susAction, action.points).then(() =>
-    // window.location.reload(true)
-    // console.log(action.susAction, action.points)
+    updateUserPoint(authContext.email, action.susAction, parseInt(action.points))
     console.log(action.susAction, localStorage.getItem(action.susAction));
   };
-
   const favAction = (action) => {
     // Toggle favorited (so favorite if unfavorited and vice versa)
     favorited = !favorited;
@@ -145,10 +144,6 @@ const ActionCard = () => {
       var message = action.title + " removed from favorites"
     }
     toast(message, { autoClose: 8000 });
-
-//     updateUserPoint(authContext.email, action.susAction, parseInt(action.points)).then(() =>
-//     window.location.reload(true)
-//     // console.log(action.susAction, action.points)
 
   };
 
@@ -243,4 +238,7 @@ const ActionCard = () => {
   );
 };
 
+
 export default ActionCard;
+
+const condition = (authUser) => !!authUser;
