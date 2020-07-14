@@ -154,21 +154,43 @@ const ActionCard = () => {
       storedFav = false; // If not initiallized, initialize here
     }
     storedFav = !storedFav; // Toggle the favorite
-
     // variable for getting color of fav icon
-    var favIconColor = document.getElementById("favoriteIcon");
+    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
     // Notify user that action was added/removed from favorites
     if (storedFav) {
       var message = action.title.concat(" added to favorites");
-      favIconColor.style.color = "#DC143C";
+      favIconColor.style.color = "#DC143C"; // Turn red
       toast(message, { autoClose: 5000 });
     } else {
       var message = action.title.concat(" removed from favorites");
-      favIconColor.style.color = "#6c6c6c";
+      favIconColor.style.color = "#6c6c6c"; // Back to grey
       toast.warn(message, { autoClose: 5000 });
     }
-    localStorage.setItem(storageName, storedFav);
+    localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
+
+  const initColor = (action) => {
+    console.log("initcolor ran");
+    // Get the name and info of the stored action that we're working with
+    // var storageName = action.susAction.concat("Fav");
+    // // storedFav is a boolean (is the current action favorited?)
+    // // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
+    // var storedFav = localStorage.getItem(storageName) == 'true';
+    // // In case the action hasn't been favorited before
+    // // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is.
+    // if (storedFav == null) {
+    //   console.log("storedFav was null or NaN", storedFav);
+    //   storedFav = false; // If not initiallized, initialize here
+    // }
+    // // variable for getting color of fav icon
+    // var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
+    // // Init color of fav button
+    // if (storedFav) {
+    //   favIconColor.style.color = "#DC143C"; // Turn red
+    // } else {
+    //   favIconColor.style.color = "#6c6c6c"; // Back to grey
+    // }
+  }
 
   return (
     <Fragment>
@@ -213,13 +235,14 @@ const ActionCard = () => {
                     title={action.title}
                     subheader={"Earn ".concat(action.points, " Points!")}
                   />
+                  <div onLoad={initColor(action)} >
                   <CardActions disableSpacing>
                     <IconButton
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
                       // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
                       onClick={() => favAction(action)}
-                      id="favoriteIcon"
+                      id={ "favoriteIcon".concat(action.susAction) }
                       className={classes.favoriteIcon}
                     >
                       <FavoriteIcon />
@@ -237,6 +260,7 @@ const ActionCard = () => {
                       <ExpandMoreIcon />
                     </IconButton>
                   </CardActions>
+                  </div>
                   <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
                     <CardContent>
                       <CardMedia
