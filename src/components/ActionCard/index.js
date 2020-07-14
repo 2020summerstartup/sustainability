@@ -156,7 +156,6 @@ const ActionCard = () => {
       storedFav = false; // If not initiallized, initialize here
     }
     storedFav = !storedFav; // Toggle the favorite
-
     // variable for getting color of fav icon
     var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
     // Notify user that action was added/removed from favorites
@@ -167,15 +166,31 @@ const ActionCard = () => {
       var message = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
     }
-    toast(message, { autoClose: 4000 });
+    toast(message, { autoClose: 5000 });
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
-  // Should delete this function soon
-  function toggle() {
-    var color = document.getElementById("favoriteIcon");
-    var backColor = color.style.backgroundColor;
-    color.style.backgroundColor = backColor === "black" ? "white" : "black";
+  const initColor = (action) => {
+    console.log("initcolor ran");
+    // Get the name and info of the stored action that we're working with
+    var storageName = action.susAction.concat("Fav");
+    // storedFav is a boolean (is the current action favorited?)
+    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
+    var storedFav = localStorage.getItem(storageName) == 'true';
+    // In case the action hasn't been favorited before
+    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is.
+    if (storedFav == null) {
+      console.log("storedFav was null or NaN", storedFav);
+      storedFav = false; // If not initiallized, initialize here
+    }
+    // variable for getting color of fav icon
+    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
+    // Init color of fav button
+    if (storedFav) {
+      favIconColor.style.color = "#DC143C"; // Turn red
+    } else {
+      favIconColor.style.color = "#6c6c6c"; // Back to grey
+    }
   }
 
   return (
