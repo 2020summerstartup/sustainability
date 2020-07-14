@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import points from "../../img/points.svg";
 // import getPoints from "./Account";
 import { AuthUserContext, withAuthorization } from "../Session";
-import { getUser } from "../Firebase";
+import pointsForAccount from "./points.js";
 
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
@@ -20,6 +20,7 @@ import {
 import { useGalaxyInfoStyles } from '@mui-treasury/styles/info/galaxy';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 
+import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
 import {initPoints, assignData} from "../Home"
 
 const useStyles = makeStyles(() => ({
@@ -27,7 +28,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: '1rem',
     boxShadow: 'none',
     position: 'relative',
-    minWidth: 200,
+    minWidth: 400,
     minHeight: 360,
     '&:after': {
       content: '""',
@@ -88,8 +89,11 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
         <Box py={3} px={2} className={styles.content}>
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoSubtitle>You have earned</InfoSubtitle>
-            <InfoTitle>{ localStorage.getItem("total") } Points</InfoTitle>
-            <InfoCaption>Way to go!</InfoCaption>
+          <InfoTitle>  { localStorage.getItem("total") } Points</InfoTitle>
+          <InfoCaption> 
+            <p onClick={() => pointsForAccount()} class="btn-text"></p>
+          </InfoCaption>
+            
           </Info>
         </Box>
       </Card>

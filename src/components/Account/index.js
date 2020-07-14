@@ -10,14 +10,17 @@ import React from "react";
 import SignOutButton from "../SignOut";
 // import { db } from "..,Firebase/firebase.js";
 // import { PasswordForgetForm } from "../PasswordForget";
-import PasswordChangeForm from "../PasswordChange";
+// import PasswordChangeForm from "../PasswordChange";
 
+import TotalPoints from "./points.js";
 import Dropdown2 from "../Dropdown";
 import accountImg from "../../img/account.svg";
 import TotalPointsCard from "./points.js";
+
 import DormCard from "./dorm.js";
 import FaveCard from "./fave.js";
 import SettingsPage from "../Setting";
+
 
 // import SignOutButton from "../SignOut";
 import { AuthUserContext, withAuthorization } from "../Session";
@@ -26,13 +29,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import PhoneIcon from "@material-ui/icons/Phone";
+// import PhoneIcon from "@material-ui/icons/Phone";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
-import HelpIcon from "@material-ui/icons/Help";
-import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
-import ThumbDown from "@material-ui/icons/ThumbDown";
-import ThumbUp from "@material-ui/icons/ThumbUp";
+// import HelpIcon from "@material-ui/icons/Help";
+// import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
+// import ThumbDown from "@material-ui/icons/ThumbDown";
+// import ThumbUp from "@material-ui/icons/ThumbUp";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import HouseIcon from "@material-ui/icons/House";
@@ -105,9 +108,9 @@ function AccountPage() {
     <div>
       <AuthUserContext.Consumer>
         {(authUser) => (
-          <div class="base-container">
-            <div class="profile">Profile</div>
-            <div class="accountName">{authUser.email}'s page!</div>
+          <div className="base-container">
+            <div className="profile">Profile</div>
+            <div className="accountName">{authUser.email}'s page!</div>
             <div className={classes.root}>
               <AppBar position="static" color="default">
                 <Tabs
@@ -145,7 +148,7 @@ function AccountPage() {
                     {...a11yProps(2)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  <Tab label=<SignOutButton /> {...a11yProps(3)} />
+                 
                 </Tabs>
               </AppBar>
               <TabPanel value={value} index={0}>
@@ -164,6 +167,9 @@ function AccountPage() {
                 Item Five
               </TabPanel> */}
             </div>
+            <div class="bottom">
+              <SignOutButton />
+            </div>
           </div>
         )}
       </AuthUserContext.Consumer>
@@ -171,15 +177,15 @@ function AccountPage() {
   );
 }
 
-// <div class="base-container">
+// <div className="base-container">
 
-//   <div class="wrapper1">
+//   <div className="wrapper1">
 //     Welcome,{authUser.email}!
-{
-  /* *insert profile pic* */
-}
+// {
+//   /* *insert profile pic* */
+// }
 // </div>
-// <div class="wrapper2">
+// <div className="wrapper2">
 //   <div>
 //     <div>
 //     You've earned
@@ -202,7 +208,7 @@ function AccountPage() {
 //   <div>
 //   <img alt = '' src = {southdorm} />
 //   </div>
-//   <div class="wrapper3">
+//   <div className="wrapper3">
 //   <div>
 //     Account info:
 //   </div>
@@ -217,22 +223,22 @@ function AccountPage() {
 //   <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
 //   </div>
 // </div>
-{
-  /* <div class="wrapper3">
-            <div>
-              Account info:
-            </div>
-            <div>
-              Email address: *insert user email*
-            </div>
-            <div>
-              Need to change dorms or change your password?
-            </div>
+// {
+//   /* <div className="wrapper3">
+//             <div>
+//               Account info:
+//             </div>
+//             <div>
+//               Email address: *insert user email*
+//             </div>
+//             <div>
+//               Need to change dorms or change your password?
+//             </div>
 
-            <div>
-            <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
-            </div> */
-}
+//             <div>
+//             <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+//             </div> */
+// }
 
 // </div>
 /* <div className="grid"> </div>
@@ -253,12 +259,12 @@ function AccountPage() {
           
           <div class = "wrapper">
             
-          <div class="box">box1</div>
-          <div class="box">box2</div>
-          <div class="box">box3</div>
-          <div class="box">box4</div>
+          <div className="box">box1</div>
+          <div className="box">box2</div>
+          <div className="box">box3</div>
+          <div className="box">box4</div>
            */
-// <div class="bottom">
+// <div className="bottom">
 //   <SignOutButton />
 // </div>
 //  </div>

@@ -10,7 +10,7 @@ import 'firebase/database';
 
 // };
 
-const firebase = require("firebase");
+// const firebase = require("firebase"); // Value never used
 // Required for side-effects
 require("firebase/firestore");  
 
@@ -95,13 +95,14 @@ class Firebase {
   // export const firestore = firebase.firestore();
 export default Firebase;
 
-export const createUser = (userEmail) => {
+export const createUser = (userEmail, dorm) => {
   console.log("creating...")
   return firestore.collection('users').doc(userEmail)
       .set({
           created: app.firestore.FieldValue.serverTimestamp(),
           createdBy: userEmail,
           total: 0,
+          userDorm: dorm,
           points: {
               "waterBottle": 0,
               "cmontWalk": 0,
@@ -115,6 +116,7 @@ export const createUser = (userEmail) => {
           },
       });
 };
+
 
 export const getUser = (userEmail) => {
   return firestore.collection('users').doc(userEmail)
@@ -148,4 +150,3 @@ export const updateUserDorm = (userEmail, value) => {
 }
 
 
-// export { Axios, db }

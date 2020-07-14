@@ -4,7 +4,6 @@ import dorm from "../../img/dorm.svg";
 import { AuthUserContext} from "../Session";
 import {getUser} from "../Firebase"
 
-
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
 import { makeStyles } from '@material-ui/core/styles';
