@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: "56.25%", // 16:9
+    marginBottom: "1rem",
   },
   expand: {
     transform: "rotate(0deg)",
@@ -172,7 +173,7 @@ const ActionCard = () => {
     var storageName = action.susAction.concat("Fav");
     // storedFav is a boolean (is the current action favorited?)
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedFav = localStorage.getItem(storageName) == 'true';
+    var storedFav = localStorage.getItem(storageName) == "true";
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is.
     if (storedFav == null) {
@@ -294,8 +295,10 @@ const ActionCard = () => {
                         image={action.image}
                         title={action.title}
                       />
-                      <Typography variant="h4">Impact:</Typography>
-                      <Typography variant="body">{action.impact}</Typography>
+                      <Typography variant="h5" gutterBottom>
+                        Environmental Impact:
+                      </Typography>
+                      <Typography variant="body1">{action.impact}</Typography>
                     </CardContent>
                   </Collapse>
                 </Card>
