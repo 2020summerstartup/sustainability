@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styles from "../Dropdown.modules.css";
 
+import { AuthUserContext, withAuthorization } from "../Session";
+import {updateUserDorm} from "../Firebase"
+
 import Select from "react-select";
 
 // Choose your dorm!
@@ -47,21 +50,21 @@ const dorms = [
 
 function Dropdown2() {
   const [selectedValue, setSelectedValue] = useState(null);
+  const authConext = useContext(AuthUserContext);
+
   const handleChange = (obj) => {
-    setSelectedValue(obj.label.replace(/"([^"]+)":/g, "$1:"));
+    const dorm = obj.label.replace(/"([^"]+)":/g, "$1:")
+    setSelectedValue(dorm);
+    localStorage.setItem('dorm', dorm);
+    updateUserDorm(authConext.email, dorm);
     // the .replace was supposed to get rid of quotes but it didn't work
   };
-
-  if (localStorage.getItem('selectedDorm') == null) {
-    localStorage.setItem('selectedDorm', "Not Selected");
+  
+  if (localStorage.getItem('dorm') == null) {
+    alert("Please select your dorm in setting page!");
   }
-
   // original if statement I wrote
-  if (selectedValue != null) {
-    localStorage.setItem('selectedDorm', selectedValue);
-  } else {
-    setSelectedValue(localStorage.getItem('selectedDorm'));
-  }
+  
 
   const customStyles = {
     option: (styles, state) => ({
@@ -102,12 +105,13 @@ function Dropdown2() {
         placeholder="Select your dorm..."
       />
       <br />
-      <b>Your dorm: { localStorage.getItem('selectedDorm') }</b>
-      <h1></h1>
+      <b>Your dorm: { localStorage.getItem('dorm') }</b>
     </div>
   );
 }
 
-export default Dropdown2;
-
 export {Dropdown2};
+
+const condition = (authUser) => !!authUser;
+
+export default withAuthorization(condition)(Dropdown2);

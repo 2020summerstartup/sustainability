@@ -1,8 +1,8 @@
-import React from 'react';
-// import points from "../../img/points.svg";
+import React, {useContext} from 'react';
+import points from "../../img/points.svg";
 import dorm from "../../img/dorm.svg";
-import { AuthUserContext } from "../Session";
-
+import { AuthUserContext} from "../Session";
+import {getUser} from "../Firebase"
 
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
@@ -45,9 +45,24 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+function assignDorm(data) {
+  localStorage.setItem("dorm", data.userDorm)
+}
+
 export const DormCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: 'top' });
   const styles = useStyles();
+  const authContext = useContext(AuthUserContext);
+
+  getUser(authContext.email).onSnapshot(docSnapshot => {
+    if (docSnapshot.exists) {
+      assignDorm(docSnapshot.data())
+    } else {
+      alert("Sorry, please choose your dorm in setting!")
+    }
+  }, err => {
+  console.log(`Encountered error: ${err}`);
+})
 
   return (
     <div>
@@ -73,7 +88,7 @@ export const DormCard = React.memo(function GalaxyCard() {
         />
         <Box py={3} px={2} className={styles.content}>
           <Info useStyles={useGalaxyInfoStyles}>
-            <InfoSubtitle>{authUser.email}, you're representing South {authUser.dorm} dorm</InfoSubtitle>
+            <InfoSubtitle>{authUser.email}, you're representing {localStorage.getItem("dorm")} dorm</InfoSubtitle>
             <InfoTitle>You're in 3rd place</InfoTitle>
             <InfoCaption>Change your dorm in settings</InfoCaption>
           </Info>

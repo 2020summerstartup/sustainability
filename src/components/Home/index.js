@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import ActionCard from "../ActionCard";
+
 import ActionData from "../ActionData/OriginalData";
 import HomeTabs from "../HomeTabs";
 
@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../Session";
-import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
+import {getUser, createUser, uploadUserTotalPoint} from "../Firebase";
 
 
 
@@ -43,15 +43,18 @@ function initPoints(email) {
     var action = localStorage.getItem(ActionData[key].susAction);
     if (isNaN(action) || action == null) {
       localStorage.setItem(ActionData[key].susAction, 0);
-    }else{
-      uploadUserPoint(email, ActionData[key].susAction, parseInt(localStorage.getItem(ActionData[key].susAction)))
-      total += parseInt(localStorage.getItem(ActionData[key].susAction))
     }
   }
   localStorage.setItem('total', total);
 }
 
-
+function assignData(data){
+  localStorage.setItem("total", data.total)
+  const points = data.points
+  for (const [key, value] of Object.entries(points)) {
+    localStorage.setItem(key, value)
+  }
+}
 // Loop over every element in ActionData, adding the save point values earn from each
 // for(const key in ActionData) {
 //   total += parseInt(localStorage.getItem(ActionData[key].susAction));
@@ -103,13 +106,6 @@ function initPoints(email) {
 //   // code into counter or something.
 // }
 
-function assignData(data){
-  localStorage.setItem("total", data.total)
-  const points = data.points
-  for (const [key, value] of Object.entries(points)) {
-    localStorage.setItem(key, value)
-  }
-}
 
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
@@ -154,6 +150,7 @@ function HomePage() {
       <button onClick={() => setModalIsOpen(true)} className="button">
         Check Your Progress
       </button>
+      <p></p>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
@@ -168,7 +165,8 @@ function HomePage() {
         }}
       >
       <center>
-        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! -Katie */}
+        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! (Wait I think it's fixed on other branches, so hopefully that
+        transfers to here too?) -Katie */}
         <Confetti
           width={1500}
           numberOfPieces={2000}
@@ -188,6 +186,7 @@ function HomePage() {
           )
         }
         <h2 id='testId'>Your Progress: </h2>
+        {/* Pretty sure the fullowing script is leftover from my testing. Unless you know it's important, feel free to delete! -Katie */}
         <script>
           document.getElementById("testId").innerHTML = "Hello JavaScript!";
         </script>
