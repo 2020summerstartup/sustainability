@@ -171,11 +171,16 @@ export const FaveCard = React.memo(function GalaxyCard() {
       storedFav = false; // If not initiallized, initialize here
     }
     storedFav = !storedFav; // Toggle the favorite
+
+    // variable for getting color of fav icon
+    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
     // Notify user that action was added/removed from favorites
     if (storedFav) {
       var message = action.title.concat(" added to favorites");
+      favIconColor.style.color = "#DC143C"; // Turn red
     } else {
       var message = action.title.concat(" removed from favorites");
+      favIconColor.style.color = "#6c6c6c"; // Back to grey
     }
     toast(message, { autoClose: 4000 });
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
@@ -237,10 +242,13 @@ export const FaveCard = React.memo(function GalaxyCard() {
                     <IconButton
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
+                      // Start with all favorite buttons red, because we know that they're favorited
+                      style={{color: "#DC143C" }}
                       // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
                       onClick={() =>
                         favAction(action)
                       }
+                      id={ "favoriteIcon".concat(action.susAction) }
                       className="favoriteIcon" 
                     >
                       <FavoriteIcon />

@@ -118,14 +118,18 @@ function HomePage() {
   getUser(authContext.email).onSnapshot(docSnapshot => {
       if (docSnapshot.exists) {
         assignData(docSnapshot.data())
-      } else {
+        function assignData(data){
+          localStorage.setItem('dorm', data.userDorm)
+      } 
+    } else {
         createUser(authContext.email);
         initPoints(authContext.email);
         uploadUserTotalPoint(authContext.email, total);
       }
     }, err => {
-    console.log(`Encountered error: ${err}`);
-  })
+    console.log(`Encountered error: ${err}`); 
+  });
+  
   
   var message = [];
   total = localStorage.getItem("total")

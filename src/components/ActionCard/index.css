@@ -1,3 +1,4 @@
-.favoriteIcon {
-    color: red;
-  }
+.Toastify__close-button:hover, .Toastify__close-button:focus {
+  background-color: transparent;
+  color: var(--theme);
+}
