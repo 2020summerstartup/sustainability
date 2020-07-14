@@ -1,9 +1,9 @@
 /* Small screens */
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
     .signout-btn {
         display: inline;
     }
-}
+} */
 .accountHeader {
     text-align: left;
     font-size: 30px;

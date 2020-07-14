@@ -119,8 +119,8 @@ function AccountPage() {
                   variant="fullWidth"
                   scrollButtons="off"
                   indicatorColor="primary"
-                  textColor="inherited"
-                  aria-label="scrollable force tabs example"
+                  textColor="primary"
+                  aria-label="scrollable tabs"
                   centered="true"
                 >
 
@@ -167,7 +167,7 @@ function AccountPage() {
                 Item Five
               </TabPanel> */}
             </div>
-            <div class="signOutBottom">
+            <div class="signout-btn">
               <SignOutButton />
             </div>
           </div>
