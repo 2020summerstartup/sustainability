@@ -130,6 +130,13 @@ export const updateUserPoint = (userEmail, userAction, actionPoint) => {
   })
 }
 
+//this method is meant to update the dorm total
+export const updateDormPoint = (userDorm, actionPoint) => {
+  return firestore.collection('dorms').doc(userDorm).update({
+    score: app.firestore.FieldValue.increment(actionPoint),
+  })
+}
+
 // this method is called to synchronize local storage with Firestore
 export const uploadUserPoint = (userEmail, userAction, actionPoint) => {
   return firestore.collection('users').doc(userEmail).update({
@@ -149,4 +156,6 @@ export const updateUserDorm = (userEmail, value) => {
   })
 }
 
+
+export {firestore};
 
