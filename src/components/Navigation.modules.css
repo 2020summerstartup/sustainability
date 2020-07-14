@@ -227,6 +227,10 @@ main {
     position: relative;
     bottom:0.5rem;
   }
+
+  .signout-btn {
+    display: inline;
+  }
 }
 
 /* Large screens */

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import "./index.css";
+// import "./index.css";
 
 import { withFirebase, createUser } from "../Firebase";
 import * as ROUTES from "../../constants/routes";

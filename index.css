@@ -1,10 +1,34 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap');
+
+.profile {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  padding: 1%;
+}
+
+.accountName {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px;
+  padding: 3%;
+  text-align: left;
+}
+.main{
   margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0px 0px;
+  padding: 0 0;
+  /* this is the default font for each platform */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* -webkit-overflow-scrolling: auto; */
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 code {
@@ -17,30 +41,28 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 2rem;
+  margin: 0;
+  text-align: center;
 }
 
-.image {
-  width: 21em;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-}
-
-.form {
-  margin-top: 30px;
+h1 {
+  font-size: 24px;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 20px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: fit-content;
+h3 {
+  font-size: 20px;
+  margin-top: 40px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-size: 12px;
 }
 
 input {
@@ -62,76 +84,29 @@ input:focus {
   box-shadow: 0px 0px 12px 0.8px var(--theme);
 }
 
-.button {
-  font-size: 21px;
-  padding: 5px 20px;
-  border: 0;
-  background-color: var(--theme) !important;
-  color: #fff;
-  border-radius: 3px;
-  transition: all 250ms ease-in-out;
-  margin-top: 15px;
-  cursor: pointer;
+/* Trying to add new fonts to the app */
+
+body {
+  font-family: 'Open Sans', sans-serif
+}
+.heading {
+  font-weight: 700;
+}
+.subheading {
+  font-weight: 400;
 }
 
-.button:hover {
-  background-color: #107a13;
+/* Better native app experience  */
+@media (max-width: 991px) {
+  body {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    /* suppposed to not allow the screen to overscroll on mobile */
+    overscroll-behavior: none;
+  }
+  *::-webkit-scrollbar {
+    width: 0px;
+   }
 }
 
-.button:focus {
-  outline: none;
-}
-
-#navigation {
-  height: 10%;
-  background-color: lightgreen;
-  display: block;
-  /* position: static; */
-}
-
-#navBar {
-  height: 10%;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-
-#navigation ul {
-  height: 10%;
-  opacity: 0.5;
-}
-
-#navigation ul li {
-  display: inline-block;
-  color: darkgreen;
-}
-
-.buzzButton {
-  font-size: 15px;
-  border: 0;
-  background-color: ForestGreen;
-  color: #fff;
-  border-radius: 3px;
-  transition: all 250ms ease-in-out;
-  margin-top: 15px;
-  cursor: pointer;
-  width: 60px;
-  height: 60px;
-}
-
-.buzzButton:hover {
-  background-color: LimeGreen;
-}
-
-.undoButton {
-  font-size: 15px;
-  border: 0;
-  background-color: #e60d0d;
-  color: #fff;
-  border-radius: 3px;
-  transition: all 250ms ease-in-out;
-  margin-top: 15px;
-  cursor: pointer;
-  height: 60px;
-  width: 60px;
-}
