@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -92,6 +92,7 @@ const useStyles = makeStyles((theme) => ({
 const ActionCard = () => {
   const classes = useStyles();
   const [expandedId, setExpandedId] = React.useState(-1);
+  const authContext = useContext(AuthUserContext)
   // const [actionData, setActionData] = useState(ActionData);
   // const [actionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
@@ -129,7 +130,9 @@ const ActionCard = () => {
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
     );
 
-    updateUserPoint(authContext.email, action.susAction, parseInt(action.points))
+    updateUserPoint(authContext.email, action.susAction, parseInt(action.points)).then(() => {
+      window.location.reload(true)
+    })
     console.log(action.susAction, localStorage.getItem(action.susAction));
   };
   const favAction = (action) => {
@@ -141,7 +144,7 @@ const ActionCard = () => {
     if (favorited) {
       var message = action.title + " added to favorites"
     } else {
-      var message = action.title + " removed from favorites"
+      message = action.title + " removed from favorites"
     }
     toast(message, { autoClose: 8000 });
 
@@ -238,7 +241,5 @@ const ActionCard = () => {
   );
 };
 
-
-export default ActionCard;
-
 const condition = (authUser) => !!authUser;
+export default withAuthorization(condition)(ActionCard);
