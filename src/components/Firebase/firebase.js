@@ -141,5 +141,11 @@ export const uploadUserTotalPoint = (userEmail, total) =>{
   })
 }
 
+export const updateUserDorm = (userEmail, value) => {
+  return firestore.collection('users').doc(userEmail).update({
+    userDorm: value,
+  })
+}
+
 
 // export { Axios, db }

@@ -19,8 +19,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
-import { updateUser } from "../Firebase";
-import { AuthUserContext } from "../Session";
+import { updateUserPoint } from "../Firebase";
+import { AuthUserContext, withAuthorization} from "../Session";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -118,10 +118,9 @@ const ActionCard = () => {
       action.susAction,
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
     );
-    updateUserPoint(authContext.email, action.susAction, parseInt(action.points)).then(() =>
-    window.location.reload(true)
+    updateUserPoint(authContext.email, action.susAction, parseInt(action.points))
     // console.log(action.susAction, action.points)
-  };
+  }
 
   return (
     <Fragment>
@@ -206,4 +205,7 @@ const ActionCard = () => {
   );
 };
 
+
 export default ActionCard;
+
+const condition = (authUser) => !!authUser;
