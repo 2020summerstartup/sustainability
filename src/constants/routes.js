@@ -12,3 +12,4 @@ export const PASSWORD_FORGET = '/pw-forget';
 export const PROFILE = '/profile';
 export const ATABS = '/tabs';
 export const TABS = '/tabs2';
+export const OFFLINE = '/offline';

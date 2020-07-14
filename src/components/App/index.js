@@ -14,6 +14,7 @@ import ProfilePage from '../Profile';
 import Header from '../Header';
 import CompetePage from '../Compete';
 import TabPage from '../Tabs';
+import OfflinePage from '../Offline';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
@@ -39,7 +40,7 @@ const App = () => (
       <Route path={ROUTES.PROFILE} component={ProfilePage} />
       <Route path={ROUTES.COMPETE} component={CompetePage} />
       <Route path={ROUTES.TABS} component={TabPage} />
-
+      <Route path={ROUTES.OFFLINE} component={OfflinePage} />
 
     </div>
   </Router>
