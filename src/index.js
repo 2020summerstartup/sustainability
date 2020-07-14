@@ -9,6 +9,13 @@ import App from "./components/App";
 import Firebase, { FirebaseContext } from "./components/Firebase";
 
 const theme = createMuiTheme({
+  // overrides: {
+  //   MuiButton: {
+  //     text: {
+  //       color: "white",
+  //     },
+  //   },
+  // },
   palette: {
     primary: {
       main: "#24a113",
