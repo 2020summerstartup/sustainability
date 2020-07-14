@@ -173,24 +173,24 @@ const ActionCard = () => {
   const initColor = (action) => {
     console.log("initcolor ran");
     // Get the name and info of the stored action that we're working with
-    var storageName = action.susAction.concat("Fav");
-    // storedFav is a boolean (is the current action favorited?)
-    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedFav = localStorage.getItem(storageName) == 'true';
-    // In case the action hasn't been favorited before
-    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is.
-    if (storedFav == null) {
-      console.log("storedFav was null or NaN", storedFav);
-      storedFav = false; // If not initiallized, initialize here
-    }
-    // variable for getting color of fav icon
-    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
-    // Init color of fav button
-    if (storedFav) {
-      favIconColor.style.color = "#DC143C"; // Turn red
-    } else {
-      favIconColor.style.color = "#6c6c6c"; // Back to grey
-    }
+    // var storageName = action.susAction.concat("Fav");
+    // // storedFav is a boolean (is the current action favorited?)
+    // // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
+    // var storedFav = localStorage.getItem(storageName) == 'true';
+    // // In case the action hasn't been favorited before
+    // // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is.
+    // if (storedFav == null) {
+    //   console.log("storedFav was null or NaN", storedFav);
+    //   storedFav = false; // If not initiallized, initialize here
+    // }
+    // // variable for getting color of fav icon
+    // var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
+    // // Init color of fav button
+    // if (storedFav) {
+    //   favIconColor.style.color = "#DC143C"; // Turn red
+    // } else {
+    //   favIconColor.style.color = "#6c6c6c"; // Back to grey
+    // }
   }
 
   return (
@@ -236,6 +236,7 @@ const ActionCard = () => {
                     title={action.title}
                     subheader={"Earn ".concat(action.points, " Points!")}
                   />
+                  <div onLoad={initColor(action)} >
                   <CardActions disableSpacing>
                     <IconButton
                       aria-label="add to favorites"
@@ -260,6 +261,7 @@ const ActionCard = () => {
                       <ExpandMoreIcon />
                     </IconButton>
                   </CardActions>
+                  </div>
                   <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
                     <CardContent>
                       <CardMedia
