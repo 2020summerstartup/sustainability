@@ -93,11 +93,6 @@ const ActionCard = () => {
   // const [actionData, setActionData] = useState(ActionData);
   // const [actionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
-  var favorited = localStorage.getItem('favorited'); // Is the action favorited? Eventually this will need to be loaded from firestore (I assume)
-  if (favorited == null || isNaN(favorited)) {
-    console.log("favorited was null or NaN");
-    favorited = false; // If not initiallized, initialize here
-  }
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
 
@@ -134,25 +129,26 @@ const ActionCard = () => {
   };
 
   const favAction = (action) => {
-    // Toggle favorited (so favorite if unfavorited and vice versa)
-    favorited = !favorited;
-    console.log("favorited?", favorited, action.susAction);
-    // Save the value (right now just one instead of one per action) in local storage
-    localStorage.setItem('favorited', favorited);
-    if (favorited) {
-      var message = action.title + " added to favorites"
-    } else {
-      var message = action.title + " removed from favorites"
+    // Get the name and info of the stored action that we're working with
+    var storageName = action.susAction.concat("Fav");
+    // storedFav is a boolean (is the current action favorited?)
+    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
+    var storedFav = localStorage.getItem(storageName) == 'true';
+    // In case the action hasn't been favorited before
+    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is.
+    if (storedFav == null) {
+      console.log("storedFav was null or NaN", storedFav);
+      storedFav = false; // If not initiallized, initialize here
     }
-    toast(message, { autoClose: 8000 });
-
-//     updateUserPoint(authContext.email, action.susAction, parseInt(action.points)).then(() =>
-//     window.location.reload(true)
-//     // console.log(action.susAction, action.points)
-
-  };
-
-  const favNotify = (action) => {
+    storedFav = !storedFav; // Toggle the favorite
+    // Notify user that action was added/removed from favorites
+    if (storedFav) {
+      var message = action.title.concat(" added to favorites");
+    } else {
+      var message = action.title.concat(" removed from favorites");
+    }
+    toast(message, { autoClose: 4000 });
+    localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
   return (

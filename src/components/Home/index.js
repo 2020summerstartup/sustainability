@@ -169,7 +169,8 @@ function HomePage() {
         }}
       >
       <center>
-        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! -Katie */}
+        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! (Wait I think it's fixed on other branches, so hopefully that
+        transfers to here too?) -Katie */}
         <Confetti
           width={1500}
           numberOfPieces={2000}
