@@ -118,14 +118,18 @@ function HomePage() {
   getUser(authContext.email).onSnapshot(docSnapshot => {
       if (docSnapshot.exists) {
         assignData(docSnapshot.data())
-      } else {
+        function assignData(data){
+          localStorage.setItem('dorm', data.userDorm)
+      } 
+    } else {
         createUser(authContext.email);
         initPoints(authContext.email);
         uploadUserTotalPoint(authContext.email, total);
       }
     }, err => {
-    console.log(`Encountered error: ${err}`);
-  })
+    console.log(`Encountered error: ${err}`); 
+  });
+  
   
   var message = [];
   total = localStorage.getItem("total")
@@ -165,7 +169,8 @@ function HomePage() {
         }}
       >
       <center>
-        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! -Katie */}
+        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! (Wait I think it's fixed on other branches, so hopefully that
+        transfers to here too?) -Katie */}
         <Confetti
           width={1500}
           numberOfPieces={2000}
@@ -185,6 +190,7 @@ function HomePage() {
           )
         }
         <h2 id='testId'>Your Progress: </h2>
+        {/* Pretty sure the fullowing script is leftover from my testing. Unless you know it's important, feel free to delete! -Katie */}
         <script>
           document.getElementById("testId").innerHTML = "Hello JavaScript!";
         </script>
