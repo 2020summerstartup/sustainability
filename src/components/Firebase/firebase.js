@@ -95,11 +95,12 @@ class Firebase {
   // export const firestore = firebase.firestore();
 export default Firebase;
 
-export const createUser = (userEmail, dorm) => {
+export const createUser = (userEmail, userName, dorm) => {
   console.log("creating...")
   return firestore.collection('users').doc(userEmail)
       .set({
           created: app.firestore.FieldValue.serverTimestamp(),
+          name: userName,
           createdBy: userEmail,
           total: 0,
           userDorm: dorm,
