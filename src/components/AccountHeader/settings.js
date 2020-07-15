@@ -23,14 +23,25 @@ import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 import PasswordChange from '../PasswordChange';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   list: {
     width: 250,
   },
   fullList: {
-    width: 'auto',
+    width: 100,
   },
-});
+  settingsIcon: {
+    color: "white",
+    display: "flex",
+    position: "fixed",
+    top: ".75rem",  
+    right: "0rem",
+    // display:"flex",
+    // flexDirection: "flex-end",
+    // position: "relative",
+    // left: "25rem",
+  }
+}));
 
 export default function SwipeableTemporaryDrawer() {
   const classes = useStyles();
@@ -64,6 +75,9 @@ export default function SwipeableTemporaryDrawer() {
       {/* <ListItem button component={Link} to={ROUTES.HOME} className="link-text">
         <ListItemText primary="Google" />
    </ListItem> */}
+   <ListItem>
+     <ListItemText>Settings</ListItemText>
+   </ListItem>
    <ListItem button component={Link} to={ROUTES.CHANGE} className="link-text">
        <ListItemIcon>
             <LockOpenIcon />
@@ -109,7 +123,7 @@ export default function SwipeableTemporaryDrawer() {
        
         <React.Fragment key={"right"}>
           
-          <Button onClick={toggleDrawer("right", true)}>{<SettingsIcon/>}</Button>
+          <Button className={classes.settingsIcon} style={{ backgroundColor: "transparent" }} onClick={toggleDrawer("right", true)}>{<SettingsIcon/>}</Button>
          
           <SwipeableDrawer
             anchor={"right"}
