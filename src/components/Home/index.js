@@ -96,11 +96,11 @@ function HomePage() {
       <h1>Home Sweet Home</h1>
       {/* Testing for fun */}
       <h3>
-        You have earned a total of&nbsp;
+        You have earned&nbsp;
         {<CountUp start={0} end={total} duration={1}></CountUp>} points! &nbsp;
-        <button onClick={notify2} className="button">
+        {/* <button onClick={notify2} className="button">
           Click me!
-        </button>
+        </button> */}
       </h3>
       <button onClick={() => setModalIsOpen(true)} className="button">
         Check Your Progress
