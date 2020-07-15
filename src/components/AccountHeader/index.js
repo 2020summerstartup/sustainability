@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "6.5rem",
     },
   },
+  menuButton: {
+    marginleft: theme.spacing(2),
+  },
 }));
 
 
@@ -35,9 +38,13 @@ const AccountHeader = ({ firebase }) => {
             Yay
             <EcoIcon className={classes.leaf} />
           </Typography>
-          <div class="settings">
-          <SwipeableTemporaryDrawer/>
-          </div>
+        <IconButton edge="end">
+            <SwipeableTemporaryDrawer   />
+        </IconButton>
+          
+          
+          
+      
         </Toolbar>
       </AppBar>
     </>
