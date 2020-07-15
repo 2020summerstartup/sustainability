@@ -69,7 +69,7 @@ class SignUpFormBase extends Component {
         // Create a user in your Firebase realtime database
         return this.props.firebase.user(authUser.user.uid).set({
           username,
-          email,
+          email
         });
       })
       .then(() => {
@@ -124,7 +124,7 @@ class SignUpFormBase extends Component {
           />
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon="home" className="icon" />
+          <FontAwesomeIcon icon="user" className="icon" />
           <input
             className="input-field"
             name="dorm"

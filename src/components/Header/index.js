@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.css";
 import { withFirebase } from '../Firebase';
 
 // import material ui
@@ -13,15 +14,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: "white",
-    fontWeight: "bold",
-    margin: "0",
+    marginTop: "0.5rem",
+    marginLeft: "0rem",
+    marginBottom: "0.5rem",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
     },
   },
 }));
-
-
 
 const Header = ({ firebase }) => {
   const classes = useStyles();
