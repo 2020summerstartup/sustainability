@@ -174,9 +174,10 @@ const ActionCard = () => {
     var storageName = action.susAction.concat("Fav");
     // storedFav is a boolean (is the current action favorited?)
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedFav = localStorage.getItem(storageName) == "true";
+    var storedFav = localStorage.getItem(storageName) == 'true'; // We're getting a warning in the console
+    // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
     // In case the action hasn't been favorited before
-    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is.
+    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     if (storedFav == null) {
       console.log("storedFav was null or NaN", storedFav);
       storedFav = false; // If not initialized, initialize here
