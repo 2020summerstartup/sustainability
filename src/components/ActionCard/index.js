@@ -253,7 +253,7 @@ const ActionCard = () => {
                       style={{ backgroundColor: "transparent" }}
                       style={{ color: favIconColors[i-1] }} // Set the favIcon color (i-1 prevents off-by-one error)
                       onClick={() => favAction(action)}
-                      id={ "favoriteIcon".concat(action.susAction) }
+                      id={ "favoriteIcon".concat(action.susAction) }                                                                                                                                                                                                            
                       className={classes.favoriteIcon}
                     >
                       <FavoriteIcon />

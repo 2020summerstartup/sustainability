@@ -13,7 +13,7 @@ const CompetePage = () => (
       {(authUser) => (
         <div class="base-container">
           <h1>
-            Competition! Yay!
+            Competitions and Rankings
             <span role="img" aria-label="Trophy">
               🏆
             </span>
