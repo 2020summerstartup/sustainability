@@ -12,7 +12,6 @@ import { AuthUserContext, withAuthorization } from "../Session";
 import {getUser, createUser, uploadUserTotalPoint} from "../Firebase";
 
 
-
 const CustomToast = ({ closeToast }) => {
   return (
     <div>
@@ -55,12 +54,15 @@ function assignData(data){
 
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
+
+
 // Text to display on the homepage
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const authContext = useContext(AuthUserContext);
 
+  // get user's dorm set in local storage
   getUser(authContext.email).onSnapshot(docSnapshot => {
       if (docSnapshot.exists) {
         assignData(docSnapshot.data())
@@ -89,6 +91,7 @@ function HomePage() {
   
   var message = [];
   total = localStorage.getItem("total")
+
 
 
   return (
