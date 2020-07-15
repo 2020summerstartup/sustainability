@@ -18,7 +18,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import EmailIcon from '@material-ui/icons/Email';
 import { Link } from "react-router-dom";
-
+import FormDialog from "./popupform";
 import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 import PasswordChange from '../PasswordChange';
@@ -78,6 +78,15 @@ export default function SwipeableTemporaryDrawer() {
    <ListItem>
      <ListItemText>Settings</ListItemText>
    </ListItem>
+   <ListItem className="link-text">
+     <ListItemIcon>
+       <EmailIcon/>
+     </ListItemIcon>
+       <ListItemText>
+         Email
+         {/* <FormDialog/> */}
+       </ListItemText>
+   </ListItem>
    <ListItem button component={Link} to={ROUTES.CHANGE} className="link-text">
        <ListItemIcon>
             <LockOpenIcon />
@@ -86,14 +95,7 @@ export default function SwipeableTemporaryDrawer() {
            CHANGE PASSWORD
        </ListItemText>
    </ListItem>
-   <ListItem button component={Link} to={ROUTES.CHANGE} className="link-text">
-     <ListItemIcon>
-       <EmailIcon/>
-     </ListItemIcon>
-       <ListItemText>
-         Your email!
-       </ListItemText>
-   </ListItem>
+   
 
    <ListItem button component={Link} to={ROUTES.CHANGE} className="link-text">
    <ListItemIcon>
