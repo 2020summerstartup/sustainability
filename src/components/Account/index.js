@@ -109,8 +109,8 @@ function AccountPage() {
       <AuthUserContext.Consumer>
         {(authUser) => (
           <div className="base-container">
-            <div className="profile">Profile</div>
-            <div className="accountName">{authUser.email}'s page!</div>
+            <h1>Profile</h1>
+            <p>{authUser.email}'s page!</p>
             <div className={classes.root}>
               <AppBar position="static" color="default">
                 <Tabs
