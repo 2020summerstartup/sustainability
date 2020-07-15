@@ -1,0 +1,36 @@
+.modal {
+  /* color: var(--theme);
+  overflow: hidden;
+  width: 20rem;
+  height: 30rem;
+  margin: auto auto;
+  vertical-align: middle;
+  text-align: center;
+  background-color: white; */
+
+  position: relative;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-left: 5rem;
+  transform: translate(-50%, -50%);
+  position: sticky;
+  overflow: hidden;
+  width: 25rem;
+  height: 25rem;
+  background-color: white;
+}
+
+/* .overlay {
+    position: sticky;
+    overflow: hidden;
+} */
+
+/* small screens */
+@media only screen and (max-width: 600px) {
+    .modal {
+        margin-left: 0;
+        width: 20rem;
+    }
+}

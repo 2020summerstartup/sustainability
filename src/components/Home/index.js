@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
+import styles from "../Home.module.css";
 
 import ActionData from "../ActionData/OriginalData";
 import HomeTabs from "../HomeTabs";
+import CustomizedDialogs from "../Modal";
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
@@ -9,15 +11,15 @@ import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../Session";
-import {getUser, createUser, uploadUserTotalPoint} from "../Firebase";
-
-
+import { getUser, createUser, uploadUserTotalPoint } from "../Firebase";
 
 const CustomToast = ({ closeToast }) => {
   return (
     <div>
       <p>Log more sustainable actions!</p>
-      <button onClick={closeToast} className="button">OK</button>
+      <button onClick={closeToast} className="button">
+        OK
+      </button>
     </div>
   );
 };
@@ -39,20 +41,20 @@ var total;
 // Initialize point counter to 0 instead of NaN or null
 function initPoints(email) {
   total = 0;
-  for(const key in ActionData) {
+  for (const key in ActionData) {
     var action = localStorage.getItem(ActionData[key].susAction);
     if (isNaN(action) || action == null) {
       localStorage.setItem(ActionData[key].susAction, 0);
     }
   }
-  localStorage.setItem('total', total);
+  localStorage.setItem("total", total);
 }
 
-function assignData(data){
-  localStorage.setItem("total", data.total)
-  const points = data.points
+function assignData(data) {
+  localStorage.setItem("total", data.total);
+  const points = data.points;
   for (const [key, value] of Object.entries(points)) {
-    localStorage.setItem(key, value)
+    localStorage.setItem(key, value);
   }
 }
 // Loop over every element in ActionData, adding the save point values earn from each
@@ -78,7 +80,6 @@ function assignData(data){
 // + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
 // + parseInt(localStorage.getItem('ecoClean'));
 
-
 // The following commented out code didn't work, but I want to keep the record of it for now
 // to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)
 // // If the counter changes (i.e. if the buzz or undo button is pressed), call refreshPage function
@@ -96,7 +97,7 @@ function assignData(data){
 //   } else {
 //     console.log('else ran');
 //   }
-//   // Currently the above if statement never runs, so the computer thinks that testParam is always equal to 
+//   // Currently the above if statement never runs, so the computer thinks that testParam is always equal to
 //   // the actual local storage values. but the local storage should be getting changed, and testParam definitely
 //   // isn't updated.
 //   // And the function is basically running full time so that shouldn't be the issue
@@ -106,6 +107,22 @@ function assignData(data){
 //   // code into counter or something.
 // }
 
+const modalCustomStyles = {
+  overlay: {
+    position: "fixed",
+    overflow: "hidden",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    overflow: "hidden",
+    height: "25rem",
+  },
+};
 
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
@@ -115,25 +132,26 @@ function HomePage() {
 
   const authContext = useContext(AuthUserContext);
 
-  getUser(authContext.email).onSnapshot(docSnapshot => {
+  getUser(authContext.email).onSnapshot(
+    (docSnapshot) => {
       if (docSnapshot.exists) {
-        assignData(docSnapshot.data())
-        function assignData(data){
-          localStorage.setItem('dorm', data.userDorm)
-      } 
-    } else {
+        assignData(docSnapshot.data());
+        function assignData(data) {
+          localStorage.setItem("dorm", data.userDorm);
+        }
+      } else {
         createUser(authContext.email);
         initPoints(authContext.email);
         uploadUserTotalPoint(authContext.email, total);
       }
-    }, err => {
-    console.log(`Encountered error: ${err}`); 
-  });
-  
-  
-  var message = [];
-  total = localStorage.getItem("total")
+    },
+    (err) => {
+      console.log(`Encountered error: ${err}`);
+    }
+  );
 
+  var message = [];
+  total = localStorage.getItem("total");
 
   return (
     <div className="base-container">
@@ -146,7 +164,8 @@ function HomePage() {
         {<CountUp start={0} end={total} duration={1}></CountUp>} points! &nbsp;
         <button onClick={notify1} className="button">
           Click me!
-        </button> &nbsp;
+        </button>{" "}
+        &nbsp;
         <button onClick={notify2} className="button">
           No, Click me!
         </button>
@@ -155,58 +174,76 @@ function HomePage() {
         Check Your Progress
       </button>
       <p></p>
+      <CustomizedDialogs />
+      <p></p>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
-        style={{
-          overlay: {
-            // backgroundColor: 'papayawhip'
-          },
-          content: {
-            color: "var(--theme)",
-            overflow: "hidden",
-          },
-        }}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+        // style={{
+        //   overlay: {
+        //     // backgroundColor: 'papayawhip'
+        //   },
+        //   content: {
+        //     color: "var(--theme)",
+        //     overflow: "hidden",
+        //     width: "20rem",
+        //     height: "30rem",
+        //     margin: "auto auto",
+        //     verticalAlign: "middle",
+        //     textAlign: "center",
+        //   },
+        // }}
+        // style={modalCustomStyles}
       >
-      <center>
-        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! (Wait I think it's fixed on other branches, so hopefully that
+        <center>
+          {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! (Wait I think it's fixed on other branches, so hopefully that
         transfers to here too?) -Katie */}
-        <Confetti
-          width={1500}
-          numberOfPieces={2000}
-          recycle={false}
-          opacity={0.7}
-          // colors={["grey", "white", "green", "black"]}
-        />
-        {
-          // I don't yet understand what "Object" is referring to here/how the program knows that.
-          Object.keys(ActionData).map(
-            (key) => {
+          <Confetti
+            width={1500}
+            numberOfPieces={2000}
+            recycle={false}
+            opacity={0.7}
+            // colors={["grey", "white", "green", "black"]}
+          />
+          {
+            // I don't yet understand what "Object" is referring to here/how the program knows that.
+            Object.keys(ActionData).map((key) => {
               // TODO: All the actions display on one line, and I couldn't get newline characters to work no matter
               // what I did. Need to sort this out later. -Katie
-              message[parseInt(key) - 1] = ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
-              return '' // It has to return a value. I think it isn't bad practice to do this? -Katie
-            }
-          )
-        }
-        <h2 id='testId'>Your Progress: </h2>
-        {/* Pretty sure the fullowing script is leftover from my testing. Unless you know it's important, feel free to delete! -Katie */}
-        <script>
-          document.getElementById("testId").innerHTML = "Hello JavaScript!";
-        </script>
-        {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
-        <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
-        <h3>Total Points: { total } </h3>
-        <h1> </h1>
-        <div>
-          <button onClick={() => setModalIsOpen(false)} className="button">
-            Close
-          </button>
-        </div>
-      </center>
+              message[parseInt(key) - 1] = ActionData[key].title.concat(
+                " Points: ",
+                localStorage.getItem(ActionData[key].susAction),
+                " "
+              );
+              return ""; // It has to return a value. I think it isn't bad practice to do this? -Katie
+            })
+          }
+          <h1 id="testId">Your Progress: </h1>
+          {/* Pretty sure the fullowing script is leftover from my testing. Unless you know it's important, feel free to delete! -Katie */}
+          <script>
+            document.getElementById("testId").innerHTML = "Hello JavaScript!";
+          </script>
+          {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
+          <p>
+            {" "}
+            {message[0]} <br /> {message[1]} <br /> {message[2]} <br />{" "}
+            {message[3]} <br /> {message[4]} <br /> {message[5]} <br />{" "}
+            {message[6]} <br /> {message[7]} <br /> {message[8]}{" "}
+            {message.slice(9, message.length)}{" "}
+          </p>
+          <h3>Total Points: {total} </h3>
+          <h1> </h1>
+          <div>
+            <button onClick={() => setModalIsOpen(false)} className="button">
+              Close
+            </button>
+          </div>
+        </center>
       </Modal>
       <div>
-      < HomeTabs />
+        <HomeTabs />
       </div>
       {/* <ActionCard /> */}
     </div>
@@ -217,5 +254,4 @@ const condition = (authUser) => !!authUser;
 
 export default withAuthorization(condition)(HomePage);
 
-export {initPoints, assignData}
-
+export { initPoints, assignData };
