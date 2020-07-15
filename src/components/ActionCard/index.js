@@ -24,7 +24,6 @@ import ActionData from "../ActionData/index.json";
 import { updateUserPoint, updateDormPoint, updateUserDorm } from "../Firebase";
 import { AuthUserContext, withAuthorization} from "../Session";
 
-// I pulled these from Home's index.js
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -122,14 +121,6 @@ const ActionCard = () => {
   };
 
   // KEEP THIS!!! UPDATED VERSION
-  //   const increment = () => {
-  //     // add specified number of points to the saved point total
-  //     localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
-  //     updateUser(authContext.email, susAction, points).then(() => {window.location.reload(true)})
-  //   };
-  // };
-
-  // KEEP THIS!!! UPDATED VERSION
   const increment = (action) => {
     // add specified number of points to the saved point total
     localStorage.setItem(
@@ -168,6 +159,20 @@ const ActionCard = () => {
 
   };
 
+  // Initialize the color of each favorite button
+  // This isn't in a function because I can't call the function when I want using html. Could go in a function and then be called with JS.
+  var favIconColors = [] // Initalize array of the color for each favIcon
+  for(const key in ActionData) { // Iterate over every action in ActionData
+    var action = ActionData[key]; // Take the current action
+    var storageName = action.susAction.concat("Fav");
+    var storedFav = localStorage.getItem(storageName) == 'true'; // We're getting a warning in the console (wants ===)
+    if (storedFav) { // If the action is favorited
+    favIconColors[key-1] = "#DC143C"; // Turn red
+    } else {
+      favIconColors[key-1] = "#6c6c6c"; // Otherwise turn gray
+    }
+  }
+
 
   const favAction = (action) => {
     // Get the name and info of the stored action that we're working with
@@ -196,30 +201,6 @@ const ActionCard = () => {
       toast.warn(message, { autoClose: 5000 });
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
-  };
-
-  const initColor = (action) => {
-    // Get the name and info of the stored action that we're working with
-    var storageName = action.susAction.concat("Fav");
-    // storedFav is a boolean (is the current action favorited?)
-    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedFav = localStorage.getItem(storageName) == 'true';
-    // In case the action hasn't been favorited before
-    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is.
-    if (storedFav == null) {
-      console.log("storedFav was null or NaN", storedFav);
-      storedFav = false; // If not initialized, initialize here
-    }
-    // variable for getting color of fav icon
-    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
-    // favIconColor was not null when this was called in onclick so the function itself works, it's the calling that's messed up
-    console.log('favIconColor', favIconColor);
-    // Notify user that action was added/removed from favorites
-    if (storedFav) {
-      favIconColor.style.color = "#DC143C"; // Turn red
-    } else {
-      favIconColor.style.color = "#6c6c6c"; // Back to grey
-    }
   };
 
   return (
@@ -267,10 +248,11 @@ const ActionCard = () => {
                   />
                   <CardActions disableSpacing>
                     <IconButton
+                      title='Add to favorites'
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
+                      style={{ color: favIconColors[i-1] }} // Set the favIcon color (i-1 prevents off-by-one error)
                       onClick={() => favAction(action)}
-                      // onload={initColor(action)}
                       id={ "favoriteIcon".concat(action.susAction) }
                       className={classes.favoriteIcon}
                     >
