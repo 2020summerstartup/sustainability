@@ -13,6 +13,8 @@ import {
   faComment,
   faLock,
   faUnlockAlt,
+  faEye,
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -26,4 +28,6 @@ library.add(
   faComment,
   faLock,
   faUnlockAlt,
+  faEye,
+  faEyeSlash
 );
