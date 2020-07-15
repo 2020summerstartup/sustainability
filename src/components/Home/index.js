@@ -137,24 +137,19 @@ function HomePage() {
 
   return (
     <div className="base-container">
-      {/* Does the following line do anything? */}
-      <script>var user =</script>
       <h1>Home Sweet Home</h1>
       {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
         {<CountUp start={0} end={total} duration={1}></CountUp>} points! &nbsp;
-        <button onClick={notify1} className="button">
-          Click me!
-        </button> &nbsp;
         <button onClick={notify2} className="button">
-          No, Click me!
+          Click me!
         </button>
       </h3>
       <button onClick={() => setModalIsOpen(true)} className="button">
         Check Your Progress
       </button>
-      <p></p>
+      <p> </p>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
@@ -197,7 +192,6 @@ function HomePage() {
         {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
         <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
         <h3>Total Points: { total } </h3>
-        <h1> </h1>
         <div>
           <button onClick={() => setModalIsOpen(false)} className="button">
             Close
@@ -208,7 +202,6 @@ function HomePage() {
       <div>
       < HomeTabs />
       </div>
-      {/* <ActionCard /> */}
     </div>
   );
 }
