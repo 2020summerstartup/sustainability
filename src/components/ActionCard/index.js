@@ -127,6 +127,8 @@ const ActionCard = () => {
   const increment = (action) => {
 
     // allows us to increment the correct values by writing the action & value to local storage
+    toast(action.title.concat(' logged. Thanks!'), { autoClose: 5000 });
+    // add specified number of points to the saved point total
     localStorage.setItem(
       action.susAction,
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)

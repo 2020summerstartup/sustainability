@@ -79,6 +79,7 @@ function HomePage() {
   });
 
   const clicked = () => {
+    // var codeBlock = '<button id=\'wrapper\' >Another option...</button><br />';
     var codeBlock = '';
     for (const key in ActionData) {
       codeBlock += ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ') +
@@ -99,11 +100,11 @@ function HomePage() {
       <h1>Home Sweet Home</h1>
       {/* Testing for fun */}
       <h3>
-        You have earned a total of&nbsp;
+        You have earned&nbsp;
         {<CountUp start={0} end={total} duration={1}></CountUp>} points! &nbsp;
-        <button onClick={notify2} className="button">
+        {/* <button onClick={notify2} className="button">
           Click me!
-        </button>
+        </button> */}
       </h3>
       <button onClick={() => setModalIsOpen(true)} className="button">
         Check Your Progress
@@ -123,13 +124,14 @@ function HomePage() {
         }}
       >
       <center>
-        <Confetti
+        {/* <Confetti
           width={1500}
           numberOfPieces={2000}
           recycle={false}
           opacity={0.7}
           // colors={["grey", "white", "green", "black"]}
-        />
+        /> */} 
+        {/* Just for while I'm working */}
         {
           // I don't yet understand what "Object" is referring to here/how the program knows that.
           Object.keys(ActionData).map(
@@ -142,8 +144,8 @@ function HomePage() {
         <h1>Your Progress:</h1>
         {/* TODO: This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
         <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
-        <h3 id="testId">Total Points: { total } </h3>
-        <button id='wrapper' onClick={() => clicked()}>Another option...</button>
+        <h3>Total Points: { total } </h3>
+        <h1 id='wrapper'><button onClick={() => clicked()}>Another option...</button></h1>
         <div>
           <button onClick={() => setModalIsOpen(false)} className="button">
             Close
