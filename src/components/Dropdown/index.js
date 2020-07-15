@@ -49,6 +49,11 @@ const dorms = [
 function Dropdown2() {
   const [selectedValue, setSelectedValue] = useState(null);
   const authContext = useContext(AuthUserContext);
+  var placeholder = localStorage.getItem('dorm');
+  if (placeholder == null) {
+    placeholder = "Select your dorm..."
+    alert("Please select your dorm in setting page!");
+  } // modified from "original if statement I wrote" that someone else created. -Katie
 
   const handleChange = (obj) => {
     const dorm = obj.label.replace(/"([^"]+)":/g, "$1:")
@@ -57,11 +62,6 @@ function Dropdown2() {
     updateUserDorm(authContext.email, dorm);
     // the .replace was supposed to get rid of quotes but it didn't work
   };
-  
-  if (localStorage.getItem('dorm') == null) {
-    alert("Please select your dorm in setting page!");
-  }
-  // original if statement I wrote
   
 
   const customStyles = {
@@ -99,7 +99,7 @@ function Dropdown2() {
         options={dorms}
         onChange={handleChange}
         isOptionDisabled={(option) => option.isDisabled}
-        placeholder="Select your dorm..."
+        placeholder= { placeholder }
       />
       <br />
       <b>Your dorm: { localStorage.getItem('dorm') }</b>
