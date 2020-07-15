@@ -1,8 +1,9 @@
 import React from "react";
 import { withFirebase } from '../Firebase';
-
-
+import IconButton from "@material-ui/core/IconButton";
 // import material ui
+import Button from '@material-ui/core/Button';
+
 import { AppBar, Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,9 +18,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "0.5rem",
     marginLeft: "0rem",
     marginBottom: "0.5rem",
+    textAlign:"left",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
     },
+    
+  },
+  menuButton: {
+    marginright: theme.spacing(2),
+    textAlign: "left",
+    color: "white",
   },
 }));
 
@@ -35,9 +43,17 @@ const AccountHeader = ({ firebase }) => {
             Yay
             <EcoIcon className={classes.leaf} />
           </Typography>
-          <div class="settings">
-          <SwipeableTemporaryDrawer/>
-          </div>
+          <SwipeableTemporaryDrawer className={classes.menuButton} />
+          {/* <IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="menu">
+            <EcoIcon />
+          </IconButton> */}
+        {/* <IconButton edge="end">
+          <SwipeableTemporaryDrawer   />
+        </IconButton> */}
+          
+          
+          
+      
         </Toolbar>
       </AppBar>
     </>

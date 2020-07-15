@@ -1,7 +1,8 @@
-.button_settings {
+.buttonSettings {
     /* display: grid;
     justify-content: left;
     align-content: flex-end; */
-    /* float: right; */
-    text-align: right;
+    float: right;
+    /* text-align: right; */
 }
+
