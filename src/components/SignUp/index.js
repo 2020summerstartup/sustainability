@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-// import "./index.css";
+import "./index.css";
 
 import { withFirebase, createUser } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
@@ -124,7 +124,7 @@ class SignUpFormBase extends Component {
           />
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon="user" className="icon" />
+          <FontAwesomeIcon icon="home" className="icon" />
           <input
             className="input-field"
             name="dorm"

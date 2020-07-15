@@ -11,7 +11,6 @@ const dorms = [
   {
     value: 1,
     label: "Atwood",
-    // isDisabled: true,
   },
   {
     value: 2,
@@ -28,7 +27,6 @@ const dorms = [
   {
     value: 5,
     label: "Linde",
-    // isDisabled: true,
   },
   {
     value: 6,
@@ -82,12 +80,11 @@ function Dropdown2() {
     control: (styles, state) => ({
       ...styles,
       boxShadow: state.isFocused ? "0 0 0 0.2rem #24a113)" : 0,
-      borderColor: state.isFocused ? "#D0EAE2" : "#CED4DA",
-
+      borderColor: state.isFocused ? "#24a113" : "#24a113",
       cursor: state.isDisabled ? "not-allowed" : "default",
-
       "&:hover": {
         borderColor: state.isFocused ? "#24a113" : "#24a113",
+        borderColor: state.isSelected ? "#24a113" : "#24a113",
       },
     }),
   };

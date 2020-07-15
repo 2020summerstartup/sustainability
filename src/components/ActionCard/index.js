@@ -40,8 +40,6 @@ const useStyles = makeStyles((theme) => ({
   searchContainer: {
     display: "flex",
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    paddingLeft: "20px",
-    paddingRight: "20px",
     marginTop: "1rem",
     marginBottom: "0.5rem",
   },
@@ -50,13 +48,16 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "0.5rem",
   },
   searchInput: {
-    width: "15rem",
+    width: "12rem",
     paddingBottom: "0",
+    [theme.breakpoints.up("sm")]: {
+      width: "15em",
+    },
   },
   actionContainer: {
     paddingTop: "1rem",
-    paddingLeft: "2rem",
-    paddingRight: "2rem",
+    paddingLeft: "0",
+    paddingRight: "0",
   },
   media: {
     height: 0,
@@ -222,7 +223,7 @@ const ActionCard = () => {
 
   return (
     <Fragment>
-      <Toolbar>
+      {/* <Toolbar> */}
         <div className={classes.searchContainer}>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
@@ -240,8 +241,8 @@ const ActionCard = () => {
             </Grid>
           </Grid>
         </div>
-      </Toolbar>
-      <Grid container spacing={3} className={classes.actionContainer}>
+      {/* </Toolbar> */}
+      <Grid container spacing={2} className={classes.actionContainer}>
         {ActionData.map(
           (action, i) =>
             action.title.toLowerCase().includes(filter.toLowerCase()) && (
