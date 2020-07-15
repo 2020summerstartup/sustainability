@@ -77,6 +77,7 @@ function HomePage() {
   });
 
   const clicked = () => {
+    // var codeBlock = '<button id=\'wrapper\' >Another option...</button><br />';
     var codeBlock = '';
     for (const key in ActionData) {
       codeBlock += ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ') +
@@ -140,7 +141,7 @@ function HomePage() {
         {/* TODO: This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
         <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
         <h3 id="testId">Total Points: { total } </h3>
-        <button id='wrapper' onClick={() => clicked()}>Another option...</button>
+        <h1 id='wrapper'><button onClick={() => clicked()}>Another option...</button></h1>
         <div>
           <button onClick={() => setModalIsOpen(false)} className="button">
             Close
