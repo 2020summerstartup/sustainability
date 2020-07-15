@@ -121,13 +121,14 @@ function HomePage() {
         }}
       >
       <center>
-        <Confetti
+        {/* <Confetti
           width={1500}
           numberOfPieces={2000}
           recycle={false}
           opacity={0.7}
           // colors={["grey", "white", "green", "black"]}
-        />
+        /> */} 
+        {/* Just for while I'm working */}
         {
           // I don't yet understand what "Object" is referring to here/how the program knows that.
           Object.keys(ActionData).map(
@@ -140,7 +141,7 @@ function HomePage() {
         <h1>Your Progress:</h1>
         {/* TODO: This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
         <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
-        <h3 id="testId">Total Points: { total } </h3>
+        <h3>Total Points: { total } </h3>
         <h1 id='wrapper'><button onClick={() => clicked()}>Another option...</button></h1>
         <div>
           <button onClick={() => setModalIsOpen(false)} className="button">
