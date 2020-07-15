@@ -248,6 +248,7 @@ const ActionCard = () => {
                   />
                   <CardActions disableSpacing>
                     <IconButton
+                      title='Add to favorites'
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
                       style={{ color: favIconColors[i-1] }} // Set the favIcon color (i-1 prevents off-by-one error)
