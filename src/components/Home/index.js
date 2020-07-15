@@ -24,9 +24,6 @@ const CustomToast = ({ closeToast }) => {
 
 // Fun toast notifications
 toast.configure();
-const notify1 = () => {
-  toast("You are amazing!", { autoClose: 8000 });
-};
 const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
