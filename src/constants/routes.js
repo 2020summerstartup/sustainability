@@ -10,5 +10,6 @@ export const COMPETE = '/compete';
 export const INFO = '/info';
 export const PASSWORD_FORGET = '/pw-forget';
 export const PROFILE = '/profile';
-export const CHANGE = '/changepassword';
+export const CHANGEPW = '/changepassword';
+export const CHANGEDORM = '/changedorm';
 export const OFFLINE = '/offline';

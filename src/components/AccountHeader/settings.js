@@ -10,7 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import ChangePage from "../PasswordChange/changePage.js";
+import ChangePW from "../PasswordChange/changePw.js";
 import Dropdown2 from "../Dropdown";
 import styles from "../AccountHeader.modules.css";
 import LockOpenIcon from '@material-ui/icons/LockOpen';
@@ -87,7 +87,7 @@ export default function SwipeableTemporaryDrawer() {
          {/* <FormDialog/> */}
        </ListItemText>
    </ListItem>
-   <ListItem button component={Link} to={ROUTES.CHANGE} className="link-text">
+   <ListItem button component={Link} to={ROUTES.CHANGEPW} className="link-text">
        <ListItemIcon>
             <LockOpenIcon />
        </ListItemIcon>
@@ -97,7 +97,7 @@ export default function SwipeableTemporaryDrawer() {
    </ListItem>
    
 
-   <ListItem button component={Link} to={ROUTES.CHANGE} className="link-text">
+   <ListItem button component={Link} to={ROUTES.CHANGEDORM} className="link-text">
    <ListItemIcon>
         <ApartmentIcon/>
      </ListItemIcon>

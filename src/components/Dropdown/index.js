@@ -91,8 +91,6 @@ function Dropdown2() {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Earn Points for Your Dorm! </h1>{" "}
-      <br />
       <Select
         styles={customStyles}
         value={dorms.find((x) => x.label === selectedValue)}
