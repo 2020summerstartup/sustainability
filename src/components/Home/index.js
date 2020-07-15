@@ -126,7 +126,7 @@ function HomePage() {
             }
           )
         }
-        <h2>Your Progress: </h2>
+        <h1>Your Progress: </h1>
         {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
         <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
         <h3>Total Points: { total } </h3>
