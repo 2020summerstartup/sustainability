@@ -24,16 +24,13 @@ const CustomToast = ({ closeToast }) => {
 
 // Fun toast notifications
 toast.configure();
-const notify1 = () => {
-  toast("You are amazing!", { autoClose: 8000 });
-};
 const notify2 = () => {
   toast(<CustomToast />, { autoClose: false });
 };
 
 var total;
 
-// Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
+// Note from Katie to other programmers: The following fuction is super important, even though it usually doesn't
 // do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
 // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
 // Initialize point counter to 0 instead of NaN or null
@@ -55,57 +52,6 @@ function assignData(data){
     localStorage.setItem(key, value)
   }
 }
-// Loop over every element in ActionData, adding the save point values earn from each
-// for(const key in ActionData) {
-//   total += parseInt(localStorage.getItem(ActionData[key].susAction));
-// }
-// Save the total point value in local storage (to be accessed elsewhere when we need to display total)
-// localStorage.setItem('total', total);
-
-// Initialize total points variable
-// TODO: I want this to update without us having to manually add every sus action. Change to a function somehow
-// var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
-// + parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
-// + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
-// + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
-// + parseInt(localStorage.getItem('ecoClean'));
-
-// // Initialize total points variable
-// // TODO: I want this to update without us having to manually add every sus action.
-// var total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))
-// + parseInt(localStorage.getItem('reuseStraw')) + parseInt(localStorage.getItem('reuseBag'))
-// + parseInt(localStorage.getItem('frmersMarket')) + parseInt(localStorage.getItem('rebrewTea'))
-// + parseInt(localStorage.getItem('noFoodWaste')) + parseInt(localStorage.getItem('meatlessMon'))
-// + parseInt(localStorage.getItem('ecoClean'));
-
-
-// The following commented out code didn't work, but I want to keep the record of it for now
-// to understand what I tried and what went wrong. Talk to me (Katie) if you want any clarificaiton. :)
-// // If the counter changes (i.e. if the buzz or undo button is pressed), call refreshPage function
-// Counter.onChange = refreshPage();
-
-// // Refresh the page
-// function refreshPage() {
-//   console.log('refreshPage func ran');
-//   console.log('total val', total);
-//   console.log('sum value', parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk')));
-//   if (total != parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'))) {
-//     console.log('if ran');
-//     total = parseInt(localStorage.getItem('waterBottle')) + parseInt(localStorage.getItem('cmontWalk'));
-//     document.location.reload(true);
-//   } else {
-//     console.log('else ran');
-//   }
-//   // Currently the above if statement never runs, so the computer thinks that testParam is always equal to 
-//   // the actual local storage values. but the local storage should be getting changed, and testParam definitely
-//   // isn't updated.
-//   // And the function is basically running full time so that shouldn't be the issue
-
-//   // update at 2:43: I think the issue is that the function isn't actually running. Which I guess kind of makes
-//   // sense because this entire file runs once and then it stops until reload. So i probably have to move all of this
-//   // code into counter or something.
-// }
-
 
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
@@ -137,24 +83,19 @@ function HomePage() {
 
   return (
     <div className="base-container">
-      {/* Does the following line do anything? */}
-      <script>var user =</script>
       <h1>Home Sweet Home</h1>
       {/* Testing for fun */}
       <h3>
         You have earned a total of&nbsp;
         {<CountUp start={0} end={total} duration={1}></CountUp>} points! &nbsp;
-        <button onClick={notify1} className="button">
-          Click me!
-        </button> &nbsp;
         <button onClick={notify2} className="button">
-          No, Click me!
+          Click me!
         </button>
       </h3>
       <button onClick={() => setModalIsOpen(true)} className="button">
         Check Your Progress
       </button>
-      <p></p>
+      <p> </p>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
@@ -169,8 +110,6 @@ function HomePage() {
         }}
       >
       <center>
-        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! (Wait I think it's fixed on other branches, so hopefully that
-        transfers to here too?) -Katie */}
         <Confetti
           width={1500}
           numberOfPieces={2000}
@@ -182,22 +121,15 @@ function HomePage() {
           // I don't yet understand what "Object" is referring to here/how the program knows that.
           Object.keys(ActionData).map(
             (key) => {
-              // TODO: All the actions display on one line, and I couldn't get newline characters to work no matter
-              // what I did. Need to sort this out later. -Katie
               message[parseInt(key) - 1] = ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
               return '' // It has to return a value. I think it isn't bad practice to do this? -Katie
             }
           )
         }
-        <h2 id='testId'>Your Progress: </h2>
-        {/* Pretty sure the fullowing script is leftover from my testing. Unless you know it's important, feel free to delete! -Katie */}
-        <script>
-          document.getElementById("testId").innerHTML = "Hello JavaScript!";
-        </script>
+        <h2>Your Progress: </h2>
         {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
         <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
         <h3>Total Points: { total } </h3>
-        <h1> </h1>
         <div>
           <button onClick={() => setModalIsOpen(false)} className="button">
             Close
@@ -208,7 +140,6 @@ function HomePage() {
       <div>
       < HomeTabs />
       </div>
-      {/* <ActionCard /> */}
     </div>
   );
 }

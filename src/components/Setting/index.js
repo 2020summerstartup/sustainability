@@ -17,7 +17,7 @@ const SettingsPage = () => (
           <h1>Your Account: {authUser.email}</h1>
           <h3>Change your dorm here!</h3>
           <Dropdown2 />
-          <h3></h3>
+          <h3> </h3>
           <div className="image">
             <img alt="your account" src={accountImg} />
           </div>
