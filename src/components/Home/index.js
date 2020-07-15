@@ -30,7 +30,7 @@ const notify2 = () => {
 
 var total;
 
-// Note from Katie to other programmers: The following if statements are super important, even though they usually doesn't
+// Note from Katie to other programmers: The following fuction is super important, even though it usually doesn't
 // do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
 // decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
 // Initialize point counter to 0 instead of NaN or null
@@ -110,8 +110,6 @@ function HomePage() {
         }}
       >
       <center>
-        {/* Confetti is off-center now. I'm not sure why? I'm super sorry if I broke something! (Wait I think it's fixed on other branches, so hopefully that
-        transfers to here too?) -Katie */}
         <Confetti
           width={1500}
           numberOfPieces={2000}
@@ -123,18 +121,12 @@ function HomePage() {
           // I don't yet understand what "Object" is referring to here/how the program knows that.
           Object.keys(ActionData).map(
             (key) => {
-              // TODO: All the actions display on one line, and I couldn't get newline characters to work no matter
-              // what I did. Need to sort this out later. -Katie
               message[parseInt(key) - 1] = ActionData[key].title.concat(' Points: ', localStorage.getItem(ActionData[key].susAction), ' ')
               return '' // It has to return a value. I think it isn't bad practice to do this? -Katie
             }
           )
         }
-        <h2 id='testId'>Your Progress: </h2>
-        {/* Pretty sure the fullowing script is leftover from my testing. Unless you know it's important, feel free to delete! -Katie */}
-        <script>
-          document.getElementById("testId").innerHTML = "Hello JavaScript!";
-        </script>
+        <h2>Your Progress: </h2>
         {/* This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
         <p> { message[0] } <br /> { message[1] } <br /> { message[2] } <br /> { message[3] } <br /> { message[4] } <br /> { message[5] } <br /> { message[6] } <br /> { message[7] } <br /> { message[8] } { message.slice(9, message.length) } </p>
         <h3>Total Points: { total } </h3>
