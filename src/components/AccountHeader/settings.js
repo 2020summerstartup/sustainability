@@ -15,7 +15,7 @@ import Dropdown2 from "../Dropdown";
 import styles from "../AccountHeader.modules.css";
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import SettingsIcon from '@material-ui/icons/Settings';
-import ApartmentIcon from '@material-ui/icons/Apartment';
+import HomeIcon from '@material-ui/icons/Home';
 import EmailIcon from '@material-ui/icons/Email';
 import { Link } from "react-router-dom";
 import FormDialog from "./popupform";
@@ -36,10 +36,6 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     top: ".75rem",  
     right: "0rem",
-    // display:"flex",
-    // flexDirection: "flex-end",
-    // position: "relative",
-    // left: "25rem",
   }
 }));
 
@@ -78,12 +74,12 @@ export default function SwipeableTemporaryDrawer() {
    <ListItem>
      <ListItemText>Settings</ListItemText>
    </ListItem>
-   <ListItem className="link-text">
+   <ListItem >
      <ListItemIcon>
        <EmailIcon/>
      </ListItemIcon>
        <ListItemText>
-         Email
+         {localStorage.getItem("email")}
          {/* <FormDialog/> */}
        </ListItemText>
    </ListItem>
@@ -92,17 +88,17 @@ export default function SwipeableTemporaryDrawer() {
             <LockOpenIcon />
        </ListItemIcon>
        <ListItemText>
-           CHANGE PASSWORD
+           Change password
        </ListItemText>
    </ListItem>
    
 
    <ListItem button component={Link} to={ROUTES.CHANGEDORM} className="link-text">
    <ListItemIcon>
-        <ApartmentIcon/>
+        <HomeIcon/>
      </ListItemIcon>
      <ListItemText >
-       Change your dorm here!
+       Change your dorm
      </ListItemText>
      </ListItem>
 

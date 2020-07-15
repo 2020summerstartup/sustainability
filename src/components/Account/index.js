@@ -38,7 +38,7 @@ import PersonPinIcon from "@material-ui/icons/PersonPin";
 // import ThumbUp from "@material-ui/icons/ThumbUp";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import HouseIcon from "@material-ui/icons/House";
+import HomeIcon from "@material-ui/icons/Home";
 import SettingsIcon from "@material-ui/icons/Settings";
 
 function TabPanel(props) {
@@ -109,8 +109,8 @@ function AccountPage() {
       <AuthUserContext.Consumer>
         {(authUser) => (
           <div className="base-container">
-            <h1>Profile</h1>
-            <p>{authUser.email}'s page!</p>
+            {/* <h1>Profile</h1>
+            <p>{authUser.email}'s page!</p> */}
             <div className={classes.root}>
               <AppBar position="static" color="default">
                 <Tabs
@@ -130,24 +130,14 @@ function AccountPage() {
                     {...a11yProps(0)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  {/* <Tab
-                    label="Your Favorites"
-                    icon={<FavoriteIcon />}
-                    {...a11yProps(1)}
-                    style={{ backgroundColor: "transparent" }}
-                  /> */}
+                
                   <Tab
                     label="Your Dorm"
-                    icon={<HouseIcon />}
+                    icon={<HomeIcon />}
                     {...a11yProps(1)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  <Tab
-                    label="Settings"
-                    icon={<SettingsIcon />}
-                    {...a11yProps(2)}
-                    style={{ backgroundColor: "transparent" }}
-                  />
+                 
                  
                 </Tabs>
               </AppBar>
@@ -160,16 +150,11 @@ function AccountPage() {
               <TabPanel value={value} index={1}>
                 <DormCard />
               </TabPanel>
-              <TabPanel value={value} index={2}>
-                <SettingsPage />
-              </TabPanel>
-              {/* <TabPanel value={value} index={3}>
-                Item Five
-              </TabPanel> */}
+              
             </div>
-            <div class="signout-btn">
+            {/* <div class="signout-btn">
               <SignOutButton />
-            </div>
+            </div> */}
           </div>
         )}
       </AuthUserContext.Consumer>
