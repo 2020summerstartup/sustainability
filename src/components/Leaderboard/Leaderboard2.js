@@ -40,7 +40,6 @@ class Leaderboard2 extends React.Component {
           leaders: newLeaders,
           maxScore: newLeaders[0].points
         });
-        console.log('success', newLeaders[0].points)
       })
     }
     
