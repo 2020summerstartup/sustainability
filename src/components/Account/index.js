@@ -112,16 +112,17 @@ function AccountPage() {
             {/* <h1>Profile</h1>
             <p>{authUser.email}'s page!</p> */}
             <div className={classes.root}>
-              <AppBar position="static" color="default">
+              <AppBar position="static" color="primary">
                 <Tabs
                   value={value}
                   onChange={handleChange}
                   variant="fullWidth"
                   scrollButtons="off"
                   indicatorColor="primary"
-                  textColor="primary"
+                  textColor="default"
                   aria-label="scrollable tabs"
                   centered="true"
+                  width="100%"
                 >
 
                   <Tab

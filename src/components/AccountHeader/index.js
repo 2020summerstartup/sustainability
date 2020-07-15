@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import EcoIcon from "@material-ui/icons/Eco";
 import SwipeableTemporaryDrawer from './settings.js';
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -25,11 +26,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "6.5rem",
     },
   },
-  menuButton: {
-    marginright: theme.spacing(2),
-    textAlign: "left",
-    color: "white",
-  },
 }));
 
 
@@ -40,11 +36,17 @@ const AccountHeader = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
+          <Grid justify="space-between" container spacing={24} flexGrow={1}>
+        <Grid item>
           <Typography variant="h6" className={classes.title} noWrap>
-            Yay
+            Sustainability Competition
             <EcoIcon className={classes.leaf} />
           </Typography>
-          <SwipeableTemporaryDrawer className={classes.menuButton} />       
+        </Grid>
+        <Grid item>
+          <SwipeableTemporaryDrawer />   
+        </Grid>
+        </Grid>    
         </Toolbar>
       </AppBar>
     </>

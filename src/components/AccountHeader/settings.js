@@ -22,6 +22,7 @@ import FormDialog from "./popupform";
 import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 import PasswordChange from '../PasswordChange';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -32,11 +33,19 @@ const useStyles = makeStyles((theme) => ({
   },
   settingsIcon: {
     color: "white",
-    display: "flex",
-    position: "fixed",
-    top: ".75rem",  
+    top: ".5rem",
     right: "0rem",
-  }
+  },
+  listItemIcon: {
+    minWidth: "2.5rem",
+  },
+  listItemText: {
+    marginRight: "1.5rem",
+  },
+  settingsSignOut: {
+    display: "flex",
+    justifyContent: "center",
+  },
 }));
 
 export default function SwipeableTemporaryDrawer() {
@@ -72,47 +81,46 @@ export default function SwipeableTemporaryDrawer() {
         <ListItemText primary="Google" />
    </ListItem> */}
    <ListItem>
-     <ListItemText>Settings</ListItemText>
+     <ListItemText>
+       <Typography variant="h5">
+        Settings  
+       </Typography>
+    </ListItemText>
    </ListItem>
-   <ListItem >
-     <ListItemIcon>
+   <ListItem>
+     <ListItemIcon className={classes.listItemIcon}>
        <EmailIcon/>
      </ListItemIcon>
-       <ListItemText>
+       <ListItemText className={classes.listItemText}>
          {localStorage.getItem("email")}
          {/* <FormDialog/> */}
        </ListItemText>
    </ListItem>
    <ListItem button component={Link} to={ROUTES.CHANGEPW} className="link-text">
-       <ListItemIcon>
+       <ListItemIcon className={classes.listItemIcon}>
             <LockOpenIcon />
        </ListItemIcon>
-       <ListItemText>
+       <ListItemText className={classes.listItemText}>
            Change password
        </ListItemText>
    </ListItem>
-   
 
    <ListItem button component={Link} to={ROUTES.CHANGEDORM} className="link-text">
-   <ListItemIcon>
+   <ListItemIcon className={classes.listItemIcon}>
         <HomeIcon/>
      </ListItemIcon>
-     <ListItemText >
+     <ListItemText className={classes.listItemText}>
        Change your dorm
      </ListItemText>
      </ListItem>
 
-    <ListItem >
-   <ListItemText>
+    <ListItem className={classes.settingsSignOut}>
+   {/* <ListItemText> */}
      <SignOutButton/>
-   </ListItemText>
+   {/* </ListItemText> */}
     </ListItem>
-    
-     
-   
       </List>
-      
-      
+ 
     </div>
   );
 
