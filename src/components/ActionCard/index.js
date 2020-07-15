@@ -168,6 +168,23 @@ const ActionCard = () => {
 
   };
 
+  // OKAY HERE'S THE PLAN. I RAN A FOR LOOP HERE FOR EVERY THING IN ACTION DATA (LIKE I DID ELSEWHERE FOR INITALIZE STUFF)
+  // I SET A VARIABLE FOR EACH COLOR TO BE ONE OF TWO THINGS
+  // THEN WITHIN THE STYLE I SET THE COLOR TO BE EQUAL TO THE VARIABLE THAT WAS SET HERE.
+  //var favColor = "blue";
+  var favIconColors = []
+  for(const key in ActionData) {
+    var action = ActionData[key];
+    //favIconColors[key-1] = "green";
+    var storageName = action.susAction.concat("Fav");
+    var storedFav = localStorage.getItem(storageName) == 'true'; // We're getting a warning in the console
+    if (storedFav) {
+    favIconColors[key-1] = "#DC143C"; // red
+    } else {
+      favIconColors[key-1] = "#6c6c6c"; // gray
+    }
+  }
+
 
   const favAction = (action) => {
     // Get the name and info of the stored action that we're working with
@@ -269,8 +286,8 @@ const ActionCard = () => {
                     <IconButton
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
+                      style={{ color: favIconColors[i-1] }} // TODO: Might have an off by one error here!!
                       onClick={() => favAction(action)}
-                      // onload={initColor(action)}
                       id={ "favoriteIcon".concat(action.susAction) }
                       className={classes.favoriteIcon}
                     >
