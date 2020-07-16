@@ -1,25 +1,21 @@
 .modal {
-  /* color: var(--theme);
-  overflow: hidden;
-  width: 20rem;
-  height: 30rem;
-  margin: auto auto;
-  vertical-align: middle;
-  text-align: center;
-  background-color: white; */
-
   position: relative;
-  top: 50%;
+  top: 45%;
   left: 50%;
   right: auto;
   bottom: auto;
   margin-left: 5rem;
   transform: translate(-50%, -50%);
-  position: sticky;
   overflow: hidden;
-  width: 25rem;
+  width: 30rem;
   height: 25rem;
   background-color: white;
+  border-radius: 10px;
+  border: 1px solid var(--theme);
+  -webkit-box-shadow: 0 3px 7px var(--theme);
+  -moz-box-shadow: 0 3px 7px var(--theme);
+  box-shadow: 0 3px 7px var(--theme);
+  outline: none;
 }
 
 /* .overlay {
@@ -29,8 +25,9 @@
 
 /* small screens */
 @media only screen and (max-width: 600px) {
-    .modal {
-        margin-left: 0;
-        width: 20rem;
-    }
+  .modal {
+    margin-left: 0;
+    width: 20rem;
+    height: 25rem;
+  }
 }
