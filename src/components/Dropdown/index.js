@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import styles from "../Dropdown.modules.css";
+import styles from "../Dropdown.module.css";
 
 import { AuthUserContext, withAuthorization } from "../Session";
 import {updateUserDorm, getDorm} from "../Firebase"
