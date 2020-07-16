@@ -14,7 +14,7 @@ import CompetePage from '../Compete';
 import OfflinePage from '../Offline';
 // import AccountHeader from '../AccountHeader';
 import ChangePW from "../PasswordChange/changePw.js";
-import ChangeDorm from "../Setting/changeDorm.js";
+import ChangeDorm from "../PasswordChange/changeDorm.js";
 // import ChangeHeader from "../ChangeHeader";
 
 import * as ROUTES from '../../constants/routes';
