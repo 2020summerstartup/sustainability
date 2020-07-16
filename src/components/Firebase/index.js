@@ -1,6 +1,6 @@
 import FirebaseContext, { withFirebase } from './context';
 import Firebase from './firebase';
-import {createUser, getUser, updateUserPoint, uploadUserPoint, uploadUserTotalPoint, updateUserDorm, updateDormPoint, getDorm} from './firebase';
+import {firestore, createUser, getUser, updateUserPoint, uploadUserPoint, uploadUserTotalPoint, updateUserDorm, updateDormPoint, getDorm} from './firebase';
  
 export default Firebase;
 
@@ -28,4 +28,4 @@ export default Firebase;
  
 export { FirebaseContext, withFirebase };
 
-export {createUser, getUser, updateUserPoint, uploadUserPoint, uploadUserTotalPoint, updateUserDorm, updateDormPoint, getDorm};
+export {firestore, createUser, getUser, updateUserPoint, uploadUserPoint, uploadUserTotalPoint, updateUserDorm, updateDormPoint, getDorm};
