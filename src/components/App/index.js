@@ -9,7 +9,6 @@ import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
 import InfoPage from '../Info';
-import ProfilePage from '../Profile';
 import Header, {AccountHeader, ChangeHeader} from '../Headers';
 import CompetePage from '../Compete';
 import OfflinePage from '../Offline';
@@ -46,7 +45,6 @@ const App = () => (
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.INFO} component={InfoPage} />
-      <Route path={ROUTES.PROFILE} component={ProfilePage} />
       <Route path={ROUTES.COMPETE} component={CompetePage} />
       <Route path={ROUTES.OFFLINE} component={OfflinePage} />
       <Route path={ROUTES.CHANGEPW} component={ChangePW} />
