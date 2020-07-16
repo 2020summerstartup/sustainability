@@ -164,8 +164,4 @@ export const getDorm = () => {
   return firestore.collection('dorms')
 }
 
-export const updateDormPoint = (dorm, point) => {
-  return firestore.collection('dorms').doc(dorm).update({
-    score: point,
-  })
-}
+export {firestore}

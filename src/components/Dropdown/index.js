@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import "./index.css";
+import styles from "../Dropdown.modules.css";
+
 import { AuthUserContext, withAuthorization } from "../Session";
 import {updateUserDorm, getDorm} from "../Firebase"
 
@@ -61,7 +62,7 @@ function Dropdown2() {
     const dorm = obj.label.replace(/"([^"]+)":/g, "$1:")
     setSelectedValue(dorm);
     localStorage.setItem('dorm', dorm);
-    updateUserDorm(authConext.email, dorm);
+    updateUserDorm(authContext.email, dorm);
     getDorm().doc(dorm).onSnapshot(docSnapshot => {
       assignRanking(docSnapshot.data())
     })
