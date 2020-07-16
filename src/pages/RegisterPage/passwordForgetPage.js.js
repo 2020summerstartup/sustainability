@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { withFirebase } from "../Firebase";
+import { withFirebase } from "../../components/Firebase";
 import * as ROUTES from "../../constants/routes";
 import pwImg from "../../img/forgetpw.svg";
 
 // import your fontawesome library
-import "../FontAwesomeIcons";
+import "../../components/FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

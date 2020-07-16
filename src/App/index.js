@@ -5,7 +5,7 @@ import Navigation from '../components/Navigation';
 import LandingPage from '../pages/LandingPage';
 import SignUpPage from '../pages/RegisterPage/signUpPage';
 import SignInPage from '../pages/RegisterPage/signInPage';
-import PasswordForgetPage from '../components/PasswordForget';
+import PasswordForgetPage from '../pages/RegisterPage/passwordForgetPage.js.js';
 import HomePage from '../components/Home';
 import AccountPage from '../components/Account';
 import InfoPage from '../components/Info';
