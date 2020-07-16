@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./index.css";
 
-import { withFirebase, createUser } from "../Firebase";
+import { withFirebase, createUser } from "../../components/Firebase";
 import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
-import { signInWithRedirect } from "../../pages/RegisterPage/signInPage";
+import { signInWithRedirect } from "./signInPage";
 // import Dropdown from 'react-dropdown';
 // import 'react-dropdown/style.css';
 
 // import { Dropdown2 } from "../Dropdown";
 
 // import your fontawesome library
-import "../FontAwesomeIcons";
+import "../../components/FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

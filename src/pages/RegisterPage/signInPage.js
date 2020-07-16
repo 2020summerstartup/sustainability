@@ -4,7 +4,7 @@ import { compose } from "recompose";
 import * as firebase from "firebase";
 import "firebase/auth";
 
-import { SignUpLink } from "../../components/SignUp";
+import { SignUpLink } from "./signUpPage";
 import { PasswordForgetLink } from "../../components/PasswordForget";
 import { withFirebase } from "../../components/Firebase";
 import * as ROUTES from "../../constants/routes";
