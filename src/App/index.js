@@ -1,24 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
  
-import Navigation from '../Navigation';
-import LandingPage from '../Landing';
-import SignUpPage from '../SignUp';
-import SignInPage from '../SignIn';
-import PasswordForgetPage from '../PasswordForget';
-import HomePage from '../Home';
-import AccountPage from '../Account';
-import InfoPage from '../Info';
-import Header, {AccountHeader, ChangeHeader} from '../Headers';
-import CompetePage from '../Compete';
-import OfflinePage from '../Offline';
+import Navigation from '../components/Navigation';
+import LandingPage from '../components/Landing';
+import SignUpPage from '../components/SignUp';
+import SignInPage from '../components/SignIn';
+import PasswordForgetPage from '../components/PasswordForget';
+import HomePage from '../components/Home';
+import AccountPage from '../components/Account';
+import InfoPage from '../components/Info';
+import Header, {AccountHeader, ChangeHeader} from '../components/Headers';
+import CompetePage from '../components/Compete';
+import OfflinePage from '../components/Offline';
 // import AccountHeader from '../AccountHeader';
-import ChangePW from "../PasswordChange/changePw.js";
-import ChangeDorm from "../PasswordChange/changeDorm.js";
+import ChangePW from "../components/PasswordChange/changePw.js";
+import ChangeDorm from "../components/PasswordChange/changeDorm.js";
 // import ChangeHeader from "../ChangeHeader";
 
-import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from '../Session';
+import * as ROUTES from '../constants/routes';
+import { withAuthentication } from '../components/Session';
 // import AccountHeader from '../AccountHeader';
 
 const App = () => (
