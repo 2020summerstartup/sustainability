@@ -6,7 +6,7 @@ function assignRanking(data) {
     localStorage.setItem('ranking', data.rank)
   }  
 
-export default function leaderBoardUpdate() {
+function leaderBoardUpdate() {
     const updates = []
 
     return getDorm()
@@ -35,4 +35,5 @@ export default function leaderBoardUpdate() {
         });
 }
 
-export {assignRanking}
+export { assignRanking };
+export default leaderBoardUpdate;

@@ -11,11 +11,10 @@ import React, {useEffect, useContext} from "react";
 // import { PasswordForgetForm } from "../PasswordForget";
 // import PasswordChangeForm from "../PasswordChange";
 
-
 import TotalPointsCard from "./points.js";
 
 import DormCard from "./dorm.js";
-import {leaderBoardUpdate, assignRanking} from '../Leaderboard';
+import leaderBoardUpdate, {assignRanking} from '../Leaderboard/leaderBoardUpdate.js';
 import {getUser, getDorm} from "../Firebase";
 // import SignOutButton from "../SignOut";
 import { AuthUserContext, withAuthorization } from "../Session";
