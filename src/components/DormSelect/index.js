@@ -10,6 +10,7 @@ import { AuthUserContext, withAuthorization } from "../Session";
 import {updateUserDorm, getDorm} from "../Firebase";
 import { assignRanking } from "../Leaderboard";
 
+
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),

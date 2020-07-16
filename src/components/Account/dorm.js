@@ -72,6 +72,7 @@ export const DormCard = React.memo(function GalaxyCard() {
             <InfoSubtitle>{authUser.email}, you're representing {localStorage.getItem("dorm")} dorm</InfoSubtitle>
             <InfoTitle>You're in Rank {localStorage.getItem('ranking')}</InfoTitle>
             <InfoCaption>Change your dorm in settings ⚙️</InfoCaption>
+
           </Info>
         </Box>
       </Card>

@@ -9,6 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import leaderBoardUpdate, {assignRanking} from "./leaderBoardUpdate"
 
+import leaderBoardUpdate, {assignRanking} from "./leaderBoardUpdate"
+
 // Override regular table cells in material ui
 const StyledTableCell = withStyles((theme) => ({
   head: {

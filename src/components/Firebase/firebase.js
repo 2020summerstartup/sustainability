@@ -134,7 +134,6 @@ export const updateUserPoint = (userEmail, userAction, actionPoint) => {
     total: app.firestore.FieldValue.increment(actionPoint),
   })
 }
-
 //this method is meant to update the dorm total
 export const updateDormPoint = (userDorm, actionPoint) => {
   return firestore.collection('dorms').doc(userDorm).update({
@@ -165,5 +164,8 @@ export const getDorm = () => {
   return firestore.collection('dorms')
 }
 
-export {firestore};
-
+export const updateDormPoint = (dorm, point) => {
+  return firestore.collection('dorms').doc(dorm).update({
+    score: point,
+  })
+}
