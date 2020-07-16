@@ -40,12 +40,7 @@ const useStyles = makeStyles((theme) => ({
       getDorm().doc(dorm).onSnapshot(docSnapshot => {
         assignRanking(docSnapshot.data())
       })
-      // the .replace was supposed to get rid of quotes but it didn't work
     };
-
-    // const handleChange = (event) => {
-    //   setDorm(event.target.value);
-    // };
   
     return (
       <div>

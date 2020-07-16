@@ -1,6 +1,4 @@
 import React from "react";
-import styles from "../Settings.module.css";
-
 import SignOutButton from "../SignOut";
 
 import { AuthUserContext, withAuthorization } from "../Session";

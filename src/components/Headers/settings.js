@@ -12,7 +12,6 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ChangePW from "../PasswordChange/changePw.js";
 import Dropdown2 from "../Dropdown";
-import styles from "../AccountHeader.modules.css";
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import SettingsIcon from '@material-ui/icons/Settings';
 import HomeIcon from '@material-ui/icons/Home';

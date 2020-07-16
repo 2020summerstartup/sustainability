@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
-import styles from "../Home.module.css";
+import styles from "../MuiModal.module.css";
 
-import ActionData from "../ActionData/OriginalData";
+import ActionData from "../ActionData/index.json";
 import HomeTabs from "../HomeTabs";
 import CustomizedDialogs from "../Modal";
 
