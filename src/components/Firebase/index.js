@@ -27,5 +27,4 @@ export default Firebase;
 // export const auth = firebase.auth();
  
 export { FirebaseContext, withFirebase };
-export {createUser, getUser, updateUserPoint, uploadUserPoint, uploadUserTotalPoint, updateUserDorm, getDorm};
-
+export {createUser, getUser, updateUserPoint, uploadUserPoint, uploadUserTotalPoint, updateUserDorm, updateDormPoint, getDorm};

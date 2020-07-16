@@ -61,7 +61,7 @@ class SignUpFormBase extends Component {
     //   })
     // });
 
-    createUser(email, dorm);
+    createUser(email, username, dorm);
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -69,7 +69,7 @@ class SignUpFormBase extends Component {
         // Create a user in your Firebase realtime database
         return this.props.firebase.user(authUser.user.uid).set({
           username,
-          email
+          email,
         });
       })
       .then(() => {
@@ -109,7 +109,7 @@ class SignUpFormBase extends Component {
             value={username}
             onChange={this.onChange}
             type="text"
-            placeholder="Full Name"
+            placeholder="First Name"
           />
         </div>
         <div className="form-group">

@@ -1,4 +1,6 @@
 import React, { Fragment, useState, useContext } from "react";
+import "./index.css";
+
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -19,12 +21,16 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
-import { updateUserPoint } from "../Firebase";
+import { updateUserPoint, updateDormPoint, updateUserDorm } from "../Firebase";
 import { AuthUserContext, withAuthorization} from "../Session";
 
-// I pulled these from Home's index.js
+// pulled these from Home's index.js
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { getUser } from '../Firebase';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,8 +40,6 @@ const useStyles = makeStyles((theme) => ({
   searchContainer: {
     display: "flex",
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    paddingLeft: "20px",
-    paddingRight: "20px",
     marginTop: "1rem",
     marginBottom: "0.5rem",
   },
@@ -44,20 +48,21 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "0.5rem",
   },
   searchInput: {
-    width: "15rem",
-    // marginBottom: "-8px !important",
+    width: "12rem",
     paddingBottom: "0",
-    underline: "0px !important",
-    // borderBottom: "#24a113"
+    [theme.breakpoints.up("sm")]: {
+      width: "15em",
+    },
   },
   actionContainer: {
     paddingTop: "1rem",
-    paddingLeft: "2rem",
-    paddingRight: "2rem",
+    paddingLeft: "0",
+    paddingRight: "0",
   },
   media: {
     height: 0,
     paddingTop: "56.25%", // 16:9
+    marginBottom: "1rem",
   },
   expand: {
     transform: "rotate(0deg)",
@@ -79,28 +84,32 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     paddingTop: "0",
   },
-  // underline: {
-  //   "&&&:before": {
-  //     borderBottom: `1px solid var(--theme)`
-  //   },
-  //   "&&:after": {
-  //     borderBottom: `1px solid var(--theme)`
-  //   }
-  // },
+  // OMG I finally fixed the underline problem!!!
+  underline: {
+    "&:before": {
+      borderBottom: "2px solid var(--text-primary)",
+      marginBottom: "8px",
+    },
+    "&:hover:not($disabled):not($focused):not($error):before": {
+      borderBottom: "2px solid var(--theme)",
+      marginBottom: "8px",
+    },
+    "&:after": {
+      borderBottom: "2px solid var(--theme)",
+      marginBottom: "8px",
+    },
+  },
+  disabled: {},
+  focused: {},
+  error: {},
 }));
 
 const ActionCard = () => {
   const classes = useStyles();
   const [expandedId, setExpandedId] = React.useState(-1);
-  const authContext = useContext(AuthUserContext)
-  // const [actionData, setActionData] = useState(ActionData);
-  // const [actionData] = useState(ActionData);
+  const authContext = useContext(AuthUserContext);
+
   const [filter, setFilter] = useState("");
-  var favorited = localStorage.getItem('favorited'); // Is the action favorited? Eventually this will need to be loaded from firestore (I assume)
-  if (favorited == null || isNaN(favorited)) {
-    console.log("favorited was null or NaN");
-    favorited = false; // If not initiallized, initialize here
-  }
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
 
@@ -113,49 +122,89 @@ const ActionCard = () => {
   };
 
 
-
   // KEEP THIS!!! UPDATED VERSION
-  //   const increment = () => {
-  //     // add specified number of points to the saved point total
-  //     localStorage.setItem(currSusAction, parseInt(localStorage.getItem(currSusAction))+parseInt(`${points}`));
-  //     updateUser(authContext.email, susAction, points).then(() => {window.location.reload(true)})
-  //   };
-  // };
-
-  // KEEP THIS!!! UPDATED VERSION
+  // updates all necessary values in firestore when user completes sus action
   const increment = (action) => {
+
+    // allows us to increment the correct values by writing the action & value to local storage
+    toast(action.title.concat(' logged. Thanks!'), { autoClose: 5000 });
     // add specified number of points to the saved point total
     localStorage.setItem(
       action.susAction,
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
     );
+    
+    // updates user's point in firestore
+    updateUserPoint(
+      authContext.email,
+      action.susAction,
+      parseInt(action.points)
+    ).then(() => {
+      window.location.reload(true);
+    });
 
-    updateUserPoint(authContext.email, action.susAction, parseInt(action.points)).then(() => {
-      window.location.reload(true)
-    })
-    console.log(action.susAction, localStorage.getItem(action.susAction));
+    // get the user's dorm from firestore and sets it in local storage
+    getUser(authContext.email).onSnapshot(snapshot => {
+      if (snapshot.exists) {
+        localStorage.setItem('dorm', snapshot.data().userDorm)
+      } else {
+        console.log('Please select your dorm so you can contribute');
+      }
+    }, err => {
+    console.log(`Encountered error: ${err}`);
+  })
+
+  // update dorm's point in firestore
+  updateDormPoint(localStorage.getItem('dorm'), parseInt(action.points));
+
   };
-  const favAction = (action) => {
-    // Toggle favorited (so favorite if unfavorited and vice versa)
-    favorited = !favorited;
-    console.log("favorited?", favorited, action.susAction);
-    // Save the value (right now just one instead of one per action) in local storage
-    localStorage.setItem('favorited', favorited);
-    if (favorited) {
-      var message = action.title + " added to favorites"
+
+  // Initialize the color of each favorite button
+  // This isn't in a function because I can't call the function when I want using html. Could go in a function and then be called with JS.
+  var favIconColors = [] // Initalize array of the color for each favIcon
+  for(const key in ActionData) { // Iterate over every action in ActionData
+    var action = ActionData[key]; // Take the current action
+    var storageName = action.susAction.concat("Fav");
+    var storedFav = localStorage.getItem(storageName) == 'true'; // We're getting a warning in the console (wants ===)
+    if (storedFav) { // If the action is favorited
+    favIconColors[key-1] = "#DC143C"; // Turn red
     } else {
-      message = action.title + " removed from favorites"
+      favIconColors[key-1] = "#6c6c6c"; // Otherwise turn gray
     }
-    toast(message, { autoClose: 8000 });
+  }
 
-  };
-
-  const favNotify = (action) => {
+  const favAction = (action) => {
+    // Get the name and info of the stored action that we're working with
+    var storageName = action.susAction.concat("Fav");
+    // storedFav is a boolean (is the current action favorited?)
+    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
+    var storedFav = localStorage.getItem(storageName) == 'true'; // We're getting a warning in the console
+    // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
+    // In case the action hasn't been favorited before
+    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
+    if (storedFav == null) {
+      console.log("storedFav was null or NaN", storedFav);
+      storedFav = false; // If not initialized, initialize here
+    }
+    storedFav = !storedFav; // Toggle the favorite
+    // variable for getting color of fav icon
+    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
+    // Notify user that action was added/removed from favorites
+    if (storedFav) {
+      var message = action.title.concat(" added to favorites");
+      favIconColor.style.color = "#DC143C"; // Turn red
+      toast(message, { autoClose: 5000 });
+    } else {
+      var message = action.title.concat(" removed from favorites");
+      favIconColor.style.color = "#6c6c6c"; // Back to grey
+      toast.warn(message, { autoClose: 5000 });
+    }
+    localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
   return (
     <Fragment>
-      <Toolbar>
+      {/* <Toolbar> */}
         <div className={classes.searchContainer}>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
@@ -168,13 +217,13 @@ const ActionCard = () => {
                 label="Search Actions"
                 variant="standard"
                 InputProps={{ disableUnderline: true }}
-                InputProps={{classes:{underline: classes.underline}}}
+                InputProps={{ classes: { underline: classes.underline } }}
               />
             </Grid>
           </Grid>
         </div>
-      </Toolbar>
-      <Grid container spacing={3} className={classes.actionContainer}>
+      {/* </Toolbar> */}
+      <Grid container spacing={2} className={classes.actionContainer}>
         {ActionData.map(
           (action, i) =>
             action.title.toLowerCase().includes(filter.toLowerCase()) && (
@@ -184,13 +233,13 @@ const ActionCard = () => {
                     className={classes.cardContent}
                     action={
                       <IconButton
-                      onClick={() => increment(action)}
+                        onClick={() => increment(action)}
                         // Finally found how to get ride of random old green from click and hover!
                         style={{ backgroundColor: "transparent" }}
                         aria-label="settings"
                         title="Complete this sustainable action"
                       >
-                      <AddCircleIcon fontSize="large" />
+                        <AddCircleIcon fontSize="large" />
                       </IconButton>
                     }
                     title={action.title}
@@ -198,13 +247,13 @@ const ActionCard = () => {
                   />
                   <CardActions disableSpacing>
                     <IconButton
+                      title='Add to favorites'
                       aria-label="add to favorites"
                       style={{ backgroundColor: "transparent" }}
-                      // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
-                      onClick={() =>
-                        favAction(action)
-                      }
-                      className="favoriteIcon" 
+                      style={{ color: favIconColors[i-1] }} // Set the favIcon color (i-1 prevents off-by-one error)
+                      onClick={() => favAction(action)}
+                      id={ "favoriteIcon".concat(action.susAction) }                                                                                                                                                                                                            
+                      className={classes.favoriteIcon}
                     >
                       <FavoriteIcon />
                     </IconButton>
@@ -228,8 +277,10 @@ const ActionCard = () => {
                         image={action.image}
                         title={action.title}
                       />
-                      <Typography variant="h4">Impact:</Typography>
-                      <Typography variant="body">{action.impact}</Typography>
+                      <Typography variant="h5" gutterBottom>
+                        Environmental Impact:
+                      </Typography>
+                      <Typography variant="body1">{action.impact}</Typography>
                     </CardContent>
                   </Collapse>
                 </Card>

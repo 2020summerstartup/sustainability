@@ -5,7 +5,7 @@ import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../Session";
 import SignOutButton from "../SignOut";
 
-import "./index.css";
+import styles from "../Navigation.modules.css";
 
 // import your fontawesome library
 import "../FontAwesomeIcons";

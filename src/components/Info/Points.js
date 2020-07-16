@@ -14,9 +14,8 @@ export class Points extends Component {
             <div style={points}>
               <h1>How to Participate & Earn Points</h1>
               <p>
-                Sign up with your HMC gmail! Look on our actions page for
-                sustainable practices that you can earn points for and hit the
-                "BUZZ" button everytime you complete the action!
+                Sign up with your HMC email! Look on our actions page for
+                sustainable practices that you can earn points for every time you complete the action!
               </p>
             </div>
           </div>
