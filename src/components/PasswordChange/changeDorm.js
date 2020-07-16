@@ -1,5 +1,4 @@
 import React from 'react';
-import PasswordChangeForm from './index.js';
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import DormSelect from "../DormSelect";
 import changedorm from "../../img/changedorm.svg";

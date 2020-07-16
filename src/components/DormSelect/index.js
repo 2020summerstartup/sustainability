@@ -6,7 +6,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import { AuthUserContext, withAuthorization } from "../services/Session";
+import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {updateUserDorm, getDorm} from "../../services/Firebase";
 import { assignRanking } from "../Leaderboard";
 
