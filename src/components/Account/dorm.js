@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
     boxShadow: 'none',
     position: 'relative',
     minWidth: 200,
-    minHeight: 360,
+    minHeight: 250,
     '&:after': {
       content: '""',
       display: 'block',
@@ -88,7 +88,7 @@ export const DormCard = React.memo(function GalaxyCard() {
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoSubtitle>{authUser.email}, you're representing {localStorage.getItem("dorm")} dorm</InfoSubtitle>
             <InfoTitle>You're in Rank {}</InfoTitle>
-            <InfoCaption>Change your dorm in settings</InfoCaption>
+            <InfoCaption>Change your dorm in settings ⚙️</InfoCaption>
           </Info>
         </Box>
       </Card>

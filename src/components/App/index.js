@@ -11,20 +11,24 @@ import AccountPage from '../Account';
 import SettingsPage from '../Setting';
 import InfoPage from '../Info';
 import ProfilePage from '../Profile';
-import Header from '../Header';
+import Header, {AccountHeader, ChangeHeader} from '../Headers';
 import CompetePage from '../Compete';
 import OfflinePage from '../Offline';
-import AccountHeader from '../AccountHeader';
+// import AccountHeader from '../AccountHeader';
 import ChangePW from "../PasswordChange/changePw.js";
 import ChangeDorm from "../Setting/changeDorm.js";
+// import ChangeHeader from "../ChangeHeader";
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
+// import AccountHeader from '../AccountHeader';
 
 const App = () => (
   <Router>
      <Switch>
       <Route exact path="/account" component={AccountHeader} />
+      <Route exact path="/changedorm" component={ChangeHeader} />
+      <Route exact path="/changepassword" component={ChangeHeader} />
       <Route component={Header} />
     </Switch> 
     <div className="main">

@@ -97,6 +97,7 @@ function HomePage() {
 
   return (
     <div className="base-container">
+       < HomeTabs />
       <h1>Home Sweet Home</h1>
       {/* Testing for fun */}
       <h3>
@@ -153,8 +154,8 @@ function HomePage() {
         </div>
       </center>
       </Modal>
-      <div>
-      < HomeTabs />
+      <div class="base-container">
+     
       </div>
     </div>
   );
