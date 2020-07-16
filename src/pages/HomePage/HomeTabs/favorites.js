@@ -2,8 +2,8 @@
 // so I'm happy to fix it eventually lol.) -Katie
 
 import React, { Fragment, useState } from "react";
-import favorite from "../../img/favorite.svg";
-import { AuthUserContext, withAuthorization } from "../../services/Session";
+import favorite from "../../../img/favorite.svg";
+import { AuthUserContext, withAuthorization } from "../../../services/Session";
 
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -36,7 +36,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 
-import ActionData from "../ActionData/index.json";
+import ActionData from "./actionData.json";
 
 // I pulled these from Home's index.js
 import { toast } from "react-toastify";

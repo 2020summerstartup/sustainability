@@ -1,6 +1,6 @@
 import React from "react";
-import ActionCard from "../ActionCard";
-import FaveCard from "../Favorites";
+import ActionCard from "./actionCards";
+import FaveCard from "./favorites";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";

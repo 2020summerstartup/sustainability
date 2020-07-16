@@ -6,7 +6,7 @@ import LandingPage from '../pages/LandingPage';
 import SignUpPage from '../pages/RegisterPage/signUpPage';
 import SignInPage from '../pages/RegisterPage/signInPage';
 import PasswordForgetPage from '../pages/RegisterPage/passwordForgetPage.js.js';
-import HomePage from '../components/Home';
+import HomePage from '../pages/HomePage';
 import AccountPage from '../components/Account';
 import InfoPage from '../components/Info';
 import Header, {AccountHeader, ChangeHeader} from '../components/Headers';

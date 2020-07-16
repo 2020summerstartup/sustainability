@@ -21,14 +21,16 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "./actionData.json";
-import { updateUserPoint, updateDormPoint, updateUserDorm } from "../../../../services/Firebase";
-import { AuthUserContext, withAuthorization} from "../../../../services/Session";
+import { updateUserPoint, updateDormPoint, updateUserDorm } from "../../../services/Firebase";
+import { AuthUserContext, withAuthorization} from "../../../services/Session";
 
 // pulled these from Home's index.js
 import { toast } from "react-toastify";
-import "./node_modules/react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
-import { getUser } from '../../../../services/Firebase';
+import { getUser } from '../../../services/Firebase';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
