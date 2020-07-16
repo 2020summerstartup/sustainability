@@ -2,7 +2,8 @@ import React, {useContext} from 'react';
 import points from "../../img/points.svg";
 import dorm from "../../img/dorm.svg";
 import {AuthUserContext} from "../Session";
-import {getUser} from "../Firebase";
+import {getUser, getDorm} from "../Firebase";
+import {assignRanking} from "../Leaderboard"
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
 import { makeStyles } from '@material-ui/core/styles';
@@ -24,7 +25,7 @@ const useStyles = makeStyles(() => ({
     boxShadow: 'none',
     position: 'relative',
     minWidth: 200,
-    minHeight: 250,
+    minHeight: 360,
     '&:after': {
       content: '""',
       display: 'block',
@@ -62,6 +63,12 @@ export const DormCard = React.memo(function GalaxyCard() {
   }, err => {
   console.log(`Encountered error: ${err}`);
 })
+
+  getDorm().doc(localStorage.getItem('dorm')).onSnapshot(docSnapshot => {
+    assignRanking(docSnapshot.data())
+  }, error => {
+    console.error("Error: ", error)
+  })
   return (
     <div>
     <AuthUserContext.Consumer>
@@ -87,8 +94,8 @@ export const DormCard = React.memo(function GalaxyCard() {
         <Box py={3} px={2} className={styles.content}>
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoSubtitle>{authUser.email}, you're representing {localStorage.getItem("dorm")} dorm</InfoSubtitle>
-            <InfoTitle>You're in Rank {}</InfoTitle>
-            <InfoCaption>Change your dorm in settings ⚙️</InfoCaption>
+            <InfoTitle>You're in Rank {localStorage.getItem('ranking')}</InfoTitle>
+            <InfoCaption>Change your dorm in settings</InfoCaption>
           </Info>
         </Box>
       </Card>

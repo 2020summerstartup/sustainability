@@ -95,12 +95,11 @@ class Firebase {
   // export const firestore = firebase.firestore();
 export default Firebase;
 
-export const createUser = (userEmail, userName, dorm) => {
+export const createUser = (userEmail, dorm) => {
   console.log("creating...")
   return firestore.collection('users').doc(userEmail)
       .set({
           created: app.firestore.FieldValue.serverTimestamp(),
-          name: userName,
           createdBy: userEmail,
           total: 0,
           userDorm: dorm,
@@ -123,44 +122,39 @@ export const getUser = (userEmail) => {
   return firestore.collection('users').doc(userEmail)
 }
 
-
 // this method is called to increase points
 export const updateUserPoint = (userEmail, userAction, actionPoint) => {
-  // local storage allows us to display the correct points
-  localStorage.setItem('total', (parseInt(localStorage.getItem('total'))+ parseInt(actionPoint)));
-  localStorage.setItem(userAction, (parseInt(localStorage.getItem(userAction)) + parseInt(actionPoint)));
   return firestore.collection('users').doc(userEmail).update({
     ['points.' + userAction]: app.firestore.FieldValue.increment(actionPoint),
     total: app.firestore.FieldValue.increment(actionPoint),
   })
 }
 
-//this method is meant to update the dorm total
-export const updateDormPoint = (userDorm, actionPoint) => {
-  return firestore.collection('dorms').doc(userDorm).update({
-    score: app.firestore.FieldValue.increment(actionPoint),
-  })
-}
-
-// these two methods are called to synchronize local storage with Firestore
+// this method is called to synchronize local storage with Firestore
 export const uploadUserPoint = (userEmail, userAction, actionPoint) => {
   return firestore.collection('users').doc(userEmail).update({
-    ['points.' + userAction]: app.firestore.FieldValue.increment(actionPoint),
-  })
-}
-export const uploadUserTotalPoint = (userEmail, actionPoint) =>{
-  return firestore.collection('users').doc(userEmail).update({
-    total: app.firestore.FieldValue.increment(actionPoint),
+    ['points.' + userAction]: actionPoint,
   })
 }
 
-// for changing which dorm you are affilaited with 
+export const uploadUserTotalPoint = (userEmail, total) =>{
+  return firestore.collection('users').doc(userEmail).update({
+    total: total,
+  })
+}
+
 export const updateUserDorm = (userEmail, value) => {
   return firestore.collection('users').doc(userEmail).update({
     userDorm: value,
   })
 }
 
+export const getDorm = () => {
+  return firestore.collection('dorms')
+}
 
-export {firestore};
-
+export const updateDormPoint = (dorm, point) => {
+  return firestore.collection('dorms').doc(dorm).update({
+    score: point,
+  })
+}

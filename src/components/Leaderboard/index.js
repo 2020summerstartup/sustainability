@@ -8,6 +8,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
+import leaderBoardUpdate, {assignRanking} from "./leaderBoardUpdate"
+
 // Override regular table cells in material ui
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -79,3 +81,5 @@ export default function CustomizedTables() {
     </TableContainer>
   );
 }
+
+export {leaderBoardUpdate, assignRanking}
