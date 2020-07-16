@@ -34,6 +34,14 @@ code {
   }
 }
 
+/* Small screens */
+@media only screen and (max-width: 600px) {
+  .base-container {
+    margin-bottom: 5rem;
+    overflow-x: hidden;
+  }
+}
+/* 
 .base-container {
   width: 100%;
   display: flex;
@@ -41,7 +49,7 @@ code {
   align-items: center;
   margin: 0;
   text-align: center;
-}
+} */
 
 h1 {
   font-size: 24px;

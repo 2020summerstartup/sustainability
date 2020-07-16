@@ -84,7 +84,6 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     paddingTop: "0",
   },
-  // OMG I finally fixed the underline problem!!!
   underline: {
     "&:before": {
       borderBottom: "2px solid var(--text-primary)",
