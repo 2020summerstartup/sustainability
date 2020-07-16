@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 // import "./index.css";
 // import "././index.css";
 // import { Link } from "react-router-dom";
@@ -7,22 +7,16 @@ import React, {useEffect} from "react";
 // import * as ROUTES from "../../constants/routes";
 // import Tabs from '@material-ui/core/Tabs';
 
-import SignOutButton from "../SignOut";
 // import { db } from "..,Firebase/firebase.js";
 // import { PasswordForgetForm } from "../PasswordForget";
 // import PasswordChangeForm from "../PasswordChange";
 
-import TotalPoints from "./points.js";
-import Dropdown2 from "../Dropdown";
-import accountImg from "../../img/account.svg";
+
 import TotalPointsCard from "./points.js";
 
 import DormCard from "./dorm.js";
-import FaveCard from "./fave.js";
-import SettingsPage from "../Setting";
-import {leaderBoardUpdate} from '../Leaderboard'
-
-
+import {leaderBoardUpdate, assignRanking} from '../Leaderboard';
+import {getUser, getDorm} from "../Firebase";
 // import SignOutButton from "../SignOut";
 import { AuthUserContext, withAuthorization } from "../Session";
 import PropTypes from "prop-types";
@@ -31,7 +25,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 // import PhoneIcon from "@material-ui/icons/Phone";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 // import HelpIcon from "@material-ui/icons/Help";
 // import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
@@ -39,8 +32,7 @@ import PersonPinIcon from "@material-ui/icons/PersonPin";
 // import ThumbUp from "@material-ui/icons/ThumbUp";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import HouseIcon from "@material-ui/icons/House";
-import SettingsIcon from "@material-ui/icons/Settings";
+import HomeIcon from "@material-ui/icons/Home";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -97,6 +89,14 @@ const useStyles = makeStyles((theme) => ({
 // })
 // };
 
+function assignDorm(data) {
+  if (data.userDorm === ""){
+    alert("Sorry, please choose your dorm in setting!")
+  }else{
+    localStorage.setItem("dorm", data.userDorm)
+  }
+}
+
 function AccountPage() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -108,28 +108,48 @@ function AccountPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       leaderBoardUpdate()
-    }, 60000);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  const authContext = useContext(AuthUserContext);
+
+  getUser(authContext.email).onSnapshot(docSnapshot => {
+    if (docSnapshot.exists) {
+      assignDorm(docSnapshot.data())
+    } else {
+      alert("Sorry, please choose your dorm in setting!")
+    }
+  }, err => {
+  console.log(`Encountered error: ${err}`);
+})
+
+  getDorm().doc(localStorage.getItem('dorm')).onSnapshot(docSnapshot => {
+    assignRanking(docSnapshot.data())
+  }, error => {
+    console.error("Error: ", error)
+  })
 
   return (
     <div>
       <AuthUserContext.Consumer>
         {(authUser) => (
           <div className="base-container">
-            <div className="profile">Profile</div>
-            <div className="accountName">{authUser.email}'s page!</div>
+
+            {/* <h1>Profile</h1>
+            <p>{authUser.email}'s page!</p> */}
             <div className={classes.root}>
-              <AppBar position="static" color="default">
+              <AppBar position="static" color="primary">
                 <Tabs
                   value={value}
                   onChange={handleChange}
                   variant="fullWidth"
                   scrollButtons="off"
                   indicatorColor="primary"
-                  textColor="inherited"
-                  aria-label="scrollable force tabs example"
+                  textColor="default"
+                  aria-label="scrollable tabs"
                   centered="true"
+                  width="100%"
                 >
 
                   <Tab
@@ -138,24 +158,14 @@ function AccountPage() {
                     {...a11yProps(0)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  {/* <Tab
-                    label="Your Favorites"
-                    icon={<FavoriteIcon />}
-                    {...a11yProps(1)}
-                    style={{ backgroundColor: "transparent" }}
-                  /> */}
+                
                   <Tab
                     label="Your Dorm"
-                    icon={<HouseIcon />}
+                    icon={<HomeIcon />}
                     {...a11yProps(1)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  <Tab
-                    label="Settings"
-                    icon={<SettingsIcon />}
-                    {...a11yProps(2)}
-                    style={{ backgroundColor: "transparent" }}
-                  />
+                 
                  
                 </Tabs>
               </AppBar>
@@ -168,16 +178,12 @@ function AccountPage() {
               <TabPanel value={value} index={1}>
                 <DormCard />
               </TabPanel>
-              <TabPanel value={value} index={2}>
-                <SettingsPage />
-              </TabPanel>
-              {/* <TabPanel value={value} index={3}>
-                Item Five
-              </TabPanel> */}
+              
             </div>
-            <div class="bottom">
+            {/* <div class="signout-btn">
+
               <SignOutButton />
-            </div>
+            </div> */}
           </div>
         )}
       </AuthUserContext.Consumer>

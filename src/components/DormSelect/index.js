@@ -7,7 +7,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 import { AuthUserContext, withAuthorization } from "../Session";
-import {updateUserDorm} from "../Firebase"
+import {updateUserDorm, getDorm} from "../Firebase";
+import { assignRanking } from "../Leaderboard";
+
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -31,10 +33,13 @@ const useStyles = makeStyles((theme) => ({
     }
   
     const handleChange = (event) => {
-    //   const dorm = obj.label.replace(/"([^"]+)":/g, "$1:")
+      const dorm = event.target.value
       setDorm(event.target.value);
       localStorage.setItem('dorm', dorm);
       updateUserDorm(authContext.email, dorm);
+      getDorm().doc(dorm).onSnapshot(docSnapshot => {
+        assignRanking(docSnapshot.data())
+      })
       // the .replace was supposed to get rid of quotes but it didn't work
     };
 
@@ -60,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
           <MenuItem value={"Case"}>Case</MenuItem>
           <MenuItem value={"East"}>East</MenuItem>
           <MenuItem value={"West"}>West</MenuItem>
-          <MenuItem value={"Norf"}>Norf</MenuItem>
+          <MenuItem value={"North"}>North</MenuItem>
           <MenuItem value={"Drinkward"}>Drinkward</MenuItem>
           <MenuItem value={"Sontag"}>Sontag</MenuItem>
           <MenuItem value={"Linde"}>Linde</MenuItem>

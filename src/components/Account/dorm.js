@@ -1,9 +1,6 @@
-import React, {useContext} from 'react';
-import points from "../../img/points.svg";
+import React from 'react';
 import dorm from "../../img/dorm.svg";
 import {AuthUserContext} from "../Session";
-import {getUser, getDorm} from "../Firebase";
-import {assignRanking} from "../Leaderboard"
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,7 +22,7 @@ const useStyles = makeStyles(() => ({
     boxShadow: 'none',
     position: 'relative',
     minWidth: 200,
-    minHeight: 360,
+    minHeight: 250,
     '&:after': {
       content: '""',
       display: 'block',
@@ -45,30 +42,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function assignDorm(data) {
-  localStorage.setItem("dorm", data.userDorm)
-}
-
 export const DormCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: 'top' });
   const styles = useStyles();
-  const authContext = useContext(AuthUserContext);
-
-  getUser(authContext.email).onSnapshot(docSnapshot => {
-    if (docSnapshot.exists) {
-      assignDorm(docSnapshot.data())
-    } else {
-      alert("Sorry, please choose your dorm in setting!")
-    }
-  }, err => {
-  console.log(`Encountered error: ${err}`);
-})
-
-  getDorm().doc(localStorage.getItem('dorm')).onSnapshot(docSnapshot => {
-    assignRanking(docSnapshot.data())
-  }, error => {
-    console.error("Error: ", error)
-  })
   return (
     <div>
     <AuthUserContext.Consumer>
@@ -95,7 +71,8 @@ export const DormCard = React.memo(function GalaxyCard() {
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoSubtitle>{authUser.email}, you're representing {localStorage.getItem("dorm")} dorm</InfoSubtitle>
             <InfoTitle>You're in Rank {localStorage.getItem('ranking')}</InfoTitle>
-            <InfoCaption>Change your dorm in settings</InfoCaption>
+            <InfoCaption>Change your dorm in settings ⚙️</InfoCaption>
+
           </Info>
         </Box>
       </Card>
