@@ -24,6 +24,16 @@ code {
     monospace;
 }
 
+/* Large screens */
+@media only screen and (min-width: 600px) {
+  .base-container {
+    margin-right: 6.5rem !important;
+    padding-right: 2rem;
+    padding-left: 8.5rem !important;
+    padding-bottom: 2rem;
+  }
+}
+
 .base-container {
   width: 100%;
   display: flex;

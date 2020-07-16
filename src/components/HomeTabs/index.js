@@ -90,10 +90,10 @@ function HomeTabs() {
           />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={0} class="base-container">
         <ActionCard />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={1} class="base-container">
         <FaveCard />
       </TabPanel>
     </div>
