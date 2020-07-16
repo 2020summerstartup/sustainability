@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
+import styles from "../Home.module.css";
 
 import ActionData from "../ActionData/OriginalData";
 import HomeTabs from "../HomeTabs";
+import CustomizedDialogs from "../Modal";
 
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
@@ -11,12 +13,13 @@ import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../Session";
 import {getUser, createUser, uploadUserTotalPoint} from "../Firebase";
 
-
 const CustomToast = ({ closeToast }) => {
   return (
     <div>
       <p>Log more sustainable actions!</p>
-      <button onClick={closeToast} className="button">OK</button>
+      <button onClick={closeToast} className="button">
+        OK
+      </button>
     </div>
   );
 };
@@ -35,22 +38,39 @@ var total;
 // Initialize point counter to 0 instead of NaN or null
 function initPoints(email) {
   total = 0;
-  for(const key in ActionData) {
+  for (const key in ActionData) {
     var action = localStorage.getItem(ActionData[key].susAction);
     if (isNaN(action) || action == null) {
       localStorage.setItem(ActionData[key].susAction, 0);
     }
   }
-  localStorage.setItem('total', total);
+  localStorage.setItem("total", total);
 }
 
-function assignData(data){
-  localStorage.setItem("total", data.total)
-  const points = data.points
+function assignData(data) {
+  localStorage.setItem("total", data.total);
+  const points = data.points;
   for (const [key, value] of Object.entries(points)) {
-    localStorage.setItem(key, value)
+    localStorage.setItem(key, value);
   }
 }
+
+const modalCustomStyles = {
+  overlay: {
+    position: "fixed",
+    overflow: "hidden",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    overflow: "hidden",
+    height: "25rem",
+  },
+};
 
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
@@ -64,12 +84,13 @@ function HomePage() {
 
   // get user's dorm set in local storage
   getUser(authContext.email).onSnapshot(docSnapshot => {
+
       if (docSnapshot.exists) {
-        assignData(docSnapshot.data())
-        function assignData(data){
-          localStorage.setItem('dorm', data.userDorm)
-      } 
-    } else {
+        assignData(docSnapshot.data());
+        function assignData(data) {
+          localStorage.setItem("dorm", data.userDorm);
+        }
+      } else {
         createUser(authContext.email);
         initPoints(authContext.email);
         uploadUserTotalPoint(authContext.email, total);
@@ -89,10 +110,9 @@ function HomePage() {
     // Inserting the code block to wrapper element
     document.getElementById("wrapper").innerHTML = codeBlock
   }
-  
-  var message = [];
-  total = localStorage.getItem("total")
 
+  var message = [];
+  total = localStorage.getItem("total");
 
 
   return (
@@ -110,19 +130,29 @@ function HomePage() {
       <button onClick={() => setModalIsOpen(true)} className="button">
         Check Your Progress
       </button>
-      <p> </p>
+      <p></p>
+      <CustomizedDialogs />
+      <p></p>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
-        style={{
-          overlay: {
-            // backgroundColor: 'papayawhip'
-          },
-          content: {
-            color: "var(--theme)",
-            overflow: "hidden",
-          },
-        }}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+        // style={{
+        //   overlay: {
+        //     // backgroundColor: 'papayawhip'
+        //   },
+        //   content: {
+        //     color: "var(--theme)",
+        //     overflow: "hidden",
+        //     width: "20rem",
+        //     height: "30rem",
+        //     margin: "auto auto",
+        //     verticalAlign: "middle",
+        //     textAlign: "center",
+        //   },
+        // }}
+        // style={modalCustomStyles}
       >
       <center>
         {/* <Confetti
@@ -154,9 +184,6 @@ function HomePage() {
         </div>
       </center>
       </Modal>
-      <div class="base-container">
-     
-      </div>
     </div>
   );
 }
@@ -165,5 +192,4 @@ const condition = (authUser) => !!authUser;
 
 export default withAuthorization(condition)(HomePage);
 
-export {initPoints, assignData}
-
+export { initPoints, assignData };
