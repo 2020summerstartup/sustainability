@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "../ContactForm.modules.css";
+import styles from "./contactForm.modules.css";
 // import your fontawesome library
-import "../FontAwesomeIcons";
+import "../../components/FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

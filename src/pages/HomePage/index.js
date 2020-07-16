@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import styles from "./MuiModal.module.css";
+import styles from "./muiModal.module.css";
 
 import ActionData from "./HomeTabs/actionData.json";
 import HomeTabs from "./HomeTabs";
-import CustomizedDialogs from "./MuiModal";
+import CustomizedDialogs from "./muiModal";
 
 // import "./toastify.module.css";
 

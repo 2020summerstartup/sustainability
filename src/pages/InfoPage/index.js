@@ -1,9 +1,9 @@
 import React from "react"; // Used to also import "{ Component }", removed because it gave a warning
-import Goal from "./Goal";
-import Points from "./Points";
-import Challenges from "./Challenges";
-import Rewards from "./Rewards";
-import ContactForm from "../ContactForm";
+import Goal from "./goal";
+import Points from "./points";
+import Challenges from "./challenges";
+import Rewards from "./rewards";
+import ContactForm from "./contactForm";
 
 const InfoPage = () => (
   <div className="base-container">

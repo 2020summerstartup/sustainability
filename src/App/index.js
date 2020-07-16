@@ -8,7 +8,7 @@ import SignInPage from '../pages/RegisterPage/signInPage';
 import PasswordForgetPage from '../pages/RegisterPage/passwordForgetPage.js.js';
 import HomePage from '../pages/HomePage';
 import AccountPage from '../components/Account';
-import InfoPage from '../components/Info';
+import InfoPage from '../pages/InfoPage';
 import Header, {AccountHeader, ChangeHeader} from '../components/Headers';
 import CompetePage from '../pages/CompetePage';
 import OfflinePage from '../pages/OfflinePage';
