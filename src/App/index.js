@@ -13,8 +13,8 @@ import Header, {AccountHeader, ChangeHeader} from '../components/Headers';
 import CompetePage from '../pages/CompetePage';
 import OfflinePage from '../pages/OfflinePage';
 // import AccountHeader from '../AccountHeader';
-import ChangePW from "../components/PasswordChange/changePw.js";
-import ChangeDorm from "../components/PasswordChange/changeDorm.js";
+import ChangePW from "../pages/AccountPage/Settings/changePw";
+import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
 // import ChangeHeader from "../ChangeHeader";
 
 import * as ROUTES from '../constants/routes';

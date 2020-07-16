@@ -10,16 +10,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import ChangePW from "../PasswordChange/changePw.js";
-import Dropdown2 from "../Dropdown";
+// import ChangePW from "../PasswordChange/changePw.js";
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import SettingsIcon from '@material-ui/icons/Settings';
 import HomeIcon from '@material-ui/icons/Home';
 import EmailIcon from '@material-ui/icons/Email';
 import { Link } from "react-router-dom";
-import SignOutButton from "../SignOut";
-import * as ROUTES from "../../constants/routes";
-import PasswordChange from '../PasswordChange';
+import SignOutButton from "../../../components/SignOut";
+import * as ROUTES from "../../../constants/routes";
+// import PasswordChangeForm from '../PasswordChange';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({

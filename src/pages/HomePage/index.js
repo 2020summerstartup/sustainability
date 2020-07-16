@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import styles from "./muiModal.module.css";
+import styles from "./modal.module.css";
 
 import ActionData from "./HomeTabs/actionData.json";
 import HomeTabs from "./HomeTabs";

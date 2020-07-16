@@ -3,7 +3,7 @@ import React from "react"; // No longer imports component because it wasn't used
 // import { withFirebase } from "../Firebase";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 
-import Leaderboard from "./leaderboard";
+import Leaderboard from "./leaderboard.js";
 
 const CompetePage = () => (
   <div>
@@ -17,7 +17,7 @@ const CompetePage = () => (
             </span>
           </h1>
           <center>New competitions coming soon...</center>
-          <h1> </h1>
+          
           <h3>Leaderboard</h3>
           <p>See your dorm's ranking below! :)</p>
           <Leaderboard />

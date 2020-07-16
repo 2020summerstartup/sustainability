@@ -1,7 +1,7 @@
 import React from 'react';
-import { AuthUserContext, withAuthorization } from "../../services/Session";
-import DormSelect from "../DormSelect";
-import changedorm from "../../img/changedorm.svg";
+import { AuthUserContext, withAuthorization } from "../../../services/Session";
+import DormSelect from "../../../components/DormSelect";
+import changedorm from "../../../img/changedorm.svg";
 
 const ChangeDorm = () => (
     <div>

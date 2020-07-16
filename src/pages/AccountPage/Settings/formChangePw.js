@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { withFirebase } from "../../services/Firebase";
+import { withFirebase } from "../../../services/Firebase";
 
 // import your fontawesome library
-import "../FontAwesomeIcons";
+import "../../../components/FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

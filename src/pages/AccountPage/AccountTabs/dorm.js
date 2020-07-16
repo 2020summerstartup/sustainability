@@ -1,6 +1,6 @@
 import React from 'react';
-import dorm from "../../img/dorm.svg";
-import {AuthUserContext} from "../../services/Session";
+import dorm from "../../../img/dorm.svg";
+import {AuthUserContext} from "../../../services/Session";
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
 import { makeStyles } from '@material-ui/core/styles';

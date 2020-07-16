@@ -287,7 +287,7 @@ main {
 
   body {
     margin-right: 5rem;
-    padding: 1rem;
+    /* padding: 1rem; */
   }
 
   .base-container {
