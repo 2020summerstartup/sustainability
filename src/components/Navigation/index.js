@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../../services/Session";
 import SignOutButton from "../SignOut";
-import "./Navigation.modules.css";
+import "./navigation.modules.css";
 
 // import your fontawesome library
 import "../FontAwesomeIcons";
