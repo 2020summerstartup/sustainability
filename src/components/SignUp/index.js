@@ -6,7 +6,7 @@ import { withFirebase, createUser } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
-import { signInWithRedirect } from "../SignIn";
+import { signInWithRedirect } from "../../pages/RegisterPage/signInPage";
 // import Dropdown from 'react-dropdown';
 // import 'react-dropdown/style.css';
 

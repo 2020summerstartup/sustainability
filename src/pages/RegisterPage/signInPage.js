@@ -4,15 +4,14 @@ import { compose } from "recompose";
 import * as firebase from "firebase";
 import "firebase/auth";
 
-import { SignUpLink } from "../SignUp";
-import { PasswordForgetLink } from "../PasswordForget";
-import { withFirebase } from "../Firebase";
+import { SignUpLink } from "../../components/SignUp";
+import { PasswordForgetLink } from "../../components/PasswordForget";
+import { withFirebase } from "../../components/Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
-
 // import your fontawesome library
-import "../FontAwesomeIcons";
+import "../../components/FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
