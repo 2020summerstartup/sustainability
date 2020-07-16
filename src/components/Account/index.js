@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 // import "./index.css";
 // import "././index.css";
 // import { Link } from "react-router-dom";
@@ -20,6 +20,7 @@ import TotalPointsCard from "./points.js";
 import DormCard from "./dorm.js";
 import FaveCard from "./fave.js";
 import SettingsPage from "../Setting";
+import {leaderBoardUpdate} from '../Leaderboard'
 
 
 // import SignOutButton from "../SignOut";
@@ -103,6 +104,13 @@ function AccountPage() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      leaderBoardUpdate()
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div>

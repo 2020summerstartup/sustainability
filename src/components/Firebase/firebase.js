@@ -156,6 +156,9 @@ export const updateUserDorm = (userEmail, value) => {
   })
 }
 
+export const getDorm = () => {
+  return firestore.collection('dorms')
+}
 
 export {firestore};
 
