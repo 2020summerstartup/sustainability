@@ -1,5 +1,5 @@
 import React from "react";
-import { withFirebase } from '../Firebase';
+import { withFirebase } from '../../services/Firebase';
 
 // import material ui
 import { AppBar, Toolbar } from "@material-ui/core";

@@ -11,14 +11,14 @@ import AccountPage from '../components/Account';
 import InfoPage from '../components/Info';
 import Header, {AccountHeader, ChangeHeader} from '../components/Headers';
 import CompetePage from '../components/Compete';
-import OfflinePage from '../components/Offline';
+import OfflinePage from '../pages/OfflinePage';
 // import AccountHeader from '../AccountHeader';
 import ChangePW from "../components/PasswordChange/changePw.js";
 import ChangeDorm from "../components/PasswordChange/changeDorm.js";
 // import ChangeHeader from "../ChangeHeader";
 
 import * as ROUTES from '../constants/routes';
-import { withAuthentication } from '../components/Session';
+import { withAuthentication } from '../services/Session';
 // import AccountHeader from '../AccountHeader';
 
 const App = () => (

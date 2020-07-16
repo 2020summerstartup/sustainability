@@ -15,9 +15,9 @@ import TotalPointsCard from "./points.js";
 
 import DormCard from "./dorm.js";
 import leaderBoardUpdate, {assignRanking} from '../Leaderboard/leaderBoardUpdate.js';
-import {getUser, getDorm} from "../Firebase";
+import {getUser, getDorm} from "../../services/Firebase";
 // import SignOutButton from "../SignOut";
-import { AuthUserContext, withAuthorization } from "../Session";
+import { AuthUserContext, withAuthorization } from "../../services/Session";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";

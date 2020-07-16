@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { withFirebase } from "../../components/Firebase";
+import { withFirebase } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 import pwImg from "../../img/forgetpw.svg";
 

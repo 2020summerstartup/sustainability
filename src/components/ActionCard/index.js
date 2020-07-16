@@ -21,14 +21,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "../ActionData/index.json";
-import { updateUserPoint, updateDormPoint, updateUserDorm } from "../Firebase";
-import { AuthUserContext, withAuthorization} from "../Session";
+import { updateUserPoint, updateDormPoint, updateUserDorm } from "../../services/Firebase";
+import { AuthUserContext, withAuthorization} from "../../services/Session";
 
 // pulled these from Home's index.js
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { getUser } from '../Firebase';
+import { getUser } from '../../services/Firebase';
 
 
 

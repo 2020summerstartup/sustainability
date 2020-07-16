@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import styles from "../Dropdown.module.css";
 
-import { AuthUserContext, withAuthorization } from "../Session";
-import {updateUserDorm, getDorm} from "../Firebase"
+import { AuthUserContext, withAuthorization } from "../../services/Session";
+import {updateUserDorm, getDorm} from "../../services/Firebase"
 
 import Select from "react-select";
 import { assignRanking } from "../Leaderboard";

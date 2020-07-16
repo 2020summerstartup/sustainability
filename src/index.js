@@ -6,7 +6,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import "./index.css";
 
 import App from "./App";
-import Firebase, { FirebaseContext } from "./components/Firebase";
+import Firebase, { FirebaseContext } from "./services/Firebase";
 
 const theme = createMuiTheme({
   // overrides: {

@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
-import { AuthUserContext, withAuthorization } from "../Session";
-import { getUser, createUser, uploadUserTotalPoint } from "../Firebase";
+import { AuthUserContext, withAuthorization } from "../../services/Session";
+import { getUser, createUser, uploadUserTotalPoint } from "../../services/Firebase";
 
 const CustomToast = ({ closeToast }) => {
   return (

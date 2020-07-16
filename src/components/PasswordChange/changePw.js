@@ -1,6 +1,6 @@
 import React from 'react';
 import PasswordChangeForm from './index.js';
-import { AuthUserContext, withAuthorization } from "../Session";
+import { AuthUserContext, withAuthorization } from "../../services/Session";
 import accountImg from "../../img/account.svg";
 
 const ChangePW = () => (

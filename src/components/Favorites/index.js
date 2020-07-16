@@ -3,7 +3,7 @@
 
 import React, { Fragment, useState } from "react";
 import favorite from "../../img/favorite.svg";
-import { AuthUserContext, withAuthorization } from "../Session";
+import { AuthUserContext, withAuthorization } from "../../services/Session";
 
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";

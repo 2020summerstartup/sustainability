@@ -1,6 +1,6 @@
 import React from "react";
 
-import {getDorm} from "../Firebase";
+import {getDorm} from "../../services/Firebase";
 
 function assignRanking(data) {
     localStorage.setItem('ranking', data.rank)

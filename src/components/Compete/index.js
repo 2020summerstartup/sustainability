@@ -1,7 +1,7 @@
 import React from "react"; // No longer imports component because it wasn't used
 
 // import { withFirebase } from "../Firebase";
-import { AuthUserContext, withAuthorization } from "../Session";
+import { AuthUserContext, withAuthorization } from "../../services/Session";
 
 import Leaderboard2 from "../Leaderboard";
 

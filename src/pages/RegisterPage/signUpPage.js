@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./index.css";
 
-import { withFirebase, createUser } from "../../components/Firebase";
+import { withFirebase, createUser } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 

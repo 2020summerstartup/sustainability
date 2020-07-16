@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
-import { AuthUserContext } from "../Session";
+import { AuthUserContext } from "../../services/Session";
 import SignOutButton from "../SignOut";
 
 import styles from "../Navigation.modules.css";

@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./Leaderboard.css";
-import { firestore } from '../Firebase/firebase';
+import { firestore } from '../../services/Firebase/firebase';
 import "firebase/firestore";
 import leaderBoardUpdate, {assignRanking} from "./leaderBoardUpdate";
 
