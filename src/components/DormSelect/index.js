@@ -8,8 +8,7 @@ import Select from '@material-ui/core/Select';
 
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {updateUserDorm, getDorm} from "../../services/Firebase";
-import { assignRanking } from "../Leaderboard";
-
+import { assignRanking } from "../../pages/CompetePage/leaderboard.js";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {

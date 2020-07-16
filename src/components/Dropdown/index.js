@@ -5,7 +5,7 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {updateUserDorm, getDorm} from "../../services/Firebase"
 
 import Select from "react-select";
-import { assignRanking } from "../Leaderboard";
+import { assignRanking } from '../../pages/CompetePage/leaderBoardUpdate.js';
 
 // Choose your dorm!
 const dorms = [

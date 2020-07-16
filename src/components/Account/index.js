@@ -14,7 +14,7 @@ import React, {useEffect, useContext} from "react";
 import TotalPointsCard from "./points.js";
 
 import DormCard from "./dorm.js";
-import leaderBoardUpdate, {assignRanking} from '../Leaderboard/leaderBoardUpdate.js';
+import leaderBoardUpdate, {assignRanking} from '../../pages/CompetePage/leaderBoardUpdate.js';
 import {getUser, getDorm} from "../../services/Firebase";
 // import SignOutButton from "../SignOut";
 import { AuthUserContext, withAuthorization } from "../../services/Session";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Leaderboard.css";
+import "./leaderboard.css";
 import { firestore } from '../../services/Firebase/firebase';
 import "firebase/firestore";
 import leaderBoardUpdate, {assignRanking} from "./leaderBoardUpdate";

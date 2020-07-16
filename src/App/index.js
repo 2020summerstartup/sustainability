@@ -10,7 +10,7 @@ import HomePage from '../pages/HomePage';
 import AccountPage from '../components/Account';
 import InfoPage from '../components/Info';
 import Header, {AccountHeader, ChangeHeader} from '../components/Headers';
-import CompetePage from '../components/Compete';
+import CompetePage from '../pages/CompetePage';
 import OfflinePage from '../pages/OfflinePage';
 // import AccountHeader from '../AccountHeader';
 import ChangePW from "../components/PasswordChange/changePw.js";
