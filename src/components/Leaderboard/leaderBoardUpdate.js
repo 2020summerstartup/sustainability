@@ -16,7 +16,6 @@ export default function leaderBoardUpdate() {
         let i = 0;
         let length = snapshot.docs.length
         snapshot.docs.forEach(doc => {
-            console.log(doc.id)
             updates.push(getDorm().doc(doc.id).update({
                 rank: length - i,
             }));
@@ -35,3 +34,5 @@ export default function leaderBoardUpdate() {
         console.error(err);
         });
 }
+
+export {assignRanking}

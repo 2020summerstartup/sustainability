@@ -2,7 +2,8 @@ import React, {useContext} from 'react';
 import points from "../../img/points.svg";
 import dorm from "../../img/dorm.svg";
 import {AuthUserContext} from "../Session";
-import {getUser} from "../Firebase";
+import {getUser, getDorm} from "../Firebase";
+import {assignRanking} from "../Leaderboard"
 import GoogleFontLoader from 'react-google-font-loader';
 import NoSsr from '@material-ui/core/NoSsr';
 import { makeStyles } from '@material-ui/core/styles';
@@ -62,6 +63,12 @@ export const DormCard = React.memo(function GalaxyCard() {
   }, err => {
   console.log(`Encountered error: ${err}`);
 })
+
+  getDorm().doc(localStorage.getItem('dorm')).onSnapshot(docSnapshot => {
+    assignRanking(docSnapshot.data())
+  }, error => {
+    console.error("Error: ", error)
+  })
   return (
     <div>
     <AuthUserContext.Consumer>

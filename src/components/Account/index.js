@@ -108,7 +108,7 @@ function AccountPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       leaderBoardUpdate()
-    }, 1000);
+    }, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -117,8 +117,8 @@ function AccountPage() {
       <AuthUserContext.Consumer>
         {(authUser) => (
           <div className="base-container">
-            <h1>Profile</h1>
-            <p>{authUser.email}'s page!</p>
+            <div className="profile">Profile</div>
+            <div className="accountName">{authUser.email}'s page!</div>
             <div className={classes.root}>
               <AppBar position="static" color="default">
                 <Tabs
@@ -127,8 +127,8 @@ function AccountPage() {
                   variant="fullWidth"
                   scrollButtons="off"
                   indicatorColor="primary"
-                  textColor="primary"
-                  aria-label="scrollable tabs"
+                  textColor="inherited"
+                  aria-label="scrollable force tabs example"
                   centered="true"
                 >
 
@@ -175,7 +175,7 @@ function AccountPage() {
                 Item Five
               </TabPanel> */}
             </div>
-            <div class="signout-btn">
+            <div class="bottom">
               <SignOutButton />
             </div>
           </div>
@@ -184,6 +184,102 @@ function AccountPage() {
     </div>
   );
 }
+
+// <div className="base-container">
+
+//   <div className="wrapper1">
+//     Welcome,{authUser.email}!
+// {
+//   /* *insert profile pic* */
+// }
+// </div>
+// <div className="wrapper2">
+//   <div>
+//     <div>
+//     You've earned
+//     </div>
+//     <div>
+//     { localStorage.getItem("waterBottle") } Points for recycling,
+//     </div>
+//     <div>
+//     way to go!</div>
+
+//   </div>
+//   <div>
+//   You're representing ______ {authUser.dorm} dorm
+
+//   </div>
+
+//   <div>
+//     Your dorm is in ____ place!
+//   </div>
+//   <div>
+//   <img alt = '' src = {southdorm} />
+//   </div>
+//   <div className="wrapper3">
+//   <div>
+//     Account info:
+//   </div>
+//   <div>
+//     Email address: {authUser.email}
+//   </div>
+//   <div>
+//     Need to change dorms or change your password?
+//   </div>
+
+//   <div>
+//   <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+//   </div>
+// </div>
+// {
+//   /* <div className="wrapper3">
+//             <div>
+//               Account info:
+//             </div>
+//             <div>
+//               Email address: *insert user email*
+//             </div>
+//             <div>
+//               Need to change dorms or change your password?
+//             </div>
+
+//             <div>
+//             <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+//             </div> */
+// }
+
+// </div>
+/* <div className="grid"> </div>
+          <div>ACCOUNT INFO</div>
+          <h1>Your Account: {authUser.email}</h1>
+          
+          <h3>You've earned *insert user's points*{authUser.points}, way to go!</h3>
+          <h3>Your dorm is in *user dorm place*{authUser.dormplace} place with *user dorm points* {authUser.dormPoints}points!</h3>
+          <h3>You're representing *insert dorm* {authUser.dorm} dorm</h3>
+          <h3>*insert dorm pic*</h3>
+          <img src = {southdorm} />
+
+          Entered the wrong dorm? Change your account password?
+          <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+          
+          <SignOutButton className="signout-btn" />
+         
+          
+          <div class = "wrapper">
+            
+          <div className="box">box1</div>
+          <div className="box">box2</div>
+          <div className="box">box3</div>
+          <div className="box">box4</div>
+           */
+// <div className="bottom">
+//   <SignOutButton />
+// </div>
+//  </div>
+//
+//     </AuthUserContext.Consumer>
+//   </div>
+// );
 
 
 const condition = (authUser) => !!authUser;

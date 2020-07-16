@@ -1,8 +1,6 @@
 import React from "react";
 
 import "./Leaderboard2.css";
-import { firestore } from '../Firebase/firebase';
-import "firebase/firestore";
 
 // list of colors for each dorm to display in a different color depending on their ranking
 let colors = [
@@ -22,44 +20,39 @@ class Leaderboard2 extends React.Component {
     super();
     this.state = {
       leaders: [],
-      maxScore: 0
+      maxPoints: 500,
     };
     this.getData = this.getData.bind(this);
   }
   getData() {
-    //import the real dorm score data from firestore
-    const getLeaders = () => {
-      const newLeaders = []
-      firestore.collection('dorms').get().then((snapshot) => {
-        snapshot.docs.forEach( doc => {
-            newLeaders.push({id: 1 , name: doc.id , points: doc.data().score},)
-        })
-        // orders by decreasing points property 
-        newLeaders.sort((a,b) => b.points - a.points)
-        this.setState({
-          leaders: newLeaders,
-          maxScore: newLeaders[0].points
-        });
-      })
-    }
-    
+    /* Here we can implement data fetching once we have data in firebase */
+    // Below is some fake data
     let data = {
       success: true,
       leaders: [
-        getLeaders()
+        { id: 1, name: "Case", points: 500 },
+        { id: 3, name: "East", points: 450 },
+        { id: 2, name: "South", points: 400 },
+        { id: 4, name: "West", points: 200 },
+        { id: 5, name: "Sontag", points: 100 },
+        { id: 5, name: "Drinkward", points: 50 },
+        { id: 5, name: "Atwood", points: 50 },
+        { id: 5, name: "Linde", points: 25 },
+        { id: 5, name: "North", points: 10 },
       ],
-      maxScore: this.state.maxScore
+      maxScore: 500,
     };
+    this.setState({
+      leaders: data.leaders,
+      maxScore: data.maxScore,
+    });
   }
-
-  
   //implement later with real data
   componentWillMount() {
     this.getData();
     /*data is refreshing every 3 minutes*/
     setInterval(this.getData, 180000);
-  };
-
+  }
 
   render() {
     return (
@@ -99,11 +92,11 @@ class Leaderboard2 extends React.Component {
                   ) : null}
                   <div className="leader-content">
                     <div className="leader-name">
-                      {i + 1 + ". " + dorm['name']}
+                      {i + 1 + ". " + dorm.name}
                     </div>
                     <div className="leader-score">
                       {/* insert avatar here if we want */}
-                      <div className="leader-score_title">{dorm['points']}</div>
+                      <div className="leader-score_title">{dorm.points}</div>
                     </div>
                   </div>
                 </div>
@@ -116,7 +109,7 @@ class Leaderboard2 extends React.Component {
                     style={{
                       backgroundColor: colors[i],
                       // calculates the bar to show how many points
-                      width: (dorm['points'] / this.state.maxScore) * 100 + "%",
+                      width: (dorm.points / this.state.maxPoints) * 100 + "%",
                     }}
                     className="bar"
                   />

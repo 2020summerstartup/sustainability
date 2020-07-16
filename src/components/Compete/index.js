@@ -19,7 +19,7 @@ const CompetePage = () => (
             </span>
           </h1>
           <center>New competitions coming soon...</center>
-          <h1> </h1>
+          <h1></h1>
           <h3>Leaderboard</h3>
           <p>See your dorm's ranking below! :)</p>
           <Leaderboard2 />
