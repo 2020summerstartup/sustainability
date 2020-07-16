@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
 // import "./index.css";
 // import "././index.css";
 // import { Link } from "react-router-dom";
@@ -7,21 +7,16 @@ import React from "react";
 // import * as ROUTES from "../../constants/routes";
 // import Tabs from '@material-ui/core/Tabs';
 
-import SignOutButton from "../SignOut";
 // import { db } from "..,Firebase/firebase.js";
 // import { PasswordForgetForm } from "../PasswordForget";
 // import PasswordChangeForm from "../PasswordChange";
 
-import TotalPoints from "./points.js";
-import Dropdown2 from "../Dropdown";
-import accountImg from "../../img/account.svg";
+
 import TotalPointsCard from "./points.js";
 
 import DormCard from "./dorm.js";
-import FaveCard from "./fave.js";
-import SettingsPage from "../Setting";
-
-
+import {leaderBoardUpdate, assignRanking} from '../Leaderboard';
+import {getUser, getDorm} from "../Firebase";
 // import SignOutButton from "../SignOut";
 import { AuthUserContext, withAuthorization } from "../Session";
 import PropTypes from "prop-types";
@@ -30,7 +25,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 // import PhoneIcon from "@material-ui/icons/Phone";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 // import HelpIcon from "@material-ui/icons/Help";
 // import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
@@ -38,8 +32,7 @@ import PersonPinIcon from "@material-ui/icons/PersonPin";
 // import ThumbUp from "@material-ui/icons/ThumbUp";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import HouseIcon from "@material-ui/icons/House";
-import SettingsIcon from "@material-ui/icons/Settings";
+import HomeIcon from "@material-ui/icons/Home";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -96,6 +89,14 @@ const useStyles = makeStyles((theme) => ({
 // })
 // };
 
+function assignDorm(data) {
+  if (data.userDorm === ""){
+    alert("Sorry, please choose your dorm in setting!")
+  }else{
+    localStorage.setItem("dorm", data.userDorm)
+  }
+}
+
 function AccountPage() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -104,24 +105,51 @@ function AccountPage() {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      leaderBoardUpdate()
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const authContext = useContext(AuthUserContext);
+
+  getUser(authContext.email).onSnapshot(docSnapshot => {
+    if (docSnapshot.exists) {
+      assignDorm(docSnapshot.data())
+    } else {
+      alert("Sorry, please choose your dorm in setting!")
+    }
+  }, err => {
+  console.log(`Encountered error: ${err}`);
+})
+
+  getDorm().doc(localStorage.getItem('dorm')).onSnapshot(docSnapshot => {
+    assignRanking(docSnapshot.data())
+  }, error => {
+    console.error("Error: ", error)
+  })
+
   return (
     <div>
       <AuthUserContext.Consumer>
         {(authUser) => (
           <div className="base-container">
-            <h1>Profile</h1>
-            <p>{authUser.email}'s page!</p>
+
+            {/* <h1>Profile</h1>
+            <p>{authUser.email}'s page!</p> */}
             <div className={classes.root}>
-              <AppBar position="static" color="default">
+              <AppBar position="static" color="primary">
                 <Tabs
                   value={value}
                   onChange={handleChange}
                   variant="fullWidth"
                   scrollButtons="off"
                   indicatorColor="primary"
-                  textColor="primary"
+                  textColor="default"
                   aria-label="scrollable tabs"
                   centered="true"
+                  width="100%"
                 >
 
                   <Tab
@@ -130,24 +158,14 @@ function AccountPage() {
                     {...a11yProps(0)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  {/* <Tab
-                    label="Your Favorites"
-                    icon={<FavoriteIcon />}
-                    {...a11yProps(1)}
-                    style={{ backgroundColor: "transparent" }}
-                  /> */}
+                
                   <Tab
                     label="Your Dorm"
-                    icon={<HouseIcon />}
+                    icon={<HomeIcon />}
                     {...a11yProps(1)}
                     style={{ backgroundColor: "transparent" }}
                   />
-                  <Tab
-                    label="Settings"
-                    icon={<SettingsIcon />}
-                    {...a11yProps(2)}
-                    style={{ backgroundColor: "transparent" }}
-                  />
+                 
                  
                 </Tabs>
               </AppBar>
@@ -160,22 +178,114 @@ function AccountPage() {
               <TabPanel value={value} index={1}>
                 <DormCard />
               </TabPanel>
-              <TabPanel value={value} index={2}>
-                <SettingsPage />
-              </TabPanel>
-              {/* <TabPanel value={value} index={3}>
-                Item Five
-              </TabPanel> */}
+              
             </div>
-            <div class="signout-btn">
+            {/* <div class="signout-btn">
+
               <SignOutButton />
-            </div>
+            </div> */}
           </div>
         )}
       </AuthUserContext.Consumer>
     </div>
   );
 }
+
+// <div className="base-container">
+
+//   <div className="wrapper1">
+//     Welcome,{authUser.email}!
+// {
+//   /* *insert profile pic* */
+// }
+// </div>
+// <div className="wrapper2">
+//   <div>
+//     <div>
+//     You've earned
+//     </div>
+//     <div>
+//     { localStorage.getItem("waterBottle") } Points for recycling,
+//     </div>
+//     <div>
+//     way to go!</div>
+
+//   </div>
+//   <div>
+//   You're representing ______ {authUser.dorm} dorm
+
+//   </div>
+
+//   <div>
+//     Your dorm is in ____ place!
+//   </div>
+//   <div>
+//   <img alt = '' src = {southdorm} />
+//   </div>
+//   <div className="wrapper3">
+//   <div>
+//     Account info:
+//   </div>
+//   <div>
+//     Email address: {authUser.email}
+//   </div>
+//   <div>
+//     Need to change dorms or change your password?
+//   </div>
+
+//   <div>
+//   <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+//   </div>
+// </div>
+// {
+//   /* <div className="wrapper3">
+//             <div>
+//               Account info:
+//             </div>
+//             <div>
+//               Email address: *insert user email*
+//             </div>
+//             <div>
+//               Need to change dorms or change your password?
+//             </div>
+
+//             <div>
+//             <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+//             </div> */
+// }
+
+// </div>
+/* <div className="grid"> </div>
+          <div>ACCOUNT INFO</div>
+          <h1>Your Account: {authUser.email}</h1>
+          
+          <h3>You've earned *insert user's points*{authUser.points}, way to go!</h3>
+          <h3>Your dorm is in *user dorm place*{authUser.dormplace} place with *user dorm points* {authUser.dormPoints}points!</h3>
+          <h3>You're representing *insert dorm* {authUser.dorm} dorm</h3>
+          <h3>*insert dorm pic*</h3>
+          <img src = {southdorm} />
+
+          Entered the wrong dorm? Change your account password?
+          <Link to={ROUTES.SETTING}><button className="button">Settings</button></Link>
+          
+          <SignOutButton className="signout-btn" />
+         
+          
+          <div class = "wrapper">
+            
+          <div className="box">box1</div>
+          <div className="box">box2</div>
+          <div className="box">box3</div>
+          <div className="box">box4</div>
+           */
+// <div className="bottom">
+//   <SignOutButton />
+// </div>
+//  </div>
+//
+//     </AuthUserContext.Consumer>
+//   </div>
+// );
 
 
 const condition = (authUser) => !!authUser;

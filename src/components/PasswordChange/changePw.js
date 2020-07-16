@@ -1,13 +1,17 @@
 import React from 'react';
 import PasswordChangeForm from './index.js';
 import { AuthUserContext, withAuthorization } from "../Session";
+import accountImg from "../../img/account.svg";
 
-const ChangePage = () => (
+const ChangePW = () => (
     <div>
     <AuthUserContext>
       {(authUser) => (
     <div class="base-container">
-        <div>Want to change your password?</div>
+        <h1>Want to change your password?</h1>
+        <div className="image">
+          <img alt="change your password" src={accountImg} />
+        </div>
         <PasswordChangeForm/>
     </div>
       )}
@@ -17,4 +21,4 @@ const ChangePage = () => (
 
 const condition = (authUser) => !!authUser;
 
-export default withAuthorization(condition)(ChangePage);
+export default withAuthorization(condition)(ChangePW);

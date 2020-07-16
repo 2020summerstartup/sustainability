@@ -19,12 +19,7 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
-import {
-  getUser,
-  createUser,
-  uploadUserPoint,
-  uploadUserTotalPoint,
-} from "../Firebase";
+import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../Firebase";
 import { initPoints, assignData } from "../Home";
 
 const useStyles = makeStyles(() => ({
@@ -32,8 +27,8 @@ const useStyles = makeStyles(() => ({
     borderRadius: "1rem",
     boxShadow: "none",
     position: "relative",
-    minWidth: 400,
-    minHeight: 360,
+    minWidth: 200,
+    minHeight: 250,
     "&:after": {
       content: '""',
       display: "block",

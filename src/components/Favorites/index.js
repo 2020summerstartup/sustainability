@@ -1,4 +1,4 @@
-// THIS FILE HAS CODE LARGELY DUPLICATED FROM INDEX.JS IN ACTIONCARD. IT'S SUPER JANKY AND WE NEED TO FIX IT. (I made this mess
+// TODO: THIS FILE HAS CODE LARGELY DUPLICATED FROM INDEX.JS IN ACTIONCARD. IT'S SUPER JANKY AND WE NEED TO FIX IT. (I made this mess
 // so I'm happy to fix it eventually lol.) -Katie
 
 import React, { Fragment, useState } from 'react';

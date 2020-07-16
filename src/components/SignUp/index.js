@@ -61,7 +61,7 @@ class SignUpFormBase extends Component {
     //   })
     // });
 
-    createUser(email, dorm);
+    createUser(email, username, dorm);
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -109,7 +109,7 @@ class SignUpFormBase extends Component {
             value={username}
             onChange={this.onChange}
             type="text"
-            placeholder="Full Name"
+            placeholder="First Name"
           />
         </div>
         <div className="form-group">
@@ -124,7 +124,7 @@ class SignUpFormBase extends Component {
           />
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon="home" className="icon" />
+          <FontAwesomeIcon icon="user" className="icon" />
           <input
             className="input-field"
             name="dorm"

@@ -50,7 +50,8 @@ function TabPanel(props) {
     //   padding: "30px",
       flexGrow: 1,
       width: "100%",
-      backgroundColor: theme.palette.background.paper,
+      // backgroundColor: theme.palette.background.paper,
+      backgroundColor: "red",
     },
     // flexContainer: {
     //     padding: "10%",
@@ -66,18 +67,19 @@ function HomeTabs() {
       setValue(newValue);
     };
     return (
-<div>
-<AppBar position="static" color="default" p="5%">
+<div >
+<AppBar position="static" color="primary">
                 <Tabs
                   value={value}
                   onChange={handleChange}
                   variant="fullWidth"
                   scrollButtons="off"
                   indicatorColor="primary"
-                  textColor="primary"
-                  aria-label="scrollable force tabs example"
+                  textColor="default"
+                  aria-label="scrollable tabs"
                   centered="true"
-                  width="100%">                  
+                  width="100%"
+                >              
                     <Tab
                     label="Actions!"
                     icon= {<EcoIcon />}

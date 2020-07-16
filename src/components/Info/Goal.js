@@ -13,7 +13,7 @@ export default function Goal() {
             <h1>Our Goal</h1>
             <p>
               The 2020 Summer Startup Team works with sustainability
-              organizations at Mudd like ASHMC sustainability and Engineers of a
+              organizations at Harvey Mudd like ASHMC sustainability and Engineers of a
               Sustainable World to help promote more eco-friendly practices
               on our campus by providing real-life incentives.
             </p>
