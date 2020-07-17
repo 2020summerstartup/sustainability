@@ -30,14 +30,15 @@ code {
     margin-right: 6.5rem !important;
     padding-right: 2rem;
     padding-left: 8.5rem !important;
-    padding-bottom: 2rem;
+    padding-bottom: 0rem !important;
   }
 }
 
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .base-container {
-    margin-bottom: 5rem;
+    margin-bottom: 3.5rem;
+    padding-bottom: 0rem !important;
     overflow-x: hidden;
   }
 }

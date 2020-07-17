@@ -123,7 +123,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const FaveCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
-  const styles = useStyles();
   const classes = useStyles();
 
   const [expandedId, setExpandedId] = React.useState(-1);
@@ -194,9 +193,9 @@ export const FaveCard = React.memo(function GalaxyCard() {
                 ]}
               />
             </NoSsr>
-            <Card className={styles.card}>
+            <Card className={classes.card}>
               <CardMedia classes={mediaStyles} image={favorite} />
-              <Box py={3} px={2} className={styles.content}>
+              <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
                   <InfoSubtitle>Your faves are here </InfoSubtitle>
                   <InfoTitle>Add more!</InfoTitle>
