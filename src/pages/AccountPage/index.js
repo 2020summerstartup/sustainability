@@ -76,12 +76,7 @@ function AccountPage() {
   //   setValue(newValue);
   // };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      leaderBoardUpdate();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  leaderBoardUpdate();
 
   const authContext = useContext(AuthUserContext);
 
