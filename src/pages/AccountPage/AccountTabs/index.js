@@ -53,6 +53,9 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  appbar: {
+    boxShadow: "2px 2px 6px #a6a6a6",
+  },
   tabs: {
     flexGrow: 1,
     backgroundColor: "primary",
@@ -92,7 +95,7 @@ function AccountTabs() {
   };
   return (
     <div>
-      <AppBar position="static" color="primary" className={classes.bar}>
+      <AppBar position="static" color="primary" elevation={0} className={classes.appbar}>
         <Tabs
           value={value}
           onChange={handleChange}

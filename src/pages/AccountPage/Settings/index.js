@@ -97,7 +97,7 @@ export default function SwipeableTemporaryDrawer() {
           <AuthUserContext.Consumer>
           {(authUser) => (
             <ListItemText className={classes.listItemText}>
-            Your email: {authUser.email}
+            {authUser.email}
             {/* {localStorage.getItem("email")} */}
             {/* <FormDialog/> */}
           </ListItemText>

@@ -133,7 +133,7 @@ const AccountHeader = ({ firebase }) => {
   const classes = useStyles2();
   return (
     <>
-      <AppBar position="static" className={classes.header}>
+      <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
           <Grid justify="space-between" container flexGrow={1}>
             <Grid item>
@@ -305,13 +305,13 @@ const HomeHeader = ({ firebase }) => {
 
   return (
     <>
-      <AppBar position="static" className={classes.header}>
+      <AppBar position="static" className={classes.appbar} elevation={0}>
         <Toolbar className={classes.toolbar}>
           <Grid justify="space-between" container flexGrow={1}>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
                 <img src={suslogoImg} alt="logo" className={classes.logo} />
-                Actions
+                Home
               </Typography>
             </Grid>
             <Grid item>
