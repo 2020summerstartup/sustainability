@@ -58,11 +58,28 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
+      marginTop: "0.5rem",
     },
-    // mHeight: 50,
   },
   bar: {
     padding: 0,
+  },
+  tabIcon: {
+    position: "relative",
+    top: "0.4rem",
+  },
+  tabText: {
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "17px",
+      fontWeight: "bold",
+      marginBottom: "1rem",
+    },
+  },
+  indicator: {
+    height: "3px",
+    [theme.breakpoints.up("sm")]: {
+    height: "5px",
+    },
   }
 }));
 
@@ -81,21 +98,23 @@ function AccountTabs() {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          indicatorColor="secondary"
+          // indicatorColor="secondary"
+          // inkBarStyle={{ background: '#000' }}
           textColor="default"
           aria-label="scrollable tabs"
           centered="true"
           className={classes.tabs}
+          TabIndicatorProps={{className: classes.indicator}}
         >
           <Tab
-            label={<div><PersonIcon viewBox="0 -14 30 32"/> Your Points </div>}
+            label={<div className={classes.tabText}><PersonIcon className={classes.tabIcon}/> Your Points </div>}
             // icon={<PersonPinIcon />}
             {...a11yProps(0)}
             style={{ backgroundColor: "transparent" }}
           />
 
           <Tab
-            label={<div><HomeIcon viewBox="0 -13 30 32"/> Your Dorm </div>}
+            label={<div className={classes.tabText}><HomeIcon className={classes.tabIcon}/> Your Dorm </div>}
             // icon={<HomeIcon />}
             {...a11yProps(1)}
             style={{ backgroundColor: "transparent" }}
