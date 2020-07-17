@@ -69,7 +69,7 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-// I think Linda wrong this function? I don't want to fail to do it justice with my comments. -Katie
+// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
 function assignData(data) {
   localStorage.setItem("total", data.total);
   const points = data.points;
