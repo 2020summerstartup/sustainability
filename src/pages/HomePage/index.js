@@ -51,7 +51,6 @@ import {
   InfoTitle,
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
-import { addFav, deleteFav } from "../../services/Firebase";
 
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
