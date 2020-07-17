@@ -9,7 +9,6 @@ import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import { getUser, createUser, uploadUserTotalPoint } from "../../services/Firebase";
 
-import ActionCard from "./HomeTabs/actionCards";
 import FaveCard from "./HomeTabs/favorites";
 
 import PropTypes from "prop-types";
@@ -33,7 +32,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { updateUserPoint, updateDormPoint, updateUserDorm } from "../../services/Firebase";
 
 
-import ActionData from "./HomeTabs/actionData.json";
+import ActionData from "./actionData.json";
 
 import Grid from "@material-ui/core/Grid";
 
@@ -525,6 +524,64 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
       <TabPanel value={value} index={0} class="tab-container">
       <Fragment>
       {/* <Toolbar> */}
+      <div className="base-container">
+        <h3>
+          You have earned&nbsp;
+          {<CountUp start={0} end={total} duration={1}></CountUp>} points!
+          &nbsp;
+          {/* <button onClick={notify2} className="button">
+          Click me!
+        </button> */}
+        </h3>
+        <button onClick={() => setProgressModalIsOpen(true)} className="button">
+          Check Your Progress
+        </button>
+        <Modal
+          isOpen={progressModalIsOpen}
+          onRequestClose={() => setProgressModalIsOpen(false)}
+          className={styles.modal}
+          overlayClassName={styles.overlay}
+        >
+          <center>
+            <Confetti
+          width={1500}
+          numberOfPieces={2000}
+          recycle={false}
+          opacity={0.7}
+          // colors={["grey", "white", "green", "black"]}
+        />
+            {
+              // I don't yet understand what "Object" is referring to here/how the program knows that.
+              Object.keys(ActionData).map((key) => {
+                message[parseInt(key) - 1] = ActionData[key].title.concat(
+                  " Points: ",
+                  localStorage.getItem(ActionData[key].susAction),
+                  " "
+                );
+                return ""; // It has to return a value. I think it isn't bad practice to do this? -Katie
+              })
+            }
+            <h1>Your Progress:</h1>
+            {/* TODO: This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
+            <p>
+              {" "}
+              {message[0]} <br /> {message[1]} <br /> {message[2]} <br />{" "}
+              {message[3]} <br /> {message[4]} <br /> {message[5]} <br />{" "}
+              {message[6]} <br /> {message[7]} <br /> {message[8]}{" "}
+              {message.slice(9, message.length)}{" "}
+            </p>
+            <h3>Total Points: {total} </h3>
+            <h1 id="wrapper">
+              <button onClick={() => clicked()}>Another option...</button>
+            </h1>
+            <div>
+              <button onClick={() => setProgressModalIsOpen(false)} className="button">
+                Close
+              </button>
+            </div>
+          </center>
+        </Modal>
+      </div>
         <div className={classes.searchContainer}>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
@@ -704,67 +761,6 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
     </div>
       </TabPanel>
     </div>
-      <div className="base-container">
-        <h3>
-          You have earned&nbsp;
-          {<CountUp start={0} end={total} duration={1}></CountUp>} points!
-          &nbsp;
-          {/* <button onClick={notify2} className="button">
-          Click me!
-        </button> */}
-        </h3>
-        <button onClick={() => setProgressModalIsOpen(true)} className="button">
-          Check Your Progress
-        </button>
-        <p></p>
-        {/* <CustomizedDialogs /> */}
-        <p></p>
-        <Modal
-          isOpen={progressModalIsOpen}
-          onRequestClose={() => setProgressModalIsOpen(false)}
-          className={styles.modal}
-          overlayClassName={styles.overlay}
-        >
-          <center>
-            <Confetti
-          width={1500}
-          numberOfPieces={2000}
-          recycle={false}
-          opacity={0.7}
-          // colors={["grey", "white", "green", "black"]}
-        />
-            {
-              // I don't yet understand what "Object" is referring to here/how the program knows that.
-              Object.keys(ActionData).map((key) => {
-                message[parseInt(key) - 1] = ActionData[key].title.concat(
-                  " Points: ",
-                  localStorage.getItem(ActionData[key].susAction),
-                  " "
-                );
-                return ""; // It has to return a value. I think it isn't bad practice to do this? -Katie
-              })
-            }
-            <h1>Your Progress:</h1>
-            {/* TODO: This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
-            <p>
-              {" "}
-              {message[0]} <br /> {message[1]} <br /> {message[2]} <br />{" "}
-              {message[3]} <br /> {message[4]} <br /> {message[5]} <br />{" "}
-              {message[6]} <br /> {message[7]} <br /> {message[8]}{" "}
-              {message.slice(9, message.length)}{" "}
-            </p>
-            <h3>Total Points: {total} </h3>
-            <h1 id="wrapper">
-              <button onClick={() => clicked()}>Another option...</button>
-            </h1>
-            <div>
-              <button onClick={() => setProgressModalIsOpen(false)} className="button">
-                Close
-              </button>
-            </div>
-          </center>
-        </Modal>
-      </div>
     </>
   );
 }
