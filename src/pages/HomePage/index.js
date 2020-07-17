@@ -1,15 +1,12 @@
 import React, { Fragment, useState, useContext } from "react";
 import styles from "./modal.module.css";
 
-import HomeTabs from "./HomeTabs";
 
 import CountUp from "react-countup";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import { getUser, createUser, uploadUserTotalPoint } from "../../services/Firebase";
-
-import FaveCard from "./HomeTabs/favorites";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
