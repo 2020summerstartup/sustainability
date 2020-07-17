@@ -1,10 +1,6 @@
 import React, { Fragment, useState, useContext } from "react";
 import styles from "./modal.module.css";
 
-
-import CustomizedDialogs from "./MuiModal.js";
-// import "./toastify.css";
-
 import CountUp from "react-countup";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
@@ -12,7 +8,14 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import { getUser, createUser, uploadUserTotalPoint, updateUserPoint, updateDormPoint } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+
+import "./toastify.module.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import ActionData from "./actionData.json";
+
+import { makeStyles, fade } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -21,20 +24,9 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import EcoIcon from "@material-ui/icons/Eco";
 
-import { fade } from "@material-ui/core/styles";
-
-import "./toastify.module.css";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-import ActionData from "./actionData.json";
-
 import Grid from "@material-ui/core/Grid";
-
 import SearchIcon from "@material-ui/icons/Search";
-
 import TextField from "@material-ui/core/TextField";
-
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -46,12 +38,12 @@ import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
-import clsx from "clsx";
 import Collapse from "@material-ui/core/Collapse";
 import NoSsr from "@material-ui/core/NoSsr";
 import GoogleFontLoader from "react-google-font-loader";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import favorite from "../../img/favorite.svg";
+import clsx from "clsx";
 import {
   Info,
   InfoCaption,
@@ -61,24 +53,23 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { addFav, deleteFav } from "../../services/Firebase";
 
-
+// Initiaize user's points in local storage. If the user has never logged points on this device,
+// each local storage item will be null. To prevent "null" from displaying anywhere, we
+// initialize here.
 var total;
-
-// Note from Katie to other programmers: The following fuction is super important, even though it usually doesn't
-// do anything. When a new susAction is added, the local storage value is initially NaN (or null), and then we can't increment/
-// decrement. So we have to include this check, even though it rarely does anything. Let me know if you need clarification!
-// Initialize point counter to 0 instead of NaN or null
 function initPoints(email) {
   total = 0;
   for (const key in ActionData) {
-    var action = localStorage.getItem(ActionData[key].susAction);
-    if (isNaN(action) || action == null) {
-      localStorage.setItem(ActionData[key].susAction, 0);
+    var action = localStorage.getItem(ActionData[key].susAction); // Action to initialize
+    if (isNaN(action) || action == null) { // If it hasn't been initialized
+      localStorage.setItem(ActionData[key].susAction, 0); // Initialize to 0
     }
   }
-  localStorage.setItem("total", total);
+  // TODO: Right now total init sets total equal to 0. I think we should be incrementing total inside the for loop? -Katie
+  localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
+// I think Linda wrong this function? I don't want to fail to do it justice with my comments. -Katie
 function assignData(data) {
   localStorage.setItem("total", data.total);
   const points = data.points;
@@ -92,9 +83,9 @@ function assignData(data) {
   localStorage.setItem('name', data.name)
 }
 
-// need this for modal to not get error in console
-Modal.setAppElement("#root");
+Modal.setAppElement("#root"); // Need this for modal to not get error in console
 
+// Amy or Kobe (I think) wrote this function. -Katie
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -121,6 +112,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
+// Idk who wrote this or what it does -Katie
 function a11yProps(index) {
   return {
     id: `scrollable-force-tab-${index}`,
@@ -140,9 +132,19 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "280",
     backgroundColor: "var(--text-secondary)",
   },
+  // Commenting this out doesn't seem to break anything, so I think we can delete it? Saving unless the styles
+  // are necessary somewhere I didn't seen.
+  // searchContainer: {
+  //   display: "flex",
+  //   backgroundColor: fade(theme.palette.common.white, 0.15),
+  //   marginTop: "1rem",
+  //   marginBottom: "0.5rem",
+  // },
   searchContainer: {
     display: "flex",
     backgroundColor: fade(theme.palette.common.white, 0.15),
+    paddingLeft: "20px",
+    paddingRight: "20px",
     marginTop: "1rem",
     marginBottom: "0.5rem",
   },
@@ -150,17 +152,25 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "flex-end",
     marginBottom: "0.5rem",
   },
+  // Again I'm pretty sure this is overwritten by the later searchInput
+  // searchInput: {
+  //   width: "12rem",
+  //   paddingBottom: "0",
+  //   [theme.breakpoints.up("sm")]: {
+  //     width: "15em",
+  //   },
+  // },
   searchInput: {
-    width: "12rem",
+    width: "15rem",
+    // marginBottom: "-8px !important",
     paddingBottom: "0",
-    [theme.breakpoints.up("sm")]: {
-      width: "15em",
-    },
+    underline: "0px !important",
+    // borderBottom: "#24a113"
   },
   actionContainer: {
     paddingTop: "1rem",
-    paddingLeft: "0",
-    paddingRight: "0",
+    paddingLeft: "0rem",
+    paddingRight: "0rem",
   },
   media: {
     height: 0,
@@ -227,55 +237,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     width: "100%",
   },
-  searchContainer: {
-    display: "flex",
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    paddingLeft: "20px",
-    paddingRight: "20px",
-    marginTop: "1rem",
-    marginBottom: "0.5rem",
-  },
-  searchIcon: {
-    alignSelf: "flex-end",
-    marginBottom: "0.5rem",
-  },
-  searchInput: {
-    width: "15rem",
-    // marginBottom: "-8px !important",
-    paddingBottom: "0",
-    underline: "0px !important",
-    // borderBottom: "#24a113"
-  },
-  actionContainer: {
-    paddingTop: "1rem",
-    paddingLeft: "0rem",
-    paddingRight: "0rem",
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
-    marginBottom: "1rem",
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-  avatar: {
-    backgroundColor: "var(--theme)",
-  },
-  cardContent: {
-    textAlign: "left",
-    paddingBottom: "0",
-  },
-  cardActions: {
-    paddingTop: "0",
-  },
 }));
 
 const modalCustomStyles = {
@@ -299,7 +260,6 @@ const modalCustomStyles = {
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [incrementModalIsOpen, setIncrementModalIsOpen] = useState(false);
-
   const authContext = useContext(AuthUserContext);
 
   // Get user's dorm set in local storage
@@ -321,9 +281,14 @@ function HomePage() {
     }
   );
 
-  const clicked = () => {
+  // A function to run when the button "another option..." within check your progress is clicked. 
+  // This won't be in the final code, but it's been part of my learning process for trying to get the
+  // newlines to work, and I don't want to delete it until I fully solve this issue. Please ask me
+  // before deleting this. :) -Katie
+  const showProgress = () => {
     var codeBlock = "";
-    for (const key in ActionData) {
+    for (const key in ActionData) { // Get each susAction
+      // Add info about each susAction, formatted with html, to the codeBalck
       codeBlock +=
         ActionData[key].title.concat(
           " Points: ",
@@ -331,41 +296,35 @@ function HomePage() {
           " "
         ) + "<br />";
     }
-
-    // Inserting the code block to wrapper element
+    // Setting the html of the element with id "wrapper" to be the stuff that was just put in codeBlock.
     document.getElementById("wrapper").innerHTML = codeBlock;
   };
 
+  // message to be displayed in check your progress
   var message = [];
   total = localStorage.getItem("total");
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [expandedId, setExpandedId] = React.useState(-1);
+  const [filter, setFilter] = useState("");
+  toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
+  // the one Amy wrote so I assume it's necessary here too) -Katie
+  const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const [expandedId, setExpandedId] = React.useState(-1);
-  const [filter, setFilter] = useState("");
-  toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
-  // the one Amy wrote so I assume it's necessary here too) -Katie
-
   const handleExpandClick = (i) => {
     setExpandedId(expandedId === i ? -1 : i);
   };
-
-
-  const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
-
-  toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
-  // the one Amy wrote so I assume it's necessary here too) -Katie
 
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
   };
 
-  // updates all necessary values in firestore when user completes sus action
+  // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the saved point total
@@ -383,7 +342,7 @@ function HomePage() {
       window.location.reload(true);
     });
 
-    // get the user's dorm from firestore and sets it in local storage
+    // get the user's dorm from firestore and update the dorm's points
     getUser(authContext.email).onSnapshot(
       (docSnapshot) => {
         if (docSnapshot.exists) {
@@ -401,8 +360,7 @@ function HomePage() {
 
   // update dorm's point in firestore
   updateDormPoint(localStorage.getItem('dorm'), parseInt(action.points));
-
-  };
+  }; // increment
 
   // Initialize the color of each favorite button
   // This isn't in a function because I can't call the function when I want using html. Could go in a function and then be called with JS.
@@ -447,6 +405,7 @@ function HomePage() {
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
+  // HTML to be displayed
   return (
     <>
       <div>
@@ -496,243 +455,245 @@ function HomePage() {
             />
           </Tabs>
         </AppBar>
-      <div className="base-container">
-        <h3>
-          You have earned&nbsp;
-          {<CountUp start={0} end={total} duration={1}></CountUp>} points!
-        </h3>
-        <button onClick={() => setProgressModalIsOpen(true)} className="button">
-          Check Your Progress
-        </button>
-        <Modal
-          isOpen={progressModalIsOpen}
-          onRequestClose={() => setProgressModalIsOpen(false)}
-          className={styles.modal}
-          overlayClassName={styles.overlay}
-        >
-          <center>
-            <Confetti
-          width={1500}
-          numberOfPieces={2000}
-          recycle={false}
-          opacity={0.7}
-          // colors={["grey", "white", "green", "black"]}
-        />
-            {
-              // I don't yet understand what "Object" is referring to here/how the program knows that.
-              Object.keys(ActionData).map((key) => {
-                message[parseInt(key) - 1] = ActionData[key].title.concat(
-                  " Points: ",
-                  localStorage.getItem(ActionData[key].susAction),
-                  " "
-                );
-                return ""; // It has to return a value. I think it isn't bad practice to do this? -Katie
-              })
-            }
-            <h1>Your Progress:</h1>
-            {/* TODO: This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
-            <p>
-              {" "}
-              {message[0]} <br /> {message[1]} <br /> {message[2]} <br />{" "}
-              {message[3]} <br /> {message[4]} <br /> {message[5]} <br />{" "}
-              {message[6]} <br /> {message[7]} <br /> {message[8]}{" "}
-              {message.slice(9, message.length)}{" "}
-            </p>
-            <h3>Total Points: {total} </h3>
-            <h1 id="wrapper">
-              <button onClick={() => clicked()}>Another option...</button>
-            </h1>
-            <div>
-              <button onClick={() => setProgressModalIsOpen(false)} className="button">
-                Close
-              </button>
-            </div>
-          </center>
-        </Modal>
-      </div>
-      <TabPanel value={value} index={0} class="tab-container">
-      <Fragment>
-        <div className={classes.searchContainer}>
-          <Grid container spacing={1} alignItems="flex-end">
-            <Grid item>
-              <SearchIcon className={classes.searchIcon} />
-            </Grid>
-            <Grid item>
-              <TextField
-                onChange={handleSearchChange}
-                className={classes.searchInput}
-                label="Search Actions"
-                variant="standard"
-                InputProps={{ disableUnderline: true }}
-                InputProps={{ classes: { underline: classes.underline } }}
+        <div className="base-container">
+          <h3>
+            You have earned&nbsp;
+            {<CountUp start={0} end={total} duration={1}></CountUp>} points!
+          </h3>
+          <button onClick={() => setProgressModalIsOpen(true)} className="button">
+            Check Progress
+          </button>
+          <Modal
+            isOpen={progressModalIsOpen}
+            onRequestClose={() => setProgressModalIsOpen(false)}
+            className={styles.modal}
+            overlayClassName={styles.overlay}
+          >
+            <center>
+              <Confetti
+                width={1500}
+                numberOfPieces={2000}
+                recycle={false}
+                opacity={0.7}
+                // colors={["grey", "white", "green", "black"]}
               />
-            </Grid>
-          </Grid>
+              {
+                // Get the individual points earned from each susAction
+                // I don't yet understand what "Object" is referring to here/how the program knows that.
+                Object.keys(ActionData).map((key) => {
+                  message[parseInt(key) - 1] = ActionData[key].title.concat(
+                    " Points: ",
+                    localStorage.getItem(ActionData[key].susAction),
+                    " "
+                  );
+                  return ""; // It has to return a value. I think it isn't bad practice to do this? -Katie
+                })
+              }
+              <h1>Your Progress:</h1>
+              {/* TODO: This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
+              <p>
+                {" "}
+                {message[0]} <br /> {message[1]} <br /> {message[2]} <br />{" "}
+                {message[3]} <br /> {message[4]} <br /> {message[5]} <br />{" "}
+                {message[6]} <br /> {message[7]} <br /> {message[8]}{" "}
+                {message.slice(9, message.length)}{" "}
+              </p>
+              <h3>Total Points: {total} </h3>
+              <h1 id="wrapper">
+                <button onClick={() => showProgress()}>Another option (delete eventually, not yet)</button>
+              </h1>
+              <div>
+                <button onClick={() => setProgressModalIsOpen(false)} className="button">
+                  Close
+                </button>
+              </div>
+            </center>
+          </Modal>
         </div>
-      <Grid container spacing={2} className={classes.actionContainer}>
-        {ActionData.map(
-          (action, i) =>
-            action.title.toLowerCase().includes(filter.toLowerCase()) && (
-              <Grid item xs={12} md={6} lg={4}>
-                <Card className={classes.root} key={action.title}>
-                  <CardHeader
-                    className={classes.cardContent}
-                    action={
-                      <IconButton
-                        onClick={() => setIncrementModalIsOpen(true)}
-                        // Finally found how to get ride of random old green from click and hover!
-                        style={{ backgroundColor: "transparent" }}
-                        aria-label="settings"
-                        title="Complete this sustainable action"
-                      >
-                        <AddCircleIcon fontSize="large" />
-                      </IconButton>
-                    }
-                    title={action.title}
-                    subheader={"Earn ".concat(action.points, " Points!")}
+        <TabPanel value={value} index={0} class="tab-container">
+          <Fragment>
+            <div className={classes.searchContainer}>
+              <Grid container spacing={1} alignItems="flex-end">
+                <Grid item>
+                  <SearchIcon className={classes.searchIcon} />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    onChange={handleSearchChange}
+                    className={classes.searchInput}
+                    label="Search Actions"
+                    variant="standard"
+                    InputProps={{ disableUnderline: true }}
+                    InputProps={{ classes: { underline: classes.underline } }}
                   />
-                  <CardActions disableSpacing>
-                    <IconButton
-                      title='Add to favorites'
-                      aria-label="add to favorites"
-                      style={{ color: favIconColors[i-1], backgroundColor: "transparent" }} // Set the favIcon color (i-1 prevents off-by-one error)
-                      onClick={() => favAction(action)}
-                      id={ "favoriteIcon".concat(action.susAction) }                                                                                                                                                                                                            
-                      className={classes.favoriteIcon}
-                    >
-                      <FavoriteIcon/>
-                    </IconButton>
-                    <IconButton
-                      className={clsx(classes.expand, {
-                        [classes.expandOpen]: !expandedId,
-                      })}
-                      onClick={() => handleExpandClick(i)}
-                      style={{ backgroundColor: "transparent" }}
-                      aria-expanded={expandedId === i}
-                      aria-label="Show More"
-                      title="Learn more"
-                    >
-                      <ExpandMoreIcon />
-                    </IconButton>
-                  </CardActions>
-                  <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
-                    <CardContent>
-                      <CardMedia
-                        className={classes.media}
-                        image={action.image}
-                        title={action.title}
-                      />
-                      <Typography variant="h5" gutterBottom>
-                        Environmental Impact:
-                      </Typography>
-                      <Typography variant="body1">{action.impact}</Typography>
-                    </CardContent>
-                  </Collapse>
-                </Card>
+                </Grid>
               </Grid>
-            )
-        )}
-      </Grid>
-    </Fragment>
-      </TabPanel>
-      <TabPanel value={value} index={1} class="tab-container">
-      <div>
-      <AuthUserContext.Consumer>
-        {(authUser) => (
-          <>
-            <NoSsr>
-              <GoogleFontLoader
-                fonts={[
-                  { font: "Spartan", weights: [300] },
-                  { font: "Montserrat", weights: [200, 400, 700] },
-                ]}
-              />
-            </NoSsr>
-            <Card className={classes.card}>
-              <CardMedia classes={mediaStyles} image={favorite} />
-              <Box py={3} px={2} className={classes.content}>
-                <Info useStyles={useGalaxyInfoStyles}>
-                  <InfoSubtitle>Your faves are here </InfoSubtitle>
-                  <InfoTitle>Add more!</InfoTitle>
-                  <InfoCaption>
-                    Go to actions tab and press the heart to add❤️
-                  </InfoCaption>
-                </Info>
-              </Box>
-            </Card>
+            </div>
             <Grid container spacing={2} className={classes.actionContainer}>
-        {ActionData.map(
-          (action, i) =>
-          localStorage.getItem(action.susAction.concat("Fav")) == "true" && (
-              <Grid item xs={12} md={6} lg={4}>
-                <Card className={classes.root} key={action.title}>
-                  <CardHeader
-                    className={classes.cardContent}
-                    action={
-                      <IconButton
-                        onClick={() => setIncrementModalIsOpen(true)}
-                        // Finally found how to get ride of random old green from click and hover!
-                        style={{ backgroundColor: "transparent" }}
-                        aria-label="settings"
-                        title="Complete this sustainable action"
-                      >
-                        <AddCircleIcon fontSize="large" />
-                      </IconButton>
-                    }
-                    title={action.title}
-                    subheader={"Earn ".concat(action.points, " Points!")}
-                  />
-                  <CardActions disableSpacing>
-                    <IconButton
-                      title='Add to favorites'
-                      aria-label="add to favorites"
-                      style={{ color: favIconColors[i-1], backgroundColor: "transparent" }} // Set the favIcon color (i-1 prevents off-by-one error)
-                      onClick={() => favAction(action)}
-                      id={ "favoriteIcon".concat(action.susAction) }                                                                                                                                                                                                            
-                      className={classes.favoriteIcon}
-                    >
-                      <FavoriteIcon/>
-                    </IconButton>
-                    <IconButton
-                      className={clsx(classes.expand, {
-                        [classes.expandOpen]: !expandedId,
-                      })}
-                      onClick={() => handleExpandClick(i)}
-                      style={{ backgroundColor: "transparent" }}
-                      aria-expanded={expandedId === i}
-                      aria-label="Show More"
-                      title="Learn more"
-                    >
-                      <ExpandMoreIcon />
-                    </IconButton>
-                  </CardActions>
-                  <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
-                    <CardContent>
-                      <CardMedia
-                        className={classes.media}
-                        image={action.image}
+              {ActionData.map(
+                (action, i) =>
+                action.title.toLowerCase().includes(filter.toLowerCase()) && (
+                  <Grid item xs={12} md={6} lg={4}>
+                    <Card className={classes.root} key={action.title}>
+                      <CardHeader
+                        className={classes.cardContent}
+                        action={
+                          <IconButton
+                            onClick={() => setIncrementModalIsOpen(true)}
+                            // Finally found how to get ride of random old green from click and hover!
+                            style={{ backgroundColor: "transparent" }}
+                            aria-label="settings"
+                            title="Complete this sustainable action"
+                          >
+                            <AddCircleIcon fontSize="large" />
+                          </IconButton>
+                        }
                         title={action.title}
+                        subheader={"Earn ".concat(action.points, " Points!")}
                       />
-                      <Typography variant="h5" gutterBottom>
-                        Environmental Impact:
-                      </Typography>
-                      <Typography variant="body1">{action.impact}</Typography>
-                    </CardContent>
-                  </Collapse>
-                </Card>
-              </Grid>
-            )
-        )}
-      </Grid>
-          </>
-        )}
-      </AuthUserContext.Consumer>
-    </div>
-      </TabPanel>
-    </div>
+                      <CardActions disableSpacing>
+                        <IconButton
+                          title='Add to favorites'
+                          aria-label="add to favorites"
+                          style={{ color: favIconColors[i-1], backgroundColor: "transparent" }} // Set the favIcon color (i-1 prevents off-by-one error)
+                          onClick={() => favAction(action)}
+                          id={ "favoriteIcon".concat(action.susAction) }                                                                                                                                                                                                            
+                          className={classes.favoriteIcon}
+                        >
+                          <FavoriteIcon/>
+                        </IconButton>
+                        <IconButton
+                          className={clsx(classes.expand, {
+                            [classes.expandOpen]: !expandedId,
+                          })}
+                          onClick={() => handleExpandClick(i)}
+                          style={{ backgroundColor: "transparent" }}
+                          aria-expanded={expandedId === i}
+                          aria-label="Show More"
+                          title="Learn more"
+                        >
+                          <ExpandMoreIcon />
+                        </IconButton>
+                      </CardActions>
+                      <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
+                        <CardContent>
+                          <CardMedia
+                            className={classes.media}
+                            image={action.image}
+                            title={action.title}
+                          />
+                          <Typography variant="h5" gutterBottom>
+                            Environmental Impact:
+                          </Typography>
+                          <Typography variant="body1">{action.impact}</Typography>
+                        </CardContent>
+                      </Collapse>
+                    </Card>
+                  </Grid>
+                )
+              )}
+            </Grid>
+          </Fragment>
+        </TabPanel>
+        <TabPanel value={value} index={1} class="tab-container">
+          <div>
+            <AuthUserContext.Consumer>
+              {(authUser) => (
+                <>
+                  <NoSsr>
+                    <GoogleFontLoader
+                      fonts={[
+                        { font: "Spartan", weights: [300] },
+                        { font: "Montserrat", weights: [200, 400, 700] },
+                      ]}
+                    />
+                  </NoSsr>
+                  <Card className={classes.card}>
+                    <CardMedia classes={mediaStyles} image={favorite} />
+                    <Box py={3} px={2} className={classes.content}>
+                      <Info useStyles={useGalaxyInfoStyles}>
+                        <InfoSubtitle>Your faves are here </InfoSubtitle>
+                        <InfoTitle>Add more!</InfoTitle>
+                        <InfoCaption>
+                          Go to actions tab and press the heart to add❤️
+                        </InfoCaption>
+                      </Info>
+                    </Box>
+                  </Card>
+                  <Grid container spacing={2} className={classes.actionContainer}>
+                    {ActionData.map(
+                      (action, i) =>
+                        localStorage.getItem(action.susAction.concat("Fav")) == "true" && (
+                          <Grid item xs={12} md={6} lg={4}>
+                            <Card className={classes.root} key={action.title}>
+                              <CardHeader
+                                className={classes.cardContent}
+                                action={
+                                  <IconButton
+                                    onClick={() => setIncrementModalIsOpen(true)}
+                                    // Finally found how to get ride of random old green from click and hover!
+                                    style={{ backgroundColor: "transparent" }}
+                                    aria-label="settings"
+                                    title="Complete this sustainable action"
+                                  >
+                                    <AddCircleIcon fontSize="large" />
+                                  </IconButton>
+                                }
+                                title={action.title}
+                                subheader={"Earn ".concat(action.points, " Points!")}
+                              />
+                              <CardActions disableSpacing>
+                                <IconButton
+                                  title='Add to favorites'
+                                  aria-label="add to favorites"
+                                  style={{ color: favIconColors[i-1], backgroundColor: "transparent" }} // Set the favIcon color (i-1 prevents off-by-one error)
+                                  onClick={() => favAction(action)}
+                                  id={ "favoriteIcon".concat(action.susAction) }                                                                                                                                                                                                            
+                                  className={classes.favoriteIcon}
+                                >
+                                  <FavoriteIcon/>
+                                </IconButton>
+                                <IconButton
+                                  className={clsx(classes.expand, {
+                                    [classes.expandOpen]: !expandedId,
+                                  })}
+                                  onClick={() => handleExpandClick(i)}
+                                  style={{ backgroundColor: "transparent" }}
+                                  aria-expanded={expandedId === i}
+                                  aria-label="Show More"
+                                  title="Learn more"
+                                >
+                                  <ExpandMoreIcon />
+                                </IconButton>
+                              </CardActions>
+                              <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
+                                <CardContent>
+                                  <CardMedia
+                                    className={classes.media}
+                                    image={action.image}
+                                    title={action.title}
+                                  />
+                                  <Typography variant="h5" gutterBottom>
+                                    Environmental Impact:
+                                  </Typography>
+                                  <Typography variant="body1">{action.impact}</Typography>
+                                </CardContent>
+                              </Collapse>
+                            </Card>
+                          </Grid>
+                        )
+                      )
+                    }
+                  </Grid>
+                </>
+              )}
+            </AuthUserContext.Consumer>
+          </div>
+        </TabPanel>
+      </div>
     </>
-  );
-}
+  ); // end of return statement
+} // end of function
 
 const condition = (authUser) => !!authUser;
 export default withAuthorization(condition)(HomePage);
