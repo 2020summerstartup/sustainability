@@ -25,7 +25,7 @@ import EcoIcon from "@material-ui/icons/Eco";
 import { fade } from "@material-ui/core/styles";
 
 
-import "./HomeTabs/toastify.module.css";
+import "./toastify.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
