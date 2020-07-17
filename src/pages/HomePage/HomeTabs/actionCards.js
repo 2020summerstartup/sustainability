@@ -21,8 +21,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 import ActionData from "./actionData.json";
-import { updateUserPoint, updateDormPoint, updateUserDorm } from "../../../services/Firebase";
+import { updateUserPoint, updateDormPoint, addFav, deleteFav, createUser, uploadUserTotalPoint } from "../../../services/Firebase";
 import { AuthUserContext, withAuthorization} from "../../../services/Session";
+import {initPoints, assignData} from "../index.js"
 
 // pulled these from Home's index.js
 import { toast } from "react-toastify";
@@ -144,6 +145,21 @@ const ActionCard = () => {
     setFilter(e.target.value);
   };
 
+  getUser(authContext.email).onSnapshot(
+    (docSnapshot) => {
+      if (docSnapshot.exists) {
+        assignData(docSnapshot.data());
+      } else {
+        createUser(authContext.email);
+        initPoints(authContext.email);
+        uploadUserTotalPoint(authContext.email, localStorage.getItem('total'));
+      }
+    },
+    (err) => {
+      console.log(`Encountered error: ${err}`);
+    }
+  );
+
   // KEEP THIS!!! UPDATED VERSION
   // updates all necessary values in firestore when user completes sus action
   const increment = (action) => {
@@ -189,6 +205,7 @@ const ActionCard = () => {
     var storedFav = localStorage.getItem(storageName) == 'true'; // We're getting a warning in the console (wants ===)
     if (storedFav) { // If the action is favorited
     favIconColors[key-1] = "#DC143C"; // Turn red
+    addFav(authContext.email, storageName)
     } else {
       favIconColors[key-1] = "#6c6c6c"; // Otherwise turn gray
     }
@@ -215,10 +232,12 @@ const ActionCard = () => {
       var message = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C"; // Turn red
       toast(message, { autoClose: 5000 });
+      addFav(authContext.email, storageName);
     } else {
       var message = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
       toast.warn(message, { autoClose: 5000 });
+      deleteFav(authContext.email, storageName);
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
