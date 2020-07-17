@@ -9,21 +9,18 @@ import PasswordForgetPage from '../pages/RegisterPage/passwordForgetPage.js.js';
 import HomePage from '../pages/HomePage';
 import AccountPage from '../pages/AccountPage';
 import InfoPage from '../pages/InfoPage';
-import Header, {AccountHeader, ChangeHeader} from '../components/Headers';
+import Header, {AccountHeader, ChangeHeader, HomeHeader} from '../components/Headers';
 import CompetePage from '../pages/CompetePage';
 import OfflinePage from '../pages/OfflinePage';
-// import AccountHeader from '../AccountHeader';
 import ChangePW from "../pages/AccountPage/Settings/changePw";
 import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
-// import ChangeHeader from "../ChangeHeader";
-
 import * as ROUTES from '../constants/routes';
 import { withAuthentication } from '../services/Session';
-// import AccountHeader from '../AccountHeader';
 
 const App = () => (
   <Router>
      <Switch>
+     <Route exact path="/home" component={HomeHeader} />
       <Route exact path="/account" component={AccountHeader} />
       <Route exact path="/changedorm" component={ChangeHeader} />
       <Route exact path="/changepassword" component={ChangeHeader} />
