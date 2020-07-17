@@ -20,6 +20,9 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 import suslogoImg from "../../img/suslogo.svg";
 
+// Import Tabs
+import AccountTabs from "../../pages/AccountPage/AccountTabs";
+
 
 // Styles for Header
 const useStyles1 = makeStyles((theme) => ({
@@ -66,6 +69,7 @@ const Header = ({ firebase }) => {
 const useStyles2 = makeStyles((theme) => ({
   header: {
     background: "primary",
+    maxHeight: 10,
   },
   logo: {
     width: "3rem",
@@ -85,6 +89,7 @@ const useStyles2 = makeStyles((theme) => ({
     padding: "0",
     marginTop: "0.5rem"
   },
+  
 }));
 
 // Header for account page
@@ -104,9 +109,14 @@ const AccountHeader = ({ firebase }) => {
             <Grid item>
               <SwipeableTemporaryDrawer />
             </Grid>
+            {/* <Grid item>
+              <AccountTabs/>
+            </Grid> */}
           </Grid>
+
         </Toolbar>
       </AppBar>
+      <AccountTabs/>
     </>
   );
 };

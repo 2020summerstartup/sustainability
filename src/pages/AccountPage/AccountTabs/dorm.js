@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     width: "100%",
   },
+  caption: {
+    textColor: "green",
+  }
 }));
 
 export const DormCard = React.memo(function GalaxyCard() {
@@ -73,12 +76,10 @@ export const DormCard = React.memo(function GalaxyCard() {
                   <InfoTitle>
                     You're in Rank {localStorage.getItem("ranking")}
                   </InfoTitle>
-                  <InfoCaption>
-                    
-                    <Link to={ROUTES.CHANGEDORM} class="link-text">
+                  <InfoCaption className={styles.caption}>
+                    <Link to={ROUTES.CHANGEDORM}>
                       Change your dorm in settings ⚙️
                     </Link>
-                    
                   </InfoCaption>
                 </Info>
               </Box>

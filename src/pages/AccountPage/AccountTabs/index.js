@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "6.5rem",
     },
   },
+  bar: {
+    padding:10,
+  }
 }));
 
 function AccountTabs() {
@@ -71,7 +74,7 @@ function AccountTabs() {
   };
   return (
     <div>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="primary" className={classes.bar}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -84,8 +87,8 @@ function AccountTabs() {
           className={classes.tabs}
         >
           <Tab
-            label="Your Points"
-            icon={<PersonPinIcon />}
+            label={<div><PersonPinIcon viewBox="0 -7 24 24"/> Your Points </div>}
+            // icon={<PersonPinIcon />}
             {...a11yProps(0)}
             style={{ backgroundColor: "transparent" }}
           />
