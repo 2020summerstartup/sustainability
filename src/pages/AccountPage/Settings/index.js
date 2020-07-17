@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "0",
     padding: "0",
     margin: "1rem 0",
-    // right: "5rem",
   },
   listItemIcon: {
     minWidth: "2.5rem",
@@ -86,6 +85,7 @@ export default function SwipeableTemporaryDrawer() {
         <ListItem>
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
+            <Typography variant="h6">Hi, [user]</Typography>
           </ListItemText>
         </ListItem>
         <ListItem>
@@ -93,7 +93,8 @@ export default function SwipeableTemporaryDrawer() {
             <EmailIcon />
           </ListItemIcon>
           <ListItemText className={classes.listItemText}>
-            {localStorage.getItem("email")}
+            [User's Email]
+            {/* {localStorage.getItem("email")} */}
             {/* <FormDialog/> */}
           </ListItemText>
         </ListItem>
