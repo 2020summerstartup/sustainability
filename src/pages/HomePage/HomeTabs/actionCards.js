@@ -31,7 +31,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getUser } from '../../../services/Firebase';
 
 import Modal from "react-modal";
-import styles from "../MuiModal";
+import styles from "../modal.module.css";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -228,7 +228,6 @@ const ActionCard = () => {
       {/* <Toolbar> */}
         <div className={classes.searchContainer}>
           {/* TOOD: Make the modal shorter */}
-          {/* TODO: The modal styles don't actually update yet.. not sure what's going wrong there?? */}
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={() => setModalIsOpen(false)}
@@ -239,13 +238,13 @@ const ActionCard = () => {
           <center>
             <h1>Are you sure you want to log this action?</h1>
             <div>
-              <button onClick={() => (setModalIsOpen(false), increment(action))} className="button">
-                Yes, log it!
-              </button>
-              <br />
               <button onClick={() => setModalIsOpen(false)} className="button">
                 {/* TODO: I want this button to be gray! But changing the color wasn't working? I'm not quite sure why. */}
                 Oops, don't log it!
+              </button>
+              &nbsp;&nbsp;&nbsp;
+              <button onClick={() => (setModalIsOpen(false), increment(action))} className="button">
+                Yes, log it!
               </button>
             </div>
           </center>

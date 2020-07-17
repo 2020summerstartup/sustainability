@@ -19,7 +19,6 @@
 }
 
 /* Used in ActionCard's index.js (at least before the files were finished being reorganized. This pops up as a confirmation when the user logs a sustainable action. */
-/* TODO: This doesn't work right now and I have NO IDEA why because it worked yesterday? -Katie */
 .modalIncrement {
   position: relative;
   top: 45%;
@@ -30,7 +29,7 @@
   transform: translate(-50%, -50%);
   overflow: hidden;
   width: 30rem;
-  height: 25rem;
+  height: 9rem !important;
   background-color: white;
   border-radius: 10px;
   border: 1px solid var(--theme);
