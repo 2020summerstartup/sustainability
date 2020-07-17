@@ -65,8 +65,9 @@ code {
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .tab-container {
-    margin-bottom: 3.5rem;
+    margin-bottom: 0rem !important;
     padding-bottom: 0rem !important;
+    padding-top: 0rem !important;
     overflow-x: hidden;
   }
 }
