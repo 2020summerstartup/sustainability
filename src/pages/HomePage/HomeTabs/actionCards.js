@@ -1,5 +1,5 @@
 // import React, { Fragment, useState, useContext } from "react";
-// import "./toastify.module.css";
+// import "./toastify.css";
 
 // import clsx from "clsx";
 // import Card from "@material-ui/core/Card";
@@ -104,26 +104,6 @@
 //   focused: {},
 //   error: {},
 // }));
-
-// const modalCustomStyles = {
-//   overlay: {
-//     position: "fixed",
-//     overflow: "hidden",
-//   },
-//   content: {
-//     top: "50%",
-//     left: "50%",
-//     right: "auto",
-//     bottom: "auto",
-//     marginRight: "-50%",
-//     transform: "translate(-50%, -50%)",
-//     overflow: "hidden",
-//     height: "25rem",
-//   },
-// };
-
-// // need this for modal to not get error in console
-// Modal.setAppElement("#root");
 
 // const ActionCard = () => {
 //   const classes = useStyles();

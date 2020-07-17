@@ -108,6 +108,9 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  appbar: {
+    boxShadow: "2px 2px 6px #a6a6a6",
+  },
   tabs: {
     flexGrow: 1,
     backgroundColor: "primary",
@@ -425,7 +428,7 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
             </div>
           </center>
         </Modal>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="primary" elevation={0} className={classes.appbar}>
         <Tabs
           value={value}
           onChange={handleChange}
