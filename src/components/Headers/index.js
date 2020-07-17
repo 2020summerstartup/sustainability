@@ -51,7 +51,7 @@ const Header = ({ firebase }) => {
           <img src={suslogoImg} alt="logo" className={classes.logo} />
           <Typography variant="h6" className={classes.title} noWrap>
             Sus Comp
-            <EcoIcon className={classes.leaf} />
+            {/* <EcoIcon className={classes.leaf} /> */}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -118,6 +118,9 @@ const useStyles3 = makeStyles((theme) => ({
     marginLeft: "0rem",
     marginBottom: "0.5rem",
     textAlign: "left",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "6.5rem",
+    },
   },
   menuButton: {
     marginright: theme.spacing(2),
@@ -130,7 +133,7 @@ const useStyles3 = makeStyles((theme) => ({
   backarrow: {
     color: "white",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: "6.5rem",
+      display: "none",
     },
   },
 }));
