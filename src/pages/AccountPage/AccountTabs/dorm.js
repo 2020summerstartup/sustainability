@@ -8,6 +8,7 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Link } from "react-router-dom";
+import Typography from '@material-ui/core/Typography';
 import styles from "./dorm.module.css";
 import * as ROUTES from "../../../constants/routes";
 import {
@@ -44,11 +45,14 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     width: "100%",
   },
+  linkText: {
+    color: "white",
+  }
 }));
 
 export const DormCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
-  const styles = useStyles();
+  const classes = useStyles();
   return (
     <div>
       <AuthUserContext.Consumer>
@@ -62,9 +66,9 @@ export const DormCard = React.memo(function GalaxyCard() {
                 ]}
               />
             </NoSsr>
-            <Card className={styles.card}>
+            <Card className={classes.card}>
               <CardMedia classes={mediaStyles} image={dorm} />
-              <Box py={3} px={2} className={styles.content}>
+              <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
                   <InfoSubtitle>
                     {authUser.email}, you're representing{" "}
@@ -74,11 +78,11 @@ export const DormCard = React.memo(function GalaxyCard() {
                     You're in Rank {localStorage.getItem("ranking")}
                   </InfoTitle>
                   <InfoCaption>
-                    
-                    <Link to={ROUTES.CHANGEDORM} class="link-text">
-                      Change your dorm in settings ⚙️
+                    <Link to={ROUTES.CHANGEDORM}>
+                      <Typography className={classes.linkText}>
+                        Change your dorm in settings ⚙️
+                      </Typography>
                     </Link>
-                    
                   </InfoCaption>
                 </Info>
               </Box>
