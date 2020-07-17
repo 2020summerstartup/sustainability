@@ -23,6 +23,8 @@ import suslogoImg from "../../img/suslogo.svg";
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
+
+// Styles for Header
 const useStyles1 = makeStyles((theme) => ({
   header: {
     background: "primary",
@@ -45,6 +47,7 @@ const useStyles1 = makeStyles((theme) => ({
   },
 }));
 
+// Standard Header for App
 const Header = ({ firebase }) => {
   const classes = useStyles1();
   return (
@@ -61,6 +64,7 @@ const Header = ({ firebase }) => {
   );
 };
 
+// Styles for Account Page Header
 const useStyles2 = makeStyles((theme) => ({
   header: {
     background: "primary",
@@ -85,6 +89,7 @@ const useStyles2 = makeStyles((theme) => ({
   },
 }));
 
+// Header for account page
 const AccountHeader = ({ firebase }) => {
   const classes = useStyles2();
   return (
@@ -108,6 +113,7 @@ const AccountHeader = ({ firebase }) => {
   );
 };
 
+// Styles used for Header on Change Password
 const useStyles3 = makeStyles((theme) => ({
   header: {
     background: "primary",
@@ -139,6 +145,8 @@ const useStyles3 = makeStyles((theme) => ({
   },
 }));
 
+
+// Header for Change Dorm and Change PW
 const ChangeHeader = ({ firebase }) => {
   let history = useHistory();
 
@@ -147,6 +155,7 @@ const ChangeHeader = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
+          {/* Back Button using history */}
           <IconButton
             className={classes.buttonIcon}
             onClick={() => history.goBack()}

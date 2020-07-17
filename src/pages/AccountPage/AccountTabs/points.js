@@ -4,6 +4,7 @@ import points from "../../../img/points.svg";
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import pointsForAccount from "./points.js";
 
+
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
 import { makeStyles } from "@material-ui/core/styles";
