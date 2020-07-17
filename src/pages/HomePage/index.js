@@ -3,7 +3,7 @@ import styles from "./modal.module.css";
 
 import ActionData from "./HomeTabs/actionData.json";
 import HomeTabs from "./HomeTabs";
-import CustomizedDialogs from "./MuiModal";
+import CustomizedDialogs from "./muiModal";
 
 // import "./toastify.module.css";
 
