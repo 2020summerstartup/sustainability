@@ -23,7 +23,6 @@ import suslogoImg from "../../img/suslogo.svg";
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
-
 // Styles for Header
 const useStyles1 = makeStyles((theme) => ({
   header: {
@@ -57,6 +56,40 @@ const Header = ({ firebase }) => {
           <img src={suslogoImg} alt="logo" className={classes.logo} />
           <Typography variant="h6" className={classes.title} noWrap>
             Sus Comp
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+// CompeteHeader
+const CompeteHeader = ({ firebase }) => {
+  const classes = useStyles1();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <Typography variant="h6" className={classes.title} noWrap>
+            Competitions and Rankings
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+// InfoHeader
+const InfoHeader = ({ firebase }) => {
+  const classes = useStyles1();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <Typography variant="h6" className={classes.title} noWrap>
+            Information
           </Typography>
         </Toolbar>
       </AppBar>
@@ -145,7 +178,6 @@ const useStyles3 = makeStyles((theme) => ({
   },
 }));
 
-
 // Header for Change Dorm and Change PW
 const ChangeHeader = ({ firebase }) => {
   let history = useHistory();
@@ -164,8 +196,8 @@ const ChangeHeader = ({ firebase }) => {
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
           <Typography variant="h6" className={classes.title} noWrap>
-            Sustainability Competition
-            <EcoIcon className={classes.leaf} />
+            Sus Comp
+            {/* <EcoIcon className={classes.leaf} /> */}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -203,29 +235,35 @@ const useStyles4 = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    marginTop: "0.3rem",
+    marginTop: "0.4rem",
     borderBottom: "0px !important",
-    width: "100%",
+    width: "10rem",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: "auto",
+      width: "100%",
     },
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 1),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    [theme.breakpoints.up("sm")]: {
+      padding: theme.spacing(0, 2),
+    },
   },
   inputRoot: {
     color: "inherit",
     top: "0.5rem",
     height: "2.5rem",
-    paddingLeft: "3rem",
+    paddingLeft: "2.25rem",
     paddingBottom: "0.5rem",
+    [theme.breakpoints.up("sm")]: {
+      paddingLeft: "3rem",
+    },
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -263,7 +301,7 @@ const HomeHeader = ({ firebase }) => {
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
                 <img src={suslogoImg} alt="logo" className={classes.logo} />
-                Profile
+                Actions
               </Typography>
             </Grid>
             <Grid item>
@@ -289,39 +327,5 @@ const HomeHeader = ({ firebase }) => {
   );
 };
 
-//   return (
-//     <div className={classes.root}>
-//       <AppBar position="static">
-//         <Toolbar>
-//           <IconButton
-//             edge="start"
-//             className={classes.menuButton}
-//             color="inherit"
-//             aria-label="open drawer"
-//           >
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography className={classes.title} variant="h6" noWrap>
-//             Actions
-//           </Typography>
-//           <div className={classes.search}>
-//             <div className={classes.searchIcon}>
-//               <SearchIcon />
-//             </div>
-//             <InputBase
-//               placeholder="Search…"
-//               classes={{
-//                 root: classes.inputRoot,
-//                 input: classes.inputInput,
-//               }}
-//               inputProps={{ 'aria-label': 'search' }}
-//             />
-//           </div>
-//         </Toolbar>
-//       </AppBar>
-//     </div>
-//   );
-// }
-
-export { AccountHeader, ChangeHeader, HomeHeader };
+export { HomeHeader, CompeteHeader, InfoHeader, AccountHeader, ChangeHeader };
 export default withFirebase(Header);

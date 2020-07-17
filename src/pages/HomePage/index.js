@@ -64,23 +64,6 @@ function assignData(data) {
   localStorage.setItem('name', data.name)
 }
 
-const modalCustomStyles = {
-  overlay: {
-    position: "fixed",
-    overflow: "hidden",
-  },
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    overflow: "hidden",
-    height: "25rem",
-  },
-};
-
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
 

@@ -232,6 +232,15 @@ img {
   cursor: pointer;
 }
 
+.button:hover {
+  background-color: #107a13;
+}
+
+.button:focus {
+  outline: none;
+  background-color: var(--theme);
+}
+
 /* Button for the increment confirmation on the homepage (I couldn't get styling working without creating an entirely new button?? */
 .buttonOops {
   font-size: 21px;
@@ -245,11 +254,12 @@ img {
   cursor: pointer;
 }
 
-.button:hover {
-  background-color: #107a13;
+.buttonOops:hover {
+  background-color: #9c9c9c;
 }
 
-.button:focus {
+.buttonOops:focus {
   outline: none;
-  background-color: var(--theme);
+  background-color: rgb(179, 174, 174);
 }
+

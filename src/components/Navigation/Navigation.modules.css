@@ -213,6 +213,7 @@ main {
     padding: 0;
     position: relative;
     bottom: 0.9rem;
+    color: var(--text-secondary);
   }
 
   .signout-btn {
