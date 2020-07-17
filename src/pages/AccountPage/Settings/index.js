@@ -21,6 +21,8 @@ import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
 import IconButton from '@material-ui/core/IconButton';
 import styles from "./Settings.module.css";
+
+import { AuthUserContext } from "../../../services/Session";
 const useStyles = makeStyles((theme) => ({
   list: {
     width: 250,
@@ -85,18 +87,22 @@ export default function SwipeableTemporaryDrawer() {
         <ListItem>
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
-            <Typography variant="h6">Hi, [user]</Typography>
+            <Typography variant="h6">Hi, {localStorage.getItem('name')}</Typography>
           </ListItemText>
         </ListItem>
         <ListItem>
           <ListItemIcon className={classes.listItemIcon}>
             <EmailIcon />
           </ListItemIcon>
-          <ListItemText className={classes.listItemText}>
-            [User's Email]
+          <AuthUserContext.Consumer>
+          {(authUser) => (
+            <ListItemText className={classes.listItemText}>
+            Your email: {authUser.email}
             {/* {localStorage.getItem("email")} */}
             {/* <FormDialog/> */}
           </ListItemText>
+          )}
+          </AuthUserContext.Consumer>
         </ListItem>
         <ListItem
           button
