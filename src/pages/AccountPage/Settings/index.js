@@ -20,7 +20,7 @@ import SignOutButton from "../../../components/SignOut";
 import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
 import IconButton from '@material-ui/core/IconButton';
-
+import styles from "./Settings.module.css";
 const useStyles = makeStyles((theme) => ({
   list: {
     width: 250,

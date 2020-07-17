@@ -32,9 +32,11 @@ const useStyles = makeStyles((theme) => ({
     // Gives an alert if the user does not have a dorm selected
     const authContext = useContext(AuthUserContext);
     var placeholder = localStorage.getItem('dorm');
+    var newPlaceholder = localStorage.getItem('dorm');
     if (placeholder == null) {
       placeholder = "Select your dorm..."
       alert("Please select your dorm in setting page!");
+      newPlaceholder = "Dorm";
     }
   
     // Sets dorm by calling local storage and firebase
@@ -47,34 +49,35 @@ const useStyles = makeStyles((theme) => ({
         assignRanking(docSnapshot.data())
       })
     };
-  
-    return (
-      <div>
-        <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Dorm</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={dorm}
-          onChange={handleChange}
-          label="Dorm"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"South"}>South</MenuItem>
-          <MenuItem value={"Case"}>Case</MenuItem>
-          <MenuItem value={"East"}>East</MenuItem>
-          <MenuItem value={"West"}>West</MenuItem>
-          <MenuItem value={"North"}>North</MenuItem>
-          <MenuItem value={"Drinkward"}>Drinkward</MenuItem>
-          <MenuItem value={"Sontag"}>Sontag</MenuItem>
-          <MenuItem value={"Linde"}>Linde</MenuItem>
-        </Select>
-      </FormControl>
-      <div>
-        Your dorm is {localStorage.getItem('dorm')}
-      </div>
-      </div>
-  );
+
+
+  return (
+    <div>
+      <FormControl variant="outlined" className={classes.formControl}>
+      <InputLabel id="demo-simple-select-outlined-label">{newPlaceholder}</InputLabel>
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        id="demo-simple-select-outlined"
+        value={dorm}
+        onChange={handleChange}
+        label="Dorm"
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem value={"South"}>South</MenuItem>
+        <MenuItem value={"Case"}>Case</MenuItem>
+        <MenuItem value={"East"}>East</MenuItem>
+        <MenuItem value={"West"}>West</MenuItem>
+        <MenuItem value={"North"}>North</MenuItem>
+        <MenuItem value={"Drinkward"}>Drinkward</MenuItem>
+        <MenuItem value={"Sontag"}>Sontag</MenuItem>
+        <MenuItem value={"Linde"}>Linde</MenuItem>
+      </Select>
+    </FormControl>
+    {/* <div>
+      Your dorm is {localStorage.getItem('dorm')}
+    </div> */}
+    </div>
+);
 }

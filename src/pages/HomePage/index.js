@@ -127,8 +127,6 @@ function HomePage() {
     <>
       <HomeTabs />
       <div className="base-container">
-        <h1>Home Sweet Home</h1>
-        {/* Testing for fun */}
         <h3>
           You have earned&nbsp;
           {<CountUp start={0} end={total} duration={1}></CountUp>} points!
@@ -165,14 +163,13 @@ function HomePage() {
           // style={modalCustomStyles}
         >
           <center>
-            {/* <Confetti
+            <Confetti
           width={1500}
           numberOfPieces={2000}
           recycle={false}
           opacity={0.7}
           // colors={["grey", "white", "green", "black"]}
-        /> */}
-            {/* Just for while I'm working */}
+        />
             {
               // I don't yet understand what "Object" is referring to here/how the program knows that.
               Object.keys(ActionData).map((key) => {

@@ -1,8 +1,9 @@
-a:link {
+a.link {
     color: #24a113;
   }
   
   /* visited link */
   a:visited {
-    color: lightgreen;
+    color: rgba(0,0,0,0.87);
+    /* color: orange; */
   }

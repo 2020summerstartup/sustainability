@@ -8,7 +8,7 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Link } from "react-router-dom";
-import styles from "./Account.module.css";
+import styles from "./dorm.module.css";
 import * as ROUTES from "../../../constants/routes";
 import {
   Info,
@@ -18,6 +18,7 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -73,9 +74,11 @@ export const DormCard = React.memo(function GalaxyCard() {
                     You're in Rank {localStorage.getItem("ranking")}
                   </InfoTitle>
                   <InfoCaption>
-                    <Link to={ROUTES.CHANGEDORM} >
+                    
+                    <Link to={ROUTES.CHANGEDORM} class="link-text">
                       Change your dorm in settings ⚙️
                     </Link>
+                    
                   </InfoCaption>
                 </Info>
               </Box>

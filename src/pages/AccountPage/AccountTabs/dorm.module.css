@@ -1,0 +1,16 @@
+/* a:link.dorm {
+    color: #24a113;
+  }
+  
+  /* visited link */
+  /* a:visited.dorm {
+    /* color: rgba(0,0,0,0.87); */
+    /* color: green; 
+  }  */
+
+  .link-text {
+    /* margin-left: 1rem;
+    text-decoration: none;
+    font-size: 1.2rem; */
+    color: green;
+  }
