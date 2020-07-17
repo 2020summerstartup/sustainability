@@ -30,6 +30,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { getUser } from '../../../services/Firebase';
 
+import Modal from "react-modal";
+import styles from "../modal.module.css";
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: "280",
@@ -101,6 +105,26 @@ const useStyles = makeStyles((theme) => ({
   error: {},
 }));
 
+const modalCustomStyles = {
+  overlay: {
+    position: "fixed",
+    overflow: "hidden",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    overflow: "hidden",
+    height: "25rem",
+  },
+};
+
+// need this for modal to not get error in console
+Modal.setAppElement("#root");
+
 const ActionCard = () => {
   const classes = useStyles();
   const [expandedId, setExpandedId] = React.useState(-1);
@@ -110,6 +134,8 @@ const ActionCard = () => {
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const handleExpandClick = (i) => {
     setExpandedId(expandedId === i ? -1 : i);
   };
@@ -118,13 +144,11 @@ const ActionCard = () => {
     setFilter(e.target.value);
   };
 
-
   // KEEP THIS!!! UPDATED VERSION
   // updates all necessary values in firestore when user completes sus action
   const increment = (action) => {
 
     // allows us to increment the correct values by writing the action & value to local storage
-    toast(action.title.concat(' logged. Thanks!'), { autoClose: 5000 });
     // add specified number of points to the saved point total
     localStorage.setItem(
       action.susAction,
@@ -203,6 +227,28 @@ const ActionCard = () => {
     <Fragment>
       {/* <Toolbar> */}
         <div className={classes.searchContainer}>
+          {/* TOOD: Make the modal shorter */}
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          className={styles.modalIncrement}
+          overlayClassName={styles.overlay}
+          style={modalCustomStyles}
+        >
+          <center>
+            <h1>Are you sure you want to log this action?</h1>
+            <div>
+              <button onClick={() => setModalIsOpen(false)} className="buttonOops">
+                {/* TODO: I want this button to be gray! But changing the color wasn't working? I'm not quite sure why. */}
+                Oops, don't log it!
+              </button>
+              &nbsp;&nbsp;&nbsp;
+              <button onClick={() => (setModalIsOpen(false), increment(action))} className="button">
+                Yes, log it!
+              </button>
+            </div>
+          </center>
+        </Modal>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
               <SearchIcon className={classes.searchIcon} />
@@ -230,7 +276,7 @@ const ActionCard = () => {
                     className={classes.cardContent}
                     action={
                       <IconButton
-                        onClick={() => increment(action)}
+                        onClick={() => setModalIsOpen(true)}
                         // Finally found how to get ride of random old green from click and hover!
                         style={{ backgroundColor: "transparent" }}
                         aria-label="settings"

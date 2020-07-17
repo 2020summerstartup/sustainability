@@ -18,6 +18,27 @@
   outline: none;
 }
 
+/* Used in ActionCard's index.js (at least before the files were finished being reorganized. This pops up as a confirmation when the user logs a sustainable action. */
+.modalIncrement {
+  position: relative;
+  top: 45%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-left: 5rem;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  width: 30rem;
+  height: 9rem !important;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid var(--theme);
+  -webkit-box-shadow: 0 3px 7px var(--theme);
+  -moz-box-shadow: 0 3px 7px var(--theme);
+  box-shadow: 0 3px 7px var(--theme);
+  outline: none;
+}
+
 /* .overlay {
     position: sticky;
     overflow: hidden;
