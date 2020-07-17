@@ -30,14 +30,15 @@ code {
     margin-right: 6.5rem !important;
     padding-right: 2rem;
     padding-left: 8.5rem !important;
-    padding-bottom: 2rem;
+    padding-bottom: 0rem !important;
   }
 }
 
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .base-container {
-    margin-bottom: 5rem;
+    margin-bottom: 3.5rem;
+    padding-bottom: 0rem !important;
     overflow-x: hidden;
   }
 }
@@ -46,6 +47,33 @@ code {
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 0;
+  text-align: center;
+}
+
+/* Large screens */
+@media only screen and (min-width: 600px) {
+  .tab-container {
+    margin-right: 6.5rem !important;
+    padding-right: 2rem;
+    padding-left: 8.5rem !important;
+    padding-bottom: 0rem !important;
+  }
+}
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+  .tab-container {
+    margin-bottom: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-top: 0rem !important;
+    overflow-x: hidden;
+  }
+}
+
+.tab-container {
+  width: 100%;
   align-items: center;
   margin: 0;
   text-align: center;
@@ -198,6 +226,19 @@ img {
   border: 0;
   background-color: var(--theme);
   color: #fff;
+  border-radius: 3px;
+  transition: all 250ms ease-in-out;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+/* Button for the increment confirmation on the homepage (I couldn't get styling working without creating an entirely new button?? */
+.buttonOops {
+  font-size: 21px;
+  padding: 5px 20px;
+  border: 0;
+  background-color: rgb(179, 174, 174);
+  color: rgb(0, 0, 0);
   border-radius: 3px;
   transition: all 250ms ease-in-out;
   margin-top: 15px;

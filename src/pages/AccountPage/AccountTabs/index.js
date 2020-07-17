@@ -7,12 +7,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-// import FavoriteIcon from "@material-ui/icons/Favorite";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-// import EcoIcon from "@material-ui/icons/Eco";
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import HomeIcon from '@material-ui/icons/Home';
+import PersonPinIcon from "@material-ui/icons/PersonPin";
+import HomeIcon from "@material-ui/icons/Home";
 
 // import leaderBoardUpdate, {
 //   assignRanking,
@@ -75,38 +73,38 @@ function AccountTabs() {
     <div>
       <AppBar position="static" color="primary">
         <Tabs
-            value={value}
-            onChange={handleChange}
-            variant="fullWidth"
-            scrollButtons="off"
-            indicatorColor="primary"
-            textColor="default"
-            aria-label="scrollable tabs"
-            centered="true"
-            width="100%"
+          value={value}
+          onChange={handleChange}
+          variant="fullWidth"
+          scrollButtons="off"
+          indicatorColor="primary"
+          textColor="default"
+          aria-label="scrollable tabs"
+          centered="true"
+          className={classes.tabs}
         >
-            <Tab
+          <Tab
             label="Your Points"
             icon={<PersonPinIcon />}
             {...a11yProps(0)}
             style={{ backgroundColor: "transparent" }}
-            />
+          />
 
-            <Tab
+          <Tab
             label="Your Dorm"
             icon={<HomeIcon />}
             {...a11yProps(1)}
             style={{ backgroundColor: "transparent" }}
-            />
+          />
         </Tabs>
-        </AppBar>
-        <TabPanel value={value} index={0}>
+      </AppBar>
+      <TabPanel value={value} index={0} class="tab-container">
         <TotalPointsCard />
-        </TabPanel>
+      </TabPanel>
 
-        <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={1} class="tab-container">
         <DormCard />
-        </TabPanel>
+      </TabPanel>
     </div>
   );
 }

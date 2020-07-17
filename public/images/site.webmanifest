@@ -1,6 +1,6 @@
 {
-    "name": "Green Team",
-    "short_name": "Green Team",
+    "name": "Sus Comp",
+    "short_name": "Sus Comp",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#24a113",
+    "background_color": "#24a113",
     "display": "standalone"
 }
