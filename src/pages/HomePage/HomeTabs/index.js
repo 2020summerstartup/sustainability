@@ -93,7 +93,7 @@ function HomeTabs() {
       <TabPanel value={value} index={0} class="base-container">
         <ActionCard />
       </TabPanel>
-      <TabPanel value={value} index={1} class="base-container">
+      <TabPanel value={value} index={1} class="tab-container">
         <FaveCard />
       </TabPanel>
     </div>

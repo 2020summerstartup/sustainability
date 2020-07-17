@@ -98,11 +98,11 @@ function AccountTabs() {
           />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} class="base-container">
+      <TabPanel value={value} index={0} class="tab-container">
         <TotalPointsCard />
       </TabPanel>
 
-      <TabPanel value={value} index={1} class="base-container">
+      <TabPanel value={value} index={1} class="tab-container">
         <DormCard />
       </TabPanel>
     </div>
