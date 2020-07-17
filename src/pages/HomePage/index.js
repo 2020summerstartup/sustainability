@@ -1,12 +1,11 @@
 import React, { Fragment, useState, useContext } from "react";
 import styles from "./modal.module.css";
 
-
 import CountUp from "react-countup";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
-import { getUser, createUser, uploadUserTotalPoint } from "../../services/Firebase";
+import { getUser, createUser, uploadUserTotalPoint, updateUserPoint, updateDormPoint } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,16 +17,11 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import EcoIcon from "@material-ui/icons/Eco";
 
-// ---------------------------------- NEW IMPORTS -------------------------------
 import { fade } from "@material-ui/core/styles";
-
 
 import "./toastify.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import { updateUserPoint, updateDormPoint, updateUserDorm } from "../../services/Firebase";
-
 
 import ActionData from "./actionData.json";
 
@@ -44,31 +38,23 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 
-
 import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import clsx from "clsx";
-
 import Collapse from "@material-ui/core/Collapse";
-
 import NoSsr from "@material-ui/core/NoSsr";
 import GoogleFontLoader from "react-google-font-loader";
-
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-
 import favorite from "../../img/favorite.svg";
-
 import {
   Info,
   InfoCaption,
   InfoSubtitle,
   InfoTitle,
 } from "@mui-treasury/components/info";
-
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
-
 import { addFav, deleteFav } from "../../services/Firebase";
 
 
@@ -288,7 +274,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// ----------------------------------STUFF THAT I'M STARTING TO ADD IN -------------------------------
 const modalCustomStyles = {
   overlay: {
     position: "fixed",
@@ -306,8 +291,6 @@ const modalCustomStyles = {
   },
 };
 
-
-
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
@@ -315,7 +298,7 @@ function HomePage() {
 
   const authContext = useContext(AuthUserContext);
 
-  // get user's dorm set in local storage
+  // Get user's dorm set in local storage
   getUser(authContext.email).onSnapshot(
     (docSnapshot) => {
       if (docSnapshot.exists) {
@@ -335,7 +318,6 @@ function HomePage() {
   );
 
   const clicked = () => {
-    // var codeBlock = '<button id=\'wrapper\' >Another option...</button><br />';
     var codeBlock = "";
     for (const key in ActionData) {
       codeBlock +=
@@ -360,12 +342,7 @@ function HomePage() {
     setValue(newValue);
   };
 
-// ----------------------------------STUFF THAT I'M STARTING TO ADD IN -------------------------------
-
-
   const [expandedId, setExpandedId] = React.useState(-1);
-  // const [actionData, setActionData] = useState(ActionData);
-  // const [actionData] = useState(ActionData);
   const [filter, setFilter] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
@@ -375,7 +352,7 @@ function HomePage() {
   };
 
 
-const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
+  const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
 
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
@@ -384,10 +361,8 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
     setFilter(e.target.value);
   };
 
-  // KEEP THIS!!! UPDATED VERSION
   // updates all necessary values in firestore when user completes sus action
   const increment = (action) => {
-
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the saved point total
     localStorage.setItem(
@@ -471,7 +446,7 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   return (
     <>
       <div>
-      <Modal
+        <Modal
           isOpen={incrementModalIsOpen}
           onRequestClose={() => setIncrementModalIsOpen(false)}
           className={styles.modalIncrement}
@@ -482,7 +457,6 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
             <h1>Are you sure you want to log this action?</h1>
             <div>
               <button onClick={() => setIncrementModalIsOpen(false)} className="buttonOops">
-                {/* TODO: I want this button to be gray! But changing the color wasn't working? I'm not quite sure why. */}
                 Oops, don't log it!
               </button>
               &nbsp;&nbsp;&nbsp;
@@ -492,43 +466,36 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
             </div>
           </center>
         </Modal>
-      <AppBar position="static" color="primary">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="fullWidth"
-          scrollButtons="off"
-          indicatorColor="primary"
-          textColor="default"
-          aria-label="scrollable tabs"
-          centered="true"
-          className={classes.tabs}
-        >
-          <Tab
-            label="Actions!"
-            icon={<EcoIcon />}
-            {...a11yProps(0)}
-            style={{ backgroundColor: "transparent" }}
-          />
-          <Tab
-            label="Your Favorites"
-            icon={<FavoriteIcon />}
-            {...a11yProps(1)}
-            style={{ backgroundColor: "transparent" }}
-          />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0} class="tab-container">
-      <Fragment>
-      {/* <Toolbar> */}
+        <AppBar position="static" color="primary">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            scrollButtons="off"
+            indicatorColor="primary"
+            textColor="default"
+            aria-label="scrollable tabs"
+            centered="true"
+            className={classes.tabs}
+          >
+            <Tab
+              label="Actions!"
+              icon={<EcoIcon />}
+              {...a11yProps(0)}
+              style={{ backgroundColor: "transparent" }}
+            />
+            <Tab
+              label="Your Favorites"
+              icon={<FavoriteIcon />}
+              {...a11yProps(1)}
+              style={{ backgroundColor: "transparent" }}
+            />
+          </Tabs>
+        </AppBar>
       <div className="base-container">
         <h3>
           You have earned&nbsp;
           {<CountUp start={0} end={total} duration={1}></CountUp>} points!
-          &nbsp;
-          {/* <button onClick={notify2} className="button">
-          Click me!
-        </button> */}
         </h3>
         <button onClick={() => setProgressModalIsOpen(true)} className="button">
           Check Your Progress
@@ -579,6 +546,8 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
           </center>
         </Modal>
       </div>
+      <TabPanel value={value} index={0} class="tab-container">
+      <Fragment>
         <div className={classes.searchContainer}>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
@@ -596,7 +565,6 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
             </Grid>
           </Grid>
         </div>
-      {/* </Toolbar> */}
       <Grid container spacing={2} className={classes.actionContainer}>
         {ActionData.map(
           (action, i) =>
