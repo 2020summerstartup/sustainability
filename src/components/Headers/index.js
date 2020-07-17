@@ -104,7 +104,8 @@ const InfoHeader = ({ firebase }) => {
 const useStyles2 = makeStyles((theme) => ({
   header: {
     background: "primary",
-    maxHeight: 10,
+    maxHeight: 100,
+    padding: 5,
   },
   logo: {
     width: "3rem",
@@ -148,10 +149,9 @@ const AccountHeader = ({ firebase }) => {
               <AccountTabs/>
             </Grid> */}
           </Grid>
-
         </Toolbar>
       </AppBar>
-      <AccountTabs/>
+      {/* <AccountTabs/> */}
     </>
   );
 };

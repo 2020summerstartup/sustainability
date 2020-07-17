@@ -9,7 +9,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import PersonPinIcon from "@material-ui/icons/PersonPin";
+import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
 
 // import leaderBoardUpdate, {
@@ -59,9 +59,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
     },
+    // mHeight: 50,
   },
   bar: {
-    padding:10,
+    padding: 0,
   }
 }));
 
@@ -80,22 +81,22 @@ function AccountTabs() {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          indicatorColor="primary"
+          indicatorColor="secondary"
           textColor="default"
           aria-label="scrollable tabs"
           centered="true"
           className={classes.tabs}
         >
           <Tab
-            label={<div><PersonPinIcon viewBox="0 -7 24 24"/> Your Points </div>}
+            label={<div><PersonIcon viewBox="0 -14 30 32"/> Your Points </div>}
             // icon={<PersonPinIcon />}
             {...a11yProps(0)}
             style={{ backgroundColor: "transparent" }}
           />
 
           <Tab
-            label="Your Dorm"
-            icon={<HomeIcon />}
+            label={<div><HomeIcon viewBox="0 -13 30 32"/> Your Dorm </div>}
+            // icon={<HomeIcon />}
             {...a11yProps(1)}
             style={{ backgroundColor: "transparent" }}
           />
