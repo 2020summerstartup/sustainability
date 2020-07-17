@@ -238,7 +238,7 @@ const ActionCard = () => {
           <center>
             <h1>Are you sure you want to log this action?</h1>
             <div>
-              <button onClick={() => setModalIsOpen(false)} className="button">
+              <button onClick={() => setModalIsOpen(false)} className="buttonOops">
                 {/* TODO: I want this button to be gray! But changing the color wasn't working? I'm not quite sure why. */}
                 Oops, don't log it!
               </button>

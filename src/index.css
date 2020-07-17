@@ -232,6 +232,19 @@ img {
   cursor: pointer;
 }
 
+/* Button for the increment confirmation on the homepage (I couldn't get styling working without creating an entirely new button?? */
+.buttonOops {
+  font-size: 21px;
+  padding: 5px 20px;
+  border: 0;
+  background-color: rgb(179, 174, 174);
+  color: rgb(0, 0, 0);
+  border-radius: 3px;
+  transition: all 250ms ease-in-out;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
 .button:hover {
   background-color: #107a13;
 }
