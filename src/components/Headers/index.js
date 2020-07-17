@@ -263,7 +263,7 @@ const HomeHeader = ({ firebase }) => {
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
                 <img src={suslogoImg} alt="logo" className={classes.logo} />
-                Profile
+                Actions
               </Typography>
             </Grid>
             <Grid item>
