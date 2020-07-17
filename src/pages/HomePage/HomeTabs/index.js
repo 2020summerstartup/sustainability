@@ -395,6 +395,27 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
 
   return (
     <div>
+      <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          className={styles.modalIncrement}
+          overlayClassName={styles.overlay}
+          style={modalCustomStyles}
+        >
+          <center>
+            <h1>Are you sure you want to log this action?</h1>
+            <div>
+              <button onClick={() => setModalIsOpen(false)} className="buttonOops">
+                {/* TODO: I want this button to be gray! But changing the color wasn't working? I'm not quite sure why. */}
+                Oops, don't log it!
+              </button>
+              &nbsp;&nbsp;&nbsp;
+              <button onClick={() => (setModalIsOpen(false), increment(action))} className="button">
+                Yes, log it!
+              </button>
+            </div>
+          </center>
+        </Modal>
       <AppBar position="static" color="primary">
         <Tabs
           value={value}
@@ -425,27 +446,6 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
       <Fragment>
       {/* <Toolbar> */}
         <div className={classes.searchContainer}>
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={() => setModalIsOpen(false)}
-          className={styles.modalIncrement}
-          overlayClassName={styles.overlay}
-          style={modalCustomStyles}
-        >
-          <center>
-            <h1>Are you sure you want to log this action?</h1>
-            <div>
-              <button onClick={() => setModalIsOpen(false)} className="buttonOops">
-                {/* TODO: I want this button to be gray! But changing the color wasn't working? I'm not quite sure why. */}
-                Oops, don't log it!
-              </button>
-              &nbsp;&nbsp;&nbsp;
-              <button onClick={() => (setModalIsOpen(false), increment(action))} className="button">
-                Yes, log it!
-              </button>
-            </div>
-          </center>
-        </Modal>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
               <SearchIcon className={classes.searchIcon} />
