@@ -1,0 +1,8 @@
+a:link {
+    color: #24a113;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: lightgreen;
+  }

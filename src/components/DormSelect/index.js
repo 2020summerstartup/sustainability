@@ -10,7 +10,10 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {updateUserDorm, getDorm} from "../../services/Firebase";
 import { assignRanking } from "../../pages/CompetePage/leaderboard";
 
+
+// Styles for dropdown menu
 const useStyles = makeStyles((theme) => ({
+    // Provides context for form inputs
     formControl: {
       margin: theme.spacing(1),
       minWidth: 120,
@@ -20,10 +23,13 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
+  // Function that contains the dropdown menu for selecting the user's dorm
   export default function DormSelect() {
     const classes = useStyles();
     const [dorm, setDorm] = React.useState('');
     
+    // Used to make sure user is authenticated
+    // Gives an alert if the user does not have a dorm selected
     const authContext = useContext(AuthUserContext);
     var placeholder = localStorage.getItem('dorm');
     if (placeholder == null) {
@@ -31,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
       alert("Please select your dorm in setting page!");
     }
   
+    // Sets dorm by calling local storage and firebase
     const handleChange = (event) => {
       const dorm = event.target.value
       setDorm(event.target.value);
