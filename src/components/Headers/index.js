@@ -1,5 +1,5 @@
 import React from "react";
-import { withFirebase } from '../Firebase';
+import { withFirebase } from '../../services/Firebase';
 
 // import material ui
 import { AppBar, Toolbar } from "@material-ui/core";
@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import EcoIcon from "@material-ui/icons/Eco";
 
 // account header imports
-import SwipeableTemporaryDrawer from './settings.js';
+import SwipeableTemporaryDrawer from '../../pages/AccountPage/Settings';
 import Grid from "@material-ui/core/Grid";
 
 // change dorm/pw imports 

@@ -6,10 +6,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import { AuthUserContext, withAuthorization } from "../Session";
-import {updateUserDorm, getDorm} from "../Firebase";
-import { assignRanking } from "../Leaderboard";
-
+import { AuthUserContext, withAuthorization } from "../../services/Session";
+import {updateUserDorm, getDorm} from "../../services/Firebase";
+import { assignRanking } from "../../pages/CompetePage/leaderboard";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -40,12 +39,7 @@ const useStyles = makeStyles((theme) => ({
       getDorm().doc(dorm).onSnapshot(docSnapshot => {
         assignRanking(docSnapshot.data())
       })
-      // the .replace was supposed to get rid of quotes but it didn't work
     };
-
-    // const handleChange = (event) => {
-    //   setDorm(event.target.value);
-    // };
   
     return (
       <div>
