@@ -555,80 +555,69 @@ const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
               </Box>
             </Card>
             <Grid container spacing={2} className={classes.actionContainer}>
-              {ActionData.map(
-                (action, i) =>
-                  localStorage.getItem(action.susAction.concat("Fav")) ==
-                    "true" && (
-                    <Grid item xs={12} md={6} lg={4}>
-                      <Card className={classes.root} key={action.title}>
-                        <CardHeader
-                          className={classes.cardContent}
-                          action={
-                            <IconButton
-                              onClick={() => increment(action)}
-                              // Finally found how to get ride of random old green from click and hover!
-                              style={{ backgroundColor: "transparent" }}
-                              aria-label="settings"
-                              title="Complete this sustainable action"
-                            >
-                              <AddCircleIcon fontSize="large" />
-                            </IconButton>
-                          }
-                          title={action.title}
-                          subheader={"Earn ".concat(action.points, " Points!")}
-                        />
-                        <CardActions disableSpacing>
-                          <IconButton
-                            aria-label="add to favorites"
-                            // Start with all favorite buttons red, because we know that they're favorited
-                            style={{
-                              color: "#DC143C",
-                              backgroundColor: "transparent",
-                            }}
-                            // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
-                            onClick={() => favAction(action)}
-                            id={"favoriteIcon".concat(action.susAction)}
-                            className="favoriteIcon"
-                          >
-                            <FavoriteIcon />
-                          </IconButton>
-                          <IconButton
-                            className={clsx(classes.expand, {
-                              [classes.expandOpen]: !expandedId,
-                            })}
-                            onClick={() => handleExpandClick(i)}
-                            style={{ backgroundColor: "transparent" }}
-                            aria-expanded={expandedId === i}
-                            aria-label="Show More"
-                            title="Learn more"
-                          >
-                            <ExpandMoreIcon />
-                          </IconButton>
-                        </CardActions>
-                        <Collapse
-                          in={expandedId === i}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          <CardContent>
-                            <CardMedia
-                              className={classes.media}
-                              image={action.image}
-                              title={action.title}
-                            />
-                            <Typography variant="h5" gutterBottom>
-                              Environmental Impact:
-                            </Typography>
-                            <Typography variant="body1">
-                              {action.impact}
-                            </Typography>
-                          </CardContent>
-                        </Collapse>
-                      </Card>
-                    </Grid>
-                  )
-              )}
-            </Grid>
+        {ActionData.map(
+          (action, i) =>
+          localStorage.getItem(action.susAction.concat("Fav")) == "true" && (
+              <Grid item xs={12} md={6} lg={4}>
+                <Card className={classes.root} key={action.title}>
+                  <CardHeader
+                    className={classes.cardContent}
+                    action={
+                      <IconButton
+                        onClick={() => setModalIsOpen(true)}
+                        // Finally found how to get ride of random old green from click and hover!
+                        style={{ backgroundColor: "transparent" }}
+                        aria-label="settings"
+                        title="Complete this sustainable action"
+                      >
+                        <AddCircleIcon fontSize="large" />
+                      </IconButton>
+                    }
+                    title={action.title}
+                    subheader={"Earn ".concat(action.points, " Points!")}
+                  />
+                  <CardActions disableSpacing>
+                    <IconButton
+                      title='Add to favorites'
+                      aria-label="add to favorites"
+                      style={{ color: favIconColors[i-1], backgroundColor: "transparent" }} // Set the favIcon color (i-1 prevents off-by-one error)
+                      onClick={() => favAction(action)}
+                      id={ "favoriteIcon".concat(action.susAction) }                                                                                                                                                                                                            
+                      className={classes.favoriteIcon}
+                    >
+                      <FavoriteIcon/>
+                    </IconButton>
+                    <IconButton
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: !expandedId,
+                      })}
+                      onClick={() => handleExpandClick(i)}
+                      style={{ backgroundColor: "transparent" }}
+                      aria-expanded={expandedId === i}
+                      aria-label="Show More"
+                      title="Learn more"
+                    >
+                      <ExpandMoreIcon />
+                    </IconButton>
+                  </CardActions>
+                  <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <CardMedia
+                        className={classes.media}
+                        image={action.image}
+                        title={action.title}
+                      />
+                      <Typography variant="h5" gutterBottom>
+                        Environmental Impact:
+                      </Typography>
+                      <Typography variant="body1">{action.impact}</Typography>
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
+            )
+        )}
+      </Grid>
           </>
         )}
       </AuthUserContext.Consumer>
