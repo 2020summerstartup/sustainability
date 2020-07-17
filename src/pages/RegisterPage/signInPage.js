@@ -6,7 +6,8 @@ import "firebase/auth";
 
 import { SignUpLink } from "./signUpPage";
 import { PasswordForgetLink } from "./passwordForgetPage.js.js";
-import { withFirebase } from "../../services/Firebase";
+import { withFirebase, getUser } from "../../services/Firebase";
+import { assignData } from '../HomePage/index.js';
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
@@ -54,6 +55,16 @@ class SignInFormBase extends Component {
       });
 
     event.preventDefault();
+
+    getUser(email).onSnapshot(snapshot => {
+      if (snapshot.exists) {
+        assignData(snapshot.data())
+      } else {
+        alert("Please sign up again!");
+      }
+    }, err => {
+    console.log(`Encountered error: ${err}`);
+  })
   };
 
   onChange = (event) => {
@@ -62,7 +73,6 @@ class SignInFormBase extends Component {
 
   render() {
     const { email, password, error } = this.state;
-
     const isInvalid = password === "" || email === "";
 
     return (

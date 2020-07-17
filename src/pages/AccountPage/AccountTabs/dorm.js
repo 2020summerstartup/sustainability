@@ -69,7 +69,7 @@ export const DormCard = React.memo(function GalaxyCard() {
         />
         <Box py={3} px={2} className={styles.content}>
           <Info useStyles={useGalaxyInfoStyles}>
-            <InfoSubtitle>{authUser.email}, you're representing {localStorage.getItem("dorm")} dorm</InfoSubtitle>
+            <InfoSubtitle>Hey, {localStorage.getItem('name')}, you're representing {localStorage.getItem("dorm")} dorm</InfoSubtitle>
             <InfoTitle>You're in Rank {localStorage.getItem('ranking')}</InfoTitle>
             <InfoCaption>Change your dorm in settings ⚙️</InfoCaption>
 

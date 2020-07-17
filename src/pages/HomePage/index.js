@@ -57,6 +57,11 @@ function assignData(data) {
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
+  data.favorites.forEach(fav => {
+    localStorage.setItem(fav, true)
+  })
+  localStorage.setItem("dorm", data.userDorm);
+  localStorage.setItem('name', data.name)
 }
 
 const modalCustomStyles = {

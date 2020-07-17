@@ -1,9 +1,10 @@
 // TODO: THIS FILE HAS CODE LARGELY DUPLICATED FROM INDEX.JS IN ACTIONCARD. IT'S SUPER JANKY AND WE NEED TO FIX IT. (I made this mess
 // so I'm happy to fix it eventually lol.) -Katie
 
-import React, { Fragment, useState } from "react";
+import React, { useState, useContext } from "react";
 import favorite from "../../../img/favorite.svg";
-import { AuthUserContext, withAuthorization } from "../../../services/Session";
+import { AuthUserContext } from "../../../services/Session";
+import { addFav, deleteFav } from '../../../services/Firebase';
 
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -125,11 +126,11 @@ export const FaveCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const styles = useStyles();
   const classes = useStyles();
+  const authContext = useContext(AuthUserContext);
 
   const [expandedId, setExpandedId] = React.useState(-1);
   // const [actionData, setActionData] = useState(ActionData);
   // const [actionData] = useState(ActionData);
-  const [filter, setFilter] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
 
@@ -173,12 +174,14 @@ export const FaveCard = React.memo(function GalaxyCard() {
     if (storedFav) {
       var message = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C"; // Turn red
+      addFav(authContext.email, storageName)
     } else {
       var message = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
     }
     toast(message, { autoClose: 4000 });
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
+    deleteFav(authContext.email, storageName)
   };
 
   return (
