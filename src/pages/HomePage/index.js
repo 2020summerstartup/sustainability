@@ -3,36 +3,13 @@ import styles from "./modal.module.css";
 
 import ActionData from "./HomeTabs/actionData.json";
 import HomeTabs from "./HomeTabs";
-import CustomizedDialogs from "./MuiModal";
-
-// import "./toastify.module.css";
 
 import CountUp from "react-countup";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-// import "./node_modules/react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import { getUser, createUser, uploadUserTotalPoint } from "../../services/Firebase";
 
-// const CustomToast = ({ closeToast }) => {
-//   return (
-//     <div>
-//       <p>Log more sustainable actions!</p>
-//       <button onClick={closeToast} className="button">
-//         OK
-//       </button>
-//     </div>
-//   );
-// };
-
-// Fun toast notifications
-// toast.configure();
-// const notify2 = () => {
-//   toast(<CustomToast />, { autoClose: false });
-// };
 
 var total;
 
@@ -134,21 +111,6 @@ function HomePage() {
           onRequestClose={() => setModalIsOpen(false)}
           className={styles.modal}
           overlayClassName={styles.overlay}
-          // style={{
-          //   overlay: {
-          //     // backgroundColor: 'papayawhip'
-          //   },
-          //   content: {
-          //     color: "var(--theme)",
-          //     overflow: "hidden",
-          //     width: "20rem",
-          //     height: "30rem",
-          //     margin: "auto auto",
-          //     verticalAlign: "middle",
-          //     textAlign: "center",
-          //   },
-          // }}
-          // style={modalCustomStyles}
         >
           <center>
             <Confetti
@@ -195,7 +157,5 @@ function HomePage() {
 }
 
 const condition = (authUser) => !!authUser;
-
 export default withAuthorization(condition)(HomePage);
-
 export { initPoints, assignData };
