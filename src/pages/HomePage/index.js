@@ -227,73 +227,38 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     width: "100%",
   },
-  searchContainer: {
-    display: "flex",
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    paddingLeft: "20px",
-    paddingRight: "20px",
-    marginTop: "1rem",
-    marginBottom: "0.5rem",
+  appbar: {
+    boxShadow: "2px 2px 6px #a6a6a6",
   },
-  searchIcon: {
-    alignSelf: "flex-end",
-    marginBottom: "0.5rem",
+  tabs: {
+    flexGrow: 1,
+    backgroundColor: "primary",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "6.5rem",
+      marginTop: "0.5rem",
+    },
   },
-  searchInput: {
-    width: "15rem",
-    // marginBottom: "-8px !important",
-    paddingBottom: "0",
-    underline: "0px !important",
-    // borderBottom: "#24a113"
+  bar: {
+    padding: 0,
   },
-  actionContainer: {
-    paddingTop: "1rem",
-    paddingLeft: "0rem",
-    paddingRight: "0rem",
+  tabIcon: {
+    position: "relative",
+    top: "0.4rem",
   },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
-    marginBottom: "1rem",
+  tabText: {
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "17px",
+      fontWeight: "bold",
+      marginBottom: "1rem",
+    },
   },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-  avatar: {
-    backgroundColor: "var(--theme)",
-  },
-  cardContent: {
-    textAlign: "left",
-    paddingBottom: "0",
-  },
-  cardActions: {
-    paddingTop: "0",
+  indicator: {
+    height: "3px",
+    [theme.breakpoints.up("sm")]: {
+    height: "5px",
+    },
   },
 }));
-
-const modalCustomStyles = {
-  overlay: {
-    position: "fixed",
-    overflow: "hidden",
-  },
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    overflow: "hidden",
-    height: "25rem",
-  },
-};
 
 // Text to display on the homepage
 function HomePage() {
@@ -455,7 +420,6 @@ function HomePage() {
           onRequestClose={() => setIncrementModalIsOpen(false)}
           className={styles.modalIncrement}
           overlayClassName={styles.overlay}
-          style={modalCustomStyles}
         >
           <center>
             <h1>Are you sure you want to log this action?</h1>
@@ -470,27 +434,25 @@ function HomePage() {
             </div>
           </center>
         </Modal>
-        <AppBar position="static" color="primary">
+        <AppBar position="static" color="primary" elevation={0} className={classes.appbar}>
           <Tabs
             value={value}
             onChange={handleChange}
             variant="fullWidth"
             scrollButtons="off"
-            indicatorColor="primary"
             textColor="default"
             aria-label="scrollable tabs"
             centered="true"
             className={classes.tabs}
+            TabIndicatorProps={{className: classes.indicator}}
           >
             <Tab
-              label="Actions!"
-              icon={<EcoIcon />}
+              label={<div className={classes.tabText}><EcoIcon className={classes.tabIcon}/> Actions </div>}
               {...a11yProps(0)}
               style={{ backgroundColor: "transparent" }}
             />
             <Tab
-              label="Your Favorites"
-              icon={<FavoriteIcon />}
+              label={<div className={classes.tabText}><FavoriteIcon className={classes.tabIcon}/> Favorites </div>}
               {...a11yProps(1)}
               style={{ backgroundColor: "transparent" }}
             />

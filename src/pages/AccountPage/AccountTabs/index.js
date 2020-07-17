@@ -101,8 +101,6 @@ function AccountTabs() {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          // indicatorColor="secondary"
-          // inkBarStyle={{ background: '#000' }}
           textColor="default"
           aria-label="scrollable tabs"
           centered="true"

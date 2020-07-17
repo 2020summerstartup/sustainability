@@ -43,9 +43,6 @@ const useStyles1 = makeStyles((theme) => ({
     color: "white",
     fontWeight: "bold",
     margin: "0",
-    // [theme.breakpoints.up("sm")]: {
-    //   marginLeft: "6.5rem",
-    // },
   },
 }));
 
@@ -195,7 +192,7 @@ const ChangeHeader = ({ firebase }) => {
   const classes = useStyles3();
   return (
     <>
-      <AppBar position="static" className={classes.header}>
+      <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
           {/* Back Button using history */}
           <IconButton
@@ -216,6 +213,11 @@ const ChangeHeader = ({ firebase }) => {
 };
 
 const useStyles4 = makeStyles((theme) => ({
+  header: {
+    background: "primary",
+    maxHeight: 100,
+    padding: 5,
+  },
   root: {
     flexGrow: 1,
   },
@@ -305,7 +307,7 @@ const HomeHeader = ({ firebase }) => {
 
   return (
     <>
-      <AppBar position="static" className={classes.appbar} elevation={0}>
+      <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
           <Grid justify="space-between" container flexGrow={1}>
             <Grid item>
