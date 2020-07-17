@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useContext } from "react";
-import "./toastify.module.css";
+import "./toastify.css";
 
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -104,23 +104,6 @@ const useStyles = makeStyles((theme) => ({
   error: {},
 }));
 
-const modalCustomStyles = {
-  overlay: {
-    position: "fixed",
-    overflow: "hidden",
-  },
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    overflow: "hidden",
-    height: "25rem",
-  },
-};
-
 // need this for modal to not get error in console
 Modal.setAppElement("#root");
 
@@ -213,11 +196,11 @@ const ActionCard = () => {
     if (storedFav) {
       var message = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C"; // Turn red
-      toast(message, { autoClose: 5000 });
+      toast(message, { autoClose: 3000 });
     } else {
       var message = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
-      toast.warn(message, { autoClose: 5000 });
+      toast.warn(message, { autoClose: 3000 });
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
@@ -232,7 +215,6 @@ const ActionCard = () => {
           onRequestClose={() => setModalIsOpen(false)}
           className={styles.modalIncrement}
           overlayClassName={styles.overlay}
-          style={modalCustomStyles}
         >
           <center>
             <h1>Are you sure you want to log this action?</h1>
