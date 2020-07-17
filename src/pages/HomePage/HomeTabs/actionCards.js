@@ -228,6 +228,7 @@ const ActionCard = () => {
       {/* <Toolbar> */}
         <div className={classes.searchContainer}>
           {/* TOOD: Make the modal shorter */}
+          {/* TODO: The modal styles don't actually update yet.. not sure what's going wrong there?? */}
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={() => setModalIsOpen(false)}
