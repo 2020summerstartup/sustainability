@@ -35,7 +35,7 @@ main {
   position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease;
-  z-index: 1;
+  z-index: 5;
 }
 
 .navbar-nav {

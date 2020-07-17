@@ -232,9 +232,11 @@ export const FaveCard = React.memo(function GalaxyCard() {
                         <CardActions disableSpacing>
                           <IconButton
                             aria-label="add to favorites"
-                            style={{ backgroundColor: "transparent" }}
                             // Start with all favorite buttons red, because we know that they're favorited
-                            style={{ color: "#DC143C" }}
+                            style={{
+                              color: "#DC143C",
+                              backgroundColor: "transparent",
+                            }}
                             // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
                             onClick={() => favAction(action)}
                             id={"favoriteIcon".concat(action.susAction)}
@@ -266,8 +268,10 @@ export const FaveCard = React.memo(function GalaxyCard() {
                               image={action.image}
                               title={action.title}
                             />
-                            <Typography variant="h4">Impact:</Typography>
-                            <Typography variant="body">
+                            <Typography variant="h5" gutterBottom>
+                              Environmental Impact:
+                            </Typography>
+                            <Typography variant="body1">
                               {action.impact}
                             </Typography>
                           </CardContent>

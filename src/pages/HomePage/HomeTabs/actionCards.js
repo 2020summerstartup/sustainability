@@ -30,8 +30,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { getUser } from '../../../services/Firebase';
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: "280",

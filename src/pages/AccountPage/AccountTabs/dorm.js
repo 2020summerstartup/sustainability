@@ -16,22 +16,22 @@ import {
 import { useGalaxyInfoStyles } from '@mui-treasury/styles/info/galaxy';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   card: {
-    borderRadius: '1rem',
-    boxShadow: 'none',
-    position: 'relative',
+    borderRadius: "1rem",
+    boxShadow: "none",
+    position: "relative",
     minWidth: 200,
     minHeight: 250,
-    '&:after': {
+    "&:after": {
       content: '""',
-      display: 'block',
-      position: 'absolute',
-      width: '100%',
-      height: '64%',
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: 'linear-gradient(to top, #000, rgba(0,0,0,0))',
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
     },
   },
   content: {
