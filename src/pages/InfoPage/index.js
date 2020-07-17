@@ -7,7 +7,7 @@ import ContactForm from "./contactForm";
 
 const InfoPage = () => (
   <div className="base-container">
-    <h1 className="header">Information</h1>
+    {/* <h1 className="header">Information</h1> */}
     <center>
       <Goal />
       <p></p>
