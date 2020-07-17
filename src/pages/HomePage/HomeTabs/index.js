@@ -51,6 +51,23 @@ import clsx from "clsx";
 
 import Collapse from "@material-ui/core/Collapse";
 
+import NoSsr from "@material-ui/core/NoSsr";
+import GoogleFontLoader from "react-google-font-loader";
+
+import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
+
+import favorite from "../../../img/favorite.svg";
+
+import {
+  Info,
+  InfoCaption,
+  InfoSubtitle,
+  InfoTitle,
+} from "@mui-treasury/components/info";
+
+import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
+
+
 
 
 function TabPanel(props) {
@@ -162,6 +179,78 @@ const useStyles = makeStyles((theme) => ({
   disabled: {},
   focused: {},
   error: {},
+  card: {
+    borderRadius: "1rem",
+    boxShadow: "none",
+    position: "relative",
+    minWidth: 200,
+    minHeight: 250,
+    "&:after": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      bottom: 0,
+      zIndex: 1,
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+    },
+  },
+  content: {
+    position: "absolute",
+    zIndex: 2,
+    bottom: 0,
+    width: "100%",
+  },
+  searchContainer: {
+    display: "flex",
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    paddingLeft: "20px",
+    paddingRight: "20px",
+    marginTop: "1rem",
+    marginBottom: "0.5rem",
+  },
+  searchIcon: {
+    alignSelf: "flex-end",
+    marginBottom: "0.5rem",
+  },
+  searchInput: {
+    width: "15rem",
+    // marginBottom: "-8px !important",
+    paddingBottom: "0",
+    underline: "0px !important",
+    // borderBottom: "#24a113"
+  },
+  actionContainer: {
+    paddingTop: "1rem",
+    paddingLeft: "0rem",
+    paddingRight: "0rem",
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%", // 16:9
+    marginBottom: "1rem",
+  },
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: "rotate(180deg)",
+  },
+  avatar: {
+    backgroundColor: "var(--theme)",
+  },
+  cardContent: {
+    textAlign: "left",
+    paddingBottom: "0",
+  },
+  cardActions: {
+    paddingTop: "0",
+  },
 }));
 
 // ----------------------------------STUFF THAT I'M STARTING TO ADD IN -------------------------------
@@ -195,18 +284,29 @@ function HomeTabs() {
 
 // ----------------------------------STUFF THAT I'M STARTING TO ADD IN -------------------------------
 
+
   const [expandedId, setExpandedId] = React.useState(-1);
+  // const [actionData, setActionData] = useState(ActionData);
+  // const [actionData] = useState(ActionData);
+  const [filter, setFilter] = useState("");
+  toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
+  // the one Amy wrote so I assume it's necessary here too) -Katie
+
+  const handleExpandClick = (i) => {
+    setExpandedId(expandedId === i ? -1 : i);
+  };
+
+
+const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
+
+
   const authContext = useContext(AuthUserContext);
 
-  const [filter, setFilter] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handleExpandClick = (i) => {
-    setExpandedId(expandedId === i ? -1 : i);
-  };
 
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
@@ -430,7 +530,109 @@ function HomeTabs() {
     </Fragment>
       </TabPanel>
       <TabPanel value={value} index={1} class="tab-container">
-        <FaveCard />
+      <div>
+      <AuthUserContext.Consumer>
+        {(authUser) => (
+          <>
+            <NoSsr>
+              <GoogleFontLoader
+                fonts={[
+                  { font: "Spartan", weights: [300] },
+                  { font: "Montserrat", weights: [200, 400, 700] },
+                ]}
+              />
+            </NoSsr>
+            <Card className={classes.card}>
+              <CardMedia classes={mediaStyles} image={favorite} />
+              <Box py={3} px={2} className={classes.content}>
+                <Info useStyles={useGalaxyInfoStyles}>
+                  <InfoSubtitle>Your faves are here </InfoSubtitle>
+                  <InfoTitle>Add more!</InfoTitle>
+                  <InfoCaption>
+                    Go to actions tab and press the heart to add❤️
+                  </InfoCaption>
+                </Info>
+              </Box>
+            </Card>
+            <Grid container spacing={2} className={classes.actionContainer}>
+              {ActionData.map(
+                (action, i) =>
+                  localStorage.getItem(action.susAction.concat("Fav")) ==
+                    "true" && (
+                    <Grid item xs={12} md={6} lg={4}>
+                      <Card className={classes.root} key={action.title}>
+                        <CardHeader
+                          className={classes.cardContent}
+                          action={
+                            <IconButton
+                              onClick={() => increment(action)}
+                              // Finally found how to get ride of random old green from click and hover!
+                              style={{ backgroundColor: "transparent" }}
+                              aria-label="settings"
+                              title="Complete this sustainable action"
+                            >
+                              <AddCircleIcon fontSize="large" />
+                            </IconButton>
+                          }
+                          title={action.title}
+                          subheader={"Earn ".concat(action.points, " Points!")}
+                        />
+                        <CardActions disableSpacing>
+                          <IconButton
+                            aria-label="add to favorites"
+                            // Start with all favorite buttons red, because we know that they're favorited
+                            style={{
+                              color: "#DC143C",
+                              backgroundColor: "transparent",
+                            }}
+                            // THIS IS HOW TO PASS PARAMETERS PROPERLY OMG!! -Katie
+                            onClick={() => favAction(action)}
+                            id={"favoriteIcon".concat(action.susAction)}
+                            className="favoriteIcon"
+                          >
+                            <FavoriteIcon />
+                          </IconButton>
+                          <IconButton
+                            className={clsx(classes.expand, {
+                              [classes.expandOpen]: !expandedId,
+                            })}
+                            onClick={() => handleExpandClick(i)}
+                            style={{ backgroundColor: "transparent" }}
+                            aria-expanded={expandedId === i}
+                            aria-label="Show More"
+                            title="Learn more"
+                          >
+                            <ExpandMoreIcon />
+                          </IconButton>
+                        </CardActions>
+                        <Collapse
+                          in={expandedId === i}
+                          timeout="auto"
+                          unmountOnExit
+                        >
+                          <CardContent>
+                            <CardMedia
+                              className={classes.media}
+                              image={action.image}
+                              title={action.title}
+                            />
+                            <Typography variant="h5" gutterBottom>
+                              Environmental Impact:
+                            </Typography>
+                            <Typography variant="body1">
+                              {action.impact}
+                            </Typography>
+                          </CardContent>
+                        </Collapse>
+                      </Card>
+                    </Grid>
+                  )
+              )}
+            </Grid>
+          </>
+        )}
+      </AuthUserContext.Consumer>
+    </div>
       </TabPanel>
     </div>
   );
