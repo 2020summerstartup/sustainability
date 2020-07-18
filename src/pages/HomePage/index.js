@@ -237,24 +237,38 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     width: "100%",
   },
+  appbar: {
+    boxShadow: "2px 2px 6px #a6a6a6",
+  },
+  tabs: {
+    flexGrow: 1,
+    backgroundColor: "primary",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "6.5rem",
+      marginTop: "0.5rem",
+    },
+  },
+  bar: {
+    padding: 0,
+  },
+  tabIcon: {
+    position: "relative",
+    top: "0.4rem",
+  },
+  tabText: {
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "17px",
+      fontWeight: "bold",
+      marginBottom: "1rem",
+    },
+  },
+  indicator: {
+    height: "3px",
+    [theme.breakpoints.up("sm")]: {
+    height: "5px",
+    },
+  },
 }));
-
-const modalCustomStyles = {
-  overlay: {
-    position: "fixed",
-    overflow: "hidden",
-  },
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    overflow: "hidden",
-    height: "25rem",
-  },
-};
 
 // Text to display on the homepage
 function HomePage() {
@@ -414,7 +428,6 @@ function HomePage() {
           onRequestClose={() => setIncrementModalIsOpen(false)}
           className={styles.modalIncrement}
           overlayClassName={styles.overlay}
-          style={modalCustomStyles}
         >
           <center>
             <h1>Are you sure you want to log this action?</h1>
@@ -429,27 +442,25 @@ function HomePage() {
             </div>
           </center>
         </Modal>
-        <AppBar position="static" color="primary">
+        <AppBar position="static" color="primary" elevation={0} className={classes.appbar}>
           <Tabs
             value={value}
             onChange={handleChange}
             variant="fullWidth"
             scrollButtons="off"
-            indicatorColor="primary"
             textColor="default"
             aria-label="scrollable tabs"
             centered="true"
             className={classes.tabs}
+            TabIndicatorProps={{className: classes.indicator}}
           >
             <Tab
-              label="Actions!"
-              icon={<EcoIcon />}
+              label={<div className={classes.tabText}><EcoIcon className={classes.tabIcon}/> Actions </div>}
               {...a11yProps(0)}
               style={{ backgroundColor: "transparent" }}
             />
             <Tab
-              label="Your Favorites"
-              icon={<FavoriteIcon />}
+              label={<div className={classes.tabText}><FavoriteIcon className={classes.tabIcon}/> Favorites </div>}
               {...a11yProps(1)}
               style={{ backgroundColor: "transparent" }}
             />

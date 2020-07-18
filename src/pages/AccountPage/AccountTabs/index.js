@@ -9,7 +9,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import PersonPinIcon from "@material-ui/icons/PersonPin";
+import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
 
 // import leaderBoardUpdate, {
@@ -61,8 +61,29 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
+      marginTop: "0.5rem",
     },
   },
+  bar: {
+    padding: 0,
+  },
+  tabIcon: {
+    position: "relative",
+    top: "0.4rem",
+  },
+  tabText: {
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "17px",
+      fontWeight: "bold",
+      marginBottom: "1rem",
+    },
+  },
+  indicator: {
+    height: "3px",
+    [theme.breakpoints.up("sm")]: {
+    height: "5px",
+    },
+  }
 }));
 
 function AccountTabs() {
@@ -80,22 +101,22 @@ function AccountTabs() {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          indicatorColor="primary"
           textColor="default"
           aria-label="scrollable tabs"
           centered="true"
           className={classes.tabs}
+          TabIndicatorProps={{className: classes.indicator}}
         >
           <Tab
-            label="Your Points"
-            icon={<PersonPinIcon />}
+            label={<div className={classes.tabText}><PersonIcon className={classes.tabIcon}/> Your Points </div>}
+            // icon={<PersonPinIcon />}
             {...a11yProps(0)}
             style={{ backgroundColor: "transparent" }}
           />
 
           <Tab
-            label="Your Dorm"
-            icon={<HomeIcon />}
+            label={<div className={classes.tabText}><HomeIcon className={classes.tabIcon}/> Your Dorm </div>}
+            // icon={<HomeIcon />}
             {...a11yProps(1)}
             style={{ backgroundColor: "transparent" }}
           />

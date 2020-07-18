@@ -195,7 +195,7 @@ main {
     font-size: 0.9rem;
   }
 
-  .navbar:hover .link-text {
+  .navbar:hover .link-text .page-text {
     display: inline;
     color: var(--theme);
   }

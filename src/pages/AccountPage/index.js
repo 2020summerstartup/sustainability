@@ -19,47 +19,6 @@ import HomeIcon from "@material-ui/icons/Home";
 
 import AccountTabs from "./AccountTabs";
 
-// function TabPanel(props) {
-//   const { children, value, index, ...other } = props;
-
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`scrollable-force-tabpanel-${index}`}
-//       aria-labelledby={`scrollable-force-tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && (
-//         <Box p={3}>
-//           <Typography>{children}</Typography>
-//         </Box>
-//       )}
-//     </div>
-//   );
-// }
-
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.any.isRequired,
-//   value: PropTypes.any.isRequired,
-// };
-
-// function a11yProps(index) {
-//   return {
-//     id: `scrollable-force-tab-${index}`,
-//     "aria-controls": `scrollable-force-tabpanel-${index}`,
-//   };
-// }
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//     width: "100%",
-//     backgroundColor: theme.palette.background.paper,
-//   },
-// }));
-
 function assignDorm(data) {
   if (data.userDorm === "") {
     alert("Sorry, please choose your dorm in setting!");

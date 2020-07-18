@@ -47,7 +47,11 @@ const useStyles = makeStyles((theme) => ({
   },
   linkText: {
     color: "white",
-  }
+
+  // caption: {
+  //   textColor: "green",
+
+  // }
 }));
 
 export const DormCard = React.memo(function GalaxyCard() {
@@ -82,6 +86,10 @@ export const DormCard = React.memo(function GalaxyCard() {
                       <Typography className={classes.linkText}>
                         Change your dorm in settings ⚙️
                       </Typography>
+                  {/* <InfoCaption className={styles.caption}>
+                    <Link to={ROUTES.CHANGEDORM}>
+                      Change your dorm in settings ⚙️ */}
+
                     </Link>
                   </InfoCaption>
                 </Info>
