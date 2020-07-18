@@ -30,8 +30,8 @@ const App = () => (
       <Route exact path="/compete" component={CompeteHeader} />
       <Route exact path="/info" component={InfoHeader} />
       <Route exact path="/account" component={AccountHeader} />
-      <Route exact path="/changedorm" component={Header} />
-      <Route exact path="/changepassword" component={Header} />
+      <Route exact path="/changedorm" component={ChangeHeader} />
+      <Route exact path="/changepassword" component={ChangeHeader} />
       <Route component={Header} />
     </Switch>
     <div className="main">

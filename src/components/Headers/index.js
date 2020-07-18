@@ -183,6 +183,16 @@ const useStyles3 = makeStyles((theme) => ({
       display: "none",
     },
   },
+  logo: {
+    width: "3rem",
+    height: "100%",
+    paddingRight: "0.5rem",
+    padding: "0",
+    margin: "0",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "6.5rem",
+    },
+  },
 }));
 
 // Header for Change Dorm and Change PW
@@ -202,6 +212,7 @@ const ChangeHeader = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
+          <img src={suslogoImg} alt="logo" className={classes.logo} />
           <Typography variant="h6" className={classes.title} noWrap>
             Sus Comp
             {/* <EcoIcon className={classes.leaf} /> */}
