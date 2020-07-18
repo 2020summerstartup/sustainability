@@ -466,10 +466,10 @@ function HomePage() {
             />
           </Tabs>
         </AppBar>
-        <div className="base-container">
+        <div className="top-container">
           <h3>
             You have earned&nbsp;
-            {<CountUp start={0} end={total} duration={1}></CountUp>} points!
+            {<CountUp start={0} end={total} duration={2}></CountUp>} points!
           </h3>
           <button onClick={() => setProgressModalIsOpen(true)} className="button">
             Check Progress
