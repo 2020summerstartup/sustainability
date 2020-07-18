@@ -3,7 +3,7 @@ a.link {
   }
   
   /* visited link */
-  a:visited {
-    color: rgba(0,0,0,0.87);
+  /* a:visited { */
+    /* color: rgba(0,0,0,0.87); */
     /* color: orange; */
-  }
+  /* } */
