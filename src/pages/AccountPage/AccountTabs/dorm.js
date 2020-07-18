@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   linkText: {
     color: "white",
-
+  },
   // caption: {
   //   textColor: "green",
 
