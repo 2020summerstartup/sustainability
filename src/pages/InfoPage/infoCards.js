@@ -7,15 +7,6 @@ import ContactForm from "./contactForm";
 // I grabbed the background color from the monochrome spread here: https://www.colorhexa.com/24a113
 let colors = ["#24a113", "#39AA2A", "#4FB342", "#65BD59"];
 
-const styles = {
-  color: "white",
-  padding: "1.5rem",
-  borderRadius: "10px",
-  margin: "0 1.5rem",
-  maxWidth: "600px",
-  marginTop: "2rem",
-};
-
 class InfoCards extends React.Component {
   constructor() {
     super();
@@ -59,16 +50,14 @@ class InfoCards extends React.Component {
   }
   componentWillMount() {
     this.getData();
-    // /*data is refreshing every 3 minutes*/
-    // setInterval(this.getData, 180000);
   }
 
   render() {
     return (
       <Spring
-        from={{ opacity: 0, marginTop: -500 }}
+        from={{ opacity: 0, marginTop: -1200 }}
         to={{ opacity: 1, marginTop: 0 }}
-        config={{ delay: 0, duration: 1000 }}
+        config={{ delay: 0, duration: 2000 }}
       >
         {(props) => (
           <div style={props}>
