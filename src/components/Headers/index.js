@@ -118,7 +118,6 @@ const useStyles2 = makeStyles((theme) => ({
     padding: "0",
     marginTop: "0.5rem",
   },
-  
 }));
 
 // Header for account page
@@ -237,7 +236,7 @@ const useStyles4 = makeStyles((theme) => ({
     display: "inline-flex",
     alignItems: "center",
     padding: "0",
-    marginTop: "0.5rem",
+    marginRight: "2rem",
   },
   search: {
     position: "relative",
@@ -247,35 +246,23 @@ const useStyles4 = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    marginTop: "0.4rem",
-    borderBottom: "0px !important",
-    width: "10rem",
+    width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: "100%",
+      width: "auto",
     },
   },
   searchIcon: {
-    padding: theme.spacing(0, 1),
+    padding: theme.spacing(0, 2),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    [theme.breakpoints.up("sm")]: {
-      padding: theme.spacing(0, 2),
-    },
   },
   inputRoot: {
     color: "inherit",
-    top: "0.5rem",
-    height: "2.5rem",
-    paddingLeft: "2.25rem",
-    paddingBottom: "0.5rem",
-    [theme.breakpoints.up("sm")]: {
-      paddingLeft: "3rem",
-    },
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -283,20 +270,12 @@ const useStyles4 = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    borderBottom: "0px !important",
-    height: "2rem !important",
-    '&$focus': {
-      borderBottom: "0px !important",
-    },
     [theme.breakpoints.up("sm")]: {
       width: "12ch",
       "&:focus": {
         width: "20ch",
       },
     },
-  },
-  inputFocused: {
-    bottomBorder: '1px solid #fff !important',
   },
 }));
 
@@ -312,31 +291,30 @@ const HomeHeader = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
-          <Grid justify="space-between" container flexGrow={1}>
-            <Grid item>
-              <Typography variant="h6" className={classes.title} noWrap>
-                <img src={suslogoImg} alt="logo" className={classes.logo} />
-                Home
-              </Typography>
-            </Grid>
-            <Grid item>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Search…"
-                  onChange={handleSearchChange}
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                    focused: classes.inputFocused
-                  }}
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </div>
-            </Grid>
-          </Grid>
+          {/* <Grid justify="space-between" container flexGrow={1}> */}
+          {/* <Grid item> */}
+          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <Typography variant="h6" className={classes.title} >
+            Home
+          </Typography>
+          {/* </Grid> */}
+          {/* <Grid item> */}
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              onChange={handleSearchChange}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ "aria-label": "search" }}
+            />
+          </div>
+          {/* </Grid> */}
+          {/* </Grid> */}
         </Toolbar>
       </AppBar>
     </>
