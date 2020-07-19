@@ -158,9 +158,6 @@ const useStyles3 = makeStyles((theme) => ({
     marginLeft: "0rem",
     marginBottom: "0.5rem",
     textAlign: "left",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "6.5rem",
-    },
   },
   menuButton: {
     marginright: theme.spacing(2),
