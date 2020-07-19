@@ -28,9 +28,6 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 
 // Styles for Header
 const useStyles1 = makeStyles((theme) => ({
-  header: {
-    background: "primary",
-  },
   logo: {
     width: "3rem",
     height: "3rem",
@@ -100,7 +97,6 @@ const InfoHeader = ({ firebase }) => {
 // Styles for Account Page Header
 const useStyles2 = makeStyles((theme) => ({
   header: {
-    background: "primary",
     maxHeight: 100,
     padding: 5,
   },
@@ -155,9 +151,6 @@ const AccountHeader = ({ firebase }) => {
 
 // Styles used for Header on Change Password
 const useStyles3 = makeStyles((theme) => ({
-  header: {
-    background: "primary",
-  },
   title: {
     color: "white",
     fontWeight: "bold",
@@ -225,7 +218,6 @@ const ChangeHeader = ({ firebase }) => {
 
 const useStyles4 = makeStyles((theme) => ({
   header: {
-    background: "primary",
     maxHeight: 100,
     padding: 5,
   },
