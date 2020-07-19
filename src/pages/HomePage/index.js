@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useContext } from "react";
 import styles from "./modal.module.css";
+import useIsIOS from "../../components/IosModal/useIsIOS";
+import { IosModal } from "../../components/IosModal";
 
 import CountUp from "react-countup";
 import Modal from "react-modal";
@@ -229,6 +231,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
     maxWidth: "60rem",
     minHeight: "15rem",
+    zIndex: 0,
     "&:after": {
       content: '""',
       display: "block",
@@ -284,6 +287,8 @@ function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [incrementModalIsOpen, setIncrementModalIsOpen] = useState(false);
   const authContext = useContext(AuthUserContext);
+  // loading install prompt for ios
+  const { prompt } = useIsIOS();
 
   // Get user's dorm set in local storage
   getUser(authContext.email).onSnapshot(
@@ -439,6 +444,7 @@ function HomePage() {
   // HTML to be displayed
   return (
     <>
+      {prompt && <IosModal />}
       <div>
         <Modal
           isOpen={incrementModalIsOpen}
