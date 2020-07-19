@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "../components/Navigation";
+import BottomNav from "../components/Navigation/bottomNav";
 import LandingPage from "../pages/LandingPage";
 import SignUpPage from "../pages/RegisterPage/signUpPage";
 import SignInPage from "../pages/RegisterPage/signInPage";
@@ -30,14 +31,15 @@ const App = () => (
       <Route exact path="/compete" component={CompeteHeader} />
       <Route exact path="/info" component={InfoHeader} />
       <Route exact path="/account" component={AccountHeader} />
-      <Route exact path="/changedorm" component={Header} />
-      <Route exact path="/changepassword" component={Header} />
+      <Route exact path="/changedorm" component={ChangeHeader} />
+      <Route exact path="/changepassword" component={ChangeHeader} />
       <Route component={Header} />
     </Switch>
     <div className="main">
       {/* {window.location.pathname !== "/account" ? <Header /> : <AccountHeader /> }  */}
 
       <Navigation />
+      <BottomNav />
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />

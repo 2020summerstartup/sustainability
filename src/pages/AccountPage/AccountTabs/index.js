@@ -81,9 +81,11 @@ const useStyles = makeStyles((theme) => ({
   indicator: {
     height: "3px",
     [theme.breakpoints.up("sm")]: {
-    height: "5px",
+      height: "4.5px",
+      width: "20px",
+      margin: "auto",
     },
-  }
+  },
 }));
 
 function AccountTabs() {
@@ -95,7 +97,12 @@ function AccountTabs() {
   };
   return (
     <div>
-      <AppBar position="static" color="primary" elevation={0} className={classes.appbar}>
+      <AppBar
+        position="static"
+        color="primary"
+        elevation={0}
+        className={classes.appbar}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -105,18 +112,24 @@ function AccountTabs() {
           aria-label="scrollable tabs"
           centered="true"
           className={classes.tabs}
-          TabIndicatorProps={{className: classes.indicator}}
+          TabIndicatorProps={{ className: classes.indicator }}
         >
           <Tab
-            label={<div className={classes.tabText}><PersonIcon className={classes.tabIcon}/> Your Points </div>}
-            // icon={<PersonPinIcon />}
+            label={
+              <div className={classes.tabText}>
+                <PersonIcon className={classes.tabIcon} /> Your Points{" "}
+              </div>
+            }
             {...a11yProps(0)}
             style={{ backgroundColor: "transparent" }}
           />
 
           <Tab
-            label={<div className={classes.tabText}><HomeIcon className={classes.tabIcon}/> Your Dorm </div>}
-            // icon={<HomeIcon />}
+            label={
+              <div className={classes.tabText}>
+                <HomeIcon className={classes.tabIcon} /> Your Dorm{" "}
+              </div>
+            }
             {...a11yProps(1)}
             style={{ backgroundColor: "transparent" }}
           />

@@ -28,8 +28,9 @@ const useStyles = makeStyles(() => ({
     borderRadius: "1rem",
     boxShadow: "none",
     position: "relative",
-    minWidth: 200,
-    minHeight: 250,
+    margin: "auto",
+    maxWidth: "60rem",
+    minHeight: "15rem",
     "&:after": {
       content: '""',
       display: "block",

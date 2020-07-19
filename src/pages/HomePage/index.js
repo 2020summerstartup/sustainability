@@ -5,7 +5,13 @@ import CountUp from "react-countup";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
-import { getUser, createUser, uploadUserTotalPoint, updateUserPoint, updateDormPoint } from "../../services/Firebase";
+import {
+  getUser,
+  createUser,
+  uploadUserTotalPoint,
+  updateUserPoint,
+  updateDormPoint,
+} from "../../services/Firebase";
 
 import PropTypes from "prop-types";
 
@@ -61,7 +67,8 @@ function initPoints(email) {
   total = 0;
   for (const key in ActionData) {
     var action = localStorage.getItem(ActionData[key].susAction); // Action to initialize
-    if (isNaN(action) || action == null) { // If it hasn't been initialized
+    if (isNaN(action) || action == null) {
+      // If it hasn't been initialized
       localStorage.setItem(ActionData[key].susAction, 0); // Initialize to 0
     }
   }
@@ -76,11 +83,11 @@ function assignData(data) {
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
-  data.favorites.forEach(fav => {
-    localStorage.setItem(fav, true)
-  })
+  data.favorites.forEach((fav) => {
+    localStorage.setItem(fav, true);
+  });
   localStorage.setItem("dorm", data.userDorm);
-  localStorage.setItem('name', data.name)
+  localStorage.setItem("name", data.name);
 }
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
@@ -218,8 +225,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "1rem",
     boxShadow: "none",
     position: "relative",
-    minWidth: 200,
-    minHeight: 250,
+    margin: "auto",
+    marginBottom: "1rem",
+    maxWidth: "60rem",
+    minHeight: "15rem",
     "&:after": {
       content: '""',
       display: "block",
@@ -265,7 +274,7 @@ const useStyles = makeStyles((theme) => ({
   indicator: {
     height: "3px",
     [theme.breakpoints.up("sm")]: {
-    height: "5px",
+      height: "5px",
     },
   },
 }));
@@ -295,13 +304,14 @@ function HomePage() {
     }
   );
 
-  // A function to run when the button "another option..." within check your progress is clicked. 
+  // A function to run when the button "another option..." within check your progress is clicked.
   // This won't be in the final code, but it's been part of my learning process for trying to get the
   // newlines to work, and I don't want to delete it until I fully solve this issue. Please ask me
   // before deleting this. :) -Katie
   const showProgress = () => {
     var codeBlock = "";
-    for (const key in ActionData) { // Get each susAction
+    for (const key in ActionData) {
+      // Get each susAction
       // Add info about each susAction, formatted with html, to the codeBalck
       codeBlock +=
         ActionData[key].title.concat(
@@ -346,7 +356,7 @@ function HomePage() {
       action.susAction,
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
     );
-    
+
     // updates user's point in firestore
     updateUserPoint(
       authContext.email,
@@ -364,7 +374,10 @@ function HomePage() {
         } else {
           createUser(authContext.email);
           initPoints(authContext.email);
-          uploadUserTotalPoint(authContext.email, localStorage.getItem('total'));
+          uploadUserTotalPoint(
+            authContext.email,
+            localStorage.getItem("total")
+          );
         }
       },
       (err) => {
@@ -372,21 +385,23 @@ function HomePage() {
       }
     );
 
-  // update dorm's point in firestore
-  updateDormPoint(localStorage.getItem('dorm'), parseInt(action.points));
+    // update dorm's point in firestore
+    updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
   }; // increment
 
   // Initialize the color of each favorite button
   // This isn't in a function because I can't call the function when I want using html. Could go in a function and then be called with JS.
-  var favIconColors = [] // Initalize array of the color for each favIcon
-  for(const key in ActionData) { // Iterate over every action in ActionData
+  var favIconColors = []; // Initalize array of the color for each favIcon
+  for (const key in ActionData) {
+    // Iterate over every action in ActionData
     var action = ActionData[key]; // Take the current action
     var storageName = action.susAction.concat("Fav");
-    var storedFav = localStorage.getItem(storageName) == 'true'; // We're getting a warning in the console (wants ===)
-    if (storedFav) { // If the action is favorited
-    favIconColors[key-1] = "#DC143C"; // Turn red
+    var storedFav = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console (wants ===)
+    if (storedFav) {
+      // If the action is favorited
+      favIconColors[key - 1] = "#DC143C"; // Turn red
     } else {
-      favIconColors[key-1] = "#6c6c6c"; // Otherwise turn gray
+      favIconColors[key - 1] = "#6c6c6c"; // Otherwise turn gray
     }
   }
 
@@ -395,7 +410,7 @@ function HomePage() {
     var storageName = action.susAction.concat("Fav");
     // storedFav is a boolean (is the current action favorited?)
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedFav = localStorage.getItem(storageName) == 'true'; // We're getting a warning in the console
+    var storedFav = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console
     // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
@@ -405,7 +420,9 @@ function HomePage() {
     }
     storedFav = !storedFav; // Toggle the favorite
     // variable for getting color of fav icon
-    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
+    var favIconColor = document.getElementById(
+      "favoriteIcon".concat(action.susAction)
+    );
     // Notify user that action was added/removed from favorites
     if (storedFav) {
       var message = action.title.concat(" added to favorites");
@@ -432,17 +449,30 @@ function HomePage() {
           <center>
             <h1>Are you sure you want to log this action?</h1>
             <div>
-              <button onClick={() => setIncrementModalIsOpen(false)} className="buttonOops">
+              <button
+                onClick={() => setIncrementModalIsOpen(false)}
+                className="buttonOops"
+              >
                 Oops, don't log it!
               </button>
               &nbsp;&nbsp;&nbsp;
-              <button onClick={() => (setIncrementModalIsOpen(false), increment(action))} className="button">
+              <button
+                onClick={() => (
+                  setIncrementModalIsOpen(false), increment(action)
+                )}
+                className="button"
+              >
                 Yes, log it!
               </button>
             </div>
           </center>
         </Modal>
-        <AppBar position="static" color="primary" elevation={0} className={classes.appbar}>
+        <AppBar
+          position="static"
+          color="primary"
+          elevation={0}
+          className={classes.appbar}
+        >
           <Tabs
             value={value}
             onChange={handleChange}
@@ -452,26 +482,37 @@ function HomePage() {
             aria-label="scrollable tabs"
             centered="true"
             className={classes.tabs}
-            TabIndicatorProps={{className: classes.indicator}}
+            TabIndicatorProps={{ className: classes.indicator }}
           >
             <Tab
-              label={<div className={classes.tabText}><EcoIcon className={classes.tabIcon}/> Actions </div>}
+              label={
+                <div className={classes.tabText}>
+                  <EcoIcon className={classes.tabIcon} /> Actions{" "}
+                </div>
+              }
               {...a11yProps(0)}
               style={{ backgroundColor: "transparent" }}
             />
             <Tab
-              label={<div className={classes.tabText}><FavoriteIcon className={classes.tabIcon}/> Favorites </div>}
+              label={
+                <div className={classes.tabText}>
+                  <FavoriteIcon className={classes.tabIcon} /> Favorites{" "}
+                </div>
+              }
               {...a11yProps(1)}
               style={{ backgroundColor: "transparent" }}
             />
           </Tabs>
         </AppBar>
-        <div className="base-container">
+        <div className="top-container">
           <h3>
             You have earned&nbsp;
-            {<CountUp start={0} end={total} duration={1}></CountUp>} points!
+            {<CountUp start={0} end={total} duration={2}></CountUp>} points!
           </h3>
-          <button onClick={() => setProgressModalIsOpen(true)} className="button">
+          <button
+            onClick={() => setProgressModalIsOpen(true)}
+            className="button"
+          >
             Check Progress
           </button>
           <Modal
@@ -511,10 +552,15 @@ function HomePage() {
               </p>
               <h3>Total Points: {total} </h3>
               <h1 id="wrapper">
-                <button onClick={() => showProgress()}>Another option (delete eventually, not yet)</button>
+                <button onClick={() => showProgress()}>
+                  Another option (delete eventually, not yet)
+                </button>
               </h1>
               <div>
-                <button onClick={() => setProgressModalIsOpen(false)} className="button">
+                <button
+                  onClick={() => setProgressModalIsOpen(false)}
+                  className="button"
+                >
                   Close
                 </button>
               </div>
@@ -543,65 +589,74 @@ function HomePage() {
             <Grid container spacing={2} className={classes.actionContainer}>
               {ActionData.map(
                 (action, i) =>
-                action.title.toLowerCase().includes(filter.toLowerCase()) && (
-                  <Grid item xs={12} md={6} lg={4}>
-                    <Card className={classes.root} key={action.title}>
-                      <CardHeader
-                        className={classes.cardContent}
-                        action={
+                  action.title.toLowerCase().includes(filter.toLowerCase()) && (
+                    <Grid item xs={12} md={6} lg={4}>
+                      <Card className={classes.root} key={action.title}>
+                        <CardHeader
+                          className={classes.cardContent}
+                          action={
+                            <IconButton
+                              onClick={() => setIncrementModalIsOpen(true)}
+                              // Finally found how to get ride of random old green from click and hover!
+                              style={{ backgroundColor: "transparent" }}
+                              aria-label="settings"
+                              title="Complete this sustainable action"
+                            >
+                              <AddCircleIcon fontSize="large" />
+                            </IconButton>
+                          }
+                          title={action.title}
+                          subheader={"Earn ".concat(action.points, " Points!")}
+                        />
+                        <CardActions disableSpacing>
                           <IconButton
-                            onClick={() => setIncrementModalIsOpen(true)}
-                            // Finally found how to get ride of random old green from click and hover!
-                            style={{ backgroundColor: "transparent" }}
-                            aria-label="settings"
-                            title="Complete this sustainable action"
+                            title="Add to favorites"
+                            aria-label="add to favorites"
+                            style={{
+                              color: favIconColors[i - 1],
+                              backgroundColor: "transparent",
+                            }} // Set the favIcon color (i-1 prevents off-by-one error)
+                            onClick={() => favAction(action)}
+                            id={"favoriteIcon".concat(action.susAction)}
+                            className={classes.favoriteIcon}
                           >
-                            <AddCircleIcon fontSize="large" />
+                            <FavoriteIcon />
                           </IconButton>
-                        }
-                        title={action.title}
-                        subheader={"Earn ".concat(action.points, " Points!")}
-                      />
-                      <CardActions disableSpacing>
-                        <IconButton
-                          title='Add to favorites'
-                          aria-label="add to favorites"
-                          style={{ color: favIconColors[i-1], backgroundColor: "transparent" }} // Set the favIcon color (i-1 prevents off-by-one error)
-                          onClick={() => favAction(action)}
-                          id={ "favoriteIcon".concat(action.susAction) }                                                                                                                                                                                                            
-                          className={classes.favoriteIcon}
+                          <IconButton
+                            className={clsx(classes.expand, {
+                              [classes.expandOpen]: !expandedId,
+                            })}
+                            onClick={() => handleExpandClick(i)}
+                            style={{ backgroundColor: "transparent" }}
+                            aria-expanded={expandedId === i}
+                            aria-label="Show More"
+                            title="Learn more"
+                          >
+                            <ExpandMoreIcon />
+                          </IconButton>
+                        </CardActions>
+                        <Collapse
+                          in={expandedId === i}
+                          timeout="auto"
+                          unmountOnExit
                         >
-                          <FavoriteIcon/>
-                        </IconButton>
-                        <IconButton
-                          className={clsx(classes.expand, {
-                            [classes.expandOpen]: !expandedId,
-                          })}
-                          onClick={() => handleExpandClick(i)}
-                          style={{ backgroundColor: "transparent" }}
-                          aria-expanded={expandedId === i}
-                          aria-label="Show More"
-                          title="Learn more"
-                        >
-                          <ExpandMoreIcon />
-                        </IconButton>
-                      </CardActions>
-                      <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
-                        <CardContent>
-                          <CardMedia
-                            className={classes.media}
-                            image={action.image}
-                            title={action.title}
-                          />
-                          <Typography variant="h5" gutterBottom>
-                            Environmental Impact:
-                          </Typography>
-                          <Typography variant="body1">{action.impact}</Typography>
-                        </CardContent>
-                      </Collapse>
-                    </Card>
-                  </Grid>
-                )
+                          <CardContent>
+                            <CardMedia
+                              className={classes.media}
+                              image={action.image}
+                              title={action.title}
+                            />
+                            <Typography variant="h5" gutterBottom>
+                              Environmental Impact:
+                            </Typography>
+                            <Typography variant="body1">
+                              {action.impact}
+                            </Typography>
+                          </CardContent>
+                        </Collapse>
+                      </Card>
+                    </Grid>
+                  )
               )}
             </Grid>
           </Fragment>
@@ -631,17 +686,24 @@ function HomePage() {
                       </Info>
                     </Box>
                   </Card>
-                  <Grid container spacing={2} className={classes.actionContainer}>
+                  <Grid
+                    container
+                    spacing={2}
+                    className={classes.actionContainer}
+                  >
                     {ActionData.map(
                       (action, i) =>
-                        localStorage.getItem(action.susAction.concat("Fav")) == "true" && (
+                        localStorage.getItem(action.susAction.concat("Fav")) ==
+                          "true" && (
                           <Grid item xs={12} md={6} lg={4}>
                             <Card className={classes.root} key={action.title}>
                               <CardHeader
                                 className={classes.cardContent}
                                 action={
                                   <IconButton
-                                    onClick={() => setIncrementModalIsOpen(true)}
+                                    onClick={() =>
+                                      setIncrementModalIsOpen(true)
+                                    }
                                     // Finally found how to get ride of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
                                     aria-label="settings"
@@ -651,18 +713,24 @@ function HomePage() {
                                   </IconButton>
                                 }
                                 title={action.title}
-                                subheader={"Earn ".concat(action.points, " Points!")}
+                                subheader={"Earn ".concat(
+                                  action.points,
+                                  " Points!"
+                                )}
                               />
                               <CardActions disableSpacing>
                                 <IconButton
-                                  title='Add to favorites'
+                                  title="Add to favorites"
                                   aria-label="add to favorites"
-                                  style={{ color: favIconColors[i-1], backgroundColor: "transparent" }} // Set the favIcon color (i-1 prevents off-by-one error)
+                                  style={{
+                                    color: favIconColors[i - 1],
+                                    backgroundColor: "transparent",
+                                  }} // Set the favIcon color (i-1 prevents off-by-one error)
                                   onClick={() => favAction(action)}
-                                  id={ "favoriteIcon".concat(action.susAction) }                                                                                                                                                                                                            
+                                  id={"favoriteIcon".concat(action.susAction)}
                                   className={classes.favoriteIcon}
                                 >
-                                  <FavoriteIcon/>
+                                  <FavoriteIcon />
                                 </IconButton>
                                 <IconButton
                                   className={clsx(classes.expand, {
@@ -677,7 +745,11 @@ function HomePage() {
                                   <ExpandMoreIcon />
                                 </IconButton>
                               </CardActions>
-                              <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
+                              <Collapse
+                                in={expandedId === i}
+                                timeout="auto"
+                                unmountOnExit
+                              >
                                 <CardContent>
                                   <CardMedia
                                     className={classes.media}
@@ -687,14 +759,15 @@ function HomePage() {
                                   <Typography variant="h5" gutterBottom>
                                     Environmental Impact:
                                   </Typography>
-                                  <Typography variant="body1">{action.impact}</Typography>
+                                  <Typography variant="body1">
+                                    {action.impact}
+                                  </Typography>
                                 </CardContent>
                               </Collapse>
                             </Card>
                           </Grid>
                         )
-                      )
-                    }
+                    )}
                   </Grid>
                 </>
               )}
