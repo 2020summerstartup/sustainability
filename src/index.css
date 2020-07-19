@@ -37,7 +37,8 @@ code {
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .base-container {
-    margin-bottom: 3.5rem;
+    padding: 0 1rem !important;
+    margin-bottom: 4rem !important;
     padding-bottom: 0rem !important;
     overflow-x: hidden;
   }
@@ -120,7 +121,7 @@ h2 {
 
 input {
   margin-top: 6px;
-  min-width: 18em;
+  min-width: 15em;
   height: 37px;
   padding: 0px 10px;
   font-size: 16px;
@@ -134,7 +135,7 @@ input {
 
 input:focus {
   outline: none;
-  box-shadow: 0px 0px 12px 0.8px var(--theme);
+  /* box-shadow: 0px 0px 12px 0.8px var(--theme); */
 }
 
 /* Trying to add new fonts to the app */
