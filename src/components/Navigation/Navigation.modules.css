@@ -145,6 +145,12 @@ main {
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
+    display: none;
+  }
+}
+
+/* @media only screen and (max-width: 600px) {
+  .navbar {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -184,7 +190,6 @@ main {
   .base-container {
     margin-bottom: 3.5rem;
     overflow-x: hidden;
-    /* padding-bottom: 5rem; */
   }
 
   .link-text {
@@ -219,7 +224,7 @@ main {
   .signout-btn {
     display: inline;
   }
-}
+} */
 
 /* Large screens */
 @media only screen and (min-width: 600px) {

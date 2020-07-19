@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "../components/Navigation";
+import BottomNav from "../components/Navigation/bottomNav";
 import LandingPage from "../pages/LandingPage";
 import SignUpPage from "../pages/RegisterPage/signUpPage";
 import SignInPage from "../pages/RegisterPage/signInPage";
@@ -38,6 +39,7 @@ const App = () => (
       {/* {window.location.pathname !== "/account" ? <Header /> : <AccountHeader /> }  */}
 
       <Navigation />
+      <BottomNav />
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />

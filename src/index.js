@@ -17,6 +17,27 @@ const theme = createMuiTheme({
       main: "#FFFFFF",
     },
   },
+  overrides: {
+    MuiBottomNavigation: {
+      root: {
+        backgroundColor: "var(--bg-primary)",
+      },
+      Mui: {
+        selected: {
+          color: "var(--theme)",
+        },
+      },
+    },
+    MuiBottomNavigationAction: {
+      wrapper: {
+        color: "#fff",
+        "&$selected": {
+          color: "red",
+        },
+      },
+      
+    },
+  },
 });
 
 ReactDOM.render(
