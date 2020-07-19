@@ -212,11 +212,8 @@ const ChangeHeader = ({ firebase }) => {
   );
 };
 
+// HomeHeader
 const useStyles4 = makeStyles((theme) => ({
-  header: {
-    maxHeight: 100,
-    padding: 5,
-  },
   root: {
     flexGrow: 1,
   },
@@ -231,12 +228,14 @@ const useStyles4 = makeStyles((theme) => ({
     },
   },
   title: {
-    color: "white",
+    flexGrow: 1,
     fontWeight: "bold",
-    display: "inline-flex",
-    alignItems: "center",
-    padding: "0",
+    display: "inline",
     marginRight: "2rem",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+      margin: "0",
+    },
   },
   search: {
     position: "relative",
@@ -281,31 +280,21 @@ const useStyles4 = makeStyles((theme) => ({
 
 const HomeHeader = ({ firebase }) => {
   const classes = useStyles4();
-  const [filter, setFilter] = useState("");
-
-  const handleSearchChange = (e) => {
-    setFilter(e.target.value);
-  };
 
   return (
-    <>
-      <AppBar position="static" className={classes.header} elevation={0}>
-        <Toolbar className={classes.toolbar}>
-          {/* <Grid justify="space-between" container flexGrow={1}> */}
-          {/* <Grid item> */}
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
           <img src={suslogoImg} alt="logo" className={classes.logo} />
-          <Typography variant="h6" className={classes.title} >
+          <Typography className={classes.title} variant="h6">
             Home
           </Typography>
-          {/* </Grid> */}
-          {/* <Grid item> */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
               placeholder="Search…"
-              onChange={handleSearchChange}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -313,11 +302,9 @@ const HomeHeader = ({ firebase }) => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          {/* </Grid> */}
-          {/* </Grid> */}
         </Toolbar>
       </AppBar>
-    </>
+    </div>
   );
 };
 
