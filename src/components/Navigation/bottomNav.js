@@ -16,10 +16,6 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     width: "100%",
     zIndex: 5,
-    color: "green",
-    "&$selected": {
-      color: "red",
-    },
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },

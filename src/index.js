@@ -29,13 +29,9 @@ const theme = createMuiTheme({
       },
     },
     MuiBottomNavigationAction: {
-      wrapper: {
-        color: "#fff",
-        "&$selected": {
-          color: "red",
-        },
-      },
-      
+      root: {
+        color: "var(--text-primary)",
+      },      
     },
   },
 });
