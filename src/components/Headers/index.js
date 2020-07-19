@@ -96,10 +96,6 @@ const InfoHeader = ({ firebase }) => {
 
 // Styles for Account Page Header
 const useStyles2 = makeStyles((theme) => ({
-  header: {
-    maxHeight: 100,
-    padding: 5,
-  },
   logo: {
     width: "3rem",
     height: "100%",
