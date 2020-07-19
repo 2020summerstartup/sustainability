@@ -1,0 +1,9 @@
+/* not in use rn! */
+.cardWrapper {
+  color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 0 1.5rem;
+  max-width: 600px;
+  margin-top: 2rem;
+}

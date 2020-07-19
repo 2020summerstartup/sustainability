@@ -69,8 +69,6 @@ function AccountPage() {
         {(authUser) => (
           <>
           <AccountTabs />
-          {/* <div className="base-container">
-          </div> */}
           </>
         )}
       </AuthUserContext.Consumer>
