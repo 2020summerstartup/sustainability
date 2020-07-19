@@ -270,7 +270,7 @@ main {
   .navbar:hover .signout-btn {
     display: inline;
     margin-left: 6rem;
-    animation: fade 5s;
+    animation: fade 3s;
   }
 
   .nav-item:last-child {
