@@ -96,10 +96,6 @@ const InfoHeader = ({ firebase }) => {
 
 // Styles for Account Page Header
 const useStyles2 = makeStyles((theme) => ({
-  header: {
-    maxHeight: 100,
-    padding: 5,
-  },
   logo: {
     width: "3rem",
     height: "100%",
@@ -118,7 +114,6 @@ const useStyles2 = makeStyles((theme) => ({
     padding: "0",
     marginTop: "0.5rem",
   },
-  
 }));
 
 // Header for account page
@@ -158,9 +153,6 @@ const useStyles3 = makeStyles((theme) => ({
     marginLeft: "0rem",
     marginBottom: "0.5rem",
     textAlign: "left",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "6.5rem",
-    },
   },
   menuButton: {
     marginright: theme.spacing(2),
@@ -216,11 +208,8 @@ const ChangeHeader = ({ firebase }) => {
   );
 };
 
+// HomeHeader
 const useStyles4 = makeStyles((theme) => ({
-  header: {
-    maxHeight: 100,
-    padding: 5,
-  },
   root: {
     flexGrow: 1,
   },
@@ -235,12 +224,14 @@ const useStyles4 = makeStyles((theme) => ({
     },
   },
   title: {
-    color: "white",
+    flexGrow: 1,
     fontWeight: "bold",
-    display: "inline-flex",
-    alignItems: "center",
-    padding: "0",
-    marginTop: "0.5rem",
+    display: "inline",
+    marginRight: "2rem",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+      margin: "0",
+    },
   },
   search: {
     position: "relative",
@@ -250,35 +241,23 @@ const useStyles4 = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    marginTop: "0.4rem",
-    borderBottom: "0px !important",
-    width: "10rem",
+    width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: "100%",
+      width: "auto",
     },
   },
   searchIcon: {
-    padding: theme.spacing(0, 1),
+    padding: theme.spacing(0, 2),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    [theme.breakpoints.up("sm")]: {
-      padding: theme.spacing(0, 2),
-    },
   },
   inputRoot: {
     color: "inherit",
-    top: "0.5rem",
-    height: "2.5rem",
-    paddingLeft: "2.25rem",
-    paddingBottom: "0.5rem",
-    [theme.breakpoints.up("sm")]: {
-      paddingLeft: "3rem",
-    },
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -286,11 +265,6 @@ const useStyles4 = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    borderBottom: "0px !important",
-    height: "2rem !important",
-    '&$focus': {
-      borderBottom: "0px !important",
-    },
     [theme.breakpoints.up("sm")]: {
       width: "12ch",
       "&:focus": {
@@ -298,51 +272,35 @@ const useStyles4 = makeStyles((theme) => ({
       },
     },
   },
-  inputFocused: {
-    bottomBorder: '1px solid #fff !important',
-  },
 }));
 
 const HomeHeader = ({ firebase }) => {
   const classes = useStyles4();
-  const [filter, setFilter] = useState("");
-
-  const handleSearchChange = (e) => {
-    setFilter(e.target.value);
-  };
 
   return (
-    <>
-      <AppBar position="static" className={classes.header} elevation={0}>
-        <Toolbar className={classes.toolbar}>
-          <Grid justify="space-between" container flexGrow={1}>
-            <Grid item>
-              <Typography variant="h6" className={classes.title} noWrap>
-                <img src={suslogoImg} alt="logo" className={classes.logo} />
-                Home
-              </Typography>
-            </Grid>
-            <Grid item>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Search…"
-                  onChange={handleSearchChange}
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                    focused: classes.inputFocused
-                  }}
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </div>
-            </Grid>
-          </Grid>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <Typography className={classes.title} variant="h6">
+            Home
+          </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ "aria-label": "search" }}
+            />
+          </div>
         </Toolbar>
       </AppBar>
-    </>
+    </div>
   );
 };
 

@@ -48,11 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
   linkText: {
     color: "white",
+    textDecoration: "none",
   },
-  // caption: {
-  //   textColor: "green",
-
-  // }
 }));
 
 export const DormCard = React.memo(function GalaxyCard() {
@@ -84,7 +81,7 @@ export const DormCard = React.memo(function GalaxyCard() {
                   </InfoTitle>
                   <InfoCaption>
                     <Link to={ROUTES.CHANGEDORM}>
-                      <Typography className={classes.linkText}>
+                      <Typography variant="p" className={classes.linkText} style={{ underline: 'enum: none' }} >
                         Change your dorm in settings ⚙️
                       </Typography>
                   {/* <InfoCaption className={styles.caption}>

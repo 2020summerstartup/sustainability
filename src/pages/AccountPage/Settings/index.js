@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import SignOutButton from "../../../components/SignOut";
 import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from "@material-ui/core/IconButton";
 import styles from "./Settings.module.css";
 
 import { AuthUserContext } from "../../../services/Session";
@@ -32,9 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   settingsIcon: {
     color: "white",
-    minWidth: "0",
-    padding: "0",
-    margin: "1rem 0",
+    paddingRight: "0",
   },
   listItemIcon: {
     minWidth: "2.5rem",
@@ -42,10 +40,10 @@ const useStyles = makeStyles((theme) => ({
   listItemText: {
     marginRight: "1.5rem",
   },
-  settingsSignOut: {
-    display: "flex",
-    justifyContent: "center",
-  },
+  // settingsSignOut: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  // },
 }));
 
 export default function SwipeableTemporaryDrawer() {
@@ -87,7 +85,9 @@ export default function SwipeableTemporaryDrawer() {
         <ListItem>
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
-            <Typography variant="h6">Hi, {localStorage.getItem('name')}</Typography>
+            <Typography variant="h6">
+              Hi, {localStorage.getItem("name")}
+            </Typography>
           </ListItemText>
         </ListItem>
         <ListItem>
@@ -95,13 +95,13 @@ export default function SwipeableTemporaryDrawer() {
             <EmailIcon />
           </ListItemIcon>
           <AuthUserContext.Consumer>
-          {(authUser) => (
-            <ListItemText className={classes.listItemText}>
-            {authUser.email}
-            {/* {localStorage.getItem("email")} */}
-            {/* <FormDialog/> */}
-          </ListItemText>
-          )}
+            {(authUser) => (
+              <ListItemText className={classes.listItemText}>
+                {authUser.email}
+                {/* {localStorage.getItem("email")} */}
+                {/* <FormDialog/> */}
+              </ListItemText>
+            )}
           </AuthUserContext.Consumer>
         </ListItem>
         <ListItem
@@ -134,7 +134,7 @@ export default function SwipeableTemporaryDrawer() {
 
         <ListItem className={classes.settingsSignOut}>
           {/* <ListItemText> */}
-          <SignOutButton />
+            <SignOutButton />
           {/* </ListItemText> */}
         </ListItem>
       </List>

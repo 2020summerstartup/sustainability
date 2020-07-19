@@ -147,6 +147,9 @@ main {
   .navbar {
     display: none;
   }
+  .signout-btn {
+    display: inline;
+  }
 }
 
 /* @media only screen and (max-width: 600px) {

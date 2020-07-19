@@ -38,7 +38,7 @@ img {
 
 input {
   margin-top: 6px;
-  min-width: 18em;
+  min-width: 15em;
   height: 37px;
   padding: 0px 10px;
   font-size: 16px;
@@ -57,8 +57,8 @@ input {
 
 input:focus {
   outline: none;
-  border-bottom: 1px solid var(--theme) !important; 
-  box-shadow: 0px 0px 12px 0.8px var(--theme);
+  /* border-bottom: 1px solid var(--theme) !important;  */
+  /* box-shadow: 0px 0px 12px 0.8px var(--theme); */
 }
 
 .icon {

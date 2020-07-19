@@ -141,40 +141,22 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "280",
     backgroundColor: "var(--text-secondary)",
   },
-  // Commenting this out doesn't seem to break anything, so I think we can delete it? Saving unless the styles
-  // are necessary somewhere I didn't seen.
-  // searchContainer: {
-  //   display: "flex",
-  //   backgroundColor: fade(theme.palette.common.white, 0.15),
-  //   marginTop: "1rem",
-  //   marginBottom: "0.5rem",
-  // },
+  margin: {
+    margin: theme.spacing.unit,
+  },
   searchContainer: {
     display: "flex",
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    paddingLeft: "20px",
-    paddingRight: "20px",
-    marginTop: "1rem",
-    marginBottom: "0.5rem",
   },
   searchIcon: {
     alignSelf: "flex-end",
-    marginBottom: "0.5rem",
   },
-  // Again I'm pretty sure this is overwritten by the later searchInput
-  // searchInput: {
-  //   width: "12rem",
-  //   paddingBottom: "0",
-  //   [theme.breakpoints.up("sm")]: {
-  //     width: "15em",
-  //   },
-  // },
   searchInput: {
-    width: "15rem",
-    // marginBottom: "-8px !important",
-    paddingBottom: "0",
-    underline: "0px !important",
-    // borderBottom: "#24a113"
+    width: "12rem",
+    paddingBottom: "0rem",
+    [theme.breakpoints.up("sm")]: {
+      width: "15em",
+    },
   },
   actionContainer: {
     paddingTop: "1rem",
@@ -453,7 +435,7 @@ function HomePage() {
           overlayClassName={styles.overlay}
         >
           <center>
-            <h1>Are you sure you want to log this action?</h1>
+            <h2>Are you sure you want to log this action?</h2>
             <div>
               <button
                 onClick={() => setIncrementModalIsOpen(false)}
@@ -578,17 +560,10 @@ function HomePage() {
             <div className={classes.searchContainer}>
               <Grid container spacing={1} alignItems="flex-end">
                 <Grid item>
-                  <SearchIcon className={classes.searchIcon} />
+                  <SearchIcon />
                 </Grid>
                 <Grid item>
-                  <TextField
-                    onChange={handleSearchChange}
-                    className={classes.searchInput}
-                    label="Search Actions"
-                    variant="standard"
-                    InputProps={{ disableUnderline: true }}
-                    InputProps={{ classes: { underline: classes.underline } }}
-                  />
+                  <TextField id="search bar" label="Search Actions" />
                 </Grid>
               </Grid>
             </div>
