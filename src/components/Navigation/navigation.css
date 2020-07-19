@@ -105,6 +105,31 @@ main {
   width: 100%;
 }
 
+.logo svg {
+  transform: rotate(0deg);
+  transition: var(--transition-speed);
+  margin: 0;
+}
+
+.logo-text {
+  display: inline;
+  position: absolute;
+  top: 1.5rem;
+  left: -999px;
+  transition: var(--transition-speed);
+  color: var(--text-secondary);
+}
+
+.navbar:hover .logo svg {
+  transform: rotate(-180deg);
+  position: relative;
+  right: 2rem;
+}
+
+.navbar:hover .icons {
+  color: var(--theme);
+}
+
 .icons {
   font-weight: bold;
   text-transform: uppercase;
@@ -115,27 +140,6 @@ main {
   font-size: 1.5rem;
   letter-spacing: 0.3ch;
   width: 100%;
-}
-
-.logo svg {
-  transform: rotate(0deg);
-  transition: var(--transition-speed);
-}
-
-.logo-text {
-  display: inline;
-  position: absolute;
-  left: -999px;
-  transition: var(--transition-speed);
-  color: var(--text-secondary);
-}
-
-.navbar:hover .logo svg {
-  transform: rotate(-180deg);
-}
-
-.navbar:hover .icons {
-  color: var(--theme);
 }
 
 .signout-btn {

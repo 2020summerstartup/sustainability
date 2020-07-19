@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../../services/Session";
 import SignOutButton from "../SignOut";
-import "./Navigation.modules.css";
+import "./navigation.css";
 
 // import your fontawesome library
 import "../FontAwesomeIcons";
@@ -29,6 +29,7 @@ const NavigationAuth = () => (
       <ul className="navbar-nav">
         <li className="logo">
           <a href="#" className="nav-link">
+          <Link to={ROUTES.HOME} className="link-text">
             <span className="link-text logo-text">Go Green</span>
             <svg
               aria-hidden="true"
@@ -38,7 +39,7 @@ const NavigationAuth = () => (
               role="img"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
-              className="svg-inline--fa fa-angle-double-right fa-w-14 fa-5x"
+              className="svg-inline--fa fa-angle-double-right fa-w-10 fa-5x"
             >
               <g className="fa-group">
                 <path
@@ -53,6 +54,7 @@ const NavigationAuth = () => (
                 ></path>
               </g>
             </svg>
+            </Link>
           </a>
         </li>
 
