@@ -141,11 +141,12 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "280",
     backgroundColor: "var(--text-secondary)",
   },
+  margin: {
+    margin: theme.spacing.unit,
+  },
   searchContainer: {
     display: "flex",
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    // marginTop: "1rem",
-    // marginBottom: "0.5rem",
   },
   searchIcon: {
     alignSelf: "flex-end",
@@ -434,7 +435,7 @@ function HomePage() {
           overlayClassName={styles.overlay}
         >
           <center>
-            <h1>Are you sure you want to log this action?</h1>
+            <h2>Are you sure you want to log this action?</h2>
             <div>
               <button
                 onClick={() => setIncrementModalIsOpen(false)}
@@ -559,16 +560,10 @@ function HomePage() {
             <div className={classes.searchContainer}>
               <Grid container spacing={1} alignItems="flex-end">
                 <Grid item>
-                  <SearchIcon className={classes.searchIcon} />
+                  <SearchIcon />
                 </Grid>
                 <Grid item>
-                  <TextField
-                    onChange={handleSearchChange}
-                    className={classes.searchInput}
-                    label="Search Actions"
-                    variant="standard"
-                    InputProps={{ classes: { underline: classes.underline } }}
-                  />
+                  <TextField id="search bar" label="Search Actions" />
                 </Grid>
               </Grid>
             </div>
