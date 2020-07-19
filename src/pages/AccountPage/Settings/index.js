@@ -40,10 +40,10 @@ const useStyles = makeStyles((theme) => ({
   listItemText: {
     marginRight: "1.5rem",
   },
-  settingsSignOut: {
-    display: "flex",
-    justifyContent: "center",
-  },
+  // settingsSignOut: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  // },
 }));
 
 export default function SwipeableTemporaryDrawer() {
