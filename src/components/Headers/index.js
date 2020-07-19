@@ -296,7 +296,7 @@ const useStyles4 = makeStyles((theme) => ({
     width: "100%",
     borderBottom: "0px !important",
     height: "2rem !important",
-    "&:focus": {
+    '&$focus': {
       borderBottom: "0px !important",
     },
     [theme.breakpoints.up("sm")]: {
@@ -305,6 +305,9 @@ const useStyles4 = makeStyles((theme) => ({
         width: "20ch",
       },
     },
+  },
+  inputFocused: {
+    bottomBorder: '1px solid #fff !important',
   },
 }));
 
@@ -338,6 +341,7 @@ const HomeHeader = ({ firebase }) => {
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
+                    focused: classes.inputFocused
                   }}
                   inputProps={{ "aria-label": "search" }}
                 />

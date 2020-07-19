@@ -229,6 +229,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
     maxWidth: "60rem",
     minHeight: "15rem",
+    zIndex: 0,
     "&:after": {
       content: '""',
       display: "block",

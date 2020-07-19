@@ -17,6 +17,7 @@ const theme = createMuiTheme({
       main: "#FFFFFF",
     },
   },
+  // overrides for material ui bottom navbar
   overrides: {
     MuiBottomNavigation: {
       root: {
@@ -26,13 +27,21 @@ const theme = createMuiTheme({
         selected: {
           color: "var(--theme)",
         },
+        // focused: {
+        //   bottomBorder: "0px",
+        // },
       },
     },
     MuiBottomNavigationAction: {
       root: {
         color: "var(--text-primary)",
-      },      
+      },
     },
+    // MuiInputBase: {
+    //   input: {
+    //     border: "0px !important",
+    //   },
+    // },
   },
 });
 
