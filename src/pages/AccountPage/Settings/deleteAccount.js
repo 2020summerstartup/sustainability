@@ -32,7 +32,7 @@ class DeleteAccount extends React.Component{
         )
         //Navigate to landing page
         this.props.history.push('/');
-        console.log('User Deleted!');
+        alert("User associated with email '" + localStorage.getItem('email') + "' has been deleted! \n Sign up again if you would like to create a new account!");
     };
     
 
