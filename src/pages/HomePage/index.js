@@ -336,6 +336,7 @@ function HomePage() {
 
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
+    console.log('testVar', testVar);
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the saved point total
     localStorage.setItem(
@@ -422,6 +423,8 @@ function HomePage() {
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
+  var testVar = 'initVal';
+
   // HTML to be displayed
   return (
     <>
@@ -446,7 +449,7 @@ function HomePage() {
               <button
                 onClick={() => (
                   setIncrementModalIsOpen(false),
-                  increment(action)
+                  increment(testVar)
                 )}
                 className="button"
               >
@@ -576,8 +579,10 @@ function HomePage() {
                         <CardHeader
                           className={classes.cardContent}
                           action={
+                            // DO NOT CHANGE THE FOLLOWING LINE WITHOUT FULLY UNDERSTANDING, BECAUSE THIS IS FINALLY CLOSE TO WORKING (this is a note to self, not to all of you :) ) -Katie
+                            testVar = action,
                             <IconButton
-                              onClick={() => increment(action)}
+                              onClick={() => setIncrementModalIsOpen(true)}
                               // Finally found how to get ride of random old green from click and hover!
                               style={{ backgroundColor: "transparent" }}
                               aria-label="settings"
