@@ -81,7 +81,7 @@ export const DormCard = React.memo(function GalaxyCard() {
                     <Link to={ROUTES.CHANGEDORM}>
                       <Typography variant="p" className={classes.linkText} style={{ underline: 'enum: none' }} >
                         Change your dorm in settings&nbsp;
-                        <span role="img" aria-label="Trophy">
+                        <span role="img" aria-label="gear">
                           ⚙️
                         </span>
                       </Typography>

@@ -21,12 +21,12 @@ const OfflinePage = () => (
         </span>
       </li>
       <li>You have competitive fire within you!&nbsp;
-        <span role="img" aria-label="earth">
+        <span role="img" aria-label="fire">
         🔥
         </span>
       </li>
       <li>You don't want to let your dorm down.&nbsp;
-        <span role="img" aria-label="earth">
+        <span role="img" aria-label="dorm">
           🏫
         </span>
       </li>

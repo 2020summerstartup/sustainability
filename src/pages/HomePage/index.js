@@ -410,13 +410,13 @@ function HomePage() {
     );
     // Notify user that action was added/removed from favorites
     if (storedFav) {
-      var message = action.title.concat(" added to favorites");
+      var displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C"; // Turn red
-      toast.success(message, { autoClose: 5000 }); // It's "success" so that the window is green
+      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
     } else {
-      var message = action.title.concat(" removed from favorites");
+      var displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
-      toast.warn(message, { autoClose: 5000 }); // It's a warning so that the window is yellow
+      toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
@@ -444,7 +444,8 @@ function HomePage() {
               &nbsp;&nbsp;&nbsp;
               <button
                 onClick={() => (
-                  setIncrementModalIsOpen(false), increment(action)
+                  setIncrementModalIsOpen(false),
+                  increment(action)
                 )}
                 className="button"
               >
@@ -660,7 +661,10 @@ function HomePage() {
                         <InfoSubtitle>Your faves are here </InfoSubtitle>
                         <InfoTitle>Add more!</InfoTitle>
                         <InfoCaption>
-                          Go to actions tab and press the heart to add❤️
+                          Go to actions tab and press the heart to add&nbsp;
+                          <span role="img" aria-label="heart">
+                            ❤️
+                          </span>
                         </InfoCaption>
                       </Info>
                     </Box>
