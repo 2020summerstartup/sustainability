@@ -576,7 +576,7 @@ function HomePage() {
                           className={classes.cardContent}
                           action={
                             <IconButton
-                              onClick={() => setIncrementModalIsOpen(true)}
+                              onClick={() => increment(action)}
                               // Finally found how to get ride of random old green from click and hover!
                               style={{ backgroundColor: "transparent" }}
                               aria-label="settings"
@@ -682,7 +682,7 @@ function HomePage() {
                                 action={
                                   <IconButton
                                     onClick={() =>
-                                      setIncrementModalIsOpen(true)
+                                      increment(action)
                                     }
                                     // Finally found how to get ride of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
