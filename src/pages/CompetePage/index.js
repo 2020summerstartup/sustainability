@@ -10,16 +10,6 @@ const CompetePage = () => (
     <AuthUserContext>
       {(authUser) => (
         <div className="base-container">
-          {/* <h1>
-            Competitions and Rankings
-            <span role="img" aria-label="Trophy">
-              🏆
-            </span>
-          </h1>
-          <center>New competitions coming soon...</center>
-          
-          <h3>Leaderboard</h3>
-          <p>See your dorm's ranking below! :)</p> */}
           <Leaderboard />
         </div>
       )}
