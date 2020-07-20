@@ -6,7 +6,7 @@ import * as firebase from "firebase";
 import "firebase/auth";
 
 import { PasswordInput } from "./muiSignInPage";
-import { withFirebase, getUser } from "../../services/Firebase";
+import { withFirebase, createUser } from "../../services/Firebase";
 import { assignData } from "../HomePage/index.js";
 import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
@@ -95,8 +95,9 @@ function DormInput() {
         return (
           <TextField
             {...params}
-            label="Combo box"
+            label="Dorms"
             variant="outlined"
+            margin="normal"
             fullWidth
             InputProps={{
               ...params.InputProps,
@@ -190,33 +191,28 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { email, password } = this.state;
+    const { username, email, passwordOne, dorm, image, points } = this.state;
+
+    createUser(email, username, dorm);
 
     this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then((authUser) => {
+        // Create a user in your Firebase realtime database
+        return this.props.firebase.user(authUser.user.uid).set({
+          username,
+          email,
+        });
+      })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
       .catch((error) => {
         this.setState({ error });
-        console.log(error);
       });
 
     event.preventDefault();
-
-    getUser(email).onSnapshot(
-      (snapshot) => {
-        if (snapshot.exists) {
-          assignData(snapshot.data());
-        } else {
-          alert("Please sign up again!");
-        }
-      },
-      (err) => {
-        console.log(`Encountered error: ${err}`);
-      }
-    );
   };
 
   onChange = (event) => {
@@ -237,10 +233,23 @@ class SignUpFormBase extends Component {
 
   render() {
     const { classes } = this.props;
-    const { email, password, error } = this.state;
     const { pw } = this.state;
     const { pw2 } = this.state;
-    const isInvalid = password === "" || email === "";
+    const {
+      username,
+      email,
+      dorm,
+      passwordOne,
+      passwordTwo,
+      error,
+    } = this.state;
+
+    const isInvalid =
+      passwordOne !== passwordTwo ||
+      passwordOne === "" ||
+      email === "" ||
+      dorm === "" ||
+      username === "";
 
     return (
       <div class="base-container">
@@ -290,14 +299,14 @@ class SignUpFormBase extends Component {
               <PasswordInput2
                 label="Password"
                 name="password"
-                // value={password}
-                onChange={this.onChangePW2}
+                value={passwordOne}
+                onChange={this.onChangePW}
               />
               <PasswordInput
                 label="Verify Password"
                 name="password"
-                value={password}
-                onChange={this.onChangePW}
+                value={passwordTwo}
+                onChange={this.onChangePW2}
               />
               {error && (
                 <Typography variant="body2" className={classes.errorText}>
@@ -321,24 +330,6 @@ class SignUpFormBase extends Component {
     );
   }
 }
-
-const provider = new firebase.auth.GoogleAuthProvider();
-
-export const signInWithRedirect = () => {
-  firebase.auth().signInWithRedirect(provider);
-};
-
-export const signOutFirebase = () => {
-  firebase
-    .auth()
-    .signOut()
-    .then(function () {
-      // Sign-out successful.
-    })
-    .catch(function (error) {
-      // An error happened.
-    });
-};
 
 const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
 
