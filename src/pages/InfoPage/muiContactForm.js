@@ -103,7 +103,6 @@ class ContactForm extends React.Component {
               label="Name"
               name="name"
               autoComplete="name"
-              autoFocus
               InputProps={{
                 startAdornment: <PersonIcon className={classes.formIcon}/>,
                 classes: {
@@ -120,7 +119,6 @@ class ContactForm extends React.Component {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
               InputProps={{
                 startAdornment: <EmailIcon className={classes.formIcon}/>,
                 classes: {
