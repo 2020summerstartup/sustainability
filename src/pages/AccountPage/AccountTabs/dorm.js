@@ -80,12 +80,11 @@ export const DormCard = React.memo(function GalaxyCard() {
                   <InfoCaption>
                     <Link to={ROUTES.CHANGEDORM}>
                       <Typography variant="p" className={classes.linkText} style={{ underline: 'enum: none' }} >
-                        Change your dorm in settings ⚙️
+                        Change your dorm in settings&nbsp;
+                        <span role="img" aria-label="Trophy">
+                          ⚙️
+                        </span>
                       </Typography>
-                  {/* <InfoCaption className={styles.caption}>
-                    <Link to={ROUTES.CHANGEDORM}>
-                      Change your dorm in settings ⚙️ */}
-
                     </Link>
                   </InfoCaption>
                 </Info>
