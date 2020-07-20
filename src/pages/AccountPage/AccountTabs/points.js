@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import points from "../../../img/points.svg";
-// import getPoints from "./Account";
-import { AuthUserContext, withAuthorization } from "../../../services/Session";
+import { AuthUserContext } from "../../../services/Session";
 import pointsForAccount from "./points.js";
-
 
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
