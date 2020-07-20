@@ -10,7 +10,7 @@ let colors = [
   "#FFD700", //gold
   "#C0C0C0", //silver
   "#cd7f32", //bronze
-  "#7A7574",
+  "#7A7574", //gray
   "#7A7574",
   "#7A7574",
   "#7A7574",

@@ -1,11 +1,9 @@
-import React, { useEffect, useContext } from "react";
-
+import React, { useContext } from "react";
 import leaderBoardUpdate, {
   assignRanking,
 } from "../CompetePage/leaderBoardUpdate.js";
 import { getUser, getDorm } from "../../services/Firebase";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
-
 import AccountTabs from "./AccountTabs";
 
 function assignDorm(data) {
@@ -17,13 +15,6 @@ function assignDorm(data) {
 }
 
 function AccountPage() {
-  // const classes = useStyles();
-  // const [value, setValue] = React.useState(0);
-
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
-
   leaderBoardUpdate();
 
   const authContext = useContext(AuthUserContext);

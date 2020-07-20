@@ -9,7 +9,7 @@ const CompetePage = () => (
   <div>
     <AuthUserContext>
       {(authUser) => (
-        <div class="base-container">
+        <div className="base-container">
           {/* <h1>
             Competitions and Rankings
             <span role="img" aria-label="Trophy">
