@@ -401,7 +401,6 @@ function HomePage() {
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     if (storedFav == null) {
-      console.log("storedFav was null or NaN", storedFav);
       storedFav = false; // If not initialized, initialize here
     }
     storedFav = !storedFav; // Toggle the favorite
@@ -413,11 +412,11 @@ function HomePage() {
     if (storedFav) {
       var message = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C"; // Turn red
-      toast(message, { autoClose: 5000 });
+      toast.success(message, { autoClose: 5000 }); // It's "success" so that the window is green
     } else {
       var message = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
-      toast.warn(message, { autoClose: 5000 });
+      toast.warn(message, { autoClose: 5000 }); // It's a warning so that the window is yellow
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
