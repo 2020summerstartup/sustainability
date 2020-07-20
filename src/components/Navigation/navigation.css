@@ -109,7 +109,6 @@ main {
   transform: rotate(0deg);
   transition: var(--transition-speed);
   margin: 0;
-  margin-left: 10px;
   width: 0.7em !important;
 }
 
@@ -125,7 +124,7 @@ main {
 .navbar:hover .logo svg {
   transform: rotate(-180deg);
   position: relative;
-  right: 10px;
+  right: 30px;
 }
 
 .navbar:hover .icons {
