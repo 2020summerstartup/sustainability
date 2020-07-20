@@ -4,37 +4,53 @@ import * as firebase from "firebase";
 import "firebase/auth";
 import {firestore} from "../../../services/Firebase"
 import 'firebase/firestore'
+// import * as ROUTES from "../../../constants/routes";
 
 
 
-// to delete user in authentication & firestore 
-const accountDelete = () => {
-    // to let firebase know the user we want to delete
-    const currentUser = localStorage.getItem('email');
-    // deletes user from firbase auth
-    firebase.auth().currentUser.delete().then( 
+class DeleteAccount extends React.Component{
+    constructor(props) {
+        super(props);
+    
+        this.state = { };
+      }
+
+
+        // to delete user in authentication & firestore 
+    accountDelete = () => {
+        // to let firebase know the user we want to delete
+        const currentUser = localStorage.getItem('email');
+        // deletes user from firbase auth
+        firebase.auth().currentUser.delete().then( 
         // calls for deletion of user data in firestore 
+        //(doesn't work but dont know why, KEEP)
         () => {
         const userDoc = firestore.doc('users/' + localStorage.getItem('email'))
         userDoc.delete()
-        // .addOnCompleteListener(
-        //     // redirect to landing page after deleted?
-        // )
+        .then(
+            //Navigate to landing page
+            this.props.history.push('/'))
+            }
+        )
+        console.log('User Deleted!');
+    };
+    
+
+    
+    render() {
+        return(
+            <div>
+            <center>
+            <p> hi </p>
+            <button onClick={this.accountDelete}>Click here to delete account!!</button>
+            <p>Bye</p>
+            </center>
+            </div>
+        )
     }
-    )
-    console.log('User Deleted!');
+
 }
 
 
-
-const DeleteAccount = () => (
-    <div>
-    <center>
-    <p> hi </p>
-    <button onClick={accountDelete}>Click here to delete account!!</button>
-    <p>Bye</p>
-    </center>
-    </div>
-)
 
 export default DeleteAccount;
