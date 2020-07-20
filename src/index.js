@@ -27,9 +27,6 @@ const theme = createMuiTheme({
         selected: {
           color: "var(--theme)",
         },
-        // focused: {
-        //   bottomBorder: "0px",
-        // },
       },
     },
     MuiBottomNavigationAction: {
@@ -37,13 +34,22 @@ const theme = createMuiTheme({
         color: "var(--text-primary)",
       },
     },
-    // MuiInputBase: {
-    //   input: {
-    //     border: "0px !important",
-    //   },
-    // },
   },
 });
+
+// for later if we want to implement dark theme
+const themeDark = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: "#24a113",
+    },
+    secondary: {
+      main: "#FFFFFF",
+    },
+  },
+});
+
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
