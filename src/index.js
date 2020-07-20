@@ -34,6 +34,16 @@ const theme = createMuiTheme({
         color: "var(--text-primary)",
       },
     },
+    MuiInputBase: {
+      root: {
+        color: "var(--icon_color)",
+      },
+    },
+    // MuiSvgIcon: {
+    //   root: {
+    //     marginRight: "1rem",
+    //   },
+    // },
   },
 });
 
@@ -49,7 +59,6 @@ const themeDark = createMuiTheme({
     },
   },
 });
-
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
