@@ -46,10 +46,6 @@ const useStyles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
-  },
   form: {
     width: "100%",
     marginTop: theme.spacing(1),
@@ -122,7 +118,6 @@ PasswordInput.propTypes = {
 };
 
 PasswordInput = withStyles(useStyles)(PasswordInput);
-
 
 const INITIAL_STATE = {
   email: "",
@@ -201,7 +196,6 @@ class SignInFormBase extends Component {
               <TextField
                 variant="outlined"
                 margin="normal"
-                // required
                 fullWidth
                 id="email"
                 label="Email Address"
@@ -221,24 +215,7 @@ class SignInFormBase extends Component {
                 value={password}
                 onChange={this.onChangePW}
               />
-              {/* <TextField
-                variant="outlined"
-                margin="normal"
-                // required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={this.onChange}
-                InputProps={{
-                  startAdornment: <LockIcon className={classes.formIcon} />,
-                  classes: {
-                    adornedEnd: classes.adornedEnd,
-                  },
-                }}
-              /> */}
+
               {error && (
                 <Typography variant="body2" className={classes.errorText}>
                   {error.message}
@@ -295,12 +272,11 @@ export const signOutFirebase = () => {
     });
 };
 
-// NEED THIS
-
 const SignInFormStyled = withStyles(useStyles)(SignInFormBase);
 
 const SignInForm = compose(withRouter, withFirebase)(SignInFormStyled);
 
 export { SignInForm };
+export { PasswordInput };
 
 export default SignInPage;

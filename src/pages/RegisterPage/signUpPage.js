@@ -37,9 +37,7 @@ const INITIAL_STATE = {
     image: null,
     points: 0,
   },
-
-  
-  error: null
+  error: null,
 };
 
 class SignUpFormBase extends Component {
@@ -88,7 +86,14 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { username, email, dorm, passwordOne, passwordTwo, error } = this.state;
+    const {
+      username,
+      email,
+      dorm,
+      passwordOne,
+      passwordTwo,
+      error,
+    } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||

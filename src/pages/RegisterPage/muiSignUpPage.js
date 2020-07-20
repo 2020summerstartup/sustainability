@@ -1,41 +1,34 @@
 import React, { Component } from "react";
-import clsx from "clsx";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import * as firebase from "firebase";
 import "firebase/auth";
 
-import { SignUpLink } from "./signUpPage";
-import { PasswordForgetLink } from "./passwordForgetPage.js.js";
+import { PasswordInput } from "./muiSignInPage";
 import { withFirebase, getUser } from "../../services/Firebase";
 import { assignData } from "../HomePage/index.js";
 import * as ROUTES from "../../constants/routes";
-import signinImg from "../../img/login3.svg";
+import signupImg from "../../img/login2.svg";
 
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-// import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
-import LockIcon from "@material-ui/icons/Lock";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { RemoveRedEye } from "@material-ui/icons";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import HomeIcon from "@material-ui/icons/Home";
 
-const SignInPage = () => (
+const SignUpPage = () => (
   <div className="base-container">
-    <SignInForm />
+    <SignUpForm />
   </div>
 );
 
@@ -45,10 +38,6 @@ const useStyles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: "100%",
@@ -73,7 +62,58 @@ const useStyles = (theme) => ({
   },
 });
 
-class PasswordInput extends Component {
+const useStyles2 = makeStyles((theme) => ({
+  formIcon: {
+    marginLeft: "5px",
+    marginRight: "1rem",
+  },
+}));
+
+const dorms = [
+  { title: "South" },
+  { title: "Case" },
+  { title: "East" },
+  { title: "West" },
+  { title: "North" },
+  { title: "Drinkward" },
+  { title: "Sontag" },
+  { title: "Linde" },
+  { title: "Atwood" },
+];
+
+function DormInput() {
+  const classes = useStyles2();
+
+  return (
+    <Autocomplete
+      id="dorm input"
+      options={dorms}
+      getOptionLabel={(option) => option.title}
+      disableClearable
+      fullWidth
+      renderInput={(params) => {
+        return (
+          <TextField
+            {...params}
+            label="Combo box"
+            variant="outlined"
+            fullWidth
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment>
+                  <HomeIcon className={classes.formIcon} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        );
+      }}
+    />
+  );
+}
+
+class PasswordInput2 extends Component {
   constructor(props) {
     super(props);
 
@@ -82,7 +122,7 @@ class PasswordInput extends Component {
     };
   }
 
-  togglePasswordMask = () => {
+  togglePasswordMask2 = () => {
     this.setState((prevState) => ({
       passwordIsMasked: !prevState.passwordIsMasked,
     }));
@@ -104,39 +144,48 @@ class PasswordInput extends Component {
             <InputAdornment position="end">
               <RemoveRedEye
                 className={classes.eye}
-                onClick={this.togglePasswordMask}
+                onClick={this.togglePasswordMask2}
               />
             </InputAdornment>
           ),
-          startAdornment: <LockIcon className={classes.formIcon} />,
+          startAdornment: <LockOpenIcon className={classes.formIcon} />,
         }}
       />
     );
   }
 }
 
-PasswordInput.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.func.isRequired,
+PasswordInput2.propTypes = {
+  classes2: PropTypes.object.isRequired,
+  onChange2: PropTypes.func.isRequired,
+  value2: PropTypes.func.isRequired,
 };
 
-PasswordInput = withStyles(useStyles)(PasswordInput);
-
+PasswordInput2 = withStyles(useStyles)(PasswordInput2);
 
 const INITIAL_STATE = {
-  email: "",
-  password: "",
+  user: {
+    username: "",
+    email: "",
+    passwordOne: "",
+    passwordTwo: "",
+    dorm: "",
+    image: null,
+    points: 0,
+  },
   error: null,
 };
 
-class SignInFormBase extends Component {
+class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
 
     this.state = { ...INITIAL_STATE };
     this.state = {
       pw: "",
+    };
+    this.state = {
+      pw2: "",
     };
   }
 
@@ -180,10 +229,17 @@ class SignInFormBase extends Component {
     this.setState({ [name]: value });
   };
 
+  onChangePW2 = (event) => {
+    const { name2, value2 } = event.target;
+
+    this.setState({ [name2]: value2 });
+  };
+
   render() {
     const { classes } = this.props;
     const { email, password, error } = this.state;
     const { pw } = this.state;
+    const { pw2 } = this.state;
     const isInvalid = password === "" || email === "";
 
     return (
@@ -192,16 +248,31 @@ class SignInFormBase extends Component {
           <CssBaseline />
           <div className={classes.paper}>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign Up
             </Typography>
             <div className="image">
-              <img alt="sign in" src={signinImg} />
+              <img alt="sign up" src={signupImg} />
             </div>
             <form onSubmit={this.onSubmit} className={classes.form} noValidate>
               <TextField
                 variant="outlined"
                 margin="normal"
-                // required
+                fullWidth
+                id="name"
+                label="Full Name"
+                name="name"
+                autoComplete="name"
+                onChange={this.onChange}
+                InputProps={{
+                  startAdornment: <PersonIcon className={classes.formIcon} />,
+                  classes: {
+                    adornedEnd: classes.adornedEnd,
+                  },
+                }}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
                 fullWidth
                 id="email"
                 label="Email Address"
@@ -215,30 +286,19 @@ class SignInFormBase extends Component {
                   },
                 }}
               />
-              <PasswordInput
+              <DormInput />
+              <PasswordInput2
                 label="Password"
+                name="password"
+                // value={password}
+                onChange={this.onChangePW2}
+              />
+              <PasswordInput
+                label="Verify Password"
                 name="password"
                 value={password}
                 onChange={this.onChangePW}
               />
-              {/* <TextField
-                variant="outlined"
-                margin="normal"
-                // required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={this.onChange}
-                InputProps={{
-                  startAdornment: <LockIcon className={classes.formIcon} />,
-                  classes: {
-                    adornedEnd: classes.adornedEnd,
-                  },
-                }}
-              /> */}
               {error && (
                 <Typography variant="body2" className={classes.errorText}>
                   {error.message}
@@ -252,23 +312,8 @@ class SignInFormBase extends Component {
                 className={classes.submit}
                 disabled={isInvalid}
               >
-                Sign In
+                Sign Up
               </Button>
-              <Grid container justify="space-between">
-                <Grid item>
-                  <Link
-                    to={ROUTES.PASSWORD_FORGET}
-                    className={classes.linkText}
-                  >
-                    Forgot Password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link to={ROUTES.SIGN_UP} className={classes.linkText}>
-                    Don't have an account? Sign Up
-                  </Link>
-                </Grid>
-              </Grid>
             </form>
           </div>
         </Container>
@@ -295,12 +340,10 @@ export const signOutFirebase = () => {
     });
 };
 
-// NEED THIS
+const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
 
-const SignInFormStyled = withStyles(useStyles)(SignInFormBase);
+const SignUpForm = compose(withRouter, withFirebase)(SignUpFormStyled);
 
-const SignInForm = compose(withRouter, withFirebase)(SignInFormStyled);
+export { SignUpForm };
 
-export { SignInForm };
-
-export default SignInPage;
+export default SignUpPage;
