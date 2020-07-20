@@ -20,6 +20,7 @@ import SignOutButton from "../../../components/SignOut";
 import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Switch from '@material-ui/core/Switch';
 import styles from "./Settings.module.css";
 
 import { AuthUserContext } from "../../../services/Session";
@@ -34,16 +35,16 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     paddingRight: "0",
   },
+  listItem: {
+    marginLeft: "0",
+    paddingLeft: "0",
+  },
   listItemIcon: {
     minWidth: "2.5rem",
   },
   listItemText: {
     marginRight: "1.5rem",
   },
-  // settingsSignOut: {
-  //   display: "flex",
-  //   justifyContent: "center",
-  // },
 }));
 
 export default function SwipeableTemporaryDrawer() {
@@ -132,9 +133,24 @@ export default function SwipeableTemporaryDrawer() {
           </ListItemText>
         </ListItem>
 
+        <ListItem className={classes.listItem}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <Switch
+              checked={state.checked}
+              // onChange={handleChange}
+              color="primary"
+              name="mode"
+              inputProps={{ "aria-label": "mode changed" }}
+            />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            Change your theme
+          </ListItemText>
+        </ListItem>
+
         <ListItem className={classes.settingsSignOut}>
           {/* <ListItemText> */}
-            <SignOutButton />
+          <SignOutButton />
           {/* </ListItemText> */}
         </ListItem>
       </List>
