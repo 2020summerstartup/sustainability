@@ -11,7 +11,7 @@ export const IosModal = ({...props}) => {
     useEffect(
         () => {
             setModalOpen(true)
-        }, []
+        }//, [] (This was causing a warning in the terminal -- feel free to add it back in if you need it. -Katie)
     )
     return (
         <Modal
