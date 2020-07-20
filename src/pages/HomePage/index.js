@@ -349,7 +349,9 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
-      window.location.reload(true);
+      // TODO: this might be unnecessary now??? idk what would have changed to make it unnecessary though -Katie
+      // Wait I think it's because the modal closing kind of forces the page to rerender??
+      // window.location.reload(true);
     });
 
     // get the user's dorm from firestore and update the dorm's points
@@ -494,7 +496,7 @@ function HomePage() {
         <div className="top-container">
           <h3>
             You have earned&nbsp;
-            {<CountUp start={0} end={total} duration={2}></CountUp>} points!
+            {<CountUp start={0} end={total} duration={1}></CountUp>} points!
           </h3>
           <button
             onClick={() => setProgressModalIsOpen(true)}
@@ -520,7 +522,7 @@ function HomePage() {
                 // Get the individual points earned from each susAction
                 // I don't yet understand what "Object" is referring to here/how the program knows that.
                 Object.keys(ActionData).map((key) => {
-                  message[parseInt(key) - 1] = ActionData[key].title.concat(
+                  message[parseInt(key)] = ActionData[key].title.concat(
                     " Points: ",
                     localStorage.getItem(ActionData[key].susAction),
                     " "
