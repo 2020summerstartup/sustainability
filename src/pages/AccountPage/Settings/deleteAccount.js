@@ -15,6 +15,10 @@ class DeleteAccount extends React.Component{
         this.state = { };
       }
 
+      userDocDelete = async () => {
+          await firestore.doc('users/' + localStorage.getItem('email')).delete()
+      }
+      
 
         // to delete user in authentication & firestore 
     accountDelete = () => {
@@ -24,14 +28,10 @@ class DeleteAccount extends React.Component{
         firebase.auth().currentUser.delete().then( 
         // calls for deletion of user data in firestore 
         //(doesn't work but dont know why, KEEP)
-        () => {
-        const userDoc = firestore.doc('users/' + localStorage.getItem('email'))
-        userDoc.delete()
-        .then(
-            //Navigate to landing page
-            this.props.history.push('/'))
-            }
+        this.userDocDelete
         )
+        //Navigate to landing page
+        this.props.history.push('/');
         console.log('User Deleted!');
     };
     
