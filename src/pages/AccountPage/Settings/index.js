@@ -20,6 +20,7 @@ import SignOutButton from "../../../components/SignOut";
 import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from '@material-ui/icons/Delete';
 import Switch from '@material-ui/core/Switch';
 import styles from "./Settings.module.css";
 
@@ -132,6 +133,20 @@ export default function SwipeableTemporaryDrawer() {
             Change your dorm
           </ListItemText>
         </ListItem>
+
+        <ListItem
+        button
+        component={Link}
+        to={ROUTES.DELETE_ACCOUNT}
+        className="link-text"
+      >
+        <ListItemIcon className={classes.listItemIcon}>
+          <DeleteIcon />
+        </ListItemIcon>
+        <ListItemText className={classes.listItemText}>
+          Delete your account
+        </ListItemText>
+      </ListItem>
 
         <ListItem className={classes.listItem}>
           <ListItemIcon className={classes.listItemIcon}>
