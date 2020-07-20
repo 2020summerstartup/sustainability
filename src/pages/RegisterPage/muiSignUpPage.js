@@ -177,17 +177,12 @@ const INITIAL_STATE = {
   error: null,
 };
 
+
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-    this.state = {
-      pw: "",
-    };
-    this.state = {
-      pw2: "",
-    };
   }
 
   onSubmit = (event) => {
@@ -198,6 +193,7 @@ class SignUpFormBase extends Component {
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
+        console.log('auth')
         // Create a user in your Firebase realtime database
         return this.props.firebase.user(authUser.user.uid).set({
           username,
@@ -205,36 +201,34 @@ class SignUpFormBase extends Component {
         });
       })
       .then(() => {
+        alert('hi')
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
       .catch((error) => {
         this.setState({ error });
+        console.log(error);
       });
 
     event.preventDefault();
+    console.log("end");
+    alert('end'+ username, email, passwordOne, dorm, image, points);
   };
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+    console.log('here')
   };
 
   onChangePW = (event) => {
     const { name, value } = event.target;
 
     this.setState({ [name]: value });
-  };
-
-  onChangePW2 = (event) => {
-    const { name2, value2 } = event.target;
-
-    this.setState({ [name2]: value2 });
+    console.log('pass')
   };
 
   render() {
     const { classes } = this.props;
-    const { pw } = this.state;
-    const { pw2 } = this.state;
     const {
       username,
       email,
@@ -248,92 +242,92 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      dorm === "" ||
+      //   dorm === "" ||
       username === "";
 
     return (
-      <div class="base-container">
-        <Container maxWidth="xs">
-          <CssBaseline />
-          <div className={classes.paper}>
-            <Typography component="h1" variant="h5">
-              Sign Up
-            </Typography>
-            <div className="image">
-              <img alt="sign up" src={signupImg} />
-            </div>
-            <form onSubmit={this.onSubmit} className={classes.form} noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                id="name"
-                label="Full Name"
-                name="name"
-                autoComplete="name"
-                onChange={this.onChange}
-                InputProps={{
-                  startAdornment: <PersonIcon className={classes.formIcon} />,
-                  classes: {
-                    adornedEnd: classes.adornedEnd,
-                  },
-                }}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                onChange={this.onChange}
-                InputProps={{
-                  startAdornment: <EmailIcon className={classes.formIcon} />,
-                  classes: {
-                    adornedEnd: classes.adornedEnd,
-                  },
-                }}
-              />
-              <DormInput />
-              <PasswordInput2
-                label="Password"
-                name="password"
-                value={passwordOne}
-                onChange={this.onChangePW}
-              />
-              <PasswordInput
-                label="Verify Password"
-                name="password"
-                value={passwordTwo}
-                onChange={this.onChangePW2}
-              />
-              {error && (
-                <Typography variant="body2" className={classes.errorText}>
-                  {error.message}
-                </Typography>
-              )}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                disabled={isInvalid}
-              >
-                Sign Up
-              </Button>
-            </form>
+      <Container maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Typography component="h1" variant="h5">
+            Sign Up
+          </Typography>
+          <div className="image">
+            <img alt="sign up" src={signupImg} />
           </div>
-        </Container>
-      </div>
+          <form onSubmit={this.onSubmit} className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              id="username"
+              label="Full Name"
+              name="username"
+              value={username}
+              autoComplete="name"
+              onChange={this.onChange}
+              InputProps={{
+                startAdornment: <PersonIcon className={classes.formIcon} />,
+                classes: {
+                  adornedEnd: classes.adornedEnd,
+                },
+              }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              value={email}
+              autoComplete="email"
+              onChange={this.onChange}
+              InputProps={{
+                startAdornment: <EmailIcon className={classes.formIcon} />,
+                classes: {
+                  adornedEnd: classes.adornedEnd,
+                },
+              }}
+            />
+            <DormInput />
+            <PasswordInput2
+              label="Password"
+              name="password"
+              value={passwordOne}
+              onChange={this.onChange}
+            />
+            <PasswordInput
+              label="Verify Password"
+              name="password"
+              value={passwordTwo}
+              onChange={this.onChange}
+            />
+            {error && (
+              <Typography variant="body2" className={classes.errorText}>
+                {error.message}
+              </Typography>
+            )}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              disabled={isInvalid}
+            >
+              Sign Up
+            </Button>
+          </form>
+        </div>
+      </Container>
     );
   }
 }
 
 const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
 
-const SignUpForm = compose(withRouter, withFirebase)(SignUpFormStyled);
+const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
 
 export { SignUpForm };
 

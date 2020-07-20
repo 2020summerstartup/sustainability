@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import clsx from "clsx";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
@@ -7,19 +6,16 @@ import * as firebase from "firebase";
 import "firebase/auth";
 
 import { SignUpLink } from "./signUpPage";
-import { PasswordForgetLink } from "./passwordForgetPage.js.js";
+import { PasswordForgetLink } from "./passwordForgetPage";
 import { withFirebase, getUser } from "../../services/Firebase";
 import { assignData } from "../HomePage/index.js";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-// import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";

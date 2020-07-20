@@ -8,7 +8,8 @@ import SignUpPage from "../pages/RegisterPage/signUpPage";
 import SignInPage from "../pages/RegisterPage/signInPage";
 import MuiSignInPage from "../pages/RegisterPage/muiSignInPage";
 import MuiSignUpPage from "../pages/RegisterPage/muiSignUpPage";
-import PasswordForgetPage from "../pages/RegisterPage/passwordForgetPage.js.js";
+import PasswordForgetPage from "../pages/RegisterPage/passwordForgetPage";
+import MuiPasswordForgetPage from "../pages/RegisterPage/muiPasswordForgetPage";
 import HomePage from "../pages/HomePage";
 import AccountPage from "../pages/AccountPage";
 import InfoPage from "../pages/InfoPage";
@@ -46,7 +47,7 @@ const App = () => (
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />
-      <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+      <Route path={ROUTES.PASSWORD_FORGET} component={MuiPasswordForgetPage} />
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.INFO} component={InfoPage} />
