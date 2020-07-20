@@ -1,6 +1,7 @@
 import React from "react";
 import { Spring } from "react-spring/renderprops";
 import ContactForm from "./contactForm";
+import MuiContactForm from "./muiContactForm";
 // import styles from "./infoCards.module.css";
 
 // list of colors for each dorm to display in a different color depending on their ranking
@@ -105,6 +106,7 @@ class InfoCards extends React.Component {
             </div>
             <center>
               <ContactForm />
+              {/* <MuiContactForm /> */}
             </center>
           </div>
         )}

@@ -27,9 +27,6 @@ const theme = createMuiTheme({
         selected: {
           color: "var(--theme)",
         },
-        // focused: {
-        //   bottomBorder: "0px",
-        // },
       },
     },
     MuiBottomNavigationAction: {
@@ -37,11 +34,29 @@ const theme = createMuiTheme({
         color: "var(--text-primary)",
       },
     },
-    // MuiInputBase: {
-    //   input: {
-    //     border: "0px !important",
+    MuiInputBase: {
+      root: {
+        color: "var(--icon_color)",
+      },
+    },
+    // MuiSvgIcon: {
+    //   root: {
+    //     marginRight: "1rem",
     //   },
     // },
+  },
+});
+
+// for later if we want to implement dark theme
+const themeDark = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: "#24a113",
+    },
+    secondary: {
+      main: "#FFFFFF",
+    },
   },
 });
 

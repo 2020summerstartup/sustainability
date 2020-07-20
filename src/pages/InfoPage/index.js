@@ -4,6 +4,7 @@ import Points from "./points";
 import Challenges from "./challenges";
 import Rewards from "./rewards";
 import ContactForm from "./contactForm";
+import MuiContactForm from "./muiContactForm";
 import InfoCards from "./infoCards";
 
 const InfoPage = () => (
@@ -20,7 +21,7 @@ const InfoPage = () => (
       <Rewards />
     </center> */}
     {/* <ContactForm /> */}
-    
+    <MuiContactForm />
   </div>
 );
 

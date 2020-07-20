@@ -6,6 +6,7 @@ import BottomNav from "../components/Navigation/bottomNav";
 import LandingPage from "../pages/LandingPage";
 import SignUpPage from "../pages/RegisterPage/signUpPage";
 import SignInPage from "../pages/RegisterPage/signInPage";
+import MuiSignInPage from "../pages/RegisterPage/muiSignInPage";
 import PasswordForgetPage from "../pages/RegisterPage/passwordForgetPage.js.js";
 import HomePage from "../pages/HomePage";
 import AccountPage from "../pages/AccountPage";
