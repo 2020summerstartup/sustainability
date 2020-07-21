@@ -16,6 +16,7 @@ import { signInWithRedirect } from "./signInPage";
 import "../../components/FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SendmailTransport from "nodemailer/lib/sendmail-transport";
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -62,6 +63,8 @@ class SignUpFormBase extends Component {
     // });
 
     createUser(email, username, dorm);
+    localStorage.setItem('email', email);
+
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
