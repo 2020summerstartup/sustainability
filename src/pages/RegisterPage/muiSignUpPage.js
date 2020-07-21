@@ -119,7 +119,7 @@ class PasswordInput2 extends Component {
     };
   }
 
-  togglePasswordMask2 = () => {
+  togglePasswordMask = () => {
     this.setState((prevState) => ({
       passwordIsMasked: !prevState.passwordIsMasked,
     }));
@@ -141,7 +141,7 @@ class PasswordInput2 extends Component {
             <InputAdornment position="end">
               <RemoveRedEye
                 className={classes.eye}
-                onClick={this.togglePasswordMask2}
+                onClick={this.togglePasswordMask}
               />
             </InputAdornment>
           ),
@@ -153,9 +153,9 @@ class PasswordInput2 extends Component {
 }
 
 PasswordInput2.propTypes = {
-  classes2: PropTypes.object.isRequired,
-  onChange2: PropTypes.func.isRequired,
-  value2: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.func.isRequired,
 };
 
 PasswordInput2 = withStyles(useStyles)(PasswordInput2);
