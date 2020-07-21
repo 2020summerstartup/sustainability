@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import BottomNav from "../components/Navigation/bottomNav";
 import LandingPage from "../pages/LandingPage";
+import MuiLandingPage from "../pages/LandingPage/muiLandingPage";
 import SignUpPage from "../pages/RegisterPage/signUpPage";
 import SignInPage from "../pages/RegisterPage/signInPage";
 import MuiSignInPage from "../pages/RegisterPage/muiSignInPage";
@@ -45,8 +46,8 @@ const App = () => (
       <Navigation />
       <BottomNav />
 
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+      <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
+      <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />
       <Route path={ROUTES.PASSWORD_FORGET} component={MuiPasswordForgetPage} />
       <Route path={ROUTES.HOME} component={HomePage} />

@@ -179,6 +179,9 @@ class SignUpFormBase extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
+    this.state = {
+      pw: "",
+    };
   }
 
   onSubmit = (event) => {
@@ -216,11 +219,11 @@ class SignUpFormBase extends Component {
     const { name, value } = event.target;
 
     this.setState({ [name]: value });
-    console.log('pass')
   };
 
   render() {
     const { classes } = this.props;
+    const { pw } = this.state;
     const {
       username,
       email,
@@ -252,7 +255,7 @@ class SignUpFormBase extends Component {
               variant="outlined"
               margin="normal"
               fullWidth
-              // id="username"
+              id="username"
               label="Full Name"
               name="username"
               value={username}
@@ -269,7 +272,7 @@ class SignUpFormBase extends Component {
               variant="outlined"
               margin="normal"
               fullWidth
-              // id="email"
+              id="email"
               label="Email Address"
               name="email"
               value={email}
