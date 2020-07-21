@@ -333,9 +333,15 @@ function HomePage() {
     setFilter(e.target.value);
   };
 
+  const confirmIncrement = (action) => {
+    var retVal = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
+    if( retVal == true ) {
+      increment(action); // If user meant to, call the function to actually increment user's points
+    }
+  }
+
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
-    console.log('testVar', testVar);
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the saved point total
     localStorage.setItem(
@@ -351,7 +357,7 @@ function HomePage() {
     ).then(() => {
       // TODO: this might be unnecessary now??? idk what would have changed to make it unnecessary though -Katie
       // Wait I think it's because the modal closing kind of forces the page to rerender??
-      // window.location.reload(true);
+      window.location.reload(true);
     });
 
     // get the user's dorm from firestore and update the dorm's points
@@ -424,8 +430,6 @@ function HomePage() {
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
-  var testVar = 'initVal';
-
   // HTML to be displayed
   return (
     <>
@@ -450,7 +454,7 @@ function HomePage() {
               <button
                 onClick={() => (
                   setIncrementModalIsOpen(false),
-                  increment(testVar)
+                  increment(action)
                 )}
                 className="button"
               >
@@ -588,11 +592,10 @@ function HomePage() {
                         <CardHeader
                           className={classes.cardContent}
                           action={
-                            // DO NOT CHANGE THE FOLLOWING LINE WITHOUT FULLY UNDERSTANDING, BECAUSE THIS IS FINALLY CLOSE TO WORKING (this is a note to self, not to all of you :) ) -Katie
-                            testVar = action,
                             <IconButton
-                              onClick={() => setIncrementModalIsOpen(true)}
+                              onClick={() => confirmIncrement(action)}
                               // Finally found how to get ride of random old green from click and hover!
+                              // TODO: Is the following line actually still necessary?
                               style={{ backgroundColor: "transparent" }}
                               aria-label="settings"
                               title="Complete this sustainable action"
