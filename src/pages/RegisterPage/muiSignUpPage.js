@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import PropTypes from "prop-types";
-import DormSelect from "../../components/DormSelect"
+import DormSelect from "../../components/DormSelect";
 
 import { withFirebase, createUser } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
@@ -27,7 +27,7 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { RemoveRedEye } from "@material-ui/icons";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import HomeIcon from "@material-ui/icons/Home"; 
+import HomeIcon from "@material-ui/icons/Home";
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
@@ -249,7 +249,7 @@ class SignUpFormBase extends Component {
   };
 
   onChange = (event) => {
-    this.setState((prevState) => ({ 
+    this.setState((prevState) => ({
       user: {
         username: "",
         email: "",
@@ -258,7 +258,7 @@ class SignUpFormBase extends Component {
         dorm: "",
         image: null,
         points: 0,
-      }, 
+      },
     }));
     // console.log("NAME: ", event.target.name),
     // console.log("USERNAME: ", this.state.user.username)
@@ -477,11 +477,27 @@ class SignUpFormBase extends Component {
               />
             </div> */}
 
-            <button disabled={isInvalid} type="submit" className="button">
-              Sign Up
-            </button>
+            {error && (
+              <Typography variant="body2" className={classes.errorText}>
+                {error.message}
+              </Typography>
+            )}
 
-            {error && <p>{error.message}</p>}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              disabled={isInvalid}
+            >
+              Sign Up
+            </Button>
+            {/* <button disabled={isInvalid} type="submit" className="button">
+              Sign Up
+            </button> */}
+
+            {/* {error && <p>{error.message}</p>} */}
           </form>
         </div>
       </Container>
