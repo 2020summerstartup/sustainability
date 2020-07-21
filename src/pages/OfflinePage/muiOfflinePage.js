@@ -30,8 +30,8 @@ function OfflinePage() {
           <img alt="offline" src={offlineImg} />
         </div>
         <Typography component="h1" variant="h6">
-          <p>Hey you should sign up to use our awesome app! :) </p>
-          <p>Here's just a few reasons why:</p>
+          <p>Please come back when you have connection! :)</p>
+          <p>Here's why you should come back later:</p>
         </Typography>
         <Typography component="h1" variant="body1">
           <ul>
