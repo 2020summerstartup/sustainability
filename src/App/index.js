@@ -23,6 +23,7 @@ import Header, {
 } from "../components/Headers";
 import CompetePage from "../pages/CompetePage";
 import OfflinePage from "../pages/OfflinePage";
+import MuiOfflinePage from "../pages/OfflinePage/muiOfflinePage";
 import ChangePW from "../pages/AccountPage/Settings/changePw";
 import MuiChangePw from "../pages/AccountPage/Settings/muiChangePw";
 import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
@@ -55,7 +56,7 @@ const App = () => (
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.INFO} component={InfoPage} />
       <Route path={ROUTES.COMPETE} component={CompetePage} />
-      <Route path={ROUTES.OFFLINE} component={OfflinePage} />
+      <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
       <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
       <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
     </div>
