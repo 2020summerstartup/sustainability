@@ -306,7 +306,6 @@ class SignUpFormBase extends Component {
               label="Password"
               name="password"
               value={passwordOne}
-              type="password"
               onChange={this.onChangePW}
             />
             <PasswordInput
