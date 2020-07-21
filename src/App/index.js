@@ -5,7 +5,7 @@ import Navigation from "../components/Navigation";
 import BottomNav from "../components/Navigation/bottomNav";
 import LandingPage from "../pages/LandingPage";
 import SignUpPage from "../pages/RegisterPage/signUpPage";
-import SignInPage from "../pages/RegisterPage/signInPage";
+import SignInPage from "../pages/RegisterPage/muiSignInPage";
 import PasswordForgetPage from "../pages/RegisterPage/passwordForgetPage.js.js";
 import HomePage from "../pages/HomePage";
 import AccountPage from "../pages/AccountPage";
@@ -45,7 +45,7 @@ const App = () => (
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />
+      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
