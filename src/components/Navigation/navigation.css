@@ -124,7 +124,7 @@ main {
 .navbar:hover .logo svg {
   transform: rotate(-180deg);
   position: relative;
-  right: 30px;
+  right: 20px;
 }
 
 .navbar:hover .icons {

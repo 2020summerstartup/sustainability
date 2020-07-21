@@ -2,11 +2,10 @@ import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import { AuthUserContext, withAuthorization } from "../../services/Session";
+import { AuthUserContext } from "../../services/Session";
 import {updateUserDorm, getDorm} from "../../services/Firebase";
 import { assignRanking } from "../../pages/CompetePage/leaderboard";
 
@@ -31,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
     // Used to make sure user is authenticated
     // Gives an alert if the user does not have a dorm selected
     const authContext = useContext(AuthUserContext);
-    var placeholder = localStorage.getItem('dorm');
+    // var placeholder = localStorage.getItem('dorm');
     var newPlaceholder = localStorage.getItem('dorm');
-    if (placeholder == null) {
-      placeholder = "Select your dorm..."
-      alert("Please select your dorm in setting page!");
-      newPlaceholder = "Dorm";
-    }
+    // if (placeholder == null) {
+    //   placeholder = "Select your dorm..."
+    //   alert("Please select your dorm in setting page!");
+    //   newPlaceholder = "Dorm";
+    // }
   
     // Sets dorm by calling local storage and firebase
     const handleChange = (event) => {

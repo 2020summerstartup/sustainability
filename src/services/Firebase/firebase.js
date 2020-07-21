@@ -59,40 +59,6 @@ class Firebase {
   users = () => this.db.ref('users');
   }
 
-
-  // var db = firebase.firestore();
-
-  // db.collection("people").add({
-  //   first: "Kobe",
-  //   last: "Rico",
-  //   born: 2000
-  // })
- 
-  // .then(function(docRef) {
-  //     console.log("Document written with ID: ", docRef.id);
-  // })
-  // .catch(function(error) {
-  //     console.error("Error adding document: ", error);
-  // });
-
-  // // Add a second document with a generated ID.
-  // db.collection("people").add({
-  //   first: "Alan",
-  //   middle: "Mathison",
-  //   last: "Turing",
-  //   born: 1912
-  // })
-  // .then(function(docRef) {
-  //   console.log("Document written with ID: ", docRef.id);
-  // })
-  // .catch(function(error) {
-  //   console.error("Error adding document: ", error);
-  // });
-  // firebase.initializeApp(firebaseConfig);
-
-  // const db = firebase.firestore();
-  // export const auth = firebase.auth();
-  // export const firestore = firebase.firestore();
 export default Firebase;
 
 export const createUser = (userEmail, userName, dorm) => {
@@ -103,6 +69,7 @@ export const createUser = (userEmail, userName, dorm) => {
           name: userName,
           createdBy: userEmail,
           total: 0,
+          favorites: {},
           userDorm: dorm,
           points: {
               "waterBottle": 0,
@@ -120,8 +87,10 @@ export const createUser = (userEmail, userName, dorm) => {
 
 
 export const getUser = (userEmail) => {
+  localStorage.setItem('email', userEmail)
   return firestore.collection('users').doc(userEmail)
 }
+
 
 // this method is called to increase points
 export const updateUserPoint = (userEmail, userAction, actionPoint) => {

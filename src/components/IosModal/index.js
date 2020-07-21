@@ -6,12 +6,12 @@ import image from "../../img/suslogo.svg";
 import share from "../../img/appleShare.png";
 
 export const IosModal = ({...props}) => {
-    const [modalOpen, setModalOpen, toggleModal] = useModal();
+    const [modalOpen, setModalOpen] = useModal();
 
     useEffect(
         () => {
             setModalOpen(true)
-        }, []
+        }//, [] (This was causing a warning in the terminal -- feel free to add it back in if you need it. -Katie)
     )
     return (
         <Modal

@@ -5,8 +5,7 @@ import Navigation from "../components/Navigation";
 import BottomNav from "../components/Navigation/bottomNav";
 import LandingPage from "../pages/LandingPage";
 import SignUpPage from "../pages/RegisterPage/signUpPage";
-import SignInPage from "../pages/RegisterPage/signInPage";
-import MuiSignInPage from "../pages/RegisterPage/muiSignInPage";
+import SignInPage from "../pages/RegisterPage/muiSignInPage";
 import PasswordForgetPage from "../pages/RegisterPage/passwordForgetPage.js.js";
 import HomePage from "../pages/HomePage";
 import AccountPage from "../pages/AccountPage";
@@ -22,6 +21,7 @@ import CompetePage from "../pages/CompetePage";
 import OfflinePage from "../pages/OfflinePage";
 import ChangePW from "../pages/AccountPage/Settings/changePw";
 import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
+import DeleteAccount from "../pages/AccountPage/Settings/deleteAccount";
 import * as ROUTES from "../constants/routes";
 import { withAuthentication } from "../services/Session";
 
@@ -34,6 +34,7 @@ const App = () => (
       <Route exact path="/account" component={AccountHeader} />
       <Route exact path="/changedorm" component={ChangeHeader} />
       <Route exact path="/changepassword" component={ChangeHeader} />
+      <Route exact path="/delete-account" component={DeleteAccount} />
       <Route component={Header} />
     </Switch>
     <div className="main">
@@ -53,6 +54,7 @@ const App = () => (
       <Route path={ROUTES.OFFLINE} component={OfflinePage} />
       <Route path={ROUTES.CHANGEPW} component={ChangePW} />
       <Route path={ROUTES.CHANGEDORM} component={ChangeDorm} />
+      <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
     </div>
   </Router>
 );
