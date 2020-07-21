@@ -8,7 +8,7 @@ import AccountTabs from "./AccountTabs";
 
 function assignDorm(data) {
   if (data.userDorm === "") {
-    alert("Sorry, please choose your dorm in setting!");
+    alert("If you want to contribute to your dorm, choose your dorm in settings!");
   } else {
     localStorage.setItem("dorm", data.userDorm);
   }
@@ -24,7 +24,8 @@ function AccountPage() {
       if (docSnapshot.exists) {
         assignDorm(docSnapshot.data());
       } else {
-        alert("Sorry, please choose your dorm in setting!");
+        console.log(null);
+        // alert("Sorry, please choose your dorm in setting!");
       }
     },
     (err) => {

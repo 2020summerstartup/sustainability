@@ -58,7 +58,8 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
       if (docSnapshot.exists) {
         assignData(docSnapshot.data());
       } else {
-        alert("Sorry You don't have any data yet, please go to Home page");
+        console.log(null);
+        // alert("Sorry You don't have any data yet, please go to Home page");
       }
     },
     (err) => {

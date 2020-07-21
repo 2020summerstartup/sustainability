@@ -30,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
     // Used to make sure user is authenticated
     // Gives an alert if the user does not have a dorm selected
     const authContext = useContext(AuthUserContext);
-    var placeholder = localStorage.getItem('dorm');
+    // var placeholder = localStorage.getItem('dorm');
     var newPlaceholder = localStorage.getItem('dorm');
-    if (placeholder == null) {
-      placeholder = "Select your dorm..."
-      alert("Please select your dorm in setting page!");
-      newPlaceholder = "Dorm";
-    }
+    // if (placeholder == null) {
+    //   placeholder = "Select your dorm..."
+    //   alert("Please select your dorm in setting page!");
+    //   newPlaceholder = "Dorm";
+    // }
   
     // Sets dorm by calling local storage and firebase
     const handleChange = (event) => {
