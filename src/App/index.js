@@ -26,6 +26,7 @@ import OfflinePage from "../pages/OfflinePage";
 import ChangePW from "../pages/AccountPage/Settings/changePw";
 import MuiChangePw from "../pages/AccountPage/Settings/muiChangePw";
 import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
+import MuiChangeDorm from "../pages/AccountPage/Settings/muiChangeDorm";
 import * as ROUTES from "../constants/routes";
 import { withAuthentication } from "../services/Session";
 
@@ -56,7 +57,7 @@ const App = () => (
       <Route path={ROUTES.COMPETE} component={CompetePage} />
       <Route path={ROUTES.OFFLINE} component={OfflinePage} />
       <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
-      <Route path={ROUTES.CHANGEDORM} component={ChangeDorm} />
+      <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
     </div>
   </Router>
 );
