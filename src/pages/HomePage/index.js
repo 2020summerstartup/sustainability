@@ -549,7 +549,6 @@ function HomePage() {
                     onChange={handleSearchChange}
                     className={classes.searchInput}
                     variant="standard"
-                    InputProps={{ disableUnderline: true }}
                     InputProps={{ classes: { underline: classes.underline } }}
                   />
                 </Grid>
@@ -567,7 +566,7 @@ function HomePage() {
                           action={
                             <IconButton
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
-                              // Finally found how to get ride of random old green from click and hover!
+                              // Finally found how to get rid of random old green from click and hover!
                               // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
                               // style={{ backgroundColor: "transparent" }}
                               aria-label="settings"
@@ -679,7 +678,7 @@ function HomePage() {
                                     onClick={() =>
                                       confirmIncrement(action)
                                     }
-                                    // Finally found how to get ride of random old green from click and hover!
+                                    // Finally found how to get rid of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
                                     aria-label="settings"
                                     title="Complete this sustainable action"
