@@ -435,34 +435,6 @@ function HomePage() {
     <>
       {prompt && <IosModal />}
       <div>
-        <Modal
-          isOpen={incrementModalIsOpen}
-          onRequestClose={() => setIncrementModalIsOpen(false)}
-          className={styles.modalIncrement}
-          overlayClassName={styles.overlay}
-        >
-          <center>
-            <h2>Are you sure you want to log this action?</h2>
-            <div>
-              <button
-                onClick={() => setIncrementModalIsOpen(false)}
-                className="buttonOops"
-              >
-                Oops, don't log it!
-              </button>
-              &nbsp;&nbsp;&nbsp;
-              <button
-                onClick={() => (
-                  setIncrementModalIsOpen(false),
-                  increment(action)
-                )}
-                className="button"
-              >
-                Yes, log it!
-              </button>
-            </div>
-          </center>
-        </Modal>
         <AppBar
           position="static"
           color="primary"
@@ -584,6 +556,7 @@ function HomePage() {
               </Grid>
             </div>
             <Grid container spacing={2} className={classes.actionContainer}>
+              {/* All actions (this loops using search) */}
               {ActionData.map(
                 (action, i) =>
                   action.title.toLowerCase().includes(filter.toLowerCase()) && (
@@ -593,10 +566,10 @@ function HomePage() {
                           className={classes.cardContent}
                           action={
                             <IconButton
-                              onClick={() => confirmIncrement(action)}
+                              onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
                               // Finally found how to get ride of random old green from click and hover!
-                              // TODO: Is the following line actually still necessary?
-                              style={{ backgroundColor: "transparent" }}
+                              // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
+                              // style={{ backgroundColor: "transparent" }}
                               aria-label="settings"
                               title="Complete this sustainable action"
                             >
@@ -692,6 +665,7 @@ function HomePage() {
                     spacing={2}
                     className={classes.actionContainer}
                   >
+                  {/* Favorite actions (this loops using favs) */}
                     {ActionData.map(
                       (action, i) =>
                         localStorage.getItem(action.susAction.concat("Fav")) ==
@@ -703,7 +677,7 @@ function HomePage() {
                                 action={
                                   <IconButton
                                     onClick={() =>
-                                      increment(action)
+                                      confirmIncrement(action)
                                     }
                                     // Finally found how to get ride of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
