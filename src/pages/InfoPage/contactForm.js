@@ -51,6 +51,10 @@ class ContactForm extends React.Component {
           onSubmit={this.handleSubmit}
           id="contact"
           className={styles.inputContainer}
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
         >
           <p>
             <FontAwesomeIcon icon="user" className="contactIcon icon user" />

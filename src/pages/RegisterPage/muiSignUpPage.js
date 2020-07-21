@@ -150,8 +150,8 @@ class PasswordInput2 extends Component {
         variant="outlined"
         margin="normal"
         fullWidth
-        type="password"
-        //   type={passwordIsMasked ? "password" : "text"}
+        // type="password"
+        type={passwordIsMasked ? "password" : "text"}
         {...this.props}
         InputProps={{
           endAdornment: (

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { withFirebase } from "../../../services/Firebase";
+import PasswordChangeForm from "./formChangePw.js";
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
-import changePwImg from "../../../img/account.svg";
+import { withFirebase } from "../../../services/Firebase";
+import accountImg from "../../../img/account.svg";
 import { PasswordInput } from "../../RegisterPage/muiSignInPage";
 import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage2";
 
@@ -12,13 +13,17 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+// import your fontawesome library
+import "../../../components/FontAwesomeIcons";
+// import when you need to use icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ChangePW = () => (
   <div>
     <AuthUserContext>
       {(authUser) => (
         <div class="base-container">
-          <PasswordChangeForm />
+          <PasswordChange />
         </div>
       )}
     </AuthUserContext>
@@ -26,25 +31,29 @@ const ChangePW = () => (
 );
 
 const useStyles = (theme) => ({
-    paper: {
-        marginTop: theme.spacing(3),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      },
-      form: {
-        width: "100%",
-        marginTop: theme.spacing(1),
-      },
-      formIcon: {
-        marginRight: "1rem",
-      },
-      eye: {
-        cursor: "pointer",
-      },
-      submit: {
-        margin: theme.spacing(3, 0, 2),
-      },
+  paper: {
+    marginTop: theme.spacing(3),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  form: {
+    width: "100%",
+    marginTop: theme.spacing(1),
+  },
+  formIcon: {
+    marginRight: "1rem",
+  },
+  eye: {
+    cursor: "pointer",
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  errorText: {
+    color: "red",
+    marginTop: "1rem",
+  },
 });
 
 const INITIAL_STATE = {
@@ -82,12 +91,6 @@ class PasswordChangeFormBase extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  onChangePW = (event) => {
-    const { name, value } = event.target;
-
-    this.setState({ [name]: value });
-  };
-
   render() {
     const { passwordOne, passwordTwo, error } = this.state;
     const isInvalid = passwordOne !== passwordTwo || passwordOne === "";
@@ -95,28 +98,33 @@ class PasswordChangeFormBase extends Component {
     const { pw } = this.state;
 
     return (
-      <Container maxWidth="xs">
+      <Container maxWidth="sm">
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Want to Change Your Password?
           </Typography>
           <div className="image">
-            <img alt="change your password" src={changePwImg} />
+            <img alt="change your password" src={accountImg} />
           </div>
-          <form onSubmit={this.onSubmit} className={classes.form} noValidate>
+          <form onSubmit={this.onSubmit} className="form">
             <PasswordInput2
               label="Password"
-              name="password"
+              name="passwordOne"
               value={passwordOne}
-              onChange={this.onChangePW}
+              onChange={this.onChange}
             />
             <PasswordInput
               label="Verify Password"
-              name="password"
+              name="passwordTwo"
               value={passwordTwo}
-              onChange={this.onChangePW}
+              onChange={this.onChange}
             />
+            {error && (
+              <Typography variant="body2" className={classes.errorText}>
+                {error.message}
+              </Typography>
+            )}
             <Button
               type="submit"
               fullWidth
@@ -125,8 +133,10 @@ class PasswordChangeFormBase extends Component {
               className={classes.submit}
               disabled={isInvalid}
             >
-              Change My Password
+              Change Password
             </Button>
+
+            {error && <p>{error.message}</p>}
           </form>
         </div>
       </Container>
@@ -138,7 +148,7 @@ const condition = (authUser) => !!authUser;
 
 const PasswordChangeFormStyled = withStyles(useStyles)(PasswordChangeFormBase);
 
-const PasswordChangeForm = withFirebase(PasswordChangeFormStyled);
+const PasswordChange = withFirebase(PasswordChangeFormStyled);
 
 export { PasswordChangeForm };
 
