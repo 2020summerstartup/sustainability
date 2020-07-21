@@ -77,9 +77,8 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-
-// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie'
-// removed fav foreach loop here, don't think it was doing anything?
+// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
+// removed fav foreach loop here, don't think it was doing anything? (This comment is from Jessica?)
 function assignData(data) {
   localStorage.setItem("total", data.total);
   const points = data.points;
@@ -333,6 +332,8 @@ function HomePage() {
     setFilter(e.target.value);
   };
 
+  // This function is the one that is called when the user presses the increment susAction button. If they confirm that
+  // they meant to, then this fucntion calls increment.
   const confirmIncrement = (action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
     if( confirmed == true ) {
