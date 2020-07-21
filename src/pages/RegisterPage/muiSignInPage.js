@@ -211,7 +211,6 @@ class SignInFormBase extends Component {
                 value={password}
                 onChange={this.onChangePW}
               />
-
               {error && (
                 <Typography variant="body2" className={classes.errorText}>
                   {error.message}

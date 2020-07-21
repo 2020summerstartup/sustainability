@@ -23,6 +23,7 @@ import Header, {
 import CompetePage from "../pages/CompetePage";
 import OfflinePage from "../pages/OfflinePage";
 import ChangePW from "../pages/AccountPage/Settings/changePw";
+import MuiChangePw from "../pages/AccountPage/Settings/muiChangePw";
 import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
 import * as ROUTES from "../constants/routes";
 import { withAuthentication } from "../services/Session";
@@ -45,7 +46,7 @@ const App = () => (
       <BottomNav />
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
+      <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />
       <Route path={ROUTES.PASSWORD_FORGET} component={MuiPasswordForgetPage} />
       <Route path={ROUTES.HOME} component={HomePage} />
@@ -53,7 +54,7 @@ const App = () => (
       <Route path={ROUTES.INFO} component={InfoPage} />
       <Route path={ROUTES.COMPETE} component={CompetePage} />
       <Route path={ROUTES.OFFLINE} component={OfflinePage} />
-      <Route path={ROUTES.CHANGEPW} component={ChangePW} />
+      <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
       <Route path={ROUTES.CHANGEDORM} component={ChangeDorm} />
     </div>
   </Router>

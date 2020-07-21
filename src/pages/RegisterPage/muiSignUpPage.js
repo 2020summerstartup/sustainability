@@ -49,10 +49,6 @@ const useStyles = (theme) => ({
   eye: {
     cursor: "pointer",
   },
-  linkText: {
-    color: theme.palette.primary.main,
-    textDecoration: "none",
-  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -188,12 +184,11 @@ class SignUpFormBase extends Component {
   onSubmit = (event) => {
     const { username, email, passwordOne, dorm, image, points } = this.state;
 
-    createUser(email, username, dorm);
+    createUser(username, email, passwordOne, dorm);
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
-        console.log('auth')
         // Create a user in your Firebase realtime database
         return this.props.firebase.user(authUser.user.uid).set({
           username,
@@ -201,7 +196,6 @@ class SignUpFormBase extends Component {
         });
       })
       .then(() => {
-        alert('hi')
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -211,8 +205,6 @@ class SignUpFormBase extends Component {
       });
 
     event.preventDefault();
-    console.log("end");
-    alert('end'+ username, email, passwordOne, dorm, image, points);
   };
 
   onChange = (event) => {
@@ -260,7 +252,7 @@ class SignUpFormBase extends Component {
               variant="outlined"
               margin="normal"
               fullWidth
-              id="username"
+              // id="username"
               label="Full Name"
               name="username"
               value={username}
@@ -277,7 +269,7 @@ class SignUpFormBase extends Component {
               variant="outlined"
               margin="normal"
               fullWidth
-              id="email"
+              // id="email"
               label="Email Address"
               name="email"
               value={email}
@@ -290,18 +282,37 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            <DormInput />
+            {/* Comment this out later!! for testing only! */}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              id="dorm"
+              label="Dorm"
+              name="dorm"
+              value={dorm}
+              onChange={this.onChange}
+              InputProps={{
+                startAdornment: <HomeIcon className={classes.formIcon} />,
+                classes: {
+                  adornedEnd: classes.adornedEnd,
+                },
+              }}
+            />
+            {/* <DormInput /> */}
             <PasswordInput2
               label="Password"
               name="password"
               value={passwordOne}
-              onChange={this.onChange}
+              type="password"
+              onChange={this.onChangePW}
             />
             <PasswordInput
               label="Verify Password"
               name="password"
               value={passwordTwo}
-              onChange={this.onChange}
+              type="password"
+              onChange={this.onChangePW}
             />
             {error && (
               <Typography variant="body2" className={classes.errorText}>
@@ -329,6 +340,7 @@ const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
 
 const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
 
+export { PasswordInput2 };
 export { SignUpForm };
 
 export default SignUpPage;
