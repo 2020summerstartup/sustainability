@@ -212,7 +212,6 @@ class SignUpFormBase extends Component {
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log('here')
   };
 
   onChangePW = (event) => {
@@ -314,7 +313,6 @@ class SignUpFormBase extends Component {
               label="Verify Password"
               name="password"
               value={passwordTwo}
-              type="password"
               onChange={this.onChangePW}
             />
             {error && (

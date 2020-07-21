@@ -12,14 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import IconButton from "@material-ui/core/IconButton";
-import PersonIcon from "@material-ui/icons/Person";
-import EmailIcon from "@material-ui/icons/Email";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import { RemoveRedEye } from "@material-ui/icons";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import HomeIcon from "@material-ui/icons/Home";
+
 
 const ChangePW = () => (
   <div>
@@ -66,6 +59,9 @@ class PasswordChangeFormBase extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
+    this.state = {
+      pw: "",
+    };
   }
 
   onSubmit = (event) => {
@@ -97,6 +93,7 @@ class PasswordChangeFormBase extends Component {
     const { passwordOne, passwordTwo, error } = this.state;
     const isInvalid = passwordOne !== passwordTwo || passwordOne === "";
     const { classes } = this.props;
+    const { pw } = this.state;
 
     return (
       <Container maxWidth="xs">
@@ -113,13 +110,13 @@ class PasswordChangeFormBase extends Component {
               label="Password"
               name="password"
               value={passwordOne}
-              onChange={this.onChange}
+              onChange={this.onChangePW}
             />
             <PasswordInput
               label="Verify Password"
               name="password"
               value={passwordTwo}
-              onChange={this.onChange}
+              onChange={this.onChangePW}
             />
             <Button
               type="submit"
