@@ -77,16 +77,15 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
+
+// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie'
+// removed fav foreach loop here, don't think it was doing anything?
 function assignData(data) {
   localStorage.setItem("total", data.total);
   const points = data.points;
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
-  data.favorites.forEach((fav) => {
-    localStorage.setItem(fav, true);
-  });
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
 }
