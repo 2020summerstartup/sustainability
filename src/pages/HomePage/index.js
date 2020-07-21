@@ -336,6 +336,7 @@ function HomePage() {
 
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
+    console.log('testVar', testVar);
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the saved point total
     localStorage.setItem(
@@ -403,7 +404,6 @@ function HomePage() {
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     if (storedFav == null) {
-      console.log("storedFav was null or NaN", storedFav);
       storedFav = false; // If not initialized, initialize here
     }
     storedFav = !storedFav; // Toggle the favorite
@@ -412,17 +412,20 @@ function HomePage() {
       "favoriteIcon".concat(action.susAction)
     );
     // Notify user that action was added/removed from favorites
+    var displayText;
     if (storedFav) {
-      var message = action.title.concat(" added to favorites");
+      displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C"; // Turn red
-      toast(message, { autoClose: 5000 });
+      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
     } else {
-      var message = action.title.concat(" removed from favorites");
+      displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
-      toast.warn(message, { autoClose: 5000 });
+      toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
+
+  var testVar = 'initVal';
 
   // HTML to be displayed
   return (
@@ -447,7 +450,8 @@ function HomePage() {
               &nbsp;&nbsp;&nbsp;
               <button
                 onClick={() => (
-                  setIncrementModalIsOpen(false), increment(action)
+                  setIncrementModalIsOpen(false),
+                  increment(testVar)
                 )}
                 className="button"
               >
@@ -577,6 +581,8 @@ function HomePage() {
                         <CardHeader
                           className={classes.cardContent}
                           action={
+                            // DO NOT CHANGE THE FOLLOWING LINE WITHOUT FULLY UNDERSTANDING, BECAUSE THIS IS FINALLY CLOSE TO WORKING (this is a note to self, not to all of you :) ) -Katie
+                            testVar = action,
                             <IconButton
                               onClick={() => setIncrementModalIsOpen(true)}
                               // Finally found how to get ride of random old green from click and hover!
@@ -663,7 +669,10 @@ function HomePage() {
                         <InfoSubtitle>Your faves are here </InfoSubtitle>
                         <InfoTitle>Add more!</InfoTitle>
                         <InfoCaption>
-                          Go to actions tab and press the heart to add❤️
+                          Go to actions tab and press the heart to add&nbsp;
+                          <span role="img" aria-label="heart">
+                            ❤️
+                          </span>
                         </InfoCaption>
                       </Info>
                     </Box>
@@ -684,7 +693,7 @@ function HomePage() {
                                 action={
                                   <IconButton
                                     onClick={() =>
-                                      setIncrementModalIsOpen(true)
+                                      increment(action)
                                     }
                                     // Finally found how to get ride of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}

@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import points from "../../../img/points.svg";
-// import getPoints from "./Account";
-import { AuthUserContext, withAuthorization } from "../../../services/Session";
+import { AuthUserContext } from "../../../services/Session";
 import pointsForAccount from "./points.js";
-
 
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -20,8 +18,8 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
-import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../../../services/Firebase";
-import { initPoints, assignData } from "../../HomePage";
+import { getUser } from "../../../services/Firebase";
+import { assignData } from "../../HomePage";
 
 const useStyles = makeStyles(() => ({
   card: {
