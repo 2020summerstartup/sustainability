@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import PropTypes from "prop-types";
+import DormSelect from "../../components/DormSelect"
 
 import { withFirebase, createUser } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
@@ -26,7 +27,7 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { RemoveRedEye } from "@material-ui/icons";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import HomeIcon from "@material-ui/icons/Home";
+import HomeIcon from "@material-ui/icons/Home"; 
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
@@ -90,41 +91,40 @@ const dorms = [
   { title: "Atwood" },
 ];
 
+// function DormInput() {
+//   const classes = useStyles2();
 
-function DormInput() {
-  const classes = useStyles2();
-
-  return (
-    <Autocomplete
-      id="dorm input"
-      options={dorms}
-      getOptionLabel={(option) => option.title}
-      disableClearable
-      fullWidth
-      renderInput={(params) => {
-        return (
-          <TextField
-            {...params}
-            label="Dorms"
-            variant="outlined"
-            margin="normal"
-            name="dorm"
-            type="text"        
-            fullWidth
-            InputProps={{
-              ...params.InputProps,
-              startAdornment: (
-                <InputAdornment>
-                  <HomeIcon className={classes.formIcon} />
-                </InputAdornment>
-              ),
-            }}
-          />
-        );
-      }}
-    />
-  );
-}
+//   return (
+//     <Autocomplete
+//       id="dorm input"
+//       options={dorms}
+//       getOptionLabel={(option) => option.title}
+//       disableClearable
+//       fullWidth
+//       renderInput={(params) => {
+//         return (
+//           <TextField
+//             {...params}
+//             label="Dorms"
+//             variant="outlined"
+//             margin="normal"
+//             name="dorm"
+//             type="text"
+//             fullWidth
+//             InputProps={{
+//               ...params.InputProps,
+//               startAdornment: (
+//                 <InputAdornment>
+//                   <HomeIcon className={classes.formIcon} />
+//                 </InputAdornment>
+//               ),
+//             }}
+//           />
+//         );
+//       }}
+//     />
+//   );
+// }
 
 class PasswordInput2 extends Component {
   constructor(props) {
@@ -195,10 +195,27 @@ class SignUpFormBase extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
+    // this.state = {
+    //   tags: "",
+    // };
+    // this.onTagsChange = this.onTagsChange.bind(this);
   }
+
+  //TEST
+  test = () => {
+    const { username, email, passwordOne, dorm, image, points } = this.state;
+    console.log("DORM: ", dorm);
+    console.log("USERNAME: ", username);
+    console.log("EMAIL: ", email);
+    console.log("PASSWORD: ", passwordOne);
+  };
 
   onSubmit = (event) => {
     const { username, email, passwordOne, dorm, image, points } = this.state;
+    console.log("DORM: ", dorm);
+    console.log("USERNAME: ", username);
+    console.log("EMAIL: ", email);
+    console.log("PASSWORD: ", passwordOne);
     // const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
     // uploadTask.on('state_changed', () => {
@@ -232,9 +249,44 @@ class SignUpFormBase extends Component {
   };
 
   onChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-    console.log("change");
+    this.setState((prevState) => ({ 
+      user: {
+        username: "",
+        email: "",
+        passwordOne: "",
+        passwordTwo: "",
+        dorm: "",
+        image: null,
+        points: 0,
+      }, 
+    }));
+    // console.log("NAME: ", event.target.name),
+    // console.log("USERNAME: ", this.state.user.username)
   };
+
+  //   onChange = (event) => {
+  //     this.setState({ [event.target.name]: event.target.value });
+  //     console.log(event.target.name);
+  //   };
+
+  onTagsChange = (event, values) => {
+    this.setState(
+      {
+        user: { dorm: values.title },
+        // tags: values,
+      },
+      () => {
+        // This will output an array of objects
+        // given by Autocomplete options property.
+        console.log(values.title);
+      }
+    );
+  };
+  // [dorm, setDorm] = React.useState('');
+  // onDormChange = (event) => {
+  //   const dorm = event.target.value
+  //   setDorm(event.target.value);
+  // };
 
   render() {
     const { classes } = this.props;
@@ -265,7 +317,7 @@ class SignUpFormBase extends Component {
           <div className="image">
             <img alt="sign up" src={signupImg} />
           </div>
-          <form onSubmit={this.onSubmit} className={classes.form}>
+          <form onSubmit={this.test} className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -324,12 +376,44 @@ class SignUpFormBase extends Component {
           />
         </div> */}
             {/* <DormInput
-            //   name="dorm"
+              name="dorm"
               value={dorm}
-              onChange={this.onChange}
+              onChange={this.onTagsChange}
+            //   onChange={this.onChange}
+            /> */}
+            <DormSelect />
+            {/* <Autocomplete
+              id="dorm input"
+              options={dorms}
+              getOptionLabel={(option) => option.title}
+              disableClearable
+              fullWidth
+              //   onChange={this.onChange}
+              onChange={this.onTagsChange}
+              renderInput={(params) => {
+                return (
+                  <TextField
+                    {...params}
+                    label="Dorms"
+                    variant="outlined"
+                    margin="normal"
+                    name="dorm"
+                    type="text"
+                    fullWidth
+                    InputProps={{
+                      ...params.InputProps,
+                      startAdornment: (
+                        <InputAdornment>
+                          <HomeIcon className={classes.formIcon} />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                );
+              }}
             /> */}
             {/* dont delete  */}
-            <TextField
+            {/* <TextField
               variant="outlined"
               margin="normal"
               fullWidth
@@ -337,7 +421,6 @@ class SignUpFormBase extends Component {
               label="Dorm"
               name="dorm"
               // value={dorm}
-
               onChange={this.onChange}
               InputProps={{
                 startAdornment: <HomeIcon className={classes.formIcon} />,
@@ -345,7 +428,7 @@ class SignUpFormBase extends Component {
                   adornedEnd: classes.adornedEnd,
                 },
               }}
-            />
+            /> */}
             {/* <div className="form-group">
               <FontAwesomeIcon icon="user" className="icon" />
               <input
