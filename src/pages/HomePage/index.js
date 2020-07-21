@@ -568,7 +568,15 @@ function HomePage() {
                   <SearchIcon />
                 </Grid>
                 <Grid item>
-                  <TextField id="search bar" label="Search Actions" />
+                  <TextField
+                    id="search bar"
+                    label="Search Actions" 
+                    onChange={handleSearchChange}
+                    className={classes.searchInput}
+                    variant="standard"
+                    InputProps={{ disableUnderline: true }}
+                    InputProps={{ classes: { underline: classes.underline } }}
+                  />
                 </Grid>
               </Grid>
             </div>
