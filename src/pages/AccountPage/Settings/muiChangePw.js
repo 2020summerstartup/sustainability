@@ -3,7 +3,7 @@ import { withFirebase } from "../../../services/Firebase";
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import changePwImg from "../../../img/account.svg";
 import { PasswordInput } from "../../RegisterPage/muiSignInPage";
-import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage";
+import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage2";
 
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";

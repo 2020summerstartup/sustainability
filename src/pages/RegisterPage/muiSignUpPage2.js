@@ -1,16 +1,14 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
-import PropTypes from "prop-types";
-
-import { withFirebase, createUser } from "../../services/Firebase";
-import * as ROUTES from "../../constants/routes";
-
 import * as firebase from "firebase";
 import "firebase/auth";
 
 import { PasswordInput } from "./muiSignInPage";
+import { withFirebase, createUser } from "../../services/Firebase";
 import { assignData } from "../HomePage/index.js";
+import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
 import Button from "@material-ui/core/Button";
@@ -28,22 +26,12 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import HomeIcon from "@material-ui/icons/Home";
 
-// import your fontawesome library
-import "../../components/FontAwesomeIcons";
-// import when you need to use icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-const MuiSignUpPage = () => (
+const SignUpPage = () => (
   <div className="base-container">
-    {/* <h1 className="header">Register</h1>
-    <div className="image">
-      <img alt="sign up" src={signupImg} />
-    </div> */}
     <SignUpForm />
   </div>
 );
 
-// Styles for Main Page
 const useStyles = (theme) => ({
   paper: {
     marginTop: theme.spacing(3),
@@ -70,7 +58,6 @@ const useStyles = (theme) => ({
   },
 });
 
-// Styles for Icons
 const useStyles2 = makeStyles((theme) => ({
   formIcon: {
     marginLeft: "5px",
@@ -90,7 +77,6 @@ const dorms = [
   { title: "Atwood" },
 ];
 
-
 function DormInput() {
   const classes = useStyles2();
 
@@ -108,8 +94,6 @@ function DormInput() {
             label="Dorms"
             variant="outlined"
             margin="normal"
-            name="dorm"
-            type="text"        
             fullWidth
             InputProps={{
               ...params.InputProps,
@@ -150,8 +134,7 @@ class PasswordInput2 extends Component {
         variant="outlined"
         margin="normal"
         fullWidth
-        type="password"
-        //   type={passwordIsMasked ? "password" : "text"}
+        type={passwordIsMasked ? "password" : "text"}
         {...this.props}
         InputProps={{
           endAdornment: (
@@ -190,24 +173,19 @@ const INITIAL_STATE = {
   error: null,
 };
 
+
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
 
     this.state = { ...INITIAL_STATE };
+    this.state = {
+      pw: "",
+    };
   }
 
   onSubmit = (event) => {
     const { username, email, passwordOne, dorm, image, points } = this.state;
-    // const uploadTask = storage.ref(`images/${image.name}`).put(image);
-
-    // uploadTask.on('state_changed', () => {
-    //   // complete function ....
-    //   storage.ref('images').child(image.name).getDownloadURL().then(url => {
-    //       console.log(url);
-    //       this.setState({url});
-    //   })
-    // });
 
     createUser(email, username, dorm);
 
@@ -215,7 +193,9 @@ class SignUpFormBase extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
         // Create a user in your Firebase realtime database
-        return this.props.firebase.user(authUser.user.uid).set({
+        return this.props.firebase
+          .user(authUser.user.uid)
+          .set({
           username,
           email,
         });
@@ -226,6 +206,7 @@ class SignUpFormBase extends Component {
       })
       .catch((error) => {
         this.setState({ error });
+        console.log(error);
       });
 
     event.preventDefault();
@@ -233,11 +214,17 @@ class SignUpFormBase extends Component {
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log("change");
+  };
+
+  onChangePW = (event) => {
+    const { name, value } = event.target;
+
+    this.setState({ [name]: value });
   };
 
   render() {
     const { classes } = this.props;
+    const { pw } = this.state;
     const {
       username,
       email,
@@ -251,9 +238,8 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      dorm === "" ||
+      //   dorm === "" ||
       username === "";
-    // dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
     return (
       <Container maxWidth="xs">
@@ -265,7 +251,7 @@ class SignUpFormBase extends Component {
           <div className="image">
             <img alt="sign up" src={signupImg} />
           </div>
-          <form onSubmit={this.onSubmit} className={classes.form}>
+          <form onSubmit={this.onSubmit} className={classes.form} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -273,7 +259,7 @@ class SignUpFormBase extends Component {
               id="username"
               label="Full Name"
               name="username"
-              // value={username}
+              value={username}
               autoComplete="name"
               onChange={this.onChange}
               InputProps={{
@@ -283,18 +269,6 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            {/* <Image source={{uri:this.state.user.avatar}} /> */}
-            {/* <div className="form-group">
-          <FontAwesomeIcon icon="user" className="icon" />
-          <input
-            className="input-field"
-            name="username"
-            value={username}
-            onChange={this.onChange}
-            type="text"
-            placeholder="First Name"
-          />
-        </div> */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -302,7 +276,7 @@ class SignUpFormBase extends Component {
               id="email"
               label="Email Address"
               name="email"
-              // value={email}
+              value={email}
               autoComplete="email"
               onChange={this.onChange}
               InputProps={{
@@ -312,23 +286,7 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            {/* <div className="form-group">
-          <FontAwesomeIcon icon="envelope" className="icon envelope" />
-          <input
-            className="input-field"
-            name="email"
-            value={email}
-            onChange={this.onChange}
-            type="text"
-            placeholder="Email Address"
-          />
-        </div> */}
-            {/* <DormInput
-            //   name="dorm"
-              value={dorm}
-              onChange={this.onChange}
-            /> */}
-            {/* dont delete  */}
+            {/* Comment this out later!! for testing only! */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -336,8 +294,7 @@ class SignUpFormBase extends Component {
               id="dorm"
               label="Dorm"
               name="dorm"
-              // value={dorm}
-
+              value={dorm}
               onChange={this.onChange}
               InputProps={{
                 startAdornment: <HomeIcon className={classes.formIcon} />,
@@ -346,59 +303,34 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            {/* <div className="form-group">
-              <FontAwesomeIcon icon="user" className="icon" />
-              <input
-                className="input-field"
-                name="dorm"
-                value={dorm}
-                onChange={this.onChange}
-                type="text"
-                placeholder="Res Hall"
-              />
-            </div> */}
+            {/* <DormInput /> */}
             <PasswordInput2
-              // type="password"
               label="Password"
-              name="passwordTwo"
-              value={passwordTwo}
-              onChange={this.onChange}
+              name="password"
+              value={passwordOne}
+              onChange={this.onChangePW}
             />
             <PasswordInput
-              // type="password"
-              label="Password"
-              name="passwordOne"
-              value={passwordOne}
-              onChange={this.onChange}
+              label="Verify Password"
+              name="password"
+              value={passwordTwo}
+              onChange={this.onChangePW}
             />
-            {/* <div className="form-group">
-              <FontAwesomeIcon icon="unlock-alt" className="icon" />
-              <input
-                className="input-field"
-                name="passwordOne"
-                value={passwordOne}
-                onChange={this.onChange}
-                type="password"
-                placeholder="Password"
-              />
-            </div> */}
-            {/* <div className="form-group">
-              <FontAwesomeIcon icon="lock" className="icon" />
-              <input
-                className="input-field"
-                name="passwordTwo"
-                value={passwordTwo}
-                onChange={this.onChange}
-                type="password"
-                placeholder="Confirm Password"
-              />
-            </div> */}
-
-            <button disabled={isInvalid} type="submit" className="button">
+            {error && (
+              <Typography variant="body2" className={classes.errorText}>
+                {error.message}
+              </Typography>
+            )}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              disabled={isInvalid}
+            >
               Sign Up
-            </button>
-
-            {error && <p>{error.message}</p>}
+            </Button>
           </form>
         </div>
       </Container>
@@ -406,17 +338,11 @@ class SignUpFormBase extends Component {
   }
 }
 
-const SignUpLink = () => (
-  <p>
-    Don't have an account? Get with the program, and{" "}
-    <Link to={ROUTES.SIGN_UP}>Sign Up</Link> here now!
-  </p>
-);
-
 const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
 
-const SignUpForm = compose(withRouter, withFirebase)(SignUpFormStyled);
+const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
 
-export default MuiSignUpPage;
+export { PasswordInput2 };
+export { SignUpForm };
 
-export { SignUpForm, SignUpLink };
+export default SignUpPage;

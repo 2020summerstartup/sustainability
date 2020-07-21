@@ -7,10 +7,10 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 // for class Components we should use withStyles instead of makeStyles
 import { withStyles } from "@material-ui/core/styles";
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import PersonIcon from '@material-ui/icons/Person';
-import EmailIcon from '@material-ui/icons/Email';
-import MessageIcon from '@material-ui/icons/Message';
+import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
+import PersonIcon from "@material-ui/icons/Person";
+import EmailIcon from "@material-ui/icons/Email";
+import MessageIcon from "@material-ui/icons/Message";
 
 const encode = (data) => {
   return Object.keys(data)
@@ -34,7 +34,7 @@ const useStyles = (theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
   form: {
-    width: "100%", 
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   formIcon: {
@@ -81,7 +81,7 @@ class ContactForm extends React.Component {
 
     return (
       // <Container>
-        <Paper elevation={5} className={classes.paper}>
+      <Paper elevation={5} className={classes.paper}>
         <CssBaseline />
         <div className={classes.formWrapper}>
           <Avatar className={classes.avatar}>
@@ -93,18 +93,24 @@ class ContactForm extends React.Component {
           <Typography component="subtitle1" variant="subtitle1">
             Let us know your questions, comments, and concerns!
           </Typography>
-          <form className={classes.form} noValidate>
+          <form
+            onSubmit={this.handleSubmit}
+            id="contact"
+            className={classes.form}
+          >
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
+              value={name}
+              onChange={this.handleChange}
               id="name"
               label="Name"
               name="name"
               autoComplete="name"
               InputProps={{
-                startAdornment: <PersonIcon className={classes.formIcon}/>,
+                startAdornment: <PersonIcon className={classes.formIcon} />,
                 classes: {
                   adornedEnd: classes.adornedEnd,
                 },
@@ -115,12 +121,14 @@ class ContactForm extends React.Component {
               margin="normal"
               required
               fullWidth
+              value={email}
+              onChange={this.handleChange}
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
               InputProps={{
-                startAdornment: <EmailIcon className={classes.formIcon}/>,
+                startAdornment: <EmailIcon className={classes.formIcon} />,
                 classes: {
                   adornedEnd: classes.adornedEnd,
                 },
@@ -133,11 +141,13 @@ class ContactForm extends React.Component {
               rows={3}
               required
               fullWidth
+              value={message}
+              onChange={this.handleChange}
               name="message"
               label="Your Message"
               id="message"
               InputProps={{
-                startAdornment: <MessageIcon className={classes.formIcon}/>,
+                startAdornment: <MessageIcon className={classes.formIcon} />,
                 classes: {
                   adornedEnd: classes.adornedEnd,
                 },
@@ -154,7 +164,7 @@ class ContactForm extends React.Component {
             </Button>
           </form>
         </div>
-        </Paper>
+      </Paper>
       // </Container>
     );
   }

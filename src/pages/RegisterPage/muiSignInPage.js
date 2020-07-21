@@ -89,7 +89,8 @@ class PasswordInput extends Component {
         variant="outlined"
         margin="normal"
         fullWidth
-        type={passwordIsMasked ? "password" : "text"}
+        type="password"
+        // {passwordIsMasked ? "password" : "text"}
         {...this.props}
         InputProps={{
           endAdornment: (
