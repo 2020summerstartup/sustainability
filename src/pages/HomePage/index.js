@@ -553,6 +553,9 @@ function HomePage() {
                 >
                   Close
                 </button>
+                <p> </p>
+                <p> </p>
+                <p> </p>
               </div>
             </center>
           </Modal>
