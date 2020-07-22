@@ -311,26 +311,6 @@ function HomePage() {
     }
   );
 
-  // A function to run when the button "another option..." within check your progress is clicked.
-  // This won't be in the final code, but it's been part of my learning process for trying to get the
-  // newlines to work, and I don't want to delete it until I fully solve this issue. Please ask me
-  // before deleting this. :) -Katie
-  const showProgress = () => {
-    var codeBlock = "";
-    for (const key in ActionData) {
-      // Get each susAction
-      // Add info about each susAction, formatted with html, to the codeBalck
-      codeBlock +=
-        ActionData[key].title.concat(
-          " Points: ",
-          localStorage.getItem(ActionData[key].susAction),
-          " "
-        ) + "<br />";
-    }
-    // Setting the html of the element with id "wrapper" to be the stuff that was just put in codeBlock.
-    document.getElementById("wrapper").innerHTML = codeBlock;
-  };
-
   // message to be displayed in check your progress
   var message = [];
   total = localStorage.getItem("total");
