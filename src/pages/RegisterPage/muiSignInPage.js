@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import clsx from "clsx";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
@@ -7,19 +6,16 @@ import * as firebase from "firebase";
 import "firebase/auth";
 
 import { SignUpLink } from "./signUpPage";
-import { PasswordForgetLink } from "./passwordForgetPage.js.js";
+import { PasswordForgetLink } from "./passwordForgetPage";
 import { withFirebase, getUser } from "../../services/Firebase";
 import { assignData } from "../HomePage/index.js";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-// import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -30,7 +26,8 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
-import { RemoveRedEye } from "@material-ui/icons";
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 const SignInPage = () => (
@@ -46,19 +43,12 @@ const useStyles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
-  },
   form: {
     width: "100%",
     marginTop: theme.spacing(1),
   },
   formIcon: {
     marginRight: "1rem",
-  },
-  eye: {
-    cursor: "pointer",
   },
   linkText: {
     color: theme.palette.primary.main,
@@ -97,15 +87,19 @@ class PasswordInput extends Component {
         variant="outlined"
         margin="normal"
         fullWidth
+        // type="password"
         type={passwordIsMasked ? "password" : "text"}
         {...this.props}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <RemoveRedEye
-                className={classes.eye}
-                onClick={this.togglePasswordMask}
-              />
+               <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={this.togglePasswordMask}
+                  edge="end"
+                >
+                  {passwordIsMasked ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
             </InputAdornment>
           ),
           startAdornment: <LockIcon className={classes.formIcon} />,
@@ -122,7 +116,6 @@ PasswordInput.propTypes = {
 };
 
 PasswordInput = withStyles(useStyles)(PasswordInput);
-
 
 const INITIAL_STATE = {
   email: "",
@@ -201,7 +194,6 @@ class SignInFormBase extends Component {
               <TextField
                 variant="outlined"
                 margin="normal"
-                // required
                 fullWidth
                 id="email"
                 label="Email Address"
@@ -221,24 +213,6 @@ class SignInFormBase extends Component {
                 value={password}
                 onChange={this.onChangePW}
               />
-              {/* <TextField
-                variant="outlined"
-                margin="normal"
-                // required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={this.onChange}
-                InputProps={{
-                  startAdornment: <LockIcon className={classes.formIcon} />,
-                  classes: {
-                    adornedEnd: classes.adornedEnd,
-                  },
-                }}
-              /> */}
               {error && (
                 <Typography variant="body2" className={classes.errorText}>
                   {error.message}
@@ -295,12 +269,11 @@ export const signOutFirebase = () => {
     });
 };
 
-// NEED THIS
-
 const SignInFormStyled = withStyles(useStyles)(SignInFormBase);
 
 const SignInForm = compose(withRouter, withFirebase)(SignInFormStyled);
 
 export { SignInForm };
+export { PasswordInput };
 
 export default SignInPage;

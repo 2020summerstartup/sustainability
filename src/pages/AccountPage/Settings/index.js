@@ -14,8 +14,9 @@ import SignOutButton from "../../../components/SignOut";
 import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Switch from "@material-ui/core/Switch";
+import styles from "./Settings.module.css";
 import DeleteIcon from '@material-ui/icons/Delete';
-import Switch from '@material-ui/core/Switch';
 
 import { AuthUserContext } from "../../../services/Session";
 const useStyles = makeStyles((theme) => ({
@@ -81,7 +82,7 @@ export default function SwipeableTemporaryDrawer() {
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
             <Typography variant="h6">
-              Hi, {localStorage.getItem("name")}
+              Hi, {localStorage.getItem("name")}!
             </Typography>
           </ListItemText>
         </ListItem>
@@ -93,8 +94,6 @@ export default function SwipeableTemporaryDrawer() {
             {(authUser) => (
               <ListItemText className={classes.listItemText}>
                 {authUser.email}
-                {/* {localStorage.getItem("email")} */}
-                {/* <FormDialog/> */}
               </ListItemText>
             )}
           </AuthUserContext.Consumer>
@@ -145,6 +144,7 @@ export default function SwipeableTemporaryDrawer() {
           <ListItemIcon className={classes.listItemIcon}>
             <Switch
               checked={state.checked}
+              // write this function later when we implement dark mode
               // onChange={handleChange}
               color="primary"
               name="mode"
