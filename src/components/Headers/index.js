@@ -280,6 +280,7 @@ const HomeHeader = ({ firebase }) => {
           <Typography className={classes.title} variant="h6">
             Home
           </Typography>
+          {/* OLD SEARCH BAR IN HEADER THAT WASN'T FUNCTIONAL wait a little before deleting */}
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -299,5 +300,11 @@ const HomeHeader = ({ firebase }) => {
   );
 };
 
-export { HomeHeader, CompeteHeader, InfoHeader, AccountHeader, BackArrowHeader };
+export {
+  HomeHeader,
+  CompeteHeader,
+  InfoHeader,
+  AccountHeader,
+  BackArrowHeader,
+};
 export default withFirebase(Header);
