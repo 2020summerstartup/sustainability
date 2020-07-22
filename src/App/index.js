@@ -8,7 +8,7 @@ import MuiLandingPage from "../pages/LandingPage/muiLandingPage";
 import SignUpPage from "../pages/RegisterPage/signUpPage";
 import SignInPage from "../pages/RegisterPage/signInPage";
 import MuiSignInPage from "../pages/RegisterPage/muiSignInPage";
-import MuiSignUpPage from "../pages/RegisterPage/muiSignUpPage2.js";
+import MuiSignUpPage from "../pages/RegisterPage/muiSignupPage.js";
 import PasswordForgetPage from "../pages/RegisterPage/passwordForgetPage";
 import MuiPasswordForgetPage from "../pages/RegisterPage/muiPasswordForgetPage";
 import HomePage from "../pages/HomePage";

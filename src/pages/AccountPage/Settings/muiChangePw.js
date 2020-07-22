@@ -4,7 +4,7 @@ import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import { withFirebase } from "../../../services/Firebase";
 import accountImg from "../../../img/account.svg";
 import { PasswordInput } from "../../RegisterPage/muiSignInPage";
-import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage2";
+import { PasswordInput2 } from "../../RegisterPage/muiSignupPage";
 
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";

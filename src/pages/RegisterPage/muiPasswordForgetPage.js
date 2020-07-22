@@ -31,7 +31,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 const MuiPasswordForgetPage = () => (
   <div class="base-container">
-    <PasswordForgetForm />;
+    <PasswordForgetForm />
   </div>
 );
 
@@ -142,7 +142,7 @@ class PasswordForgetFormBase extends Component {
           </form>
         </div>
       </Container>
-    );
+    )
   }
 }
 

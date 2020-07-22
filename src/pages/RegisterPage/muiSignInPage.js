@@ -26,7 +26,8 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
-import { RemoveRedEye } from "@material-ui/icons";
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 const SignInPage = () => (
@@ -48,9 +49,6 @@ const useStyles = (theme) => ({
   },
   formIcon: {
     marginRight: "1rem",
-  },
-  eye: {
-    cursor: "pointer",
   },
   linkText: {
     color: theme.palette.primary.main,
@@ -95,10 +93,13 @@ class PasswordInput extends Component {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <RemoveRedEye
-                className={classes.eye}
-                onClick={this.togglePasswordMask}
-              />
+               <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={this.togglePasswordMask}
+                  edge="end"
+                >
+                  {passwordIsMasked ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
             </InputAdornment>
           ),
           startAdornment: <LockIcon className={classes.formIcon} />,

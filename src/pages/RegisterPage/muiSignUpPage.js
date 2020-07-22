@@ -24,7 +24,8 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import { RemoveRedEye } from "@material-ui/icons";
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import HomeIcon from "@material-ui/icons/Home";
@@ -156,10 +157,13 @@ class PasswordInput2 extends Component {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <RemoveRedEye
-                className={classes.eye}
-                onClick={this.togglePasswordMask}
-              />
+               <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={this.togglePasswordMask}
+                  edge="end"
+                >
+                  {passwordIsMasked ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
             </InputAdornment>
           ),
           startAdornment: <LockOpenIcon className={classes.formIcon} />,
@@ -176,6 +180,7 @@ PasswordInput2.propTypes = {
 };
 
 PasswordInput2 = withStyles(useStyles)(PasswordInput2);
+
 
 const INITIAL_STATE = {
   user: {
@@ -308,7 +313,7 @@ class SignUpFormBase extends Component {
     // dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
     return (
-      <Container maxWidth="xs">
+      <Container maxWidth="sm">
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -443,15 +448,15 @@ class SignUpFormBase extends Component {
             <PasswordInput2
               // type="password"
               label="Password"
-              name="passwordTwo"
-              value={passwordTwo}
+              name="passwordOne"
+              value={passwordOne}
               onChange={this.onChange}
             />
             <PasswordInput
               // type="password"
               label="Password"
-              name="passwordOne"
-              value={passwordOne}
+              name="passwordTwo"
+              value={passwordTwo}
               onChange={this.onChange}
             />
             {/* <div className="form-group">
@@ -518,4 +523,4 @@ const SignUpForm = compose(withRouter, withFirebase)(SignUpFormStyled);
 
 export default MuiSignUpPage;
 
-export { SignUpForm, SignUpLink };
+export { SignUpForm, SignUpLink, PasswordInput2 };
