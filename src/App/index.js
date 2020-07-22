@@ -35,6 +35,7 @@ import { withAuthentication } from "../services/Session";
 const App = () => (
   <Router>
     <Switch>
+      {/* FOR PAGES WITH SPECIAL HEADERS */}
       <Route exact path="/home" component={HomeHeader} />
       <Route exact path="/compete" component={CompeteHeader} />
       <Route exact path="/info" component={InfoHeader} />
@@ -43,15 +44,17 @@ const App = () => (
       <Route exact path="/changedorm" component={BackArrowHeader} />
       <Route exact path="/changepassword" component={BackArrowHeader} />
       <Route exact path="/forgetpassword" component={BackArrowHeader} />
-      <Route exact path="/delete-account" component={DeleteAccount} />
+      <Route exact path="/deleteaccount" component={BackArrowHeader} />
       <Route component={Header} />
     </Switch>
+
     <div className="main">
       {/* {window.location.pathname !== "/account" ? <Header /> : <AccountHeader /> }  */}
 
       <Navigation />
       <BottomNav />
 
+      {/* For each page's content */}
       <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
       <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />

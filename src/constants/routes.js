@@ -11,4 +11,4 @@ export const PASSWORD_FORGET = '/forgetpassword';
 export const CHANGEPW = '/changepassword';
 export const CHANGEDORM = '/changedorm';
 export const OFFLINE = '/offline';
-export const DELETE_ACCOUNT = './delete-account';
+export const DELETE_ACCOUNT = './deleteaccount';
