@@ -431,6 +431,9 @@ function HomePage() {
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
+  // The following line is definitely interesting in terms of getting/maybe changing inner html and potentially getting the newlines to work
+console.log('INNERHTML', window.document.querySelector('div').innerHTML);
+
   // HTML to be displayed
   return (
     <>
