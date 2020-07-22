@@ -19,6 +19,8 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import { render } from "@testing-library/react";
+import leaderBoardUpdate , { assignRanking } from '../../CompetePage/leaderBoardUpdate';
+import { getDorm } from '../../../services/Firebase'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,30 +56,34 @@ const useStyles = makeStyles((theme) => ({
 
 var rank;
 
+getDorm().doc(localStorage.getItem('dorm')).onSnapshot(docSnapshot => {
+  assignRanking(docSnapshot.data())
+})
+leaderBoardUpdate();
+
 const rankDisplay = () => {
-  console.log(localStorage.getItem("ranking"))
-  if (localStorage.getItem("ranking") == 1){
+  if (localStorage.getItem('ranking') == 1){
     rank = ( 
     <p>
     You're in 1st place!
     </p>
     )
-  } if (localStorage.getItem("ranking") == 2){
+  } if (localStorage.getItem('ranking') == 2){
     rank = ( 
     <p>
     You're in 2nd place!
     </p>
     )
-  } else if (localStorage.getItem("ranking") == 3){
+  } if (localStorage.getItem('ranking') == 3){
     rank = ( 
     <p>
     You're in 3rd place!
     </p>
     )
-  } else {
+  } else if (localStorage.getItem('ranking') >= 4) {
     rank = (
     <p>
-    You're in {localStorage.getItem("ranking")}th place!
+    You're in {localStorage.getItem('ranking')}th place!
     </p>
     )
   }
