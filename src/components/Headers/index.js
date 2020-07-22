@@ -139,7 +139,7 @@ const AccountHeader = ({ firebase }) => {
   );
 };
 
-// Styles used for Header on Change Password
+// Styles used for pages that have a back arrow
 const useStyles3 = makeStyles((theme) => ({
   title: {
     color: "white",
@@ -182,7 +182,7 @@ const BackArrowHeader = ({ firebase }) => {
   const classes = useStyles3();
   return (
     <>
-      <AppBar position="static" className={classes.header} elevation={0}>
+      <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           {/* Back Button using history */}
           <IconButton
