@@ -19,7 +19,6 @@ class DeleteAccount extends React.Component{
       userDocDelete = async () => {
         // problem with accessing updated email, local storage has email from previous logins
         const email = localStorage.getItem('email');
-        console.log('firestore', email)
         firestore.collection('users').doc(email).delete()
       }
        
@@ -29,7 +28,6 @@ class DeleteAccount extends React.Component{
         accountDelete = () => {
         // to let firebase know the user we want to delete
         const currentUser = localStorage.getItem('email');
-        console.log('firebase', currentUser)
         // deletes user from firbase auth
         firebase.auth().currentUser.delete()
         .then( 
