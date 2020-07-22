@@ -6,16 +6,11 @@ import { withFirebase, createUser } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
-import { signInWithRedirect } from "./signInPage";
-// import Dropdown from 'react-dropdown';
-// import 'react-dropdown/style.css';
-
-// import { Dropdown2 } from "../Dropdown";
-
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SendmailTransport from "nodemailer/lib/sendmail-transport";
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -48,18 +43,11 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne, dorm, image, points } = this.state;
-    // const uploadTask = storage.ref(`images/${image.name}`).put(image);
-
-    // uploadTask.on('state_changed', () => {
-    //   // complete function ....
-    //   storage.ref('images').child(image.name).getDownloadURL().then(url => {
-    //       console.log(url);
-    //       this.setState({url});
-    //   })
-    // });
+    const { username, email, passwordOne, dorm } = this.state;
 
     createUser(email, username, dorm);
+    localStorage.setItem('email', email);
+
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)

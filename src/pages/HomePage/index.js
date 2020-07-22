@@ -77,16 +77,15 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
+
+// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie'
+// removed fav foreach loop here, don't think it was doing anything?
 function assignData(data) {
   localStorage.setItem("total", data.total);
   const points = data.points;
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
-  data.favorites.forEach((fav) => {
-    localStorage.setItem(fav, true);
-  });
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
 }
@@ -334,6 +333,13 @@ function HomePage() {
     setFilter(e.target.value);
   };
 
+  const confirmIncrement = (action) => {
+    var retVal = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
+    if( retVal == true ) {
+      increment(action); // If user meant to, call the function to actually increment user's points
+    }
+  }
+
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
     // allows us to increment the correct values by writing the action & value to local storage
@@ -349,6 +355,8 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
+      // TODO: this might be unnecessary now??? idk what would have changed to make it unnecessary though -Katie
+      // Wait I think it's because the modal closing kind of forces the page to rerender??
       window.location.reload(true);
     });
 
@@ -401,7 +409,6 @@ function HomePage() {
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     if (storedFav == null) {
-      console.log("storedFav was null or NaN", storedFav);
       storedFav = false; // If not initialized, initialize here
     }
     storedFav = !storedFav; // Toggle the favorite
@@ -410,14 +417,15 @@ function HomePage() {
       "favoriteIcon".concat(action.susAction)
     );
     // Notify user that action was added/removed from favorites
+    var displayText;
     if (storedFav) {
-      var message = action.title.concat(" added to favorites");
+      displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C"; // Turn red
-      toast(message, { autoClose: 5000 });
+      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
     } else {
-      var message = action.title.concat(" removed from favorites");
+      displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
-      toast.warn(message, { autoClose: 5000 });
+      toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
@@ -427,33 +435,6 @@ function HomePage() {
     <>
       {prompt && <IosModal />}
       <div>
-        <Modal
-          isOpen={incrementModalIsOpen}
-          onRequestClose={() => setIncrementModalIsOpen(false)}
-          className={styles.modalIncrement}
-          overlayClassName={styles.overlay}
-        >
-          <center>
-            <h2>Are you sure you want to log this action?</h2>
-            <div>
-              <button
-                onClick={() => setIncrementModalIsOpen(false)}
-                className="buttonOops"
-              >
-                Oops, don't log it!
-              </button>
-              &nbsp;&nbsp;&nbsp;
-              <button
-                onClick={() => (
-                  setIncrementModalIsOpen(false), increment(action)
-                )}
-                className="button"
-              >
-                Yes, log it!
-              </button>
-            </div>
-          </center>
-        </Modal>
         <AppBar
           position="static"
           color="primary"
@@ -494,7 +475,7 @@ function HomePage() {
         <div className="top-container">
           <h3>
             You have earned&nbsp;
-            {<CountUp start={0} end={total} duration={2}></CountUp>} points!
+            {<CountUp start={0} end={total} duration={1}></CountUp>} points!
           </h3>
           <button
             onClick={() => setProgressModalIsOpen(true)}
@@ -520,7 +501,7 @@ function HomePage() {
                 // Get the individual points earned from each susAction
                 // I don't yet understand what "Object" is referring to here/how the program knows that.
                 Object.keys(ActionData).map((key) => {
-                  message[parseInt(key) - 1] = ActionData[key].title.concat(
+                  message[parseInt(key)] = ActionData[key].title.concat(
                     " Points: ",
                     localStorage.getItem(ActionData[key].susAction),
                     " "
@@ -562,11 +543,20 @@ function HomePage() {
                   <SearchIcon />
                 </Grid>
                 <Grid item>
-                  <TextField id="search bar" label="Search Actions" />
+                  <TextField
+                    id="search bar"
+                    label="Search Actions" 
+                    onChange={handleSearchChange}
+                    className={classes.searchInput}
+                    variant="standard"
+                    InputProps={{ disableUnderline: true }}
+                    InputProps={{ classes: { underline: classes.underline } }}
+                  />
                 </Grid>
               </Grid>
             </div>
             <Grid container spacing={2} className={classes.actionContainer}>
+              {/* All actions (this loops using search) */}
               {ActionData.map(
                 (action, i) =>
                   action.title.toLowerCase().includes(filter.toLowerCase()) && (
@@ -576,9 +566,10 @@ function HomePage() {
                           className={classes.cardContent}
                           action={
                             <IconButton
-                              onClick={() => setIncrementModalIsOpen(true)}
+                              onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
                               // Finally found how to get ride of random old green from click and hover!
-                              style={{ backgroundColor: "transparent" }}
+                              // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
+                              // style={{ backgroundColor: "transparent" }}
                               aria-label="settings"
                               title="Complete this sustainable action"
                             >
@@ -661,7 +652,10 @@ function HomePage() {
                         <InfoSubtitle>Your faves are here </InfoSubtitle>
                         <InfoTitle>Add more!</InfoTitle>
                         <InfoCaption>
-                          Go to actions tab and press the heart to add❤️
+                          Go to actions tab and press the heart to add&nbsp;
+                          <span role="img" aria-label="heart">
+                            ❤️
+                          </span>
                         </InfoCaption>
                       </Info>
                     </Box>
@@ -671,6 +665,7 @@ function HomePage() {
                     spacing={2}
                     className={classes.actionContainer}
                   >
+                  {/* Favorite actions (this loops using favs) */}
                     {ActionData.map(
                       (action, i) =>
                         localStorage.getItem(action.susAction.concat("Fav")) ==
@@ -682,7 +677,7 @@ function HomePage() {
                                 action={
                                   <IconButton
                                     onClick={() =>
-                                      setIncrementModalIsOpen(true)
+                                      confirmIncrement(action)
                                     }
                                     // Finally found how to get ride of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}

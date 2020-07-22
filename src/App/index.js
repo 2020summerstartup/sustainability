@@ -28,6 +28,7 @@ import ChangePW from "../pages/AccountPage/Settings/changePw";
 import MuiChangePw from "../pages/AccountPage/Settings/muiChangePw";
 import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
 import MuiChangeDorm from "../pages/AccountPage/Settings/muiChangeDorm";
+import DeleteAccount from "../pages/AccountPage/Settings/deleteAccount";
 import * as ROUTES from "../constants/routes";
 import { withAuthentication } from "../services/Session";
 
@@ -42,6 +43,7 @@ const App = () => (
       <Route exact path="/changedorm" component={BackArrowHeader} />
       <Route exact path="/changepassword" component={BackArrowHeader} />
       <Route exact path="/forgetpassword" component={BackArrowHeader} />
+      <Route exact path="/delete-account" component={DeleteAccount} />
       <Route component={Header} />
     </Switch>
     <div className="main">
@@ -61,6 +63,7 @@ const App = () => (
       <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
       <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
       <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
+      <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
     </div>
   </Router>
 );

@@ -76,7 +76,6 @@ class ContactForm extends React.Component {
   handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   render() {
-    const { name, email, message } = this.state;
     const { classes } = this.props;
 
     return (

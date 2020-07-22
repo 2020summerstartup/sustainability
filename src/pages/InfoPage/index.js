@@ -1,4 +1,4 @@
-import React from "react"; // Used to also import "{ Component }", removed because it gave a warning
+import React from "react";
 import MuiContactForm from "./muiContactForm";
 import InfoCards from "./infoCards";
 

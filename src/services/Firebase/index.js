@@ -4,27 +4,7 @@ import {firestore, createUser, getUser, updateUserPoint, uploadUserPoint, upload
  
 export default Firebase;
 
-// const provider = new firebase.auth.GoogleAuthProvider();
 
-// export const signInWithGoogle = () => {
-//     firebase.auth().signInWithPopup(provider).then(function(result)    
-// }
-
-// const provider = new firebase.auth.GoogleAuthProvider();
-
-// export const signInWithRedirect = () => {
-//     firebase.auth().signInWithRedirect(provider);
-// }
-
-// export const signOutFirebase = () => {
-//     firebase.auth().signOut().then(function() {
-//         // Sign-out successful.
-//     }).catch(function(error) {
-//         // An error happened.
-//     });
-// }
-// export const provider = new firebase.auth.GoogleAuthProvider();
-// export const auth = firebase.auth();
  
 export { FirebaseContext, withFirebase };
 

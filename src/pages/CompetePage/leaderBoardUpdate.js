@@ -1,5 +1,3 @@
-import React from "react";
-
 import {getDorm} from "../../services/Firebase";
 
 function assignRanking(data) {

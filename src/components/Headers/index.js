@@ -1,26 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { withFirebase } from "../../services/Firebase";
 
 // import material ui
 import { AppBar, Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import EcoIcon from "@material-ui/icons/Eco";
 
 // account header imports
 import SwipeableTemporaryDrawer from "../../pages/AccountPage/Settings";
 import Grid from "@material-ui/core/Grid";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 
 // change dorm/pw imports
 // import material ui
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 import suslogoImg from "../../img/suslogo.svg";
-
-// Import Tabs
-import AccountTabs from "../../pages/AccountPage/AccountTabs";
 
 // imports for homeheader
 import InputBase from "@material-ui/core/InputBase";

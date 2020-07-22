@@ -9,7 +9,6 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Link } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
-import styles from "./dorm.module.css";
 import * as ROUTES from "../../../constants/routes";
 import {
   Info,
@@ -19,7 +18,6 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -84,13 +82,12 @@ export const DormCard = React.memo(function GalaxyCard() {
                   </InfoTitle>
                   <InfoCaption>
                     <Link to={ROUTES.CHANGEDORM} className={classes.link}>
-                      <Typography variant="p" className={classes.linkText} >
-                        Change your dorm in settings ⚙️
+                      <Typography variant="p" className={classes.linkText} style={{ underline: 'enum: none' }} >
+                        Change your dorm in settings&nbsp;
+                        <span role="img" aria-label="settings">
+                          ⚙️
+                        </span>
                       </Typography>
-                  {/* <InfoCaption className={styles.caption}>
-                    <Link to={ROUTES.CHANGEDORM}>
-                      Change your dorm in settings ⚙️ */}
-
                     </Link>
                   </InfoCaption>
                 </Info>

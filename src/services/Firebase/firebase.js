@@ -69,6 +69,7 @@ export const createUser = (userEmail, userName, dorm) => {
           name: userName,
           createdBy: userEmail,
           total: 0,
+          favorites: {},
           userDorm: dorm,
           points: {
               "waterBottle": 0,
@@ -86,8 +87,10 @@ export const createUser = (userEmail, userName, dorm) => {
 
 
 export const getUser = (userEmail) => {
+  localStorage.setItem('email', userEmail)
   return firestore.collection('users').doc(userEmail)
 }
+
 
 // this method is called to increase points
 export const updateUserPoint = (userEmail, userAction, actionPoint) => {
