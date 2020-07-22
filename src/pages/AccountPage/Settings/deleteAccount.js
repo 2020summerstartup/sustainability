@@ -35,7 +35,7 @@ class DeleteAccount extends React.Component {
     confirmDelete = (action) => {
         var confirmed = window.confirm("Are you sure you want to delete your account? This cannot be undone."); // Check with the user (did they mean to increment?)
         if( confirmed == true ) {
-            this.accountDelete();; // If user meant to, call the function to actually increment user's points
+            this.accountDelete();; // If user meant to, call the function to actually delete the user
         }
     };
 
