@@ -38,12 +38,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "1.5rem",
   },
   deleteAccount: {
-    position: "relative",
-    top: "14rem",
+    position: "fixed",
+    bottom: "1rem",
     color: "red",
-    [theme.breakpoints.up("sm")]: {
-      top: "24rem",
-    },
   },
 }));
 
