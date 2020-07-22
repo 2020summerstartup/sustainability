@@ -76,6 +76,7 @@ function initPoints(email) {
     }
   }
   // TODO: Right now total init sets total equal to 0. I think we should be incrementing total inside the for loop? -Katie
+  // Actually I'm pretty sure this gets overwritten by assignData later, as soon as assignData is called.
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
@@ -378,8 +379,6 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
-      // TODO: this might be unnecessary now??? idk what would have changed to make it unnecessary though -Katie
-      // Wait I think it's because the modal closing kind of forces the page to rerender??
       window.location.reload(true);
     });
 
