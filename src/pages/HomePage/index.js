@@ -406,7 +406,7 @@ function HomePage() {
   }; // increment
 
   // Initialize the color of each favorite button
-  // This isn't in a function because I can't call the function when I want using html. Could go in a function and then be called with JS.
+  // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
   for (const key in ActionData) {
     // Iterate over every action in ActionData

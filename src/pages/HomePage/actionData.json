@@ -16,7 +16,7 @@
     "impact": "Whenever possible, walk, bike, car pool, or use mass transit. Every gallon of gasoline you save avoids 22 pounds of CO2 emissions, and every mile you walk burns an average of 100 calories. Avoiding just 10 miles of driving every week would eliminate about 500 pounds of carbon dioxide emissions a year! "
   },
   {
-    "title": "Bring Your Own Reusable Straw",
+    "title": "Bring Reusable Straw",
     "id": 3,
     "points": 15,
     "susAction": "reuseStraw",
