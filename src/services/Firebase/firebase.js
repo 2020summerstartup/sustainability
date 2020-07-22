@@ -1,10 +1,13 @@
+import firebase from 'firebase/app';
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
 import 'firebase/database';
 import Axios from 'axios'
+require('dotenv').config();
+console.log(process.env);
+console.log(process.env.REACT_APP_API_KEY);
 
-import firebase from 'firebase/app';
 // import firebase/auth from 'firebase/auth';
 
 
@@ -16,22 +19,23 @@ require("firebase/firestore");
 
 // Intialize Firebase
 const config = {
-  apiKey: "AIzaSyBzlwDriPb6sKitZ3b9gnX9n6NOMbkCi9s",
-  authDomain: "sustainabilitycompetition.firebaseapp.com",
-  databaseURL: "https://sustainabilitycompetition.firebaseio.com",
-  projectId: "sustainabilitycompetition",
-  storageBucket: "sustainabilitycompetition.appspot.com",
-  messagingSenderId: "72202621299",
-  appId: "1:72202621299:web:d8d210e7b9cb4765dcb506",
-  measurementId: "G-682PQBF33P"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 
-// app.initializeApp(config);
-firebase.initializeApp(config)
+app.initializeApp(config);
+// firebase.initializeApp(config)
 const firestore = app.firestore()
 
 class Firebase {
   constructor() {
+    // app.initializeApp(config);
+
+    
 
     this.auth = app.auth();
     this.db = app.database();
