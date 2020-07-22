@@ -3,8 +3,11 @@ import * as firebase from "firebase";
 import "firebase/auth";
 import { firestore } from "../../../services/Firebase";
 import "firebase/firestore";
-import { AuthUserContext } from "../../../services/Session";
+// import { AuthUserContext } from "../../../services/Session";
 import deleteImg from "../../../img/delete.svg";
+// import { withAuthorization } from "../../../services/Session";
+
+import { AuthUserContext, withAuthorization } from "../../../services/Session";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
@@ -18,12 +21,13 @@ const useStyles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    color: "red"
   },
 });
 
 const context = createContext();
 
-class DeleteAccount extends React.Component {
+class DeleteAccountBase extends React.Component {
   constructor(props) {
     super(props);
 
@@ -62,6 +66,29 @@ class DeleteAccount extends React.Component {
     const { classes } = this.props;
 
     return (
+      
+    //     <div>
+    // <AuthUserContext>
+    //   {(authUser) => (
+    //     <div class="base-container">
+    //       <h2>Need to change your dorm?</h2>
+    //       {/* <div className="image">
+    //         <img alt="your account" src={changedorm} />
+    //       </div> */}
+    //       <h3>Change your dorm here!</h3>
+    //       {/* <DormSelect /> */}
+    //     </div>
+    //   )}
+    // </AuthUserContext>
+    // </div>
+    // )}
+    //   }
+
+    
+    
+    <div>
+      <AuthUserContext>
+      {(authUser) => (
       <div className="base-container">
         <Container maxWidth="sm">
           <CssBaseline />
@@ -85,8 +112,18 @@ class DeleteAccount extends React.Component {
           </div>
         </Container>
       </div>
-    );
+      )}
+      </ AuthUserContext>
+      </div>
+    )
+    
+   }
   }
-}
+  
 
-export default withStyles(useStyles)(DeleteAccount);
+
+const DeleteAccount = withStyles(useStyles)(DeleteAccountBase);
+
+const condition = (authUser) => !!authUser;
+
+export default withAuthorization(condition)(DeleteAccount);

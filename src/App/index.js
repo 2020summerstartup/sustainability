@@ -40,11 +40,11 @@ const App = () => (
       <Route exact path="/compete" component={CompeteHeader} />
       <Route exact path="/info" component={InfoHeader} />
       <Route exact path="/account" component={AccountHeader} />
+      <Route exact path="/deleteaccount" component={BackArrowHeader} />
       <Route exact path="/signup" component={BackArrowHeader} />
       <Route exact path="/changedorm" component={BackArrowHeader} />
       <Route exact path="/changepassword" component={BackArrowHeader} />
       <Route exact path="/forgetpassword" component={BackArrowHeader} />
-      <Route exact path="/deleteaccount" component={BackArrowHeader} />
       <Route component={Header} />
     </Switch>
 
