@@ -2,9 +2,9 @@ import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
 import 'firebase/database';
-// import Axios from 'axios'
+import Axios from 'axios'
 
-// import firebase from 'firebase/app';
+import firebase from 'firebase/app';
 // import firebase/auth from 'firebase/auth';
 
 
@@ -14,6 +14,7 @@ import 'firebase/database';
 // Required for side-effects
 require("firebase/firestore");  
 
+// Intialize Firebase
 const config = {
   apiKey: "AIzaSyBzlwDriPb6sKitZ3b9gnX9n6NOMbkCi9s",
   authDomain: "sustainabilitycompetition.firebaseapp.com",
@@ -25,7 +26,8 @@ const config = {
   measurementId: "G-682PQBF33P"
 };
 
-app.initializeApp(config);
+// app.initializeApp(config);
+firebase.initializeApp(config)
 const firestore = app.firestore()
 
 class Firebase {
@@ -144,5 +146,9 @@ export const deleteFav = (userEmail, susAction) => {
     favorites: app.firestore.FieldValue.arrayRemove(susAction)
   })
 }
+
+const db = firebase.firestore;
+
+export {Axios, db}
 
 export {firestore}
