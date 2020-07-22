@@ -78,8 +78,8 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie'
-// removed fav foreach loop here, don't think it was doing anything?
+// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
+// removed fav foreach loop here, don't think it was doing anything? (This comment is from Jessica?)
 function assignData(data) {
   localStorage.setItem("total", data.total);
   const points = data.points;
@@ -353,9 +353,11 @@ function HomePage() {
     setFilter(e.target.value);
   };
 
+  // This function is the one that is called when the user presses the increment susAction button. If they confirm that
+  // they meant to, then this fucntion calls increment.
   const confirmIncrement = (action) => {
-    var retVal = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
-    if (retVal == true) {
+    var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
+    if( confirmed == true ) {
       increment(action); // If user meant to, call the function to actually increment user's points
     }
   };
@@ -449,6 +451,9 @@ function HomePage() {
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
+
+  // The following line is definitely interesting in terms of getting/maybe changing inner html and potentially getting the newlines to work
+console.log('INNERHTML', window.document.querySelector('div').innerHTML);
 
   // HTML to be displayed
   return (
@@ -583,7 +588,7 @@ function HomePage() {
                           action={
                             <IconButton
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
-                              // Finally found how to get ride of random old green from click and hover!
+                              // Finally found how to get rid of random old green from click and hover!
                               // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
                               // style={{ backgroundColor: "transparent" }}
                               aria-label="settings"
@@ -692,8 +697,10 @@ function HomePage() {
                                 className={classes.cardContent}
                                 action={
                                   <IconButton
-                                    onClick={() => confirmIncrement(action)}
-                                    // Finally found how to get ride of random old green from click and hover!
+                                    onClick={() =>
+                                      confirmIncrement(action)
+                                    }
+                                    // Finally found how to get rid of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
                                     aria-label="settings"
                                     title="Complete this sustainable action"
