@@ -280,7 +280,7 @@ const HomeHeader = ({ firebase }) => {
           <Typography className={classes.title} variant="h6">
             Home
           </Typography>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -292,7 +292,7 @@ const HomeHeader = ({ firebase }) => {
               }}
               inputProps={{ "aria-label": "search" }}
             />
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>
