@@ -18,6 +18,8 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
+import { render } from "@testing-library/react";
+
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -50,6 +52,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+var rank;
+
+const rankDisplay = () => {
+  console.log(localStorage.getItem("ranking"))
+  if (localStorage.getItem("ranking") == 1){
+    rank = ( 
+    <p>
+    You're in 1st place!
+    </p>
+    )
+  } if (localStorage.getItem("ranking") == 2){
+    rank = ( 
+    <p>
+    You're in 2nd place!
+    </p>
+    )
+  } else if (localStorage.getItem("ranking") == 3){
+    rank = ( 
+    <p>
+    You're in 3rd place!
+    </p>
+    )
+  } else {
+    rank = (
+    <p>
+    You're in {localStorage.getItem("ranking")}th place!
+    </p>
+    )
+  }
+  }
+
+  rankDisplay();
+
+
 export const DormCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
@@ -75,8 +111,8 @@ export const DormCard = React.memo(function GalaxyCard() {
                     {localStorage.getItem("dorm")} dorm
                   </InfoSubtitle>
                   <InfoTitle>
-                    You're in Rank {localStorage.getItem("ranking")}
-                  </InfoTitle>
+                  {rank}
+                  </InfoTitle>             
                   <InfoCaption>
                     <Link to={ROUTES.CHANGEDORM}>
                       <Typography variant="p" className={classes.linkText} style={{ underline: 'enum: none' }} >
