@@ -19,7 +19,7 @@ import Header, {
   CompeteHeader,
   InfoHeader,
   AccountHeader,
-  ChangeHeader,
+  BackArrowHeader,
 } from "../components/Headers";
 import CompetePage from "../pages/CompetePage";
 import OfflinePage from "../pages/OfflinePage";
@@ -38,8 +38,10 @@ const App = () => (
       <Route exact path="/compete" component={CompeteHeader} />
       <Route exact path="/info" component={InfoHeader} />
       <Route exact path="/account" component={AccountHeader} />
-      <Route exact path="/changedorm" component={ChangeHeader} />
-      <Route exact path="/changepassword" component={ChangeHeader} />
+      <Route exact path="/signup" component={BackArrowHeader} />
+      <Route exact path="/changedorm" component={BackArrowHeader} />
+      <Route exact path="/changepassword" component={BackArrowHeader} />
+      <Route exact path="/forgetpassword" component={BackArrowHeader} />
       <Route component={Header} />
     </Switch>
     <div className="main">

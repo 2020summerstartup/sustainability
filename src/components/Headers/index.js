@@ -181,7 +181,7 @@ const useStyles3 = makeStyles((theme) => ({
 }));
 
 // Header for Change Dorm and Change PW
-const ChangeHeader = ({ firebase }) => {
+const BackArrowHeader = ({ firebase }) => {
   let history = useHistory();
 
   const classes = useStyles3();
@@ -304,5 +304,5 @@ const HomeHeader = ({ firebase }) => {
   );
 };
 
-export { HomeHeader, CompeteHeader, InfoHeader, AccountHeader, ChangeHeader };
+export { HomeHeader, CompeteHeader, InfoHeader, AccountHeader, BackArrowHeader };
 export default withFirebase(Header);
