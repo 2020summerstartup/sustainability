@@ -77,6 +77,7 @@ class ContactForm extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { name, email, message } = this.state;
 
     return (
       // <Container>
