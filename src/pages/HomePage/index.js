@@ -60,6 +60,7 @@ import {
   InfoTitle,
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
+import TotalPointsCard from "../AccountPage/AccountTabs/points";
 
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
@@ -452,8 +453,30 @@ function HomePage() {
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
-  // The following line is definitely interesting in terms of getting/maybe changing inner html and potentially getting the newlines to work
-console.log('INNERHTML', window.document.querySelector('div').innerHTML);
+  // Set the "progress message" to be displayed when the user pressed "check progress"
+  var progressMessage = '';
+  const setProgressMessage = () => {
+    for (const key in ActionData) { // Loop over every action in ActionData
+      var actionPoints = localStorage.getItem(ActionData[key].susAction); // Points earned by current action
+      progressMessage = (
+        <>
+          {progressMessage}
+          {ActionData[key].title}&nbsp;points: {actionPoints}
+          <br/>
+        </>
+      )
+    }
+    // Append the total points earned
+    progressMessage = (
+      <>
+        {progressMessage}
+        <h3>Total points: {total}</h3>
+      </>
+    )
+  } // setProgressMessage
+
+  // Call the function immediately so that it runs before the return statement
+  setProgressMessage();
 
   // HTML to be displayed
   return (
@@ -522,33 +545,8 @@ console.log('INNERHTML', window.document.querySelector('div').innerHTML);
                 opacity={0.7}
                 // colors={["grey", "white", "green", "black"]}
               />
-              {
-                // Get the individual points earned from each susAction
-                // I don't yet understand what "Object" is referring to here/how the program knows that.
-                Object.keys(ActionData).map((key) => {
-                  message[parseInt(key)] = ActionData[key].title.concat(
-                    " Points: ",
-                    localStorage.getItem(ActionData[key].susAction),
-                    " "
-                  );
-                  return ""; // It has to return a value. I think it isn't bad practice to do this? -Katie
-                })
-              }
               <h1>Your Progress:</h1>
-              {/* TODO: This is a super janky but slightly prettier way to display the individual points. Still need to improve later. */}
-              <p>
-                {" "}
-                {message[0]} <br /> {message[1]} <br /> {message[2]} <br />{" "}
-                {message[3]} <br /> {message[4]} <br /> {message[5]} <br />{" "}
-                {message[6]} <br /> {message[7]} <br /> {message[8]}{" "}
-                {message.slice(9, message.length)}{" "}
-              </p>
-              <h3>Total Points: {total} </h3>
-              <h1 id="wrapper">
-                <button onClick={() => showProgress()}>
-                  Another option (delete eventually, not yet)
-                </button>
-              </h1>
+              {progressMessage}
               <div>
                 <button
                   onClick={() => setProgressModalIsOpen(false)}
