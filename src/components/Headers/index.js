@@ -139,7 +139,7 @@ const AccountHeader = ({ firebase }) => {
   );
 };
 
-// Styles used for Header on Change Password
+// Styles used for pages that have a back arrow
 const useStyles3 = makeStyles((theme) => ({
   title: {
     color: "white",
@@ -176,13 +176,13 @@ const useStyles3 = makeStyles((theme) => ({
 }));
 
 // Header for Change Dorm and Change PW
-const ChangeHeader = ({ firebase }) => {
+const BackArrowHeader = ({ firebase }) => {
   let history = useHistory();
 
   const classes = useStyles3();
   return (
     <>
-      <AppBar position="static" className={classes.header} elevation={0}>
+      <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           {/* Back Button using history */}
           <IconButton
@@ -280,7 +280,8 @@ const HomeHeader = ({ firebase }) => {
           <Typography className={classes.title} variant="h6">
             Home
           </Typography>
-          <div className={classes.search}>
+          {/* OLD SEARCH BAR IN HEADER THAT WASN'T FUNCTIONAL wait a little before deleting */}
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -292,12 +293,18 @@ const HomeHeader = ({ firebase }) => {
               }}
               inputProps={{ "aria-label": "search" }}
             />
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-export { HomeHeader, CompeteHeader, InfoHeader, AccountHeader, ChangeHeader };
+export {
+  HomeHeader,
+  CompeteHeader,
+  InfoHeader,
+  AccountHeader,
+  BackArrowHeader,
+};
 export default withFirebase(Header);

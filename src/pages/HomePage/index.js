@@ -35,6 +35,7 @@ import EcoIcon from "@material-ui/icons/Eco";
 import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
+import InputBase from "@material-ui/core/InputBase";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -77,9 +78,8 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-
-// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie'
-// removed fav foreach loop here, don't think it was doing anything?
+// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
+// removed fav foreach loop here, don't think it was doing anything? (This comment is from Jessica?)
 function assignData(data) {
   localStorage.setItem("total", data.total);
   const points = data.points;
@@ -142,20 +142,6 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing.unit,
   },
-  searchContainer: {
-    display: "flex",
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-  },
-  searchIcon: {
-    alignSelf: "flex-end",
-  },
-  searchInput: {
-    width: "12rem",
-    paddingBottom: "0rem",
-    [theme.breakpoints.up("sm")]: {
-      width: "15em",
-    },
-  },
   actionContainer: {
     paddingTop: "1rem",
     paddingLeft: "0rem",
@@ -186,23 +172,6 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     paddingTop: "0",
   },
-  underline: {
-    "&:before": {
-      borderBottom: "2px solid var(--text-primary)",
-      marginBottom: "8px",
-    },
-    "&:hover:not($disabled):not($focused):not($error):before": {
-      borderBottom: "2px solid var(--theme)",
-      marginBottom: "8px",
-    },
-    "&:after": {
-      borderBottom: "2px solid var(--theme)",
-      marginBottom: "8px",
-    },
-  },
-  disabled: {},
-  focused: {},
-  error: {},
   card: {
     borderRadius: "1rem",
     boxShadow: "none",
@@ -258,6 +227,57 @@ const useStyles = makeStyles((theme) => ({
     height: "3px",
     [theme.breakpoints.up("sm")]: {
       height: "5px",
+    },
+  },
+  search: {
+    position: "absolute",
+    top: "0.75rem",
+    right: "1rem",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: "12rem",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto",
+      top: "1rem",
+
+    },
+  },
+  searchIcon: {
+    color: "#fff",
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    color: "#fff",
+    display: "flex",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+      "&:focus": {
+        width: "28ch",
+      },
     },
   },
 }));
@@ -333,12 +353,14 @@ function HomePage() {
     setFilter(e.target.value);
   };
 
+  // This function is the one that is called when the user presses the increment susAction button. If they confirm that
+  // they meant to, then this fucntion calls increment.
   const confirmIncrement = (action) => {
-    var retVal = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
-    if( retVal == true ) {
+    var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
+    if( confirmed == true ) {
       increment(action); // If user meant to, call the function to actually increment user's points
     }
-  }
+  };
 
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
@@ -429,6 +451,9 @@ function HomePage() {
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
+
+  // The following line is definitely interesting in terms of getting/maybe changing inner html and potentially getting the newlines to work
+console.log('INNERHTML', window.document.querySelector('div').innerHTML);
 
   // HTML to be displayed
   return (
@@ -537,23 +562,19 @@ function HomePage() {
         </div>
         <TabPanel value={value} index={0} class="tab-container">
           <Fragment>
-            <div className={classes.searchContainer}>
-              <Grid container spacing={1} alignItems="flex-end">
-                <Grid item>
-                  <SearchIcon />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    id="search bar"
-                    label="Search Actions" 
-                    onChange={handleSearchChange}
-                    className={classes.searchInput}
-                    variant="standard"
-                    InputProps={{ disableUnderline: true }}
-                    InputProps={{ classes: { underline: classes.underline } }}
-                  />
-                </Grid>
-              </Grid>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                onChange={handleSearchChange}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
             </div>
             <Grid container spacing={2} className={classes.actionContainer}>
               {/* All actions (this loops using search) */}
@@ -567,7 +588,7 @@ function HomePage() {
                           action={
                             <IconButton
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
-                              // Finally found how to get ride of random old green from click and hover!
+                              // Finally found how to get rid of random old green from click and hover!
                               // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
                               // style={{ backgroundColor: "transparent" }}
                               aria-label="settings"
@@ -665,7 +686,7 @@ function HomePage() {
                     spacing={2}
                     className={classes.actionContainer}
                   >
-                  {/* Favorite actions (this loops using favs) */}
+                    {/* Favorite actions (this loops using favs) */}
                     {ActionData.map(
                       (action, i) =>
                         localStorage.getItem(action.susAction.concat("Fav")) ==
@@ -679,7 +700,7 @@ function HomePage() {
                                     onClick={() =>
                                       confirmIncrement(action)
                                     }
-                                    // Finally found how to get ride of random old green from click and hover!
+                                    // Finally found how to get rid of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
                                     aria-label="settings"
                                     title="Complete this sustainable action"

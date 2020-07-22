@@ -9,7 +9,6 @@ import { AuthUserContext } from "../../services/Session";
 import {updateUserDorm, getDorm} from "../../services/Firebase";
 import { assignRanking } from "../../pages/CompetePage/leaderboard";
 
-
 // Styles for dropdown menu
 const useStyles = makeStyles((theme) => ({
     // Provides context for form inputs

@@ -46,8 +46,11 @@ const useStyles = makeStyles((theme) => ({
   },
   linkText: {
     color: "white",
-    textDecoration: "none",
   },
+  link: {
+    textDecoration: "none",
+    underline: "none",
+  }
 }));
 
 export const DormCard = React.memo(function GalaxyCard() {
@@ -78,10 +81,10 @@ export const DormCard = React.memo(function GalaxyCard() {
                     You're in Rank {localStorage.getItem("ranking")}
                   </InfoTitle>
                   <InfoCaption>
-                    <Link to={ROUTES.CHANGEDORM}>
+                    <Link to={ROUTES.CHANGEDORM} className={classes.link}>
                       <Typography variant="p" className={classes.linkText} style={{ underline: 'enum: none' }} >
                         Change your dorm in settings&nbsp;
-                        <span role="img" aria-label="gear">
+                        <span role="img" aria-label="settings">
                           ⚙️
                         </span>
                       </Typography>

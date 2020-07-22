@@ -5,7 +5,7 @@ import * as firebase from "firebase";
 import "firebase/auth";
 
 import { SignUpLink } from "./signUpPage";
-import { PasswordForgetLink } from "./passwordForgetPage.js";
+import { PasswordForgetLink } from "./passwordForgetPage";
 import { withFirebase, getUser } from "../../services/Firebase";
 import { assignData } from '../HomePage/index.js';
 import * as ROUTES from "../../constants/routes";
