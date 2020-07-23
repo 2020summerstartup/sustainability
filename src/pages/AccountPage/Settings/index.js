@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteAccount: {
     position: "fixed",
-    bottom: "1rem",
+    bottom: "5px",
     color: "red",
   },
 }));
