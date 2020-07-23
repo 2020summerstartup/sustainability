@@ -35,6 +35,7 @@ import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import InputBase from "@material-ui/core/InputBase";
+import Button from "@material-ui/core/Button";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -281,15 +282,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   fab: {
-    // margin: theme.spacing(1),
     right: "1rem",
     bottom: "4.5rem",
     position: "fixed",
     zIndex: "1",
     [theme.breakpoints.up("sm")]: {
-      right: "2rem",
-      bottom: "2rem",
+      display: "none",
     },
+  },
+  checkProgress: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+      marginTop: theme.spacing(2)
+    }
   },
 }));
 
@@ -514,20 +520,27 @@ function HomePage() {
             You have earned&nbsp;
             {<CountUp start={0} end={total} duration={2}></CountUp>} points!
           </Typography >
+          {/* Mobile Screens */}
           <Fab
+            variant="extended"
+            size="medium"
             color="primary"
             onClick={() => setProgressModalIsOpen(true)}
             aria-label="check progress"
             className={classes.fab}
           >
-            <EcoIcon />
+            <CheckIcon />
+            &nbsp;Progress
           </Fab>
-          {/* <button
+          {/* Large Screens */}
+          <Button
+            color="primary"
+            variant="contained"
             onClick={() => setProgressModalIsOpen(true)}
-            className="button"
+            className={classes.checkProgress}
           >
             Check Progress
-          </button> */}
+          </Button>
           <Modal
             isOpen={progressModalIsOpen}
             onRequestClose={() => setProgressModalIsOpen(false)}

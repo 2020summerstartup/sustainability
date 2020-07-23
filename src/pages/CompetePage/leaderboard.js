@@ -1,9 +1,19 @@
 import React from "react";
 
 import "./leaderboard.css";
-import { firestore } from '../../services/Firebase/firebase';
+import { firestore } from "../../services/Firebase/firebase";
 import "firebase/firestore";
-import leaderBoardUpdate, {assignRanking} from "./leaderBoardUpdate";
+import leaderBoardUpdate, { assignRanking } from "./leaderBoardUpdate";
+
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+
+const useStyles = (theme) => ({
+  title: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(2),
+  },
+});
 
 // list of colors for each dorm to display in a different color depending on their ranking
 let colors = [
@@ -23,49 +33,50 @@ class Leaderboard extends React.Component {
     super();
     this.state = {
       leaders: [],
-      maxPoints: 500,
+      maxPoints: 1500,
     };
     this.getData = this.getData.bind(this);
   }
   getData() {
     //import the real dorm score data from firestore
     const getLeaders = () => {
-      const newLeaders = []
-      firestore.collection('dorms').get().then((snapshot) => {
-        snapshot.docs.forEach( doc => {
-            newLeaders.push({id: 1 , name: doc.id , points: doc.data().score},)
-        })
-        // orders by decreasing points property 
-        newLeaders.sort((a,b) => b.points - a.points)
-        this.setState({
-          leaders: newLeaders,
-          maxScore: newLeaders[0].points
+      const newLeaders = [];
+      firestore
+        .collection("dorms")
+        .get()
+        .then((snapshot) => {
+          snapshot.docs.forEach((doc) => {
+            newLeaders.push({ id: 1, name: doc.id, points: doc.data().score });
+          });
+          // orders by decreasing points property
+          newLeaders.sort((a, b) => b.points - a.points);
+          this.setState({
+            leaders: newLeaders,
+            maxScore: newLeaders[0].points,
+          });
         });
-      })
-    }
+    };
     // data is used, even though we get a warning saying otherwise. I think it complains because data is read from a different file?
     let data = {
       success: true,
-      leaders: [
-        getLeaders()
-      ],
-      maxScore: this.state.maxScore
+      leaders: [getLeaders()],
+      maxScore: this.state.maxScore,
     };
   }
 
-  
   //implement later with real data
   componentWillMount() {
     this.getData();
     /*data is refreshing every 3 minutes*/
     setInterval(this.getData, 180000);
-  };
-
+  }
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div className="Leaderboard">
-        <h1>Leaderboard</h1>
+        <Typography variant="h5" className={classes.title}>Leaderboard</Typography>
         <div className="leaders">
           {this.state.leaders ? (
             this.state.leaders.map((dorm, i) => (
@@ -133,5 +144,5 @@ class Leaderboard extends React.Component {
   }
 }
 
-export default Leaderboard;
-export {leaderBoardUpdate, assignRanking};
+export default withStyles(useStyles)(Leaderboard);
+export { leaderBoardUpdate, assignRanking };

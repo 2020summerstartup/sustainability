@@ -316,6 +316,10 @@ main {
     padding-bottom: 2rem;
   }
 
+  .signout-btn {
+    display: none !important;
+  }
+
 }
 
 @keyframes fade {
