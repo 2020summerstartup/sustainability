@@ -1,8 +1,9 @@
 import React from "react";
 import ChallengeData from './challengeData.json';
+import { red } from "@material-ui/core/colors";
 
 function challenges() {
-  // Just hardcoding in a bunch of colors so that we'll (hopefully) never have more simultaneous challenges than possible colors.
+  // Just hardcoding in a bunch of colors so that we'll never have more simultaneous challenges than possible colors.
   let colors = ["#24a113", "#39AA2A", "#4FB342", "#65BD59", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77", "#7fbf77"];
 
   var challengeInfo = "";

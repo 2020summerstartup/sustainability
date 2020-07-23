@@ -21,7 +21,6 @@
     "firebase-admin": "^8.13.0",
     "firebaseui": "^4.5.1",
     "http2": "^3.3.7",
-    "meteor-node-stubs": "^1.0.0",
     "moment": "^2.27.0",
     "muicss": "^0.10.2",
     "node-sass": "^4.14.1",
