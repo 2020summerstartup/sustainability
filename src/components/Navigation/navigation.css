@@ -155,6 +155,12 @@ main {
   }
   .signout-btn {
     display: inline;
+    position: absolute !important;
+    justify-content: center !important;
+    left: 50%;
+    bottom: 5rem;
+    transform: translate(-50%, 0);
+    z-index: 5;
   }
 }
 
