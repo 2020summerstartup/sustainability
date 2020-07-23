@@ -10,7 +10,7 @@ import Firebase, { FirebaseContext } from "./services/Firebase";
 
 const theme = createMuiTheme({
   palette: {
-    type: "dark",
+    type: "light",
     primary: {
       main: "#24a113",
     },

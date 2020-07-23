@@ -90,10 +90,10 @@ export const DormCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
   return (
-    <div>
+    // <Paper>
       <AuthUserContext.Consumer>
         {(authUser) => (
-          <Paper>
+          <>
             <NoSsr>
               <GoogleFontLoader
                 fonts={[
@@ -129,10 +129,10 @@ export const DormCard = React.memo(function GalaxyCard() {
               </Box>
             </Card>
             <SignOutButton />
-          </Paper>
+          </>
         )}
       </AuthUserContext.Consumer>
-    </div>
+    // </Paper>
   );
 });
 export default DormCard;
