@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Axios, db } from '../../services/Firebase/firebase.js'
-import './fbContactForm.styled.scss'
 
 const FBContactForm = () => {
   const [formData, setFormData] = useState({})
