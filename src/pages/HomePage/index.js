@@ -293,7 +293,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [incrementModalIsOpen, setIncrementModalIsOpen] = useState(false);
