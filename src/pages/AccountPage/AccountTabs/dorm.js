@@ -11,6 +11,7 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 import * as ROUTES from "../../../constants/routes";
 import {
   Info,
@@ -92,7 +93,7 @@ export const DormCard = React.memo(function GalaxyCard() {
     <div>
       <AuthUserContext.Consumer>
         {(authUser) => (
-          <>
+          <Paper>
             <NoSsr>
               <GoogleFontLoader
                 fonts={[
@@ -128,7 +129,7 @@ export const DormCard = React.memo(function GalaxyCard() {
               </Box>
             </Card>
             <SignOutButton />
-          </>
+          </Paper>
         )}
       </AuthUserContext.Consumer>
     </div>
