@@ -345,7 +345,7 @@ function HomePage() {
   };
 
   // This function is the one that is called when the user presses the increment susAction button. If they confirm that
-  // they meant to, then this fucntion calls increment.
+  // they meant to, then this function calls increment.
   const confirmIncrement = (action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
     if (confirmed == true) {
