@@ -14,6 +14,7 @@ import {
   updateUserPoint,
   updateDormPoint,
   actionMastered,
+  firestore,
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -321,6 +322,8 @@ function HomePage() {
     }
   );
 
+  // getMastered(authContext.email);
+
   // message to be displayed in check your progress
   var message = [];
   total = localStorage.getItem("total");
@@ -391,7 +394,6 @@ function HomePage() {
       }
     );
   
-    var notMastered = false
     checkMastered(action);
     
 
@@ -401,28 +403,48 @@ function HomePage() {
 
 
 
-  // Initialize the mastered status of each action
-  // This isn't in a function because I can't call the function when I want using html. Could go in a function and then be called with JS.
+
+ 
+  
+  // to check with the mastered actions that firestore has upon loading page 
+  // may need to change this because every time the page loads we will read firestore data 
+  //(and page load everytime action is logged) so we may reach limit if many people are using the app
+  var firestoreMastered = [] 
+  const getMastered = (userEmail) => {
+    let userDocRef = firestore.doc('users/' + userEmail);
+    userDocRef.get().then(snapshot => {
+      // finds which actions have been previously mastered from firestore -> this is an array!
+      firestoreMastered = snapshot.get('masteredActions');
+      // need json.stringify to put the array into local storage as an array!
+      localStorage.setItem('firestoreMastered', JSON.stringify(firestoreMastered));
+    })
+  }
+  getMastered(localStorage.getItem('email'));
+
+
   var masterActions = []; // Initalize array of the mastered status for each action
   for (const key in ActionData) {
-    // Iterate over every action in ActionData
+    // Iterate over every action in ActionData & determine if button needs to load as enabled or disabled
     var action = ActionData[key]; // Take the current action
+    var stringActionName = JSON.stringify(action.susAction)
     var storageName = action.susAction.concat("Mastered");
-    var storedMaster = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console (wants ===)
-    if (storedMaster) {
-      // If the action is mastered
-      masterActions[key - 1] = true; // disabled button
+    var firestoreMastered = localStorage.getItem('firestoreMastered');
+
+    if ( firestoreMastered.includes(stringActionName) ){
+      masterActions[key -1] = true; //disable button when action is mastered
+      localStorage.setItem(storageName, true) // update local storage accordingly 
     } else {
-      masterActions[key - 1] = false; // enabled button
+      masterActions[key -1] = false; //enable button is action is not yet mastered
+      localStorage.setItem(storageName, false) // update local storage accordingly 
     }
   }
 
-  var notMastered;
+
+  //This function checks if (upon increment) the action should be mastered & acts according
   const checkMastered = (action) => {
     // Get the name and info of the stored action that we're working with
-    // console.log(action.susAction)
     var storageName = action.susAction.concat("Mastered");
-    // storedFav is a boolean (is the current action favorited?)
+
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
     var storedMaster = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console
     // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
@@ -431,38 +453,18 @@ function HomePage() {
     const actionTotal = localStorage.getItem(action.susAction);
     console.log(actionTotal);
     console.log(action.points)
-    if (storedMaster == null) {
-      notMastered = false; // if not initialized, then initialize
-      console.log('null')
-    } if ((20 * (action.points)) > actionTotal) {
-      notMastered = false; // If I have not mastered action, leave button enabled
-      localStorage.setItem(storageName, notMastered);
+    // if (storedMaster == null) {
+    //   console.log('null')
+    // } 
+    if ((20 * (action.points)) >= actionTotal) {
+      // If action has not been mastered, the button will remain enabled
       console.log('You are ' + ((20 * (action.points))- actionTotal) + ' points away from mastering this action!')
-    } else  if ((20 * (action.points)) <= actionTotal){
-      notMastered = true; // If mastered, set button disabled var to true
+    } else  if ((20 * (action.points)) < actionTotal){
       actionMastered((localStorage.getItem('email')), action.susAction)
-      localStorage.setItem(storageName, notMastered);
+      // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect 
+      // that action has been mastered -> will be disabled upon reload
       console.log('You have mastered this action!')
     }
-    // Toggle the favorite
-    // variable for getting color of fav icon
-    var masterStatus = document.getElementById(
-      "addCircleIcon".concat(action.susAction)
-    );
- 
-    
-    // // Notify user that action was added/removed from favorites
-    // var displayText;
-    // if (masterFav) {
-    //   displayText = action.title.concat(" has been mastered!");
-    //   masterStatus.disabled={true}; // disable
-    //   toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
-    // } else {
-    //   displayText = action.title.concat(" removed from favorites");
-    //   masterStatus.style.color = "#6c6c6c"; // Back to grey
-    //   toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
-    // }
-    // localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
 
