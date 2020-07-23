@@ -26,8 +26,8 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 const SignInPage = () => (
@@ -87,7 +87,6 @@ class PasswordInput extends Component {
         variant="outlined"
         margin="normal"
         fullWidth
-        // type="password"
         type={passwordIsMasked ? "password" : "text"}
         {...this.props}
         InputProps={{
@@ -98,7 +97,7 @@ class PasswordInput extends Component {
                   onClick={this.togglePasswordMask}
                   edge="end"
                 >
-                  {passwordIsMasked ? <VisibilityOff /> : <Visibility />}
+                  {passwordIsMasked ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </IconButton>
             </InputAdornment>
           ),
@@ -202,9 +201,6 @@ class SignInFormBase extends Component {
                 onChange={this.onChange}
                 InputProps={{
                   startAdornment: <EmailIcon className={classes.formIcon} />,
-                  classes: {
-                    adornedEnd: classes.adornedEnd,
-                  },
                 }}
               />
               <PasswordInput

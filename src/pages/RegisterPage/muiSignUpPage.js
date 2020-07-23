@@ -24,8 +24,8 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import HomeIcon from "@material-ui/icons/Home";
@@ -162,7 +162,7 @@ class PasswordInput2 extends Component {
                   onClick={this.togglePasswordMask}
                   edge="end"
                 >
-                  {passwordIsMasked ? <VisibilityOff /> : <Visibility />}
+                  {passwordIsMasked ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </IconButton>
             </InputAdornment>
           ),
@@ -313,7 +313,7 @@ class SignUpFormBase extends Component {
     // dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
     return (
-      <Container maxWidth="sm">
+      <Container maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
