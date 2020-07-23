@@ -4,21 +4,43 @@ import Leaderboard from "./leaderboard.js";
 import Challenges from "./challenges.js";
 
 import Paper from "@material-ui/core/Paper";
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const CompetePage = () => (
-  <div>
+  <Paper>
     <AuthUserContext>
       {(authUser) => (
-        <Paper>
           <div className="base-container">
+            {/* <Compete loading /> */}
+            {/* <Compete /> */}
             <Leaderboard />
             <Challenges />
           </div>
-        </Paper>
       )}
     </AuthUserContext>
-  </div>
+  </Paper>
 );
+
+// function Compete(props) {
+//   const { loading = false } = props;
+
+//   return (
+//     // <Typography variant="h1">
+//     <div>
+//       {loading ? <Skeleton /> : <Leaderboard />}
+//     </div>
+//     // </Typography>
+//   );
+// }
+
+// Compete.propTypes = {
+//   loading: PropTypes.bool,
+// };
+
 
 const condition = (authUser) => !!authUser;
 

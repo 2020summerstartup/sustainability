@@ -34,12 +34,12 @@ class DeleteAccountBase extends React.Component {
     this.state = {};
   }
 
-    // This function is the one that is called when the user presses the increment susAction button. If they confirm that
-    // they meant to, then this fucntion calls increment.
+    // This function is the one that is called when the user presses the delete account button. If they confirm that
+    // they meant to, then this fucntion calls accountDelete to delete them as an user.
     confirmDelete = (action) => {
         var confirmed = window.confirm("Are you sure you want to delete your account? This cannot be undone."); // Check with the user (did they mean to increment?)
         if( confirmed == true ) {
-            this.accountDelete();; // If user meant to, call the function to actually increment user's points
+            this.accountDelete();; // If user meant to, call the function to actually delete the user
         }
     };
 

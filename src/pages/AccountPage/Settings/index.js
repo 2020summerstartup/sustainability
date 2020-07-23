@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { withTheme } from "../../../components/Theme";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -16,8 +17,11 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Brightness7Icon from '@material-ui/icons/Brightness7';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 
 import { AuthUserContext } from "../../../services/Session";
+
 const useStyles = makeStyles((theme) => ({
   settingsIcon: {
     color: "white",
@@ -39,13 +43,14 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteAccount: {
     position: "fixed",
-    bottom: "1rem",
+    bottom: "5px",
     color: "red",
   },
 }));
 
-export default function SwipeableTemporaryDrawer() {
+function SettingsDrawer(props) {
   const classes = useStyles();
+  const { darkMode, setDarkMode } = props;
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -114,9 +119,10 @@ export default function SwipeableTemporaryDrawer() {
         <ListItem className={classes.listItem}>
           <ListItemIcon className={classes.listItemIcon}>
             <Switch
-              checked={state.checked}
-              // write this function later when we implement dark mode
-              // onChange={handleChange}
+              // checked={state.checked}
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
+              onClick={() => window.location.reload()}
               color="primary"
               name="mode"
               inputProps={{ "aria-label": "mode changed" }}
@@ -172,3 +178,6 @@ export default function SwipeableTemporaryDrawer() {
     </div>
   );
 }
+
+export default withTheme(SettingsDrawer);
+// export default SettingsDrawer;

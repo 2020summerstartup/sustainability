@@ -13,6 +13,8 @@ import {
   uploadUserTotalPoint,
   updateUserPoint,
   updateDormPoint,
+  actionMastered,
+  firestore,
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -35,6 +37,7 @@ import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import InputBase from "@material-ui/core/InputBase";
+import Button from "@material-ui/core/Button";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -281,15 +284,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   fab: {
-    // margin: theme.spacing(1),
     right: "1rem",
     bottom: "4.5rem",
     position: "fixed",
     zIndex: "1",
     [theme.breakpoints.up("sm")]: {
-      right: "2rem",
-      bottom: "2rem",
+      display: "none",
     },
+  },
+  checkProgress: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+      marginTop: theme.spacing(2)
+    }
   },
 }));
 
@@ -318,6 +326,8 @@ function HomePage() {
       console.log(`Encountered error: ${err}`);
     }
   );
+
+  // getMastered(authContext.email);
 
   // message to be displayed in check your progress
   var message = [];
@@ -388,10 +398,82 @@ function HomePage() {
         console.log(`Encountered error: ${err}`);
       }
     );
+  
+    checkMastered(action);
+    
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
   }; // increment
+
+
+
+
+ 
+  
+  // to check with the mastered actions that firestore has upon loading page 
+  // may need to change this because every time the page loads we will read firestore data 
+  //(and page load everytime action is logged) so we may reach limit if many people are using the app
+  var firestoreMastered = [] 
+  const getMastered = (userEmail) => {
+    let userDocRef = firestore.doc('users/' + userEmail);
+    userDocRef.get().then(snapshot => {
+      // finds which actions have been previously mastered from firestore -> this is an array!
+      firestoreMastered = snapshot.get('masteredActions');
+      // need json.stringify to put the array into local storage as an array!
+      localStorage.setItem('firestoreMastered', JSON.stringify(firestoreMastered));
+    })
+  }
+  getMastered(localStorage.getItem('email'));
+
+
+  var masterActions = []; // Initalize array of the mastered status for each action
+  for (const key in ActionData) {
+    // Iterate over every action in ActionData & determine if button needs to load as enabled or disabled
+    var action = ActionData[key]; // Take the current action
+    var stringActionName = JSON.stringify(action.susAction)
+    var storageName = action.susAction.concat("Mastered");
+    var firestoreMastered = localStorage.getItem('firestoreMastered');
+
+    if ( firestoreMastered.includes(stringActionName) ){
+      masterActions[key -1] = true; //disable button when action is mastered
+      localStorage.setItem(storageName, true) // update local storage accordingly 
+    } else {
+      masterActions[key -1] = false; //enable button is action is not yet mastered
+      localStorage.setItem(storageName, false) // update local storage accordingly 
+    }
+  }
+
+
+  //This function checks if (upon increment) the action should be mastered & acts according
+  const checkMastered = (action) => {
+    // Get the name and info of the stored action that we're working with
+    var storageName = action.susAction.concat("Mastered");
+
+    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
+    var storedMaster = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console
+    // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
+    // In case the action hasn't been favorited before
+    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
+    const actionTotal = localStorage.getItem(action.susAction);
+    console.log(actionTotal);
+    console.log(action.points)
+    // if (storedMaster == null) {
+    //   console.log('null')
+    // } 
+    if ((20 * (action.points)) >= actionTotal) {
+      // If action has not been mastered, the button will remain enabled
+      console.log('You are ' + ((20 * (action.points))- actionTotal) + ' points away from mastering this action!')
+    } else  if ((20 * (action.points)) < actionTotal){
+      actionMastered((localStorage.getItem('email')), action.susAction)
+      // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect 
+      // that action has been mastered -> will be disabled upon reload
+      console.log('You have mastered this action!')
+    }
+  };
+
+
+
 
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
@@ -514,20 +596,27 @@ function HomePage() {
             You have earned&nbsp;
             {<CountUp start={0} end={total} duration={1}></CountUp>} points!
           </Typography >
+          {/* Mobile Screens */}
           <Fab
+            variant="extended"
+            size="medium"
             color="primary"
             onClick={() => setProgressModalIsOpen(true)}
             aria-label="check progress"
             className={classes.fab}
           >
-            <EcoIcon />
+            <CheckIcon />
+            &nbsp;Progress
           </Fab>
-          {/* <button
+          {/* Large Screens */}
+          <Button
+            color="primary"
+            variant="contained"
             onClick={() => setProgressModalIsOpen(true)}
-            className="button"
+            className={classes.checkProgress}
           >
             Check Progress
-          </button> */}
+          </Button>
           <Modal
             isOpen={progressModalIsOpen}
             onRequestClose={() => setProgressModalIsOpen(false)}
@@ -585,6 +674,7 @@ function HomePage() {
                           className={classes.cardContent}
                           action={
                             <IconButton
+                              disabled={masterActions[i -1]}
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
                               // Finally found how to get rid of random old green from click and hover!
                               // TODO: Is the following line actually still necessary? I commented it out and I think it's fine

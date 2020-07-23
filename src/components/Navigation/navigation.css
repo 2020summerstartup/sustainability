@@ -145,7 +145,7 @@ main {
 }
 
 .signout-btn {
-  display: none !important;
+  display: none;
 }
 
 /* Small screens */
@@ -314,6 +314,10 @@ main {
     padding-right: 2rem;
     padding-left: 8.5rem;
     padding-bottom: 2rem;
+  }
+
+  .signout-btn {
+    display: none !important;
   }
 
 }
