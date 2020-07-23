@@ -64,7 +64,7 @@ const CompeteHeader = ({ firebase }) => {
         <Toolbar className={classes.toolbar}>
           <img src={suslogoImg} alt="logo" className={classes.logo} />
           <Typography variant="h6" className={classes.title} noWrap>
-            Competitions and Rankings
+            Leaderboard and Challenges
           </Typography>
         </Toolbar>
       </AppBar>

@@ -20,26 +20,26 @@ class InfoCards extends React.Component {
       cards: [
         {
           id: 1,
-          title: "Our Goal",
+          title: "About Us",
           description:
-            "The 2020 Summer Startup Team works with sustainability organizations at Harvey Mudd like ASHMC sustainability and Engineers of a Sustainable World to help promote more eco-friendly practices on our campus by providing real-life incentives.",
+            "The 2020 Summer Startup Team works with sustainability organizations at Harvey Mudd like ASHMC sustainability and Engineers of a Sustainable World to help promote more eco-friendly practices on our campus through friendly competition.",
         },
         {
           id: 3,
-          title: "Current Challenges",
+          title: "Challenges",
           description:
-            "Earth Day Challenge! Waste Challenge! Food and Drink Challenge! Recycling Challenge!",
+            "Earth Day Challenge! Waste Challenge! Food and Drink Challenge! Recycling Challenge! Check out the current challenges on the compete page.",
         },
         {
           id: 2,
           title: "How to Participate & Earn Points",
           description:
-            "Sign up with your HMC email! Look on our actions page for sustainable practices that you can earn points for every time you complete the action!",
+            "Sign up with your HMC email! Check out the home page for sustainable practices that you can earn points for every time you complete the action!",
         },
         {
           id: 4,
           title: "Current Rewards",
-          description: "Funded by ASHMC Sustainability and ESW!",
+          description: "Rewards include dorm pizza parties, sustainability swag, and BRAGGING RIGHTS. Funded by ASHMC Sustainability and ESW! (Except for the bragging rights. Those are free.) NOTE: We should talk about how these prizes would actually be funded. Can we chat with ASHMC Sustainability?",
         },
       ],
     };

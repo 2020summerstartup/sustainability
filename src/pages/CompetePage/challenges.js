@@ -1,12 +1,52 @@
 import React from "react";
+import ChallengeData from './challengeData.json';
+import { red } from "@material-ui/core/colors";
 
-export default function challenges() {
-    return (
-        <div>
-            <h1>
-                Current Challenges
-            </h1>
-            display current challenges from a json file? Idk what we want to do with this, but the skeleton of it is here now!
-        </div>
-    )
+function challenges() {
+  var challengeInfo = "";
+  const setChallengeInfo = () => {
+    for (const key in ChallengeData) {
+      // Loop over every action in ActionData
+      challengeInfo = (
+        <>
+          {challengeInfo}
+          <div
+            style={{
+              backgroundColor: "#24a113",
+              color: "white",
+              padding: "1.5rem",
+              borderRadius: "10px",
+              margin: "0 0.5rem",
+              maxWidth: "600px",
+              marginTop: "2rem",
+            }}
+          >
+            <b>Challenge {parseInt(key)+1}: {ChallengeData[key].title}</b>
+            <br/>
+            <p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;{ChallengeData[key].info}</p>
+          </div>
+        </>
+      );
+    }
+    // Append more info
+    challengeInfo = (
+      <>
+        {challengeInfo}
+        <p><b>Check back often for new challenges!</b></p>
+      </>
+    );
+  }; // setChallengeInfo
+
+  // Call the function immediately so that it runs before the return statement
+  setChallengeInfo();
+  return (
+    <div>
+      <h1>
+        Current Challenges
+      </h1>
+      {challengeInfo}
+    </div>
+  )
 }
+
+export default challenges;
