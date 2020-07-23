@@ -61,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-var rank;
 
 getDorm()
   .doc(localStorage.getItem("dorm"))
@@ -70,6 +69,8 @@ getDorm()
   });
 leaderBoardUpdate();
 
+
+var rank;
 const rankDisplay = () => {
   if (localStorage.getItem("ranking") == 1) {
     rank = <p>You're in 1st place!</p>;
