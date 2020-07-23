@@ -529,6 +529,12 @@ function HomePage() {
           >
             Check Progress
           </button>
+          {/* <button
+            onClick={() => setProgressModalIsOpen(true)}
+            className="button"
+          >
+            Check Progress
+          </button> */}
           <Modal
             isOpen={progressModalIsOpen}
             onRequestClose={() => setProgressModalIsOpen(false)}

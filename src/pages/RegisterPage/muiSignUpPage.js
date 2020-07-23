@@ -386,7 +386,7 @@ class SignUpFormBase extends Component {
               onChange={this.onTagsChange}
             //   onChange={this.onChange}
             /> */}
-            <DormSelect />
+            {/* <DormSelect /> */}
             {/* <Autocomplete
               id="dorm input"
               options={dorms}
@@ -418,7 +418,7 @@ class SignUpFormBase extends Component {
               }}
             /> */}
             {/* dont delete  */}
-            {/* <TextField
+            <TextField
               variant="outlined"
               margin="normal"
               fullWidth
@@ -433,7 +433,7 @@ class SignUpFormBase extends Component {
                   adornedEnd: classes.adornedEnd,
                 },
               }}
-            /> */}
+            />
             {/* <div className="form-group">
               <FontAwesomeIcon icon="user" className="icon" />
               <input
