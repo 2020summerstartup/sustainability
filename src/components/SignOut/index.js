@@ -1,11 +1,18 @@
-import React from 'react';
+import React from "react";
 //  import * as firebase from 'firebase';
-import { withFirebase } from '../../services/Firebase';
- 
+import { withFirebase } from "../../services/Firebase";
+
+import Button from "@material-ui/core/Button";
+
 const SignOutButton = ({ firebase }) => (
-  <button type="button" onClick={firebase.doSignOut} className="signout-btn button">
+  <Button
+    onClick={firebase.doSignOut}
+    variant="contained"
+    color="primary"
+    className="signout-btn button"
+  >
     Sign Out
-  </button>
+  </Button>
 );
- 
+
 export default withFirebase(SignOutButton);

@@ -45,6 +45,8 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Fab from "@material-ui/core/Fab";
+import CheckIcon from "@material-ui/icons/Check";
 
 import Collapse from "@material-ui/core/Collapse";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -144,9 +146,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing.unit,
   },
   actionContainer: {
-    paddingTop: "1rem",
-    paddingLeft: "0rem",
-    paddingRight: "0rem",
+    padding: "0",
   },
   media: {
     height: 0,
@@ -245,7 +245,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(1),
       width: "auto",
       top: "1rem",
-
     },
   },
   searchIcon: {
@@ -279,6 +278,17 @@ const useStyles = makeStyles((theme) => ({
       "&:focus": {
         width: "28ch",
       },
+    },
+  },
+  fab: {
+    // margin: theme.spacing(1),
+    right: "1rem",
+    bottom: "4.5rem",
+    position: "fixed",
+    zIndex: "1",
+    [theme.breakpoints.up("sm")]: {
+      right: "2rem",
+      bottom: "2rem",
     },
   },
 }));
@@ -338,7 +348,7 @@ function HomePage() {
   // they meant to, then this fucntion calls increment.
   const confirmIncrement = (action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
-    if( confirmed == true ) {
+    if (confirmed == true) {
       increment(action); // If user meant to, call the function to actually increment user's points
     }
   };
@@ -432,17 +442,18 @@ function HomePage() {
   };
 
   // Set the "progress message" to be displayed when the user pressed "check progress"
-  var progressMessage = '';
+  var progressMessage = "";
   const setProgressMessage = () => {
-    for (const key in ActionData) { // Loop over every action in ActionData
+    for (const key in ActionData) {
+      // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[key].susAction); // Points earned by current action
       progressMessage = (
         <>
           {progressMessage}
           {ActionData[key].title}&nbsp;points: {actionPoints}
-          <br/>
+          <br />
         </>
-      )
+      );
     }
     // Append the total points earned
     progressMessage = (
@@ -450,8 +461,8 @@ function HomePage() {
         {progressMessage}
         <h3>Total points: {total}</h3>
       </>
-    )
-  } // setProgressMessage
+    );
+  }; // setProgressMessage
 
   // Call the function immediately so that it runs before the return statement
   setProgressMessage();
@@ -499,16 +510,18 @@ function HomePage() {
           </Tabs>
         </AppBar>
         <div className="top-container">
-          <h3>
+          <Typography variant="h5" style={{ marginTop: "1rem"}}>
             You have earned&nbsp;
-            {<CountUp start={0} end={total} duration={1}></CountUp>} points!
-          </h3>
-          <button
+            {<CountUp start={0} end={total} duration={2}></CountUp>} points!
+          </Typography >
+          <Fab
+            color="primary"
             onClick={() => setProgressModalIsOpen(true)}
-            className="button"
+            aria-label="check progress"
+            className={classes.fab}
           >
-            Check Progress
-          </button>
+            <EcoIcon />
+          </Fab>
           {/* <button
             onClick={() => setProgressModalIsOpen(true)}
             className="button"
@@ -682,9 +695,7 @@ function HomePage() {
                                 className={classes.cardContent}
                                 action={
                                   <IconButton
-                                    onClick={() =>
-                                      confirmIncrement(action)
-                                    }
+                                    onClick={() => confirmIncrement(action)}
                                     // Finally found how to get rid of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
                                     aria-label="settings"

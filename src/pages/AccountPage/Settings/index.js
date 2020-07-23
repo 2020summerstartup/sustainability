@@ -127,11 +127,10 @@ export default function SwipeableTemporaryDrawer() {
           </ListItemText>
         </ListItem>
 
-        <ListItem className={classes.settingsSignOut}>
-          {/* <ListItemText> */}
+        {/* Moving this for now because always get error when signing out */}
+        {/* <ListItem className={classes.settingsSignOut}>
           <SignOutButton />
-          {/* </ListItemText> */}
-        </ListItem>
+        </ListItem> */}
 
         <ListItem
           button

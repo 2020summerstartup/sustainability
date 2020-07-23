@@ -1,17 +1,18 @@
 import React from "react"; // No longer imports component because it wasn't used
-
-// import { withFirebase } from "../Firebase";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
-
 import Leaderboard from "./leaderboard.js";
+
+import Paper from "@material-ui/core/Paper";
 
 const CompetePage = () => (
   <div>
     <AuthUserContext>
       {(authUser) => (
-        <div className="base-container">
-          <Leaderboard />
-        </div>
+        <Paper>
+          <div className="base-container">
+            <Leaderboard />
+          </div>
+        </Paper>
       )}
     </AuthUserContext>
   </div>

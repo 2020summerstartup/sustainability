@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import points from "../../../img/points.svg";
 import { AuthUserContext } from "../../../services/Session";
 import pointsForAccount from "./points.js";
+import SignOutButton from "../../../components/SignOut";
 
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -50,7 +51,7 @@ const useStyles = makeStyles(() => ({
 
 export const TotalPointsCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
-  const styles = useStyles();
+  const classes = useStyles();
   const authContext = useContext(AuthUserContext);
 
   getUser(authContext.email).onSnapshot(
@@ -80,9 +81,9 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 ]}
               />
             </NoSsr>
-            <Card className={styles.card}>
+            <Card className={classes.card}>
               <CardMedia classes={mediaStyles} image={points} />
-              <Box py={3} px={2} className={styles.content}>
+              <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
                   <InfoSubtitle>You have earned</InfoSubtitle>
                   <InfoTitle> {localStorage.getItem("total")} Points</InfoTitle>
@@ -92,6 +93,7 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 </Info>
               </Box>
             </Card>
+            <SignOutButton />
           </>
         )}
       </AuthUserContext.Consumer>
