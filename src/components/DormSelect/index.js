@@ -30,13 +30,10 @@ export default function DormSelect() {
   // Used to make sure user is authenticated
   // Gives an alert if the user does not have a dorm selected
   const authContext = useContext(AuthUserContext);
-  // var placeholder = localStorage.getItem('dorm');
-  var newPlaceholder = localStorage.getItem("dorm");
-  // if (placeholder == null) {
-  //   placeholder = "Select your dorm..."
-  //   alert("Please select your dorm in setting page!");
-  //   newPlaceholder = "Dorm";
-  // }
+  var placeholder = localStorage.getItem('dorm');
+  if (placeholder == null) {
+    placeholder = "Select your dorm..."
+  }
 
   // Sets dorm by calling local storage and firebase
   const handleChange = (event) => {
@@ -58,7 +55,7 @@ export default function DormSelect() {
         {/* <InputLabel>{newPlaceholder}</InputLabel> */}
         <Select
           native
-          value={dorm}
+          value={placeholder}
           onChange={handleChange}
           label="Dorm"
           inputProps={{ "aria-label": "dorm" }}
