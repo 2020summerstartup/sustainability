@@ -6,7 +6,7 @@ import { AppBar, Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 // account header imports
-import SwipeableTemporaryDrawer from "../../pages/AccountPage/Settings";
+import SettingsDrawer from "../../pages/AccountPage/Settings";
 import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -126,7 +126,7 @@ const AccountHeader = ({ firebase }) => {
               </Typography>
             </Grid>
             <Grid item>
-              <SwipeableTemporaryDrawer />
+              <SettingsDrawer />
             </Grid>
             {/* <Grid item>
               <AccountTabs/>
@@ -139,7 +139,7 @@ const AccountHeader = ({ firebase }) => {
   );
 };
 
-// Styles used for pages that have a back arrow
+// Styles used for pages that have a back arrow header
 const useStyles3 = makeStyles((theme) => ({
   title: {
     color: "white",
@@ -148,11 +148,6 @@ const useStyles3 = makeStyles((theme) => ({
     marginLeft: "0rem",
     marginBottom: "0.5rem",
     textAlign: "left",
-  },
-  menuButton: {
-    marginright: theme.spacing(2),
-    textAlign: "left",
-    color: "white",
   },
   buttonIcon: {
     paddingLeft: "0",
@@ -205,7 +200,7 @@ const BackArrowHeader = ({ firebase }) => {
             
              
             <Grid item>
-              <SwipeableTemporaryDrawer />
+              <SettingsDrawer />
             </Grid>
             {/* <Grid item>
               <AccountTabs/>
