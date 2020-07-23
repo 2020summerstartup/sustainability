@@ -6,7 +6,7 @@ import { AppBar, Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 // account header imports
-import SwipeableTemporaryDrawer from "../../pages/AccountPage/Settings";
+import SettingsDrawer from "../../pages/AccountPage/Settings";
 import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -126,7 +126,7 @@ const AccountHeader = ({ firebase }) => {
               </Typography>
             </Grid>
             <Grid item>
-              <SwipeableTemporaryDrawer />
+              <SettingsDrawer />
             </Grid>
             {/* <Grid item>
               <AccountTabs/>
@@ -200,7 +200,7 @@ const BackArrowHeader = ({ firebase }) => {
             
              
             <Grid item>
-              <SwipeableTemporaryDrawer />
+              <SettingsDrawer />
             </Grid>
             {/* <Grid item>
               <AccountTabs/>

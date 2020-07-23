@@ -31,8 +31,9 @@ import MuiChangeDorm from "../pages/AccountPage/Settings/muiChangeDorm";
 import DeleteAccount from "../pages/AccountPage/Settings/deleteAccount";
 import * as ROUTES from "../constants/routes";
 import { withAuthentication } from "../services/Session";
+import { withTheme } from "../components/Theme";
 
-const App = () => (
+const AppBase = () => (
   <Router>
     <Switch>
       {/* FOR PAGES WITH SPECIAL HEADERS */}
@@ -71,4 +72,5 @@ const App = () => (
   </Router>
 );
 
+const App = withTheme(AppBase);
 export default withAuthentication(App);
