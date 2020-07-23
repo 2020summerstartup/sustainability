@@ -1,6 +1,7 @@
 import React from "react"; // No longer imports component because it wasn't used
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import Leaderboard from "./leaderboard.js";
+import Challenges from "./challenges.js";
 
 import Paper from "@material-ui/core/Paper";
 import PropTypes from 'prop-types';
@@ -17,6 +18,7 @@ const CompetePage = () => (
             {/* <Compete loading /> */}
             {/* <Compete /> */}
             <Leaderboard />
+            <Challenges />
           </div>
       )}
     </AuthUserContext>
