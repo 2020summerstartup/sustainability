@@ -120,6 +120,7 @@ function SettingsDrawer(props) {
               // checked={state.checked}
               checked={darkMode}
               onChange={() => setDarkMode(!darkMode)}
+              onClick={() => window.location.reload()}
               color="primary"
               name="mode"
               inputProps={{ "aria-label": "mode changed" }}
