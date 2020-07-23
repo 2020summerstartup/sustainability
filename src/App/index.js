@@ -30,6 +30,7 @@ import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
 import MuiChangeDorm from "../pages/AccountPage/Settings/muiChangeDorm";
 import DeleteAccount from "../pages/AccountPage/Settings/deleteAccount";
 import * as ROUTES from "../constants/routes";
+
 import { withAuthentication } from "../services/Session";
 
 const App = () => (
