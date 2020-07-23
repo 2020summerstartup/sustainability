@@ -34,7 +34,7 @@ class InfoCards extends React.Component {
           id: 2,
           title: "How to Participate & Earn Points",
           description:
-            "Sign up with your HMC email! Check out the home page for sustainable practices that you can earn points for every time you complete the action!",
+            "Sign up with your HMC email! Log your sustainable actions on the home page, and earn points for your dorm by living more sustainably!",
         },
         {
           id: 4,
