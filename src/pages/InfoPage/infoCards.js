@@ -83,7 +83,7 @@ class InfoCards extends React.Component {
                           color: "white",
                           padding: "1.5rem",
                           borderRadius: "10px",
-                          margin: "0 1.5rem",
+                          margin: "0 0.5rem",
                           maxWidth: "600px",
                           marginTop: "2rem",
                         }}

@@ -145,7 +145,7 @@ main {
 }
 
 .signout-btn {
-  display: none;
+  display: none !important;
 }
 
 /* Small screens */
@@ -154,7 +154,10 @@ main {
     display: none;
   }
   .signout-btn {
-    display: inline;
+    position: absolute !important;
+    left: 50%;
+    bottom: 5rem;
+    transform: translate(-50%, 0);
   }
 }
 
@@ -270,9 +273,10 @@ main {
   }
 
   .navbar:hover .signout-btn {
-    display: inline;
+    display: inline-flex !important;
     margin-left: 6rem;
     animation: fade 3s;
+    width: 50%;
   }
 
   .nav-item:last-child {
@@ -311,6 +315,7 @@ main {
     padding-left: 8.5rem;
     padding-bottom: 2rem;
   }
+
 }
 
 @keyframes fade {

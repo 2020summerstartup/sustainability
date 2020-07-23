@@ -1,6 +1,8 @@
 import React from "react";
 import dorm from "../../../img/dorm.svg";
 import { AuthUserContext } from "../../../services/Session";
+import SignOutButton from "../../../components/SignOut";
+
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +10,8 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Link } from "react-router-dom";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 import * as ROUTES from "../../../constants/routes";
 import {
   Info,
@@ -19,9 +22,10 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import { render } from "@testing-library/react";
-import leaderBoardUpdate , { assignRanking } from '../../CompetePage/leaderBoardUpdate';
-import { getDorm } from '../../../services/Firebase'
-
+import leaderBoardUpdate, {
+  assignRanking,
+} from "../../CompetePage/leaderBoardUpdate";
+import { getDorm } from "../../../services/Firebase";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -54,52 +58,39 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
     underline: "none",
-  }
+  },
 }));
 
 var rank;
 
-getDorm().doc(localStorage.getItem('dorm')).onSnapshot(docSnapshot => {
-  assignRanking(docSnapshot.data())
-})
+getDorm()
+  .doc(localStorage.getItem("dorm"))
+  .onSnapshot((docSnapshot) => {
+    assignRanking(docSnapshot.data());
+  });
 leaderBoardUpdate();
 
 const rankDisplay = () => {
-  if (localStorage.getItem('ranking') == 1){
-    rank = ( 
-    <p>
-    You're in 1st place!
-    </p>
-    )
-  } if (localStorage.getItem('ranking') == 2){
-    rank = ( 
-    <p>
-    You're in 2nd place!
-    </p>
-    )
-  } if (localStorage.getItem('ranking') == 3){
-    rank = ( 
-    <p>
-    You're in 3rd place!
-    </p>
-    )
-  } else if (localStorage.getItem('ranking') >= 4) {
-    rank = (
-    <p>
-    You're in {localStorage.getItem('ranking')}th place!
-    </p>
-    )
+  if (localStorage.getItem("ranking") == 1) {
+    rank = <p>You're in 1st place!</p>;
   }
+  if (localStorage.getItem("ranking") == 2) {
+    rank = <p>You're in 2nd place!</p>;
   }
+  if (localStorage.getItem("ranking") == 3) {
+    rank = <p>You're in 3rd place!</p>;
+  } else if (localStorage.getItem("ranking") >= 4) {
+    rank = <p>You're in {localStorage.getItem("ranking")}th place!</p>;
+  }
+};
 
-  rankDisplay();
-
+rankDisplay();
 
 export const DormCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
   return (
-    <div>
+    // <Paper>
       <AuthUserContext.Consumer>
         {(authUser) => (
           <>
@@ -116,15 +107,17 @@ export const DormCard = React.memo(function GalaxyCard() {
               <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
                   <InfoSubtitle>
-                    {localStorage.getItem('name')}, you're representing{" "}
+                    {localStorage.getItem("name")}, you're representing{" "}
                     {localStorage.getItem("dorm")} dorm
                   </InfoSubtitle>
-                  <InfoTitle>
-                  {rank}
-                  </InfoTitle>             
+                  <InfoTitle>{rank}</InfoTitle>
                   <InfoCaption>
                     <Link to={ROUTES.CHANGEDORM} className={classes.link}>
-                      <Typography variant="p" className={classes.linkText} style={{ underline: 'enum: none' }} >
+                      <Typography
+                        variant="p"
+                        className={classes.linkText}
+                        style={{ underline: "enum: none" }}
+                      >
                         Change your dorm in settings&nbsp;
                         <span role="img" aria-label="settings">
                           ⚙️
@@ -135,10 +128,11 @@ export const DormCard = React.memo(function GalaxyCard() {
                 </Info>
               </Box>
             </Card>
+            <SignOutButton />
           </>
         )}
       </AuthUserContext.Consumer>
-    </div>
+    // </Paper>
   );
 });
 export default DormCard;

@@ -7,30 +7,9 @@
   margin-left: 5rem;
   transform: translate(-50%, -50%);
   overflow: hidden;
-  width: 30rem;
-  height: 30rem;
-  background-color: white;
-  border-radius: 10px;
-  border: 1px solid var(--theme);
-  -webkit-box-shadow: 0 3px 7px var(--theme);
-  -moz-box-shadow: 0 3px 7px var(--theme);
-  box-shadow: 0 3px 7px var(--theme);
-  outline: none;
-  z-index: 4;
-}
-
-/* Used in ActionCard's index.js (at least before the files were finished being reorganized. This pops up as a confirmation when the user logs a sustainable action. */
-.modalIncrement {
-  position: relative;
-  top: 45%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  margin-left: 5rem;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
-  width: 35rem;
-  height: 9rem !important;
+  width: 25rem;
+  /* height: 30rem; */
+  height: 'auto';
   background-color: white;
   border-radius: 10px;
   border: 1px solid var(--theme);
@@ -51,15 +30,7 @@
   .modal {
     margin-left: 0;
     width: 20rem;
-    height: 25rem;
-  }
-}
-
-/* small screens for modalIncrement */
-@media only screen and (max-width: 600px) {
-  .modalIncrement {
-    margin-left: 0;
-    width: 20rem;
-    height: 14rem !important;
+    /* height: 25rem; */
+    height: 'auto';
   }
 }

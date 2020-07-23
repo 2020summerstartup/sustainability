@@ -3,8 +3,11 @@ import * as firebase from "firebase";
 import "firebase/auth";
 import { firestore } from "../../../services/Firebase";
 import "firebase/firestore";
-import { AuthUserContext } from "../../../services/Session";
+// import { AuthUserContext } from "../../../services/Session";
 import deleteImg from "../../../img/delete.svg";
+// import { withAuthorization } from "../../../services/Session";
+
+import { AuthUserContext, withAuthorization } from "../../../services/Session";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
@@ -18,12 +21,13 @@ const useStyles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    color: "red"
   },
 });
 
 const context = createContext();
 
-class DeleteAccount extends React.Component {
+class DeleteAccountBase extends React.Component {
   constructor(props) {
     super(props);
 
@@ -71,8 +75,11 @@ class DeleteAccount extends React.Component {
     const { classes } = this.props;
 
     return (
-        <div className="base-container">
-        <Container maxWidth="sm">
+    <div>
+      <AuthUserContext>
+      {(authUser) => (
+      <div className="base-container">
+        <Container>
             <CssBaseline />
             <div className={classes.paper}>
             <Typography component="h1" variant="h5">
@@ -93,9 +100,19 @@ class DeleteAccount extends React.Component {
             </Button>
             </div>
         </Container>
-        </div>
-    );
-    }
-    }
+      </div>
+      )}
+      </ AuthUserContext>
+      </div>
+    )
+    
+   }
+  }
+  
 
-export default withStyles(useStyles)(DeleteAccount);
+
+const DeleteAccount = withStyles(useStyles)(DeleteAccountBase);
+
+const condition = (authUser) => !!authUser;
+
+export default withAuthorization(condition)(DeleteAccount);

@@ -8,15 +8,12 @@ import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage";
 
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-// import your fontawesome library
-import "../../../components/FontAwesomeIcons";
-// import when you need to use icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ChangePW = () => (
   <div>
@@ -62,6 +59,8 @@ const INITIAL_STATE = {
   error: null,
 };
 
+toast.configure();
+
 class PasswordChangeFormBase extends Component {
   constructor(props) {
     super(props);
@@ -79,6 +78,7 @@ class PasswordChangeFormBase extends Component {
       .doPasswordUpdate(passwordOne)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
+        toast("Your password as been changed!", { autoClose: 5000 });
       })
       .catch((error) => {
         this.setState({ error });
@@ -135,8 +135,6 @@ class PasswordChangeFormBase extends Component {
             >
               Change Password
             </Button>
-
-            {error && <p>{error.message}</p>}
           </form>
         </div>
       </Container>
