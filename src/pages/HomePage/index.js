@@ -74,10 +74,10 @@ function initPoints(email) {
     if (isNaN(action) || action == null) {
       // If it hasn't been initialized
       localStorage.setItem(ActionData[key].susAction, 0); // Initialize to 0
+      action = 0;
     }
+    total += parseInt(action); // Keep track of the sum of the individual points
   }
-  // TODO: Right now total init sets total equal to 0. I think we should be incrementing total inside the for loop? -Katie
-  // Actually I'm pretty sure this gets overwritten by assignData later, as soon as assignData is called.
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
@@ -444,6 +444,7 @@ function HomePage() {
   // Set the "progress message" to be displayed when the user pressed "check progress"
   var progressMessage = "";
   const setProgressMessage = () => {
+    initPoints();
     for (const key in ActionData) {
       // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[key].susAction); // Points earned by current action
@@ -512,7 +513,7 @@ function HomePage() {
         <div className="top-container">
           <Typography variant="h5" style={{ marginTop: "1rem"}}>
             You have earned&nbsp;
-            {<CountUp start={0} end={total} duration={2}></CountUp>} points!
+            {<CountUp start={0} end={total} duration={1}></CountUp>} points!
           </Typography >
           <Fab
             color="primary"
