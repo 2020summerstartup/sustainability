@@ -9,8 +9,7 @@ body {
 }
 
 .Leaderboard {
-  margin: 2rem 5rem;
-  width: 35rem;
+  width: 30rem;
 }
 
 .leader-wrap {
@@ -101,6 +100,5 @@ body {
 @media only screen and (max-width: 600px) {
     .Leaderboard {
         width: 100%;
-        padding: 1rem;
     }
   }

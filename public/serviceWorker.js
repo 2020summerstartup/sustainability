@@ -57,7 +57,6 @@ self.addEventListener('activate', (event) => {
 //   // "/src/components/Landing/index.js",
 //   // "welcome.svg",
 //   "/src/index.css",
-//   // "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css",
 // ];
 
 // // cache size limit function

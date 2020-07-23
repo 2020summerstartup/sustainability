@@ -9,7 +9,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import PersonPinIcon from "@material-ui/icons/PersonPin";
+import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
 
 // import leaderBoardUpdate, {
@@ -53,11 +53,37 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  appbar: {
+    boxShadow: "2px 2px 6px #a6a6a6",
+  },
   tabs: {
     flexGrow: 1,
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
+      marginTop: "0.5rem",
+    },
+  },
+  bar: {
+    padding: 0,
+  },
+  tabIcon: {
+    position: "relative",
+    top: "0.4rem",
+  },
+  tabText: {
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "17px",
+      fontWeight: "bold",
+      marginBottom: "1rem",
+    },
+  },
+  indicator: {
+    height: "3px",
+    [theme.breakpoints.up("sm")]: {
+      height: "4.5px",
+      width: "20px",
+      margin: "auto",
     },
   },
 }));
@@ -71,28 +97,39 @@ function AccountTabs() {
   };
   return (
     <div>
-      <AppBar position="static" color="primary">
+      <AppBar
+        position="static"
+        color="primary"
+        elevation={0}
+        className={classes.appbar}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          indicatorColor="primary"
           textColor="default"
           aria-label="scrollable tabs"
           centered="true"
           className={classes.tabs}
+          TabIndicatorProps={{ className: classes.indicator }}
         >
           <Tab
-            label="Your Points"
-            icon={<PersonPinIcon />}
+            label={
+              <div className={classes.tabText}>
+                <PersonIcon className={classes.tabIcon} /> Your Points{" "}
+              </div>
+            }
             {...a11yProps(0)}
             style={{ backgroundColor: "transparent" }}
           />
 
           <Tab
-            label="Your Dorm"
-            icon={<HomeIcon />}
+            label={
+              <div className={classes.tabText}>
+                <HomeIcon className={classes.tabIcon} /> Your Dorm{" "}
+              </div>
+            }
             {...a11yProps(1)}
             style={{ backgroundColor: "transparent" }}
           />

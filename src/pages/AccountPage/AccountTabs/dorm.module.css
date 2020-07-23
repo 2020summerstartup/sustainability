@@ -8,9 +8,9 @@
     /* color: green; 
   }  */
 
-  .link-text {
+  a:visited.link-text-dorm {
     /* margin-left: 1rem;
     text-decoration: none;
     font-size: 1.2rem; */
-    color: green;
+    color:green;
   }

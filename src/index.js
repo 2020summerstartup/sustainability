@@ -9,20 +9,50 @@ import App from "./App";
 import Firebase, { FirebaseContext } from "./services/Firebase";
 
 const theme = createMuiTheme({
-  // overrides: {
-  //   MuiButton: {
-  //     text: {
-  //       color: "white",
-  //     },
-  //   },
-  // },
   palette: {
+    type: "light",
     primary: {
       main: "#24a113",
     },
-    // secondary: {
-    //   main: "#0044ff",
-    // },
+    secondary: {
+      main: "#FFFFFF",
+    },
+  },
+  // overrides for material ui bottom navbar
+  overrides: {
+    MuiBottomNavigation: {
+      root: {
+        backgroundColor: "var(--bg-primary)",
+      },
+      Mui: {
+        selected: {
+          color: "var(--theme)",
+        },
+      },
+    },
+    MuiBottomNavigationAction: {
+      root: {
+        color: "var(--text-primary)",
+      },
+    },
+    MuiInputBase: {
+      root: {
+        color: "var(--icon_color)",
+      },
+    },
+  },
+});
+
+// for later if we want to implement dark theme
+const themeDark = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: "#24a113",
+    },
+    secondary: {
+      main: "#FFFFFF",
+    },
   },
 });
 

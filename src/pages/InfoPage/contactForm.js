@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./contactForm.modules.css";
+import styles from "./contactForm.module.css";
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
 // import when you need to use icons
@@ -44,16 +44,20 @@ class ContactForm extends React.Component {
   render() {
     const { name, email, message } = this.state;
     return (
-      <div className="form-container">
-        <h5>Contact Us!</h5>
+      <div className={styles.formContainer}>
+        <h2>Contact Us!</h2>
         <p>Let us know your questions, comments, and concerns!</p>
         <form
           onSubmit={this.handleSubmit}
           id="contact"
-          className="input-container"
+          className={styles.inputContainer}
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
         >
           <p>
-            <FontAwesomeIcon icon="user" className="contact-icon icon user" />
+            <FontAwesomeIcon icon="user" className="contactIcon icon user" />
             <input
               type="text"
               name="name"
@@ -80,9 +84,9 @@ class ContactForm extends React.Component {
           <p>
             <FontAwesomeIcon
               icon="comment"
-              className="contact-icon icon comment"
+              className="contactIcon icon comment"
             />
-            <textarea
+            <input
               name="message"
               placeholder="Your Message"
               value={message}

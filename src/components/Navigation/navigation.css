@@ -105,6 +105,33 @@ main {
   width: 100%;
 }
 
+.logo svg {
+  transform: rotate(0deg);
+  transition: var(--transition-speed);
+  margin: 0;
+  margin-left: 0.75rem;
+  width: 0.6em !important;
+}
+
+.logo-text {
+  display: inline;
+  position: absolute;
+  top: 1.5rem;
+  left: -999px;
+  transition: var(--transition-speed);
+  color: var(--text-secondary);
+}
+
+.navbar:hover .logo svg {
+  transform: rotate(-180deg);
+  position: relative;
+  right: 0.5rem;
+}
+
+.navbar:hover .icons {
+  color: var(--theme);
+}
+
 .icons {
   font-weight: bold;
   text-transform: uppercase;
@@ -117,33 +144,24 @@ main {
   width: 100%;
 }
 
-.logo svg {
-  transform: rotate(0deg);
-  transition: var(--transition-speed);
-}
-
-.logo-text {
-  display: inline;
-  position: absolute;
-  left: -999px;
-  transition: var(--transition-speed);
-  color: var(--text-secondary);
-}
-
-.navbar:hover .logo svg {
-  transform: rotate(-180deg);
-}
-
-.navbar:hover .icons {
-  color: var(--theme);
-}
-
 .signout-btn {
-  display: none;
+  display: none !important;
 }
 
 /* Small screens */
 @media only screen and (max-width: 600px) {
+  .navbar {
+    display: none;
+  }
+  .signout-btn {
+    position: absolute !important;
+    left: 50%;
+    bottom: 5rem;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* @media only screen and (max-width: 600px) {
   .navbar {
     position: fixed;
     bottom: 0;
@@ -184,7 +202,6 @@ main {
   .base-container {
     margin-bottom: 3.5rem;
     overflow-x: hidden;
-    /* padding-bottom: 5rem; */
   }
 
   .link-text {
@@ -195,7 +212,7 @@ main {
     font-size: 0.9rem;
   }
 
-  .navbar:hover .link-text {
+  .navbar:hover .link-text .page-text {
     display: inline;
     color: var(--theme);
   }
@@ -213,12 +230,13 @@ main {
     padding: 0;
     position: relative;
     bottom: 0.9rem;
+    color: var(--text-secondary);
   }
 
   .signout-btn {
     display: inline;
   }
-}
+} */
 
 /* Large screens */
 @media only screen and (min-width: 600px) {
@@ -255,9 +273,10 @@ main {
   }
 
   .navbar:hover .signout-btn {
-    display: inline;
+    display: inline-flex !important;
     margin-left: 6rem;
-    animation: fade 5s;
+    animation: fade 3s;
+    width: 50%;
   }
 
   .nav-item:last-child {
@@ -296,14 +315,15 @@ main {
     padding-left: 8.5rem;
     padding-bottom: 2rem;
   }
+
 }
 
 @keyframes fade {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
 
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }

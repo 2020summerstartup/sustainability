@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import points from "../../../img/points.svg";
-// import getPoints from "./Account";
-import { AuthUserContext, withAuthorization } from "../../../services/Session";
+import { AuthUserContext } from "../../../services/Session";
 import pointsForAccount from "./points.js";
-
+import SignOutButton from "../../../components/SignOut";
 
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -20,16 +19,17 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
-import {getUser, createUser, uploadUserPoint, uploadUserTotalPoint} from "../../../services/Firebase";
-import { initPoints, assignData } from "../../HomePage";
+import { getUser } from "../../../services/Firebase";
+import { assignData } from "../../HomePage";
 
 const useStyles = makeStyles(() => ({
   card: {
     borderRadius: "1rem",
     boxShadow: "none",
     position: "relative",
-    minWidth: 200,
-    minHeight: 250,
+    margin: "auto",
+    maxWidth: "60rem",
+    minHeight: "15rem",
     "&:after": {
       content: '""',
       display: "block",
@@ -51,7 +51,7 @@ const useStyles = makeStyles(() => ({
 
 export const TotalPointsCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
-  const styles = useStyles();
+  const classes = useStyles();
   const authContext = useContext(AuthUserContext);
 
   getUser(authContext.email).onSnapshot(
@@ -59,7 +59,8 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
       if (docSnapshot.exists) {
         assignData(docSnapshot.data());
       } else {
-        alert("Sorry You don't have any data yet, please go to Home page");
+        console.log(null);
+        // alert("Sorry You don't have any data yet, please go to Home page");
       }
     },
     (err) => {
@@ -80,9 +81,9 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 ]}
               />
             </NoSsr>
-            <Card className={styles.card}>
+            <Card className={classes.card}>
               <CardMedia classes={mediaStyles} image={points} />
-              <Box py={3} px={2} className={styles.content}>
+              <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
                   <InfoSubtitle>You have earned</InfoSubtitle>
                   <InfoTitle> {localStorage.getItem("total")} Points</InfoTitle>
@@ -92,6 +93,7 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 </Info>
               </Box>
             </Card>
+            <SignOutButton />
           </>
         )}
       </AuthUserContext.Consumer>

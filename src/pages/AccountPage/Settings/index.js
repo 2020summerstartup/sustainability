@@ -1,16 +1,10 @@
 import React from "react";
-import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-// import ChangePW from "../PasswordChange/changePw.js";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import SettingsIcon from "@material-ui/icons/Settings";
 import HomeIcon from "@material-ui/icons/Home";
@@ -19,32 +13,34 @@ import { Link } from "react-router-dom";
 import SignOutButton from "../../../components/SignOut";
 import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
-import IconButton from '@material-ui/core/IconButton';
-import styles from "./Settings.module.css";
+import IconButton from "@material-ui/core/IconButton";
+import Switch from "@material-ui/core/Switch";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import { AuthUserContext } from "../../../services/Session";
 const useStyles = makeStyles((theme) => ({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 100,
-  },
   settingsIcon: {
     color: "white",
-    minWidth: "0",
-    padding: "0",
-    margin: "1rem 0",
+    paddingRight: "0",
+  },
+  listItem: {
+    marginLeft: "0",
+    paddingLeft: "0",
   },
   listItemIcon: {
     minWidth: "2.5rem",
   },
+  deleteIcon: {
+    minWidth: "2.5rem",
+    color: "red",
+  },
   listItemText: {
     marginRight: "1.5rem",
   },
-  settingsSignOut: {
-    display: "flex",
-    justifyContent: "center",
+  deleteAccount: {
+    position: "fixed",
+    bottom: "1rem",
+    color: "red",
   },
 }));
 
@@ -71,23 +67,18 @@ export default function SwipeableTemporaryDrawer() {
 
   const list = (anchor) => (
     <div
-      //   className={clsx(classes.list, {
-      //     [classes.fullList]:
-      //     anchor === 'top' || anchor === 'bottom',
-      //   })}
       class="settings"
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {/* <ListItem button component={Link} to={ROUTES.HOME} className="link-text">
-        <ListItemText primary="Google" />
-   </ListItem> */}
         <ListItem>
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
-            <Typography variant="h6">Hi, {localStorage.getItem('name')}</Typography>
+            <Typography variant="h6">
+              Hi, {localStorage.getItem("name")}!
+            </Typography>
           </ListItemText>
         </ListItem>
         <ListItem>
@@ -95,21 +86,14 @@ export default function SwipeableTemporaryDrawer() {
             <EmailIcon />
           </ListItemIcon>
           <AuthUserContext.Consumer>
-          {(authUser) => (
-            <ListItemText className={classes.listItemText}>
-            Your email: {authUser.email}
-            {/* {localStorage.getItem("email")} */}
-            {/* <FormDialog/> */}
-          </ListItemText>
-          )}
+            {(authUser) => (
+              <ListItemText className={classes.listItemText}>
+                {authUser.email}
+              </ListItemText>
+            )}
           </AuthUserContext.Consumer>
         </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to={ROUTES.CHANGEPW}
-          className="link-text"
-        >
+        <ListItem button component={Link} to={ROUTES.CHANGEPW}>
           <ListItemIcon className={classes.listItemIcon}>
             <LockOpenIcon />
           </ListItemIcon>
@@ -118,12 +102,7 @@ export default function SwipeableTemporaryDrawer() {
           </ListItemText>
         </ListItem>
 
-        <ListItem
-          button
-          component={Link}
-          to={ROUTES.CHANGEDORM}
-          className="link-text"
-        >
+        <ListItem button component={Link} to={ROUTES.CHANGEDORM}>
           <ListItemIcon className={classes.listItemIcon}>
             <HomeIcon />
           </ListItemIcon>
@@ -132,10 +111,39 @@ export default function SwipeableTemporaryDrawer() {
           </ListItemText>
         </ListItem>
 
-        <ListItem className={classes.settingsSignOut}>
-          {/* <ListItemText> */}
+        <ListItem className={classes.listItem}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <Switch
+              checked={state.checked}
+              // write this function later when we implement dark mode
+              // onChange={handleChange}
+              color="primary"
+              name="mode"
+              inputProps={{ "aria-label": "mode changed" }}
+            />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            Change your theme
+          </ListItemText>
+        </ListItem>
+
+        {/* Moving this for now because always get error when signing out */}
+        {/* <ListItem className={classes.settingsSignOut}>
           <SignOutButton />
-          {/* </ListItemText> */}
+        </ListItem> */}
+
+        <ListItem
+          button
+          component={Link}
+          to={ROUTES.DELETE_ACCOUNT}
+          className={classes.deleteAccount}
+        >
+          <ListItemIcon className={classes.deleteIcon}>
+            <DeleteIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            Delete your account
+          </ListItemText>
         </ListItem>
       </List>
     </div>

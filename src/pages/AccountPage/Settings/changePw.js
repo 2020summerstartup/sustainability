@@ -8,7 +8,7 @@ const ChangePW = () => (
     <AuthUserContext>
       {(authUser) => (
     <div class="base-container">
-        <h1>Want to change your password?</h1>
+        <h2>Want to change your password?</h2>
         <div className="image">
           <img alt="change your password" src={accountImg} />
         </div>
