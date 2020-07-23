@@ -57,28 +57,24 @@ function BottomNavAuth() {
         icon={<HomeIcon />}
         component={Link}
         to="/home"
-        style={{ backgroundColor: "transparent" }}
       />
       <BottomNavigationAction
         label="Compete"
         component={Link}
         to="/compete"
         icon={<GroupIcon />}
-        style={{ backgroundColor: "transparent" }}
       />
       <BottomNavigationAction
         label="Info"
         component={Link}
         to="/info"
         icon={<InfoIcon />}
-        style={{ backgroundColor: "transparent" }}
       />
       <BottomNavigationAction
         label="Account"
         component={Link}
         to="/account"
         icon={<AccountCircleIcon />}
-        style={{ backgroundColor: "transparent" }}
       />
     </BottomNavigation>
   );

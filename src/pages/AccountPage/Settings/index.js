@@ -15,17 +15,10 @@ import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Switch from "@material-ui/core/Switch";
-import styles from "./Settings.module.css";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import { AuthUserContext } from "../../../services/Session";
 const useStyles = makeStyles((theme) => ({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 100,
-  },
   settingsIcon: {
     color: "white",
     paddingRight: "0",
@@ -37,8 +30,17 @@ const useStyles = makeStyles((theme) => ({
   listItemIcon: {
     minWidth: "2.5rem",
   },
+  deleteIcon: {
+    minWidth: "2.5rem",
+    color: "red",
+  },
   listItemText: {
     marginRight: "1.5rem",
+  },
+  deleteAccount: {
+    position: "fixed",
+    bottom: "1rem",
+    color: "red",
   },
 }));
 
@@ -65,19 +67,12 @@ export default function SwipeableTemporaryDrawer() {
 
   const list = (anchor) => (
     <div
-      //   className={clsx(classes.list, {
-      //     [classes.fullList]:
-      //     anchor === 'top' || anchor === 'bottom',
-      //   })}
       class="settings"
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {/* <ListItem button component={Link} to={ROUTES.HOME} className="link-text">
-        <ListItemText primary="Google" />
-   </ListItem> */}
         <ListItem>
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
@@ -98,12 +93,7 @@ export default function SwipeableTemporaryDrawer() {
             )}
           </AuthUserContext.Consumer>
         </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to={ROUTES.CHANGEPW}
-          className="link-text"
-        >
+        <ListItem button component={Link} to={ROUTES.CHANGEPW}>
           <ListItemIcon className={classes.listItemIcon}>
             <LockOpenIcon />
           </ListItemIcon>
@@ -112,12 +102,7 @@ export default function SwipeableTemporaryDrawer() {
           </ListItemText>
         </ListItem>
 
-        <ListItem
-          button
-          component={Link}
-          to={ROUTES.CHANGEDORM}
-          className="link-text"
-        >
+        <ListItem button component={Link} to={ROUTES.CHANGEDORM}>
           <ListItemIcon className={classes.listItemIcon}>
             <HomeIcon />
           </ListItemIcon>
@@ -125,20 +110,6 @@ export default function SwipeableTemporaryDrawer() {
             Change your dorm
           </ListItemText>
         </ListItem>
-
-        <ListItem
-        button
-        component={Link}
-        to={ROUTES.DELETE_ACCOUNT}
-        className="link-text"
-      >
-        <ListItemIcon className={classes.listItemIcon}>
-          <DeleteIcon />
-        </ListItemIcon>
-        <ListItemText className={classes.listItemText}>
-          Delete your account
-        </ListItemText>
-      </ListItem>
 
         <ListItem className={classes.listItem}>
           <ListItemIcon className={classes.listItemIcon}>
@@ -156,10 +127,23 @@ export default function SwipeableTemporaryDrawer() {
           </ListItemText>
         </ListItem>
 
-        <ListItem className={classes.settingsSignOut}>
-          {/* <ListItemText> */}
+        {/* Moving this for now because always get error when signing out */}
+        {/* <ListItem className={classes.settingsSignOut}>
           <SignOutButton />
-          {/* </ListItemText> */}
+        </ListItem> */}
+
+        <ListItem
+          button
+          component={Link}
+          to={ROUTES.DELETE_ACCOUNT}
+          className={classes.deleteAccount}
+        >
+          <ListItemIcon className={classes.deleteIcon}>
+            <DeleteIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            Delete your account
+          </ListItemText>
         </ListItem>
       </List>
     </div>

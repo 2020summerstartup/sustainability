@@ -35,10 +35,26 @@ function OfflinePage() {
         </Typography>
         <Typography component="h1" variant="body1">
           <ul>
-            <li>It's made by the coolest people ever! 😎</li>
-            <li>You want to be more sustainable! 🌎</li>
-            <li>You have competitive fire within you! 🔥</li>
-            <li>You don't want to let your dorm down. 🏫</li>
+            <li>Our app is made by the coolest people ever!&nbsp;
+              <span role="img" aria-label="sunglasses">
+                😎
+              </span>
+            </li>
+            <li>You want to be more sustainable!&nbsp;
+              <span role="img" aria-label="earth">
+                🌎
+              </span>
+            </li>
+            <li>You have competitive fire within you!&nbsp;
+              <span role="img" aria-label="fire">
+              🔥
+              </span>
+            </li>
+            <li>You don't want to let your dorm down.&nbsp;
+              <span role="img" aria-label="dorm">
+                🏫
+              </span>
+            </li>
           </ul>
         </Typography>
       </div>

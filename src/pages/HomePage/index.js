@@ -17,7 +17,6 @@ import {
 
 import PropTypes from "prop-types";
 
-import "./toastify.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -46,6 +45,8 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Fab from "@material-ui/core/Fab";
+import CheckIcon from "@material-ui/icons/Check";
 
 import Collapse from "@material-ui/core/Collapse";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -73,9 +74,10 @@ function initPoints(email) {
     if (isNaN(action) || action == null) {
       // If it hasn't been initialized
       localStorage.setItem(ActionData[key].susAction, 0); // Initialize to 0
+      action = 0;
     }
+    total += parseInt(action); // Keep track of the sum of the individual points
   }
-  // TODO: Right now total init sets total equal to 0. I think we should be incrementing total inside the for loop? -Katie
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
@@ -144,9 +146,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing.unit,
   },
   actionContainer: {
-    paddingTop: "1rem",
-    paddingLeft: "0rem",
-    paddingRight: "0rem",
+    padding: "0",
   },
   media: {
     height: 0,
@@ -245,7 +245,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(1),
       width: "auto",
       top: "1rem",
-
     },
   },
   searchIcon: {
@@ -281,6 +280,17 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  fab: {
+    // margin: theme.spacing(1),
+    right: "1rem",
+    bottom: "4.5rem",
+    position: "fixed",
+    zIndex: "1",
+    [theme.breakpoints.up("sm")]: {
+      right: "2rem",
+      bottom: "2rem",
+    },
+  },
 }));
 
 // Text to display on the homepage
@@ -310,26 +320,6 @@ function HomePage() {
     }
   );
 
-  // A function to run when the button "another option..." within check your progress is clicked.
-  // This won't be in the final code, but it's been part of my learning process for trying to get the
-  // newlines to work, and I don't want to delete it until I fully solve this issue. Please ask me
-  // before deleting this. :) -Katie
-  const showProgress = () => {
-    var codeBlock = "";
-    for (const key in ActionData) {
-      // Get each susAction
-      // Add info about each susAction, formatted with html, to the codeBalck
-      codeBlock +=
-        ActionData[key].title.concat(
-          " Points: ",
-          localStorage.getItem(ActionData[key].susAction),
-          " "
-        ) + "<br />";
-    }
-    // Setting the html of the element with id "wrapper" to be the stuff that was just put in codeBlock.
-    document.getElementById("wrapper").innerHTML = codeBlock;
-  };
-
   // message to be displayed in check your progress
   var message = [];
   total = localStorage.getItem("total");
@@ -355,10 +345,10 @@ function HomePage() {
   };
 
   // This function is the one that is called when the user presses the increment susAction button. If they confirm that
-  // they meant to, then this fucntion calls increment.
+  // they meant to, then this function calls increment.
   const confirmIncrement = (action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
-    if( confirmed == true ) {
+    if (confirmed == true) {
       increment(action); // If user meant to, call the function to actually increment user's points
     }
   };
@@ -378,8 +368,6 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
-      // TODO: this might be unnecessary now??? idk what would have changed to make it unnecessary though -Katie
-      // Wait I think it's because the modal closing kind of forces the page to rerender??
       window.location.reload(true);
     });
 
@@ -407,7 +395,7 @@ function HomePage() {
   }; // increment
 
   // Initialize the color of each favorite button
-  // This isn't in a function because I can't call the function when I want using html. Could go in a function and then be called with JS.
+  // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
   for (const key in ActionData) {
     // Iterate over every action in ActionData
@@ -454,17 +442,19 @@ function HomePage() {
   };
 
   // Set the "progress message" to be displayed when the user pressed "check progress"
-  var progressMessage = '';
+  var progressMessage = "";
   const setProgressMessage = () => {
-    for (const key in ActionData) { // Loop over every action in ActionData
+    initPoints();
+    for (const key in ActionData) {
+      // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[key].susAction); // Points earned by current action
       progressMessage = (
         <>
           {progressMessage}
           {ActionData[key].title}&nbsp;points: {actionPoints}
-          <br/>
+          <br />
         </>
-      )
+      );
     }
     // Append the total points earned
     progressMessage = (
@@ -472,8 +462,8 @@ function HomePage() {
         {progressMessage}
         <h3>Total points: {total}</h3>
       </>
-    )
-  } // setProgressMessage
+    );
+  }; // setProgressMessage
 
   // Call the function immediately so that it runs before the return statement
   setProgressMessage();
@@ -521,16 +511,24 @@ function HomePage() {
           </Tabs>
         </AppBar>
         <div className="top-container">
-          <h3>
+          <Typography variant="h5" style={{ marginTop: "1rem"}}>
             You have earned&nbsp;
             {<CountUp start={0} end={total} duration={1}></CountUp>} points!
-          </h3>
-          <button
+          </Typography >
+          <Fab
+            color="primary"
+            onClick={() => setProgressModalIsOpen(true)}
+            aria-label="check progress"
+            className={classes.fab}
+          >
+            <EcoIcon />
+          </Fab>
+          {/* <button
             onClick={() => setProgressModalIsOpen(true)}
             className="button"
           >
             Check Progress
-          </button>
+          </button> */}
           <Modal
             isOpen={progressModalIsOpen}
             onRequestClose={() => setProgressModalIsOpen(false)}
@@ -554,6 +552,9 @@ function HomePage() {
                 >
                   Close
                 </button>
+                <p> </p>
+                <p> </p>
+                <p> </p>
               </div>
             </center>
           </Modal>
@@ -695,9 +696,7 @@ function HomePage() {
                                 className={classes.cardContent}
                                 action={
                                   <IconButton
-                                    onClick={() =>
-                                      confirmIncrement(action)
-                                    }
+                                    onClick={() => confirmIncrement(action)}
                                     // Finally found how to get rid of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
                                     aria-label="settings"

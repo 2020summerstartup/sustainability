@@ -10,6 +10,7 @@ import Firebase, { FirebaseContext } from "./services/Firebase";
 
 const theme = createMuiTheme({
   palette: {
+    type: "light",
     primary: {
       main: "#24a113",
     },
@@ -39,11 +40,6 @@ const theme = createMuiTheme({
         color: "var(--icon_color)",
       },
     },
-    // MuiSvgIcon: {
-    //   root: {
-    //     marginRight: "1rem",
-    //   },
-    // },
   },
 });
 

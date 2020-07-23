@@ -16,7 +16,7 @@
     "impact": "Whenever possible, walk, bike, car pool, or use mass transit. Every gallon of gasoline you save avoids 22 pounds of CO2 emissions, and every mile you walk burns an average of 100 calories. Avoiding just 10 miles of driving every week would eliminate about 500 pounds of carbon dioxide emissions a year! "
   },
   {
-    "title": "Bring Your Own Reusable Straw",
+    "title": "Bring Reusable Straw",
     "id": 3,
     "points": 15,
     "susAction": "reuseStraw",
@@ -61,7 +61,7 @@
     "points": 20,
     "susAction": "meatlessMon",
     "image": "https://images.unsplash.com/photo-1556386470-bcdc6a5e9b9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
-    "impact": "Reducing consumption of meat can help contain production of greenhouse gases that impact climate change. It can also help lessen the demand for precious environmental resources such as land, water, and energy."
+    "impact": "Reducing consumption of meat can help contain production of greenhouse gases that impact climate change. It can also help lessen the demand for precious environmental resources such as land, water, and energy. If you can't pass up the Hoch's Monday steak night, choose a different day of the week to go meatless."
   },
   {
     "title": "Eco-friendly Cleaning Products",
@@ -70,5 +70,36 @@
     "susAction": "ecoClean",
     "image": "https://images.unsplash.com/photo-1583907659441-addbe699e921?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Shifting to eco-friendly cleaning products and methods is a sure way of ensuring that we live in healthy, clean and toxic-free environments."
+  },
+  {
+    "title": "Use Public Transportation",
+    "id": 10,
+    "points": 15,
+    "susAction": "publicTransit",
+    "impact": "Using public transportation can improve air quality, reduce greenhouse gas emissions, facilitate compact development, save energy, and more. Source: https://www.transit.dot.gov/regulations-and-guidance/environmental-programs/transit-environmental-sustainability/transit-role"
+  },
+
+  {
+    "title": "Buy Second-hand Clothes",
+    "id": 11,
+    "points": 20,
+    "susAction": "usedClothes",
+    "impact": "Opting to purchase your clothing second-hand (and avoiding fast-fashion) reduces your carbon footprint. You'll also save lots of money!"
+  },
+
+  {
+    "title": "Hang Your Clothes to Dry",
+    "id": 12,
+    "points": 10,
+    "susAction": "hangDry",
+    "impact": "Hanging your clothes to dry instead of using a clothes dryer reduces your energy-use. And while you're at college, it means you won't have to pay for dryer use!"
+  },
+
+  {
+    "title": "Take a Climate Science Class",
+    "id": 13,
+    "points": 100,
+    "susAction": "climateClass",
+    "impact": "The 5Cs have tons of classes focused on climate change! Interested in learning more about the topic? Register for one next semester!"
   }
 ]
