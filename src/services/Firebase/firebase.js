@@ -92,6 +92,8 @@ export const getUser = (userEmail) => {
 }
 
 
+
+
 // this method is called to increase points
 export const updateUserPoint = (userEmail, userAction, actionPoint) => {
   // local storage allows us to display the correct points
@@ -142,6 +144,13 @@ export const addFav = (userEmail, susAction) => {
 export const deleteFav = (userEmail, susAction) => {
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayRemove(susAction)
+  })
+}
+
+export const actionMastered = (userEmail, susAction) => {
+  console.log("updating")
+  return firestore.collection('users').doc(userEmail).update({
+    masteredActions: app.firestore.FieldValue.arrayUnion(susAction)
   })
 }
 

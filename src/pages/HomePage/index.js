@@ -13,6 +13,7 @@ import {
   uploadUserTotalPoint,
   updateUserPoint,
   updateDormPoint,
+  actionMastered,
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -401,10 +402,83 @@ function HomePage() {
         console.log(`Encountered error: ${err}`);
       }
     );
+  
+    var notMastered = false
+    checkMastered(action);
+    
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
   }; // increment
+
+
+
+  // Initialize the mastered status of each action
+  // This isn't in a function because I can't call the function when I want using html. Could go in a function and then be called with JS.
+  var masterActions = []; // Initalize array of the mastered status for each action
+  for (const key in ActionData) {
+    // Iterate over every action in ActionData
+    var action = ActionData[key]; // Take the current action
+    var storageName = action.susAction.concat("Mastered");
+    var storedMaster = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console (wants ===)
+    if (storedMaster) {
+      // If the action is mastered
+      masterActions[key - 1] = true; // disabled button
+    } else {
+      masterActions[key - 1] = false; // enabled button
+    }
+  }
+
+  var notMastered;
+  const checkMastered = (action) => {
+    // Get the name and info of the stored action that we're working with
+    // console.log(action.susAction)
+    var storageName = action.susAction.concat("Mastered");
+    // storedFav is a boolean (is the current action favorited?)
+    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
+    var storedMaster = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console
+    // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
+    // In case the action hasn't been favorited before
+    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
+    const actionTotal = localStorage.getItem(action.susAction);
+    console.log(actionTotal);
+    console.log(action.points)
+    if (storedMaster == null) {
+      notMastered = false; // if not initialized, then initialize
+      console.log('null')
+    } if ((20 * (action.points)) > actionTotal) {
+      notMastered = false; // If I have not mastered action, leave button enabled
+      localStorage.setItem(storageName, notMastered);
+      console.log('You are ' + ((20 * (action.points))- actionTotal) + ' points away from mastering this action!')
+    } else  if ((20 * (action.points)) <= actionTotal){
+      notMastered = true; // If mastered, set button disabled var to true
+      actionMastered((localStorage.getItem('email')), action.susAction)
+      localStorage.setItem(storageName, notMastered);
+      console.log('You have mastered this action!')
+    }
+    // Toggle the favorite
+    // variable for getting color of fav icon
+    var masterStatus = document.getElementById(
+      "addCircleIcon".concat(action.susAction)
+    );
+ 
+    
+    // // Notify user that action was added/removed from favorites
+    // var displayText;
+    // if (masterFav) {
+    //   displayText = action.title.concat(" has been mastered!");
+    //   masterStatus.disabled={true}; // disable
+    //   toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+    // } else {
+    //   displayText = action.title.concat(" removed from favorites");
+    //   masterStatus.style.color = "#6c6c6c"; // Back to grey
+    //   toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
+    // }
+    // localStorage.setItem(storageName, storedFav); // Save the updated favorite value
+  };
+
+
+
 
   // Initialize the color of each favorite button
   // This isn't in a function because I can't call the function when I want using html. Could go in a function and then be called with JS.
@@ -585,6 +659,7 @@ function HomePage() {
                           className={classes.cardContent}
                           action={
                             <IconButton
+                              disabled={masterActions[i -1]}
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
                               // Finally found how to get rid of random old green from click and hover!
                               // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
