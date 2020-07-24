@@ -8,7 +8,7 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 
 import { AuthUserContext } from "../../services/Session";
 import { updateUserDorm, getDorm } from "../../services/Firebase";
-import { assignRanking } from "../../pages/CompetePage/leaderboard";
+import { assignRanking } from "../../pages/CompetePage/CompeteTabs/leaderboard";
 
 // Styles for dropdown menu
 const useStyles = makeStyles((theme) => ({

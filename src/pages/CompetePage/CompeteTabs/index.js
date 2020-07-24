@@ -1,6 +1,4 @@
 import React from "react";
-import TotalPointsCard from "./points";
-import DormCard from "./dorm";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,7 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
-
+import Challenges from "./challenges.js";
+import Leaderboard from "./leaderboard";
+import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
+import GradeIcon from '@material-ui/icons/Grade';
+import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 // import leaderBoardUpdate, {
 //   assignRanking,
 // } from "../CompetePage/leaderBoardUpdate.js";
@@ -88,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AccountTabs() {
+function CompeteTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -117,7 +119,7 @@ function AccountTabs() {
           <Tab
             label={
               <div className={classes.tabText}>
-                <PersonIcon className={classes.tabIcon} /> Your Points{" "}
+                <GradeIcon className={classes.tabIcon} /> Leaderboard{" "}
               </div>
             }
             {...a11yProps(0)}
@@ -126,7 +128,7 @@ function AccountTabs() {
           <Tab
             label={
               <div className={classes.tabText}>
-                <HomeIcon className={classes.tabIcon} /> Your Dorm{" "}
+                <EmojiNatureIcon className={classes.tabIcon} /> Challenges{" "}
               </div>
             }
             {...a11yProps(1)}
@@ -135,14 +137,14 @@ function AccountTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} class="tab-container">
-        <TotalPointsCard />
+        <Leaderboard />
       </TabPanel>
 
       <TabPanel value={value} index={1} class="tab-container">
-        <DormCard />
+        <Challenges />
       </TabPanel>
     </div>
   );
 }
 
-export default AccountTabs;
+export default CompeteTabs;

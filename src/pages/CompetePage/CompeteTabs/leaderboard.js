@@ -1,9 +1,9 @@
 import React from "react";
 
 import "./leaderboard.css";
-import { firestore } from "../../services/Firebase/firebase";
+import { firestore } from "../../../services/Firebase/firebase";
 import "firebase/firestore";
-import leaderBoardUpdate, { assignRanking } from "./leaderBoardUpdate";
+import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
 
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
