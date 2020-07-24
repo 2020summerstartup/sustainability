@@ -10,8 +10,9 @@ const theme = createMuiTheme({
         main: "#24a113",
       },
       secondary: {
-        main: "#FFFFFF",
+        main: "#FFFFFF", //text-primary
       },
+      divider: "rgba(0, 0, 0, 0.04)"
     },
     // overrides for material ui bottom navbar
     overrides: {

@@ -1,6 +1,5 @@
 import React from "react";
 import ChallengeData from './challengeData.json';
-import { red } from "@material-ui/core/colors";
 
 function challenges() {
   var challengeInfo = "";
