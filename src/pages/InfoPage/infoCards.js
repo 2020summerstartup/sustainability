@@ -1,6 +1,5 @@
 import React from "react";
 import { Spring } from "react-spring/renderprops";
-import ContactForm from "./contactForm";
 
 // list of colors for each dorm to display in a different color depending on their ranking
 // I grabbed the background color from the monochrome spread here: https://www.colorhexa.com/24a113
@@ -34,12 +33,13 @@ class InfoCards extends React.Component {
           id: 2,
           title: "How to Participate & Earn Points",
           description:
-            "Sign up with your HMC email! Check out the home page for sustainable practices that you can earn points for every time you complete the action!",
+            "Sign up with your HMC email! Log your sustainable actions on the home page, and earn points for your dorm by living more sustainably!",
         },
         {
           id: 4,
           title: "Current Rewards",
-          description: "Rewards include dorm pizza parties, sustainability swag, and BRAGGING RIGHTS. Funded by ASHMC Sustainability and ESW! (Except for the bragging rights. Those are free.) NOTE: We should talk about how these prizes would actually be funded. Can we chat with ASHMC Sustainability?",
+          description:
+            "Rewards include dorm pizza parties, sustainability swag, and BRAGGING RIGHTS. Funded by ASHMC Sustainability and ESW! (Except for the bragging rights. Those are free.) NOTE: We should talk about how these prizes would actually be funded. Can we chat with ASHMC Sustainability?",
         },
       ],
     };
@@ -102,10 +102,6 @@ class InfoCards extends React.Component {
                 )}
               </div>
             </div>
-            <center>
-              <ContactForm />
-              {/* <MuiContactForm /> */}
-            </center>
           </div>
         )}
       </Spring>

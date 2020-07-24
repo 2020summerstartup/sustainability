@@ -1,1 +1,6 @@
-{}
+{
+    "hosting": {
+      "site": "sustainability-competition",
+      "public": "public"
+    }
+}

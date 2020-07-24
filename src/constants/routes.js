@@ -12,3 +12,4 @@ export const CHANGEPW = '/changepassword';
 export const CHANGEDORM = '/changedorm';
 export const OFFLINE = '/offline';
 export const DELETE_ACCOUNT = '/deleteaccount';
+export const ADMIN = '/admin';
