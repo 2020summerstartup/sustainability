@@ -27,10 +27,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     paddingRight: "0",
   },
-  // listItem: {
-  //   marginLeft: "0",
-  //   paddingLeft: "0",
-  // },
   listItemIcon: {
     minWidth: "2.5rem",
   },
@@ -39,12 +35,12 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteIcon: {
     minWidth: "2.5rem",
-    color: "red",
+    color: theme.palette.error.dark,
   },
   deleteAccount: {
     position: "fixed",
     bottom: "5px",
-    color: "red",
+    color: theme.palette.error.dark
   },
 }));
 
@@ -72,7 +68,6 @@ function SettingsDrawer(props) {
 
   const list = (anchor) => (
     <div
-      class="settings"
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -126,13 +121,7 @@ function SettingsDrawer(props) {
           }}
         >
           <ListItemIcon className={classes.listItemIcon}>
-            {/* <IconButton
-              aria-label="toggle password visibility"
-              onChange={() => setDarkMode(!darkMode)}
-              onClick={() => window.location.reload()}
-            > */}
             {darkMode ? <Brightness4Icon /> : <Brightness7Icon />}
-            {/* </IconButton> */}
             {/* <Switch
               checked={darkMode}
               onChange={() => setDarkMode(!darkMode)}
@@ -148,7 +137,6 @@ function SettingsDrawer(props) {
             ) : (
               <Typography>Light Mode</Typography>
             )}
-            {/* Change your theme */}
           </ListItemText>
         </ListItem>
 
@@ -179,7 +167,6 @@ function SettingsDrawer(props) {
       <React.Fragment key={"right"}>
         <IconButton
           className={classes.settingsIcon}
-          style={{ backgroundColor: "transparent" }}
           onClick={toggleDrawer("right", true)}
         >
           {<SettingsIcon />}

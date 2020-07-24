@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 const CompetePage = () => (
-  <Paper>
     <AuthUserContext>
       {(authUser) => (
           <div className="base-container">
@@ -22,7 +21,6 @@ const CompetePage = () => (
           </div>
       )}
     </AuthUserContext>
-  </Paper>
 );
 
 // function Compete(props) {

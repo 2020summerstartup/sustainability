@@ -49,6 +49,14 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Fab from "@material-ui/core/Fab";
 import CheckIcon from "@material-ui/icons/Check";
 
+// Modal Imports
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+
 import Collapse from "@material-ui/core/Collapse";
 import NoSsr from "@material-ui/core/NoSsr";
 import GoogleFontLoader from "react-google-font-loader";
@@ -141,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     minWidth: "280",
-    backgroundColor: "var(--text-secondary)",
+    backgroundColor: theme.palette.divider,
   },
   margin: {
     margin: theme.spacing.unit,
@@ -294,10 +302,18 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "flex",
-      marginTop: theme.spacing(2)
-    }
+      marginTop: theme.spacing(2),
+    },
+  },
+  dialogPaper: {
+    overflow: "hidden !important",
   },
 }));
+
+// transition to make modal open by slideing up and close by sliding down
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 // Text to display on the homepage
 function HomePage() {
@@ -517,10 +533,10 @@ function HomePage() {
           </Tabs>
         </AppBar>
         <div className="top-container">
-          <Typography variant="h5" style={{ marginTop: "1rem"}}>
+          <Typography variant="h5" style={{ marginTop: "1rem" }}>
             You have earned&nbsp;
             {<CountUp start={0} end={total} duration={1}></CountUp>} points!
-          </Typography >
+          </Typography>
           {/* Mobile Screens */}
           <Fab
             variant="extended"
@@ -542,7 +558,49 @@ function HomePage() {
           >
             Check Progress
           </Button>
-          <Modal
+
+          {/* NEW MODAL */}
+          <Dialog
+            open={progressModalIsOpen}
+            onClose={() => setProgressModalIsOpen(false)}
+            TransitionComponent={Transition}
+            keepMounted
+            fullWidth
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+            classes={{ paper: classes.dialogPaper }}
+          >
+            <DialogTitle
+              id="alert-dialog-slide-title"
+              style={{ backgroundColor: "var(--theme)", color: "#FFFFFF" }}
+            >
+              {"Check Your Progress!"}
+            </DialogTitle>
+            <DialogContent>
+              <Confetti
+                width={1500}
+                numberOfPieces={2000}
+                recycle={false}
+                opacity={0.7}
+                // colors={["grey", "white", "green", "black"]}
+              />
+              <DialogContentText id="alert-dialog-slide-description">
+                {progressMessage}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => setProgressModalIsOpen(false)}
+                variant="contained"
+                color="primary"
+              >
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          {/* OLD MODAL */}
+          {/* <Modal
             isOpen={progressModalIsOpen}
             onRequestClose={() => setProgressModalIsOpen(false)}
             className={styles.modal}
@@ -570,7 +628,7 @@ function HomePage() {
                 <p> </p>
               </div>
             </center>
-          </Modal>
+          </Modal> */}
         </div>
         <TabPanel value={value} index={0} class="tab-container">
           <Fragment>

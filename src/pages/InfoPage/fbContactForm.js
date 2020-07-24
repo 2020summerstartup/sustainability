@@ -90,7 +90,7 @@ const FBContactForm = () => {
         <Avatar className={classes.avatar}>
           <QuestionAnswerIcon />
         </Avatar>
-        <Typography component="h4" variant="h4">
+        <Typography component="h4" variant="h4" style={{ margin: "1rem 0"}}>
           Contact Us
         </Typography>
         <Typography component="subtitle1" variant="subtitle1">
