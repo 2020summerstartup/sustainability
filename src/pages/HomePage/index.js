@@ -74,6 +74,12 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import TotalPointsCard from "../AccountPage/AccountTabs/points";
 
+// Sounds
+import like from "../../sounds/state-change_confirm-up.wav";
+import unlike from "../../sounds/state-change_confirm-down.wav";
+import confetti from "../../sounds/hero_decorative-celebration-02.wav";
+import increment from "../../sounds/hero_simple-celebration-01.wav";
+
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
@@ -91,6 +97,17 @@ function initPoints(email) {
   }
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
+
+// sound play for favorites button
+const likeAudio = new Audio(like);
+const unlikeAudio = new Audio(unlike);
+const confettiAudio = new Audio(confetti);
+const incrementAudio = new Audio(increment);
+
+// called by onclick to play the audio file
+const playSound = (audioFile) => {
+  audioFile.play();
+};
 
 // I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
 // removed fav foreach loop here, don't think it was doing anything? (This comment is from Jessica?)
@@ -396,7 +413,7 @@ function HomePage() {
   const confirmIncrement = (action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
     if (confirmed == true) {
-      increment(action); // If user meant to, call the function to actually increment user's points
+      playSound(increment); // If user meant to, call the function to actually increment user's points
     }
   };
 
@@ -415,6 +432,7 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
+      increment(action);
       window.location.reload(true);
     });
 
@@ -547,10 +565,12 @@ function HomePage() {
     if (storedFav) {
       displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C"; // Turn red
+      playSound(likeAudio);
       toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
     } else {
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
+      playSound(unlikeAudio);
       toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
@@ -644,7 +664,10 @@ function HomePage() {
           <Button
             color="primary"
             variant="contained"
-            onClick={() => setProgressModalIsOpen(true)}
+            onClick={() => {
+              setProgressModalIsOpen(true);
+              playSound(confettiAudio);
+            }}
             className={classes.checkProgress}
           >
             Check Progress
