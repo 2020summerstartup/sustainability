@@ -3,6 +3,9 @@ import styles from "./modal.module.css";
 import useIsIOS from "../../components/IosModal/useIsIOS";
 import { IosModal } from "../../components/IosModal";
 
+import favorite from "../../img/favorite.svg";
+import actionTab from "../../img/actionTab.svg";
+
 import CountUp from "react-countup";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
@@ -55,7 +58,7 @@ import Collapse from "@material-ui/core/Collapse";
 import NoSsr from "@material-ui/core/NoSsr";
 import GoogleFontLoader from "react-google-font-loader";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-import favorite from "../../img/favorite.svg";
+
 import clsx from "clsx";
 import {
   Info,
@@ -196,6 +199,26 @@ const useStyles = makeStyles((theme) => ({
       background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
     },
   },
+  card2: {
+    borderRadius: "1rem",
+    boxShadow: "none",
+    position: "relative",
+    margin: "auto",
+    marginBottom: "1rem",
+    maxWidth: "55rem",
+    minHeight: "15rem",
+    zIndex: 0,
+    "&:after": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      bottom: 0,
+      zIndex: 1,
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+    },
+  },
   content: {
     position: "absolute",
     zIndex: 2,
@@ -304,6 +327,7 @@ const useStyles = makeStyles((theme) => ({
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
+  // const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const [incrementModalIsOpen, setIncrementModalIsOpen] = useState(false);
   const authContext = useContext(AuthUserContext);
   // loading install prompt for ios
@@ -340,7 +364,9 @@ function HomePage() {
   const [filter, setFilter] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
-  const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
+  const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top" });
+  const mediaStyles2 = useCoverCardMediaStyles({ bgPosition: "bottom" });
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -649,6 +675,31 @@ function HomePage() {
           </Modal>
         </div>
         <TabPanel value={value} index={0} class="tab-container">
+           {/* Action card boi */}
+        <NoSsr>
+                    <GoogleFontLoader
+                      fonts={[
+                        { font: "Spartan", weights: [300] },
+                        { font: "Montserrat", weights: [200, 400, 700] },
+                      ]}
+                    />
+                 
+                  </NoSsr>
+                  <Card className={classes.card2}>
+                    <CardMedia classes={mediaStyles2} image={actionTab} />
+                    <Box py={3} px={2} className={classes.content}>
+                      <Info useStyles={useGalaxyInfoStyles}>
+                        <InfoSubtitle>This is for the action tab </InfoSubtitle>
+                        <InfoTitle>Add more!</InfoTitle>
+                        <InfoCaption>
+                          Go to actions tab and press the heart to add&nbsp;
+                          <span role="img" aria-label="heart">
+                            ❤️
+                          </span>
+                        </InfoCaption>
+                      </Info>
+                    </Box>
+                  </Card>
           <Fragment>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -663,6 +714,7 @@ function HomePage() {
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
+              
             </div>
             <Grid container spacing={2} className={classes.actionContainer}>
               {/* All actions (this loops using search) */}
@@ -747,6 +799,7 @@ function HomePage() {
             <AuthUserContext.Consumer>
               {(authUser) => (
                 <>
+                {/* Favorites card */}
                   <NoSsr>
                     <GoogleFontLoader
                       fonts={[
@@ -756,7 +809,7 @@ function HomePage() {
                     />
                   </NoSsr>
                   <Card className={classes.card}>
-                    <CardMedia classes={mediaStyles} image={favorite} />
+                    <CardMedia classes={mediaStyles1} image={favorite} />
                     <Box py={3} px={2} className={classes.content}>
                       <Info useStyles={useGalaxyInfoStyles}>
                         <InfoSubtitle>Your faves are here </InfoSubtitle>
