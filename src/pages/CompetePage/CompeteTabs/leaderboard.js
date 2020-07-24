@@ -56,7 +56,7 @@ class Leaderboard extends React.Component {
           });
         });
     };
-    // data is used, even though we get a warning saying otherwise. I think it complains because data is read from a different file?
+    // data is used, even though we get a warning saying otherwise. I think it complains because data is read from a different file? TODO: Figure this out and fix it.
     let data = {
       success: true,
       leaders: [getLeaders()],
