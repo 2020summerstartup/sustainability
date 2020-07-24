@@ -5,8 +5,6 @@ import { compose } from "recompose";
 import * as firebase from "firebase";
 import "firebase/auth";
 
-import { SignUpLink } from "./signUpPage";
-import { PasswordForgetLink } from "./passwordForgetPage";
 import { withFirebase, getUser } from "../../services/Firebase";
 import { assignData } from "../HomePage/index.js";
 import * as ROUTES from "../../constants/routes";
@@ -15,15 +13,11 @@ import signinImg from "../../img/login3.svg";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
-import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -175,7 +169,6 @@ class SignInFormBase extends Component {
   render() {
     const { classes } = this.props;
     const { email, password, error } = this.state;
-    const { pw } = this.state;
     const isInvalid = password === "" || email === "";
 
     return (
