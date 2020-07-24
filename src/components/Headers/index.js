@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 // account header imports
 import SettingsDrawer from "../../pages/AccountPage/Settings";
 import Grid from "@material-ui/core/Grid";
-import SearchIcon from "@material-ui/icons/Search";
 
 // change dorm/pw imports
 // import material ui
@@ -18,7 +17,6 @@ import IconButton from "@material-ui/core/IconButton";
 import suslogoImg from "../../img/suslogo.svg";
 
 // imports for homeheader
-import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 // Styles for Header
