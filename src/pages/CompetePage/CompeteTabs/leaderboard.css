@@ -9,7 +9,8 @@ body {
 }
 
 .Leaderboard {
-  width: 30rem;
+  /* width: 30rem; */
+  margin-right: 0!important;
 }
 
 .leader-wrap {
@@ -24,7 +25,7 @@ body {
   animation-fill-mode: both;
   animation-timing-function: ease-in-out;
   width: 100%;
-  max-width: 30rem;
+  /* max-width: 30rem; */
 }
 
 .leader-ava {

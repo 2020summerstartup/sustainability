@@ -47,7 +47,7 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    boxShadow: "2px 2px 6px #a6a6a6",
+    boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
     flexGrow: 1,
