@@ -12,9 +12,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 const CompetePage = () => (
     <AuthUserContext>
       {(authUser) => (
-          <div className="base-container">
-            <CompeteTabs />
-          </div>
+        <CompeteTabs />
       )}
     </AuthUserContext>
 );
