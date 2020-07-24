@@ -21,7 +21,7 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
 import { getUser } from "../../../services/Firebase";
 import { assignData } from "../../HomePage";
-import EnvImpactCards from './envImpactCards';
+import EnvImpactCards from './userEnvImpactCards';
 
 const useStyles = makeStyles(() => ({
   card: {

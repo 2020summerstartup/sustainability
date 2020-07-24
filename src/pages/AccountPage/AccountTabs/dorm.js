@@ -26,6 +26,7 @@ import leaderBoardUpdate, {
   assignRanking,
 } from "../../CompetePage/leaderBoardUpdate";
 import { getDorm } from "../../../services/Firebase";
+import EnvImpactCards from './dormEnvImpactCards';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -129,6 +130,7 @@ export const DormCard = React.memo(function GalaxyCard() {
                 </Info>
               </Box>
             </Card>
+            <EnvImpactCards />
             <SignOutButton />
           </>
         )}
