@@ -17,8 +17,8 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from "@material-ui/icons/Brightness7";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 import { AuthUserContext } from "../../../services/Session";
 
@@ -116,17 +116,29 @@ function SettingsDrawer(props) {
           </ListItemText>
         </ListItem>
 
-        <ListItem className={classes.listItem}>
+        <ListItem
+          button
+          className={classes.listItem}
+          checked={darkMode}
+          // onChange={() => window.location.reload()}
+          onClick={() => {setDarkMode(!darkMode); window.location.reload()}}
+        >
           <ListItemIcon className={classes.listItemIcon}>
-            <Switch
-              // checked={state.checked}
+            {/* <IconButton
+              aria-label="toggle password visibility"
+              onChange={() => setDarkMode(!darkMode)}
+              onClick={() => window.location.reload()}
+            > */}
+            {darkMode ? <Brightness4Icon /> : <Brightness7Icon />}
+            {/* </IconButton> */}
+            {/* <Switch
               checked={darkMode}
               onChange={() => setDarkMode(!darkMode)}
               onClick={() => window.location.reload()}
               color="primary"
               name="mode"
               inputProps={{ "aria-label": "mode changed" }}
-            />
+            /> */}
           </ListItemIcon>
           <ListItemText className={classes.listItemText}>
             Change your theme

@@ -588,6 +588,30 @@ function HomePage() {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
+            {/* Card for actions */}
+            <NoSsr>
+              <GoogleFontLoader
+                fonts={[
+                  { font: "Spartan", weights: [300] },
+                  { font: "Montserrat", weights: [200, 400, 700] },
+                ]}
+              />
+            </NoSsr>
+            <Card className={classes.card}>
+              <CardMedia classes={mediaStyles} image={favorite} />
+              <Box py={3} px={2} className={classes.content}>
+                <Info useStyles={useGalaxyInfoStyles}>
+                  <InfoSubtitle>Your faves are here </InfoSubtitle>
+                  <InfoTitle>Add more!</InfoTitle>
+                  <InfoCaption>
+                    Go to actions tab and press the heart to add&nbsp;
+                    <span role="img" aria-label="heart">
+                      ❤️
+                    </span>
+                  </InfoCaption>
+                </Info>
+              </Box>
+            </Card>
             <Grid container spacing={2} className={classes.actionContainer}>
               {/* All actions (this loops using search) */}
               {ActionData.map(
