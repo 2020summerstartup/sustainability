@@ -29,6 +29,7 @@ import MuiChangePw from "../pages/AccountPage/Settings/muiChangePw";
 import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
 import MuiChangeDorm from "../pages/AccountPage/Settings/muiChangeDorm";
 import DeleteAccount from "../pages/AccountPage/Settings/deleteAccount";
+import AdminPage from "../pages/AdminPage";
 import * as ROUTES from "../constants/routes";
 
 import { withAuthentication } from "../services/Session";
@@ -69,6 +70,7 @@ const AppBase = () => (
       <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
       <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
       <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
+      <Route path={ROUTES.ADMIN} component={AdminPage} />
     </div>
   </Router>
 );

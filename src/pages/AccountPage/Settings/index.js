@@ -17,8 +17,8 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from "@material-ui/icons/Brightness7";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 import { AuthUserContext } from "../../../services/Session";
 
@@ -27,24 +27,20 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     paddingRight: "0",
   },
-  listItem: {
-    marginLeft: "0",
-    paddingLeft: "0",
-  },
   listItemIcon: {
     minWidth: "2.5rem",
-  },
-  deleteIcon: {
-    minWidth: "2.5rem",
-    color: "red",
   },
   listItemText: {
     marginRight: "1.5rem",
   },
+  deleteIcon: {
+    minWidth: "2.5rem",
+    color: theme.palette.error.dark,
+  },
   deleteAccount: {
     position: "fixed",
     bottom: "5px",
-    color: "red",
+    color: theme.palette.error.dark
   },
 }));
 
@@ -72,7 +68,6 @@ function SettingsDrawer(props) {
 
   const list = (anchor) => (
     <div
-      class="settings"
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -116,20 +111,32 @@ function SettingsDrawer(props) {
           </ListItemText>
         </ListItem>
 
-        <ListItem className={classes.listItem}>
+        <ListItem
+          button
+          checked={darkMode}
+          // onChange={() => window.location.reload()}
+          onClick={() => {
+            setDarkMode(!darkMode);
+            window.location.reload();
+          }}
+        >
           <ListItemIcon className={classes.listItemIcon}>
-            <Switch
-              // checked={state.checked}
+            {darkMode ? <Brightness4Icon /> : <Brightness7Icon />}
+            {/* <Switch
               checked={darkMode}
               onChange={() => setDarkMode(!darkMode)}
               onClick={() => window.location.reload()}
               color="primary"
               name="mode"
               inputProps={{ "aria-label": "mode changed" }}
-            />
+            /> */}
           </ListItemIcon>
           <ListItemText className={classes.listItemText}>
-            Change your theme
+            {darkMode ? (
+              <Typography>Dark Mode</Typography>
+            ) : (
+              <Typography>Light Mode</Typography>
+            )}
           </ListItemText>
         </ListItem>
 
@@ -160,7 +167,6 @@ function SettingsDrawer(props) {
       <React.Fragment key={"right"}>
         <IconButton
           className={classes.settingsIcon}
-          style={{ backgroundColor: "transparent" }}
           onClick={toggleDrawer("right", true)}
         >
           {<SettingsIcon />}
