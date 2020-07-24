@@ -1,11 +1,9 @@
-import React, { createContext } from "react";
+import React from "react";
 import * as firebase from "firebase";
 import "firebase/auth";
 import { firestore } from "../../../services/Firebase";
 import "firebase/firestore";
-// import { AuthUserContext } from "../../../services/Session";
 import deleteImg from "../../../img/delete.svg";
-// import { withAuthorization } from "../../../services/Session";
 
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 
@@ -24,8 +22,6 @@ const useStyles = (theme) => ({
     color: "red"
   },
 });
-
-const context = createContext();
 
 class DeleteAccountBase extends React.Component {
   constructor(props) {
