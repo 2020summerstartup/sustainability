@@ -151,7 +151,11 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     minWidth: "280",
+    // maxHeight: "168px",
     backgroundColor: theme.palette.divider,
+    // height: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
   margin: {
     margin: theme.spacing.unit,
@@ -182,7 +186,10 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "0",
   },
   cardActions: {
-    paddingTop: "0",
+    display: "flex",
+    flex: "1 0 auto",
+    alignItems: "flex-end",
+    justifyContent: "center",
   },
   card: {
     borderRadius: "1rem",
@@ -211,7 +218,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   appbar: {
-    boxShadow: "2px 2px 6px #a6a6a6",
+    boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
     flexGrow: 1,
@@ -353,6 +360,7 @@ function HomePage() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [expandedId, setExpandedId] = React.useState(-1);
+  // const [height, setHeight] = React.useState("");
   const [filter, setFilter] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
@@ -363,7 +371,20 @@ function HomePage() {
   };
 
   const handleExpandClick = (i) => {
+    // WILL MAYBE REVISITED TO HAVE CARDS SAME HEIGHT
+    // for (const j in ActionData) {
+    //   if (expandedId === i) {
+    //     setHeight("168px");
+    //     console.log("ID: ", i);
+    //     console.log("ID HEIGHT: ", height);
+    //   } else {
+    //     setHeight("100%");
+    //   }
+    // }
+    // console.log("ID: ", i);
+    // console.log("HEIGHT: ", height);
     setExpandedId(expandedId === i ? -1 : i);
+    // setHeight("50px")
   };
 
   const handleSearchChange = (e) => {
@@ -415,52 +436,47 @@ function HomePage() {
         console.log(`Encountered error: ${err}`);
       }
     );
-  
+
     checkMastered(action);
-    
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
   }; // increment
 
-
-
-
- 
-  
-  // to check with the mastered actions that firestore has upon loading page 
-  // may need to change this because every time the page loads we will read firestore data 
+  // to check with the mastered actions that firestore has upon loading page
+  // may need to change this because every time the page loads we will read firestore data
   //(and page load everytime action is logged) so we may reach limit if many people are using the app
-  var firestoreMastered = [] 
+  var firestoreMastered = [];
   const getMastered = (userEmail) => {
-    let userDocRef = firestore.doc('users/' + userEmail);
-    userDocRef.get().then(snapshot => {
+    let userDocRef = firestore.doc("users/" + userEmail);
+    userDocRef.get().then((snapshot) => {
       // finds which actions have been previously mastered from firestore -> this is an array!
-      firestoreMastered = snapshot.get('masteredActions');
+      firestoreMastered = snapshot.get("masteredActions");
       // need json.stringify to put the array into local storage as an array!
-      localStorage.setItem('firestoreMastered', JSON.stringify(firestoreMastered));
-    })
-  }
-  getMastered(localStorage.getItem('email'));
-
+      localStorage.setItem(
+        "firestoreMastered",
+        JSON.stringify(firestoreMastered)
+      );
+    });
+  };
+  getMastered(localStorage.getItem("email"));
 
   var masterActions = []; // Initalize array of the mastered status for each action
   for (const key in ActionData) {
     // Iterate over every action in ActionData & determine if button needs to load as enabled or disabled
     var action = ActionData[key]; // Take the current action
-    var stringActionName = JSON.stringify(action.susAction)
+    var stringActionName = JSON.stringify(action.susAction);
     var storageName = action.susAction.concat("Mastered");
-    var firestoreMastered = localStorage.getItem('firestoreMastered');
+    var firestoreMastered = localStorage.getItem("firestoreMastered");
 
-    if ( firestoreMastered.includes(stringActionName) ){
-      masterActions[key -1] = true; //disable button when action is mastered
-      localStorage.setItem(storageName, true) // update local storage accordingly 
+    if (firestoreMastered.includes(stringActionName)) {
+      masterActions[key - 1] = true; //disable button when action is mastered
+      localStorage.setItem(storageName, true); // update local storage accordingly
     } else {
-      masterActions[key -1] = false; //enable button is action is not yet mastered
-      localStorage.setItem(storageName, false) // update local storage accordingly 
+      masterActions[key - 1] = false; //enable button is action is not yet mastered
+      localStorage.setItem(storageName, false); // update local storage accordingly
     }
   }
-
 
   //This function checks if (upon increment) the action should be mastered & acts according
   const checkMastered = (action) => {
@@ -474,23 +490,24 @@ function HomePage() {
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     const actionTotal = localStorage.getItem(action.susAction);
     console.log(actionTotal);
-    console.log(action.points)
+    console.log(action.points);
     // if (storedMaster == null) {
     //   console.log('null')
-    // } 
-    if ((20 * (action.points)) >= actionTotal) {
+    // }
+    if (20 * action.points >= actionTotal) {
       // If action has not been mastered, the button will remain enabled
-      console.log('You are ' + ((20 * (action.points))- actionTotal) + ' points away from mastering this action!')
-    } else  if ((20 * (action.points)) < actionTotal){
-      actionMastered((localStorage.getItem('email')), action.susAction)
-      // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect 
+      console.log(
+        "You are " +
+          (20 * action.points - actionTotal) +
+          " points away from mastering this action!"
+      );
+    } else if (20 * action.points < actionTotal) {
+      actionMastered(localStorage.getItem("email"), action.susAction);
+      // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
-      console.log('You have mastered this action!')
+      console.log("You have mastered this action!");
     }
   };
-
-
-
 
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
@@ -595,7 +612,6 @@ function HomePage() {
                 </div>
               }
               {...a11yProps(0)}
-              style={{ backgroundColor: "transparent" }}
             />
             <Tab
               label={
@@ -604,7 +620,6 @@ function HomePage() {
                 </div>
               }
               {...a11yProps(1)}
-              style={{ backgroundColor: "transparent" }}
             />
           </Tabs>
         </AppBar>
@@ -666,7 +681,10 @@ function HomePage() {
             </DialogContent>
             <DialogActions>
               <Button
-                onClick={() => setProgressModalIsOpen(false)}
+                onClick={() => {
+                  setProgressModalIsOpen(false);
+                  window.location.reload();
+                }}
                 variant="contained"
                 color="primary"
               >
@@ -757,11 +775,11 @@ function HomePage() {
                           className={classes.cardContent}
                           action={
                             <IconButton
-                              disabled={masterActions[i -1]}
+                              disabled={masterActions[i - 1]}
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
                               // Finally found how to get rid of random old green from click and hover!
                               // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
-                              // style={{ backgroundColor: "transparent" }}
+
                               aria-label="settings"
                               title="Complete this sustainable action"
                             >
@@ -771,13 +789,16 @@ function HomePage() {
                           title={action.title}
                           subheader={"Earn ".concat(action.points, " Points!")}
                         />
-                        <CardActions disableSpacing>
+
+                        <CardActions
+                          disableSpacing
+                          className={classes.cardActions}
+                        >
                           <IconButton
                             title="Add to favorites"
                             aria-label="add to favorites"
                             style={{
                               color: favIconColors[i - 1],
-                              backgroundColor: "transparent",
                             }} // Set the favIcon color (i-1 prevents off-by-one error)
                             onClick={() => favAction(action)}
                             id={"favoriteIcon".concat(action.susAction)}
@@ -789,8 +810,9 @@ function HomePage() {
                             className={clsx(classes.expand, {
                               [classes.expandOpen]: !expandedId,
                             })}
-                            onClick={() => handleExpandClick(i)}
-                            style={{ backgroundColor: "transparent" }}
+                            onClick={() => {
+                              handleExpandClick(i);
+                            }}
                             aria-expanded={expandedId === i}
                             aria-label="Show More"
                             title="Learn more"
@@ -902,7 +924,6 @@ function HomePage() {
                                     [classes.expandOpen]: !expandedId,
                                   })}
                                   onClick={() => handleExpandClick(i)}
-                                  style={{ backgroundColor: "transparent" }}
                                   aria-expanded={expandedId === i}
                                   aria-label="Show More"
                                   title="Learn more"

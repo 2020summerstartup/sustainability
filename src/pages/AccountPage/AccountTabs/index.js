@@ -12,13 +12,6 @@ import Box from "@material-ui/core/Box";
 import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
 
-// import leaderBoardUpdate, {
-//   assignRanking,
-// } from "../CompetePage/leaderBoardUpdate.js";
-// import { getUser, getDorm } from "../../services/Firebase";
-// // import SignOutButton from "../SignOut";
-// import { AuthUserContext, withAuthorization } from "../../services/Session";
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -54,7 +47,7 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    boxShadow: "2px 2px 6px #a6a6a6",
+    boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
     flexGrow: 1,
