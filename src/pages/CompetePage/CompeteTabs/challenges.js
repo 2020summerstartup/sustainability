@@ -18,14 +18,14 @@ function Challenges() {
               color: "white",
               padding: "1.5rem",
               borderRadius: "10px",
-              margin: "0 0.5rem",
-              maxWidth: "600px",
+              margin: "0 0",
+              // maxWidth: "600px",
               marginTop: "2rem",
             }}
           >
             <b>Challenge {parseInt(key)+1}: {ChallengeData[key].title}</b>
             <br/>
-            <p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;{ChallengeData[key].info}</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;{ChallengeData[key].info}</p>
           </div>
         </>
       );

@@ -1,4 +1,6 @@
 import React from "react";
+import { AuthUserContext } from "../../../services/Session";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { withTheme } from "../../../components/Theme";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
@@ -20,8 +22,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 
-import { AuthUserContext } from "../../../services/Session";
-
 const useStyles = makeStyles((theme) => ({
   settingsIcon: {
     color: "white",
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   deleteAccount: {
     position: "fixed",
     bottom: "5px",
-    color: theme.palette.error.dark
+    color: theme.palette.error.dark,
   },
 }));
 

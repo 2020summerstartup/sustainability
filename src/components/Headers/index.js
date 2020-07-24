@@ -60,7 +60,7 @@ const CompeteHeader = ({ firebase }) => {
   const classes = useStyles1();
   return (
     <>
-      <AppBar position="static" className={classes.header}>
+      <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
           <img src={suslogoImg} alt="logo" className={classes.logo} />
           <Typography variant="h6" className={classes.title} noWrap>

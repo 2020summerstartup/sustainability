@@ -33,7 +33,7 @@ class Leaderboard extends React.Component {
     super();
     this.state = {
       leaders: [],
-      maxPoints: 1500,
+      maxPoints: 1650,
     };
     this.getData = this.getData.bind(this);
   }

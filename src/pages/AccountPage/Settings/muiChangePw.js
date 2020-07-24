@@ -15,6 +15,9 @@ import Container from "@material-ui/core/Container";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// Sounds
+import toastNotify from "../../../sounds/notification_simple-01.wav";
+
 const ChangePW = () => (
   <div>
     <AuthUserContext>
@@ -60,6 +63,14 @@ const INITIAL_STATE = {
 };
 
 toast.configure();
+
+// sound play for favorites button
+const toastAudio = new Audio(toastNotify);
+
+// called by onclick to play the audio file
+const playSound = (audioFile) => {
+  audioFile.play();
+};
 
 class PasswordChangeFormBase extends Component {
   constructor(props) {
@@ -132,6 +143,7 @@ class PasswordChangeFormBase extends Component {
               color="primary"
               className={classes.submit}
               disabled={isInvalid}
+              onClick={() => playSound(toastAudio)}
             >
               Change Password
             </Button>
