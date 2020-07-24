@@ -35,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     maxWidth: "60rem",
     minHeight: "15rem",
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "60rem",
+      minHeight: "20rem",
+    },
     "&:after": {
       content: '""',
       display: "block",

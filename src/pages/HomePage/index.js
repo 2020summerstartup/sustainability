@@ -185,9 +185,13 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     margin: "auto",
     marginBottom: "1rem",
-    maxWidth: "60rem",
+    maxWidth: "36rem",
     minHeight: "15rem",
     zIndex: 0,
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "75vh",
+      minHeight: "40vh",
+    },
     "&:after": {
       content: '""',
       display: "block",
@@ -197,7 +201,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },
+    },  
   },
   card2: {
     borderRadius: "1rem",
@@ -205,9 +209,13 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     margin: "auto",
     marginBottom: "1rem",
-    maxWidth: "55rem",
+    maxWidth: "36rem",
     minHeight: "15rem",
     zIndex: 0,
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "75vh",
+      minHeight: "40vh",
+    },
     "&:after": {
       content: '""',
       display: "block",
@@ -364,7 +372,7 @@ function HomePage() {
   const [filter, setFilter] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
-  const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top" });
+  const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top"});
   const mediaStyles2 = useCoverCardMediaStyles({ bgPosition: "bottom" });
 
 
