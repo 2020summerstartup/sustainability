@@ -27,19 +27,19 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     paddingRight: "0",
   },
-  listItem: {
-    marginLeft: "0",
-    paddingLeft: "0",
-  },
+  // listItem: {
+  //   marginLeft: "0",
+  //   paddingLeft: "0",
+  // },
   listItemIcon: {
     minWidth: "2.5rem",
+  },
+  listItemText: {
+    marginRight: "1.5rem",
   },
   deleteIcon: {
     minWidth: "2.5rem",
     color: "red",
-  },
-  listItemText: {
-    marginRight: "1.5rem",
   },
   deleteAccount: {
     position: "fixed",
@@ -118,10 +118,12 @@ function SettingsDrawer(props) {
 
         <ListItem
           button
-          className={classes.listItem}
           checked={darkMode}
           // onChange={() => window.location.reload()}
-          onClick={() => {setDarkMode(!darkMode); window.location.reload()}}
+          onClick={() => {
+            setDarkMode(!darkMode);
+            window.location.reload();
+          }}
         >
           <ListItemIcon className={classes.listItemIcon}>
             {/* <IconButton
@@ -141,7 +143,12 @@ function SettingsDrawer(props) {
             /> */}
           </ListItemIcon>
           <ListItemText className={classes.listItemText}>
-            Change your theme
+            {darkMode ? (
+              <Typography>Dark Mode</Typography>
+            ) : (
+              <Typography>Light Mode</Typography>
+            )}
+            {/* Change your theme */}
           </ListItemText>
         </ListItem>
 
