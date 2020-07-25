@@ -1,6 +1,7 @@
 import React from "react";
 import TotalPointsCard from "./points";
 import DormCard from "./dorm";
+import Badges from "./badges";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -145,7 +146,7 @@ function AccountTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={2} class="tab-container">
-        <DormCard />
+        <Badges />
       </TabPanel>
     </div>
   );
