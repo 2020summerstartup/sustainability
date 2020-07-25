@@ -14,6 +14,8 @@ import Leaderboard from "./leaderboard";
 import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
 import GradeIcon from '@material-ui/icons/Grade';
 import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
+
+import ChallengeCard from "./challengeCard";
 // import leaderBoardUpdate, {
 //   assignRanking,
 // } from "../CompetePage/leaderBoardUpdate.js";
@@ -139,9 +141,8 @@ function CompeteTabs() {
       <TabPanel value={value} index={0} class="tab-container">
         <Leaderboard />
       </TabPanel>
-
       <TabPanel value={value} index={1} class="tab-container">
-        <Challenges />
+        <ChallengeCard/>
       </TabPanel>
     </div>
   );

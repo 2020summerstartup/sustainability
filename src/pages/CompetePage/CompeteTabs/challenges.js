@@ -19,7 +19,7 @@ function Challenges() {
               padding: "1.5rem",
               borderRadius: "10px",
               margin: "0 0.5rem",
-              maxWidth: "600px",
+              // maxWidth: "600px",
               marginTop: "2rem",
             }}
           >
