@@ -14,6 +14,9 @@ import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
 import NewReleasesIcon from "@material-ui/icons/NewReleases";
 
+// probably delete later
+import Grid from "@material-ui/core/Grid";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -168,7 +171,17 @@ function AccountTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={2} class="tab-container">
-        <Badges />
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6} lg={4}>
+            <Badges />
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <Badges />
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <Badges />
+          </Grid>
+        </Grid>
       </TabPanel>
     </div>
   );

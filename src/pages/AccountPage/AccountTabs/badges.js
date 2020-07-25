@@ -24,15 +24,8 @@ const useStyles = makeStyles((theme) => ({
     // width: 151,
     width: "100%",
   },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
+  buzzTimes: {
+    marginTop: "1rem",
   },
 }));
 
@@ -44,10 +37,10 @@ export default function MediaControlCard() {
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
+          <Typography variant="h5">
             Earth Day Badge
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography variant="subtitle1" color="textSecondary" className={classes.buzzTimes}>
             Buzzed 20 times!
           </Typography>
         </CardContent>

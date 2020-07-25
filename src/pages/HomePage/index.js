@@ -822,7 +822,6 @@ function HomePage() {
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
-              
             </div>
             {/* Card for actions */}
             <Grid container spacing={2} className={classes.actionContainer}>
@@ -838,10 +837,7 @@ function HomePage() {
                             <IconButton
                               disabled={masterActions[i - 1]}
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
-                              // Finally found how to get rid of random old green from click and hover!
-                              // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
-
-                              aria-label="settings"
+                              aria-label="increment"
                               title="Complete this sustainable action"
                             >
                               <AddCircleIcon fontSize="large" />
