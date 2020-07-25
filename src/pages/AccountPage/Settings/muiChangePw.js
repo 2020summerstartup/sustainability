@@ -9,7 +9,7 @@ import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { toast } from "react-toastify";
@@ -106,7 +106,6 @@ class PasswordChangeFormBase extends Component {
     const { passwordOne, passwordTwo, error } = this.state;
     const isInvalid = passwordOne !== passwordTwo || passwordOne === "";
     const { classes } = this.props;
-    const { pw } = this.state;
 
     return (
       <Container maxWidth="sm">

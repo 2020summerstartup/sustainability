@@ -7,19 +7,10 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import PersonIcon from "@material-ui/icons/Person";
-import HomeIcon from "@material-ui/icons/Home";
 import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
 import GradeIcon from '@material-ui/icons/Grade';
-import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
-// import leaderBoardUpdate, {
-//   assignRanking,
-// } from "../CompetePage/leaderBoardUpdate.js";
-// import { getUser, getDorm } from "../../services/Firebase";
-// // import SignOutButton from "../SignOut";
-// import { AuthUserContext, withAuthorization } from "../../services/Session";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

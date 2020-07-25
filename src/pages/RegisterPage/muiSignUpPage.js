@@ -2,16 +2,13 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import PropTypes from "prop-types";
-import DormSelect from "../../components/DormSelect";
 
 import { withFirebase, createUser } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 
-import * as firebase from "firebase";
 import "firebase/auth";
 
 import { PasswordInput } from "./muiSignInPage";
-import { assignData } from "../HomePage/index.js";
 import signupImg from "../../img/login2.svg";
 
 import Button from "@material-ui/core/Button";
@@ -27,13 +24,11 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import HomeIcon from "@material-ui/icons/Home";
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
 // import when you need to use icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Sounds
 import signup from "../../sounds/hero_simple-celebration-03.wav";
@@ -74,14 +69,6 @@ const useStyles = (theme) => ({
     marginTop: "1rem",
   },
 });
-
-// Styles for Icons
-const useStyles2 = makeStyles((theme) => ({
-  formIcon: {
-    marginLeft: "5px",
-    marginRight: "1rem",
-  },
-}));
 
 const dorms = [
   { title: "South" },

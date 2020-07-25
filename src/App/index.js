@@ -3,13 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "../components/Navigation";
 import BottomNav from "../components/Navigation/bottomNav";
-import LandingPage from "../pages/LandingPage";
 import MuiLandingPage from "../pages/LandingPage/muiLandingPage";
-import SignUpPage from "../pages/RegisterPage/signUpPage";
-import SignInPage from "../pages/RegisterPage/signInPage";
 import MuiSignInPage from "../pages/RegisterPage/muiSignInPage";
 import MuiSignUpPage from "../pages/RegisterPage/muiSignUpPage.js";
-import PasswordForgetPage from "../pages/RegisterPage/passwordForgetPage";
 import MuiPasswordForgetPage from "../pages/RegisterPage/muiPasswordForgetPage";
 import HomePage from "../pages/HomePage";
 import AccountPage from "../pages/AccountPage";
@@ -22,11 +18,8 @@ import Header, {
   BackArrowHeader,
 } from "../components/Headers";
 import CompetePage from "../pages/CompetePage";
-import OfflinePage from "../pages/OfflinePage";
 import MuiOfflinePage from "../pages/OfflinePage/muiOfflinePage";
-import ChangePW from "../pages/AccountPage/Settings/changePw";
 import MuiChangePw from "../pages/AccountPage/Settings/muiChangePw";
-import ChangeDorm from "../pages/AccountPage/Settings/changeDorm";
 import MuiChangeDorm from "../pages/AccountPage/Settings/muiChangeDorm";
 import DeleteAccount from "../pages/AccountPage/Settings/deleteAccount";
 import AdminPage from "../pages/AdminPage";
