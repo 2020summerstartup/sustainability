@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
-import NewReleasesIcon from '@material-ui/icons/NewReleases';
+import NewReleasesIcon from "@material-ui/icons/NewReleases";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,11 +66,18 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     top: "0.4rem",
   },
-  tabText: {
+  tabTextBigScreen: {
+    display: "none",
     [theme.breakpoints.up("sm")]: {
+      display: "inline",
       fontSize: "17px",
       fontWeight: "bold",
       marginBottom: "1rem",
+    },
+  },
+  tabTextSmallScreen: {
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
     },
   },
   indicator: {
@@ -111,27 +118,42 @@ function AccountTabs() {
         >
           <Tab
             label={
-              <div className={classes.tabText}>
-                <PersonIcon className={classes.tabIcon} /> Your Points{" "}
-              </div>
+              <>
+                <div className={classes.tabTextBigScreen}>
+                  <PersonIcon className={classes.tabIcon} /> Your Points{" "}
+                </div>
+                <div className={classes.tabTextSmallScreen}>
+                  <PersonIcon className={classes.tabIcon} /> Points{" "}
+                </div>
+              </>
             }
             {...a11yProps(0)}
           />
 
           <Tab
             label={
-              <div className={classes.tabText}>
-                <HomeIcon className={classes.tabIcon} /> Your Dorm{" "}
-              </div>
+              <>
+                <div className={classes.tabTextBigScreen}>
+                  <HomeIcon className={classes.tabIcon} /> Your Dorm{" "}
+                </div>
+                <div className={classes.tabTextSmallScreen}>
+                  <HomeIcon className={classes.tabIcon} /> Dorm{" "}
+                </div>
+              </>
             }
             {...a11yProps(1)}
           />
 
           <Tab
             label={
-              <div className={classes.tabText}>
-                <NewReleasesIcon className={classes.tabIcon} /> Your Badges{" "}
-              </div>
+              <>
+                <div className={classes.tabTextBigScreen}>
+                  <NewReleasesIcon className={classes.tabIcon} /> Your Badges{" "}
+                </div>
+                <div className={classes.tabTextSmallScreen}>
+                  <NewReleasesIcon className={classes.tabIcon} /> Badges{" "}
+                </div>
+              </>
             }
             {...a11yProps(1)}
           />

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import PropTypes from "prop-types";
+import Reward from "react-rewards";
 
 import { withFirebase, createUser } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
@@ -477,17 +478,28 @@ class SignUpFormBase extends Component {
               </Typography>
             )}
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              disabled={isInvalid}
-              onClick={() => playSound(signupAudio)}
+            <Reward
+              ref={(ref) => {
+                this.reward = ref;
+              }}
+              type="memphis"
             >
-              Sign Up
-            </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                disabled={isInvalid}
+                onClick={() => {
+                  playSound(signupAudio);
+                  this.reward.rewardMe();
+                }}
+              >
+                Sign Up
+              </Button>
+            </Reward>
+
             {/* <button disabled={isInvalid} type="submit" className="button">
               Sign Up
             </button> */}
