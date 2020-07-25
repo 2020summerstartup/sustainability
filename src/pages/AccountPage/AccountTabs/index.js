@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
+import NewReleasesIcon from '@material-ui/icons/NewReleases';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -123,7 +124,15 @@ function AccountTabs() {
               </div>
             }
             {...a11yProps(1)}
-            style={{ backgroundColor: "transparent" }}
+          />
+
+          <Tab
+            label={
+              <div className={classes.tabText}>
+                <NewReleasesIcon className={classes.tabIcon} /> Your Badges{" "}
+              </div>
+            }
+            {...a11yProps(1)}
           />
         </Tabs>
       </AppBar>
@@ -132,6 +141,10 @@ function AccountTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={1} class="tab-container">
+        <DormCard />
+      </TabPanel>
+
+      <TabPanel value={value} index={2} class="tab-container">
         <DormCard />
       </TabPanel>
     </div>
