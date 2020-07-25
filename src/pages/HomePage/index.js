@@ -800,7 +800,7 @@ function HomePage() {
                         <InfoTitle>Log your actions here!</InfoTitle>
                         <InfoCaption>
                         Tap the drop down menu to find out more 
-                          <span role="img" aria-label="heart">
+                          <span role="img" aria-label="down arrow">
                              🔽
                           </span>
                         </InfoCaption>
