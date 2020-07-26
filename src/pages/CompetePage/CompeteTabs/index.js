@@ -9,8 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
-import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
-import GradeIcon from '@material-ui/icons/Grade';
+import StarIcon from '@material-ui/icons/Star';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -110,7 +110,7 @@ function CompeteTabs() {
           <Tab
             label={
               <div className={classes.tabText}>
-                <GradeIcon className={classes.tabIcon} /> Leaderboard{" "}
+                <EqualizerIcon className={classes.tabIcon} /> Leaderboard{" "}
               </div>
             }
             {...a11yProps(0)}
@@ -119,7 +119,7 @@ function CompeteTabs() {
           <Tab
             label={
               <div className={classes.tabText}>
-                <EmojiNatureIcon className={classes.tabIcon} /> Challenges{" "}
+                <StarIcon className={classes.tabIcon} /> Challenges{" "}
               </div>
             }
             {...a11yProps(1)}

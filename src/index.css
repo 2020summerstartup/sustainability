@@ -41,6 +41,7 @@ code {
     margin-bottom: 4rem !important;
     padding-bottom: 0rem !important;
     overflow-x: hidden;
+    overscroll-behavior-y: contain;
   }
 }
 
@@ -70,6 +71,7 @@ code {
     padding-bottom: 0rem !important;
     padding-top: 0rem !important;
     overflow-x: hidden;
+    overscroll-behavior-y: contain;
   }
 }
 

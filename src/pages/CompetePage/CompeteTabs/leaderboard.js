@@ -10,7 +10,6 @@ import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = (theme) => ({
   title: {
-    marginTop: theme.spacing(3),
     marginBottom: theme.spacing(2),
   },
 });

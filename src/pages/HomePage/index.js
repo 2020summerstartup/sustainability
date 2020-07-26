@@ -2,6 +2,7 @@ import React, { Fragment, useState, useContext } from "react";
 import styles from "./modal.module.css";
 import useIsIOS from "../../components/IosModal/useIsIOS";
 import { IosModal } from "../../components/IosModal";
+import BadgeModal from "./badgeModal"
 
 import favorite from "../../img/favorite.svg";
 import actionTab from "../../img/actionTab.svg";
@@ -81,7 +82,6 @@ import TotalPointsCard from "../AccountPage/AccountTabs/points";
 import like from "../../sounds/state-change_confirm-up.wav";
 import unlike from "../../sounds/state-change_confirm-down.wav";
 import confetti from "../../sounds/hero_decorative-celebration-02.wav";
-import increment from "../../sounds/hero_simple-celebration-01.wav";
 
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
@@ -101,11 +101,10 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-// sound play for favorites button
+// sound play for certain buttons
 const likeAudio = new Audio(like);
 const unlikeAudio = new Audio(unlike);
 const confettiAudio = new Audio(confetti);
-const incrementAudio = new Audio(increment);
 
 // called by onclick to play the audio file
 const playSound = (audioFile) => {
@@ -447,7 +446,7 @@ function HomePage() {
   const confirmIncrement = (action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
     if (confirmed == true) {
-      playSound(increment); // If user meant to, call the function to actually increment user's points
+      increment(action); // If user meant to, call the function to actually increment user's points
     }
   };
 
@@ -640,7 +639,7 @@ function HomePage() {
   // HTML to be displayed
   return (
     <>
-      {prompt && <IosModal />}
+      {/* {prompt && <IosModal />} */}
       <div>
         <AppBar
           position="static"
@@ -706,6 +705,8 @@ function HomePage() {
           >
             Check Progress
           </Button>
+
+          <BadgeModal />
 
           {/* NEW MODAL */}
           <Dialog
@@ -800,7 +801,7 @@ function HomePage() {
                         <InfoTitle>Log your actions here!</InfoTitle>
                         <InfoCaption>
                         Tap the drop down menu to find out more 
-                          <span role="img" aria-label="heart">
+                          <span role="img" aria-label="down arrow">
                              🔽
                           </span>
                         </InfoCaption>
@@ -821,7 +822,6 @@ function HomePage() {
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
-              
             </div>
             {/* Card for actions */}
             <Grid container spacing={2} className={classes.actionContainer}>
@@ -837,10 +837,7 @@ function HomePage() {
                             <IconButton
                               disabled={masterActions[i - 1]}
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
-                              // Finally found how to get rid of random old green from click and hover!
-                              // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
-
-                              aria-label="settings"
+                              aria-label="increment"
                               title="Complete this sustainable action"
                             >
                               <AddCircleIcon fontSize="large" />
