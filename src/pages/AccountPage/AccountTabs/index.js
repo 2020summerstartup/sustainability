@@ -2,6 +2,7 @@ import React from "react";
 import TotalPointsCard from "./points";
 import DormCard from "./dorm";
 import Badges from "./badges";
+import Badges2 from "./badges2";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -180,6 +181,18 @@ function AccountTabs() {
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <Badges />
+          </Grid>
+        </Grid>
+        <h1></h1>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6} lg={4}>
+            <Badges2 />
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <Badges2 />
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <Badges2 />
           </Grid>
         </Grid>
       </TabPanel>
