@@ -77,9 +77,17 @@ export default function AlertDialog() {
         {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
         <DialogContent className={styles.dialogContent}>
           <DialogContentText id="alert-dialog-description">
-            <Typography variant="h5" className={classes.textTitle}>
+            {/* RIBBON */}
+            <div className={styles.nonSemanticProtector}>
+              <h1 className={styles.ribbon}>
+                <strong className={styles.ribbonContent}>
+                  Congratulations [name]!
+                </strong>
+              </h1>
+            </div>
+            {/* <Typography variant="h5" className={classes.textTitle}>
               Congratulations [user's name]!
-            </Typography>
+            </Typography> */}
             {/* <Typography variant="subtitle" className={classes.textBody}>
               You just earned a new badge for completing [susaction]! This means
               you have completed this action 20 times. Great job and keep being
