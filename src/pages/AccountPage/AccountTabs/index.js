@@ -3,6 +3,7 @@ import TotalPointsCard from "./points";
 import DormCard from "./dorm";
 import Badges from "./badges";
 import Badges2 from "./badges2";
+import Badges3 from "./badges3";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -172,29 +173,46 @@ function AccountTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={2} class="tab-container">
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6} lg={4}>
-            <Badges />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <Badges />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <Badges />
-          </Grid>
-        </Grid>
+        {/* THIRD BADGE */}
         <h1></h1>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges3 />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges3 />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges3 />
+          </Grid>
+        </Grid>        
+        {/* FIRST BADGE */}
+        <h1></h1>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges />
+          </Grid>
+        </Grid>
+        {/* SECOND BADGE */}
+        <h1></h1>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4}>
             <Badges2 />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Badges2 />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Badges2 />
           </Grid>
         </Grid>
+        
       </TabPanel>
     </div>
   );

@@ -25,9 +25,9 @@ const useGridStyles = makeStyles(({ breakpoints }) => ({
 }));
 
 const useStyles = makeStyles(({ palette }) => ({
-  color: {  
-  '&:before': {
-      backgroundColor: "grey",
+  color: {
+    "&:before": {
+      backgroundColor: "#696969",
     },
   },
   root: {
@@ -62,7 +62,7 @@ const useStyles = makeStyles(({ palette }) => ({
     position: "relative",
     zIndex: 1,
     borderRadius: "1rem",
-    boxShadow: "0 6px 16px 0 grey",
+    boxShadow: "0 6px 16px 0	#696969",
     "&:before": {
       content: '""',
       display: "block",
@@ -82,6 +82,12 @@ const useStyles = makeStyles(({ palette }) => ({
   title: {
     fontFamily: "Fjalla One",
     fontSize: "1.25rem",
+    color: "#fff",
+    margin: 0,
+  },
+  subtitle:{
+    fontFamily: "Fjalla One",
+    fontSize: "1rem",
     color: "#fff",
     margin: 0,
   },
@@ -108,7 +114,7 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-const CustomCard = ({ styles, cover, logo, title, brand, date }) => {
+const CustomCard = ({ styles, cover, logo, title, subtitle, brand, date }) => {
   const mediaStyles = useCoverCardMediaStyles();
   return (
     <Box className={cx(styles.root, styles.color)} pt={20}>
@@ -121,6 +127,7 @@ const CustomCard = ({ styles, cover, logo, title, brand, date }) => {
             </Item>
             <Item position={"bottom"}>
               <h2 className={styles.title}>{title}</h2>
+              <h2 className={styles.subtitle}>{subtitle}</h2>
             </Item>
           </Row>
           <Row mt={4} alignItems={"center"}>
@@ -138,10 +145,9 @@ const CustomCard = ({ styles, cover, logo, title, brand, date }) => {
 };
 
 export const HighlightCardDemo = React.memo(function HighlightCard() {
-  const styles1 = useStyles({ color: "#fc7944" });
-  const styles2 = useStyles({ color: "#5357ce" });
+  const styles = useStyles();
   const gridStyles = useGridStyles();
-  
+
   return (
     <>
       <NoSsr>
@@ -158,27 +164,23 @@ export const HighlightCardDemo = React.memo(function HighlightCard() {
       >
         <Grid item>
           <CustomCard
-            styles={styles1}
+            styles={styles}
             brand={"SusComp"}
             date={"Date badge received: 07.25.2020"}
             cover={
-              "https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60"
+              "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
             }
             // give credit to author!
             logo={
               "https://images.pexels.com/photos/542619/pexels-photo-542619.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             }
-            title={
-              <>
-                Energy Saver Badge
-                {/* <br />A Great Alternative */}
-              </>
-            }
+            title={<>Energy Saver Badge</>}
+            subtitle={<>Buzzed 20 times</>}
           />
         </Grid>
         {/* <Grid item>
           <CustomCard
-            styles={styles2}
+            styles={styles}
             brand={'League of Legends Official'}
             date={'02.04.2020'}
             cover={
