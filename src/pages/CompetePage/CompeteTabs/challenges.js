@@ -3,6 +3,7 @@ import Reward from "react-rewards";
 import ChallengeData from "../challengeData.json";
 
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 // Just hardcoding in a bunch of colors so that we'll never have more simultaneous challenges than possible colors.
 let colors = [
@@ -42,7 +43,8 @@ const setChallengeInfo = () => {
             padding: "1.5rem",
             borderRadius: "10px",
             margin: "0 0",
-            // maxWidth: "600px",
+            maxWidth: "600px",
+            display: "inline-block",
             marginTop: "2rem",
           }}
         >
@@ -70,7 +72,7 @@ class Challenges extends React.Component {
   render() {
     return (
       <div>
-        <h1>Current Challenges</h1>
+        <Typography variant="h5">Current Challenges</Typography>
         {challengeInfo}
         <p></p>
         <Reward
@@ -91,9 +93,8 @@ class Challenges extends React.Component {
             Start a Challenge
           </Button>
         </Reward>
-        <p>
-          <b>Check back often for new challenges!</b>
-        </p>
+        <p></p>
+        <Typography variant="body1">Check back often for new challenges!</Typography>
       </div>
     );
   }
