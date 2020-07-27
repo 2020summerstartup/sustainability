@@ -84,11 +84,11 @@ import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 var total;
 function initPoints(email) {
   total = 0;
-  for (const key in ActionData) {
-    var action = localStorage.getItem(ActionData[key].susAction); // Action to initialize
+  for (const el in ActionData) {
+    var action = localStorage.getItem(ActionData[el].susAction); // Action to initialize
     if (isNaN(action) || action == null) {
       // If it hasn't been initialized
-      localStorage.setItem(ActionData[key].susAction, 0); // Initialize to 0
+      localStorage.setItem(ActionData[el].susAction, 0); // Initialize to 0
       action = 0;
     }
     total += parseInt(action); // Keep track of the sum of the individual points
@@ -493,18 +493,18 @@ function HomePage() {
   getMastered(localStorage.getItem("email"));
 
   var masterActions = []; // Initalize array of the mastered status for each action
-  for (const key in ActionData) {
+  for (const el in ActionData) {
     // Iterate over every action in ActionData & determine if button needs to load as enabled or disabled
-    var action = ActionData[key]; // Take the current action
+    var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
     var storageName = action.susAction.concat("Mastered");
     firestoreMastered = localStorage.getItem("firestoreMastered");
 
     if (firestoreMastered.includes(stringActionName)) {
-      masterActions[key - 1] = true; //disable button when action is mastered
+      masterActions[el - 1] = true; //disable button when action is mastered
       localStorage.setItem(storageName, true); // update local storage accordingly
     } else {
-      masterActions[key - 1] = false; //enable button is action is not yet mastered
+      masterActions[el - 1] = false; //enable button is action is not yet mastered
       localStorage.setItem(storageName, false); // update local storage accordingly
     }
   }
@@ -539,16 +539,16 @@ function HomePage() {
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
-  for (const key in ActionData) {
+  for (const el in ActionData) {
     // Iterate over every action in ActionData
-    var action2 = ActionData[key]; // Take the current action
+    var action2 = ActionData[el]; // Take the current action
     var storageName2 = action2.susAction.concat("Fav");
     var storedFav = localStorage.getItem(storageName2) == "true"; // We're getting a warning in the console (wants ===)
     if (storedFav) {
       // If the action is favorited
-      favIconColors[key - 1] = "#DC143C"; // Turn red
+      favIconColors[el - 1] = "#DC143C"; // Turn red
     } else {
-      favIconColors[key - 1] = "#6c6c6c"; // Otherwise turn gray
+      favIconColors[el - 1] = "#6c6c6c"; // Otherwise turn gray
     }
   }
 
@@ -589,13 +589,13 @@ function HomePage() {
   var progressMessage = "";
   const setProgressMessage = () => {
     initPoints();
-    for (const key in ActionData) {
+    for (const el in ActionData) {
       // Loop over every action in ActionData
-      var actionPoints = localStorage.getItem(ActionData[key].susAction); // Points earned by current action
+      var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
       progressMessage = (
         <>
           {progressMessage}
-          {ActionData[key].title}&nbsp;points: {actionPoints}
+          {ActionData[el].title}&nbsp;points: {actionPoints}
           <br />
         </>
       );
@@ -628,9 +628,9 @@ function HomePage() {
             onChange={handleChange}
             variant="fullWidth"
             scrollButtons="off"
-            textColor="default"
+            // TODO: need to set text color to white if we don't want non-selected tab to have grayed out text
+            // textColor="#ffff"
             aria-label="scrollable tabs"
-            centered="true"
             className={classes.tabs}
             TabIndicatorProps={{ className: classes.indicator }}
           >
@@ -801,8 +801,8 @@ function HomePage() {
               {ActionData.map(
                 (action, i) =>
                   action.title.toLowerCase().includes(filter.toLowerCase()) && (
-                    <Grid item xs={12} md={6} lg={4}>
-                      <Card className={classes.root} key={action.title}>
+                    <Grid item xs={12} md={6} lg={4} key={i}>
+                      <Card className={classes.root}>
                         <CardHeader
                           className={classes.cardContent}
                           action={
@@ -914,8 +914,8 @@ function HomePage() {
                       (action, i) =>
                         localStorage.getItem(action.susAction.concat("Fav")) ==
                           "true" && (
-                          <Grid item xs={12} md={6} lg={4}>
-                            <Card className={classes.root} key={action.title}>
+                          <Grid item xs={12} md={6} lg={4} key={i}>
+                            <Card className={classes.root}>
                               <CardHeader
                                 className={classes.cardContent}
                                 action={
