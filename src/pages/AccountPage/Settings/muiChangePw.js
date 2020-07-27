@@ -22,7 +22,7 @@ const ChangePW = () => (
   <div>
     <AuthUserContext>
       {(authUser) => (
-        <div class="base-container">
+        <div className="base-container">
           <PasswordChange />
         </div>
       )}

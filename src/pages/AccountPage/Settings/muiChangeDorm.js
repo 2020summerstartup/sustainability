@@ -23,7 +23,7 @@ function ChangeDorm() {
     <div>
       <AuthUserContext>
         {(authUser) => (
-          <div class="base-container">
+          <div className="base-container">
             <CssBaseline />
             <div className={classes.paper}>
               <Typography variant="h5">Need to change your dorm?</Typography>

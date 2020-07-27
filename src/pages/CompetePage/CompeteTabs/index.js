@@ -127,11 +127,11 @@ function CompeteTabs() {
           />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} class="tab-container">
+      <TabPanel value={value} index={0} className="tab-container">
         <Leaderboard />
       </TabPanel>
 
-      <TabPanel value={value} index={1} class="tab-container">
+      <TabPanel value={value} index={1} className="tab-container">
         <Challenges />
       </TabPanel>
     </div>

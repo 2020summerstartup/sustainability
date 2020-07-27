@@ -13,7 +13,7 @@ import Container from "@material-ui/core/Container";
 import EmailIcon from "@material-ui/icons/Email";
 
 const MuiPasswordForgetPage = () => (
-  <div class="base-container">
+  <div className="base-container">
     <PasswordForgetForm />
   </div>
 );

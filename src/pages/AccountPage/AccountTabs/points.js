@@ -92,7 +92,7 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                   <InfoSubtitle>You have earned</InfoSubtitle>
                   <InfoTitle> {localStorage.getItem("total")} Points</InfoTitle>
                   <InfoCaption>
-                    <p onClick={() => pointsForAccount()} class="btn-text"></p>
+                    <p onClick={() => pointsForAccount()} className="btn-text"></p>
                   </InfoCaption>
                 </Info>
               </Box>

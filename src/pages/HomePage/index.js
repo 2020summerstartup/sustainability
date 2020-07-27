@@ -751,7 +751,7 @@ function HomePage() {
             </center>
           </Modal> */}
         </div>
-        <TabPanel value={value} index={0} class="tab-container">
+        <TabPanel value={value} index={0} className="tab-container">
            {/* Action card boi */}
         <NoSsr>
                     <GoogleFontLoader
@@ -872,7 +872,7 @@ function HomePage() {
             </Grid>
           </Fragment>
         </TabPanel>
-        <TabPanel value={value} index={1} class="tab-container">
+        <TabPanel value={value} index={1} className="tab-container">
           <div>
             <AuthUserContext.Consumer>
               {(authUser) => (

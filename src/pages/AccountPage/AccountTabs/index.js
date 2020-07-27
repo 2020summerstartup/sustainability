@@ -164,15 +164,15 @@ function AccountTabs() {
           />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} class="tab-container">
+      <TabPanel value={value} index={0} className="tab-container">
         <TotalPointsCard />
       </TabPanel>
 
-      <TabPanel value={value} index={1} class="tab-container">
+      <TabPanel value={value} index={1} className="tab-container">
         <DormCard />
       </TabPanel>
 
-      <TabPanel value={value} index={2} class="tab-container">
+      <TabPanel value={value} index={2} className="tab-container">
         {/* THIRD BADGE */}
         <h1> </h1>
         <Grid container spacing={2}>
