@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
-    flexGrow: 1,
+    // flexGrow: 1,
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
