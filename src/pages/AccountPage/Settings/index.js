@@ -1,4 +1,6 @@
 import React from "react";
+import { AuthUserContext } from "../../../services/Session";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { withTheme } from "../../../components/Theme";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
@@ -11,16 +13,12 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import HomeIcon from "@material-ui/icons/Home";
 import EmailIcon from "@material-ui/icons/Email";
 import { Link } from "react-router-dom";
-import SignOutButton from "../../../components/SignOut";
 import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
-
-import { AuthUserContext } from "../../../services/Session";
 
 const useStyles = makeStyles((theme) => ({
   settingsIcon: {
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   deleteAccount: {
     position: "fixed",
     bottom: "5px",
-    color: theme.palette.error.dark
+    color: theme.palette.error.dark,
   },
 }));
 

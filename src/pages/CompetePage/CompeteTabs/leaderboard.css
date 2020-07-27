@@ -9,7 +9,9 @@ body {
 }
 
 .Leaderboard {
-  /* width: 30rem; */
+  width: 30rem;
+  margin-right: 0!important;
+  display: inline-block;
 }
 
 .leader-wrap {

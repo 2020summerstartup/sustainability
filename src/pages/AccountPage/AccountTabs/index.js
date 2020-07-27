@@ -1,6 +1,9 @@
 import React from "react";
 import TotalPointsCard from "./points";
 import DormCard from "./dorm";
+import Badges from "./badges";
+import Badges2 from "./badges2";
+import Badges3 from "./badges3";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,13 +14,10 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
+import NewReleasesIcon from "@material-ui/icons/NewReleases";
 
-// import leaderBoardUpdate, {
-//   assignRanking,
-// } from "../CompetePage/leaderBoardUpdate.js";
-// import { getUser, getDorm } from "../../services/Firebase";
-// // import SignOutButton from "../SignOut";
-// import { AuthUserContext, withAuthorization } from "../../services/Session";
+// probably delete later
+import Grid from "@material-ui/core/Grid";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,7 +54,7 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    boxShadow: "2px 2px 6px #a6a6a6",
+    boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
     flexGrow: 1,
@@ -71,11 +71,18 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     top: "0.4rem",
   },
-  tabText: {
+  tabTextBigScreen: {
+    display: "none",
     [theme.breakpoints.up("sm")]: {
+      display: "inline",
       fontSize: "17px",
       fontWeight: "bold",
       marginBottom: "1rem",
+    },
+  },
+  tabTextSmallScreen: {
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
     },
   },
   indicator: {
@@ -116,21 +123,44 @@ function AccountTabs() {
         >
           <Tab
             label={
-              <div className={classes.tabText}>
-                <PersonIcon className={classes.tabIcon} /> Your Points{" "}
-              </div>
+              <>
+                <div className={classes.tabTextBigScreen}>
+                  <PersonIcon className={classes.tabIcon} /> Your Points{" "}
+                </div>
+                <div className={classes.tabTextSmallScreen}>
+                  <PersonIcon className={classes.tabIcon} /> Points{" "}
+                </div>
+              </>
             }
             {...a11yProps(0)}
           />
 
           <Tab
             label={
-              <div className={classes.tabText}>
-                <HomeIcon className={classes.tabIcon} /> Your Dorm{" "}
-              </div>
+              <>
+                <div className={classes.tabTextBigScreen}>
+                  <HomeIcon className={classes.tabIcon} /> Your Dorm{" "}
+                </div>
+                <div className={classes.tabTextSmallScreen}>
+                  <HomeIcon className={classes.tabIcon} /> Dorm{" "}
+                </div>
+              </>
             }
             {...a11yProps(1)}
-            style={{ backgroundColor: "transparent" }}
+          />
+
+          <Tab
+            label={
+              <>
+                <div className={classes.tabTextBigScreen}>
+                  <NewReleasesIcon className={classes.tabIcon} /> Your Badges{" "}
+                </div>
+                <div className={classes.tabTextSmallScreen}>
+                  <NewReleasesIcon className={classes.tabIcon} /> Badges{" "}
+                </div>
+              </>
+            }
+            {...a11yProps(1)}
           />
         </Tabs>
       </AppBar>
@@ -140,6 +170,49 @@ function AccountTabs() {
 
       <TabPanel value={value} index={1} class="tab-container">
         <DormCard />
+      </TabPanel>
+
+      <TabPanel value={value} index={2} class="tab-container">
+        {/* THIRD BADGE */}
+        <h1></h1>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges3 />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges3 />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges3 />
+          </Grid>
+        </Grid>        
+        {/* FIRST BADGE */}
+        <h1></h1>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges />
+          </Grid>
+        </Grid>
+        {/* SECOND BADGE */}
+        <h1></h1>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges2 />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges2 />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Badges2 />
+          </Grid>
+        </Grid>
+        
       </TabPanel>
     </div>
   );

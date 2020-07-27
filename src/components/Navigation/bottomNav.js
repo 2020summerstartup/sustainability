@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../../services/Session";
 
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeIcon from "@material-ui/icons/Home";
-import GroupIcon from "@material-ui/icons/Group";
+import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import InfoIcon from "@material-ui/icons/Info";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import EcoIcon from "@material-ui/icons/Eco";
@@ -62,7 +61,7 @@ function BottomNavAuth() {
         label="Compete"
         component={Link}
         to="/compete"
-        icon={<GroupIcon />}
+        icon={<EmojiEventsIcon />}
       />
       <BottomNavigationAction
         label="Info"

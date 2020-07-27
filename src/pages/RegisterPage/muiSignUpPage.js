@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import PropTypes from "prop-types";
-import DormSelect from "../../components/DormSelect";
+import Reward from "react-rewards";
 
 import { withFirebase, createUser } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 
-import * as firebase from "firebase";
 import "firebase/auth";
 
 import { PasswordInput } from "./muiSignInPage";
-import { assignData } from "../HomePage/index.js";
 import signupImg from "../../img/login2.svg";
 
 import Button from "@material-ui/core/Button";
@@ -24,16 +22,17 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import HomeIcon from "@material-ui/icons/Home";
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
 // import when you need to use icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Sounds
+import signup from "../../sounds/hero_simple-celebration-03.wav";
 
 const MuiSignUpPage = () => (
   <div className="base-container">
@@ -71,14 +70,6 @@ const useStyles = (theme) => ({
     marginTop: "1rem",
   },
 });
-
-// Styles for Icons
-const useStyles2 = makeStyles((theme) => ({
-  formIcon: {
-    marginLeft: "5px",
-    marginRight: "1rem",
-  },
-}));
 
 const dorms = [
   { title: "South" },
@@ -157,13 +148,13 @@ class PasswordInput2 extends Component {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-               <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={this.togglePasswordMask}
-                  edge="end"
-                >
-                  {passwordIsMasked ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                </IconButton>
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={this.togglePasswordMask}
+                edge="end"
+              >
+                {passwordIsMasked ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              </IconButton>
             </InputAdornment>
           ),
           startAdornment: <LockOpenIcon className={classes.formIcon} />,
@@ -181,7 +172,6 @@ PasswordInput2.propTypes = {
 
 PasswordInput2 = withStyles(useStyles)(PasswordInput2);
 
-
 const INITIAL_STATE = {
   user: {
     username: "",
@@ -193,6 +183,14 @@ const INITIAL_STATE = {
     points: 0,
   },
   error: null,
+};
+
+// sound play for favorites button
+const signupAudio = new Audio(signup);
+
+// called by onclick to play the audio file
+const playSound = (audioFile) => {
+  audioFile.play();
 };
 
 class SignUpFormBase extends Component {
@@ -209,18 +207,10 @@ class SignUpFormBase extends Component {
   //TEST
   test = () => {
     const { username, email, passwordOne, dorm, image, points } = this.state;
-    console.log("DORM: ", dorm);
-    console.log("USERNAME: ", username);
-    console.log("EMAIL: ", email);
-    console.log("PASSWORD: ", passwordOne);
   };
 
   onSubmit = (event) => {
     const { username, email, passwordOne, dorm, image, points } = this.state;
-    console.log("DORM: ", dorm);
-    console.log("USERNAME: ", username);
-    console.log("EMAIL: ", email);
-    console.log("PASSWORD: ", passwordOne);
     // const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
     // uploadTask.on('state_changed', () => {
@@ -488,16 +478,28 @@ class SignUpFormBase extends Component {
               </Typography>
             )}
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              disabled={isInvalid}
+            <Reward
+              ref={(ref) => {
+                this.reward = ref;
+              }}
+              type="memphis"
             >
-              Sign Up
-            </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                disabled={isInvalid}
+                onClick={() => {
+                  playSound(signupAudio);
+                  this.reward.rewardMe();
+                }}
+              >
+                Sign Up
+              </Button>
+            </Reward>
+
             {/* <button disabled={isInvalid} type="submit" className="button">
               Sign Up
             </button> */}

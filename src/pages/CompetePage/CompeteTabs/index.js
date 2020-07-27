@@ -7,21 +7,10 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import PersonIcon from "@material-ui/icons/Person";
-import HomeIcon from "@material-ui/icons/Home";
 import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
-import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
-import GradeIcon from '@material-ui/icons/Grade';
-import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
-
-import ChallengeCard from "./challengeCard";
-// import leaderBoardUpdate, {
-//   assignRanking,
-// } from "../CompetePage/leaderBoardUpdate.js";
-// import { getUser, getDorm } from "../../services/Firebase";
-// // import SignOutButton from "../SignOut";
-// import { AuthUserContext, withAuthorization } from "../../services/Session";
+import StarIcon from '@material-ui/icons/Star';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,7 +47,7 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    boxShadow: "2px 2px 6px #a6a6a6",
+    boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
     flexGrow: 1,
@@ -121,7 +110,7 @@ function CompeteTabs() {
           <Tab
             label={
               <div className={classes.tabText}>
-                <GradeIcon className={classes.tabIcon} /> Leaderboard{" "}
+                <EqualizerIcon className={classes.tabIcon} /> Leaderboard{" "}
               </div>
             }
             {...a11yProps(0)}
@@ -130,7 +119,7 @@ function CompeteTabs() {
           <Tab
             label={
               <div className={classes.tabText}>
-                <EmojiNatureIcon className={classes.tabIcon} /> Challenges{" "}
+                <StarIcon className={classes.tabIcon} /> Challenges{" "}
               </div>
             }
             {...a11yProps(1)}

@@ -8,7 +8,7 @@ function checkForIOS() {
         return false;
     }
     // check day/time 
-    const today = moment().toDate();
+    const today = moment().toDate(); // moment converts it to a Data object
     const lastPrompt = moment(localStorage.getItem("installPrompt"));
     const days = moment(today).diff(lastPrompt, "days");
     // check what kind of device
