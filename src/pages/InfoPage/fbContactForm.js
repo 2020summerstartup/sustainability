@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Axios } from "../../services/Firebase/firebase.js";
-// import { firestore } from "../../services/Firebase";
 import { firestore } from '../../services/Firebase';
 import 'firebase/firestore';
-
 
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
