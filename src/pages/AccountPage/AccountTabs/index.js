@@ -174,7 +174,7 @@ function AccountTabs() {
 
       <TabPanel value={value} index={2} class="tab-container">
         {/* THIRD BADGE */}
-        <h1></h1>
+        <h1> </h1>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
             <Badges3 />
@@ -187,7 +187,7 @@ function AccountTabs() {
           </Grid>
         </Grid>        
         {/* FIRST BADGE */}
-        <h1></h1>
+        <h1> </h1>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
             <Badges />
@@ -200,7 +200,7 @@ function AccountTabs() {
           </Grid>
         </Grid>
         {/* SECOND BADGE */}
-        <h1></h1>
+        <h1> </h1>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
             <Badges2 />
