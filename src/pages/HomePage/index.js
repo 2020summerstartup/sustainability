@@ -1,7 +1,4 @@
 import React, { Fragment, useState, useContext } from "react";
-import styles from "./modal.module.css";
-import useIsIOS from "../../components/IosModal/useIsIOS";
-import { IosModal } from "../../components/IosModal";
 import BadgeModal from "./badgeModal"
 
 import favorite from "../../img/favorite.svg";
@@ -39,7 +36,6 @@ import EcoIcon from "@material-ui/icons/Eco";
 
 import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
-import TextField from "@material-ui/core/TextField";
 import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
 
@@ -76,7 +72,6 @@ import {
   InfoTitle,
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
-import TotalPointsCard from "../AccountPage/AccountTabs/points";
 
 // Sounds
 import like from "../../sounds/state-change_confirm-up.wav";
@@ -366,11 +361,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
-  // const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
-  const [incrementModalIsOpen, setIncrementModalIsOpen] = useState(false);
   const authContext = useContext(AuthUserContext);
-  // loading install prompt for ios
-  const { prompt } = useIsIOS();
 
   // Get user's dorm set in local storage
   getUser(authContext.email).onSnapshot(
@@ -393,8 +384,6 @@ function HomePage() {
 
   // getMastered(authContext.email);
 
-  // message to be displayed in check your progress
-  var message = [];
   total = localStorage.getItem("total");
 
   const classes = useStyles();
@@ -509,7 +498,7 @@ function HomePage() {
     var action = ActionData[key]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
     var storageName = action.susAction.concat("Mastered");
-    var firestoreMastered = localStorage.getItem("firestoreMastered");
+    firestoreMastered = localStorage.getItem("firestoreMastered");
 
     if (firestoreMastered.includes(stringActionName)) {
       masterActions[key - 1] = true; //disable button when action is mastered
@@ -523,11 +512,7 @@ function HomePage() {
   //This function checks if (upon increment) the action should be mastered & acts according
   const checkMastered = (action) => {
     // Get the name and info of the stored action that we're working with
-    var storageName = action.susAction.concat("Mastered");
 
-    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedMaster = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console
-    // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     const actionTotal = localStorage.getItem(action.susAction);
@@ -556,9 +541,9 @@ function HomePage() {
   var favIconColors = []; // Initalize array of the color for each favIcon
   for (const key in ActionData) {
     // Iterate over every action in ActionData
-    var action = ActionData[key]; // Take the current action
-    var storageName = action.susAction.concat("Fav");
-    var storedFav = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console (wants ===)
+    var action2 = ActionData[key]; // Take the current action
+    var storageName2 = action2.susAction.concat("Fav");
+    var storedFav = localStorage.getItem(storageName2) == "true"; // We're getting a warning in the console (wants ===)
     if (storedFav) {
       // If the action is favorited
       favIconColors[key - 1] = "#DC143C"; // Turn red
@@ -731,8 +716,7 @@ function HomePage() {
             <DialogActions>
               <Button
                 onClick={() => {
-                  setProgressModalIsOpen(false);
-                  window.location.reload();
+                  setProgressModalIsOpen(false)
                 }}
                 variant="contained"
                 color="primary"
