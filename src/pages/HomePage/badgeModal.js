@@ -81,7 +81,7 @@ export default function AlertDialog() {
             <div className={styles.nonSemanticProtector}>
               <h1 className={styles.ribbon}>
                 <strong className={styles.ribbonContent}>
-                  Congratulations [name]!
+                  Congratulations {localStorage.getItem('name')}!
                 </strong>
               </h1>
             </div>

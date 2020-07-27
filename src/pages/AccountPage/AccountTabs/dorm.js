@@ -73,13 +73,13 @@ getDorm()
 leaderBoardUpdate();
 
 const rankDisplay = () => {
-  if (localStorage.getItem("ranking") == 1) {
+  if (localStorage.getItem("ranking") === 1) {
     rank = <p>You're in 1st place!</p>;
   }
-  if (localStorage.getItem("ranking") == 2) {
+  if (localStorage.getItem("ranking") === 2) {
     rank = <p>You're in 2nd place!</p>;
   }
-  if (localStorage.getItem("ranking") == 3) {
+  if (localStorage.getItem("ranking") === 3) {
     rank = <p>You're in 3rd place!</p>;
   } else if (localStorage.getItem("ranking") >= 4) {
     rank = <p>You're in {localStorage.getItem("ranking")}th place!</p>;
