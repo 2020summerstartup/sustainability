@@ -2,6 +2,10 @@ import React, { Fragment, useState, useContext } from "react";
 import styles from "./modal.module.css";
 import useIsIOS from "../../components/IosModal/useIsIOS";
 import { IosModal } from "../../components/IosModal";
+import BadgeModal from "./badgeModal"
+
+import favorite from "../../img/favorite.svg";
+import actionTab from "../../img/actionTab.svg";
 
 import CountUp from "react-countup";
 import Modal from "react-modal";
@@ -63,7 +67,7 @@ import Collapse from "@material-ui/core/Collapse";
 import NoSsr from "@material-ui/core/NoSsr";
 import GoogleFontLoader from "react-google-font-loader";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-import favorite from "../../img/favorite.svg";
+
 import clsx from "clsx";
 import {
   Info,
@@ -73,6 +77,11 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import TotalPointsCard from "../AccountPage/AccountTabs/points";
+
+// Sounds
+import like from "../../sounds/state-change_confirm-up.wav";
+import unlike from "../../sounds/state-change_confirm-down.wav";
+import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
@@ -91,6 +100,16 @@ function initPoints(email) {
   }
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
+
+// sound play for certain buttons
+const likeAudio = new Audio(like);
+const unlikeAudio = new Audio(unlike);
+const confettiAudio = new Audio(confetti);
+
+// called by onclick to play the audio file
+const playSound = (audioFile) => {
+  audioFile.play();
+};
 
 // I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
 // removed fav foreach loop here, don't think it was doing anything? (This comment is from Jessica?)
@@ -151,7 +170,11 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     minWidth: "280",
+    // maxHeight: "168px",
     backgroundColor: theme.palette.divider,
+    // height: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
   margin: {
     margin: theme.spacing.unit,
@@ -182,7 +205,10 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "0",
   },
   cardActions: {
-    paddingTop: "0",
+    display: "flex",
+    flex: "1 0 auto",
+    alignItems: "flex-end",
+    justifyContent: "center",
   },
   card: {
     borderRadius: "1rem",
@@ -190,9 +216,37 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     margin: "auto",
     marginBottom: "1rem",
-    maxWidth: "60rem",
+    maxWidth: "36rem",
     minHeight: "15rem",
     zIndex: 0,
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "75vh",
+      minHeight: "40vh",
+    },
+    "&:after": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      bottom: 0,
+      zIndex: 1,
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+    },  
+  },
+  card2: {
+    borderRadius: "1rem",
+    boxShadow: "none",
+    position: "relative",
+    margin: "auto",
+    marginBottom: "1rem",
+    maxWidth: "36rem",
+    minHeight: "15rem",
+    zIndex: 0,
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "75vh",
+      minHeight: "40vh",
+    },
     "&:after": {
       content: '""',
       display: "block",
@@ -211,7 +265,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   appbar: {
-    boxShadow: "2px 2px 6px #a6a6a6",
+    boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
     flexGrow: 1,
@@ -320,6 +374,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
+  // const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const [incrementModalIsOpen, setIncrementModalIsOpen] = useState(false);
   const authContext = useContext(AuthUserContext);
   // loading install prompt for ios
@@ -353,17 +408,33 @@ function HomePage() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [expandedId, setExpandedId] = React.useState(-1);
+  // const [height, setHeight] = React.useState("");
   const [filter, setFilter] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
-  const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
+  const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top"});
+  const mediaStyles2 = useCoverCardMediaStyles({ bgPosition: "bottom" });
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleExpandClick = (i) => {
+    // WILL MAYBE REVISITED TO HAVE CARDS SAME HEIGHT
+    // for (const j in ActionData) {
+    //   if (expandedId === i) {
+    //     setHeight("168px");
+    //     console.log("ID: ", i);
+    //     console.log("ID HEIGHT: ", height);
+    //   } else {
+    //     setHeight("100%");
+    //   }
+    // }
+    // console.log("ID: ", i);
+    // console.log("HEIGHT: ", height);
     setExpandedId(expandedId === i ? -1 : i);
+    // setHeight("50px")
   };
 
   const handleSearchChange = (e) => {
@@ -394,6 +465,7 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
+      increment(action);
       window.location.reload(true);
     });
 
@@ -415,52 +487,47 @@ function HomePage() {
         console.log(`Encountered error: ${err}`);
       }
     );
-  
+
     checkMastered(action);
-    
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
   }; // increment
 
-
-
-
- 
-  
-  // to check with the mastered actions that firestore has upon loading page 
-  // may need to change this because every time the page loads we will read firestore data 
+  // to check with the mastered actions that firestore has upon loading page
+  // may need to change this because every time the page loads we will read firestore data
   //(and page load everytime action is logged) so we may reach limit if many people are using the app
-  var firestoreMastered = [] 
+  var firestoreMastered = [];
   const getMastered = (userEmail) => {
-    let userDocRef = firestore.doc('users/' + userEmail);
-    userDocRef.get().then(snapshot => {
+    let userDocRef = firestore.doc("users/" + userEmail);
+    userDocRef.get().then((snapshot) => {
       // finds which actions have been previously mastered from firestore -> this is an array!
-      firestoreMastered = snapshot.get('masteredActions');
+      firestoreMastered = snapshot.get("masteredActions");
       // need json.stringify to put the array into local storage as an array!
-      localStorage.setItem('firestoreMastered', JSON.stringify(firestoreMastered));
-    })
-  }
-  getMastered(localStorage.getItem('email'));
-
+      localStorage.setItem(
+        "firestoreMastered",
+        JSON.stringify(firestoreMastered)
+      );
+    });
+  };
+  getMastered(localStorage.getItem("email"));
 
   var masterActions = []; // Initalize array of the mastered status for each action
   for (const key in ActionData) {
     // Iterate over every action in ActionData & determine if button needs to load as enabled or disabled
     var action = ActionData[key]; // Take the current action
-    var stringActionName = JSON.stringify(action.susAction)
+    var stringActionName = JSON.stringify(action.susAction);
     var storageName = action.susAction.concat("Mastered");
-    var firestoreMastered = localStorage.getItem('firestoreMastered');
+    var firestoreMastered = localStorage.getItem("firestoreMastered");
 
-    if ( firestoreMastered.includes(stringActionName) ){
-      masterActions[key -1] = true; //disable button when action is mastered
-      localStorage.setItem(storageName, true) // update local storage accordingly 
+    if (firestoreMastered.includes(stringActionName)) {
+      masterActions[key - 1] = true; //disable button when action is mastered
+      localStorage.setItem(storageName, true); // update local storage accordingly
     } else {
-      masterActions[key -1] = false; //enable button is action is not yet mastered
-      localStorage.setItem(storageName, false) // update local storage accordingly 
+      masterActions[key - 1] = false; //enable button is action is not yet mastered
+      localStorage.setItem(storageName, false); // update local storage accordingly
     }
   }
-
 
   //This function checks if (upon increment) the action should be mastered & acts according
   const checkMastered = (action) => {
@@ -474,23 +541,24 @@ function HomePage() {
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     const actionTotal = localStorage.getItem(action.susAction);
     console.log(actionTotal);
-    console.log(action.points)
+    console.log(action.points);
     // if (storedMaster == null) {
     //   console.log('null')
-    // } 
-    if ((20 * (action.points)) >= actionTotal) {
+    // }
+    if (20 * action.points >= actionTotal) {
       // If action has not been mastered, the button will remain enabled
-      console.log('You are ' + ((20 * (action.points))- actionTotal) + ' points away from mastering this action!')
-    } else  if ((20 * (action.points)) < actionTotal){
-      actionMastered((localStorage.getItem('email')), action.susAction)
-      // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect 
+      console.log(
+        "You are " +
+          (20 * action.points - actionTotal) +
+          " points away from mastering this action!"
+      );
+    } else if (20 * action.points < actionTotal) {
+      actionMastered(localStorage.getItem("email"), action.susAction);
+      // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
-      console.log('You have mastered this action!')
+      console.log("You have mastered this action!");
     }
   };
-
-
-
 
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
@@ -530,10 +598,12 @@ function HomePage() {
     if (storedFav) {
       displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#DC143C"; // Turn red
+      playSound(likeAudio);
       toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
     } else {
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
+      playSound(unlikeAudio);
       toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
@@ -569,7 +639,7 @@ function HomePage() {
   // HTML to be displayed
   return (
     <>
-      {prompt && <IosModal />}
+      {/* {prompt && <IosModal />} */}
       <div>
         <AppBar
           position="static"
@@ -595,7 +665,6 @@ function HomePage() {
                 </div>
               }
               {...a11yProps(0)}
-              style={{ backgroundColor: "transparent" }}
             />
             <Tab
               label={
@@ -604,7 +673,6 @@ function HomePage() {
                 </div>
               }
               {...a11yProps(1)}
-              style={{ backgroundColor: "transparent" }}
             />
           </Tabs>
         </AppBar>
@@ -629,11 +697,16 @@ function HomePage() {
           <Button
             color="primary"
             variant="contained"
-            onClick={() => setProgressModalIsOpen(true)}
+            onClick={() => {
+              setProgressModalIsOpen(true);
+              playSound(confettiAudio);
+            }}
             className={classes.checkProgress}
           >
             Check Progress
           </Button>
+
+          <BadgeModal />
 
           {/* NEW MODAL */}
           <Dialog
@@ -666,7 +739,10 @@ function HomePage() {
             </DialogContent>
             <DialogActions>
               <Button
-                onClick={() => setProgressModalIsOpen(false)}
+                onClick={() => {
+                  setProgressModalIsOpen(false);
+                  window.location.reload();
+                }}
                 variant="contained"
                 color="primary"
               >
@@ -707,6 +783,31 @@ function HomePage() {
           </Modal> */}
         </div>
         <TabPanel value={value} index={0} class="tab-container">
+           {/* Action card boi */}
+        <NoSsr>
+                    <GoogleFontLoader
+                      fonts={[
+                        { font: "Spartan", weights: [300] },
+                        { font: "Montserrat", weights: [200, 400, 700] },
+                      ]}
+                    />
+                 
+                  </NoSsr>
+                  <Card className={classes.card2}>
+                    <CardMedia classes={mediaStyles2} image={actionTab} />
+                    <Box py={3} px={2} className={classes.content}>
+                      <Info useStyles={useGalaxyInfoStyles}>
+                        <InfoSubtitle></InfoSubtitle>
+                        <InfoTitle>Log your actions here!</InfoTitle>
+                        <InfoCaption>
+                        Tap the drop down menu to find out more 
+                          <span role="img" aria-label="down arrow">
+                             🔽
+                          </span>
+                        </InfoCaption>
+                      </Info>
+                    </Box>
+                  </Card>
           <Fragment>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -723,29 +824,6 @@ function HomePage() {
               />
             </div>
             {/* Card for actions */}
-            <NoSsr>
-              <GoogleFontLoader
-                fonts={[
-                  { font: "Spartan", weights: [300] },
-                  { font: "Montserrat", weights: [200, 400, 700] },
-                ]}
-              />
-            </NoSsr>
-            <Card className={classes.card}>
-              <CardMedia classes={mediaStyles} image={favorite} />
-              <Box py={3} px={2} className={classes.content}>
-                <Info useStyles={useGalaxyInfoStyles}>
-                  <InfoSubtitle>Your faves are here </InfoSubtitle>
-                  <InfoTitle>Add more!</InfoTitle>
-                  <InfoCaption>
-                    Go to actions tab and press the heart to add&nbsp;
-                    <span role="img" aria-label="heart">
-                      ❤️
-                    </span>
-                  </InfoCaption>
-                </Info>
-              </Box>
-            </Card>
             <Grid container spacing={2} className={classes.actionContainer}>
               {/* All actions (this loops using search) */}
               {ActionData.map(
@@ -757,12 +835,9 @@ function HomePage() {
                           className={classes.cardContent}
                           action={
                             <IconButton
-                              disabled={masterActions[i -1]}
+                              disabled={masterActions[i - 1]}
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
-                              // Finally found how to get rid of random old green from click and hover!
-                              // TODO: Is the following line actually still necessary? I commented it out and I think it's fine
-                              // style={{ backgroundColor: "transparent" }}
-                              aria-label="settings"
+                              aria-label="increment"
                               title="Complete this sustainable action"
                             >
                               <AddCircleIcon fontSize="large" />
@@ -771,13 +846,16 @@ function HomePage() {
                           title={action.title}
                           subheader={"Earn ".concat(action.points, " Points!")}
                         />
-                        <CardActions disableSpacing>
+
+                        <CardActions
+                          disableSpacing
+                          className={classes.cardActions}
+                        >
                           <IconButton
                             title="Add to favorites"
                             aria-label="add to favorites"
                             style={{
                               color: favIconColors[i - 1],
-                              backgroundColor: "transparent",
                             }} // Set the favIcon color (i-1 prevents off-by-one error)
                             onClick={() => favAction(action)}
                             id={"favoriteIcon".concat(action.susAction)}
@@ -789,8 +867,9 @@ function HomePage() {
                             className={clsx(classes.expand, {
                               [classes.expandOpen]: !expandedId,
                             })}
-                            onClick={() => handleExpandClick(i)}
-                            style={{ backgroundColor: "transparent" }}
+                            onClick={() => {
+                              handleExpandClick(i);
+                            }}
                             aria-expanded={expandedId === i}
                             aria-label="Show More"
                             title="Learn more"
@@ -829,6 +908,7 @@ function HomePage() {
             <AuthUserContext.Consumer>
               {(authUser) => (
                 <>
+                {/* Favorites card */}
                   <NoSsr>
                     <GoogleFontLoader
                       fonts={[
@@ -838,7 +918,7 @@ function HomePage() {
                     />
                   </NoSsr>
                   <Card className={classes.card}>
-                    <CardMedia classes={mediaStyles} image={favorite} />
+                    <CardMedia classes={mediaStyles1} image={favorite} />
                     <Box py={3} px={2} className={classes.content}>
                       <Info useStyles={useGalaxyInfoStyles}>
                         <InfoSubtitle>Your faves are here </InfoSubtitle>
@@ -902,7 +982,6 @@ function HomePage() {
                                     [classes.expandOpen]: !expandedId,
                                   })}
                                   onClick={() => handleExpandClick(i)}
-                                  style={{ backgroundColor: "transparent" }}
                                   aria-expanded={expandedId === i}
                                   aria-label="Show More"
                                   title="Learn more"

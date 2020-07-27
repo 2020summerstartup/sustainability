@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import leaderBoardUpdate, {
   assignRanking,
-} from "../CompetePage/leaderBoardUpdate.js";
+} from "../CompetePage/leaderBoardUpdate";
 import { getUser, getDorm } from "../../services/Firebase";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import AccountTabs from "./AccountTabs";
@@ -48,9 +48,7 @@ function AccountPage() {
     <div>
       <AuthUserContext.Consumer>
         {(authUser) => (
-          <>
           <AccountTabs />
-          </>
         )}
       </AuthUserContext.Consumer>
     </div>

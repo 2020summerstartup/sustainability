@@ -23,7 +23,7 @@ import { getUser } from "../../../services/Firebase";
 import { assignData } from "../../HomePage";
 import EnvImpactCards from './userEnvImpactCards';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   card: {
     borderRadius: "1rem",
     boxShadow: "none",
@@ -31,6 +31,10 @@ const useStyles = makeStyles(() => ({
     margin: "auto",
     maxWidth: "60rem",
     minHeight: "15rem",
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "60rem",
+      minHeight: "20rem",
+    },
     "&:after": {
       content: '""',
       display: "block",

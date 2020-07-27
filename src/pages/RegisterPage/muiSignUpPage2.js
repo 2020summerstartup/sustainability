@@ -36,7 +36,7 @@ import Select from '@material-ui/core/Select';
 
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {updateUserDorm, getDorm} from "../../services/Firebase";
-import { assignRanking } from "../../pages/CompetePage/leaderboard";
+import { assignRanking } from "../../pages/CompetePage/CompeteTabs/leaderboard";
 
 const SignUpPage = () => (
   <div className="base-container">

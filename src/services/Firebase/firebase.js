@@ -5,8 +5,6 @@ import "firebase/firestore";
 import 'firebase/database';
 import Axios from 'axios'
 require('dotenv').config();
-console.log(process.env);
-console.log(process.env.REACT_APP_API_KEY);
 
 // import firebase/auth from 'firebase/auth';
 

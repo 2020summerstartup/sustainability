@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 // account header imports
 import SettingsDrawer from "../../pages/AccountPage/Settings";
 import Grid from "@material-ui/core/Grid";
-import SearchIcon from "@material-ui/icons/Search";
 
 // change dorm/pw imports
 // import material ui
@@ -18,7 +17,6 @@ import IconButton from "@material-ui/core/IconButton";
 import suslogoImg from "../../img/suslogo.svg";
 
 // imports for homeheader
-import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 // Styles for Header
@@ -60,7 +58,7 @@ const CompeteHeader = ({ firebase }) => {
   const classes = useStyles1();
   return (
     <>
-      <AppBar position="static" className={classes.header}>
+      <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
           <img src={suslogoImg} alt="logo" className={classes.logo} />
           <Typography variant="h6" className={classes.title} noWrap>

@@ -9,11 +9,14 @@ import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+// Sounds
+import toastNotify from "../../../sounds/notification_simple-01.wav";
 
 const ChangePW = () => (
   <div>
@@ -61,6 +64,14 @@ const INITIAL_STATE = {
 
 toast.configure();
 
+// sound play for favorites button
+const toastAudio = new Audio(toastNotify);
+
+// called by onclick to play the audio file
+const playSound = (audioFile) => {
+  audioFile.play();
+};
+
 class PasswordChangeFormBase extends Component {
   constructor(props) {
     super(props);
@@ -95,7 +106,6 @@ class PasswordChangeFormBase extends Component {
     const { passwordOne, passwordTwo, error } = this.state;
     const isInvalid = passwordOne !== passwordTwo || passwordOne === "";
     const { classes } = this.props;
-    const { pw } = this.state;
 
     return (
       <Container maxWidth="sm">
@@ -132,6 +142,7 @@ class PasswordChangeFormBase extends Component {
               color="primary"
               className={classes.submit}
               disabled={isInvalid}
+              onClick={() => playSound(toastAudio)}
             >
               Change Password
             </Button>

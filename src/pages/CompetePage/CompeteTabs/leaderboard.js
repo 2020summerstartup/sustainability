@@ -1,16 +1,15 @@
 import React from "react";
 
 import "./leaderboard.css";
-import { firestore } from "../../services/Firebase/firebase";
+import { firestore } from "../../../services/Firebase/firebase";
 import "firebase/firestore";
-import leaderBoardUpdate, { assignRanking } from "./leaderBoardUpdate";
+import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
 
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = (theme) => ({
   title: {
-    marginTop: theme.spacing(3),
     marginBottom: theme.spacing(2),
   },
 });
@@ -33,7 +32,7 @@ class Leaderboard extends React.Component {
     super();
     this.state = {
       leaders: [],
-      maxPoints: 1500,
+      maxPoints: 1650,
     };
     this.getData = this.getData.bind(this);
   }
@@ -56,7 +55,7 @@ class Leaderboard extends React.Component {
           });
         });
     };
-    // data is used, even though we get a warning saying otherwise. I think it complains because data is read from a different file?
+    // data is used, even though we get a warning saying otherwise. I think it complains because data is read from a different file? TODO: Figure this out and fix it.
     let data = {
       success: true,
       leaders: [getLeaders()],
