@@ -172,7 +172,7 @@ class SignInFormBase extends Component {
     const isInvalid = password === "" || email === "";
 
     return (
-      <div class="base-container">
+      <div className="base-container">
         <Container maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>

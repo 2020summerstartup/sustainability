@@ -1,7 +1,4 @@
 import React, { Fragment, useState, useContext } from "react";
-import styles from "./modal.module.css";
-import useIsIOS from "../../components/IosModal/useIsIOS";
-import { IosModal } from "../../components/IosModal";
 import BadgeModal from "./badgeModal"
 
 import favorite from "../../img/favorite.svg";
@@ -39,7 +36,6 @@ import EcoIcon from "@material-ui/icons/Eco";
 
 import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
-import TextField from "@material-ui/core/TextField";
 import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
 
@@ -76,7 +72,6 @@ import {
   InfoTitle,
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
-import TotalPointsCard from "../AccountPage/AccountTabs/points";
 
 // Sounds
 import like from "../../sounds/state-change_confirm-up.wav";
@@ -89,11 +84,11 @@ import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 var total;
 function initPoints(email) {
   total = 0;
-  for (const key in ActionData) {
-    var action = localStorage.getItem(ActionData[key].susAction); // Action to initialize
+  for (const el in ActionData) {
+    var action = localStorage.getItem(ActionData[el].susAction); // Action to initialize
     if (isNaN(action) || action == null) {
       // If it hasn't been initialized
-      localStorage.setItem(ActionData[key].susAction, 0); // Initialize to 0
+      localStorage.setItem(ActionData[el].susAction, 0); // Initialize to 0
       action = 0;
     }
     total += parseInt(action); // Keep track of the sum of the individual points
@@ -139,7 +134,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -175,9 +170,6 @@ const useStyles = makeStyles((theme) => ({
     // height: "100%",
     display: "flex",
     flexDirection: "column",
-  },
-  margin: {
-    margin: theme.spacing.unit,
   },
   actionContainer: {
     padding: "0",
@@ -266,14 +258,6 @@ const useStyles = makeStyles((theme) => ({
   },
   appbar: {
     boxShadow: "2px 2px 6px #242424",
-  },
-  tabs: {
-    flexGrow: 1,
-    backgroundColor: "primary",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "6.5rem",
-      marginTop: "0.5rem",
-    },
   },
   bar: {
     padding: 0,
@@ -374,11 +358,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
-  // const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
-  const [incrementModalIsOpen, setIncrementModalIsOpen] = useState(false);
   const authContext = useContext(AuthUserContext);
-  // loading install prompt for ios
-  const { prompt } = useIsIOS();
 
   // Get user's dorm set in local storage
   getUser(authContext.email).onSnapshot(
@@ -401,8 +381,6 @@ function HomePage() {
 
   // getMastered(authContext.email);
 
-  // message to be displayed in check your progress
-  var message = [];
   total = localStorage.getItem("total");
 
   const classes = useStyles();
@@ -445,7 +423,7 @@ function HomePage() {
   // they meant to, then this function calls increment.
   const confirmIncrement = (action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
-    if (confirmed == true) {
+    if (confirmed === true) {
       increment(action); // If user meant to, call the function to actually increment user's points
     }
   };
@@ -465,7 +443,6 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
-      increment(action);
       window.location.reload(true);
     });
 
@@ -513,18 +490,18 @@ function HomePage() {
   getMastered(localStorage.getItem("email"));
 
   var masterActions = []; // Initalize array of the mastered status for each action
-  for (const key in ActionData) {
+  for (const el in ActionData) {
     // Iterate over every action in ActionData & determine if button needs to load as enabled or disabled
-    var action = ActionData[key]; // Take the current action
+    var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
     var storageName = action.susAction.concat("Mastered");
-    var firestoreMastered = localStorage.getItem("firestoreMastered");
+    firestoreMastered = localStorage.getItem("firestoreMastered");
 
     if (firestoreMastered.includes(stringActionName)) {
-      masterActions[key - 1] = true; //disable button when action is mastered
+      masterActions[el - 1] = true; //disable button when action is mastered
       localStorage.setItem(storageName, true); // update local storage accordingly
     } else {
-      masterActions[key - 1] = false; //enable button is action is not yet mastered
+      masterActions[el - 1] = false; //enable button is action is not yet mastered
       localStorage.setItem(storageName, false); // update local storage accordingly
     }
   }
@@ -532,11 +509,7 @@ function HomePage() {
   //This function checks if (upon increment) the action should be mastered & acts according
   const checkMastered = (action) => {
     // Get the name and info of the stored action that we're working with
-    var storageName = action.susAction.concat("Mastered");
 
-    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedMaster = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console
-    // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     const actionTotal = localStorage.getItem(action.susAction);
@@ -563,16 +536,16 @@ function HomePage() {
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
-  for (const key in ActionData) {
+  for (const el in ActionData) {
     // Iterate over every action in ActionData
-    var action = ActionData[key]; // Take the current action
-    var storageName = action.susAction.concat("Fav");
-    var storedFav = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console (wants ===)
+    var action2 = ActionData[el]; // Take the current action
+    var storageName2 = action2.susAction.concat("Fav");
+    var storedFav = localStorage.getItem(storageName2) == "true"; // We're getting a warning in the console (wants ===)
     if (storedFav) {
       // If the action is favorited
-      favIconColors[key - 1] = "#DC143C"; // Turn red
+      favIconColors[el - 1] = "#DC143C"; // Turn red
     } else {
-      favIconColors[key - 1] = "#6c6c6c"; // Otherwise turn gray
+      favIconColors[el - 1] = "#6c6c6c"; // Otherwise turn gray
     }
   }
 
@@ -613,13 +586,13 @@ function HomePage() {
   var progressMessage = "";
   const setProgressMessage = () => {
     initPoints();
-    for (const key in ActionData) {
+    for (const el in ActionData) {
       // Loop over every action in ActionData
-      var actionPoints = localStorage.getItem(ActionData[key].susAction); // Points earned by current action
+      var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
       progressMessage = (
         <>
           {progressMessage}
-          {ActionData[key].title}&nbsp;points: {actionPoints}
+          {ActionData[el].title}&nbsp;points: {actionPoints}
           <br />
         </>
       );
@@ -628,7 +601,7 @@ function HomePage() {
     progressMessage = (
       <>
         {progressMessage}
-        <h3>Total points: {total}</h3>
+        <Typography variant="body1" component={'span'}><b>Total points: {total}</b></Typography>
       </>
     );
   }; // setProgressMessage
@@ -640,7 +613,7 @@ function HomePage() {
   return (
     <>
       {/* {prompt && <IosModal />} */}
-      <div>
+      <>
         <AppBar
           position="static"
           color="primary"
@@ -652,9 +625,9 @@ function HomePage() {
             onChange={handleChange}
             variant="fullWidth"
             scrollButtons="off"
-            textColor="default"
+            // TODO: need to set text color to white if we don't want non-selected tab to have grayed out text
+            // textColor="#ffff"
             aria-label="scrollable tabs"
-            centered="true"
             className={classes.tabs}
             TabIndicatorProps={{ className: classes.indicator }}
           >
@@ -677,7 +650,7 @@ function HomePage() {
           </Tabs>
         </AppBar>
         <div className="top-container">
-          <Typography variant="h5" style={{ marginTop: "1rem" }}>
+          <Typography variant="h5" style={{ marginTop: "1rem" }} component={'span'}>
             You have earned&nbsp;
             {<CountUp start={0} end={total} duration={1}></CountUp>} points!
           </Typography>
@@ -740,8 +713,7 @@ function HomePage() {
             <DialogActions>
               <Button
                 onClick={() => {
-                  setProgressModalIsOpen(false);
-                  window.location.reload();
+                  setProgressModalIsOpen(false)
                 }}
                 variant="contained"
                 color="primary"
@@ -775,14 +747,11 @@ function HomePage() {
                 >
                   Close
                 </button>
-                <p> </p>
-                <p> </p>
-                <p> </p>
               </div>
             </center>
           </Modal> */}
         </div>
-        <TabPanel value={value} index={0} class="tab-container">
+        <TabPanel value={value} index={0} className="tab-container">
            {/* Action card boi */}
         <NoSsr>
                     <GoogleFontLoader
@@ -829,8 +798,8 @@ function HomePage() {
               {ActionData.map(
                 (action, i) =>
                   action.title.toLowerCase().includes(filter.toLowerCase()) && (
-                    <Grid item xs={12} md={6} lg={4}>
-                      <Card className={classes.root} key={action.title}>
+                    <Grid item xs={12} md={6} lg={4} key={i}>
+                      <Card className={classes.root}>
                         <CardHeader
                           className={classes.cardContent}
                           action={
@@ -888,7 +857,7 @@ function HomePage() {
                               image={action.image}
                               title={action.title}
                             />
-                            <Typography variant="h5" gutterBottom>
+                            <Typography variant="h5" component={'span'} gutterBottom>
                               Environmental Impact:
                             </Typography>
                             <Typography variant="body1">
@@ -903,7 +872,7 @@ function HomePage() {
             </Grid>
           </Fragment>
         </TabPanel>
-        <TabPanel value={value} index={1} class="tab-container">
+        <TabPanel value={value} index={1} className="tab-container">
           <div>
             <AuthUserContext.Consumer>
               {(authUser) => (
@@ -942,8 +911,8 @@ function HomePage() {
                       (action, i) =>
                         localStorage.getItem(action.susAction.concat("Fav")) ==
                           "true" && (
-                          <Grid item xs={12} md={6} lg={4}>
-                            <Card className={classes.root} key={action.title}>
+                          <Grid item xs={12} md={6} lg={4} key={i}>
+                            <Card className={classes.root}>
                               <CardHeader
                                 className={classes.cardContent}
                                 action={
@@ -1000,10 +969,10 @@ function HomePage() {
                                     image={action.image}
                                     title={action.title}
                                   />
-                                  <Typography variant="h5" gutterBottom>
+                                  <Typography variant="h5" component={'span'} gutterBottom>
                                     Environmental Impact:
                                   </Typography>
-                                  <Typography variant="body1">
+                                  <Typography component={'span'}>
                                     {action.impact}
                                   </Typography>
                                 </CardContent>
@@ -1018,7 +987,7 @@ function HomePage() {
             </AuthUserContext.Consumer>
           </div>
         </TabPanel>
-      </div>
+      </>
     </>
   ); // end of return statement
 } // end of function

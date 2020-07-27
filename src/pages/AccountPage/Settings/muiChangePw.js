@@ -4,7 +4,7 @@ import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import { withFirebase } from "../../../services/Firebase";
 import accountImg from "../../../img/account.svg";
 import { PasswordInput } from "../../RegisterPage/muiSignInPage";
-import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage";
+import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage2";
 
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,7 +22,7 @@ const ChangePW = () => (
   <div>
     <AuthUserContext>
       {(authUser) => (
-        <div class="base-container">
+        <div className="base-container">
           <PasswordChange />
         </div>
       )}

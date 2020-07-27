@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Axios } from "../../services/Firebase/firebase.js";
-// import { firestore } from "../../services/Firebase";
 import { firestore } from '../../services/Firebase';
 import 'firebase/firestore';
-
 
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
@@ -90,10 +88,10 @@ const FBContactForm = () => {
         <Avatar className={classes.avatar}>
           <QuestionAnswerIcon />
         </Avatar>
-        <Typography component="h4" variant="h4" style={{ margin: "1rem 0"}}>
+        <Typography variant="h4" style={{ margin: "1rem 0"}}>
           Contact Us
         </Typography>
-        <Typography component="subtitle1" variant="subtitle1">
+        <Typography variant="subtitle1">
           Let us know your questions, comments, and concerns!
         </Typography>
         <form onSubmit={handleSubmit} id="contact" className={classes.form}>
