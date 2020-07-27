@@ -103,7 +103,7 @@
     "id": 10,
     "points": 15,
     "susAction": "publicTransit",
-    "coEmiss": 0,
+    "coEmiss": 3.4,
     "energy": 0,
     "water": 0,
     "impact": "Using public transportation can improve air quality, reduce greenhouse gas emissions, facilitate compact development, save energy, and more. Source: https://www.transit.dot.gov/regulations-and-guidance/environmental-programs/transit-environmental-sustainability/transit-role"
@@ -116,7 +116,7 @@
     "susAction": "usedClothes",
     "coEmiss": 0,
     "energy": 0,
-    "water": 0,
+    "water": 500,
     "impact": "Opting to purchase your clothing second-hand (and avoiding fast-fashion) reduces your carbon footprint. You'll also save lots of money!"
   },
 
@@ -126,7 +126,7 @@
     "points": 10,
     "susAction": "hangDry",
     "coEmiss": 0,
-    "energy": 0,
+    "energy": 4320,
     "water": 0,
     "impact": "Hanging your clothes to dry instead of using a clothes dryer reduces your energy-use. And while you're at college, it means you won't have to pay for dryer use!"
   },
