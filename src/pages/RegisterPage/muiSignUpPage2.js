@@ -1,15 +1,15 @@
-// THIS IS THE VERSION THAT KOBE AND AMY ARE WORKING ON
-import React, { Component, useContext } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
-import * as firebase from "firebase";
+import PropTypes from "prop-types";
+import Reward from "react-rewards";
+
+import { withFirebase, createUser } from "../../services/Firebase";
+import * as ROUTES from "../../constants/routes";
+
 import "firebase/auth";
 
 import { PasswordInput } from "./muiSignInPage";
-import { withFirebase, createUser } from "../../services/Firebase";
-import { assignData } from "../HomePage/index.js";
-import * as ROUTES from "../../constants/routes";
 import signupImg from "../../img/login2.svg";
 
 import Button from "@material-ui/core/Button";
@@ -22,28 +22,29 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import { RemoveRedEye } from "@material-ui/icons";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import HomeIcon from "@material-ui/icons/Home";
 
+// import your fontawesome library
+import "../../components/FontAwesomeIcons";
+// import when you need to use icons
 
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+// Sounds
+import signup from "../../sounds/hero_simple-celebration-03.wav";
 
-import { AuthUserContext, withAuthorization } from "../../services/Session";
-import {updateUserDorm, getDorm} from "../../services/Firebase";
-import { assignRanking } from "../../pages/CompetePage/CompeteTabs/leaderboard";
-
-const SignUpPage = () => (
+const MuiSignUpPage = () => (
   <div className="base-container">
+    {/* <h1 className="header">Register</h1>
+    <div className="image">
+      <img alt="sign up" src={signupImg} />
+    </div> */}
     <SignUpForm />
   </div>
 );
 
+// Styles for main signup page
 const useStyles = (theme) => ({
   paper: {
     marginTop: theme.spacing(3),
@@ -68,85 +69,54 @@ const useStyles = (theme) => ({
     color: "red",
     marginTop: "1rem",
   },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
 });
 
-const useStyles2 = makeStyles((theme) => ({
-  // Provides context for form inputs
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
+const dorms = [
+  { title: "South" },
+  { title: "Case" },
+  { title: "East" },
+  { title: "West" },
+  { title: "North" },
+  { title: "Drinkward" },
+  { title: "Sontag" },
+  { title: "Linde" },
+  { title: "Atwood" },
+];
 
-// Function that contains the dropdown menu for selecting the user's dorm
-// function DormSelect() {
+// function DormInput() {
 //   const classes = useStyles2();
-//   const [dorm, setDorm] = React.useState('');
-  
-//   // Used to make sure user is authenticated
-//   // Gives an alert if the user does not have a dorm selected
-//   // const authContext = useContext(AuthUserContext);
-//   // var placeholder = localStorage.getItem('dorm');
-//   // var newPlaceholder = localStorage.getItem('dorm');
-//   // if (placeholder == null) {
-//   //   placeholder = "Select your dorm..."
-//   //   alert("Please select your dorm in setting page!");
-//   //   newPlaceholder = "Dorm";
-//   }
 
-//   // Sets dorm by calling local storage and firebase
-//   const handleChange = (event) => {
-//     const dorm = event.target.value
-//     setDorm(event.target.value);
-//     // localStorage.setItem('dorm', dorm);
-//     // updateUserDorm(authContext.email, dorm);
-//     // getDorm().doc(dorm).onSnapshot(docSnapshot => {
-//     //   assignRanking(docSnapshot.data())
-//     // })
-//   };
-
-
-// return (
-//   <div>
-//     <FormControl variant="outlined" className={classes.formControl}>
-//     <InputLabel id="demo-simple-select-outlined-label">
-//       {/* {newPlaceholder} */}
-//     </InputLabel>
-//     <Select
-//       labelId="demo-simple-select-outlined-label"
-//       id="demo-simple-select-outlined"
-//       value={dorm}
-//       onChange={handleChange}
-//       label="Dorm"
-//     >
-//       <MenuItem value="">
-//         <em>None</em>
-//       </MenuItem>
-//       <MenuItem value={"South"}>South</MenuItem>
-//       <MenuItem value={"Case"}>Case</MenuItem>
-//       <MenuItem value={"East"}>East</MenuItem>
-//       <MenuItem value={"West"}>West</MenuItem>
-//       <MenuItem value={"North"}>North</MenuItem>
-//       <MenuItem value={"Drinkward"}>Drinkward</MenuItem>
-//       <MenuItem value={"Sontag"}>Sontag</MenuItem>
-//       <MenuItem value={"Linde"}>Linde</MenuItem>
-//     </Select>
-//   </FormControl>
-//   {/* <div>
-//     Your dorm is {localStorage.getItem('dorm')}
-//   </div> */}
-//   </div>
-// );
+//   return (
+//     <Autocomplete
+//       id="dorm input"
+//       options={dorms}
+//       getOptionLabel={(option) => option.title}
+//       disableClearable
+//       fullWidth
+//       renderInput={(params) => {
+//         return (
+//           <TextField
+//             {...params}
+//             label="Dorms"
+//             variant="outlined"
+//             margin="normal"
+//             name="dorm"
+//             type="text"
+//             fullWidth
+//             InputProps={{
+//               ...params.InputProps,
+//               startAdornment: (
+//                 <InputAdornment>
+//                   <HomeIcon className={classes.formIcon} />
+//                 </InputAdornment>
+//               ),
+//             }}
+//           />
+//         );
+//       }}
+//     />
+//   );
+// }
 
 class PasswordInput2 extends Component {
   constructor(props) {
@@ -172,15 +142,19 @@ class PasswordInput2 extends Component {
         variant="outlined"
         margin="normal"
         fullWidth
+        // type="password"
         type={passwordIsMasked ? "password" : "text"}
         {...this.props}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <RemoveRedEye
-                className={classes.eye}
+              <IconButton
+                aria-label="toggle password visibility"
                 onClick={this.togglePasswordMask}
-              />
+                edge="end"
+              >
+                {passwordIsMasked ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              </IconButton>
             </InputAdornment>
           ),
           startAdornment: <LockOpenIcon className={classes.formIcon} />,
@@ -211,23 +185,41 @@ const INITIAL_STATE = {
   error: null,
 };
 
+// sound play for favorites button
+const signupAudio = new Audio(signup);
+
+// called by onclick to play the audio file
+const playSound = (audioFile) => {
+  audioFile.play();
+};
 
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-    this.state = {
-      pw: "",
-    };
-    this.state = {
-      selected: null,
-      hasError: false
-    };
+    // this.state = {
+    //   tags: "",
+    // };
+    // this.onTagsChange = this.onTagsChange.bind(this);
   }
+
+  //TEST
+  test = () => {
+    const { username, email, passwordOne, dorm, image, points } = this.state;
+  };
 
   onSubmit = (event) => {
     const { username, email, passwordOne, dorm, image, points } = this.state;
+    // const uploadTask = storage.ref(`images/${image.name}`).put(image);
+
+    // uploadTask.on('state_changed', () => {
+    //   // complete function ....
+    //   storage.ref('images').child(image.name).getDownloadURL().then(url => {
+    //       console.log(url);
+    //       this.setState({url});
+    //   })
+    // });
 
     createUser(email, username, dorm);
 
@@ -235,9 +227,7 @@ class SignUpFormBase extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
         // Create a user in your Firebase realtime database
-        return this.props.firebase
-          .user(authUser.user.uid)
-          .set({
+        return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
         });
@@ -248,29 +238,53 @@ class SignUpFormBase extends Component {
       })
       .catch((error) => {
         this.setState({ error });
-        console.log(error);
       });
 
     event.preventDefault();
   };
 
   onChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState((prevState) => ({
+      user: {
+        username: "",
+        email: "",
+        passwordOne: "",
+        passwordTwo: "",
+        dorm: "",
+        image: null,
+        points: 0,
+      },
+    }));
+    // console.log("NAME: ", event.target.name),
+    // console.log("USERNAME: ", this.state.user.username)
   };
 
-  handleChange(value) {
-    this.setState({ selected: value });
-  }
+  //   onChange = (event) => {
+  //     this.setState({ [event.target.name]: event.target.value });
+  //     console.log(event.target.name);
+  //   };
 
-  // onChangePW = (event) => {
-  //   const { name, value } = event.target;
-
-  //   this.setState({ [name]: value });
+  onTagsChange = (event, values) => {
+    this.setState(
+      {
+        user: { dorm: values.title },
+        // tags: values,
+      },
+      () => {
+        // This will output an array of objects
+        // given by Autocomplete options property.
+        console.log(values.title);
+      }
+    );
+  };
+  // [dorm, setDorm] = React.useState('');
+  // onDormChange = (event) => {
+  //   const dorm = event.target.value
+  //   setDorm(event.target.value);
   // };
 
   render() {
     const { classes } = this.props;
-    const { pw } = this.state;
     const {
       username,
       email,
@@ -284,8 +298,9 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      //   dorm === "" ||
+      dorm === "" ||
       username === "";
+    // dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
 
     return (
       <Container maxWidth="xs">
@@ -297,7 +312,7 @@ class SignUpFormBase extends Component {
           <div className="image">
             <img alt="sign up" src={signupImg} />
           </div>
-          <form onSubmit={this.onSubmit} className={classes.form} noValidate>
+          <form onSubmit={this.test} className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -305,7 +320,7 @@ class SignUpFormBase extends Component {
               id="username"
               label="Full Name"
               name="username"
-              value={username}
+              // value={username}
               autoComplete="name"
               onChange={this.onChange}
               InputProps={{
@@ -315,6 +330,18 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
+            {/* <Image source={{uri:this.state.user.avatar}} /> */}
+            {/* <div className="form-group">
+          <FontAwesomeIcon icon="user" className="icon" />
+          <input
+            className="input-field"
+            name="username"
+            value={username}
+            onChange={this.onChange}
+            type="text"
+            placeholder="First Name"
+          />
+        </div> */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -322,7 +349,7 @@ class SignUpFormBase extends Component {
               id="email"
               label="Email Address"
               name="email"
-              value={email}
+              // value={email}
               autoComplete="email"
               onChange={this.onChange}
               InputProps={{
@@ -332,15 +359,63 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            {/* Comment this out later!! for testing only! */}
-            {/* <TextField
+            {/* <div className="form-group">
+          <FontAwesomeIcon icon="envelope" className="icon envelope" />
+          <input
+            className="input-field"
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address"
+          />
+        </div> */}
+            {/* <DormInput
+              name="dorm"
+              value={dorm}
+              onChange={this.onTagsChange}
+            //   onChange={this.onChange}
+            /> */}
+            {/* <DormSelect /> */}
+            {/* <Autocomplete
+              id="dorm input"
+              options={dorms}
+              getOptionLabel={(option) => option.title}
+              disableClearable
+              fullWidth
+              //   onChange={this.onChange}
+              onChange={this.onTagsChange}
+              renderInput={(params) => {
+                return (
+                  <TextField
+                    {...params}
+                    label="Dorms"
+                    variant="outlined"
+                    margin="normal"
+                    name="dorm"
+                    type="text"
+                    fullWidth
+                    InputProps={{
+                      ...params.InputProps,
+                      startAdornment: (
+                        <InputAdornment>
+                          <HomeIcon className={classes.formIcon} />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                );
+              }}
+            /> */}
+            {/* dont delete  */}
+            <TextField
               variant="outlined"
               margin="normal"
               fullWidth
               id="dorm"
               label="Dorm"
               name="dorm"
-              value={dorm}
+              // value={dorm}
               onChange={this.onChange}
               InputProps={{
                 startAdornment: <HomeIcon className={classes.formIcon} />,
@@ -348,59 +423,88 @@ class SignUpFormBase extends Component {
                   adornedEnd: classes.adornedEnd,
                 },
               }}
-            /> */}
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel id="demo-simple-select-outlined-label">
-                {/* {newPlaceholder} */}
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
+            />
+            {/* <div className="form-group">
+              <FontAwesomeIcon icon="user" className="icon" />
+              <input
+                className="input-field"
+                name="dorm"
                 value={dorm}
-                onChange={this.handleChange}
-                label="Dorm"
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={"South"}>South</MenuItem>
-                <MenuItem value={"Case"}>Case</MenuItem>
-                <MenuItem value={"East"}>East</MenuItem>
-                <MenuItem value={"West"}>West</MenuItem>
-                <MenuItem value={"North"}>North</MenuItem>
-                <MenuItem value={"Drinkward"}>Drinkward</MenuItem>
-                <MenuItem value={"Sontag"}>Sontag</MenuItem>
-                <MenuItem value={"Linde"}>Linde</MenuItem>
-              </Select>
-            </FormControl>
-            {/* <DormInput /> */}
+                onChange={this.onChange}
+                type="text"
+                placeholder="Res Hall"
+              />
+            </div> */}
             <PasswordInput2
+              // type="password"
               label="Password"
-              name="password"
+              name="passwordOne"
               value={passwordOne}
-              onChange={this.onChangePW}
+              onChange={this.onChange}
             />
             <PasswordInput
-              label="Verify Password"
-              name="password"
+              // type="password"
+              label="Password"
+              name="passwordTwo"
               value={passwordTwo}
-              onChange={this.onChangePW}
+              onChange={this.onChange}
             />
+            {/* <div className="form-group">
+              <FontAwesomeIcon icon="unlock-alt" className="icon" />
+              <input
+                className="input-field"
+                name="passwordOne"
+                value={passwordOne}
+                onChange={this.onChange}
+                type="password"
+                placeholder="Password"
+              />
+            </div> */}
+            {/* <div className="form-group">
+              <FontAwesomeIcon icon="lock" className="icon" />
+              <input
+                className="input-field"
+                name="passwordTwo"
+                value={passwordTwo}
+                onChange={this.onChange}
+                type="password"
+                placeholder="Confirm Password"
+              />
+            </div> */}
+
             {error && (
               <Typography variant="body2" className={classes.errorText}>
                 {error.message}
               </Typography>
             )}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              disabled={isInvalid}
+
+            <Reward
+              ref={(ref) => {
+                this.reward = ref;
+              }}
+              type="memphis"
             >
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                disabled={isInvalid}
+                onClick={() => {
+                  playSound(signupAudio);
+                  this.reward.rewardMe();
+                }}
+              >
+                Sign Up
+              </Button>
+            </Reward>
+
+            {/* <button disabled={isInvalid} type="submit" className="button">
               Sign Up
-            </Button>
+            </button> */}
+
+            {/* {error && <p>{error.message}</p>} */}
           </form>
         </div>
       </Container>
@@ -408,11 +512,17 @@ class SignUpFormBase extends Component {
   }
 }
 
+const SignUpLink = () => (
+  <p>
+    Don't have an account? Get with the program, and{" "}
+    <Link to={ROUTES.SIGN_UP}>Sign Up</Link> here now!
+  </p>
+);
+
 const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
 
-const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
+const SignUpForm = compose(withRouter, withFirebase)(SignUpFormStyled);
 
-export { PasswordInput2 };
-export { SignUpForm };
+export default MuiSignUpPage;
 
-export default SignUpPage;
+export { SignUpForm, SignUpLink, PasswordInput2 };

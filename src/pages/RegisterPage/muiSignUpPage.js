@@ -6,9 +6,6 @@ import Reward from "react-rewards";
 
 import { withFirebase, createUser } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
-
-import "firebase/auth";
-
 import { PasswordInput } from "./muiSignInPage";
 import signupImg from "../../img/login2.svg";
 
@@ -27,24 +24,21 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import HomeIcon from "@material-ui/icons/Home";
 
-// import your fontawesome library
-import "../../components/FontAwesomeIcons";
-// import when you need to use icons
-
 // Sounds
 import signup from "../../sounds/hero_simple-celebration-03.wav";
 
-const MuiSignUpPage = () => (
+// import your fontawesome library
+import "../../components/FontAwesomeIcons";
+// import when you need to use icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const SignUpPage = () => (
   <div className="base-container">
-    {/* <h1 className="header">Register</h1>
-    <div className="image">
-      <img alt="sign up" src={signupImg} />
-    </div> */}
     <SignUpForm />
   </div>
 );
 
-// Styles for Main Page
+// Styles for main signup page
 const useStyles = (theme) => ({
   paper: {
     marginTop: theme.spacing(3),
@@ -82,41 +76,6 @@ const dorms = [
   { title: "Linde" },
   { title: "Atwood" },
 ];
-
-// function DormInput() {
-//   const classes = useStyles2();
-
-//   return (
-//     <Autocomplete
-//       id="dorm input"
-//       options={dorms}
-//       getOptionLabel={(option) => option.title}
-//       disableClearable
-//       fullWidth
-//       renderInput={(params) => {
-//         return (
-//           <TextField
-//             {...params}
-//             label="Dorms"
-//             variant="outlined"
-//             margin="normal"
-//             name="dorm"
-//             type="text"
-//             fullWidth
-//             InputProps={{
-//               ...params.InputProps,
-//               startAdornment: (
-//                 <InputAdornment>
-//                   <HomeIcon className={classes.formIcon} />
-//                 </InputAdornment>
-//               ),
-//             }}
-//           />
-//         );
-//       }}
-//     />
-//   );
-// }
 
 class PasswordInput2 extends Component {
   constructor(props) {
@@ -198,30 +157,13 @@ class SignUpFormBase extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-    // this.state = {
-    //   tags: "",
-    // };
-    // this.onTagsChange = this.onTagsChange.bind(this);
   }
 
-  //TEST
-  test = () => {
-    const { username, email, passwordOne, dorm, image, points } = this.state;
-  };
-
   onSubmit = (event) => {
-    const { username, email, passwordOne, dorm, image, points } = this.state;
-    // const uploadTask = storage.ref(`images/${image.name}`).put(image);
-
-    // uploadTask.on('state_changed', () => {
-    //   // complete function ....
-    //   storage.ref('images').child(image.name).getDownloadURL().then(url => {
-    //       console.log(url);
-    //       this.setState({url});
-    //   })
-    // });
+    const { username, email, passwordOne, dorm } = this.state;
 
     createUser(email, username, dorm);
+    localStorage.setItem("email", email);
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -244,47 +186,12 @@ class SignUpFormBase extends Component {
   };
 
   onChange = (event) => {
-    this.setState((prevState) => ({
-      user: {
-        username: "",
-        email: "",
-        passwordOne: "",
-        passwordTwo: "",
-        dorm: "",
-        image: null,
-        points: 0,
-      },
-    }));
-    // console.log("NAME: ", event.target.name),
-    // console.log("USERNAME: ", this.state.user.username)
+    this.setState({ [event.target.name]: event.target.value });
   };
-
-  //   onChange = (event) => {
-  //     this.setState({ [event.target.name]: event.target.value });
-  //     console.log(event.target.name);
-  //   };
-
-  onTagsChange = (event, values) => {
-    this.setState(
-      {
-        user: { dorm: values.title },
-        // tags: values,
-      },
-      () => {
-        // This will output an array of objects
-        // given by Autocomplete options property.
-        console.log(values.title);
-      }
-    );
-  };
-  // [dorm, setDorm] = React.useState('');
-  // onDormChange = (event) => {
-  //   const dorm = event.target.value
-  //   setDorm(event.target.value);
-  // };
 
   render() {
     const { classes } = this.props;
+
     const {
       username,
       email,
@@ -312,7 +219,8 @@ class SignUpFormBase extends Component {
           <div className="image">
             <img alt="sign up" src={signupImg} />
           </div>
-          <form onSubmit={this.test} className={classes.form}>
+          <form onSubmit={this.onSubmit} className={classes.form}>
+            {/* <Image source={{uri:this.state.user.avatar}} /> */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -330,18 +238,6 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            {/* <Image source={{uri:this.state.user.avatar}} /> */}
-            {/* <div className="form-group">
-          <FontAwesomeIcon icon="user" className="icon" />
-          <input
-            className="input-field"
-            name="username"
-            value={username}
-            onChange={this.onChange}
-            type="text"
-            placeholder="First Name"
-          />
-        </div> */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -359,55 +255,6 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            {/* <div className="form-group">
-          <FontAwesomeIcon icon="envelope" className="icon envelope" />
-          <input
-            className="input-field"
-            name="email"
-            value={email}
-            onChange={this.onChange}
-            type="text"
-            placeholder="Email Address"
-          />
-        </div> */}
-            {/* <DormInput
-              name="dorm"
-              value={dorm}
-              onChange={this.onTagsChange}
-            //   onChange={this.onChange}
-            /> */}
-            {/* <DormSelect /> */}
-            {/* <Autocomplete
-              id="dorm input"
-              options={dorms}
-              getOptionLabel={(option) => option.title}
-              disableClearable
-              fullWidth
-              //   onChange={this.onChange}
-              onChange={this.onTagsChange}
-              renderInput={(params) => {
-                return (
-                  <TextField
-                    {...params}
-                    label="Dorms"
-                    variant="outlined"
-                    margin="normal"
-                    name="dorm"
-                    type="text"
-                    fullWidth
-                    InputProps={{
-                      ...params.InputProps,
-                      startAdornment: (
-                        <InputAdornment>
-                          <HomeIcon className={classes.formIcon} />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                );
-              }}
-            /> */}
-            {/* dont delete  */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -424,17 +271,6 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            {/* <div className="form-group">
-              <FontAwesomeIcon icon="user" className="icon" />
-              <input
-                className="input-field"
-                name="dorm"
-                value={dorm}
-                onChange={this.onChange}
-                type="text"
-                placeholder="Res Hall"
-              />
-            </div> */}
             <PasswordInput2
               // type="password"
               label="Password"
@@ -449,28 +285,6 @@ class SignUpFormBase extends Component {
               value={passwordTwo}
               onChange={this.onChange}
             />
-            {/* <div className="form-group">
-              <FontAwesomeIcon icon="unlock-alt" className="icon" />
-              <input
-                className="input-field"
-                name="passwordOne"
-                value={passwordOne}
-                onChange={this.onChange}
-                type="password"
-                placeholder="Password"
-              />
-            </div> */}
-            {/* <div className="form-group">
-              <FontAwesomeIcon icon="lock" className="icon" />
-              <input
-                className="input-field"
-                name="passwordTwo"
-                value={passwordTwo}
-                onChange={this.onChange}
-                type="password"
-                placeholder="Confirm Password"
-              />
-            </div> */}
 
             {error && (
               <Typography variant="body2" className={classes.errorText}>
@@ -499,12 +313,6 @@ class SignUpFormBase extends Component {
                 Sign Up
               </Button>
             </Reward>
-
-            {/* <button disabled={isInvalid} type="submit" className="button">
-              Sign Up
-            </button> */}
-
-            {/* {error && <p>{error.message}</p>} */}
           </form>
         </div>
       </Container>
@@ -521,8 +329,8 @@ const SignUpLink = () => (
 
 const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
 
-const SignUpForm = compose(withRouter, withFirebase)(SignUpFormStyled);
+const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
 
-export default MuiSignUpPage;
+export default SignUpPage;
 
-export { SignUpForm, SignUpLink, PasswordInput2 };
+export { SignUpForm, SignUpLink };
