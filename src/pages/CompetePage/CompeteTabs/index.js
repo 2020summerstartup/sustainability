@@ -11,6 +11,8 @@ import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import StarIcon from '@material-ui/icons/Star';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
+import ChallengeCard from './challengeCard';
+import MediaControlCard from './challengeCard2';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -131,7 +133,7 @@ function CompeteTabs() {
         <Leaderboard />
       </TabPanel>
       <TabPanel value={value} index={1} class="tab-container">
-        <ChallengeCard/>
+        <MediaControlCard />
       </TabPanel>
     </div>
   );
