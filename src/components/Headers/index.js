@@ -186,7 +186,7 @@ const BackArrowHeader = ({ firebase }) => {
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
           <img src={suslogoImg} alt="logo" className={classes.logo} />
-          <Grid justify="flex-start" container flexGrow={1}>
+          <Grid justify="flex-start" container>
             <Grid item>
           <Typography variant="h6" className={classes.title} noWrap>
             Sus Comp
@@ -194,7 +194,7 @@ const BackArrowHeader = ({ firebase }) => {
           </Typography>
           </Grid>
           </Grid>
-          <Grid justify="flex-end" container flexGrow={1}>
+          <Grid justify="flex-end" container>
             
              
             <Grid item>
