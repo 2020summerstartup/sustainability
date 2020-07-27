@@ -267,14 +267,6 @@ const useStyles = makeStyles((theme) => ({
   appbar: {
     boxShadow: "2px 2px 6px #242424",
   },
-  tabs: {
-    flexGrow: 1,
-    backgroundColor: "primary",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "6.5rem",
-      marginTop: "0.5rem",
-    },
-  },
   bar: {
     padding: 0,
   },
@@ -445,7 +437,7 @@ function HomePage() {
   // they meant to, then this function calls increment.
   const confirmIncrement = (action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
-    if (confirmed == true) {
+    if (confirmed === true) {
       increment(action); // If user meant to, call the function to actually increment user's points
     }
   };
@@ -518,7 +510,7 @@ function HomePage() {
     var action = ActionData[key]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
     var storageName = action.susAction.concat("Mastered");
-    var firestoreMastered = localStorage.getItem("firestoreMastered");
+    firestoreMastered = localStorage.getItem("firestoreMastered");
 
     if (firestoreMastered.includes(stringActionName)) {
       masterActions[key - 1] = true; //disable button when action is mastered
@@ -535,7 +527,7 @@ function HomePage() {
     var storageName = action.susAction.concat("Mastered");
 
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedMaster = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console
+    var storedMaster = localStorage.getItem(storageName) === "true"; // We're getting a warning in the console
     // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
@@ -565,9 +557,9 @@ function HomePage() {
   var favIconColors = []; // Initalize array of the color for each favIcon
   for (const key in ActionData) {
     // Iterate over every action in ActionData
-    var action = ActionData[key]; // Take the current action
-    var storageName = action.susAction.concat("Fav");
-    var storedFav = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console (wants ===)
+    action = ActionData[key]; // Take the current action
+    storageName = action.susAction.concat("Fav");
+    var storedFav = localStorage.getItem(storageName) === "true"; // We're getting a warning in the console (wants ===)
     if (storedFav) {
       // If the action is favorited
       favIconColors[key - 1] = "#DC143C"; // Turn red
@@ -581,7 +573,7 @@ function HomePage() {
     var storageName = action.susAction.concat("Fav");
     // storedFav is a boolean (is the current action favorited?)
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedFav = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console
+    var storedFav = localStorage.getItem(storageName) === "true"; // We're getting a warning in the console
     // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
@@ -940,7 +932,7 @@ function HomePage() {
                     {/* Favorite actions (this loops using favs) */}
                     {ActionData.map(
                       (action, i) =>
-                        localStorage.getItem(action.susAction.concat("Fav")) ==
+                        localStorage.getItem(action.susAction.concat("Fav")) ===
                           "true" && (
                           <Grid item xs={12} md={6} lg={4}>
                             <Card className={classes.root} key={action.title}>
