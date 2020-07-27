@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import points from "../../../img/points.svg";
 import { AuthUserContext } from "../../../services/Session";
-import pointsForAccount from "./points.js";
 import SignOutButton from "../../../components/SignOut";
 
 import GoogleFontLoader from "react-google-font-loader";
@@ -91,9 +90,6 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 <Info useStyles={useGalaxyInfoStyles}>
                   <InfoSubtitle>You have earned</InfoSubtitle>
                   <InfoTitle> {localStorage.getItem("total")} Points</InfoTitle>
-                  <InfoCaption>
-                    <p onClick={() => pointsForAccount()} className="btn-text"></p>
-                  </InfoCaption>
                 </Info>
               </Box>
             </Card>
