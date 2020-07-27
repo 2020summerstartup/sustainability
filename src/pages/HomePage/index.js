@@ -171,9 +171,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  margin: {
-    margin: theme.spacing.unit,
-  },
   actionContainer: {
     padding: "0",
   },
