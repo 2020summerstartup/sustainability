@@ -213,7 +213,7 @@ const BackArrowHeader = ({ firebase }) => {
 // HomeHeader
 const useStyles4 = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    // flexGrow: 1,
   },
   logo: {
     width: "3rem",
@@ -226,7 +226,7 @@ const useStyles4 = makeStyles((theme) => ({
     },
   },
   title: {
-    flexGrow: 1,
+    // flexGrow: 1,
     fontWeight: "bold",
     display: "inline",
     marginRight: "2rem",
