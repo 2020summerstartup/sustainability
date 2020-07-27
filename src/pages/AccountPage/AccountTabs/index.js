@@ -115,9 +115,9 @@ function AccountTabs() {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          textColor="default"
+          // non selected one is grayed out
+          // textColor="default"
           aria-label="scrollable tabs"
-          centered="true"
           className={classes.tabs}
           TabIndicatorProps={{ className: classes.indicator }}
         >

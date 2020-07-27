@@ -116,7 +116,7 @@ export const DormCard = React.memo(function GalaxyCard() {
                   <InfoCaption>
                     <Link to={ROUTES.CHANGEDORM} className={classes.link}>
                       <Typography
-                        variant="p"
+                        variant="body1"
                         className={classes.linkText}
                         style={{ underline: "enum: none" }}
                       >
