@@ -32,7 +32,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -115,9 +115,9 @@ function AccountTabs() {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          textColor="default"
+          // non selected one is grayed out
+          // textColor="default"
           aria-label="scrollable tabs"
-          centered="true"
           className={classes.tabs}
           TabIndicatorProps={{ className: classes.indicator }}
         >
@@ -164,17 +164,17 @@ function AccountTabs() {
           />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} class="tab-container">
+      <TabPanel value={value} index={0} className="tab-container">
         <TotalPointsCard />
       </TabPanel>
 
-      <TabPanel value={value} index={1} class="tab-container">
+      <TabPanel value={value} index={1} className="tab-container">
         <DormCard />
       </TabPanel>
 
-      <TabPanel value={value} index={2} class="tab-container">
+      <TabPanel value={value} index={2} className="tab-container">
         {/* THIRD BADGE */}
-        <h1></h1>
+        <h1> </h1>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
             <Badges3 />
@@ -187,7 +187,7 @@ function AccountTabs() {
           </Grid>
         </Grid>        
         {/* FIRST BADGE */}
-        <h1></h1>
+        <h1> </h1>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
             <Badges />
@@ -200,7 +200,7 @@ function AccountTabs() {
           </Grid>
         </Grid>
         {/* SECOND BADGE */}
-        <h1></h1>
+        <h1> </h1>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
             <Badges2 />

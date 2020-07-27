@@ -116,7 +116,7 @@ const AccountHeader = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
-          <Grid justify="space-between" container flexGrow={1}>
+          <Grid justify="space-between" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
                 <img src={suslogoImg} alt="logo" className={classes.logo} />

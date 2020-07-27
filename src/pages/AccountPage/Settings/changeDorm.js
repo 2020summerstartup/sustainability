@@ -7,7 +7,7 @@ const ChangeDorm = () => (
   <div>
     <AuthUserContext>
       {(authUser) => (
-        <div class="base-container">
+        <div className="base-container">
           <h2>Need to change your dorm?</h2>
           <div className="image">
             <img alt="your account" src={changedorm} />

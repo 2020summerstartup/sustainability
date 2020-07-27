@@ -25,7 +25,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -101,9 +101,9 @@ function CompeteTabs() {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          textColor="default"
+          // now it is grayed out when not selected
+          // textColor="default"
           aria-label="scrollable tabs"
-          centered="true"
           className={classes.tabs}
           TabIndicatorProps={{ className: classes.indicator }}
         >
@@ -127,11 +127,11 @@ function CompeteTabs() {
           />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} class="tab-container">
+      <TabPanel value={value} index={0} className="tab-container">
         <Leaderboard />
       </TabPanel>
 
-      <TabPanel value={value} index={1} class="tab-container">
+      <TabPanel value={value} index={1} className="tab-container">
         <Challenges />
       </TabPanel>
     </div>
