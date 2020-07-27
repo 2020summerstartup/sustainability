@@ -134,7 +134,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -604,7 +604,7 @@ function HomePage() {
     progressMessage = (
       <>
         {progressMessage}
-        <h3>Total points: {total}</h3>
+        <Typography variant="body1" component={'span'}><b>Total points: {total}</b></Typography>
       </>
     );
   }; // setProgressMessage
@@ -653,7 +653,7 @@ function HomePage() {
           </Tabs>
         </AppBar>
         <div className="top-container">
-          <Typography variant="h5" style={{ marginTop: "1rem" }}>
+          <Typography variant="h5" style={{ marginTop: "1rem" }} component={'span'}>
             You have earned&nbsp;
             {<CountUp start={0} end={total} duration={1}></CountUp>} points!
           </Typography>
@@ -860,7 +860,7 @@ function HomePage() {
                               image={action.image}
                               title={action.title}
                             />
-                            <Typography variant="h5" gutterBottom>
+                            <Typography variant="h5" component={'span'} gutterBottom>
                               Environmental Impact:
                             </Typography>
                             <Typography variant="body1">
@@ -972,10 +972,10 @@ function HomePage() {
                                     image={action.image}
                                     title={action.title}
                                   />
-                                  <Typography variant="h5" gutterBottom>
+                                  <Typography variant="h5" component={'span'} gutterBottom>
                                     Environmental Impact:
                                   </Typography>
-                                  <Typography variant="body1">
+                                  <Typography component={'span'}>
                                     {action.impact}
                                   </Typography>
                                 </CardContent>
