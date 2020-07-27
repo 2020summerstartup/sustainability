@@ -73,15 +73,15 @@ getDorm()
 leaderBoardUpdate();
 
 const rankDisplay = () => {
-  if (localStorage.getItem("ranking") === 1) {
+  if (parseInt(localStorage.getItem("ranking")) === 1) {
     rank = <p>You're in 1st place!</p>;
   }
-  if (localStorage.getItem("ranking") === 2) {
+  else if (parseInt(localStorage.getItem("ranking")) === 2) {
     rank = <p>You're in 2nd place!</p>;
   }
-  if (localStorage.getItem("ranking") === 3) {
+  else if (parseInt(localStorage.getItem("ranking")) === 3) {
     rank = <p>You're in 3rd place!</p>;
-  } else if (localStorage.getItem("ranking") >= 4) {
+  } else if (parseInt(localStorage.getItem("ranking")) >= 4) {
     rank = <p>You're in {localStorage.getItem("ranking")}th place!</p>;
   }
 };
@@ -119,6 +119,7 @@ export const DormCard = React.memo(function GalaxyCard() {
                         variant="body1"
                         className={classes.linkText}
                         style={{ underline: "enum: none" }}
+                        component={'span'}
                       >
                         Change your dorm in settings&nbsp;
                         <span role="img" aria-label="settings">
