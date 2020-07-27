@@ -161,6 +161,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
+      marginTop: "0.5rem",
     },
   },
   root: {
