@@ -22,7 +22,7 @@ const playSound = (audioFile) => {
 // they meant to, then this fucntion calls sign out.
 const confirmSignOut = ({ firebase }) => {
   var confirmed = window.confirm("Are you sure you want to sign out?"); // Check with the user
-  if (confirmed == true) {
+  if (confirmed === true) {
     firebase.doSignOut();
     toast.configure(); // Configure for toast messages later
     toast.info("You have signed out. Come back soon!"); // Can play with colors here if anyone wants to. :)
