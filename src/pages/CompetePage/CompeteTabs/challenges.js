@@ -71,7 +71,7 @@ class Challenges extends React.Component {
       <div>
         <Typography variant="h5">Current Challenges</Typography>
         {challengeInfo}
-        <p></p>
+        <p> </p>
         <Reward
           ref={(ref) => {
             this.reward = ref;
@@ -90,7 +90,7 @@ class Challenges extends React.Component {
             Start a Challenge
           </Button>
         </Reward>
-        <p></p>
+        <p> </p>
         <Typography variant="body1">Check back often for new challenges!</Typography>
       </div>
     );

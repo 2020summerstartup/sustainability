@@ -616,7 +616,7 @@ function HomePage() {
   return (
     <>
       {/* {prompt && <IosModal />} */}
-      <div>
+      <>
         <AppBar
           position="static"
           color="primary"
@@ -750,9 +750,6 @@ function HomePage() {
                 >
                   Close
                 </button>
-                <p> </p>
-                <p> </p>
-                <p> </p>
               </div>
             </center>
           </Modal> */}
@@ -993,7 +990,7 @@ function HomePage() {
             </AuthUserContext.Consumer>
           </div>
         </TabPanel>
-      </div>
+      </>
     </>
   ); // end of return statement
 } // end of function
