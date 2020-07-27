@@ -73,7 +73,7 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
   );
 
   return (
-    <div>
+    <>
       <AuthUserContext.Consumer>
         {(authUser) => (
           <>
@@ -101,7 +101,7 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
           </>
         )}
       </AuthUserContext.Consumer>
-    </div>
+    </>
   );
 });
 export default TotalPointsCard;

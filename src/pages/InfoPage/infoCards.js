@@ -73,6 +73,7 @@ class InfoCards extends React.Component {
                     //   className="card"
                     // >
                     <div
+                      key={i}
                     // style={{
                     //   animationDelay: i * 0.5 + "s",
                     // }}
