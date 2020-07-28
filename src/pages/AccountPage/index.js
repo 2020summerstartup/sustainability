@@ -33,8 +33,10 @@ function AccountPage() {
     }
   );
 
-  getDorm()
-    .doc(localStorage.getItem("dorm"))
+  var dormName = localStorage.getItem("dorm")
+  if (dormName !== ""){
+    getDorm()
+    .doc(dormName)
     .onSnapshot(
       (docSnapshot) => {
         assignRanking(docSnapshot.data());
@@ -43,7 +45,8 @@ function AccountPage() {
         console.error("Error: ", error);
       }
     );
-
+  }
+  
   return (
     <div>
       <AuthUserContext.Consumer>

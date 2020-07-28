@@ -24,9 +24,7 @@ function leaderBoardUpdate() {
         .then(() => {
         getDorm().doc(localStorage.getItem('dorm')).get().then((snapShot) => {
             assignRanking(snapShot.data())
-            console.log('dorm ranking uploaded')
         })
-        console.log('dorm ranks updated');
         })
         .catch(err => {
         console.error(err);
