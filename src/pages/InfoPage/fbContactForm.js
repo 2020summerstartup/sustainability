@@ -15,6 +15,7 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import PersonIcon from "@material-ui/icons/Person";
 import EmailIcon from "@material-ui/icons/Email";
 import MessageIcon from "@material-ui/icons/Message";
+import SendIcon from "@material-ui/icons/Send";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -156,6 +157,7 @@ const FBContactForm = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            endIcon={<SendIcon />}
           >
             Send
           </Button>

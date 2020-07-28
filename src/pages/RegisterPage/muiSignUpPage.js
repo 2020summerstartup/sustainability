@@ -207,7 +207,13 @@ class SignUpFormBase extends Component {
       email === "" ||
       dorm === "" ||
       username === "";
-    // dorm !== "South" || "Sontag"|| "Drinkward"||  "Case"|| "North"||  "East"|| "West";
+      // (dorm !== "South" ||
+      // "Sontag" ||
+      // "Drinkward" ||
+      // "Case" ||
+      // "North" ||
+      // "East" ||
+      // "West");
 
     return (
       <Container maxWidth="xs">
