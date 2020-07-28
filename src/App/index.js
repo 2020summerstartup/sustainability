@@ -28,9 +28,10 @@ import * as ROUTES from "../constants/routes";
 import { withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
 
-
 // React lazy
-// const MuiLandingPage = lazy(( ) => import("../pages/LandingPage/muiLandingPage"));
+// const MuiLandingPage = lazy(() =>
+//   import("../pages/LandingPage/muiLandingPage")
+// );
 const MuiSignInPage = lazy(() => import("../pages/RegisterPage/muiSignInPage"));
 const MuiSignUpPage = lazy(() => import("../pages/RegisterPage/muiSignUpPage"));
 const MuiPasswordForgetPage = lazy(() =>
@@ -77,61 +78,39 @@ function AppBase() {
         <Navigation />
         <BottomNav />
 
-        <Switch>
-          <Suspense fallback={<div>Loading...</div>}>
-            {/* For each page's content */}
-            <Route
-              exact
-              path={ROUTES.LANDING}
-              component={(props) => <MuiLandingPage {...props} />}
-            />
-            <Route
-              path={ROUTES.SIGN_UP}
-              component={(props) => <MuiSignUpPage {...props} />}
-            />
-            <Route
-              path={ROUTES.SIGN_IN}
-              component={(props) => <MuiSignInPage {...props} />}
-            />
-            <Route
-              path={ROUTES.PASSWORD_FORGET}
-              component={(props) => <MuiPasswordForgetPage {...props} />}
-            />
-            <Route
-              path={ROUTES.HOME}
-              component={(props) => <HomePage {...props} />}
-            />
-            <Route
-              path={ROUTES.ACCOUNT}
-              component={(props) => <AccountPage {...props} />}
-            />
-            <Route path={ROUTES.INFO} render={() => <InfoPage />} />
-            <Route
-              path={ROUTES.COMPETE}
-              component={(props) => <CompetePage {...props} />}
-            />
-            <Route
-              path={ROUTES.OFFLINE}
-              component={(props) => <MuiOfflinePage {...props} />}
-            />
-            <Route
-              path={ROUTES.CHANGEPW}
-              component={(props) => <MuiChangePw {...props} />}
-            />
-            <Route
-              path={ROUTES.CHANGEDORM}
-              component={(props) => <MuiChangeDorm {...props} />}
-            />
-            <Route
-              path={ROUTES.DELETE_ACCOUNT}
-              component={(props) => <DeleteAccount {...props} />}
-            />
-            <Route
-              path={ROUTES.ADMIN}
-              component={(props) => <AdminPage {...props} />}
-            />
-          </Suspense>
-        </Switch>
+        {/* <Switch> */}
+        {/* For each page's content */}
+        <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
+
+        <Suspense fallback={<div>Loading...</div>}>
+          <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
+
+          <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />
+
+          <Route
+            path={ROUTES.PASSWORD_FORGET}
+            component={MuiPasswordForgetPage}
+          />
+
+          <Route path={ROUTES.HOME} component={HomePage} />
+
+          <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+
+          <Route path={ROUTES.INFO} component={InfoPage} />
+
+          <Route path={ROUTES.COMPETE} component={CompetePage} />
+
+          <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
+
+          <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
+
+          <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
+
+          <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
+
+          {/* <Route path={ROUTES.ADMIN} component={AdminPage} /> */}
+        </Suspense>
+        {/* </Switch> */}
 
         {/* <Switch>
         <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
@@ -159,7 +138,7 @@ function AppBase() {
 // function WaitingComponent(Component) {
 //   return (props) => (
 //     <Suspense fallback={<div>Loading...</div>}>
-//       <Component {...props} />
+//       <Component
 //     </Suspense>
 //   );
 // }
