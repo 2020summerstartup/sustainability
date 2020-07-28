@@ -4,6 +4,9 @@
     "id": 1,
     "points": 10,
     "susAction": "waterBottle",
+    "coEmiss": 0,
+    "energy": 0,
+    "water": 0.4,
     "image": "https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Americans use 2,500,000 plastic bottles every hour – most of them are thrown away! \n In 2006, Americans drank about 167 bottles of water each, but only recycled an average of 23 percent. That leaves 38 billion water bottles in landfills. \n Plastic bottles take 700 years before they begin to decompose in a landfill."
   },
@@ -12,6 +15,9 @@
     "id": 2,
     "points": 30,
     "susAction": "cmontWalk",
+    "coEmiss": 1.8,
+    "energy": 253.2,
+    "water": 0,
     "image": "https://images.unsplash.com/photo-1529083660546-904a258c8a1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Whenever possible, walk, bike, car pool, or use mass transit. Every gallon of gasoline you save avoids 22 pounds of CO2 emissions, and every mile you walk burns an average of 100 calories. Avoiding just 10 miles of driving every week would eliminate about 500 pounds of carbon dioxide emissions a year! "
   },
@@ -20,6 +26,9 @@
     "id": 3,
     "points": 15,
     "susAction": "reuseStraw",
+    "coEmiss": 0,
+    "energy": 11.8,
+    "water": 0,
     "image": "https://images.unsplash.com/photo-1586898993878-b33cd116520b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "The United States goes through some 500 million plastic straws a day, and that plastic severely impacts the environment, as they make up about 7% of the total plastic waste humans produce. It’s no surprise, then, that major rivers all around the world carry some 1.15-2.41 million tons of plastic into our seas each year. But you can make an effort to reverse this harrowing trend by moving toward eco-conscious, reusable straws as alternatives."
   },
@@ -28,6 +37,9 @@
     "id": 4,
     "points": 10,
     "susAction": "reuseBag",
+    "coEmiss": 0.05,
+    "energy": 0,
+    "water": 0,
     "image": "https://images.unsplash.com/photo-1567747450007-f324221e5598?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Firstly, swapping disposable bags for reusable bags will save you money. Recycling plastic bags often costs more than it is worth and so, many recycling facilities will not take them, meaning they end up in landfills. Disposable plastic bags are often flimsy and break easily, whereas reusable bags are more durable and can carry more without breaking."
   },
@@ -36,6 +48,9 @@
     "id": 5,
     "points": 35,
     "susAction": "frmersMarket",
+    "coEmiss": 2,
+    "energy": 0,
+    "water": 0,
     "image": "https://images.unsplash.com/photo-1444459094717-a39f1e3e0903?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Farmers selling at markets minimize the amount of waste and pollution they create. Many use certified organic practices, reducing the amount of synthetic pesticides and chemicals that pollute our soil and water. "
   },
@@ -44,6 +59,9 @@
     "id": 6,
     "points": 10,
     "susAction": "rebrewTea",
+    "coEmiss": 0,
+    "energy": 0,
+    "water": 0,
     "image": "https://images.unsplash.com/photo-1519095615130-d36e0fe3bf63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "If you’re an artisan tea lover, you may spend a lot of money on tea every year. It’s a no-brainer that you’ll save a lot of money if you steep your tea multiple times instead of just once."
   },
@@ -52,6 +70,9 @@
     "id": 7,
     "points": 20,
     "susAction": "noFoodWaste",
+    "coEmiss": 0.62,
+    "energy": 0,
+    "water": 0,
     "image": "https://images.unsplash.com/photo-1529942376973-7dd96721339c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Reducing food waste is environmentally important as it keeps food out of landfills. It makes economic sense at the small scale, by lowering household food bills and at the large scale by reducing disposal costs for restaurants, processors and farmers. Finally, reducing food waste is socially important when the rescued food is redirected to emergency food providers working to eliminate hunger in our communities."
   },
@@ -60,6 +81,9 @@
     "id": 8,
     "points": 20,
     "susAction": "meatlessMon",
+    "coEmiss": 12,
+    "energy": 0,
+    "water": 0,
     "image": "https://images.unsplash.com/photo-1556386470-bcdc6a5e9b9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Reducing consumption of meat can help contain production of greenhouse gases that impact climate change. It can also help lessen the demand for precious environmental resources such as land, water, and energy. If you can't pass up the Hoch's Monday steak night, choose a different day of the week to go meatless."
   },
@@ -68,6 +92,9 @@
     "id": 9,
     "points": 10,
     "susAction": "ecoClean",
+    "coEmiss": 0,
+    "energy": 0,
+    "water": 0,
     "image": "https://images.unsplash.com/photo-1583907659441-addbe699e921?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Shifting to eco-friendly cleaning products and methods is a sure way of ensuring that we live in healthy, clean and toxic-free environments."
   },
@@ -76,6 +103,9 @@
     "id": 10,
     "points": 15,
     "susAction": "publicTransit",
+    "coEmiss": 3.4,
+    "energy": 0,
+    "water": 0,
     "impact": "Using public transportation can improve air quality, reduce greenhouse gas emissions, facilitate compact development, save energy, and more. Source: https://www.transit.dot.gov/regulations-and-guidance/environmental-programs/transit-environmental-sustainability/transit-role"
   },
 
@@ -84,6 +114,9 @@
     "id": 11,
     "points": 20,
     "susAction": "usedClothes",
+    "coEmiss": 0,
+    "energy": 0,
+    "water": 500,
     "impact": "Opting to purchase your clothing second-hand (and avoiding fast-fashion) reduces your carbon footprint. You'll also save lots of money!"
   },
 
@@ -92,6 +125,9 @@
     "id": 12,
     "points": 10,
     "susAction": "hangDry",
+    "coEmiss": 0,
+    "energy": 4320,
+    "water": 0,
     "impact": "Hanging your clothes to dry instead of using a clothes dryer reduces your energy-use. And while you're at college, it means you won't have to pay for dryer use!"
   },
 
@@ -100,6 +136,9 @@
     "id": 13,
     "points": 100,
     "susAction": "climateClass",
+    "coEmiss": 0,
+    "energy": 0,
+    "water": 0,
     "impact": "The 5Cs have tons of classes focused on climate change! Interested in learning more about the topic? Register for one next semester!"
   }
 ]

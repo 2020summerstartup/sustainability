@@ -24,6 +24,7 @@ import leaderBoardUpdate, {
   assignRanking,
 } from "../../CompetePage/leaderBoardUpdate";
 import { getDorm } from "../../../services/Firebase";
+import EnvImpactCards from './dormEnvImpactCards';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -63,7 +64,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-var rank;
 
 getDorm()
   .doc(localStorage.getItem("dorm"))
@@ -72,6 +72,8 @@ getDorm()
   });
 leaderBoardUpdate();
 
+
+var rank;
 const rankDisplay = () => {
   if (parseInt(localStorage.getItem("ranking")) === 1) {
     rank = <p>You're in 1st place!</p>;
@@ -131,6 +133,7 @@ export const DormCard = React.memo(function GalaxyCard() {
                 </Info>
               </Box>
             </Card>
+            <EnvImpactCards />
             <SignOutButton />
           </>
         )}
