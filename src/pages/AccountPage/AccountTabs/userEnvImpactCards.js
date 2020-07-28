@@ -4,22 +4,22 @@ import { getUser} from '../../../services/Firebase';
 
 
 //gets the user's Environmental Impact Data from firebase
-let email = localStorage.getItem('email')
-getUser(email).get().then( snapshot => {
-  let envImpact = snapshot.get('impact')
-  localStorage.setItem('buzzTotal', envImpact.buzzTotal);
-  localStorage.setItem('coEmiss', envImpact.coEmiss);
-  localStorage.setItem('energy', envImpact.energy);
-  localStorage.setItem('water', envImpact.water);
-})
-console.log(localStorage.getItem('buzzTotal'))
+// let email = localStorage.getItem('email')
+// getUser(email).get().then( snapshot => {
+//   let envImpact = snapshot.get('impact')
+  // localStorage.setItem('buzzTotal', envImpact.buzzTotal);
+  // localStorage.setItem('coEmiss', envImpact.coEmiss);
+  // localStorage.setItem('energy', envImpact.energy);
+  // localStorage.setItem('water', envImpact.water);
+// })
+// console.log(localStorage.getItem('buzzTotal'))
 
 // set variables that I will need later when rendering cards
 let colors = ["#24a113", "#39AA2A", "#4FB342", "#65BD59"];
-let buzzTotal = localStorage.getItem('buzzTotal');
-let coEmiss = localStorage.getItem('coEmiss');
-let energy = localStorage.getItem('energy');
-let water = localStorage.getItem('water');
+let buzzTotal = 'hi' //localStorage.getItem('buzzTotal');
+let coEmiss = 'hi' //localStorage.getItem('coEmiss');
+let energy = 'hi' //localStorage.getItem('energy');
+let water = 'hi' //localStorage.getItem('water');
 
 class EnvImpactCards extends React.Component {
     constructor() {
