@@ -35,12 +35,12 @@ export default function DormSelect() {
 
   // Sets dorm by calling local storage and firebase
   const handleChange = (event) => {
-    const dorm = event.target.value;
+    placeholder=dorm;
     setDorm(event.target.value);
-    localStorage.setItem("dorm", dorm);
-    updateUserDorm(authContext.email, dorm);
+    localStorage.setItem("dorm", event.target.value);
+    updateUserDorm(authContext.email, event.target.value);
     getDorm()
-      .doc(dorm)
+      .doc(event.target.value)
       .onSnapshot((docSnapshot) => {
         assignRanking(docSnapshot.data());
       });
@@ -91,7 +91,7 @@ export default function DormSelect() {
         </Select> */}
       </FormControl>
       {/* <div>
-      Your dorm is {localStorage.getItem('dorm')}
+      Your dorm is {dorm}
     </div> */}
     </div>
   );
