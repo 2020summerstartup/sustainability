@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "../components/Navigation";
@@ -51,20 +51,25 @@ const AppBase = () => (
       <Navigation />
       <BottomNav />
 
-      {/* For each page's content */}
-      <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
-      <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
-      <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />
-      <Route path={ROUTES.PASSWORD_FORGET} component={MuiPasswordForgetPage} />
-      <Route path={ROUTES.HOME} component={HomePage} />
-      <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-      <Route path={ROUTES.INFO} component={InfoPage} />
-      <Route path={ROUTES.COMPETE} component={CompetePage} />
-      <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
-      <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
-      <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
-      <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
-      <Route path={ROUTES.ADMIN} component={AdminPage} />
+      <Switch>
+        {/* For each page's content */}
+        <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
+        <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
+        <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />
+        <Route
+          path={ROUTES.PASSWORD_FORGET}
+          component={MuiPasswordForgetPage}
+        />
+        <Route path={ROUTES.HOME} component={HomePage} />
+        <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+        <Route path={ROUTES.INFO} component={InfoPage} />
+        <Route path={ROUTES.COMPETE} component={CompetePage} />
+        <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
+        <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
+        <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
+        <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
+        <Route path={ROUTES.ADMIN} component={AdminPage} />
+      </Switch>
     </div>
   </Router>
 );
