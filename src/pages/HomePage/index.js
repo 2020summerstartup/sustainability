@@ -541,7 +541,7 @@ function HomePage() {
     // Iterate over every action in ActionData
     var action2 = ActionData[el]; // Take the current action
     var storageName2 = action2.susAction.concat("Fav");
-    var storedFav = localStorage.getItem(storageName2) == "true"; // We're getting a warning in the console (wants ===)
+    var storedFav = localStorage.getItem(storageName2) === "true";
     if (storedFav) {
       // If the action is favorited
       favIconColors[el - 1] = "#DC143C"; // Turn red
@@ -555,8 +555,7 @@ function HomePage() {
     var storageName = action.susAction.concat("Fav");
     // storedFav is a boolean (is the current action favorited?)
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedFav = localStorage.getItem(storageName) == "true"; // We're getting a warning in the console
-    // that this wants '===,' but I'm pretty sure we don't want that. I can check this again in a week or so. -Katie
+    var storedFav = localStorage.getItem(storageName) === "true";
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     if (storedFav == null) {
@@ -910,7 +909,7 @@ function HomePage() {
                     {/* Favorite actions (this loops using favs) */}
                     {ActionData.map(
                       (action, i) =>
-                        localStorage.getItem(action.susAction.concat("Fav")) ==
+                        localStorage.getItem(action.susAction.concat("Fav")) ===
                           "true" && (
                           <Grid item xs={12} md={6} lg={4} key={i}>
                             <Card className={classes.root}>
