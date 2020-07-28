@@ -126,7 +126,7 @@ class PasswordInput2 extends Component {
 PasswordInput2.propTypes = {
   classes: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.func.isRequired,
+  // value: PropTypes.func.isRequired,
 };
 
 PasswordInput2 = withStyles(useStyles)(PasswordInput2);
@@ -320,12 +320,12 @@ class SignUpFormBase extends Component {
   }
 }
 
-const SignUpLink = () => (
-  <p>
-    Don't have an account? Get with the program, and{" "}
-    <Link to={ROUTES.SIGN_UP}>Sign Up</Link> here now!
-  </p>
-);
+// const SignUpLink = () => (
+//   <p>
+//     Don't have an account? Get with the program, and{" "}
+//     <Link to={ROUTES.SIGN_UP}>Sign Up</Link> here now!
+//   </p>
+// );
 
 const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
 
@@ -333,4 +333,4 @@ const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
 
 export default SignUpPage;
 
-export { SignUpForm, SignUpLink };
+export { SignUpForm, PasswordInput2 };

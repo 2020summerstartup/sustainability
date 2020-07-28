@@ -168,7 +168,7 @@ class PasswordInput2 extends Component {
 PasswordInput2.propTypes = {
   classes: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.func.isRequired,
+  // value: PropTypes.func.isRequired,
 };
 
 PasswordInput2 = withStyles(useStyles)(PasswordInput2);
