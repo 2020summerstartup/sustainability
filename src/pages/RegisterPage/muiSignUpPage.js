@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose } from "recompose";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import Reward from "react-rewards";
 
@@ -13,7 +12,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
@@ -29,8 +28,6 @@ import signup from "../../sounds/hero_simple-celebration-03.wav";
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
-// import when you need to use icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -64,18 +61,6 @@ const useStyles = (theme) => ({
     marginTop: "1rem",
   },
 });
-
-const dorms = [
-  { title: "South" },
-  { title: "Case" },
-  { title: "East" },
-  { title: "West" },
-  { title: "North" },
-  { title: "Drinkward" },
-  { title: "Sontag" },
-  { title: "Linde" },
-  { title: "Atwood" },
-];
 
 class PasswordInput2 extends Component {
   constructor(props) {
