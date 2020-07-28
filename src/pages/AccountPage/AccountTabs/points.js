@@ -20,7 +20,6 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
 import { getUser } from "../../../services/Firebase";
 import { assignData } from "../../HomePage";
-import EnvImpactCards from './userEnvImpactCards';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -94,7 +93,6 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 </Info>
               </Box>
             </Card>
-            < EnvImpactCards />
             <SignOutButton />
           </>
         )}
