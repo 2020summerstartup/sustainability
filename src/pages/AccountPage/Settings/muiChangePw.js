@@ -20,13 +20,13 @@ import toastNotify from "../../../sounds/notification_simple-01.wav";
 
 const ChangePW = () => (
   <div>
-    <AuthUserContext>
+    <AuthUserContext.Consumer>
       {(authUser) => (
         <div className="base-container">
           <PasswordChange />
         </div>
       )}
-    </AuthUserContext>
+    </AuthUserContext.Consumer>
   </div>
 );
 

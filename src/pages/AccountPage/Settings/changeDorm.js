@@ -5,7 +5,7 @@ import changedorm from "../../../img/changedorm.svg";
 
 const ChangeDorm = () => (
   <div>
-    <AuthUserContext>
+    <AuthUserContext.Consumer>
       {(authUser) => (
         <div className="base-container">
           <h2>Need to change your dorm?</h2>
@@ -16,7 +16,7 @@ const ChangeDorm = () => (
           <DormSelect />
         </div>
       )}
-    </AuthUserContext>
+    </AuthUserContext.Consumer>
   </div>
 );
 

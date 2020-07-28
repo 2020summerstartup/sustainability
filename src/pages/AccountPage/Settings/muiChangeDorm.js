@@ -21,7 +21,7 @@ function ChangeDorm() {
 
   return (
     <div>
-      <AuthUserContext>
+      <AuthUserContext.Consumer>
         {(authUser) => (
           <div className="base-container">
             <CssBaseline />
@@ -35,7 +35,7 @@ function ChangeDorm() {
             </div>
           </div>
         )}
-      </AuthUserContext>
+      </AuthUserContext.Consumer>
     </div>
   );
 }
