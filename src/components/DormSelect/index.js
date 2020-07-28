@@ -35,7 +35,6 @@ export default function DormSelect() {
 
   // Sets dorm by calling local storage and firebase
   const handleChange = (event) => {
-    placeholder=dorm;
     setDorm(event.target.value);
     localStorage.setItem("dorm", event.target.value);
     updateUserDorm(authContext.email, event.target.value);
@@ -53,7 +52,7 @@ export default function DormSelect() {
         {/* <InputLabel>{newPlaceholder}</InputLabel> */}
         <Select
           native
-          value={placeholder}
+          value={dorm}
           onChange={handleChange}
           label="Dorm"
           inputProps={{ "aria-label": "dorm" }}

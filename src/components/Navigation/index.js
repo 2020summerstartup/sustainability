@@ -106,8 +106,7 @@ const NavigationNonAuth = () => (
   <nav className="navbar">
     <ul className="navbar-nav">
       <li className="logo">
-        {/* No idea why the following line needs to be "/#" when everywhere else it's fine with "#"... */}
-        <a href="/#" className="nav-link">
+        <a href="#" className="nav-link">
           <span className="link-text logo-text">Go Green!</span>
           <svg
             aria-hidden="true"
