@@ -158,6 +158,15 @@ export const actionMastered = (userEmail, susAction) => {
   })
 }
 
+export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact) => {
+  return firestore.collection('users').doc(userEmail).update({
+    ['impact.coEmiss']: app.firestore.FieldValue.increment(coImpact),
+    ['impact.energy']: app.firestore.FieldValue.increment(energyImpact),
+    ['impact.water']: app.firestore.FieldValue.increment(waterImpact),
+    ['impact.buzzTotal']: app.firestore.FieldValue.increment(1),
+  })
+}
+
 const db = firebase.firestore;
 
 export {Axios, db}

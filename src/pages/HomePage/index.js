@@ -16,6 +16,7 @@ import {
   updateDormPoint,
   actionMastered,
   firestore,
+  updateUserImpact
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -450,6 +451,8 @@ function HomePage() {
       window.location.reload(true);
     });
 
+    updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
+
     // get the user's dorm from firestore and update the dorm's points
     getUser(authContext.email).onSnapshot(
       (docSnapshot) => {
@@ -501,7 +504,7 @@ function HomePage() {
     var storageName = action.susAction.concat("Mastered");
     firestoreMastered = localStorage.getItem("firestoreMastered");
 
-    if (firestoreMastered.includes(stringActionName)) {
+    if ( firestoreMastered != null && firestoreMastered.includes(stringActionName)) {
       masterActions[el - 1] = true; //disable button when action is mastered
       localStorage.setItem(storageName, true); // update local storage accordingly
     } else {
