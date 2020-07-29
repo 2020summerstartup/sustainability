@@ -8,7 +8,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
-import badgeImg from "../../img/badge.svg";
+import { ReactComponent as BadgeLogo } from "../../img/badge.svg";
+
+// import badgeImg from "../../img/badge.svg";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 
 const useStyles = makeStyles((theme) => ({
@@ -92,7 +94,8 @@ export default function AlertDialog() {
               sustainable!
             </Typography> */}
           </DialogContentText>
-          <img alt="badge" src={badgeImg} className={classes.badgeImg} />
+          <BadgeLogo className={classes.badgeImg} />
+          {/* <img alt="badge" src={badgeImg} className={classes.badgeImg} /> */}
           {/* MUST ATTRIBUTE AUTHOR */}
           <DialogContentText id="alert-dialog-description">
             {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}

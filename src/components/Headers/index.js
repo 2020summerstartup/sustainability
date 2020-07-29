@@ -14,10 +14,14 @@ import Grid from "@material-ui/core/Grid";
 import { useHistory } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
-import suslogoImg from "../../img/suslogo.svg";
+
+// import suslogoImg from "../../img/suslogo.svg";
+import { ReactComponent as SusLogo } from "../../img/suslogo.svg";
+
 
 // imports for homeheader
 import { fade, makeStyles } from "@material-ui/core/styles";
+// const suslogoImg = import("../../img/suslogo.svg");
 
 // Styles for Header
 const useStyles1 = makeStyles((theme) => ({
@@ -43,7 +47,8 @@ const Header = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
-          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <SusLogo className = {classes.logo}/>
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography variant="h6" className={classes.title} noWrap>
             Sus Comp
           </Typography>
@@ -60,7 +65,8 @@ const CompeteHeader = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
-          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <SusLogo className={classes.logo} />
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography variant="h6" className={classes.title} noWrap>
             Leaderboard and Challenges
           </Typography>
@@ -77,7 +83,8 @@ const InfoHeader = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
-          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <SusLogo className={classes.logo} />
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography variant="h6" className={classes.title} noWrap>
             Information
           </Typography>
@@ -119,7 +126,8 @@ const AccountHeader = ({ firebase }) => {
           <Grid justify="space-between" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
-                <img src={suslogoImg} alt="logo" className={classes.logo} />
+                <SusLogo className={classes.logo} />
+                {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
                 Profile
               </Typography>
             </Grid>
@@ -185,7 +193,8 @@ const BackArrowSettingsHeader = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <SusLogo className={classes.logo} />
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
@@ -225,7 +234,8 @@ const BackArrowHeader = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <SusLogo className={classes.logo} />
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
@@ -313,7 +323,8 @@ const HomeHeader = ({ firebase }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <SusLogo className={classes.logo} />
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography className={classes.title} variant="h6">
             Home
           </Typography>
