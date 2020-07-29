@@ -612,7 +612,6 @@ function HomePage() {
   // HTML to be displayed
   return (
     <>
-      {/* {prompt && <IosModal />} */}
       <>
         <AppBar
           position="static"
