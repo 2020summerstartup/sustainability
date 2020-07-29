@@ -64,7 +64,20 @@ class InfoCards extends React.Component {
               <div className="cards">
                 {this.state.cards ? (
                   this.state.cards.map((card, i) => (
-                    <div key={i} >
+                    // <div
+                    //   key={card.id}
+                    //   // animation for dorm name and score *change later
+                    //   style={{
+                    //     animationDelay: i * 0.5 + "s",
+                    //   }}
+                    //   className="card"
+                    // >
+                    <div
+                      key={i}
+                    // style={{
+                    //   animationDelay: i * 0.5 + "s",
+                    // }}
+                    >
                       <div
                         style={{
                           backgroundColor: colors[i],
