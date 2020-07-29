@@ -76,7 +76,7 @@ class InfoCards extends React.Component {
                           marginTop: "2rem",
                         }}
                       >
-                        hello world
+                        <p className="card-description">hello world</p>
                       </div>
                       {/* </div> */}
                     </div>
