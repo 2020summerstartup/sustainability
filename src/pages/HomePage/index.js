@@ -1,7 +1,7 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
 import BadgeModal from "./badgeModal"
 
-import favorite from "../../img/favorite.svg";
+// import FavoriteCard from "./faveCard";
 import actionTab from "../../img/actionTab.svg";
 
 import CountUp from "react-countup";
@@ -78,6 +78,9 @@ import like from "../../sounds/state-change_confirm-up.wav";
 import unlike from "../../sounds/state-change_confirm-down.wav";
 import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 
+
+// Lazy load the fave card
+const FavoriteCard = lazy(() => import("./faveCard.js"));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
@@ -391,7 +394,7 @@ function HomePage() {
   const [filter, setFilter] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
-  const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top"});
+  // const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top"});
   const mediaStyles2 = useCoverCardMediaStyles({ bgPosition: "bottom" });
 
 
@@ -876,30 +879,10 @@ function HomePage() {
             <AuthUserContext.Consumer>
               {(authUser) => (
                 <>
-                {/* Favorites card */}
-                  <NoSsr>
-                    <GoogleFontLoader
-                      fonts={[
-                        { font: "Spartan", weights: [300] },
-                        { font: "Montserrat", weights: [200, 400, 700] },
-                      ]}
-                    />
-                  </NoSsr>
-                  <Card className={classes.card}>
-                    <CardMedia classes={mediaStyles1} image={favorite} />
-                    <Box py={3} px={2} className={classes.content}>
-                      <Info useStyles={useGalaxyInfoStyles}>
-                        <InfoSubtitle>Your faves are here </InfoSubtitle>
-                        <InfoTitle>Add more!</InfoTitle>
-                        <InfoCaption>
-                          Go to actions tab and press the heart to add&nbsp;
-                          <span role="img" aria-label="heart">
-                            ❤️
-                          </span>
-                        </InfoCaption>
-                      </Info>
-                    </Box>
-                  </Card>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <FavoriteCard />
+                  </Suspense>
+                
                   <Grid
                     container
                     spacing={2}
