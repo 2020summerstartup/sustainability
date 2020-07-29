@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import TotalPointsCard from "./points";
+import ProgressCircle from "../../../components/ProgressCircle";
 // import DormCard from "./dorm";
 // import Badges from "./badges";
 // import Badges2 from "./badges2";
@@ -181,13 +182,13 @@ function AccountTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={1} className="tab-container">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<ProgressCircle />}>
           <DormCard />
         </Suspense>
       </TabPanel>
 
       <TabPanel value={value} index={2} className="tab-container">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<ProgressCircle />}>
           {/* THIRD BADGE */}
           <h1> </h1>
           <Grid container spacing={2}>

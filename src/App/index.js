@@ -25,6 +25,7 @@ import Header, {
   BackArrowHeader,
 } from "../components/Headers";
 import * as ROUTES from "../constants/routes";
+import ProgressCircle from "../components/ProgressCircle";
 
 import { withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
@@ -65,11 +66,23 @@ function AppBase() {
         <Route exact path="/compete" component={CompeteHeader} />
         <Route exact path="/info" component={InfoHeader} />
         <Route exact path="/account" component={AccountHeader} />
-        <Route exact path="/deleteaccount" component={BackArrowSettingsHeader} />
+        <Route
+          exact
+          path="/deleteaccount"
+          component={BackArrowSettingsHeader}
+        />
         <Route exact path="/signup" component={BackArrowHeader} />
         <Route exact path="/changedorm" component={BackArrowSettingsHeader} />
-        <Route exact path="/changepassword" component={BackArrowSettingsHeader} />
-        <Route exact path="/forgetpassword" component={BackArrowSettingsHeader} />
+        <Route
+          exact
+          path="/changepassword"
+          component={BackArrowSettingsHeader}
+        />
+        <Route
+          exact
+          path="/forgetpassword"
+          component={BackArrowSettingsHeader}
+        />
         <Route component={Header} />
       </Switch>
 
@@ -83,7 +96,7 @@ function AppBase() {
         {/* For each page's content */}
         <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
 
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<ProgressCircle />}>
           <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
 
           <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />
@@ -135,14 +148,6 @@ function AppBase() {
     </Router>
   );
 }
-
-// function WaitingComponent(Component) {
-//   return (props) => (
-//     <Suspense fallback={<div>Loading...</div>}>
-//       <Component
-//     </Suspense>
-//   );
-// }
 
 const App = withTheme(AppBase);
 export default withAuthentication(App);

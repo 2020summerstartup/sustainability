@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
 import BadgeModal from "./badgeModal";
+import ProgressCircle from "../../components/ProgressCircle";
 
 // import FavoriteCard from "./faveCard";
 import actionTab from "../../img/actionTab.svg";
@@ -890,7 +891,7 @@ function HomePage() {
             <AuthUserContext.Consumer>
               {(authUser) => (
                 <>
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<ProgressCircle />}>
                     <FavoriteCard />
                   </Suspense>
 
