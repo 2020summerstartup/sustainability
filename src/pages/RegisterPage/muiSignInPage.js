@@ -8,7 +8,7 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 
 import { withFirebase, getUser } from "../../services/Firebase";
-import { assignData } from "../HomePage/index.js";
+import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 
