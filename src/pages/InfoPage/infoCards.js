@@ -75,8 +75,10 @@ class InfoCards extends React.Component {
                           maxWidth: "600px",
                           marginTop: "2rem",
                         }}
+                        // className={styles.cardWrapper}
                       >
-                        <p className="card-description">hello world</p>
+                        <h1 className="card-name">title</h1>
+                        <p className="card-description">description</p>
                       </div>
                       {/* </div> */}
                     </div>
