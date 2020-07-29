@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     width: "100%",
     zIndex: 5,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       display: "none",
     },
   },

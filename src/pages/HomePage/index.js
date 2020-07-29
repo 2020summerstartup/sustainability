@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
-import BadgeModal from "./badgeModal"
+import BadgeModal from "./badgeModal";
 
 // import FavoriteCard from "./faveCard";
 import actionTab from "../../img/actionTab.svg";
@@ -78,7 +78,6 @@ import like from "../../sounds/state-change_confirm-up.wav";
 import unlike from "../../sounds/state-change_confirm-down.wav";
 import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 
-
 // Lazy load the fave card
 const FavoriteCard = lazy(() => import("./faveCard.js"));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
@@ -137,7 +136,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography component={'span'}>{children}</Typography>
+          <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -165,6 +164,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
       marginTop: "0.5rem",
+    },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
     },
   },
   root: {
@@ -228,7 +231,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },  
+    },
   },
   card2: {
     borderRadius: "1rem",
@@ -396,7 +399,6 @@ function HomePage() {
   // the one Amy wrote so I assume it's necessary here too) -Katie
   // const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top"});
   const mediaStyles2 = useCoverCardMediaStyles({ bgPosition: "bottom" });
-
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -604,7 +606,9 @@ function HomePage() {
     progressMessage = (
       <>
         {progressMessage}
-        <Typography variant="body1" component={'span'}><b>Total points: {total}</b></Typography>
+        <Typography variant="body1" component={"span"}>
+          <b>Total points: {total}</b>
+        </Typography>
       </>
     );
   }; // setProgressMessage
@@ -652,7 +656,11 @@ function HomePage() {
           </Tabs>
         </AppBar>
         <div className="top-container">
-          <Typography variant="h5" style={{ marginTop: "1rem" }} component={'span'}>
+          <Typography
+            variant="h5"
+            style={{ marginTop: "1rem" }}
+            component={"span"}
+          >
             You have earned&nbsp;
             {<CountUp start={0} end={total} duration={1}></CountUp>} points!
           </Typography>
@@ -715,7 +723,7 @@ function HomePage() {
             <DialogActions>
               <Button
                 onClick={() => {
-                  setProgressModalIsOpen(false)
+                  setProgressModalIsOpen(false);
                 }}
                 variant="contained"
                 color="primary"
@@ -754,31 +762,30 @@ function HomePage() {
           </Modal> */}
         </div>
         <TabPanel value={value} index={0} className="tab-container">
-           {/* Action card boi */}
-        <NoSsr>
-                    <GoogleFontLoader
-                      fonts={[
-                        { font: "Spartan", weights: [300] },
-                        { font: "Montserrat", weights: [200, 400, 700] },
-                      ]}
-                    />
-                 
-                  </NoSsr>
-                  <Card className={classes.card2}>
-                    <CardMedia classes={mediaStyles2} image={actionTab} />
-                    <Box py={3} px={2} className={classes.content}>
-                      <Info useStyles={useGalaxyInfoStyles}>
-                        <InfoSubtitle></InfoSubtitle>
-                        <InfoTitle>Log your actions here!</InfoTitle>
-                        <InfoCaption>
-                        Tap the drop down menu to find out more 
-                          <span role="img" aria-label="down arrow">
-                             🔽
-                          </span>
-                        </InfoCaption>
-                      </Info>
-                    </Box>
-                  </Card>
+          {/* Action card boi */}
+          <NoSsr>
+            <GoogleFontLoader
+              fonts={[
+                { font: "Spartan", weights: [300] },
+                { font: "Montserrat", weights: [200, 400, 700] },
+              ]}
+            />
+          </NoSsr>
+          <Card className={classes.card2}>
+            <CardMedia classes={mediaStyles2} image={actionTab} />
+            <Box py={3} px={2} className={classes.content}>
+              <Info useStyles={useGalaxyInfoStyles}>
+                <InfoSubtitle></InfoSubtitle>
+                <InfoTitle>Log your actions here!</InfoTitle>
+                <InfoCaption>
+                  Tap the drop down menu to find out more
+                  <span role="img" aria-label="down arrow">
+                    🔽
+                  </span>
+                </InfoCaption>
+              </Info>
+            </Box>
+          </Card>
           <Fragment>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -859,7 +866,11 @@ function HomePage() {
                               image={action.image}
                               title={action.title}
                             />
-                            <Typography variant="h5" component={'span'} gutterBottom>
+                            <Typography
+                              variant="h5"
+                              component={"span"}
+                              gutterBottom
+                            >
                               Environmental Impact:
                             </Typography>
                             <Typography variant="body1">
@@ -882,7 +893,7 @@ function HomePage() {
                   <Suspense fallback={<div>Loading...</div>}>
                     <FavoriteCard />
                   </Suspense>
-                
+
                   <Grid
                     container
                     spacing={2}
@@ -951,10 +962,14 @@ function HomePage() {
                                     image={action.image}
                                     title={action.title}
                                   />
-                                  <Typography variant="h5" component={'span'} gutterBottom>
+                                  <Typography
+                                    variant="h5"
+                                    component={"span"}
+                                    gutterBottom
+                                  >
                                     Environmental Impact:
                                   </Typography>
-                                  <Typography component={'span'}>
+                                  <Typography component={"span"}>
                                     {action.impact}
                                   </Typography>
                                 </CardContent>

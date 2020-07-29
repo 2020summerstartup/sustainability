@@ -32,6 +32,10 @@ const useStyles1 = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
     },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
+    },
   },
   title: {
     color: "white",
@@ -104,6 +108,10 @@ const useStyles2 = makeStyles((theme) => ({
     margin: "0",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
+    },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
     },
   },
   title: {
@@ -252,9 +260,6 @@ const BackArrowHeader = ({ firebase }) => {
 
 // HomeHeader
 const useStyles4 = makeStyles((theme) => ({
-  root: {
-    // flexGrow: 1,
-  },
   logo: {
     width: "3rem",
     height: "100%",
@@ -264,9 +269,12 @@ const useStyles4 = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
     },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
+    },
   },
   title: {
-    // flexGrow: 1,
     fontWeight: "bold",
     display: "inline",
     marginRight: "2rem",

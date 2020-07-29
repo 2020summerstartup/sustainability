@@ -1,5 +1,4 @@
 import React from "react";
-//  import * as firebase from 'firebase';
 import { withFirebase } from "../../services/Firebase";
 
 import Button from "@material-ui/core/Button";
