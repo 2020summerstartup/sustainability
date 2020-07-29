@@ -64,35 +64,8 @@ class InfoCards extends React.Component {
               <div className="cards">
                 {this.state.cards ? (
                   this.state.cards.map((card, i) => (
-                    // <div
-                    //   key={card.id}
-                    //   // animation for dorm name and score *change later
-                    //   style={{
-                    //     animationDelay: i * 0.5 + "s",
-                    //   }}
-                    //   className="card"
-                    // >
-                    <div
-                      key={i}
-                    // style={{
-                    //   animationDelay: i * 0.5 + "s",
-                    // }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: colors[i],
-                          color: "white",
-                          padding: "1.5rem",
-                          borderRadius: "10px",
-                          margin: "0 0.5rem",
-                          maxWidth: "600px",
-                          marginTop: "2rem",
-                        }}
-                        // className={styles.cardWrapper}
-                      >
-                        <h1 className="card-name">{card.title}</h1>
-                        <p className="card-description">{card.description}</p>
-                      </div>
+                    <div key={i} >
+                      hello world
                       {/* </div> */}
                     </div>
                   ))
