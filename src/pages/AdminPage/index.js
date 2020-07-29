@@ -26,7 +26,7 @@ const getInfo = () => {
 
   return (
   <div>
-    <AuthUserContext>
+    <AuthUserContext.Consumer>
       {(authUser) => (
         <Paper>
           <div className="base-container">
@@ -35,7 +35,7 @@ const getInfo = () => {
           </div>
         </Paper>
       )}
-    </AuthUserContext>
+    </AuthUserContext.Consumer>
   </div>
   )
 }

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import TotalPointsCard from "./points";
-import DormCard from "./dorm";
-import Badges from "./badges";
-import Badges2 from "./badges2";
-import Badges3 from "./badges3";
+// import DormCard from "./dorm";
+// import Badges from "./badges";
+// import Badges2 from "./badges2";
+// import Badges3 m "./badges3";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,6 +19,13 @@ import NewReleasesIcon from "@material-ui/icons/NewReleases";
 // probably delete later
 import Grid from "@material-ui/core/Grid";
 
+//React lazy
+// const TotalPointsCard = lazy(() => import("./points"));
+const DormCard = lazy(() => import("./dorm"));
+const Badges = lazy(() => import("./badges"));
+const Badges2 = lazy(() => import("./badges2"));
+const Badges3 = lazy(() => import("./badges3"));
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -32,7 +39,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography component={'span'}>{children}</Typography>
+          <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -57,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
-    flexGrow: 1,
+    // flexGrow: 1,
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
@@ -166,53 +173,57 @@ function AccountTabs() {
       </AppBar>
       <TabPanel value={value} index={0} className="tab-container">
         <TotalPointsCard />
+        {/* </Suspense> */}
       </TabPanel>
 
       <TabPanel value={value} index={1} className="tab-container">
-        <DormCard />
+        <Suspense fallback={<div>Loading...</div>}>
+          <DormCard />
+        </Suspense>
       </TabPanel>
 
       <TabPanel value={value} index={2} className="tab-container">
-        {/* THIRD BADGE */}
-        <h1> </h1>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={4}>
-            <Badges3 />
+        <Suspense fallback={<div>Loading...</div>}>
+          {/* THIRD BADGE */}
+          <h1> </h1>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={4}>
+              <Badges3 />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Badges3 />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Badges3 />
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Badges3 />
+          {/* FIRST BADGE */}
+          <h1> </h1>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={4}>
+              <Badges />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Badges />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Badges />
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Badges3 />
+          {/* SECOND BADGE */}
+          <h1> </h1>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={4}>
+              <Badges2 />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Badges2 />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Badges2 />
+            </Grid>
           </Grid>
-        </Grid>        
-        {/* FIRST BADGE */}
-        <h1> </h1>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={4}>
-            <Badges />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Badges />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Badges />
-          </Grid>
-        </Grid>
-        {/* SECOND BADGE */}
-        <h1> </h1>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={4}>
-            <Badges2 />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Badges2 />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Badges2 />
-          </Grid>
-        </Grid>
-        
+        </Suspense>
       </TabPanel>
     </div>
   );

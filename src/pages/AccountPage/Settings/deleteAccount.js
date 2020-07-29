@@ -72,7 +72,7 @@ class DeleteAccountBase extends React.Component {
 
     return (
     <div>
-      <AuthUserContext>
+      <AuthUserContext.Consumer>
       {(authUser) => (
       <div className="base-container">
         <Container>
@@ -98,7 +98,7 @@ class DeleteAccountBase extends React.Component {
         </Container>
       </div>
       )}
-      </ AuthUserContext>
+      </ AuthUserContext.Consumer>
       </div>
     )
     

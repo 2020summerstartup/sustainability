@@ -1,4 +1,6 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
+// import Challenges from "./challenges.js";
+import Leaderboard from "./leaderboard";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,12 +9,12 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import Challenges from "./challenges.js";
-import Leaderboard from "./leaderboard";
-import StarIcon from '@material-ui/icons/Star';
-import EqualizerIcon from '@material-ui/icons/Equalizer';
-import ChallengeCard from './challengeCard';
-import MediaControlCard from './challengeCard2';
+import StarIcon from "@material-ui/icons/Star";
+import EqualizerIcon from "@material-ui/icons/Equalizer";
+
+// React lazy
+const Challenges = lazy(() => import("./challenges.js"));
+// const Leaderboard = lazy(() => import("./leaderboard"));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -27,7 +29,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography component={'span'}>{children}</Typography>
+          <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -52,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
-    flexGrow: 1,
+    // flexGrow: 1,
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
@@ -134,7 +136,9 @@ function CompeteTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={1} className="tab-container">
-        <Challenges />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Challenges />
+        </Suspense>
       </TabPanel>
     </div>
   );

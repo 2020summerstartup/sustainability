@@ -64,12 +64,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 var rank;
-
-getDorm()
-  .doc(localStorage.getItem("dorm"))
-  .onSnapshot((docSnapshot) => {
-    assignRanking(docSnapshot.data());
+var dormName = localStorage.getItem("dorm")
+  if (dormName !== ""){
+    getDorm()
+    .doc(localStorage.getItem("dorm"))
+    .onSnapshot((docSnapshot) => {
+      assignRanking(docSnapshot.data());
   });
+  }
 leaderBoardUpdate();
 
 const rankDisplay = () => {
@@ -86,11 +88,11 @@ const rankDisplay = () => {
   }
 };
 
-rankDisplay();
-
 export const DormCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
+
+  rankDisplay();
   return (
     // <Paper>
       <AuthUserContext.Consumer>

@@ -20,8 +20,8 @@ import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 const SignInPage = () => (
@@ -47,6 +47,21 @@ const useStyles = (theme) => ({
   linkText: {
     color: theme.palette.primary.main,
     textDecoration: "none",
+  },
+  linkTextBigScreen: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "inline",
+      color: theme.palette.primary.main,
+      textDecoration: "none",
+    },
+  },
+  linkTextSmallScreen: {
+    color: theme.palette.primary.main,
+    textDecoration: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -86,13 +101,13 @@ class PasswordInput extends Component {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-               <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={this.togglePasswordMask}
-                  edge="end"
-                >
-                  {passwordIsMasked ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                </IconButton>
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={this.togglePasswordMask}
+                edge="end"
+              >
+                {passwordIsMasked ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              </IconButton>
             </InputAdornment>
           ),
           startAdornment: <LockIcon className={classes.formIcon} />,
@@ -105,7 +120,7 @@ class PasswordInput extends Component {
 PasswordInput.propTypes = {
   classes: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.func.isRequired,
+  // value: PropTypes.func.isRequired,
 };
 
 PasswordInput = withStyles(useStyles)(PasswordInput);
@@ -227,8 +242,17 @@ class SignInFormBase extends Component {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to={ROUTES.SIGN_UP} className={classes.linkText}>
+                  <Link
+                    to={ROUTES.SIGN_UP}
+                    className={classes.linkTextBigScreen}
+                  >
                     Don't have an account? Sign Up
+                  </Link>
+                  <Link
+                    to={ROUTES.SIGN_UP}
+                    className={classes.linkTextSmallScreen}
+                  >
+                    Sign up here!
                   </Link>
                 </Grid>
               </Grid>

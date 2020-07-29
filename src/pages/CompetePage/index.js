@@ -3,11 +3,11 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import CompeteTabs from "./CompeteTabs";
 
 const CompetePage = () => (
-    <AuthUserContext>
+    <AuthUserContext.Consumer>
       {(authUser) => (
         <CompeteTabs />
       )}
-    </AuthUserContext>
+    </AuthUserContext.Consumer>
 );
 
 // function Compete(props) {

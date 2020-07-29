@@ -5,7 +5,7 @@ import accountImg from "../../../img/account.svg";
 
 const ChangePW = () => (
     <div>
-    <AuthUserContext>
+    <AuthUserContext.Consumer>
       {(authUser) => (
     <div className="base-container">
         <h2>Want to change your password?</h2>
@@ -15,7 +15,7 @@ const ChangePW = () => (
         <PasswordChangeForm/>
     </div>
       )}
-      </AuthUserContext>
+      </AuthUserContext.Consumer>
       </div>
 )
 

@@ -32,7 +32,7 @@ class Leaderboard extends React.Component {
     super();
     this.state = {
       leaders: [],
-      maxPoints: 1650,
+      maxPoints: 1650, // TODO: Don't hardcode this
     };
     this.getData = this.getData.bind(this);
   }
@@ -55,15 +55,10 @@ class Leaderboard extends React.Component {
           });
         });
     };
-    // data is used, even though we get a warning saying otherwise. I think it complains because data is read from a different file? TODO: Figure this out and fix it.
-    let data = {
-      success: true,
-      leaders: [getLeaders()],
-      maxScore: this.state.maxScore,
-    };
+    getLeaders();
   }
 
-  //implement later with real data
+  //implement later with real data TODO: This has been implemented with real data? I think this comment is just outdated lol
   componentWillMount() {
     this.getData();
     /*data is refreshing every 3 minutes*/
