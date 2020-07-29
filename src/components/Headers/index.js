@@ -137,7 +137,7 @@ const AccountHeader = ({ firebase }) => {
   );
 };
 
-// Styles used for pages that have a back arrow header
+// Styles used for pages that have a back arrow & settings header
 const useStyles3 = makeStyles((theme) => ({
   title: {
     color: "white",
@@ -168,7 +168,47 @@ const useStyles3 = makeStyles((theme) => ({
   },
 }));
 
-// Header for Change Dorm and Change PW
+// Header for Change Dorm and Change PW- back arrow & settings icon
+const BackArrowSettingsHeader = ({ firebase }) => {
+  let history = useHistory();
+
+  const classes = useStyles3();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          {/* Back Button using history */}
+          <IconButton
+            className={classes.buttonIcon}
+            onClick={() => history.goBack()}
+            style={{ backgroundColor: "transparent" }}
+          >
+            <ArrowBackIcon className={classes.backarrow} />
+          </IconButton>
+          <img src={suslogoImg} alt="logo" className={classes.logo} />
+          <Grid justify="flex-start" container>
+            <Grid item>
+              <Typography variant="h6" className={classes.title} noWrap>
+                Sus Comp
+                {/* <EcoIcon className={classes.leaf} /> */}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid justify="flex-end" container>
+            <Grid item>
+              <SettingsDrawer />
+            </Grid>
+            {/* <Grid item>
+              <AccountTabs/>
+            </Grid> */}
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+// Header for Signup Page- only need back arrow not settings icon
 const BackArrowHeader = ({ firebase }) => {
   let history = useHistory();
 
@@ -188,21 +228,11 @@ const BackArrowHeader = ({ firebase }) => {
           <img src={suslogoImg} alt="logo" className={classes.logo} />
           <Grid justify="flex-start" container>
             <Grid item>
-          <Typography variant="h6" className={classes.title} noWrap>
-            Sus Comp
-            {/* <EcoIcon className={classes.leaf} /> */}
-          </Typography>
-          </Grid>
-          </Grid>
-          <Grid justify="flex-end" container>
-            
-             
-            <Grid item>
-              <SettingsDrawer />
+              <Typography variant="h6" className={classes.title} noWrap>
+                Sus Comp
+                {/* <EcoIcon className={classes.leaf} /> */}
+              </Typography>
             </Grid>
-            {/* <Grid item>
-              <AccountTabs/>
-            </Grid> */}
           </Grid>
         </Toolbar>
       </AppBar>
@@ -312,6 +342,7 @@ export {
   CompeteHeader,
   InfoHeader,
   AccountHeader,
+  BackArrowSettingsHeader,
   BackArrowHeader,
 };
 export default withFirebase(Header);
