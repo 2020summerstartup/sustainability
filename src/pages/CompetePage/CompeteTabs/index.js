@@ -60,6 +60,10 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "6.5rem",
       marginTop: "0.5rem",
     },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
+    },
   },
   bar: {
     padding: 0,

@@ -1,5 +1,7 @@
 import React from "react";
-import * as firebase from "firebase";
+// DELETE this after we know firebase didn't break
+// import * as firebase from "firebase";
+import firebase from 'firebase/app';
 import "firebase/auth";
 import { firestore } from "../../../services/Firebase";
 import "firebase/firestore";
