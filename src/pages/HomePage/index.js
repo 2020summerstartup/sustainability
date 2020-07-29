@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useContext } from "react";
-import BadgeModal from "./badgeModal"
+import BadgeModal, {AlertDialog} from "./badgeModal"
 
 import favorite from "../../img/favorite.svg";
 import actionTab from "../../img/actionTab.svg";
@@ -531,6 +531,7 @@ function HomePage() {
       // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
       console.log("You have mastered this action!");
+      AlertDialog(action.susAction);
     }
   };
 

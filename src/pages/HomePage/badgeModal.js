@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AlertDialog() {
+export default function AlertDialog(susAction) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -57,7 +57,7 @@ export default function AlertDialog() {
   };
 
   return (
-    <div>
+    <div id="badgewindow">
       <Button
         variant="contained"
         color="primary"
