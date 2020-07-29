@@ -86,6 +86,12 @@ export const createUser = (userEmail, userName, dorm) => {
               "meatlessMon": 0,
               "ecoClean": 0,
           },
+          impact: {
+            "coEmiss": 0,
+            "water": 0,
+            "energy": 0,
+            "buzzes":0,
+          },
       });
 };
 
@@ -165,11 +171,17 @@ export const actionMastered = (userEmail, susAction) => {
 
 // updates all the necessary impact fields when a user logs an action
 export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact) => {
+    //updates local storage with incremented impact data
+    localStorage.setItem('coEmiss', (parseInt(localStorage.getItem('coEmiss'))+ parseInt(coImpact)));
+    localStorage.setItem('energy', (parseInt(localStorage.getItem('energy'))+ parseInt(energyImpact)));
+    localStorage.setItem('water', (parseInt(localStorage.getItem('water'))+ parseInt(waterImpact)));
+    localStorage.setItem('buzzes', (parseInt(localStorage.getItem('buzzes'))+ 1));
+  //updates firestore with incremented impact data
   return firestore.collection('users').doc(userEmail).update({
     ['impact.coEmiss']: app.firestore.FieldValue.increment(coImpact),
     ['impact.energy']: app.firestore.FieldValue.increment(energyImpact),
     ['impact.water']: app.firestore.FieldValue.increment(waterImpact),
-    ['impact.buzzTotal']: app.firestore.FieldValue.increment(1),
+    ['impact.buzzes']: app.firestore.FieldValue.increment(1),
   })
 }
 
