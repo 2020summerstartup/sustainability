@@ -28,6 +28,7 @@ import signup from "../../sounds/hero_simple-celebration-03.wav";
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
+import { faBalanceScaleRight } from "@fortawesome/free-solid-svg-icons";
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -191,34 +192,22 @@ class SignUpFormBase extends Component {
       passwordOne === "" ||
       email === "" ||
       dorm === "" ||
-      username === "";
-      // (dorm !== "South" ||
-      // "Sontag" ||
-      // "Drinkward" ||
-      // "Case" ||
-      // "North" ||
-      // "East" ||
-      // "West");
+      username === "" ||
+      !(dorm === "South" || dorm === "North" || dorm === "West" || dorm === "East" || dorm === "Case" || dorm === "Sontag" || dorm === "Drinkward" || dorm === "Linde" || dorm === "Atwood" );
+
 
 
     var dormEntered;
     const makeCapitalDormName = () => {
-      if (typeof(dorm) === "undefined") {
-        console.log('nothing entered yet')
+      if (typeof(dorm) === "undefined" || dorm.length < 1 ) {
+        console.log('nothing yet')
         } else {
-          dormEntered = (dorm[0].toUpperCase() + dorm.slice(1).toLowerCase());
-          if ( dormEntered === "North" || dormEntered === "South" || dormEntered === "Drinkward" || dormEntered === "East" || dormEntered === "West" || dormEntered === "Sontag" || dormEntered === "Linde" || dormEntered === "Atwood" || dormEntered === "Case" ) {
-            console.log(dormEntered);
-            console.log("happy")
-            //NEED STATEMENT THAT PROTECTS IF THEY DELETE EVERYTHING IN FIELD
-          // } else if (typeof(dormEntered) === "undefined"){
-          //   console.log('nothing entered again')
-          // } 
-        }
-      }
+          dormEntered = (dorm[0].toUpperCase() + dorm.slice(1).toLowerCase());      
+          } 
     }
-
     makeCapitalDormName();
+
+
 
 
     console.log(this.state);
