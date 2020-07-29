@@ -208,10 +208,6 @@ class SignUpFormBase extends Component {
     makeCapitalDormName();
 
 
-
-
-    console.log(this.state);
-
     return (
       <Container maxWidth="xs">
         <CssBaseline />
@@ -315,6 +311,7 @@ class SignUpFormBase extends Component {
               >
                 Sign Up
               </Button>
+              <p><center>Make sure all fields are filled in and your dorm is spelled correctly! </center></p>
             </Reward>
           </form>
         </div>
