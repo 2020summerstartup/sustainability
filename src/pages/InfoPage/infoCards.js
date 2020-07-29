@@ -78,7 +78,7 @@ class InfoCards extends React.Component {
                         // className={styles.cardWrapper}
                       >
                         <h1 className="card-name">{card.title}</h1>
-                        <p className="card-description">description</p>
+                        <p className="card-description">{card.description}</p>
                       </div>
                       {/* </div> */}
                     </div>
