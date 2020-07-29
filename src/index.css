@@ -120,6 +120,9 @@ code {
     padding-left: 2rem !important;
     margin-bottom: 4rem !important;
   }
+  .top-container {
+    margin-bottom: 0 !important;
+  }
 }
 
 input {
