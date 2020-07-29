@@ -65,13 +65,13 @@ const useStyles = makeStyles((theme) => ({
 
 var rank;
 var dormName = localStorage.getItem("dorm")
-  if (dormName !== ""){
-    getDorm()
+if (dormName !== "") {
+  getDorm()
     .doc(localStorage.getItem("dorm"))
     .onSnapshot((docSnapshot) => {
       assignRanking(docSnapshot.data());
-  });
-  }
+    });
+}
 leaderBoardUpdate();
 
 const rankDisplay = () => {
@@ -94,50 +94,48 @@ export const DormCard = React.memo(function GalaxyCard() {
 
   rankDisplay();
   return (
-    // <Paper>
-      <AuthUserContext.Consumer>
-        {(authUser) => (
-          <>
-            <NoSsr>
-              <GoogleFontLoader
-                fonts={[
-                  { font: "Spartan", weights: [300] },
-                  { font: "Montserrat", weights: [200, 400, 700] },
-                ]}
-              />
-            </NoSsr>
-            <Card className={classes.card}>
-              <CardMedia classes={mediaStyles} image={dorm} />
-              <Box py={3} px={2} className={classes.content}>
-                <Info useStyles={useGalaxyInfoStyles}>
-                  <InfoSubtitle>
-                    {localStorage.getItem("name")}, you're representing{" "}
-                    {localStorage.getItem("dorm")} dorm
+    <AuthUserContext.Consumer>
+      {(authUser) => (
+        <>
+          <NoSsr>
+            <GoogleFontLoader
+              fonts={[
+                { font: "Spartan", weights: [300] },
+                { font: "Montserrat", weights: [200, 400, 700] },
+              ]}
+            />
+          </NoSsr>
+          <Card className={classes.card}>
+            <CardMedia classes={mediaStyles} image={dorm} />
+            <Box py={3} px={2} className={classes.content}>
+              <Info useStyles={useGalaxyInfoStyles}>
+                <InfoSubtitle>
+                  {localStorage.getItem("name")}, you're representing{" "}
+                  {localStorage.getItem("dorm")} dorm
                   </InfoSubtitle>
-                  <InfoTitle>{rank}</InfoTitle>
-                  <InfoCaption>
-                    <Link to={ROUTES.CHANGEDORM} className={classes.link}>
-                      <Typography
-                        variant="body1"
-                        className={classes.linkText}
-                        style={{ underline: "enum: none" }}
-                        component={'span'}
-                      >
-                        Change your dorm in settings&nbsp;
+                <InfoTitle>{rank}</InfoTitle>
+                <InfoCaption>
+                  <Link to={ROUTES.CHANGEDORM} className={classes.link}>
+                    <Typography
+                      variant="body1"
+                      className={classes.linkText}
+                      style={{ underline: "enum: none" }}
+                      component={'span'}
+                    >
+                      Change your dorm in settings&nbsp;
                         <span role="img" aria-label="settings">
-                          ⚙️
+                        ⚙️
                         </span>
-                      </Typography>
-                    </Link>
-                  </InfoCaption>
-                </Info>
-              </Box>
-            </Card>
-            <SignOutButton />
-          </>
-        )}
-      </AuthUserContext.Consumer>
-    // </Paper>
+                    </Typography>
+                  </Link>
+                </InfoCaption>
+              </Info>
+            </Box>
+          </Card>
+          <SignOutButton />
+        </>
+      )}
+    </AuthUserContext.Consumer>
   );
 });
 export default DormCard;
