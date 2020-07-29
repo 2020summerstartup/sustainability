@@ -134,10 +134,13 @@ export const updateUserDorm = (userEmail, value) => {
   })
 }
 
+// fetches the dorm collection from firestore
+// meant to be called then added to (ex: getDorm().doc('North'))
 export const getDorm = () => {
   return firestore.collection('dorms')
 }
 
+// updates firestore when a user favorites an action
 export const addFav = (userEmail, susAction) => {
   console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
@@ -145,12 +148,14 @@ export const addFav = (userEmail, susAction) => {
   })
 }
 
+// updates firestore when a user deletes a favorite
 export const deleteFav = (userEmail, susAction) => {
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayRemove(susAction)
   })
 }
 
+// adds action to mastered list in firestore when called (user has mastered action)
 export const actionMastered = (userEmail, susAction) => {
   console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
@@ -158,6 +163,7 @@ export const actionMastered = (userEmail, susAction) => {
   })
 }
 
+// updates all the necessary impact fields when a user logs an action
 export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact) => {
   return firestore.collection('users').doc(userEmail).update({
     ['impact.coEmiss']: app.firestore.FieldValue.increment(coImpact),
