@@ -200,6 +200,29 @@ class SignUpFormBase extends Component {
       // "East" ||
       // "West");
 
+
+    var dormEntered;
+    const makeCapitalDormName = () => {
+      if (typeof(dorm) === "undefined") {
+        console.log('nothing entered yet')
+        } else {
+          dormEntered = (dorm[0].toUpperCase() + dorm.slice(1).toLowerCase());
+          if ( dormEntered === "North" || dormEntered === "South" || dormEntered === "Drinkward" || dormEntered === "East" || dormEntered === "West" || dormEntered === "Sontag" || dormEntered === "Linde" || dormEntered === "Atwood" || dormEntered === "Case" ) {
+            console.log(dormEntered);
+            console.log("happy")
+            //NEED STATEMENT THAT PROTECTS IF THEY DELETE EVERYTHING IN FIELD
+          // } else if (typeof(dormEntered) === "undefined"){
+          //   console.log('nothing entered again')
+          // } 
+        }
+      }
+    }
+
+    makeCapitalDormName();
+
+
+    console.log(this.state);
+
     return (
       <Container maxWidth="xs">
         <CssBaseline />
@@ -253,7 +276,7 @@ class SignUpFormBase extends Component {
               id="dorm"
               label="Dorm"
               name="dorm"
-              // value={dorm}
+              value={dormEntered}
               onChange={this.onChange}
               InputProps={{
                 startAdornment: <HomeIcon className={classes.formIcon} />,
