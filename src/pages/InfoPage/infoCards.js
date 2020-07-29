@@ -65,7 +65,19 @@ class InfoCards extends React.Component {
                 {this.state.cards ? (
                   this.state.cards.map((card, i) => (
                     <div key={i} >
-                      hello world
+                      <div
+                        style={{
+                          backgroundColor: colors[i],
+                          color: "white",
+                          padding: "1.5rem",
+                          borderRadius: "10px",
+                          margin: "0 0.5rem",
+                          maxWidth: "600px",
+                          marginTop: "2rem",
+                        }}
+                      >
+                        hello world
+                      </div>
                       {/* </div> */}
                     </div>
                   ))
