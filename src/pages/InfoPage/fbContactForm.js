@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Axios } from "../../services/Firebase/firebase.js";
+import { Axios } from "../../services/Firebase/firebase";
 import { firestore } from '../../services/Firebase';
 import 'firebase/firestore';
 

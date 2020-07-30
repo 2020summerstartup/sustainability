@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PasswordChangeForm from "./formChangePw.js";
+import PasswordChangeForm from "./formChangePw";
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import { withFirebase } from "../../../services/Firebase";
 import accountImg from "../../../img/account.svg";

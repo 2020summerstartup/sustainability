@@ -1,5 +1,5 @@
 import React from 'react';
-import PasswordChangeForm from './formChangePw.js';
+import PasswordChangeForm from './formChangePw';
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import accountImg from "../../../img/account.svg";
 
