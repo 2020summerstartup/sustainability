@@ -18,6 +18,7 @@ import {
   firestore,
   updateUserImpact
 } from "../../services/Firebase";
+import {functions} from "../../services/Firebase/firebase"
 
 import PropTypes from "prop-types";
 
@@ -103,18 +104,11 @@ function initPoints(email) {
 function initImpactPoints (email) {
     // pull impact data from firestore & intialize in local storage
     getUser(email).onSnapshot( (snapshot) => {
-      console.log(email)
       let envImpact = snapshot.get('impact')
-      console.log(envImpact)
-      let firestoreBuzzes = snapshot.data().get(envImpact.buzzes);
-      let firestoreEnergy = snapshot.data().get(envImpact.energy);
-      let firestoreEmiss = snapshot.data().get(envImpact.coEmiss);
-      let firestorewater = snapshot.data().get(envImpact.water);
-      localStorage.setItem("buzzes", firestoreBuzzes);
-      localStorage.setItem("energy", firestoreEnergy);
-      localStorage.setItem("coEmiss", firestoreEmiss);
-      localStorage.setItem("water", firestorewater);
-      console.log(firestoreBuzzes, firestoreEmiss, firestoreEnergy, firestorewater);
+      localStorage.setItem("buzzes", envImpact.buzzes);
+      localStorage.setItem("energy", envImpact.energy);
+      localStorage.setItem("coEmiss", envImpact.coEmiss);
+      localStorage.setItem("water", envImpact.water);
   });
 }
 
@@ -128,9 +122,10 @@ const playSound = (audioFile) => {
   audioFile.play();
 };
 
-// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
-// removed fav foreach loop here, don't think it was doing anything? (This comment is from Jessica?)
+// this function is meant to get each action's point value from firestore and then set each action's points in local storage
+// should only be called when page first loads, not when increment
 function assignData(data) {
+  // the data parameter is meant to be the firestore document snapshot
   localStorage.setItem("total", data.total);
   const points = data.points;
   for (const [key, value] of Object.entries(points)) {
@@ -378,15 +373,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+var total = localStorage.getItem('total');
+
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const authContext = useContext(AuthUserContext);
+  const [userTotal, updateUserTotal] = useState(localStorage.getItem('total'));
+  
 
   // Get user's dorm set in local storage
   getUser(authContext.email).onSnapshot(
     (docSnapshot) => {
       if (docSnapshot.exists) {
+        initImpactPoints(authContext.email)
         assignData(docSnapshot.data());
         function assignData(data) {
           localStorage.setItem("dorm", data.userDorm);
@@ -405,7 +405,9 @@ function HomePage() {
 
   // getMastered(authContext.email);
 
-  total = localStorage.getItem("total");
+
+
+
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -452,13 +454,24 @@ function HomePage() {
     }
   };
 
+  const updateDisplayTotal = (actionPoint) => {
+    const newTotal = parseInt(userTotal) + parseInt(actionPoint)
+    updateUserTotal(newTotal);
+  }
+
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
+
     // allows us to increment the correct values by writing the action & value to local storage
-    // add specified number of points to the saved point total
+    // add specified number of points to the specific action point count
     localStorage.setItem(
       action.susAction,
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
+    );
+    // add specified number of points to the user's total point count
+    localStorage.setItem(
+      'total',
+      parseInt(localStorage.getItem('total')) + parseInt(action.points)
     );
 
     // updates user's point in firestore
@@ -467,10 +480,18 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
-      window.location.reload(true);
+      console.log('here')
+      // THIS IS WHERE WINDOW REFRESH OCCURS!!
+      // window.location.reload(true);
     });
 
     updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
+
+    getUser(authContext.email).onSnapshot( (snapshot) => {
+      total = snapshot.get('total')
+      console.log(total)
+    })
+  
 
     // get the user's dorm from firestore and update the dorm's points
     getUser(authContext.email).onSnapshot(
@@ -496,6 +517,12 @@ function HomePage() {
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
+
+
+    updateDisplayTotal(action.points);
+
+    
+
   }; // increment
 
   // to check with the mastered actions that firestore has upon loading page
@@ -540,8 +567,6 @@ function HomePage() {
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     const actionTotal = localStorage.getItem(action.susAction);
-    console.log(actionTotal);
-    console.log(action.points);
     // if (storedMaster == null) {
     //   console.log('null')
     // }
@@ -613,7 +638,7 @@ function HomePage() {
   const setProgressMessage = () => {
     // Why is this here? Doesn't initPoints run when the page loads so local storage should be good if they
     // want to check their progress?
-    initPoints();
+    // initPoints();
     for (const el in ActionData) {
       // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
@@ -629,7 +654,7 @@ function HomePage() {
     progressMessage = (
       <>
         {progressMessage}
-        <Typography variant="body1" component={'span'}><b>Total points: {total}</b></Typography>
+        <Typography variant="body1" component={'span'}><b>Total points: {userTotal}</b></Typography>
       </>
     );
   }; // setProgressMessage
@@ -679,7 +704,7 @@ function HomePage() {
         <div className="top-container">
           <Typography variant="h5" style={{ marginTop: "1rem" }} component={'span'}>
             You have earned&nbsp;
-            {<CountUp start={0} end={total} duration={1}></CountUp>} points!
+            {<CountUp start={0} end={userTotal} duration={1}></CountUp>} points!
           </Typography>
           {/* Mobile Screens */}
           <Fab
