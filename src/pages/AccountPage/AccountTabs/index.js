@@ -3,7 +3,7 @@ import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 // import DormCard from "./dorm";
 // import Badges from "./badges";
-// import Badges2 from "./badges2";
+import Badges2 from "./badges2";
 // import Badges3 m "./badges3";
 
 import PropTypes from "prop-types";
@@ -217,9 +217,9 @@ function AccountTabs() {
           {/* SECOND BADGE */}
           {/* <h1> </h1> */}
           {/* <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={6} md={4}> */}
               <Badges2 />
-            </Grid>
+            {/* </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Badges2 />
             </Grid>
