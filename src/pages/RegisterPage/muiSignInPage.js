@@ -142,6 +142,7 @@ class SignInFormBase extends Component {
   }
 
   onSubmit = (event) => {
+    localStorage.clear();
     const { email, password } = this.state;
 
     this.props.firebase

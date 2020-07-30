@@ -313,6 +313,7 @@ class SignUpFormBase extends Component {
                 onClick={() => {
                   playSound(signupAudio);
                   this.reward.rewardMe();
+                  localStorage.clear();
                 }}
               >
                 Sign Up
