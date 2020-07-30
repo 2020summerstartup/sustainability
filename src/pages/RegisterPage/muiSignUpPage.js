@@ -28,7 +28,6 @@ import signup from "../../sounds/hero_simple-celebration-03.wav";
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
-import { faBalanceScaleRight } from "@fortawesome/free-solid-svg-icons";
 
 const SignUpPage = () => (
   <div className="base-container">
