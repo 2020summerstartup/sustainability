@@ -6,24 +6,30 @@ import CardContent from "@material-ui/core/CardContent";
 // import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import EcoIcon from "@material-ui/icons/Eco";
+import styles from "./badge3.module.css";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    // display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  },
+  // root: {
+  //   // display: "flex",
+  //   backgroundColor: theme.palette.divider,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   textAlign: "center",
+  // },
   details: {
     display: "flex",
-    margin: "auto",
+    // margin: "auto",
+    margin: "6px",
+    marginBottom: 0,
+    backgroundColor: "#777",
+    color: "white",
   },
   avatar: {
     color: theme.palette.secondary.main,
     backgroundColor: theme.palette.primary.main,
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-    border: "5px white",
+    width: theme.spacing(9),
+    height: theme.spacing(9),
+    border: "3px solid white",
     margin: "auto",
     marginRight: "1rem",
   },
@@ -35,11 +41,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
   },
   cover: {
-    // width: 151,
     width: "100%",
   },
   buzzTimes: {
-    marginTop: "1rem",
+    marginTop: "0.5rem",
+    color: "white",
   },
 }));
 
@@ -47,7 +53,7 @@ export default function MediaControlCard() {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card className={styles.root}>
       <div className={classes.details}>
         <Avatar className={classes.avatar}>
           <EcoIcon fontSize="large" />

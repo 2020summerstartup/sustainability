@@ -356,6 +356,11 @@ const useStyles = makeStyles((theme) => ({
   dialogPaper: {
     overflow: "hidden !important",
   },
+  totalPoints: {
+    position: "relative",
+    top: "0.5rem",
+    fontWeight: "bold",
+  },
 }));
 
 // transition to make modal open by slideing up and close by sliding down
@@ -607,8 +612,12 @@ function HomePage() {
     progressMessage = (
       <>
         {progressMessage}
-        <Typography variant="body1" component={"span"}>
-          <b>Total points: {total}</b>
+        <Typography
+          variant="h6"
+          component={"span"}
+          className={classes.totalPoints}
+        >
+          Total points: {total}
         </Typography>
       </>
     );
@@ -692,7 +701,7 @@ function HomePage() {
 
           <BadgeModal />
 
-          {/* NEW MODAL */}
+          {/* NEW MODAL for Check Progress */}
           <Dialog
             open={progressModalIsOpen}
             onClose={() => setProgressModalIsOpen(false)}
@@ -705,7 +714,7 @@ function HomePage() {
           >
             <DialogTitle
               id="alert-dialog-slide-title"
-              style={{ backgroundColor: "var(--theme)", color: "#FFFFFF" }}
+              style={{ backgroundColor: "var(--theme)", color: "#FFFFFF"}}
             >
               {"Check Your Progress!"}
             </DialogTitle>
