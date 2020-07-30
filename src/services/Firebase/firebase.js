@@ -106,9 +106,6 @@ export const getDorm = () => {
 
 // this method is called to increase points
 export const updateUserPoint = (userEmail, userAction, actionPoint) => {
-  // local storage allows us to display the correct points
-  localStorage.setItem('total', (parseInt(localStorage.getItem('total'))+ parseInt(actionPoint)));
-  localStorage.setItem(userAction, (parseInt(localStorage.getItem(userAction)) + parseInt(actionPoint)));
   return firestore.collection('users').doc(userEmail).update({
     ['points.' + userAction]: app.firestore.FieldValue.increment(actionPoint),
     total: app.firestore.FieldValue.increment(actionPoint),
