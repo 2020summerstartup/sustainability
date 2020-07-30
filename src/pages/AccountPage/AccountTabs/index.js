@@ -189,7 +189,7 @@ function AccountTabs() {
       <TabPanel value={value} index={2} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
           {/* THIRD BADGE */}
-          <h1> </h1>
+          {/* <h1> </h1>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6} lg={4}>
               <Badges3 />
@@ -200,10 +200,10 @@ function AccountTabs() {
             <Grid item xs={12} md={6} lg={4}>
               <Badges3 />
             </Grid>
-          </Grid>
+          </Grid> */}
           {/* FIRST BADGE */}
-          <h1> </h1>
-          <Grid container spacing={2}>
+          {/* <h1> </h1> */}
+          {/* <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={4}>
               <Badges />
             </Grid>
@@ -213,10 +213,10 @@ function AccountTabs() {
             <Grid item xs={12} sm={6} md={4}>
               <Badges />
             </Grid>
-          </Grid>
+          </Grid> */}
           {/* SECOND BADGE */}
-          <h1> </h1>
-          <Grid container spacing={2}>
+          {/* <h1> </h1> */}
+          {/* <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={4}>
               <Badges2 />
             </Grid>
@@ -226,7 +226,7 @@ function AccountTabs() {
             <Grid item xs={12} sm={6} md={4}>
               <Badges2 />
             </Grid>
-          </Grid>
+          </Grid> */}
         </Suspense>
       </TabPanel>
     </div>
