@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
-import * as firebase from "firebase";
+// DELETE this after we know firebase didn't break
+// import * as firebase from "firebase";
+import firebase from 'firebase/app';
 import "firebase/auth";
 
 import { withFirebase, getUser } from "../../services/Firebase";
-import { assignData } from "../HomePage/index.js";
+import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
 

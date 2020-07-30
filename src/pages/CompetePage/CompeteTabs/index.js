@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
+import ProgressCircle from "../../../components/ProgressCircle";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -59,6 +60,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
       marginTop: "0.5rem",
+    },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
     },
   },
   bar: {
@@ -136,7 +141,7 @@ function CompeteTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={1} className="tab-container">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<ProgressCircle />}>
           <Challenges />
         </Suspense>
       </TabPanel>

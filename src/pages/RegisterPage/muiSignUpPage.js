@@ -28,6 +28,7 @@ import signup from "../../sounds/hero_simple-celebration-03.wav";
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
+import { faBalanceScaleRight } from "@fortawesome/free-solid-svg-icons";
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -191,14 +192,21 @@ class SignUpFormBase extends Component {
       passwordOne === "" ||
       email === "" ||
       dorm === "" ||
-      username === "";
-      // (dorm !== "South" ||
-      // "Sontag" ||
-      // "Drinkward" ||
-      // "Case" ||
-      // "North" ||
-      // "East" ||
-      // "West");
+      username === "" ||
+      !(dorm === "South" || dorm === "North" || dorm === "West" || dorm === "East" || dorm === "Case" || dorm === "Sontag" || dorm === "Drinkward" || dorm === "Linde" || dorm === "Atwood" );
+
+
+
+    var dormEntered;
+    const makeCapitalDormName = () => {
+      if (typeof(dorm) === "undefined" || dorm.length < 1 ) {
+        console.log('nothing yet')
+        } else {
+          dormEntered = (dorm[0].toUpperCase() + dorm.slice(1).toLowerCase());      
+          } 
+    }
+    makeCapitalDormName();
+
 
     return (
       <Container maxWidth="xs">
@@ -253,7 +261,7 @@ class SignUpFormBase extends Component {
               id="dorm"
               label="Dorm"
               name="dorm"
-              // value={dorm}
+              value={dormEntered}
               onChange={this.onChange}
               InputProps={{
                 startAdornment: <HomeIcon className={classes.formIcon} />,
@@ -303,6 +311,7 @@ class SignUpFormBase extends Component {
               >
                 Sign Up
               </Button>
+              <p><center>Make sure all fields are filled in and your dorm is spelled correctly! </center></p>
             </Reward>
           </form>
         </div>

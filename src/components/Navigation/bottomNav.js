@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeIcon from "@material-ui/icons/Home";
-import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import InfoIcon from "@material-ui/icons/Info";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import EcoIcon from "@material-ui/icons/Eco";
@@ -21,7 +21,6 @@ const BottomNav = ({ authUser }) => (
   </div>
 );
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
@@ -32,9 +31,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      display: "flex",
+    },
   },
   selected: {},
-  
 }));
 
 function BottomNavAuth() {

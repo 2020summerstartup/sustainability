@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import TotalPointsCard from "./points";
+import ProgressCircle from "../../../components/ProgressCircle";
 // import DormCard from "./dorm";
 // import Badges from "./badges";
 // import Badges2 from "./badges2";
@@ -64,11 +65,14 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
-    // flexGrow: 1,
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
       marginTop: "0.5rem",
+    },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
     },
   },
   bar: {
@@ -177,23 +181,23 @@ function AccountTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={1} className="tab-container">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<ProgressCircle />}>
           <DormCard />
         </Suspense>
       </TabPanel>
 
       <TabPanel value={value} index={2} className="tab-container">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<ProgressCircle />}>
           {/* THIRD BADGE */}
           <h1> </h1>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} md={6} lg={4}>
               <Badges3 />
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} md={6} lg={4}>
               <Badges3 />
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} md={6} lg={4}>
               <Badges3 />
             </Grid>
           </Grid>

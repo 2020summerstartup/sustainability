@@ -2,7 +2,8 @@ import React from "react";
 
 import "./leaderboard.css";
 import { firestore } from "../../../services/Firebase/firebase";
-import "firebase/firestore";
+// DELETE this after we know firebase didn't break
+// import "firebase/firestore";
 import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
 
 import Typography from "@material-ui/core/Typography";
