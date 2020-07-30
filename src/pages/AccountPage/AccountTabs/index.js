@@ -65,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "2px 2px 6px #242424",
   },
   tabs: {
-    // flexGrow: 1,
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
@@ -192,13 +191,13 @@ function AccountTabs() {
           {/* THIRD BADGE */}
           <h1> </h1>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} md={6} lg={4}>
               <Badges3 />
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} md={6} lg={4}>
               <Badges3 />
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} md={6} lg={4}>
               <Badges3 />
             </Grid>
           </Grid>
