@@ -164,6 +164,10 @@ function SettingsDrawer(props) {
     <div align="left">
       <React.Fragment key={"right"}>
         <IconButton
+        // these 3 lines get rid of ripple effect!
+          disableFocusRipple
+          disableRipple
+          style={{ backgroundColor: "transparent" }}
           className={classes.settingsIcon}
           onClick={toggleDrawer("right", true)}
         >
