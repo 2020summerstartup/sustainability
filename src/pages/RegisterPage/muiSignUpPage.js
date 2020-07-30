@@ -261,6 +261,7 @@ class SignUpFormBase extends Component {
               id="dorm"
               label="Dorm"
               name="dorm"
+              placeholder="eg. West, Drinkward, Case"
               value={dormEntered}
               onChange={this.onChange}
               InputProps={{
