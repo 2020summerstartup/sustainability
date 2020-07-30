@@ -373,38 +373,41 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const uploadUserData = (email) => {
+    // Get user's dorm set in local storage
+    console.log(email)
+    getUser(email).get().then(snap => {
+        if (snap.exists) {
+          initImpactPoints(email)
+          assignData(snap.data());
+          function assignData(data) {
+            localStorage.setItem("dorm", data.userDorm);
+            localStorage.setItem('total', data.total);
+          }
+        } else {
+          createUser(email);
+          initPoints(email);
+          initImpactPoints(email)
+          uploadUserTotalPoint(email, total);
+        }
+      },
+      (err) => {
+        console.log(`Encountered error: ${err}`);
+      })
+    };
+uploadUserData(localStorage.getItem('email'))
+
 
 // Text to display on the homepage
 function HomePage() {
+  console.log(localStorage.getItem('total'))
+  console.log(localStorage.getItem('email'))
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const authContext = useContext(AuthUserContext);
+  // THE ERROR WITH TOTAL POINT DISPLAY WHEN A USER SIGNS IN/UP IS THAT LOCAL STORAGE 
+  // IS NOT YET SET -> IT IS SET BY AN ASYNC CALL TO FIRESTORE 
   const [userTotal, updateUserTotal] = useState(localStorage.getItem('total'));
-
-
-
-  // Get user's dorm set in local storage
-  getUser(authContext.email).onSnapshot(
-    (docSnapshot) => {
-      if (docSnapshot.exists) {
-        initImpactPoints(authContext.email)
-        assignData(docSnapshot.data());
-        function assignData(data) {
-          localStorage.setItem("dorm", data.userDorm);
-          localStorage.setItem('total', data.total);
-        }
-      } else {
-        createUser(authContext.email);
-        initPoints(authContext.email);
-        initImpactPoints(authContext.email)
-        uploadUserTotalPoint(authContext.email, total);
-      }
-    },
-    (err) => {
-      console.log(`Encountered error: ${err}`);
-    }
-  );
-
-
+  
 
 
 
@@ -627,6 +630,7 @@ function HomePage() {
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
+
   // Set the "progress message" to be displayed when the user pressed "check progress"
   var progressMessage = "";
   const setProgressMessage = () => {
@@ -655,6 +659,7 @@ function HomePage() {
 
   // Call the function immediately so that it runs before the return statement
   setProgressMessage();
+
 
   // HTML to be displayed
   return (
