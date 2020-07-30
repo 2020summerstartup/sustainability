@@ -1,8 +1,9 @@
 import React, { Fragment, useState, useContext } from "react";
-import BadgeModal from "./badgeModal"
+import styles from "./badgeModal.module.css";
 
 import favorite from "../../img/favorite.svg";
 import actionTab from "../../img/actionTab.svg";
+import badgeImg from "../../img/badge.svg";
 
 import CountUp from "react-countup";
 import Modal from "react-modal";
@@ -77,6 +78,7 @@ import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import like from "../../sounds/state-change_confirm-up.wav";
 import unlike from "../../sounds/state-change_confirm-down.wav";
 import confetti from "../../sounds/hero_decorative-celebration-02.wav";
+import badge from "../../sounds/hero_simple-celebration-01.wav";
 
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
@@ -349,6 +351,27 @@ const useStyles = makeStyles((theme) => ({
   dialogPaper: {
     overflow: "hidden !important",
   },
+  buttonModal: {
+    marginTop: theme.spacing(2),
+  },
+  dialogTitle: {
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  textTitle: {
+    color: "black",
+  },
+  badgeImg: {
+    width: "50%",
+    height: "50%",
+    margin: "1rem",
+  },
+  textBody: {
+    color: "black",
+  },
+  buttonClose: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 // transition to make modal open by slideing up and close by sliding down
@@ -359,6 +382,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
+  const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
+  const [badgeAction, setBadgeAction] = useState("");
   const authContext = useContext(AuthUserContext);
 
   // Get user's dorm set in local storage
@@ -523,13 +548,21 @@ function HomePage() {
           (20 * action.points - actionTotal) +
           ` points away from mastering ${action.susAction}!`
       );
+      setBadgeModalIsOpen(false);
+      setBadgeAction("");
     } else if (20 * action.points < actionTotal) {
       actionMastered(localStorage.getItem("email"), action.susAction);
       // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
-      localStorage.setItem("badgeAction", action.title)
+      setBadgeAction(action.title);
       console.log(`You have mastered ${localStorage.getItem("badgeAction")}!`);
+      setBadgeModalIsOpen(true);
+      Audio(badge).play();
     }
+  };
+
+  const handleClose = () => {
+    setBadgeModalIsOpen(false);
   };
 
   // Initialize the color of each favorite button
@@ -677,7 +710,53 @@ function HomePage() {
             Check Progress
           </Button>
 
-          <BadgeModal />
+          <Dialog
+            open={badgeModalIsOpen}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
+            <DialogContent className={styles.dialogContent}>
+              <DialogContentText id="alert-dialog-description">
+                {/* RIBBON */}
+                <div className={styles.nonSemanticProtector}>
+                  <h1 className={styles.ribbon}>
+                    <strong className={styles.ribbonContent}>
+                      Congratulations {localStorage.getItem('name')}!
+                    </strong>
+                  </h1>
+                </div>
+                {/* <Typography variant="h5" className={classes.textTitle}>
+                  Congratulations [user's name]!
+                </Typography> */}
+                {/* <Typography variant="subtitle" className={classes.textBody}>
+                  You just earned a new badge for completing {badgeAction}! This means
+                  you have completed this action 20 times. Great job and keep being
+                  sustainable!
+                </Typography> */}
+              </DialogContentText>
+              <img alt="badge" src={badgeImg} className={classes.badgeImg} />
+              {/* MUST ATTRIBUTE AUTHOR */}
+              <DialogContentText id="alert-dialog-description">
+                {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
+                <Typography variant="subtitle" className={classes.textBody}>
+                  You just earned a new badge for completing {badgeAction}! This means
+                  you have completed {badgeAction} 20 times. Great job and keep being
+                  sustainable!
+                </Typography>
+              </DialogContentText>
+              <Button
+                onClick={handleClose}
+                variant="contained"
+                color="primary"
+                autoFocus
+                className={classes.buttonClose}
+              >
+                Got it
+              </Button>
+            </DialogContent>
+          </Dialog>
 
           {/* NEW MODAL */}
           <Dialog
