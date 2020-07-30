@@ -18,14 +18,14 @@ import HomeIcon from "@material-ui/icons/Home";
 import NewReleasesIcon from "@material-ui/icons/NewReleases";
 
 // probably delete later
-import Grid from "@material-ui/core/Grid";
+// import Grid from "@material-ui/core/Grid";
 
 //React lazy
 // const TotalPointsCard = lazy(() => import("./points"));
 const DormCard = lazy(() => import("./dorm"));
-const Badges = lazy(() => import("./badges"));
-const Badges2 = lazy(() => import("./badges2"));
-const Badges3 = lazy(() => import("./badges3"));
+// const Badges = lazy(() => import("./badges"));
+// const Badges2 = lazy(() => import("./badges2"));
+// const Badges3 = lazy(() => import("./badges3"));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

@@ -21,14 +21,20 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import HomeIcon from "@material-ui/icons/Home";
 
 // Sounds
 import signup from "../../sounds/hero_simple-celebration-03.wav";
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
-import { faBalanceScaleRight } from "@fortawesome/free-solid-svg-icons";
+
+// Imports to support the dorm dropdown
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+
+// The value displayed in the dorm dropdown menu.
+var dormValue = "Select your dorm...";
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -120,6 +126,7 @@ PasswordInput2.propTypes = {
 
 PasswordInput2 = withStyles(useStyles)(PasswordInput2);
 
+// The initial state of all information to be completed by the user
 const INITIAL_STATE = {
   user: {
     username: "",
@@ -136,7 +143,7 @@ const INITIAL_STATE = {
 // sound play for favorites button
 const signupAudio = new Audio(signup);
 
-// called by onclick to play the audio file
+// called when the user clicks sign up to play the audio file
 const playSound = (audioFile) => {
   audioFile.play();
 };
@@ -174,8 +181,14 @@ class SignUpFormBase extends Component {
     event.preventDefault();
   };
 
+  // When text is entered/the dropdown is changed, this function is called. It updates the state to reflect changes from the new event.
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+    // If the user changed the dorm in the dropdown
+    if(event.target.name === "dorm") {
+      // Update the dormValue (value displayed in the dropdown) so they see their current selection
+      dormValue = event.target.value;
+    }
   };
 
   render() {
@@ -208,16 +221,6 @@ class SignUpFormBase extends Component {
         dorm === "Atwood"
       );
 
-    var dormEntered;
-    const makeCapitalDormName = () => {
-      if (typeof dorm === "undefined" || dorm.length < 1) {
-        console.log("nothing yet");
-      } else {
-        dormEntered = dorm[0].toUpperCase() + dorm.slice(1).toLowerCase();
-      }
-    };
-    makeCapitalDormName();
-
     return (
       <Container maxWidth="xs">
         <CssBaseline />
@@ -229,7 +232,6 @@ class SignUpFormBase extends Component {
             <img alt="sign up" src={signupImg} />
           </div>
           <form onSubmit={this.onSubmit} className={classes.form}>
-            {/* <Image source={{uri:this.state.user.avatar}} /> */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -237,7 +239,6 @@ class SignUpFormBase extends Component {
               id="username"
               label="Full Name"
               name="username"
-              // value={username}
               autoComplete="name"
               onChange={this.onChange}
               InputProps={{
@@ -254,7 +255,6 @@ class SignUpFormBase extends Component {
               id="email"
               label="Email Address"
               name="email"
-              // value={email}
               autoComplete="email"
               onChange={this.onChange}
               InputProps={{
@@ -264,32 +264,36 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              id="dorm"
-              label="Dorm"
-              placeholder="E.g. Case"
-              name="dorm"
-              value={dormEntered}
-              onChange={this.onChange}
-              InputProps={{
-                startAdornment: <HomeIcon className={classes.formIcon} />,
-                classes: {
-                  adornedEnd: classes.adornedEnd,
-                },
-              }}
-            />
+              <FormControl variant="filled" className={classes.formControl}>
+                <InputLabel>Dorm</InputLabel>
+                <Select
+                  native
+                  value={dormValue}
+                  name="dorm"
+                  onChange={this.onChange}
+                  label="Dorm"
+                  inputProps={{ "aria-label": "dorm" }}
+                  style={{ width: "25rem" }}
+                  variant="outlined"
+                >
+                  <option aria-label="None" value="" />
+                  <option value={"South"}>South</option>
+                  <option value={"Case"}>Case</option>
+                  <option value={"East"}>East</option>
+                  <option value={"West"}>West</option>
+                  <option value={"North"}>North</option>
+                  <option value={"Drinkward"}>Drinkward</option>
+                  <option value={"Sontag"}>Sontag</option>
+                  <option value={"Linde"}>Linde</option>
+                </Select>
+              </FormControl>
             <PasswordInput2
-              // type="password"
               label="Password"
               name="passwordOne"
               value={passwordOne}
               onChange={this.onChange}
             />
             <PasswordInput
-              // type="password"
               label="Password"
               name="passwordTwo"
               value={passwordTwo}
@@ -324,8 +328,7 @@ class SignUpFormBase extends Component {
               </Button>
               <p>
                 <center>
-                  Make sure all fields are filled in and your dorm is spelled
-                  correctly!{" "}
+                  Make sure all fields are completed!{" "}
                 </center>
               </p>
             </Reward>
@@ -336,17 +339,8 @@ class SignUpFormBase extends Component {
   }
 }
 
-// const SignUpLink = () => (
-//   <p>
-//     Don't have an account? Get with the program, and{" "}
-//     <Link to={ROUTES.SIGN_UP}>Sign Up</Link> here now!
-//   </p>
-// );
-
 const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
-
 const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
 
 export default SignUpPage;
-
 export { SignUpForm, PasswordInput2 };
