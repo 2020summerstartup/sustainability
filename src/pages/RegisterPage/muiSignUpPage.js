@@ -146,6 +146,7 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
+    localStorage.clear();
     const { username, email, passwordOne, dorm } = this.state;
 
     createUser(email, username, dorm);
@@ -313,7 +314,6 @@ class SignUpFormBase extends Component {
                 onClick={() => {
                   playSound(signupAudio);
                   this.reward.rewardMe();
-                  localStorage.clear();
                 }}
               >
                 Sign Up
