@@ -264,7 +264,6 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            <div>
               <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel>Dorm</InputLabel>
                 <Select
@@ -288,7 +287,6 @@ class SignUpFormBase extends Component {
                   <option value={"Linde"}>Linde</option>
                 </Select>
               </FormControl>
-            </div>
             <PasswordInput2
               label="Password"
               name="passwordOne"
