@@ -275,6 +275,7 @@ class SignUpFormBase extends Component {
                   label="Dorm"
                   inputProps={{ "aria-label": "dorm" }}
                   style={{ width: "25rem" }}
+                  variant="outlined"
                 >
                   <option aria-label="None" value="" />
                   <option value={"South"}>South</option>
@@ -329,8 +330,7 @@ class SignUpFormBase extends Component {
               </Button>
               <p>
                 <center>
-                  Make sure all fields are filled in and your dorm is spelled
-                  correctly!{" "}
+                  Make sure all fields are completed!{" "}
                 </center>
               </p>
             </Reward>
