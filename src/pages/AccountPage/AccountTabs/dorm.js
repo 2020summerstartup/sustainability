@@ -1,5 +1,10 @@
 import React from "react";
 import dorm from "../../../img/dorm.svg";
+import dorm2 from "../../../img/dorm2.svg";
+import dorm3 from "../../../img/dorm3.svg";
+import dorm4 from "../../../img/dorm4.svg";
+
+
 import { AuthUserContext } from "../../../services/Session";
 import SignOutButton from "../../../components/SignOut";
 
@@ -45,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0)33%)",
     },
   },
   content: {
@@ -106,7 +111,7 @@ export const DormCard = React.memo(function GalaxyCard() {
             />
           </NoSsr>
           <Card className={classes.card}>
-            <CardMedia classes={mediaStyles} image={dorm} />
+            <CardMedia classes={mediaStyles} image={dorm4} />
             <Box py={3} px={2} className={classes.content}>
               <Info useStyles={useGalaxyInfoStyles}>
                 <InfoSubtitle>

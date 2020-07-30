@@ -227,7 +227,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+      background: "linear-gradient(to top, #f48fb1, rgba(0,0,0,0))",
     },  
   },
   card2: {
@@ -251,7 +251,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0)33%)",
     },
   },
   content: {
@@ -334,6 +334,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   fab: {
+    backgroundColor: "secondary",
     right: "1rem",
     bottom: "4.5rem",
     position: "fixed",
@@ -343,14 +344,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   checkProgress: {
+    backgroundColor: "secondary",
     display: "none",
     [theme.breakpoints.up("sm")]: {
+      backgroundColor: "secondary",
       display: "flex",
       marginTop: theme.spacing(2),
     },
   },
   dialogPaper: {
     overflow: "hidden !important",
+    backgroundColor: "secondary",
   },
 }));
 
@@ -660,7 +664,7 @@ function HomePage() {
           <Fab
             variant="extended"
             size="medium"
-            color="primary"
+            color="secondary"
             onClick={() => setProgressModalIsOpen(true)}
             aria-label="check progress"
             className={classes.fab}
@@ -670,7 +674,7 @@ function HomePage() {
           </Fab>
           {/* Large Screens */}
           <Button
-            color="primary"
+            color="secondary"
             variant="contained"
             onClick={() => {
               setProgressModalIsOpen(true);
@@ -718,7 +722,7 @@ function HomePage() {
                   setProgressModalIsOpen(false)
                 }}
                 variant="contained"
-                color="primary"
+                color="secondary"
               >
                 Close
               </Button>
@@ -754,7 +758,7 @@ function HomePage() {
           </Modal> */}
         </div>
         <TabPanel value={value} index={0} className="tab-container">
-           {/* Action galaxy card */}
+           {/* Action galaxy card*/}
         <NoSsr>
                     <GoogleFontLoader
                       fonts={[

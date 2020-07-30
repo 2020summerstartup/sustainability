@@ -8,9 +8,10 @@ const theme = createMuiTheme({
       type: "light",
       primary: {
         main: "#24a113",
+        mainGradient:"linear-gradient(to right, #24a113, #f48fb1)",
       },
       secondary: {
-        main: "#FFFFFF", //text-primary
+        main: "#f48fb1", //text-primary
       },
       divider: "rgba(0, 0, 0, 0.04)"
     },
@@ -45,11 +46,12 @@ const theme = createMuiTheme({
       type: "dark",
       primary: {
         main: "#24a113",
+        mainGradient:"linear-gradient(to right, #24a113, #f48fb1)",
       },
       secondary: {
-        main: "#FFFFFF",
+        main: "#f48fb1",      
       },
-    },
+    }
   });
 
   const Theme = (props) => {

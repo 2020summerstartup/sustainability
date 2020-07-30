@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
+import ChallengeCard2 from "./challengeCard2";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -137,6 +138,7 @@ function CompeteTabs() {
 
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<div>Loading...</div>}>
+          <center><ChallengeCard2 /></center>
           <Challenges />
         </Suspense>
       </TabPanel>

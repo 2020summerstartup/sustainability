@@ -5,7 +5,7 @@ import PwaCard from "./pwa";
 
 const InfoPage = () => (
   <div className="base-container">
-    <PwaCard />
+    {/* <PwaCard /> */}
     <InfoCards />
     <FBContactForm />
   </div>

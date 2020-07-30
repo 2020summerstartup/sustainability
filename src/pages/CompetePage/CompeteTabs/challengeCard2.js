@@ -7,7 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +16,13 @@ import challenges from "../../../img/challenges.svg";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    justifyItems: 'center',
+    justifyContent: "center",
+    alignContent: "center",
     background: 'linear-gradient(to right, #BF953F, #FCF6BA, #B38728,#FBF5B7, #AA771C)',
+    maxWidth: 600,
+    maxHeight: 500,
+    // minHeight: "300",
 
   },
   details: {
@@ -28,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 0 auto',
   },
   cover: {
+    display: 'flex',
+    // alignItems: 'start',
     width: 300,
   },
   controls: {
@@ -56,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MediaControlCard() {
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
 
   function Notify() {
     toast("Saved to do later", {
