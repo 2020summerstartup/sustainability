@@ -3,7 +3,7 @@ import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 // import DormCard from "./dorm";
 // import Badges from "./badges";
-// import Badges2 from "./badges2";
+import Badges2 from "./badges2";
 // import Badges3 m "./badges3";
 
 import PropTypes from "prop-types";

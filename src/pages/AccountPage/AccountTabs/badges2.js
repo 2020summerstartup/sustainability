@@ -3,7 +3,7 @@ import styles from "./badges2.module.css";
 
 import Typography from "@material-ui/core/Typography";
 
-class Badge2 extends React.Component {
+class Badges2 extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -195,4 +195,4 @@ class Badge2 extends React.Component {
   }
 }
 
-export default Badge2;
+export default Badges2;
