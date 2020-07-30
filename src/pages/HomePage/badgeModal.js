@@ -97,7 +97,7 @@ export default function AlertDialog() {
           <DialogContentText id="alert-dialog-description">
             {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
             <Typography variant="subtitle" className={classes.textBody}>
-              You just earned a new badge for completing [susaction]! This means
+              You just earned a new badge for completing {localStorage.getItem("badgeAction")}! This means
               you have completed this action 20 times. Great job and keep being
               sustainable!
             </Typography>

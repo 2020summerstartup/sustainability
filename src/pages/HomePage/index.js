@@ -366,9 +366,6 @@ function HomePage() {
     (docSnapshot) => {
       if (docSnapshot.exists) {
         assignData(docSnapshot.data());
-        function assignData(data) {
-          localStorage.setItem("dorm", data.userDorm);
-        }
       } else {
         createUser(authContext.email);
         initPoints(authContext.email);
@@ -524,13 +521,14 @@ function HomePage() {
       console.log(
         "You are " +
           (20 * action.points - actionTotal) +
-          " points away from mastering this action!"
+          ` points away from mastering ${action.susAction}!`
       );
     } else if (20 * action.points < actionTotal) {
       actionMastered(localStorage.getItem("email"), action.susAction);
       // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
-      console.log("You have mastered this action!");
+      localStorage.setItem("badgeAction", action.title)
+      console.log(`You have mastered ${localStorage.getItem("badgeAction")}!`);
     }
   };
 
