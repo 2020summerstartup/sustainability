@@ -217,9 +217,9 @@ function AccountTabs() {
           {/* SECOND BADGE */}
           {/* <h1> </h1> */}
           {/* <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={6} md={4}> */}
               <Badges2 />
-            </Grid>
+            {/* </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Badges2 />
             </Grid>
