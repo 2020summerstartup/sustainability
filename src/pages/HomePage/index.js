@@ -569,7 +569,8 @@ function HomePage() {
       setBadgeAction(action.title);
       console.log(`You have mastered ${localStorage.getItem("badgeAction")}!`);
       setBadgeModalIsOpen(true);
-      Audio(badge).play();
+      const badgeAudio = new Audio(badge);
+      badgeAudio.play();
     }
   };
 
