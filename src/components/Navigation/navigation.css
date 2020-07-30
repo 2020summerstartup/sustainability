@@ -317,7 +317,7 @@ main {
   }
 
   .signout-btn {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -342,10 +342,5 @@ main {
 @media screen and (min-width: 320px) and (max-width: 766px) and (orientation: landscape) {
   .navbar {
     display: none;
-  }
-  .signout-btn {
-    position: absolute !important;
-    left: 50%;
-    transform: translate(-50%, 0);
   }
 }
