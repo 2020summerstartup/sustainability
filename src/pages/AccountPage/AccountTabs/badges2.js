@@ -19,86 +19,96 @@ class Badge2 extends React.Component {
         {
           id: 1,
           title: "Recycle Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 3,
           title: "Walking Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 2,
           title: "Straw Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 4,
           title: "Bag Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 5,
           title: "Market Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 6,
           title: "Tea Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 7,
           title: "No Waste Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 8,
           title: "Meatless Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 9,
           title: "Cleaning Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 10,
           title: "Transportation Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 11,
           title: "Clothing Badge",
-          styling: null,
+          titleStyling: null,
         },
         {
           id: 12,
           title: "Air Dry Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
         {
           id: 13,
           title: "Climate Badge",
-          styling: null,
+          titleStyling: null,
+          leafStyling: null,
         },
       ],
     };
-    badges = this.assignStyling(data.badges);
-    this.setState({
-      badges: badges,
-    });
-  }
-
-  assignStyling(badges) {
-    badges.forEach((badge) => {
-      if (badge.id % 2 === 0) {
-        badge.styling = styles.titleLeft;
-      } else {
-        badge.styling = styles.titleRight;
+    data.badges.forEach((badge, id) => {
+      if (id % 2 === 0){
+        badge.titleStyling = styles.titleLeft
+        badge.leafStyling = styles.left
+      }else{
+        badge.titleStyling = styles.titleRight
+        badge.leafStyling = styles.right
       }
     })
-    return badges
-  };
+    console.log(data.badges)
+    this.setState({
+      badges: data.badges,
+    });
+  }
 
   componentWillMount() {
     this.getData();
@@ -138,16 +148,16 @@ class Badge2 extends React.Component {
           this.state.badges.map((badge, i) => (
             <div key={i}>
               <div className={styles.column}>
-                <div className={styles.left}>
-                  <Typography variant="h6" className={styles.titleLeft}>
+                <div className={badge.leafStyling}>
+                  <Typography variant="h6" className={badge.titleStyling}>
                     {badge.title}
                   </Typography>
                 </div>
-                <div className={styles.right}>
-                  <Typography variant="h6" className={styles.titleRight}>
+                {/* <div className={styles.right}>
+                  <Typography variant="h6" className={badge.styling}>
                     {badge.title}
                   </Typography>
-                </div>
+          </div>*/}
               </div>
             </div>
           ))
