@@ -8,10 +8,6 @@ require('dotenv').config();
 
 // import firebase/auth from 'firebase/auth';
 
-
-// };
-
-// const firebase = require("firebase"); // Value never used
 // Required for side-effects
 require("firebase/firestore");  
 
@@ -86,28 +82,36 @@ export const createUser = (userEmail, userName, dorm) => {
               "meatlessMon": 0,
               "ecoClean": 0,
           },
+          impact: {
+            "coEmiss": 0,
+            "water": 0,
+            "energy": 0,
+            "buzzes":0,
+          },
       });
 };
 
-
+// fetches the user collection from firestore
+// meant to be called then added to (ex: getUser().doc(localStorage.getItem('email')))
 export const getUser = (userEmail) => {
   localStorage.setItem('email', userEmail)
   return firestore.collection('users').doc(userEmail)
 }
 
-
-
+// fetches the dorm collection from firestore
+// meant to be called then added to (ex: getDorm().doc('North'))
+export const getDorm = () => {
+  return firestore.collection('dorms')
+}
 
 // this method is called to increase points
 export const updateUserPoint = (userEmail, userAction, actionPoint) => {
-  // local storage allows us to display the correct points
-  localStorage.setItem('total', (parseInt(localStorage.getItem('total'))+ parseInt(actionPoint)));
-  localStorage.setItem(userAction, (parseInt(localStorage.getItem(userAction)) + parseInt(actionPoint)));
   return firestore.collection('users').doc(userEmail).update({
     ['points.' + userAction]: app.firestore.FieldValue.increment(actionPoint),
     total: app.firestore.FieldValue.increment(actionPoint),
   })
 }
+
 //this method is meant to update the dorm total
 export const updateDormPoint = (userDorm, actionPoint) => {
   return firestore.collection('dorms').doc(userDorm).update({
@@ -134,10 +138,8 @@ export const updateUserDorm = (userEmail, value) => {
   })
 }
 
-export const getDorm = () => {
-  return firestore.collection('dorms')
-}
 
+// updates firestore when a user favorites an action
 export const addFav = (userEmail, susAction) => {
   console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
@@ -145,16 +147,34 @@ export const addFav = (userEmail, susAction) => {
   })
 }
 
+// updates firestore when a user deletes a favorite
 export const deleteFav = (userEmail, susAction) => {
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayRemove(susAction)
   })
 }
 
+// adds action to mastered list in firestore when called (user has mastered action)
 export const actionMastered = (userEmail, susAction) => {
   console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
     masteredActions: app.firestore.FieldValue.arrayUnion(susAction)
+  })
+}
+
+// updates all the necessary impact fields when a user logs an action
+export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact) => {
+    //updates local storage with incremented impact data
+    localStorage.setItem('coEmiss', (parseInt(localStorage.getItem('coEmiss'))+ parseInt(coImpact)));
+    localStorage.setItem('energy', (parseInt(localStorage.getItem('energy'))+ parseInt(energyImpact)));
+    localStorage.setItem('water', (parseInt(localStorage.getItem('water'))+ parseInt(waterImpact)));
+    localStorage.setItem('buzzes', (parseInt(localStorage.getItem('buzzes'))+ 1));
+  //updates firestore with incremented impact data
+  return firestore.collection('users').doc(userEmail).update({
+    'impact.coEmiss': app.firestore.FieldValue.increment(coImpact),
+    'impact.energy': app.firestore.FieldValue.increment(energyImpact),
+    'impact.water': app.firestore.FieldValue.increment(waterImpact),
+    'impact.buzzes': app.firestore.FieldValue.increment(1),
   })
 }
 

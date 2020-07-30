@@ -18,7 +18,9 @@ import {
   updateDormPoint,
   actionMastered,
   firestore,
+  updateUserImpact
 } from "../../services/Firebase";
+import {functions} from "../../services/Firebase/firebase"
 
 import PropTypes from "prop-types";
 
@@ -101,6 +103,17 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
+function initImpactPoints (email) {
+    // pull impact data from firestore & intialize in local storage
+    getUser(email).onSnapshot( (snapshot) => {
+      let envImpact = snapshot.get('impact')
+      localStorage.setItem("buzzes", envImpact.buzzes);
+      localStorage.setItem("energy", envImpact.energy);
+      localStorage.setItem("coEmiss", envImpact.coEmiss);
+      localStorage.setItem("water", envImpact.water);
+  });
+}
+
 // sound play for certain buttons
 const likeAudio = new Audio(like);
 const unlikeAudio = new Audio(unlike);
@@ -111,16 +124,17 @@ const playSound = (audioFile) => {
   audioFile.play();
 };
 
-// I think Linda wrote this function? I don't want to fail to do it justice with my comments. -Katie
-// removed fav foreach loop here, don't think it was doing anything? (This comment is from Jessica?)
+// this function is meant to get each action's point value from firestore and then set each action's points in local storage
+// should only be called when page first loads, not when increment
 function assignData(data) {
-  localStorage.setItem("total", data.total);
+  // the data parameter is meant to be the firestore document snapshot
   const points = data.points;
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
+  localStorage.setItem("total", data.total);
 }
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
@@ -392,32 +406,45 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const uploadUserData = (email) => {
+    // Get user's dorm set in local storage
+    console.log(email)
+    getUser(email).get().then(snap => {
+        if (snap.exists) {
+          initImpactPoints(email)
+          assignData(snap.data());
+          function assignData(data) {
+            localStorage.setItem("dorm", data.userDorm);
+            localStorage.setItem('total', data.total);
+          }
+        } else {
+          createUser(email);
+          initPoints(email);
+          initImpactPoints(email)
+          uploadUserTotalPoint(email, total);
+        }
+      },
+      (err) => {
+        console.log(`Encountered error: ${err}`);
+      })
+    };
+uploadUserData(localStorage.getItem('email'))
+
+
 // Text to display on the homepage
 function HomePage() {
+  console.log(localStorage.getItem('total'))
+  console.log(localStorage.getItem('email'))
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
   const [badgeAction, setBadgeAction] = useState("");
   const authContext = useContext(AuthUserContext);
+  // THE ERROR WITH TOTAL POINT DISPLAY WHEN A USER SIGNS IN/UP IS THAT LOCAL STORAGE 
+  // IS NOT YET SET -> IT IS SET BY AN ASYNC CALL TO FIRESTORE 
+  const [userTotal, updateUserTotal] = useState(localStorage.getItem('total'));
+  
 
-  // Get user's dorm set in local storage
-  getUser(authContext.email).onSnapshot(
-    (docSnapshot) => {
-      if (docSnapshot.exists) {
-        assignData(docSnapshot.data());
-      } else {
-        createUser(authContext.email);
-        initPoints(authContext.email);
-        uploadUserTotalPoint(authContext.email, total);
-      }
-    },
-    (err) => {
-      console.log(`Encountered error: ${err}`);
-    }
-  );
 
-  // getMastered(authContext.email);
-
-  total = localStorage.getItem("total");
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -463,13 +490,24 @@ function HomePage() {
     }
   };
 
+  const updateDisplayTotal = (actionPoint) => {
+    const newTotal = parseInt(userTotal) + parseInt(actionPoint)
+    updateUserTotal(newTotal);
+  }
+
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
+
     // allows us to increment the correct values by writing the action & value to local storage
-    // add specified number of points to the saved point total
+    // add specified number of points to the specific action point count
     localStorage.setItem(
       action.susAction,
       parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
+    );
+    // add specified number of points to the user's total point count
+    localStorage.setItem(
+      'total',
+      parseInt(localStorage.getItem('total')) + parseInt(action.points)
     );
 
     // updates user's point in firestore
@@ -478,8 +516,13 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
-      window.location.reload(true);
+      // THIS IS WHERE WINDOW REFRESH OCCURS!!
+      // window.location.reload(true);
     });
+
+    updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
+
+ 
 
     // get the user's dorm from firestore and update the dorm's points
     getUser(authContext.email).onSnapshot(
@@ -489,6 +532,7 @@ function HomePage() {
         } else {
           createUser(authContext.email);
           initPoints(authContext.email);
+          initImpactPoints(authContext.email)
           uploadUserTotalPoint(
             authContext.email,
             localStorage.getItem("total")
@@ -504,6 +548,12 @@ function HomePage() {
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
+
+
+    updateDisplayTotal(action.points);
+
+    
+
   }; // increment
 
   // to check with the mastered actions that firestore has upon loading page
@@ -532,7 +582,7 @@ function HomePage() {
     var storageName = action.susAction.concat("Mastered");
     firestoreMastered = localStorage.getItem("firestoreMastered");
 
-    if (firestoreMastered.includes(stringActionName)) {
+    if ( firestoreMastered != null && firestoreMastered.includes(stringActionName)) {
       masterActions[el - 1] = true; //disable button when action is mastered
       localStorage.setItem(storageName, true); // update local storage accordingly
     } else {
@@ -548,8 +598,6 @@ function HomePage() {
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
     const actionTotal = localStorage.getItem(action.susAction);
-    console.log(actionTotal);
-    console.log(action.points);
     // if (storedMaster == null) {
     //   console.log('null')
     // }
@@ -626,10 +674,13 @@ function HomePage() {
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
+
   // Set the "progress message" to be displayed when the user pressed "check progress"
   var progressMessage = "";
   const setProgressMessage = () => {
-    initPoints();
+    // Why is this here? Doesn't initPoints run when the page loads so local storage should be good if they
+    // want to check their progress?
+    // initPoints();
     for (const el in ActionData) {
       // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
@@ -645,19 +696,14 @@ function HomePage() {
     progressMessage = (
       <>
         {progressMessage}
-        <Typography
-          variant="h6"
-          component={"span"}
-          className={classes.totalPoints}
-        >
-          Total points: {total}
-        </Typography>
+        <Typography variant="body1" component={'span'}><b>Total points: {userTotal}</b></Typography>
       </>
     );
   }; // setProgressMessage
 
   // Call the function immediately so that it runs before the return statement
   setProgressMessage();
+
 
   // HTML to be displayed
   return (
@@ -705,7 +751,7 @@ function HomePage() {
             component={"span"}
           >
             You have earned&nbsp;
-            {<CountUp start={0} end={total} duration={1}></CountUp>} points!
+            {<CountUp start={0} end={userTotal} duration={1}></CountUp>} points!
           </Typography>
           {/* Mobile Screens */}
           <Fab
