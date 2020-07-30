@@ -100,6 +100,24 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
+function initImpactPoints (email) {
+    // pull impact data from firestore & intialize in local storage
+    getUser(email).onSnapshot( (snapshot) => {
+      console.log(email)
+      let envImpact = snapshot.get('impact')
+      console.log(envImpact)
+      let firestoreBuzzes = snapshot.data().get(envImpact.buzzes);
+      let firestoreEnergy = snapshot.data().get(envImpact.energy);
+      let firestoreEmiss = snapshot.data().get(envImpact.coEmiss);
+      let firestorewater = snapshot.data().get(envImpact.water);
+      localStorage.setItem("buzzes", firestoreBuzzes);
+      localStorage.setItem("energy", firestoreEnergy);
+      localStorage.setItem("coEmiss", firestoreEmiss);
+      localStorage.setItem("water", firestorewater);
+      console.log(firestoreBuzzes, firestoreEmiss, firestoreEnergy, firestorewater);
+  });
+}
+
 // sound play for certain buttons
 const likeAudio = new Audio(like);
 const unlikeAudio = new Audio(unlike);
@@ -376,6 +394,7 @@ function HomePage() {
       } else {
         createUser(authContext.email);
         initPoints(authContext.email);
+        initImpactPoints(authContext.email)
         uploadUserTotalPoint(authContext.email, total);
       }
     },
@@ -461,6 +480,7 @@ function HomePage() {
         } else {
           createUser(authContext.email);
           initPoints(authContext.email);
+          initImpactPoints(authContext.email)
           uploadUserTotalPoint(
             authContext.email,
             localStorage.getItem("total")
@@ -591,6 +611,8 @@ function HomePage() {
   // Set the "progress message" to be displayed when the user pressed "check progress"
   var progressMessage = "";
   const setProgressMessage = () => {
+    // Why is this here? Doesn't initPoints run when the page loads so local storage should be good if they
+    // want to check their progress?
     initPoints();
     for (const el in ActionData) {
       // Loop over every action in ActionData

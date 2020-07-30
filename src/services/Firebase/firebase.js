@@ -178,10 +178,10 @@ export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact)
     localStorage.setItem('buzzes', (parseInt(localStorage.getItem('buzzes'))+ 1));
   //updates firestore with incremented impact data
   return firestore.collection('users').doc(userEmail).update({
-    ['impact.coEmiss']: app.firestore.FieldValue.increment(coImpact),
-    ['impact.energy']: app.firestore.FieldValue.increment(energyImpact),
-    ['impact.water']: app.firestore.FieldValue.increment(waterImpact),
-    ['impact.buzzes']: app.firestore.FieldValue.increment(1),
+    'impact.coEmiss': app.firestore.FieldValue.increment(coImpact),
+    'impact.energy': app.firestore.FieldValue.increment(energyImpact),
+    'impact.water': app.firestore.FieldValue.increment(waterImpact),
+    'impact.buzzes': app.firestore.FieldValue.increment(1),
   })
 }
 

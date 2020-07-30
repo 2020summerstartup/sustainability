@@ -4,22 +4,21 @@ import { getUser} from '../../../services/Firebase';
 
 
 //gets the user's Environmental Impact Data from firebase
-// let email = localStorage.getItem('email')
-// getUser(email).get().then( snapshot => {
-//   let envImpact = snapshot.get('impact')
-  // localStorage.setItem('buzzTotal', envImpact.buzzTotal);
-  // localStorage.setItem('coEmiss', envImpact.coEmiss);
-  // localStorage.setItem('energy', envImpact.energy);
-  // localStorage.setItem('water', envImpact.water);
-// })
-// console.log(localStorage.getItem('buzzTotal'))
+let email = localStorage.getItem('email')
+
+let buzzImpact = localStorage.getItem('buzzes');
+let coEmissImpact = localStorage.getItem('coEmiss');
+let energyImpact = localStorage.getItem('energy');
+let waterImpact = localStorage.getItem('water');
+
+console.log(localStorage.getItem('buzzTotal'))
 
 // set variables that I will need later when rendering cards
 let colors = ["#24a113", "#39AA2A", "#4FB342", "#65BD59"];
-let buzzTotal = 'hi' //localStorage.getItem('buzzTotal');
-let coEmiss = 'hi' //localStorage.getItem('coEmiss');
-let energy = 'hi' //localStorage.getItem('energy');
-let water = 'hi' //localStorage.getItem('water');
+// let buzzTotal = 'hi' //localStorage.getItem('buzzTotal');
+// let coEmiss = 'hi' //localStorage.getItem('coEmiss');
+// let energy = 'hi' //localStorage.getItem('energy');
+// let water = 'hi' //localStorage.getItem('water');
 
 class EnvImpactCards extends React.Component {
     constructor() {
@@ -35,22 +34,22 @@ class EnvImpactCards extends React.Component {
         cards: [
           {
             id: 1,
-            score: buzzTotal,
+            score: buzzImpact,
             title: "Total Actions Logged!",
             },
           {
             id: 3,
-            score: coEmiss,
+            score: coEmissImpact,
             title: "Total lbs of CO2 saved!",
           },
           {
             id: 2,
-            score: energy,
+            score: energyImpact,
             title: "Total KJs of energy conserved!",
           },
           {
             id: 4,
-            score: water,
+            score: waterImpact,
             title: "Total gallons of water conserved!",
           },
         ],
