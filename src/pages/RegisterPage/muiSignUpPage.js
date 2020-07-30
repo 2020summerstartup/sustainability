@@ -197,12 +197,15 @@ class SignUpFormBase extends Component {
 
 
 
-    var dormEntered;
+    // this will ensure that everyone's dorm entry only has the first letter of the word capitalized
+    // dormUpper will be the value that is read from the input field as used as the state rather than 
+    // what the user actually types ( ie. user could type 'case' and state would instead be 'Case') 
+    var dormUpper;
     const makeCapitalDormName = () => {
       if (typeof(dorm) === "undefined" || dorm.length < 1 ) {
-        console.log('nothing yet')
+        return null
         } else {
-          dormEntered = (dorm[0].toUpperCase() + dorm.slice(1).toLowerCase());      
+          dormUpper = (dorm[0].toUpperCase() + dorm.slice(1).toLowerCase());      
           } 
     }
     makeCapitalDormName();
@@ -261,8 +264,10 @@ class SignUpFormBase extends Component {
               id="dorm"
               label="Dorm"
               name="dorm"
-              placeholder="eg. West, Drinkward, Case"
-              value={dormEntered}
+              // placeholder to make clear what the user should input
+              placeholder="eg. West, Drinkward, Case, etc."
+              // needs to be dormUpper to ensure that they are registering to a valid dorm
+              value={dormUpper}
               onChange={this.onChange}
               InputProps={{
                 startAdornment: <HomeIcon className={classes.formIcon} />,
