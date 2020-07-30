@@ -551,7 +551,7 @@ function HomePage() {
     var storedFav = localStorage.getItem(storageName2) === "true";
     if (storedFav) {
       // If the action is favorited
-      favIconColors[el - 1] = "#DC143C"; // Turn red
+      favIconColors[el - 1] = "#f48fb1"; // Turn red
     } else {
       favIconColors[el - 1] = "#6c6c6c"; // Otherwise turn gray
     }
@@ -577,7 +577,7 @@ function HomePage() {
     var displayText;
     if (storedFav) {
       displayText = action.title.concat(" added to favorites");
-      favIconColor.style.color = "#DC143C"; // Turn red
+      favIconColor.style.color = "#f48fb1"; // Turn red
       playSound(likeAudio);
       toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
     } else {
@@ -700,7 +700,7 @@ function HomePage() {
           >
             <DialogTitle
               id="alert-dialog-slide-title"
-              style={{ backgroundColor: "var(--theme)", color: "#FFFFFF" }}
+              style={{ backgroundColor: "var(--theme-secondary)", color: "#FFFFFF" }}
             >
               {"Check Your Progress!"}
             </DialogTitle>
