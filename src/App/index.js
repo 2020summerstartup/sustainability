@@ -53,7 +53,7 @@ const MuiChangeDorm = lazy(() =>
 const DeleteAccount = lazy(() =>
   import("../pages/AccountPage/Settings/deleteAccount")
 );
-const AdminPage = lazy(() => import("../pages/AdminPage"));
+// const AdminPage = lazy(() => import("../pages/AdminPage"));
 
 function AppBase() {
   return (

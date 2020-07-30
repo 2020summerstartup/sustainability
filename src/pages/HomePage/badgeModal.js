@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AlertDialog(susAction) {
+export default function AlertDialog() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
