@@ -2,9 +2,6 @@ import React from "react";
 import styles from "./addToHomeScreen.module.css";
 
 class AddToHomeScreen extends React.Component {
-  constructor() {
-    super();
-  }
 
   render() {
     return (
