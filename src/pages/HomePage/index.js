@@ -754,7 +754,7 @@ function HomePage() {
           </Modal> */}
         </div>
         <TabPanel value={value} index={0} className="tab-container">
-           {/* Action card boi */}
+           {/* Action galaxy card */}
         <NoSsr>
                     <GoogleFontLoader
                       fonts={[

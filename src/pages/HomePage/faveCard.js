@@ -20,15 +20,17 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    borderRadius: "1rem",
+  borderRadius: "1rem",
     boxShadow: "none",
     position: "relative",
     margin: "auto",
-    maxWidth: "60rem",
+    marginBottom: "1rem",
+    maxWidth: "36rem",
     minHeight: "15rem",
+    zIndex: 0,
     [theme.breakpoints.up("sm")]: {
-      maxWidth: "60rem",
-      minHeight: "20rem",
+      maxWidth: "75vh",
+      minHeight: "40vh",
     },
     "&:after": {
       content: '""',
