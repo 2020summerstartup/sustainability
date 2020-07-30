@@ -239,7 +239,7 @@ main {
 } */
 
 /* Large screens */
-@media only screen and (min-width: 600px){
+@media only screen and (min-width: 600px) {
   .navbar {
     top: 0;
     width: 6.5rem;
@@ -317,9 +317,8 @@ main {
   }
 
   .signout-btn {
-    display: none !important;
+    display: none;
   }
-
 }
 
 @keyframes fade {
@@ -332,6 +331,13 @@ main {
   }
 }
 
+/* Large screens */
+@media only screen and (min-width: 767px) {
+  .signout-btn {
+    display: none !important;
+  }
+}
+
 /* For mobile landscape */
 @media screen and (min-width: 320px) and (max-width: 766px) and (orientation: landscape) {
   .navbar {
@@ -340,7 +346,6 @@ main {
   .signout-btn {
     position: absolute !important;
     left: 50%;
-    bottom: 5rem;
     transform: translate(-50%, 0);
   }
 }

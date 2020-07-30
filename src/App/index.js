@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "../components/Navigation";
 import BottomNav from "../components/Navigation/bottomNav";
-import MuiLandingPage from "../pages/LandingPage/muiLandingPage";
+// import MuiLandingPage from "../pages/LandingPage/muiLandingPage";
 // import MuiSignInPage from "../pages/RegisterPage/muiSignInPage";
 // import MuiSignUpPage from "../pages/RegisterPage/muiSignUpPage";
 // import MuiPasswordForgetPage from "../pages/RegisterPage/muiPasswordForgetPage";
@@ -31,9 +31,9 @@ import { withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
 
 // React lazy
-// const MuiLandingPage = lazy(() =>
-//   import("../pages/LandingPage/muiLandingPage")
-// );
+const MuiLandingPage = lazy(() =>
+  import("../pages/LandingPage/muiLandingPage")
+);
 const MuiSignInPage = lazy(() => import("../pages/RegisterPage/muiSignInPage"));
 const MuiSignUpPage = lazy(() => import("../pages/RegisterPage/muiSignUpPage"));
 const MuiPasswordForgetPage = lazy(() =>
@@ -94,9 +94,10 @@ function AppBase() {
 
         {/* <Switch> */}
         {/* For each page's content */}
-        <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
 
         <Suspense fallback={<ProgressCircle />}>
+          <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
+
           <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
 
           <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />

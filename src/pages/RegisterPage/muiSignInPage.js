@@ -104,6 +104,9 @@ class PasswordInput extends Component {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
+                disableFocusRipple
+                disableRipple
+                style={{ backgroundColor: "transparent" }}
                 aria-label="toggle password visibility"
                 onClick={this.togglePasswordMask}
                 edge="end"

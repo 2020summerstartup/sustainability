@@ -93,6 +93,9 @@ class PasswordInput2 extends Component {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
+                disableFocusRipple
+                disableRipple
+                style={{ backgroundColor: "transparent" }}
                 aria-label="toggle password visibility"
                 onClick={this.togglePasswordMask}
                 edge="end"
@@ -192,20 +195,27 @@ class SignUpFormBase extends Component {
       email === "" ||
       dorm === "" ||
       username === "" ||
-      !(dorm === "South" || dorm === "North" || dorm === "West" || dorm === "East" || dorm === "Case" || dorm === "Sontag" || dorm === "Drinkward" || dorm === "Linde" || dorm === "Atwood" );
-
-
+      !(
+        dorm === "South" ||
+        dorm === "North" ||
+        dorm === "West" ||
+        dorm === "East" ||
+        dorm === "Case" ||
+        dorm === "Sontag" ||
+        dorm === "Drinkward" ||
+        dorm === "Linde" ||
+        dorm === "Atwood"
+      );
 
     var dormEntered;
     const makeCapitalDormName = () => {
-      if (typeof(dorm) === "undefined" || dorm.length < 1 ) {
-        console.log('nothing yet')
-        } else {
-          dormEntered = (dorm[0].toUpperCase() + dorm.slice(1).toLowerCase());      
-          } 
-    }
+      if (typeof dorm === "undefined" || dorm.length < 1) {
+        console.log("nothing yet");
+      } else {
+        dormEntered = dorm[0].toUpperCase() + dorm.slice(1).toLowerCase();
+      }
+    };
     makeCapitalDormName();
-
 
     return (
       <Container maxWidth="xs">
@@ -259,6 +269,7 @@ class SignUpFormBase extends Component {
               fullWidth
               id="dorm"
               label="Dorm"
+              placeholder="E.g. Case"
               name="dorm"
               value={dormEntered}
               onChange={this.onChange}
@@ -310,7 +321,12 @@ class SignUpFormBase extends Component {
               >
                 Sign Up
               </Button>
-              <p><center>Make sure all fields are filled in and your dorm is spelled correctly! </center></p>
+              <p>
+                <center>
+                  Make sure all fields are filled in and your dorm is spelled
+                  correctly!{" "}
+                </center>
+              </p>
             </Reward>
           </form>
         </div>
