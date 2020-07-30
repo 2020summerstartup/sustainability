@@ -179,10 +179,12 @@ class SignUpFormBase extends Component {
     event.preventDefault();
   };
 
+  // When text is entered/the dropdown is changed, this function is called. It updates the state to reflect changes from the new event.
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+    // If the user changed the dorm in the dropdown
     if(event.target.name === "dorm") {
-      console.log('event was dorm');
+      // Update the placeholder (value displayed in the dropdown) so they see their current selection
       placeholder = event.target.value;
     }
   };
@@ -266,7 +268,6 @@ class SignUpFormBase extends Component {
             <div>
               <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel>Dorm</InputLabel>
-                {/* <InputLabel>{newPlaceholder}</InputLabel> */}
                 <Select
                   native
                   value={placeholder}
@@ -274,7 +275,7 @@ class SignUpFormBase extends Component {
                   onChange={this.onChange}
                   label="Dorm"
                   inputProps={{ "aria-label": "dorm" }}
-                  style={{ width: "10rem" }}
+                  style={{ width: "25rem" }}
                 >
                   <option aria-label="None" value="" />
                   <option value={"South"}>South</option>
@@ -342,13 +343,6 @@ class SignUpFormBase extends Component {
     );
   }
 }
-
-// const SignUpLink = () => (
-//   <p>
-//     Don't have an account? Get with the program, and{" "}
-//     <Link to={ROUTES.SIGN_UP}>Sign Up</Link> here now!
-//   </p>
-// );
 
 const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
 
