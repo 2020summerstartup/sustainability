@@ -126,13 +126,13 @@ const playSound = (audioFile) => {
 // should only be called when page first loads, not when increment
 function assignData(data) {
   // the data parameter is meant to be the firestore document snapshot
-  localStorage.setItem("total", data.total);
   const points = data.points;
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
+  localStorage.setItem("total", data.total);
 }
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
@@ -373,14 +373,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-var total = localStorage.getItem('total');
 
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const authContext = useContext(AuthUserContext);
   const [userTotal, updateUserTotal] = useState(localStorage.getItem('total'));
-  
+
+
 
   // Get user's dorm set in local storage
   getUser(authContext.email).onSnapshot(
@@ -390,6 +390,7 @@ function HomePage() {
         assignData(docSnapshot.data());
         function assignData(data) {
           localStorage.setItem("dorm", data.userDorm);
+          localStorage.setItem('total', data.total);
         }
       } else {
         createUser(authContext.email);
@@ -402,8 +403,6 @@ function HomePage() {
       console.log(`Encountered error: ${err}`);
     }
   );
-
-  // getMastered(authContext.email);
 
 
 
@@ -480,18 +479,13 @@ function HomePage() {
       action.susAction,
       parseInt(action.points)
     ).then(() => {
-      console.log('here')
       // THIS IS WHERE WINDOW REFRESH OCCURS!!
       // window.location.reload(true);
     });
 
     updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
 
-    getUser(authContext.email).onSnapshot( (snapshot) => {
-      total = snapshot.get('total')
-      console.log(total)
-    })
-  
+ 
 
     // get the user's dorm from firestore and update the dorm's points
     getUser(authContext.email).onSnapshot(
