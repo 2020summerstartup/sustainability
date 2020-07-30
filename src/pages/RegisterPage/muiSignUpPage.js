@@ -21,13 +21,19 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import HomeIcon from "@material-ui/icons/Home";
 
 // Sounds
 import signup from "../../sounds/hero_simple-celebration-03.wav";
 
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
+
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+// import DormSelectRegister from "./DormSelectRegister";
+
+var placeholder = "Select your dorm...";
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -175,6 +181,10 @@ class SignUpFormBase extends Component {
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+    if(event.target.name === "dorm") {
+      console.log('event was dorm');
+      placeholder = event.target.value;
+    }
   };
 
   render() {
@@ -206,16 +216,6 @@ class SignUpFormBase extends Component {
         dorm === "Linde" ||
         dorm === "Atwood"
       );
-
-    var dormEntered;
-    const makeCapitalDormName = () => {
-      if (typeof dorm === "undefined" || dorm.length < 1) {
-        console.log("nothing yet");
-      } else {
-        dormEntered = dorm[0].toUpperCase() + dorm.slice(1).toLowerCase();
-      }
-    };
-    makeCapitalDormName();
 
     return (
       <Container maxWidth="xs">
@@ -263,23 +263,31 @@ class SignUpFormBase extends Component {
                 },
               }}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              id="dorm"
-              label="Dorm"
-              placeholder="E.g. Case"
-              name="dorm"
-              value={dormEntered}
-              onChange={this.onChange}
-              InputProps={{
-                startAdornment: <HomeIcon className={classes.formIcon} />,
-                classes: {
-                  adornedEnd: classes.adornedEnd,
-                },
-              }}
-            />
+            <div>
+              <FormControl variant="filled" className={classes.formControl}>
+                <InputLabel>Dorm</InputLabel>
+                {/* <InputLabel>{newPlaceholder}</InputLabel> */}
+                <Select
+                  native
+                  value={placeholder}
+                  name="dorm"
+                  onChange={this.onChange}
+                  label="Dorm"
+                  inputProps={{ "aria-label": "dorm" }}
+                  style={{ width: "10rem" }}
+                >
+                  <option aria-label="None" value="" />
+                  <option value={"South"}>South</option>
+                  <option value={"Case"}>Case</option>
+                  <option value={"East"}>East</option>
+                  <option value={"West"}>West</option>
+                  <option value={"North"}>North</option>
+                  <option value={"Drinkward"}>Drinkward</option>
+                  <option value={"Sontag"}>Sontag</option>
+                  <option value={"Linde"}>Linde</option>
+                </Select>
+              </FormControl>
+            </div>
             <PasswordInput2
               // type="password"
               label="Password"
