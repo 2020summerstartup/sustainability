@@ -8,10 +8,6 @@ require('dotenv').config();
 
 // import firebase/auth from 'firebase/auth';
 
-
-// };
-
-// const firebase = require("firebase"); // Value never used
 // Required for side-effects
 require("firebase/firestore");  
 
@@ -95,14 +91,18 @@ export const createUser = (userEmail, userName, dorm) => {
       });
 };
 
-
+// fetches the user collection from firestore
+// meant to be called then added to (ex: getUser().doc(localStorage.getItem('email')))
 export const getUser = (userEmail) => {
   localStorage.setItem('email', userEmail)
   return firestore.collection('users').doc(userEmail)
 }
 
-
-
+// fetches the dorm collection from firestore
+// meant to be called then added to (ex: getDorm().doc('North'))
+export const getDorm = () => {
+  return firestore.collection('dorms')
+}
 
 // this method is called to increase points
 export const updateUserPoint = (userEmail, userAction, actionPoint) => {
@@ -114,6 +114,7 @@ export const updateUserPoint = (userEmail, userAction, actionPoint) => {
     total: app.firestore.FieldValue.increment(actionPoint),
   })
 }
+
 //this method is meant to update the dorm total
 export const updateDormPoint = (userDorm, actionPoint) => {
   return firestore.collection('dorms').doc(userDorm).update({
@@ -140,11 +141,6 @@ export const updateUserDorm = (userEmail, value) => {
   })
 }
 
-// fetches the dorm collection from firestore
-// meant to be called then added to (ex: getDorm().doc('North'))
-export const getDorm = () => {
-  return firestore.collection('dorms')
-}
 
 // updates firestore when a user favorites an action
 export const addFav = (userEmail, susAction) => {
