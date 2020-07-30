@@ -28,12 +28,13 @@ import signup from "../../sounds/hero_simple-celebration-03.wav";
 // import your fontawesome library
 import "../../components/FontAwesomeIcons";
 
+// Imports to support the dorm dropdown
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-// import DormSelectRegister from "./DormSelectRegister";
 
-var placeholder = "Select your dorm...";
+// The value displayed in the dorm dropdown menu.
+var dormValue = "Select your dorm...";
 
 const SignUpPage = () => (
   <div className="base-container">
@@ -125,6 +126,7 @@ PasswordInput2.propTypes = {
 
 PasswordInput2 = withStyles(useStyles)(PasswordInput2);
 
+// The initial state of all information to be completed by the user
 const INITIAL_STATE = {
   user: {
     username: "",
@@ -141,7 +143,7 @@ const INITIAL_STATE = {
 // sound play for favorites button
 const signupAudio = new Audio(signup);
 
-// called by onclick to play the audio file
+// called when the user clicks sign up to play the audio file
 const playSound = (audioFile) => {
   audioFile.play();
 };
@@ -184,8 +186,8 @@ class SignUpFormBase extends Component {
     this.setState({ [event.target.name]: event.target.value });
     // If the user changed the dorm in the dropdown
     if(event.target.name === "dorm") {
-      // Update the placeholder (value displayed in the dropdown) so they see their current selection
-      placeholder = event.target.value;
+      // Update the dormValue (value displayed in the dropdown) so they see their current selection
+      dormValue = event.target.value;
     }
   };
 
@@ -230,7 +232,6 @@ class SignUpFormBase extends Component {
             <img alt="sign up" src={signupImg} />
           </div>
           <form onSubmit={this.onSubmit} className={classes.form}>
-            {/* <Image source={{uri:this.state.user.avatar}} /> */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -238,7 +239,6 @@ class SignUpFormBase extends Component {
               id="username"
               label="Full Name"
               name="username"
-              // value={username}
               autoComplete="name"
               onChange={this.onChange}
               InputProps={{
@@ -255,7 +255,6 @@ class SignUpFormBase extends Component {
               id="email"
               label="Email Address"
               name="email"
-              // value={email}
               autoComplete="email"
               onChange={this.onChange}
               InputProps={{
@@ -270,7 +269,7 @@ class SignUpFormBase extends Component {
                 <InputLabel>Dorm</InputLabel>
                 <Select
                   native
-                  value={placeholder}
+                  value={dormValue}
                   name="dorm"
                   onChange={this.onChange}
                   label="Dorm"
@@ -290,14 +289,12 @@ class SignUpFormBase extends Component {
               </FormControl>
             </div>
             <PasswordInput2
-              // type="password"
               label="Password"
               name="passwordOne"
               value={passwordOne}
               onChange={this.onChange}
             />
             <PasswordInput
-              // type="password"
               label="Password"
               name="passwordTwo"
               value={passwordTwo}
@@ -345,9 +342,7 @@ class SignUpFormBase extends Component {
 }
 
 const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
-
 const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
 
 export default SignUpPage;
-
 export { SignUpForm, PasswordInput2 };
