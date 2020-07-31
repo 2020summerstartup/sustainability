@@ -21,11 +21,11 @@ const theme = createMuiTheme({
         root: {
           backgroundColor: "var(--bg-primary)",
         },
-        Mui: {
-          selected: {
-            color: "var(--theme)",
-          },
-        },
+        // Mui: {
+        //   selected: {
+        //     color: "var(--theme)",
+        //   },
+        // },
       },
       MuiBottomNavigationAction: {
         root: {
