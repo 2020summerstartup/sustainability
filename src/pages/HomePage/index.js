@@ -405,9 +405,15 @@ function HomePage() {
   const [badgeActionCount, setBadgeActionCount] = useState("");
   const authContext = useContext(AuthUserContext);
 
-  var initUserTotal = localStorage.getItem('total');
-  console.log(localStorage.getItem('total'))
-  console.log(initUserTotal);
+
+  // this is needed to prevent error in console when user signs into their account
+  // hopefully will revisit later to get rid of refresh page solution 
+  var initUserTotal;
+  if (localStorage.getItem('total') == null) {
+    initUserTotal = 0
+  } else {
+    initUserTotal = localStorage.getItem('total')
+  }
   const [userTotal, updateUserTotal] = useState(initUserTotal);
 
 
