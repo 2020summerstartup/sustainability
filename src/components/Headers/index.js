@@ -173,7 +173,7 @@ const useStyles3 = makeStyles((theme) => ({
     },
   },
   logo: {
-    width: "3rem",
+    width: "6.5rem",
     height: "100%",
     paddingRight: "0.5rem",
     padding: "0",
@@ -201,7 +201,7 @@ const BackArrowSettingsHeader = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo className={classes.logo} />
+          <SusLogo className={classes.logo}/>
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Grid justify="flex-start" container>
             <Grid item>

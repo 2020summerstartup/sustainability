@@ -233,8 +233,8 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },
+      background: "linear-gradient(to top, #f48fb1, rgba(0,0,0,0))",
+    },  
   },
   card2: {
     borderRadius: "1rem",
@@ -257,7 +257,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0)33%)",
     },
   },
   content: {
@@ -340,6 +340,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   fab: {
+    backgroundColor: "secondary",
     right: "1rem",
     bottom: "4.5rem",
     position: "fixed",
@@ -349,14 +350,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   checkProgress: {
+    backgroundColor: "secondary",
     display: "none",
     [theme.breakpoints.up("sm")]: {
+      backgroundColor: "secondary",
       display: "flex",
       marginTop: theme.spacing(2),
     },
   },
   dialogPaper: {
     overflow: "hidden !important",
+    backgroundColor: "secondary",
   },
   buttonModal: {
     marginTop: theme.spacing(2),
@@ -588,7 +592,7 @@ function HomePage() {
     var storedFav = localStorage.getItem(storageName2) === "true";
     if (storedFav) {
       // If the action is favorited
-      favIconColors[el - 1] = "#DC143C"; // Turn red
+      favIconColors[el - 1] = "#f48fb1"; // Turn red
     } else {
       favIconColors[el - 1] = "#6c6c6c"; // Otherwise turn gray
     }
@@ -614,7 +618,7 @@ function HomePage() {
     var displayText;
     if (storedFav) {
       displayText = action.title.concat(" added to favorites");
-      favIconColor.style.color = "#DC143C"; // Turn red
+      favIconColor.style.color = "#f48fb1"; // Turn red
       playSound(likeAudio);
       toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
     } else {
@@ -711,7 +715,7 @@ function HomePage() {
           <Fab
             variant="extended"
             size="medium"
-            color="primary"
+            color="secondary"
             onClick={() => setProgressModalIsOpen(true)}
             aria-label="check progress"
             className={classes.fab}
@@ -721,7 +725,7 @@ function HomePage() {
           </Fab>
           {/* Large Screens */}
           <Button
-            color="primary"
+            color="secondary"
             variant="contained"
             onClick={() => {
               setProgressModalIsOpen(true);
@@ -793,7 +797,7 @@ function HomePage() {
           >
             <DialogTitle
               id="alert-dialog-slide-title"
-              style={{ backgroundColor: "var(--theme)", color: "#FFFFFF"}}
+              style={{ backgroundColor: "var(--theme-secondary)", color: "#FFFFFF" }}
             >
               {"Check Your Progress!"}
             </DialogTitle>
@@ -815,7 +819,7 @@ function HomePage() {
                   setProgressModalIsOpen(false);
                 }}
                 variant="contained"
-                color="primary"
+                color="secondary"
               >
                 Close
               </Button>
@@ -851,30 +855,31 @@ function HomePage() {
           </Modal> */}
         </div>
         <TabPanel value={value} index={0} className="tab-container">
-          {/* Action card boi */}
-          <NoSsr>
-            <GoogleFontLoader
-              fonts={[
-                { font: "Spartan", weights: [300] },
-                { font: "Montserrat", weights: [200, 400, 700] },
-              ]}
-            />
-          </NoSsr>
-          <Card className={classes.card2}>
-            <CardMedia classes={mediaStyles2} image={actionTab} />
-            <Box py={3} px={2} className={classes.content}>
-              <Info useStyles={useGalaxyInfoStyles}>
-                <InfoSubtitle></InfoSubtitle>
-                <InfoTitle>Log your actions here!</InfoTitle>
-                <InfoCaption>
-                  Tap the drop down menu to find out more
-                  <span role="img" aria-label="down arrow">
-                    🔽
-                  </span>
-                </InfoCaption>
-              </Info>
-            </Box>
-          </Card>
+           {/* Action galaxy card*/}
+        <NoSsr>
+                    <GoogleFontLoader
+                      fonts={[
+                        { font: "Spartan", weights: [300] },
+                        { font: "Montserrat", weights: [200, 400, 700] },
+                      ]}
+                    />
+                 
+                  </NoSsr>
+                  <Card className={classes.card2}>
+                    <CardMedia classes={mediaStyles2} image={actionTab} />
+                    <Box py={3} px={2} className={classes.content}>
+                      <Info useStyles={useGalaxyInfoStyles}>
+                        <InfoSubtitle></InfoSubtitle>
+                        <InfoTitle>Log your actions here!</InfoTitle>
+                        <InfoCaption>
+                        Tap the drop down menu to find out more 
+                          <span role="img" aria-label="down arrow">
+                             🔽
+                          </span>
+                        </InfoCaption>
+                      </Info>
+                    </Box>
+                  </Card>
           <Fragment>
             <div className={classes.search}>
               <div className={classes.searchIcon}>

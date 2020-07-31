@@ -1,5 +1,5 @@
 import React from "react";
-import favorite from "../../img/favorite.svg";
+import favorite2 from "../../img/favorite2.svg";
 
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -20,15 +20,17 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    borderRadius: "1rem",
+  borderRadius: "1rem",
     boxShadow: "none",
     position: "relative",
     margin: "auto",
-    maxWidth: "60rem",
+    marginBottom: "1rem",
+    maxWidth: "36rem",
     minHeight: "15rem",
+    zIndex: 0,
     [theme.breakpoints.up("sm")]: {
-      maxWidth: "60rem",
-      minHeight: "20rem",
+      maxWidth: "75vh",
+      minHeight: "40vh",
     },
     "&:after": {
       content: '""',
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0)33%)",
     },
   },
   content: {
@@ -75,7 +77,7 @@ export const FavoriteCard = React.memo(function GalaxyCard() {
             />
         </NoSsr>
         <Card className={classes.card}>
-            <CardMedia classes={mediaStyles} image={favorite} />
+            <CardMedia classes={mediaStyles} image={favorite2} />
             <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
                     <InfoSubtitle>Your faves are here </InfoSubtitle>

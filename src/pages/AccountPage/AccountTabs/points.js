@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+      borderRadius: "black",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0)33%)",
     },
   },
   content: {

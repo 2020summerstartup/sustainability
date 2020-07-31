@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import ProgressCircle from "../../../components/ProgressCircle";
+import ChallengeCard2 from "./challengeCard2";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -141,7 +142,9 @@ function CompeteTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={1} className="tab-container">
+
         <Suspense fallback={<ProgressCircle />}>
+          <center><ChallengeCard2 /></center>
           <Challenges />
         </Suspense>
       </TabPanel>

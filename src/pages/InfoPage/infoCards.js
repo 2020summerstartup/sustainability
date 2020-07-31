@@ -1,9 +1,10 @@
 import React from "react";
 import { Spring } from "react-spring/renderprops";
+import PwaCard from "./pwa";
 
 // list of colors for each dorm to display in a different color depending on their ranking
 // I grabbed the background color from the monochrome spread here: https://www.colorhexa.com/24a113
-let colors = ["#24a113", "#39AA2A", "#4FB342", "#65BD59"];
+let colors = ["#DA929D", "#8BAB62", "#599D39", "#24A113"];
 
 class InfoCards extends React.Component {
   constructor() {
@@ -58,10 +59,13 @@ class InfoCards extends React.Component {
         to={{ opacity: 1, marginTop: 0 }}
         config={{ delay: 0, duration: 2000 }}
       >
+        
         {(props) => (
+          
           <div style={props}>
             <div className="InfoCards">
               <div className="cards">
+              <PwaCard />
                 {this.state.cards ? (
                   this.state.cards.map((card, i) => (
                     <div key={i} >
@@ -74,6 +78,8 @@ class InfoCards extends React.Component {
                           margin: "0 0.5rem",
                           maxWidth: "600px",
                           marginTop: "2rem",
+                          boxShadow: colors[i],
+                          // boxShadow: "0px 0px 20px 10px",
                         }}
                         // className={styles.cardWrapper}
                       >
