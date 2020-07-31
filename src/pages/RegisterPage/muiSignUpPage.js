@@ -295,6 +295,7 @@ class SignUpFormBase extends Component {
                   <option value={"Drinkward"}>Drinkward</option>
                   <option value={"Sontag"}>Sontag</option>
                   <option value={"Linde"}>Linde</option>
+                  <option value={"Atwood"}>Atwood</option>
                 </Select>
               </FormControl>
             <PasswordInput2
