@@ -406,29 +406,32 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const uploadUserData = (email) => {
-    // Get user's dorm set in local storage
-    console.log(email)
-    getUser(email).get().then(snap => {
-        if (snap.exists) {
-          initImpactPoints(email)
-          assignData(snap.data());
-          function assignData(data) {
-            localStorage.setItem("dorm", data.userDorm);
-            localStorage.setItem('total', data.total);
-          }
-        } else {
-          createUser(email);
-          initPoints(email);
-          initImpactPoints(email)
-          uploadUserTotalPoint(email, total);
-        }
-      },
-      (err) => {
-        console.log(`Encountered error: ${err}`);
-      })
-    };
-uploadUserData(localStorage.getItem('email'))
+
+
+// JESSICA WAS WORKING HERE AT END OF DAY
+// const uploadUserData = (email) => {
+//     // Get user's dorm set in local storage
+//     console.log(email)
+//     getUser(email).get().then(snap => {
+//         if (snap.exists) {
+//           initImpactPoints(email)
+//           assignData(snap.data());
+//           function assignData(data) {
+//             localStorage.setItem("dorm", data.userDorm);
+//             localStorage.setItem('total', data.total);
+//           }
+//         } else {
+//           createUser(email);
+//           initPoints(email);
+//           initImpactPoints(email)
+//           uploadUserTotalPoint(email, total);
+//         }
+//       },
+//       (err) => {
+//         console.log(`Encountered error: ${err}`);
+//       })
+//     };
+// uploadUserData(localStorage.getItem('email'))
 
 
 // Text to display on the homepage
@@ -443,6 +446,23 @@ function HomePage() {
   // IS NOT YET SET -> IT IS SET BY AN ASYNC CALL TO FIRESTORE 
   const [userTotal, updateUserTotal] = useState(localStorage.getItem('total'));
   
+
+  // Get user's info set in local storage
+  getUser(authContext.email).onSnapshot(
+    (docSnapshot) => {
+      if (docSnapshot.exists) {
+        assignData(docSnapshot.data());
+      } else {
+        createUser(authContext.email);
+        initPoints(authContext.email);
+        uploadUserTotalPoint(authContext.email, total);
+      }
+    },
+    (err) => {
+      console.log(`Encountered error: ${err}`);
+    }
+  );
+
 
 
 
