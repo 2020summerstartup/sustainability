@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from "react";
+import { withRouter } from "react-router";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 // import DormCard from "./dorm";
@@ -106,13 +107,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AccountTabs() {
+const AccountTabs = props => {
+  let { match, history } = props;
+  let { params } = match;
+  let { page } = params;
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+
+  const tabNameToIndex = {
+    0: "points",
+    1: "dorm",
+    2: "badge",
+  };
+
+  const indexToTabName = {
+    points: 0,
+    dorm: 1,
+    badge: 2,
+  };
+
+  const [value, setValue] = React.useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    history.push(`/account/${tabNameToIndex[newValue]}`);
   };
+
   return (
     <div>
       <AppBar
@@ -176,7 +195,7 @@ function AccountTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} className="tab-container">
-        <TotalPointsCard />
+         <TotalPointsCard />
         {/* </Suspense> */}
       </TabPanel>
 
@@ -233,4 +252,4 @@ function AccountTabs() {
   );
 }
 
-export default AccountTabs;
+export default withRouter(AccountTabs);

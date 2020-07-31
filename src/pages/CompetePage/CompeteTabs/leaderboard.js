@@ -60,7 +60,7 @@ class Leaderboard extends React.Component {
   }
 
   //implement later with real data TODO: This has been implemented with real data? I think this comment is just outdated lol
-  componentWillMount() {
+  componentDidMount() {
     this.getData();
     /*data is refreshing every 3 minutes*/
     setInterval(this.getData, 180000);

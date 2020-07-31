@@ -109,7 +109,7 @@ class Badges2 extends React.Component {
     });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getData();
   }
 

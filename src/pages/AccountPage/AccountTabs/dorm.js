@@ -1,7 +1,8 @@
 import React from "react";
-import dorm from "../../../img/dorm.svg";
-import dorm2 from "../../../img/dorm2.svg";
-import dorm3 from "../../../img/dorm3.svg";
+// Unused dorm photos
+// import dorm from "../../../img/dorm.svg";
+// import dorm2 from "../../../img/dorm2.svg";
+// import dorm3 from "../../../img/dorm3.svg";
 import dorm4 from "../../../img/dorm4.svg";
 
 
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0)33%)",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
     },
   },
   content: {

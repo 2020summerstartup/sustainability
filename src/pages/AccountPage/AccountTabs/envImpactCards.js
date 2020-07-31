@@ -69,7 +69,7 @@ class EnvImpactCards extends React.Component {
       cards: data.cards,
     });
   }
-  componentWillMount() {
+  componentDidMount() {
     this.getData();
   }
 

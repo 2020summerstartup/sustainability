@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import points from "../../../img/points.svg";
 import { AuthUserContext } from "../../../services/Session";
 import SignOutButton from "../../../components/SignOut";
@@ -16,9 +16,6 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-
-import { getUser } from "../../../services/Firebase";
-import { assignData } from "../../HomePage";
 import TotalBuzz from './totalBuzz';
 import EnvImpactCards from './envImpactCards'
 
@@ -43,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       borderRadius: "black",
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0)33%)",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0) 45%)",
     },
   },
   content: {
@@ -57,21 +54,21 @@ const useStyles = makeStyles((theme) => ({
 export const TotalPointsCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
-  const authContext = useContext(AuthUserContext);
+  // const authContext = useContext(AuthUserContext);
 
-  getUser(authContext.email).onSnapshot(
-    (docSnapshot) => {
-      if (docSnapshot.exists) {
-        assignData(docSnapshot.data());
-      } else {
-        console.log(null);
-        // alert("Sorry You don't have any data yet, please go to Home page");
-      }
-    },
-    (err) => {
-      console.log(`Encountered error: ${err}`);
-    }
-  );
+  // getUser(authContext.email).onSnapshot(
+  //   (docSnapshot) => {
+  //     if (docSnapshot.exists) {
+  //       assignData(docSnapshot.data());
+  //     } else {
+  //       console.log(null);
+  //       // alert("Sorry You don't have any data yet, please go to Home page");
+  //     }
+  //   },
+  //   (err) => {
+  //     console.log(`Encountered error: ${err}`);
+  //   }
+  // );
 
   return (
     <>
