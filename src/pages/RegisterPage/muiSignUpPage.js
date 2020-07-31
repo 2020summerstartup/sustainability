@@ -44,50 +44,7 @@ const SignUpPage = () => (
 );
 
 // Styles for main signup page
-const useStyles = (theme) => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  formIcon: {
-    marginRight: "1rem",
-  },
-  eye: {
-    cursor: "pointer",
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  linkText: {
-    color: theme.palette.primary.main,
-    textDecoration: "none",
-  },
-  linkTextBigScreen: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "inline",
-      color: theme.palette.primary.main,
-      textDecoration: "none",
-    },
-  },
-  linkTextSmallScreen: {
-    color: theme.palette.primary.main,
-    textDecoration: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-  errorText: {
-    color: "red",
-    marginTop: "1rem",
-  },
-});
+const useStyles = (theme) => ({});
 
 class PasswordInput2 extends Component {
   constructor(props) {
@@ -131,7 +88,7 @@ class PasswordInput2 extends Component {
               </IconButton>
             </InputAdornment>
           ),
-          startAdornment: <LockOpenIcon className={classes.formIcon} />,
+          startAdornment: <LockOpenIcon style={{ marginRight: "1rem" }} />,
         }}
       />
     );
@@ -245,14 +202,24 @@ class SignUpFormBase extends Component {
     return (
       <Container maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}>
+        <div
+          style={{
+            marginTop: "1.5rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
           <div className="image">
             <img alt="sign up" src={signupImg} />
           </div>
-          <form onSubmit={this.onSubmit} className={classes.form}>
+          <form
+            onSubmit={this.onSubmit}
+            styles={{ width: "100%", marginTop: "1rem" }}
+          >
             <TextField
               variant="outlined"
               margin="normal"
@@ -263,7 +230,7 @@ class SignUpFormBase extends Component {
               autoComplete="name"
               onChange={this.onChange}
               InputProps={{
-                startAdornment: <PersonIcon className={classes.formIcon} />,
+                startAdornment: <PersonIcon style={{ marginRight: "1rem" }} />,
                 classes: {
                   adornedEnd: classes.adornedEnd,
                 },
@@ -279,12 +246,12 @@ class SignUpFormBase extends Component {
               autoComplete="email"
               onChange={this.onChange}
               InputProps={{
-                startAdornment: <EmailIcon className={classes.formIcon} />,
+                startAdornment: <EmailIcon style={{ marginRight: "1rem" }} />,
               }}
             />
             <FormControl
               variant="filled"
-              fullWidth="true"
+              fullWidth
               margin="normal"
               className={classes.formControl}
             >
@@ -323,7 +290,10 @@ class SignUpFormBase extends Component {
             />
 
             {error && (
-              <Typography variant="body2" className={classes.errorText}>
+              <Typography
+                variant="body2"
+                style={{ color: "red", marginTop: "1rem" }}
+              >
                 {error.message}
               </Typography>
             )}
@@ -339,7 +309,7 @@ class SignUpFormBase extends Component {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
+                style={{ margin: "1rem auto 1.5rem auto" }}
                 disabled={isInvalid}
                 onClick={() => {
                   playSound(signupAudio);
@@ -355,7 +325,13 @@ class SignUpFormBase extends Component {
 
             <Grid container justify="center">
               <Grid item>
-                <Link to={ROUTES.SIGN_IN} className={classes.linkText}>
+                <Link
+                  to={ROUTES.SIGN_IN}
+                  style={{
+                    color: "var(--theme)",
+                    textDecoration: "none",
+                  }}
+                >
                   Already have an account? Sign In
                 </Link>
               </Grid>

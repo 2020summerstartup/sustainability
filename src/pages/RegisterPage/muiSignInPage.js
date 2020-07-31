@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 // DELETE this after we know firebase didn't break
 // import * as firebase from "firebase";
-import firebase from 'firebase/app';
+import firebase from "firebase/app";
 import "firebase/auth";
 
 import { withFirebase, getUser } from "../../services/Firebase";
@@ -32,48 +32,6 @@ const SignInPage = () => (
   </div>
 );
 
-const useStyles = (theme) => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  formIcon: {
-    marginRight: "1rem",
-  },
-  linkText: {
-    color: theme.palette.primary.main,
-    textDecoration: "none",
-  },
-  linkTextBigScreen: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "inline",
-      color: theme.palette.primary.main,
-      textDecoration: "none",
-    },
-  },
-  linkTextSmallScreen: {
-    color: theme.palette.primary.main,
-    textDecoration: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  errorText: {
-    color: "red",
-    marginTop: "1rem",
-  },
-});
-
 class PasswordInput extends Component {
   constructor(props) {
     super(props);
@@ -90,7 +48,6 @@ class PasswordInput extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const { passwordIsMasked } = this.state;
 
     return (
@@ -115,7 +72,7 @@ class PasswordInput extends Component {
               </IconButton>
             </InputAdornment>
           ),
-          startAdornment: <LockIcon className={classes.formIcon} />,
+          startAdornment: <LockIcon style={{ marginRight: "1rem" }} />,
         }}
       />
     );
@@ -123,12 +80,9 @@ class PasswordInput extends Component {
 }
 
 PasswordInput.propTypes = {
-  classes: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   // value: PropTypes.func.isRequired,
 };
-
-PasswordInput = withStyles(useStyles)(PasswordInput);
 
 const INITIAL_STATE = {
   email: "",
@@ -188,7 +142,6 @@ class SignInFormBase extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const { email, password, error } = this.state;
     const isInvalid = password === "" || email === "";
 
@@ -196,14 +149,25 @@ class SignInFormBase extends Component {
       <div className="base-container">
         <Container maxWidth="xs">
           <CssBaseline />
-          <div className={classes.paper}>
+          <div
+            style={{
+              marginTop: "1.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
             <div className="image">
               <img alt="sign in" src={signinImg} />
             </div>
-            <form onSubmit={this.onSubmit} className={classes.form} noValidate>
+            <form
+              onSubmit={this.onSubmit}
+              style={{ width: "100%", marginTop: "1rem" }}
+              noValidate
+            >
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -214,7 +178,7 @@ class SignInFormBase extends Component {
                 autoComplete="email"
                 onChange={this.onChange}
                 InputProps={{
-                  startAdornment: <EmailIcon className={classes.formIcon} />,
+                  startAdornment: <EmailIcon style={{ marginRight: "1rem" }} />,
                 }}
               />
               <PasswordInput
@@ -224,7 +188,10 @@ class SignInFormBase extends Component {
                 onChange={this.onChangePW}
               />
               {error && (
-                <Typography variant="body2" className={classes.errorText}>
+                <Typography
+                  variant="body2"
+                  style={{ color: "red", marginTop: "1rem" }}
+                >
                   {error.message}
                 </Typography>
               )}
@@ -233,7 +200,7 @@ class SignInFormBase extends Component {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
+                style={{ margin: "1rem auto 1.5rem auto" }}
                 disabled={isInvalid}
               >
                 Sign In
@@ -242,7 +209,10 @@ class SignInFormBase extends Component {
                 <Grid item>
                   <Link
                     to={ROUTES.PASSWORD_FORGET}
-                    className={classes.linkText}
+                    style={{
+                      color: "var(--theme)",
+                      textDecoration: "none",
+                    }}
                   >
                     Forgot Password?
                   </Link>
@@ -250,13 +220,10 @@ class SignInFormBase extends Component {
                 <Grid item>
                   <Link
                     to={ROUTES.SIGN_UP}
-                    className={classes.linkTextBigScreen}
-                  >
-                    Don't have an account? Sign Up
-                  </Link>
-                  <Link
-                    to={ROUTES.SIGN_UP}
-                    className={classes.linkTextSmallScreen}
+                    style={{
+                      color: "var(--theme)",
+                      textDecoration: "none",
+                    }}
                   >
                     Sign up here!
                   </Link>
@@ -288,11 +255,8 @@ export const signOutFirebase = () => {
     });
 };
 
-const SignInFormStyled = withStyles(useStyles)(SignInFormBase);
+const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
 
-const SignInForm = compose(withRouter, withFirebase)(SignInFormStyled);
-
-export { SignInForm };
-export { PasswordInput };
+export { SignInForm, PasswordInput };
 
 export default SignInPage;
