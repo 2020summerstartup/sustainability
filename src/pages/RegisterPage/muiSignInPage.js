@@ -47,19 +47,19 @@ const useStyles = (theme) => ({
     marginRight: "1rem",
   },
   linkText: {
-    color: "black",
+    color: theme.palette.primary.main,
     textDecoration: "none",
   },
   linkTextBigScreen: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "inline",
-      color: "black",
+      color: theme.palette.primary.main,
       textDecoration: "none",
     },
   },
   linkTextSmallScreen: {
-    color: "black",
+    color: theme.palette.primary.main,
     textDecoration: "none",
     [theme.breakpoints.up("sm")]: {
       display: "none",
@@ -232,7 +232,7 @@ class SignInFormBase extends Component {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="secondary"
+                color="primary"
                 className={classes.submit}
                 disabled={isInvalid}
               >

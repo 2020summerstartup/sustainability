@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Reward from "react-rewards";
 
@@ -8,6 +8,7 @@ import * as ROUTES from "../../constants/routes";
 import { PasswordInput } from "./muiSignInPage";
 import signupImg from "../../img/login2.svg";
 
+import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -62,6 +63,25 @@ const useStyles = (theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  linkText: {
+    color: theme.palette.primary.main,
+    textDecoration: "none",
+  },
+  linkTextBigScreen: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "inline",
+      color: theme.palette.primary.main,
+      textDecoration: "none",
+    },
+  },
+  linkTextSmallScreen: {
+    color: theme.palette.primary.main,
+    textDecoration: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
   },
   errorText: {
     color: "red",
@@ -186,7 +206,7 @@ class SignUpFormBase extends Component {
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
     // If the user changed the dorm in the dropdown
-    if(event.target.name === "dorm") {
+    if (event.target.name === "dorm") {
       // Update the dormValue (value displayed in the dropdown) so they see their current selection
       dormValue = event.target.value;
     }
@@ -262,29 +282,33 @@ class SignUpFormBase extends Component {
                 startAdornment: <EmailIcon className={classes.formIcon} />,
               }}
             />
-              <FormControl variant="filled" className={classes.formControl}>
-                <InputLabel>Dorm</InputLabel>
-                <Select
-                  native
-                  value={dormValue}
-                  name="dorm"
-                  label="Dorm"
-                  onChange={this.onChange}
-                  inputProps={{ "aria-label": "dorm" }}
-                  style={{ width: "24.75rem", margin: "1rem 0" }}
-                  variant="outlined"
-                >
-                  <option aria-label="None" value="" />
-                  <option value={"South"}>South</option>
-                  <option value={"Case"}>Case</option>
-                  <option value={"East"}>East</option>
-                  <option value={"West"}>West</option>
-                  <option value={"North"}>North</option>
-                  <option value={"Drinkward"}>Drinkward</option>
-                  <option value={"Sontag"}>Sontag</option>
-                  <option value={"Linde"}>Linde</option>
-                </Select>
-              </FormControl>
+            <FormControl
+              variant="filled"
+              fullWidth="true"
+              margin="normal"
+              className={classes.formControl}
+            >
+              <InputLabel>Dorm</InputLabel>
+              <Select
+                native
+                value={dormValue}
+                name="dorm"
+                // label="Dorm"
+                onChange={this.onChange}
+                inputProps={{ "aria-label": "dorm" }}
+                variant="outlined"
+              >
+                <option aria-label="None" value="" />
+                <option value={"South"}>South</option>
+                <option value={"Case"}>Case</option>
+                <option value={"East"}>East</option>
+                <option value={"West"}>West</option>
+                <option value={"North"}>North</option>
+                <option value={"Drinkward"}>Drinkward</option>
+                <option value={"Sontag"}>Sontag</option>
+                <option value={"Linde"}>Linde</option>
+              </Select>
+            </FormControl>
             <PasswordInput2
               label="Password"
               name="passwordOne"
@@ -324,12 +348,18 @@ class SignUpFormBase extends Component {
               >
                 Sign Up
               </Button>
-              <p>
-                <center>
-                  Make sure all fields are completed!{" "}
-                </center>
-              </p>
+              {/* <p>
+                <center>Make sure all fields are completed! </center>
+              </p> */}
             </Reward>
+
+            <Grid container justify="center">
+              <Grid item>
+                <Link to={ROUTES.SIGN_IN} className={classes.linkText}>
+                  Already have an account? Sign In
+                </Link>
+              </Grid>
+            </Grid>
           </form>
         </div>
       </Container>
