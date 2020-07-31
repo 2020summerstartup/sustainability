@@ -11,9 +11,6 @@ import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {
-  getUser,
-  createUser,
-  uploadUserTotalPoint,
   updateUserPoint,
   updateDormPoint,
   actionMastered,
@@ -402,37 +399,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 
-// JESSICA WAS WORKING HERE AT END OF DAY
-// const uploadUserData = (email) => {
-//     // Get user's dorm set in local storage
-//     console.log(email)
-//     getUser(email).get().then(snap => {
-//         if (snap.exists) {
-//           initImpactPoints(email)
-//           assignData(snap.data());
-//           function assignData(data) {
-//             localStorage.setItem("dorm", data.userDorm);
-//             localStorage.setItem('total', data.total);
-//           }
-//         } else {
-//           createUser(email);
-//           initPoints(email);
-//           initImpactPoints(email)
-//           uploadUserTotalPoint(email, total);
-//         }
-//       },
-//       (err) => {
-//         console.log(`Encountered error: ${err}`);
-//       })
-//     };
-// uploadUserData(localStorage.getItem('email'))
-
 
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
   const [badgeAction, setBadgeAction] = useState("");
+  const [badgeActionCount, setBadgeActionCount] = useState("");
   const authContext = useContext(AuthUserContext);
 
   var initUserTotal = localStorage.getItem('total');
@@ -519,9 +492,11 @@ function HomePage() {
       // window.location.reload(true);
     });
 
+    // add's associated impact points in firestore and local storage
     updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
 
-
+    // check if action has been completed enough time to be considered "mastered"
+    // also sends user a progress notifications if action has not yet been mastered
     checkMastered(action);
 
     // update dorm's point in firestore
@@ -571,24 +546,30 @@ function HomePage() {
 
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
-    const actionTotal = localStorage.getItem(action.susAction);
     // if (storedMaster == null) {
     //   console.log('null')
     // }
-    if (20 * action.points >= actionTotal) {
+    const actionTotal = localStorage.getItem(action.susAction);
+    if (action.toMaster * action.points > actionTotal) {
       // If action has not been mastered, the button will remain enabled
-      console.log(
-        "You are " +
-          (20 * action.points - actionTotal) +
-          ` points away from mastering ${action.susAction}!`
-      );
+      // send user a progress alert to tell them how many more points they need to complete the action
+      var displayText;
+      // display a different message depending on if the user needs to buzz one or several more times to complete
+      if ((action.toMaster - (actionTotal/action.points)) != 1 ){
+        displayText = `You are ${action.toMaster - (actionTotal/action.points)} buzzes away from mastering the ${action.title} task!` ;
+      } else {
+        displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!` ;
+      }
+      //  AMY!!!! THIS IS WHERE MY TOASTIFY POP-UP THING IS!!! PLZ MAKE IT PRETTY
+      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+      // possibly want a new sound for this?
       setBadgeModalIsOpen(false);
-      setBadgeAction("");
-    } else if (20 * action.points < actionTotal) {
+    } else if (action.toMaster * action.points <= actionTotal) {
       actionMastered(localStorage.getItem("email"), action.susAction);
       // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
       setBadgeAction(action.title);
+      setBadgeActionCount(action.toMaster);
       setBadgeModalIsOpen(true);
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
@@ -653,9 +634,6 @@ function HomePage() {
   // Set the "progress message" to be displayed when the user pressed "check progress"
   var progressMessage = "";
   const setProgressMessage = () => {
-    // Why is this here? Doesn't initPoints run when the page loads so local storage should be good if they
-    // want to check their progress?
-    // initPoints();
     for (const el in ActionData) {
       // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
@@ -784,8 +762,8 @@ function HomePage() {
               <DialogContentText id="alert-dialog-description">
                 {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
                 <Typography variant="subtitle" className={classes.textBody}>
-                  You just earned a new badge for completing {badgeAction}! This means
-                  you have completed {badgeAction} 20 times. Great job and keep being
+                  You just earned a new badge for mastering the {badgeAction} task! This means
+                  you have completed the {badgeAction} task {badgeActionCount} times. Great job and keep being
                   sustainable!
                 </Typography>
               </DialogContentText>
