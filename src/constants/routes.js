@@ -13,3 +13,6 @@ export const CHANGEDORM = '/changedorm';
 export const OFFLINE = '/offline';
 export const DELETE_ACCOUNT = '/deleteaccount';
 export const ADMIN = '/admin';
+export const ACCOUNT_POINT = '/account/points';
+export const ACCOUNT_DORM = '/account/dorm';
+export const ACCOUNT_Badge = '/account/badge';

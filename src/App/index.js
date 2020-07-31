@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import Navigation from "../components/Navigation";
 import BottomNav from "../components/Navigation/bottomNav";
@@ -40,7 +40,7 @@ const MuiPasswordForgetPage = lazy(() =>
   import("../pages/RegisterPage/muiPasswordForgetPage")
 );
 const HomePage = lazy(() => import("../pages/HomePage"));
-const AccountPage = lazy(() => import("../pages/AccountPage"));
+const AccountTabs = lazy(() => import("../pages/AccountPage/AccountTabs/index"));
 const InfoPage = lazy(() => import("../pages/InfoPage"));
 const CompetePage = lazy(() => import("../pages/CompetePage"));
 const MuiOfflinePage = lazy(() =>
@@ -65,7 +65,7 @@ function AppBase() {
         <Route exact path="/home" component={HomeHeader} />
         <Route exact path="/compete" component={CompeteHeader} />
         <Route exact path="/info" component={InfoHeader} />
-        <Route exact path="/account" component={AccountHeader} />
+        <Route path="/account" component={AccountHeader} />
         <Route
           exact
           path="/deleteaccount"
@@ -109,8 +109,6 @@ function AppBase() {
 
           <Route path={ROUTES.HOME} component={HomePage} />
 
-          <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-
           <Route path={ROUTES.INFO} component={InfoPage} />
 
           <Route path={ROUTES.COMPETE} component={CompetePage} />
@@ -124,6 +122,12 @@ function AppBase() {
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
 
           <Route path={ROUTES.ADMIN} component={AdminPage} />
+
+          <Switch>
+            <Redirect exact from={ROUTES.ACCOUNT} to={ROUTES.ACCOUNT_POINT} />
+            <Route exact path="/account/:page?" render={props => <AccountTabs {...props} />} />
+          </Switch>
+        
         </Suspense>
         {/* </Switch> */}
 

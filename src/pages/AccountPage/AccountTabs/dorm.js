@@ -1,7 +1,4 @@
 import React from "react";
-import dorm from "../../../img/dorm.svg";
-import dorm2 from "../../../img/dorm2.svg";
-import dorm3 from "../../../img/dorm3.svg";
 import dorm4 from "../../../img/dorm4.svg";
 
 

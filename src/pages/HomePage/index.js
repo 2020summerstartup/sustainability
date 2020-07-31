@@ -20,7 +20,6 @@ import {
   firestore,
   updateUserImpact
 } from "../../services/Firebase";
-import {functions} from "../../services/Firebase/firebase"
 
 import PropTypes from "prop-types";
 
