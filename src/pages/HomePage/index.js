@@ -87,6 +87,7 @@ const FavoriteCard = lazy(() => import("./faveCard.js"));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
+//DONT THINK WE NEED THIS ANYMORE?
 var total;
 function initPoints(email) {
   total = 0;
@@ -102,16 +103,6 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-function initImpactPoints (email) {
-    // pull impact data from firestore & intialize in local storage
-    getUser(email).onSnapshot( (snapshot) => {
-      let envImpact = snapshot.get('impact')
-      localStorage.setItem("buzzes", envImpact.buzzes);
-      localStorage.setItem("energy", envImpact.energy);
-      localStorage.setItem("coEmiss", envImpact.coEmiss);
-      localStorage.setItem("water", envImpact.water);
-  });
-}
 
 // sound play for certain buttons
 const likeAudio = new Audio(like);
@@ -124,7 +115,7 @@ const playSound = (audioFile) => {
 };
 
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
-// should only be called when page first loads, not when increment
+// should only be called when page first loads, not when points are increment
 function assignData(data) {
   // the data parameter is meant to be the firestore document snapshot
   const points = data.points;
@@ -270,7 +261,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0)33%)",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0)40%)",
     },
   },
   content: {
@@ -439,34 +430,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 // Text to display on the homepage
 function HomePage() {
-  console.log(localStorage.getItem('total'))
-  console.log(localStorage.getItem('email'))
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
   const [badgeAction, setBadgeAction] = useState("");
   const authContext = useContext(AuthUserContext);
-  // THE ERROR WITH TOTAL POINT DISPLAY WHEN A USER SIGNS IN/UP IS THAT LOCAL STORAGE 
-  // IS NOT YET SET -> IT IS SET BY AN ASYNC CALL TO FIRESTORE 
-  const [userTotal, updateUserTotal] = useState(localStorage.getItem('total'));
-  
 
-  // Get user's info set in local storage
-  getUser(authContext.email).onSnapshot(
-    (docSnapshot) => {
-      if (docSnapshot.exists) {
-        assignData(docSnapshot.data());
-      } else {
-        createUser(authContext.email);
-        initPoints(authContext.email);
-        uploadUserTotalPoint(authContext.email, total);
-      }
-    },
-    (err) => {
-      console.log(`Encountered error: ${err}`);
-    }
-  );
-
-
+  var initUserTotal = localStorage.getItem('total');
+  const [userTotal, updateUserTotal] = useState(initUserTotal);
 
 
   const classes = useStyles();
@@ -513,13 +483,19 @@ function HomePage() {
     }
   };
 
+  // this function is called upon increment 
+  // sets the state of userTotal so that user's total point display is correct 
   const updateDisplayTotal = (actionPoint) => {
-    const newTotal = parseInt(userTotal) + parseInt(actionPoint)
+    const newTotal = parseInt(localStorage.getItem('total')) + parseInt(actionPoint)
     updateUserTotal(newTotal);
   }
 
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
+
+    // function is what updates UserTotal state so that correct score is displayed!!
+    updateDisplayTotal(action.points);
+
 
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the specific action point count
@@ -545,43 +521,18 @@ function HomePage() {
 
     updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
 
- 
-
-    // get the user's dorm from firestore and update the dorm's points
-    getUser(authContext.email).onSnapshot(
-      (docSnapshot) => {
-        if (docSnapshot.exists) {
-          assignData(docSnapshot.data());
-        } else {
-          createUser(authContext.email);
-          initPoints(authContext.email);
-          initImpactPoints(authContext.email)
-          uploadUserTotalPoint(
-            authContext.email,
-            localStorage.getItem("total")
-          );
-        }
-      },
-      (err) => {
-        console.log(`Encountered error: ${err}`);
-      }
-    );
 
     checkMastered(action);
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
-
-
-    updateDisplayTotal(action.points);
-
-    
+   
 
   }; // increment
 
+
+
   // to check with the mastered actions that firestore has upon loading page
-  // may need to change this because every time the page loads we will read firestore data
-  //(and page load everytime action is logged) so we may reach limit if many people are using the app
   var firestoreMastered = [];
   const getMastered = (userEmail) => {
     let userDocRef = firestore.doc("users/" + userEmail);
@@ -638,7 +589,6 @@ function HomePage() {
       // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
       setBadgeAction(action.title);
-      console.log(`You have mastered ${localStorage.getItem("badgeAction")}!`);
       setBadgeModalIsOpen(true);
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
@@ -648,6 +598,8 @@ function HomePage() {
   const handleClose = () => {
     setBadgeModalIsOpen(false);
   };
+
+
 
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
@@ -701,9 +653,9 @@ function HomePage() {
   // Set the "progress message" to be displayed when the user pressed "check progress"
   var progressMessage = "";
   const setProgressMessage = () => {
-    // Why is this here? Doesn't initPoints run when the page loads so local storage should be good if they
-    // want to check their progress?
-    // initPoints();
+    // initPoints has to be called here so that any values that aren't yet initialized are displayed as 0 instead
+    // appearing as blank
+    initPoints(); // DO NOT REMOVE
     for (const el in ActionData) {
       // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
@@ -872,7 +824,7 @@ function HomePage() {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-                // colors={["grey", "white", "green", "black"]}
+                colors={["grey", "white", "green", "black", "pink"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -890,34 +842,6 @@ function HomePage() {
               </Button>
             </DialogActions>
           </Dialog>
-
-          {/* OLD MODAL */}
-          {/* <Modal
-            isOpen={progressModalIsOpen}
-            onRequestClose={() => setProgressModalIsOpen(false)}
-            className={styles.modal}
-            overlayClassName={styles.overlay}
-          >
-            <center>
-              <Confetti
-                width={1500}
-                numberOfPieces={2000}
-                recycle={false}
-                opacity={0.7}
-                // colors={["grey", "white", "green", "black"]}
-              />
-              <h1>Your Progress:</h1>
-              {progressMessage}
-              <div>
-                <button
-                  onClick={() => setProgressModalIsOpen(false)}
-                  className="button"
-                >
-                  Close
-                </button>
-              </div>
-            </center>
-          </Modal> */}
         </div>
         <TabPanel value={value} index={0} className="tab-container">
            {/* Action galaxy card*/}

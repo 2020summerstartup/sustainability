@@ -16,6 +16,8 @@ import BottomNav from "../components/Navigation/bottomNav";
 // import MuiChangeDorm from "../pages/AccountPage/Settings/muiChangeDorm";
 // import DeleteAccount from "../pages/AccountPage/Settings/deleteAccount";
 // import AdminPage from "../pages/AdminPage";
+import IntroPage from "../pages/IntroPage";
+import RotatePage from "../pages/RotatePage";
 import Header, {
   HomeHeader,
   CompeteHeader,
@@ -96,7 +98,11 @@ function AppBase() {
         {/* For each page's content */}
 
         <Suspense fallback={<ProgressCircle />}>
-          <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
+        {/* <Route exact path={ROUTES.LANDING} component={IntroPage} /> */}
+        <Route exact path={ROUTES.LANDING} component={RotatePage} />
+
+
+          {/* <Route exact path={ROUTES.LANDING} component={MuiLandingPage} /> */}
 
           <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
 

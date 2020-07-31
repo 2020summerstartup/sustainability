@@ -1,0 +1,42 @@
+.burstShape {
+  margin: 3rem auto;
+  width: 7rem;
+  height: 7rem;
+  position: relative;
+  text-align: center;
+  display: flex;
+  /* CSS TRICK: this combines justify-content & align-items! */
+  place-items: center;
+  color: white;
+  text-shadow: 1px 1px 5px black;
+}
+.burstShape:before,
+.burstShape:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 7rem;
+  width: 7rem;
+  z-index: -1;
+}
+.burstShape:before {
+  transform: rotate(30deg);
+}
+.burstShape:after {
+  transform: rotate(60deg);
+}
+
+/* for card.colorStyling so that each impact card will have it's own color */
+
+.co2, .co2:before, .co2:after {
+  background: #FDE74C;
+}
+
+.energy, .energy:before, .energy:after  {
+  background: #9BC53D;
+}
+
+.water, .water:before, .water:after {
+  background: #5BC0EB;
+}

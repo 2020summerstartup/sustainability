@@ -104,7 +104,6 @@ class Badges2 extends React.Component {
         badge.leafStyling = styles.right
       }
     })
-    console.log(data.badges)
     this.setState({
       badges: data.badges,
     });

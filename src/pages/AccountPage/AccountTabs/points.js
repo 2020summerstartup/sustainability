@@ -16,7 +16,7 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-
+import TotalBuzz from './totalBuzz';
 import EnvImpactCards from './envImpactCards'
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       borderRadius: "black",
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0)33%)",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0) 45%)",
     },
   },
   content: {
@@ -92,6 +92,7 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 </Info>
               </Box>
             </Card>
+            <TotalBuzz />
             <EnvImpactCards/>
             <SignOutButton />
           </>

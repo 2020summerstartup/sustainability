@@ -1,84 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./images/favicon.ico"" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Green Team</title>
+    <meta
+      name="description"
+      content="Harvey Mudd's Sustainability Competition PWA"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#24a113" />
+    <meta name="theme-color" content="#24a113" />
+    <link rel="manifest" href="/manifest.json" />
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="./images/favicon.ico"" />
-    <meta name=" viewport" content="width=device-width, initial-scale=1" />
-  <title>Green Team</title>
-  <meta name="description" content="Harvey Mudd's Sustainability Competition PWA" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-  <meta name="msapplication-TileColor" content="#24a113" />
-  <meta name="theme-color" content="#24a113" />
-  <link rel="manifest" href="/manifest.json" />
+    <!-- ios support -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-status-bar" content="#24a113" />
+    <meta name="apple-mobile-web-app-title" content="Sus Comp" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 
-  <!-- ios support -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-status-bar" content="#24a113" />
-  <meta name="apple-mobile-web-app-title" content="Sus Comp" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-
-  <!-- <meta name="google-signin-scope" content="profile email" />
+    <!-- <meta name="google-signin-scope" content="profile email" />
     <meta
       name="google-signin-client_id"
       content="MY_CLIENT_ID_ON_GOOGLE_DEV.apps.googleusercontent.com"
     /> -->
 
-  <!-- <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script> -->
-  <!-- <script src="/__/firebase/7.15.5/firebase.js" async></script> -->
+    <!-- <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script> -->
+    <!-- <script src="/__/firebase/7.15.5/firebase.js" async></script> -->
 
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+    <link
+      rel="dns-prefetch"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap"
+      crossorigin
+    />
 
-  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap"
-    crossorigin>
-
-  <!-- <link rel="dns-prefetch" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+    <!-- <link rel="dns-prefetch" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
     rel="stylesheet"> -->
-  <!-- <link
+    <!-- <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
       rel="stylesheet"
     /> -->
-</head>
+  </head>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("./serviceWorker.js")
-          .then((reg) => console.log("Success: ", reg.scope))
-          .catch((err) => console.log("Failure: ", err));
-      });
-    }
-  </script>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./serviceWorker.js")
+            .then((reg) => console.log("Success: ", reg.scope))
+            .catch((err) => console.log("Failure: ", err));
+        });
+      }
+    </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
 
-  <!-- Add SDKs for Firebase products that you want to use
+    <!-- Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
 
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyBzlwDriPb6sKitZ3b9gnX9n6NOMbkCi9s",
-      authDomain: "sustainabilitycompetition.firebaseapp.com",
-      databaseURL: "https://sustainabilitycompetition.firebaseio.com",
-      projectId: "sustainabilitycompetition",
-      storageBucket: "sustainabilitycompetition.appspot.com",
-      messagingSenderId: "72202621299",
-      appId: "1:72202621299:web:d8d210e7b9cb4765dcb506",
-      measurementId: "G-682PQBF33P"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-  </script>
-</body>
-
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBzlwDriPb6sKitZ3b9gnX9n6NOMbkCi9s",
+        authDomain: "sustainabilitycompetition.firebaseapp.com",
+        databaseURL: "https://sustainabilitycompetition.firebaseio.com",
+        projectId: "sustainabilitycompetition",
+        storageBucket: "sustainabilitycompetition.appspot.com",
+        messagingSenderId: "72202621299",
+        appId: "1:72202621299:web:d8d210e7b9cb4765dcb506",
+        measurementId: "G-682PQBF33P",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+  </body>
 </html>
