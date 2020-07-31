@@ -15,7 +15,7 @@ import {
   updateDormPoint,
   actionMastered,
   firestore,
-  updateUserImpact
+  updateUserImpact,
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -114,14 +114,13 @@ const playSound = (audioFile) => {
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
 // should only be called when page first loads, not when points are increment
 function assignData(data) {
-  // the data parameter is meant to be the firestore document snapshot
-  const points = data.points;
+  // the data parameter is meant to be a firestore document snapshot
+  localStorage.setItem("dorm", data.userDorm);
+  localStorage.setItem("name", data.name);
+  localStorage.setItem("total", data.total);const points = data.points;
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
-  localStorage.setItem("dorm", data.userDorm);
-  localStorage.setItem("name", data.name);
-  localStorage.setItem("total", data.total);
 }
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
@@ -398,8 +397,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 
-
-
 // Text to display on the homepage
 function HomePage() {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
@@ -409,7 +406,11 @@ function HomePage() {
   const authContext = useContext(AuthUserContext);
 
   var initUserTotal = localStorage.getItem('total');
+  console.log(localStorage.getItem('total'))
+  console.log(initUserTotal);
   const [userTotal, updateUserTotal] = useState(initUserTotal);
+
+
 
 
   const classes = useStyles();
@@ -425,6 +426,7 @@ function HomePage() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
 
   const handleExpandClick = (i) => {
     // WILL MAYBE REVISITED TO HAVE CARDS SAME HEIGHT

@@ -160,14 +160,14 @@ class SignInFormBase extends Component {
               assignData(docSnapshot.data());
           },
         );
-      }).then(() => {
-        this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
       }).then( () => {
         // initalizes user's impact points in local storage 
         getUserImpact(email)
-      })
-      .catch((error) => {
+      }).then(() => {
+        this.setState({ ...INITIAL_STATE });
+        this.props.history.push(ROUTES.HOME);
+        window.location.reload();
+      }).catch((error) => {
         this.setState({ error });
         console.log(error);
       });
