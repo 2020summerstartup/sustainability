@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import Reward from "react-rewards";
 
-import { withFirebase, createUser } from "../../services/Firebase";
+import { withFirebase, createUser, getUser, getUserImpact } from "../../services/Firebase";
+import {assignData} from "../HomePage"
 import * as ROUTES from "../../constants/routes";
 import { PasswordInput } from "./muiSignInPage";
 import signupImg from "../../img/login2.svg";
@@ -159,9 +160,6 @@ class SignUpFormBase extends Component {
     localStorage.clear();
     const { username, email, passwordOne, dorm } = this.state;
 
-    createUser(email, username, dorm);
-    localStorage.setItem("email", email);
-
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
@@ -170,8 +168,22 @@ class SignUpFormBase extends Component {
           username,
           email,
         });
-      })
-      .then(() => {
+      }).then( () => {
+          //create user in firebase firestore database
+          createUser(email, username, dorm);
+          localStorage.setItem("email", email);
+      } ).then( () => {
+        // once user is created in firestore we need to pull that data and update data into local storage 
+        // needed to display total point, progress modal, and enable app to run withour error
+        getUser(email).onSnapshot(
+          (docSnapshot) => {
+              assignData(docSnapshot.data());
+          },
+        );
+      }).then( () => {
+        // fetches user's impact points from firestore and updates local storage 
+        getUserImpact(email)
+      }).then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -283,6 +295,7 @@ class SignUpFormBase extends Component {
                   <option value={"Drinkward"}>Drinkward</option>
                   <option value={"Sontag"}>Sontag</option>
                   <option value={"Linde"}>Linde</option>
+                  <option value={"Atwood"}>Atwood</option>
                 </Select>
               </FormControl>
             <PasswordInput2
