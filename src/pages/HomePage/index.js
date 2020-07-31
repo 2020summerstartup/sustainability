@@ -437,38 +437,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 // Text to display on the homepage
 function HomePage() {
-  console.log('home')
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
   const [badgeAction, setBadgeAction] = useState("");
   const authContext = useContext(AuthUserContext);
-  // THE ERROR WITH TOTAL POINT DISPLAY WHEN A USER SIGNS IN/UP IS THAT LOCAL STORAGE 
-  // IS NOT YET SET -> IT IS SET BY AN ASYNC CALL TO FIRESTORE 
+
   var initUserTotal = localStorage.getItem('total');
-  console.log(localStorage.getItem('total'))
-  console.log('test new var', initUserTotal);
   const [userTotal, updateUserTotal] = useState(initUserTotal);
-  console.log('userTotal init', userTotal)
-
-
-  // initalizes user's data into local storage 
-  // needed to display total point, progress modal, and enable app to run withour error
-  // getUser(authContext.email).onSnapshot(
-  //   (docSnapshot) => {
-  //     if (docSnapshot.exists) {
-  //       assignData(docSnapshot.data());
-  //     } else {
-  //       createUser(authContext.email);
-  //       initPoints(authContext.email);
-  //       uploadUserTotalPoint(authContext.email, total);
-  //     }
-  //   },
-  //   (err) => {
-  //     console.log(`Encountered error: ${err}`);
-  //   }
-  // );
-
-
 
 
   const classes = useStyles();
@@ -524,9 +499,9 @@ function HomePage() {
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
 
-    console.log('dispaly update next', userTotal)
+    // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
-    console.log('dispaly updated', userTotal)
+
 
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the specific action point count
@@ -553,26 +528,26 @@ function HomePage() {
     updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
 
  
-
+    // DONT THINK WE NEED THIS ANYMORE
     // get the user's dorm from firestore and update the dorm's points
-    getUser(authContext.email).onSnapshot(
-      (docSnapshot) => {
-        if (docSnapshot.exists) {
-          assignData(docSnapshot.data());
-        } else {
-          createUser(authContext.email);
-          initPoints(authContext.email);
-          initImpactPoints(authContext.email)
-          uploadUserTotalPoint(
-            authContext.email,
-            localStorage.getItem("total")
-          );
-        }
-      },
-      (err) => {
-        console.log(`Encountered error: ${err}`);
-      }
-    );
+    // getUser(authContext.email).onSnapshot(
+    //   (docSnapshot) => {
+    //     if (docSnapshot.exists) {
+    //       assignData(docSnapshot.data());
+    //     } else {
+    //       createUser(authContext.email);
+    //       initPoints(authContext.email);
+    //       initImpactPoints(authContext.email)
+    //       uploadUserTotalPoint(
+    //         authContext.email,
+    //         localStorage.getItem("total")
+    //       );
+    //     }
+    //   },
+    //   (err) => {
+    //     console.log(`Encountered error: ${err}`);
+    //   }
+    // );
 
     checkMastered(action);
 
