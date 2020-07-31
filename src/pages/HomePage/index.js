@@ -653,9 +653,9 @@ function HomePage() {
   // Set the "progress message" to be displayed when the user pressed "check progress"
   var progressMessage = "";
   const setProgressMessage = () => {
-    // Why is this here? Doesn't initPoints run when the page loads so local storage should be good if they
-    // want to check their progress?
-    // initPoints();
+    // initPoints has to be called here so that any values that aren't yet initialized are displayed as 0 instead
+    // appearing as blank
+    initPoints(); // DO NOT REMOVE
     for (const el in ActionData) {
       // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
@@ -824,7 +824,7 @@ function HomePage() {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-                // colors={["grey", "white", "green", "black"]}
+                colors={["grey", "white", "green", "black", "pink"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -842,34 +842,6 @@ function HomePage() {
               </Button>
             </DialogActions>
           </Dialog>
-
-          {/* OLD MODAL */}
-          {/* <Modal
-            isOpen={progressModalIsOpen}
-            onRequestClose={() => setProgressModalIsOpen(false)}
-            className={styles.modal}
-            overlayClassName={styles.overlay}
-          >
-            <center>
-              <Confetti
-                width={1500}
-                numberOfPieces={2000}
-                recycle={false}
-                opacity={0.7}
-                // colors={["grey", "white", "green", "black"]}
-              />
-              <h1>Your Progress:</h1>
-              {progressMessage}
-              <div>
-                <button
-                  onClick={() => setProgressModalIsOpen(false)}
-                  className="button"
-                >
-                  Close
-                </button>
-              </div>
-            </center>
-          </Modal> */}
         </div>
         <TabPanel value={value} index={0} className="tab-container">
            {/* Action galaxy card*/}
