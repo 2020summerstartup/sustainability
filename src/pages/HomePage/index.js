@@ -467,6 +467,23 @@ function HomePage() {
     }
   );
 
+  // KATIE: A function I'm playing with for reading challenges from firebase:
+  // getChallenges(authContext.email).onSnapshot(
+  //   (docSnapshot) => {
+  //     if (docSnapshot.exists) {
+  //       assignData(docSnapshot.data());
+  //     } else {
+  //       createUser(authContext.email);
+  //       initPoints(authContext.email);
+  //       uploadUserTotalPoint(authContext.email, total);
+  //     }
+  //   },
+  //   (err) => {
+  //     console.log(`Encountered error: ${err}`);
+  //   }
+  // );
+
+  // getMastered(authContext.email);
 
 
 
