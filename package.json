@@ -22,6 +22,7 @@
     "firebase-admin": "^8.13.0",
     "firebaseui": "^4.6.1",
     "http2": "^3.3.7",
+    "material-auto-rotating-carousel": "^3.0.2",
     "moment": "^2.27.0",
     "muicss": "^0.10.2",
     "nodemailer": "^6.4.10",
@@ -31,6 +32,7 @@
     "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
     "react-google-font-loader": "^1.1.0",
+    "react-intro-slider": "^1.2.5",
     "react-modal": "^3.11.2",
     "react-onclickoutside": "^6.9.0",
     "react-rewards": "^1.1.1",
@@ -38,6 +40,7 @@
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0",
     "react-spring": "^8.0.27",
+    "react-swipeable-views": "^0.13.9",
     "react-toastify": "^6.0.8",
     "recompose": "^0.30.0",
     "yarn": "^1.22.4"
@@ -47,7 +50,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-    
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -23,9 +23,9 @@ function LandingPage() {
       <Container maxWidth="sm">
         <CssBaseline />
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
+          {/* <Typography component="h1" variant="h5">
             Hello friend!
-          </Typography>
+          </Typography> */}
           <div className="image">
             <img alt="welcome" src={welcomeImg} />
           </div>
