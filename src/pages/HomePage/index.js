@@ -1050,7 +1050,7 @@ function HomePage() {
             <AuthUserContext.Consumer>
               {(authUser) => (
                 <>
-                  <Suspense fallback={<ProgressCircle />}>
+                  <Suspense fallback={<center><ProgressCircle /></center>}>
                     <FavoriteCard />
                   </Suspense>
 

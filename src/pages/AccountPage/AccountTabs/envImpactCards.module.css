@@ -29,14 +29,38 @@
 
 /* for card.colorStyling so that each impact card will have it's own color */
 
-.co2, .co2:before, .co2:after {
-  background: #FDE74C;
+.co2,
+.co2:before,
+.co2:after {
+  /* background: #FDE74C; */
+  background: rgb(255, 251, 18);
+  background: radial-gradient(
+    circle,
+    rgba(255, 251, 18, 1) 0%,
+    rgba(255, 184, 24, 1) 100%
+  );
 }
 
-.energy, .energy:before, .energy:after  {
-  background: #9BC53D;
+.energy,
+.energy:before,
+.energy:after {
+  /* background: #9bc53d; */
+  background: rgb(173, 240, 25);
+  background: radial-gradient(
+    circle,
+    rgba(173, 240, 25, 1) 0%,
+    rgba(75, 179, 11, 1) 100%
+  );
 }
 
-.water, .water:before, .water:after {
-  background: #5BC0EB;
+.water,
+.water:before,
+.water:after {
+  /* background: #5bc0eb; */
+  background: rgb(91, 194, 250);
+  background: radial-gradient(
+    circle,
+    rgba(91, 194, 250, 1) 0%,
+    rgba(26, 97, 168, 1) 100%
+  );
 }

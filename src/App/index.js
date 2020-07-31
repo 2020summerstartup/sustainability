@@ -95,7 +95,7 @@ function AppBase() {
         {/* <Switch> */}
         {/* For each page's content */}
 
-        <Suspense fallback={<ProgressCircle />}>
+        <Suspense fallback={<center><ProgressCircle /></center>}>
           <Route exact path={ROUTES.LANDING} component={MuiLandingPage} />
 
           <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
