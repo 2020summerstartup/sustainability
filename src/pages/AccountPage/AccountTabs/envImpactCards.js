@@ -12,63 +12,63 @@ let waterImpact = localStorage.getItem('water');
 
 // cards to be rendered on the points page in account
 class EnvImpactCards extends React.Component {
-    constructor() {
-      super();
-      this.state = {
-        cards: [],
-      };
-      this.getData = this.getData.bind(this);
-    }
-    getData() {
-      // sets the data that we will use to render the cards
-      let data = {
-        success: true,
-        cards: [
-          {
-            id: 1,
-            score: buzzImpact,
-            title: "Total Actions Logged!",
-            },
-          {
-            id: 3,
-            score: coEmissImpact,
-            title: "Total lbs of CO2 saved!",
-          },
-          {
-            id: 2,
-            score: energyImpact,
-            title: "Total KJs of energy conserved!",
-          },
-          {
-            id: 4,
-            score: waterImpact,
-            title: "Total gallons of water conserved!",
-          },
-        ],
-      };
-      this.setState({
-        cards: data.cards,
-      });
-    }
-    componentWillMount() {
-      this.getData();
-    }
-  
-    render() {
-      return (
-        <Spring
-          from={{ opacity: 0, marginTop: -1200 }}
-          to={{ opacity: 1, marginTop: 0 }}
-          config={{ delay: 0, duration: 2000 }}
-        >
-          {(props) => (
-            <div style={props}>
-              <div className="InfoCards">
-                <div className="cards">
-                  {this.state.cards ? (
-                    this.state.cards.map((card, i) => (
-                    <center>
-                      <div>
+  constructor() {
+    super();
+    this.state = {
+      cards: [],
+    };
+    this.getData = this.getData.bind(this);
+  }
+  getData() {
+    // sets the data that we will use to render the cards
+    let data = {
+      success: true,
+      cards: [
+        {
+          id: 1,
+          score: buzzImpact,
+          title: "Total Actions Logged!",
+        },
+        {
+          id: 3,
+          score: coEmissImpact,
+          title: "Total lbs of CO2 saved!",
+        },
+        {
+          id: 2,
+          score: energyImpact,
+          title: "Total KJs of energy conserved!",
+        },
+        {
+          id: 4,
+          score: waterImpact,
+          title: "Total gallons of water conserved!",
+        },
+      ],
+    };
+    this.setState({
+      cards: data.cards,
+    });
+  }
+  componentWillMount() {
+    this.getData();
+  }
+
+  render() {
+    return (
+      <Spring
+        from={{ opacity: 0, marginTop: -1200 }}
+        to={{ opacity: 1, marginTop: 0 }}
+        config={{ delay: 0, duration: 2000 }}
+      >
+        {(props) => (
+          <div style={props}>
+            <div className="InfoCards">
+              <div className="cards">
+                {this.state.cards ? (
+                  this.state.cards.map((card, i) => (
+                    <div key={i}>
+                      <center>
                         <div
                           style={{
                             backgroundColor: colors[i],
@@ -83,21 +83,21 @@ class EnvImpactCards extends React.Component {
                           <h3 className="card-name">{card.score}</h3>
                           <p className="card-description">{card.title}</p>
                         </div>
-                      </div>
                       </center>
-                    ))
-                  ) : (
+                    </div>
+                  ))
+                ) : (
                     <div className="empty">
                       Sorry no information is currently available
                     </div>
                   )}
-                </div>
               </div>
             </div>
-          )}
-        </Spring>
-      );
-    }
+          </div>
+        )}
+      </Spring>
+    );
   }
-  
-  export default EnvImpactCards;
+}
+
+export default EnvImpactCards;
