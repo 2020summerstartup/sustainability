@@ -1,0 +1,27 @@
+.flagShape {
+  margin: auto;
+  margin-top: 2rem;
+  width: 10rem;
+  height: 5rem;
+  box-sizing: content-box;
+  padding-top: 15px;
+  position: relative;
+  background: var(--theme);
+  color: white;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.flagShape:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  /* find some way to change this color to match the background or change the shape */
+  border-bottom: 13px solid;
+  border-left: 5rem solid transparent;
+  border-right: 5rem solid transparent;
+}
