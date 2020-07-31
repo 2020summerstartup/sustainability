@@ -11,9 +11,6 @@ import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {
-  getUser,
-  createUser,
-  uploadUserTotalPoint,
   updateUserPoint,
   updateDormPoint,
   actionMastered,
