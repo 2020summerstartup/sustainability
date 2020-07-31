@@ -260,9 +260,6 @@ class SignUpFormBase extends Component {
               onChange={this.onChange}
               InputProps={{
                 startAdornment: <EmailIcon className={classes.formIcon} />,
-                classes: {
-                  adornedEnd: classes.adornedEnd,
-                },
               }}
             />
               <FormControl variant="filled" className={classes.formControl}>
@@ -271,10 +268,10 @@ class SignUpFormBase extends Component {
                   native
                   value={dormValue}
                   name="dorm"
-                  onChange={this.onChange}
                   label="Dorm"
+                  onChange={this.onChange}
                   inputProps={{ "aria-label": "dorm" }}
-                  style={{ width: "25rem" }}
+                  style={{ width: "24.75rem", margin: "1rem 0" }}
                   variant="outlined"
                 >
                   <option aria-label="None" value="" />
