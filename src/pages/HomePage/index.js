@@ -20,7 +20,6 @@ import {
   firestore,
   updateUserImpact
 } from "../../services/Firebase";
-import {functions} from "../../services/Firebase/firebase"
 
 import PropTypes from "prop-types";
 
@@ -88,6 +87,7 @@ const FavoriteCard = lazy(() => import("./faveCard.js"));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
+//DONT THINK WE NEED THIS ANYMORE?
 var total;
 function initPoints(email) {
   total = 0;
@@ -103,6 +103,7 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
+//PROBABLY DONT NEED THIS ANYMORE EITHER
 function initImpactPoints (email) {
     // pull impact data from firestore & intialize in local storage
     getUser(email).onSnapshot( (snapshot) => {
@@ -125,7 +126,7 @@ const playSound = (audioFile) => {
 };
 
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
-// should only be called when page first loads, not when increment
+// should only be called when page first loads, not when points are increment
 function assignData(data) {
   // the data parameter is meant to be the firestore document snapshot
   const points = data.points;
@@ -436,32 +437,36 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 // Text to display on the homepage
 function HomePage() {
-  console.log(localStorage.getItem('total'))
-  console.log(localStorage.getItem('email'))
+  console.log('home')
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
   const [badgeAction, setBadgeAction] = useState("");
   const authContext = useContext(AuthUserContext);
   // THE ERROR WITH TOTAL POINT DISPLAY WHEN A USER SIGNS IN/UP IS THAT LOCAL STORAGE 
   // IS NOT YET SET -> IT IS SET BY AN ASYNC CALL TO FIRESTORE 
-  const [userTotal, updateUserTotal] = useState(localStorage.getItem('total'));
-  
+  var initUserTotal = localStorage.getItem('total');
+  console.log(localStorage.getItem('total'))
+  console.log('test new var', initUserTotal);
+  const [userTotal, updateUserTotal] = useState(initUserTotal);
+  console.log('userTotal init', userTotal)
 
-  // Get user's info set in local storage
-  getUser(authContext.email).onSnapshot(
-    (docSnapshot) => {
-      if (docSnapshot.exists) {
-        assignData(docSnapshot.data());
-      } else {
-        createUser(authContext.email);
-        initPoints(authContext.email);
-        uploadUserTotalPoint(authContext.email, total);
-      }
-    },
-    (err) => {
-      console.log(`Encountered error: ${err}`);
-    }
-  );
+
+  // initalizes user's data into local storage 
+  // needed to display total point, progress modal, and enable app to run withour error
+  // getUser(authContext.email).onSnapshot(
+  //   (docSnapshot) => {
+  //     if (docSnapshot.exists) {
+  //       assignData(docSnapshot.data());
+  //     } else {
+  //       createUser(authContext.email);
+  //       initPoints(authContext.email);
+  //       uploadUserTotalPoint(authContext.email, total);
+  //     }
+  //   },
+  //   (err) => {
+  //     console.log(`Encountered error: ${err}`);
+  //   }
+  // );
 
 
 
@@ -511,12 +516,17 @@ function HomePage() {
   };
 
   const updateDisplayTotal = (actionPoint) => {
-    const newTotal = parseInt(userTotal) + parseInt(actionPoint)
+    const newTotal = parseInt(localStorage.getItem('total')) + parseInt(actionPoint)
     updateUserTotal(newTotal);
+    console.log('after log dispaly update')
   }
 
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
+
+    console.log('dispaly update next', userTotal)
+    updateDisplayTotal(action.points);
+    console.log('dispaly updated', userTotal)
 
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the specific action point count
@@ -568,11 +578,7 @@ function HomePage() {
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
-
-
-    updateDisplayTotal(action.points);
-
-    
+   
 
   }; // increment
 

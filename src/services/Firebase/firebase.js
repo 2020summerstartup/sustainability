@@ -92,7 +92,7 @@ export const createUser = (userEmail, userName, dorm) => {
 };
 
 // fetches the user collection from firestore
-// meant to be called then added to (ex: getUser().doc(localStorage.getItem('email')))
+// meant to be called then added to (ex: getUser().onSnapshot( (snap) => {..code here...}))
 export const getUser = (userEmail) => {
   localStorage.setItem('email', userEmail)
   return firestore.collection('users').doc(userEmail)
@@ -159,6 +159,19 @@ export const actionMastered = (userEmail, susAction) => {
   console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
     masteredActions: app.firestore.FieldValue.arrayUnion(susAction)
+  })
+}
+
+export const getUserImpact = (userEmail) => {
+  getUser(userEmail).onSnapshot( (snap) => {
+    const firestoreCoEmiss = snap.get('impact.coEmiss')
+    localStorage.setItem('coEmiss', firestoreCoEmiss);
+    const firestoreEnergy = snap.get('impact.energy')
+    localStorage.setItem('energy', firestoreEnergy);
+    const firestoreWater = snap.get('impact.water')
+    localStorage.setItem('water', firestoreWater);
+    const firestoreBuzzes = snap.get('impact.buzzes')
+    localStorage.setItem('buzzes', firestoreBuzzes);
   })
 }
 

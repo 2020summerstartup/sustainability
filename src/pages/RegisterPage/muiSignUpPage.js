@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import Reward from "react-rewards";
 
-import { withFirebase, createUser } from "../../services/Firebase";
+import { withFirebase, createUser, getUser, getUserImpact } from "../../services/Firebase";
+import {assignData} from "../HomePage"
 import * as ROUTES from "../../constants/routes";
 import { PasswordInput } from "./muiSignInPage";
 import signupImg from "../../img/login2.svg";
@@ -170,8 +171,19 @@ class SignUpFormBase extends Component {
           username,
           email,
         });
-      })
-      .then(() => {
+      }).then( () => {
+        // initalizes user's data into local storage 
+        // needed to display total point, progress modal, and enable app to run withour error
+        getUser(email).onSnapshot(
+          (docSnapshot) => {
+              assignData(docSnapshot.data());
+
+          },
+        );
+      }).then( () => {
+        // initalizes user's impact points
+        getUserImpact(email)
+      }).then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
