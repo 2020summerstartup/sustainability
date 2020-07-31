@@ -11,9 +11,6 @@ import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {
-  getUser,
-  createUser,
-  uploadUserTotalPoint,
   updateUserPoint,
   updateDormPoint,
   actionMastered,
@@ -726,7 +723,7 @@ function HomePage() {
             component={"span"}
           >
             You have earned&nbsp;
-            {<CountUp start={0} end={userTotal} duration={1}></CountUp>} points!
+            {<CountUp start={0} end={parseInt(userTotal)} duration={1}></CountUp>} points!
           </Typography>
           {/* Mobile Screens */}
           <Fab

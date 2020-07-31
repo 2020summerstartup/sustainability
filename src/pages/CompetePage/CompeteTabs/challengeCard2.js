@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import challenges from "../../../img/challenges.svg";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
