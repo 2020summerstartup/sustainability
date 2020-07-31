@@ -2,6 +2,7 @@ import React from "react";
 import { Spring } from "react-spring/renderprops";
 import styles from "./envImpactCards.module.css";
 
+import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 

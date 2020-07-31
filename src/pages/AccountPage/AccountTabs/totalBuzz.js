@@ -30,19 +30,12 @@ class TotalBuzz extends React.Component {
       //     <div style={props}>
       //       <div className="InfoCards">
       //         <div className="cards">
-      <Paper elevation="">
         <div
-          className={styles.flagShape}
-          style={{
-            ":after": {
-              borderBottom: "13px solid red",
-            },
-          }}
+          className={styles.bubble}
         >
           <h3 className="card-name">{localStorage.getItem("buzzes")}</h3>
           <p className="card-description">Total Actions Logged!</p>
         </div>
-      </Paper>
       //         </div>
       //       </div>
       // </div>
