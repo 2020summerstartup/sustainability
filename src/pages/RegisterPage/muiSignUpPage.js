@@ -3,8 +3,13 @@ import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Reward from "react-rewards";
 
-import { withFirebase, createUser, getUser, getUserImpact } from "../../services/Firebase";
-import {assignData} from "../HomePage"
+import {
+  withFirebase,
+  createUser,
+  getUser,
+  getUserImpact,
+} from "../../services/Firebase";
+import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 import { PasswordInput } from "./muiSignInPage";
 import signupImg from "../../img/login2.svg";
@@ -138,22 +143,24 @@ class SignUpFormBase extends Component {
           username,
           email,
         });
-      }).then( () => {
-          //create user in firebase firestore database
-          createUser(email, username, dorm);
-          localStorage.setItem("email", email);
-      } ).then( () => {
-        // once user is created in firestore we need to pull that data and update data into local storage 
+      })
+      .then(() => {
+        //create user in firebase firestore database
+        createUser(email, username, dorm);
+        localStorage.setItem("email", email);
+      })
+      .then(() => {
+        // once user is created in firestore we need to pull that data and update data into local storage
         // needed to display total point, progress modal, and enable app to run withour error
-        getUser(email).onSnapshot(
-          (docSnapshot) => {
-              assignData(docSnapshot.data());
-          },
-        );
-      }).then( () => {
-        // fetches user's impact points from firestore and updates local storage 
-        getUserImpact(email)
-      }).then(() => {
+        getUser(email).onSnapshot((docSnapshot) => {
+          assignData(docSnapshot.data());
+        });
+      })
+      .then(() => {
+        // fetches user's impact points from firestore and updates local storage
+        getUserImpact(email);
+      })
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -251,11 +258,7 @@ class SignUpFormBase extends Component {
                 startAdornment: <EmailIcon style={{ marginRight: "1rem" }} />,
               }}
             />
-            <FormControl
-              variant="filled"
-              fullWidth
-              margin="normal"
-            >
+            <FormControl variant="filled" fullWidth margin="normal">
               <InputLabel>Dorm</InputLabel>
               <Select
                 native
