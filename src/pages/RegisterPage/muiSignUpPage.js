@@ -13,7 +13,6 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
@@ -42,9 +41,6 @@ const SignUpPage = () => (
     <SignUpForm />
   </div>
 );
-
-// Styles for main signup page
-const useStyles = (theme) => ({});
 
 class PasswordInput2 extends Component {
   constructor(props) {
@@ -96,12 +92,9 @@ class PasswordInput2 extends Component {
 }
 
 PasswordInput2.propTypes = {
-  classes: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   // value: PropTypes.func.isRequired,
 };
-
-PasswordInput2 = withStyles(useStyles)(PasswordInput2);
 
 // The initial state of all information to be completed by the user
 const INITIAL_STATE = {
@@ -231,9 +224,6 @@ class SignUpFormBase extends Component {
               onChange={this.onChange}
               InputProps={{
                 startAdornment: <PersonIcon style={{ marginRight: "1rem" }} />,
-                classes: {
-                  adornedEnd: classes.adornedEnd,
-                },
               }}
             />
             <TextField
@@ -253,7 +243,6 @@ class SignUpFormBase extends Component {
               variant="filled"
               fullWidth
               margin="normal"
-              className={classes.formControl}
             >
               <InputLabel>Dorm</InputLabel>
               <Select
@@ -330,6 +319,7 @@ class SignUpFormBase extends Component {
                   style={{
                     color: "var(--theme)",
                     textDecoration: "none",
+                    paddingBottom: "2rem",
                   }}
                 >
                   Already have an account? Sign In
@@ -343,8 +333,7 @@ class SignUpFormBase extends Component {
   }
 }
 
-const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
-const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
+const SignUpForm = withRouter(withFirebase(SignUpFormBase));
 
 export default SignUpPage;
 export { SignUpForm, PasswordInput2 };

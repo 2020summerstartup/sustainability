@@ -39,7 +39,7 @@ const useStyles = (theme) => ({
   },
   form: {
     width: "100%",
-    marginTop: theme.spacing(1),
+    // marginTop: theme.spacing(1),
   },
   formIcon: {
     marginRight: "1rem",
@@ -108,7 +108,7 @@ class PasswordChangeFormBase extends Component {
     const { classes } = this.props;
 
     return (
-      <Container maxWidth="sm">
+      <Container maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -117,7 +117,7 @@ class PasswordChangeFormBase extends Component {
           <div className="image">
             <img alt="change your password" src={accountImg} />
           </div>
-          <form onSubmit={this.onSubmit} className="form">
+          <form onSubmit={this.onSubmit} className={classes.form}>
             <PasswordInput2
               label="Password"
               name="passwordOne"
