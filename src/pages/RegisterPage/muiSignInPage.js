@@ -106,10 +106,7 @@ class SignInFormBase extends Component {
 
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
-      }).then( () => {
+      .then( () => {
         // initalizes user's data into local storage 
         // needed to display total point, progress modal, and enable app to run withour error
         getUser(email).onSnapshot(
@@ -119,9 +116,14 @@ class SignInFormBase extends Component {
         );
       }).then( () => {
         // initalizes user's impact points in local storage 
-        getUserImpact(email)
-      })
-      .catch((error) => {
+        getUserImpact(email);
+      }).then(() => {
+        this.setState({ ...INITIAL_STATE });
+        this.props.history.push(ROUTES.HOME);
+        // page refresh is needed to have total point display properly 
+        // REVISIT SOON SO THAT WE CAN HOPEFULLY ELIMINATE THIS
+        window.location.reload();
+      }).catch((error) => {
         this.setState({ error });
         console.log(error);
       });
