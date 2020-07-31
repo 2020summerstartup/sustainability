@@ -160,9 +160,6 @@ class SignUpFormBase extends Component {
     localStorage.clear();
     const { username, email, passwordOne, dorm } = this.state;
 
-    createUser(email, username, dorm);
-    localStorage.setItem("email", email);
-
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
@@ -172,16 +169,19 @@ class SignUpFormBase extends Component {
           email,
         });
       }).then( () => {
-        // initalizes user's data into local storage 
+          //create user in firebase firestore database
+          createUser(email, username, dorm);
+          localStorage.setItem("email", email);
+      } ).then( () => {
+        // once user is created in firestore we need to pull that data and update data into local storage 
         // needed to display total point, progress modal, and enable app to run withour error
         getUser(email).onSnapshot(
           (docSnapshot) => {
               assignData(docSnapshot.data());
-
           },
         );
       }).then( () => {
-        // initalizes user's impact points
+        // fetches user's impact points from firestore and updates local storage 
         getUserImpact(email)
       }).then(() => {
         this.setState({ ...INITIAL_STATE });

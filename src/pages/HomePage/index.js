@@ -103,17 +103,6 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-//PROBABLY DONT NEED THIS ANYMORE EITHER
-function initImpactPoints (email) {
-    // pull impact data from firestore & intialize in local storage
-    getUser(email).onSnapshot( (snapshot) => {
-      let envImpact = snapshot.get('impact')
-      localStorage.setItem("buzzes", envImpact.buzzes);
-      localStorage.setItem("energy", envImpact.energy);
-      localStorage.setItem("coEmiss", envImpact.coEmiss);
-      localStorage.setItem("water", envImpact.water);
-  });
-}
 
 // sound play for certain buttons
 const likeAudio = new Audio(like);
@@ -490,10 +479,11 @@ function HomePage() {
     }
   };
 
+  // this function is called upon increment 
+  // sets the state of userTotal so that user's total point display is correct 
   const updateDisplayTotal = (actionPoint) => {
     const newTotal = parseInt(localStorage.getItem('total')) + parseInt(actionPoint)
     updateUserTotal(newTotal);
-    console.log('after log dispaly update')
   }
 
   // Updates all necessary values in firestore and local storage when user completes sus action
@@ -527,27 +517,6 @@ function HomePage() {
 
     updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
 
- 
-    // DONT THINK WE NEED THIS ANYMORE
-    // get the user's dorm from firestore and update the dorm's points
-    // getUser(authContext.email).onSnapshot(
-    //   (docSnapshot) => {
-    //     if (docSnapshot.exists) {
-    //       assignData(docSnapshot.data());
-    //     } else {
-    //       createUser(authContext.email);
-    //       initPoints(authContext.email);
-    //       initImpactPoints(authContext.email)
-    //       uploadUserTotalPoint(
-    //         authContext.email,
-    //         localStorage.getItem("total")
-    //       );
-    //     }
-    //   },
-    //   (err) => {
-    //     console.log(`Encountered error: ${err}`);
-    //   }
-    // );
 
     checkMastered(action);
 
@@ -557,9 +526,9 @@ function HomePage() {
 
   }; // increment
 
+
+
   // to check with the mastered actions that firestore has upon loading page
-  // may need to change this because every time the page loads we will read firestore data
-  //(and page load everytime action is logged) so we may reach limit if many people are using the app
   var firestoreMastered = [];
   const getMastered = (userEmail) => {
     let userDocRef = firestore.doc("users/" + userEmail);
@@ -616,7 +585,6 @@ function HomePage() {
       // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
       setBadgeAction(action.title);
-      console.log(`You have mastered ${localStorage.getItem("badgeAction")}!`);
       setBadgeModalIsOpen(true);
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
@@ -626,6 +594,8 @@ function HomePage() {
   const handleClose = () => {
     setBadgeModalIsOpen(false);
   };
+
+
 
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.

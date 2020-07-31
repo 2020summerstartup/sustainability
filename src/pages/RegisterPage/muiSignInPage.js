@@ -161,11 +161,10 @@ class SignInFormBase extends Component {
         getUser(email).onSnapshot(
           (docSnapshot) => {
               assignData(docSnapshot.data());
-
           },
         );
       }).then( () => {
-        // initalizes user's impact points
+        // initalizes user's impact points in local storage 
         getUserImpact(email)
       })
       .catch((error) => {
@@ -174,21 +173,10 @@ class SignInFormBase extends Component {
       });
 
     event.preventDefault();
-
-    getUser(email).onSnapshot(
-      (snapshot) => {
-        if (snapshot.exists) {
-          assignData(snapshot.data());
-        } else {
-          alert("Please sign up again!");
-        }
-      },
-      (err) => {
-        console.log(`Encountered error: ${err}`);
-      }
-    );
   };
 
+
+  
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };

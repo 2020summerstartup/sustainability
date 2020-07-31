@@ -162,6 +162,7 @@ export const actionMastered = (userEmail, susAction) => {
   })
 }
 
+// gets user's impact data from firestore and sets in in local storage
 export const getUserImpact = (userEmail) => {
   getUser(userEmail).onSnapshot( (snap) => {
     const firestoreCoEmiss = snap.get('impact.coEmiss')
