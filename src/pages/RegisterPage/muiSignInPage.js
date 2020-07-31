@@ -7,7 +7,7 @@ import { compose } from "recompose";
 import firebase from 'firebase/app';
 import "firebase/auth";
 
-import { withFirebase, getUser } from "../../services/Firebase";
+import { withFirebase, getUser, getUserImpact } from "../../services/Firebase";
 import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
@@ -155,6 +155,18 @@ class SignInFormBase extends Component {
       .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
+      }).then( () => {
+        // initalizes user's data into local storage 
+        // needed to display total point, progress modal, and enable app to run withour error
+        getUser(email).onSnapshot(
+          (docSnapshot) => {
+              assignData(docSnapshot.data());
+
+          },
+        );
+      }).then( () => {
+        // initalizes user's impact points
+        getUserImpact(email)
       })
       .catch((error) => {
         this.setState({ error });
