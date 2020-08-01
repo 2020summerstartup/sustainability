@@ -72,7 +72,7 @@ class Badges2 extends React.Component {
         },
         {
           id: 10,
-          title: "Transportation Badge",
+          title: "Save Gas Badge",
           titleStyling: null,
           leafStyling: null,
         },
