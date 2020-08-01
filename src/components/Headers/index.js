@@ -173,7 +173,7 @@ const useStyles3 = makeStyles((theme) => ({
     },
   },
   logo: {
-    width: "6.5rem",
+    width: "3rem",
     height: "100%",
     paddingRight: "0.5rem",
     padding: "0",

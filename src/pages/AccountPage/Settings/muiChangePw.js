@@ -89,7 +89,7 @@ class PasswordChangeFormBase extends Component {
       .doPasswordUpdate(passwordOne)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        toast("Your password as been changed!", { autoClose: 5000 });
+        toast.success("Your password as been changed!", { autoClose: 5000 });
       })
       .catch((error) => {
         this.setState({ error });

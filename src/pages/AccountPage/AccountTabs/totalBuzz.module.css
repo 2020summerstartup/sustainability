@@ -1,35 +1,35 @@
-.speechBubble {
-  margin: auto;
-  margin-top: 2rem;
+.bannerShape {
+  background-color: var(--theme-secondary);
+  width: 50%;
+  min-width: 18rem;
+  height: 6rem;
+  place-items: center;
+  text-align: center;
   position: relative;
-  width: 280px;
+  display: flex;
+  margin: 3rem auto;
+  color: #fff;
+  text-shadow: 1px 1px 5px black;
+}
+
+.bannerShape:before,
+.bannerShape:after {
+  /* background-color: #a44; */
+  background-color: #ca2452;
+  width: 50px;
   height: 80px;
-  padding: 5px;
-  background: lightgreen;
-  color: white;
-  text-shadow: 2px 1px 5px black;
-  border-radius: 5px;
-  border: 3px solid var(--theme);
-}
-
-.speechBubble::before,
-.speechBubble::after {
-  content: "\0020";
+  content: "";
   display: block;
+  transform: skewY(20deg);
   position: absolute;
-  top: -15px;
-  left: 15px;
-  z-index: 2;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  border: solid 15px transparent;
-  border-top: 0;
-  border-bottom-color: var(--theme);
+  z-index: -1;
 }
 
-.speechBubble::before {
-  top: -18px;
-  z-index: 1;
-  border-bottom-color: var(--theme);
+.bannerShape:before {
+  top: 25px;
+  left: 0;
+}
+.bannerShape:after {
+  top: -10px;
+  right: 1px;
 }

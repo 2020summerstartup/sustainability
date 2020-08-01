@@ -2,17 +2,17 @@ import React from "react";
 import { Spring } from "react-spring/renderprops";
 import styles from "./totalBuzz.module.css";
 
-import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = (theme) => ({
-//   borderBottom: {
-//     "&:after": {
-//       borderBottom: theme.palette.background.paper,
-//       //   borderBottom: "13px solid",
-//     },
-//   },
+  //   borderBottom: {
+  //     "&:after": {
+  //       borderBottom: theme.palette.background.paper,
+  //       //   borderBottom: "13px solid",
+  //     },
+  //   },
 });
 
 // cards to be rendered on the points page in account
@@ -30,12 +30,18 @@ class TotalBuzz extends React.Component {
       //     <div style={props}>
       //       <div className="InfoCards">
       //         <div className="cards">
-        <div
-          className={styles.speechBubble}
-        >
-          <h3 className="card-name">{localStorage.getItem("buzzes")}</h3>
-          <p className="card-description">Total Actions Logged!</p>
-        </div>
+      <div className={styles.bannerShape}>
+        <Grid container justify="center" style={{ placeItems: "center" }}>
+          <Typography
+            variant="h3"
+            component="h1"
+            style={{ marginRight: "1rem" }}
+          >
+            {localStorage.getItem("buzzes")}
+          </Typography>
+          <Typography variant="h5">Action(s) Logged!</Typography>
+        </Grid>
+      </div>
       //         </div>
       //       </div>
       // </div>
