@@ -4,6 +4,7 @@ import styles from "./envImpactCards.module.css";
 
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 
 // set variables that I will need later when rendering cards
@@ -93,8 +94,8 @@ class EnvImpactCards extends React.Component {
               <div
                 className={`${styles.burstShape} ${card.colorStyling}`}
               >
-                <h3 className="card-name">{card.score}</h3>
-                <p className="card-description">{card.title}</p>
+                <Typography variant="h5">{card.score}</Typography>
+                <Typography variant="subtitle1">{card.title}</Typography>
               </div>
             </div>
           ))

@@ -31,7 +31,7 @@ class TotalBuzz extends React.Component {
       //       <div className="InfoCards">
       //         <div className="cards">
         <div
-          className={styles.bubble}
+          className={styles.speechBubble}
         >
           <h3 className="card-name">{localStorage.getItem("buzzes")}</h3>
           <p className="card-description">Total Actions Logged!</p>

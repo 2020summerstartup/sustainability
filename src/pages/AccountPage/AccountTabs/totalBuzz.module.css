@@ -1,18 +1,19 @@
-.bubble {
+.speechBubble {
   margin: auto;
   margin-top: 2rem;
   position: relative;
   width: 280px;
   height: 80px;
   padding: 5px;
+  background: lightgreen;
   color: white;
   text-shadow: 2px 1px 5px black;
   border-radius: 5px;
   border: 3px solid var(--theme);
 }
 
-.bubble::before,
-.bubble::after {
+.speechBubble::before,
+.speechBubble::after {
   content: "\0020";
   display: block;
   position: absolute;
@@ -27,7 +28,7 @@
   border-bottom-color: var(--theme);
 }
 
-.bubble::before {
+.speechBubble::before {
   top: -18px;
   z-index: 1;
   border-bottom-color: var(--theme);

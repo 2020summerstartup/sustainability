@@ -1,7 +1,8 @@
+/* square shape */
 .burstShape {
-  margin: 3rem auto;
-  width: 7rem;
-  height: 7rem;
+  margin: 5rem auto;
+  width: 9rem;
+  height: 9rem;
   position: relative;
   text-align: center;
   display: flex;
@@ -9,15 +10,22 @@
   place-items: center;
   color: white;
   text-shadow: 1px 1px 5px black;
+  transition: all 0.2s ease-in-out;
 }
+
+.burstShape:hover {
+  transform: scale(1.25);
+}
+
+/* points besides the original square aka squares that turn */
 .burstShape:before,
 .burstShape:after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  height: 7rem;
-  width: 7rem;
+  height: 9rem;
+  width: 9rem;
   z-index: -1;
 }
 .burstShape:before {
@@ -28,7 +36,6 @@
 }
 
 /* for card.colorStyling so that each impact card will have it's own color */
-
 .co2,
 .co2:before,
 .co2:after {
