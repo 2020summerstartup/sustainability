@@ -1,9 +1,11 @@
 import { AutoRotatingCarousel} from 'material-auto-rotating-carousel';
 import React, { Component } from 'react';
+import styles from "./rotate.module.css";
 import {Slide} from 'material-auto-rotating-carousel';
 import LandingPage from "../LandingPage/muiLandingPage";
 import welcomeImg from "../../img/welcome.svg";
 import suslogoImg from "../../img/suslogo.svg";
+import pointsGif from "../../img/points.gif";
 // import First from './first.png';
 // import Login from './login.gif';
 // import Swipe from './Swipe.png';
@@ -26,14 +28,26 @@ export class Rotate extends Component {
               <AutoRotatingCarousel autoplay={false} interval = {9000} hideArrows = {false} open={true} mobile = {true} label = 'Get started' onStart = {()=>window.location.href='/signup'}>
                 <Slide
                 // media ={<LandingPage class="responsive"/> }
+               
                   media={<img src={suslogoImg} class="responsive" />}
                   mediaBackgroundStyle={{ backgroundColor: "#15601e" }}
                   style={{ backgroundColor:  "#15601e" }}
                   title='What will we accomplish?'
                   subtitle= 'Lets be sustainable together and make this world a better place one action at a time!'
                 />
+                
                 <Slide
-                //   media={<img src={Login} class="snapgrid"/>}
+                media={<img src={pointsGif} style={{
+                    // display: "flex",
+                    // alignContent: "center",
+                    // justifyContent: "center",
+                    // backgroundSize: "color",
+                    marginTop: "2rem",
+                    maxHeight: "40rem" ,
+                    maxWidth: "15rem"}}  
+                />}
+                // media={<img src={pointsGif}  className={`${"snapgrid"} ${styles.image}`}/>}
+                //   media={<img src={`url(${"https://media.giphy.com/media/f6m60G0oFoyEITq2Rs/giphy.gif"})`} class="snapgrid"/>}
                   mediaBackgroundStyle={{ backgroundColor: "#1c8028" }}
                   style={{ backgroundColor: "#1c8028" }}
                   title="Earn points!"
