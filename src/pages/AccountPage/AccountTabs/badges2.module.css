@@ -39,7 +39,7 @@
   }
 }
 
-.titleLeft {
+.titleLeftFront {
   position: relative;
   transform: rotate(-45deg) translate(5%, -35%);
   top: 45%;
@@ -47,7 +47,7 @@
   text-shadow: 2px 2px 5px black;
 }
 
-.titleRight {
+.titleRightFront {
   position: relative;
   transform: rotate(45deg) translate(-5%, -25%);
   top: 45%;
@@ -59,6 +59,10 @@ div.left,
 div.right {
   width: 10rem;
   height: 10rem;
+  position: relative;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
   /* background: linear-gradient(to right, var(--theme), #005600); */
 }
 
@@ -108,6 +112,43 @@ div.right {
     rgba(57, 227, 74, 1) 50.1%,
     rgba(38, 172, 51, 1) 100%
   ); */
+}
+
+div.left:hover {
+  transform: rotate3d(1, -1, 0, 180deg);
+}
+
+div.right:hover {
+  transform: rotate3d(-1, -1, 0, 180deg);
+}
+
+.leafFront,
+.leafBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.leafBack {
+  transform: rotateY(180deg);
+}
+
+.titleLeftBack {
+  position: relative;
+  transform: rotate(-135deg) translate(17%, 20%);
+  top: 45%;
+  color: white;
+  text-shadow: 2px 2px 5px black;
+}
+
+.titleRightBack {
+  position: relative;
+  transform: rotate(135deg) translate(-17%, 20%);
+  top: 45%;
+  color: white;
+  text-shadow: 2px 2px 5px black;
 }
 
 /* leaf animations */

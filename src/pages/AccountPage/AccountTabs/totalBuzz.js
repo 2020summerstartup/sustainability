@@ -31,7 +31,11 @@ class TotalBuzz extends React.Component {
       //       <div className="InfoCards">
       //         <div className="cards">
       <div className={styles.bannerShape}>
-        <Grid container justify="center" style={{ placeItems: "center" }}>
+        <Grid
+          container
+          justify="center"
+          style={{ placeItems: "center", marginBottom: "0.5rem"}}
+        >
           <Typography
             variant="h3"
             component="h1"
@@ -40,6 +44,11 @@ class TotalBuzz extends React.Component {
             {localStorage.getItem("buzzes")}
           </Typography>
           <Typography variant="h5">Action(s) Logged!</Typography>
+          <Grid item direction="column">
+            <Typography variant="body2">
+              Click impact cards below for a fun surprise!
+            </Typography>
+          </Grid>
         </Grid>
       </div>
       //         </div>
