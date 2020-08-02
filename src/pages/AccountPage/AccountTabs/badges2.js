@@ -24,14 +24,14 @@ class Badges2 extends React.Component {
           leafStyling: null,
         },
         {
-          id: 3,
+          id: 2,
           title: "Walking Badge",
           titleStylingFront: null,
           titleStylingBack: null,
           leafStyling: null,
         },
         {
-          id: 2,
+          id: 3,
           title: "Straw Badge",
           titleStylingFront: null,
           titleStylingBack: null,
@@ -132,10 +132,20 @@ class Badges2 extends React.Component {
   render() {
     return (
       <div className={styles.root}>
-        <Typography variant="h5">
-          Congratulations {localStorage.getItem("name")}! You have earned
-          [number] badges!
-        </Typography>
+        <div className={styles.fancyBorder}>
+          <Typography
+            variant="h5"
+            style={{
+              color: "white",
+              justify: "center",
+              textShadow: "2px 2px 3px black",
+            }}
+          >
+            Congratulations {localStorage.getItem("name")}! You have earned
+            [number] badges!
+          </Typography>
+        </div>
+
         <div className={styles.leaves}>
           <i></i>
           <i></i>
@@ -166,13 +176,16 @@ class Badges2 extends React.Component {
                 {/* <div className={styles.flipLeaf}> */}
                 <div className={badge.leafStyling}>
                   <div className={styles.leafFront}>
-                    <Typography variant="h6" className={badge.titleStylingFront}>
+                    <Typography
+                      variant="h6"
+                      className={badge.titleStylingFront}
+                    >
                       {badge.title}
                     </Typography>
                   </div>
                   <div className={styles.leafBack}>
                     <Typography variant="h6" className={badge.titleStylingBack}>
-                      {badge.id} <br/> Actions Completed!
+                      {badge.id} <br /> Actions Completed!
                     </Typography>
                   </div>
                 </div>
