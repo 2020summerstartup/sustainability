@@ -144,6 +144,12 @@ class Badges2 extends React.Component {
             Congratulations {localStorage.getItem("name")}! You have earned
             [number] badges!
           </Typography>
+          <Typography
+            variant="subtitle1"
+            style={{ color: "white", textShadow: "2px 2px 3px black" }}
+          >
+            Hover over the badges for another surprise!
+          </Typography>
         </div>
 
         <div className={styles.leaves}>
