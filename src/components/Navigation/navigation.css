@@ -2,6 +2,7 @@
   font-size: 16px;
   font-family: "Open Sans";
   --theme: #24a113;
+  --theme-secondary: #E36588;
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --bg-primary: #23232e;
@@ -338,6 +339,7 @@ main {
   .signout-btn {
     position: absolute !important;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -75%);
+    margin-top: 2rem !important;
   }
 }

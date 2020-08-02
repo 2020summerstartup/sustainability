@@ -6,40 +6,25 @@
 /* background: skyblue;
 } */
 
+/* Regular Phone Screen */
 .column {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  /* width: 80%; */
+  width: 17rem;
   margin: auto;
   position: relative;
-  margin-top: -1.5rem;
-}
-
-/* Medium screens */
-@media only screen and (min-width: 675px) {
-  .column {
-    width: 50%;
-    margin-top: 0rem;
-  }
+  margin-top: -1rem;
 }
 
 /* Large screens */
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 500px) {
   .column {
-    width: 35%;
     margin-top: 0rem;
   }
 }
 
-/* Extra Large screens */
-@media only screen and (min-width: 1300px) {
-  .column {
-    width: 25%;
-    margin-top: 0rem;
-  }
-}
-
-.titleLeft {
+.titleLeftFront {
   position: relative;
   transform: rotate(-45deg) translate(5%, -35%);
   top: 45%;
@@ -47,7 +32,7 @@
   text-shadow: 2px 2px 5px black;
 }
 
-.titleRight {
+.titleRightFront {
   position: relative;
   transform: rotate(45deg) translate(-5%, -25%);
   top: 45%;
@@ -59,55 +44,106 @@ div.left,
 div.right {
   width: 10rem;
   height: 10rem;
+  position: relative;
+  text-align: center;
+  perspective: 1000px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
   /* background: linear-gradient(to right, var(--theme), #005600); */
-  box-shadow: 2px 2px 5px #848484;
 }
 
 div.left {
+  box-shadow: 4px 2px 5px #848484;
   align-self: flex-start;
   -moz-border-radius: 8rem 0px;
   -webkit-border-radius: 8rem 0px;
   border-radius: 8rem 0px;
-  background: rgb(91, 250, 106);
+  background: rgb(41, 201, 47);
   background: linear-gradient(
     -45deg,
-    rgba(91, 250, 106, 1) 0%,
-    rgba(78, 238, 94, 1) 48%,
-    rgba(41, 201, 47, 1) 49%,
-    rgba(6, 110, 10, 1) 100%
+    rgba(41, 201, 47, 1) 0%,
+    rgba(6, 152, 11, 1) 49.9%,
+    rgba(38, 172, 51, 1) 50.1%,
+    rgba(57, 227, 74, 1) 100%
   );
+  /* background: rgb(6, 110, 10);
+  background: linear-gradient(
+    -45deg,
+    rgba(6, 110, 10, 1) 0%,
+    rgba(41, 201, 47, 1) 49.9%,
+    rgba(57, 227, 74, 1) 50.1%,
+    rgba(38, 172, 51, 1) 100%
+  ); */
 }
 
 div.right {
+  box-shadow: 2px 6px 5px #848484;
   align-self: flex-end;
   -moz-border-radius: 0rem 8rem;
   -webkit-border-radius: 0rem 8rem;
   border-radius: 0rem 8rem;
+  background: rgb(41, 201, 47);
+  background: linear-gradient(
+    45deg,
+    rgba(41, 201, 47, 1) 0%,
+    rgba(6, 152, 11, 1) 49.9%,
+    rgba(38, 172, 51, 1) 50.1%,
+    rgba(57, 227, 74, 1) 100%
+  );
   /* background: rgb(6, 110, 10);
   background: linear-gradient(
     45deg,
     rgba(6, 110, 10, 1) 0%,
-    rgba(41, 201, 47, 1) 48%,
-    rgba(78, 238, 94, 1) 49%,
-    rgba(91, 250, 106, 1) 100%
+    rgba(41, 201, 47, 1) 49.9%,
+    rgba(57, 227, 74, 1) 50.1%,
+    rgba(38, 172, 51, 1) 100%
   ); */
-  background: rgb(91, 250, 106);
-  background: linear-gradient(
-    45deg,
-    rgba(91, 250, 106, 1) 0%,
-    rgba(78, 238, 94, 1) 48%,
-    rgba(41, 201, 47, 1) 49%,
-    rgba(6, 110, 10, 1) 100%
-  );
+}
+
+div.left:hover {
+  transform: rotate3d(1, -1, 0, 180deg);
+}
+
+div.right:hover {
+  transform: rotate3d(-1, -1, 0, 180deg);
+}
+
+.leafFront,
+.leafBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.leafBack {
+  transform: rotateY(180deg);
+}
+
+.titleLeftBack {
+  position: relative;
+  transform: rotate(-135deg) translate(17%, 20%);
+  top: 45%;
+  color: white;
+  text-shadow: 2px 2px 5px black;
+}
+
+.titleRightBack {
+  position: relative;
+  transform: rotate(135deg) translate(-17%, 20%);
+  top: 45%;
+  color: white;
+  text-shadow: 2px 2px 5px black;
 }
 
 /* leaf animations */
 
 .leaves {
   position: relative;
-  top: -150px;
+  top: -15rem;
   width: 100%;
-  text-align: right;
+  text-align: center;
   z-index: -1;
 }
 
@@ -268,13 +304,13 @@ div.right {
 }
 
 .leaves i:nth-of-type(n) {
-  opacity: 0.7;
+  opacity: 1;
 }
 .leaves i:nth-of-type(3n + 1) {
-  opacity: 0.5;
+  opacity: 0.7;
 }
 .leaves i:nth-of-type(3n + 2) {
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 .leaves i:nth-of-type(n) {
@@ -291,7 +327,7 @@ div.right {
   }
 
   100% {
-    transform: translate3d(-350px, 700px, 0) rotate(90deg);
+    transform: translate3d(-50px, 700px, 0) rotate(90deg);
     opacity: 0;
   }
 }
@@ -302,7 +338,7 @@ div.right {
   }
 
   100% {
-    transform: translate3d(-230px, 640px, 0) rotate(-70deg);
+    transform: translate3d(-25px, 640px, 0) rotate(-70deg);
     opacity: 0;
   }
 }
@@ -313,7 +349,18 @@ div.right {
   }
 
   100% {
-    transform: translate3d(-400px, 680px, 0) rotate(0deg);
+    transform: translate3d(40px, 680px, 0) rotate(0deg);
     opacity: 0;
   }
+}
+
+/* FANCY BORDER but seems to prevent scrolling on mobile... Kobe can you make another galaxy card? */
+.fancyBorder {
+  background-image: url("https://c7.uihere.com/files/604/304/970/wood-plank-vector-background.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  border: 25px solid #b88846;
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='75' height='75'%3E%3Cg fill='none' stroke='%23B88846' stroke-width='2'%3E%3Cpath d='M1 1h73v73H1z'/%3E%3Cpath d='M8 8h59v59H8z'/%3E%3Cpath d='M8 8h16v16H8zM51 8h16v16H51zM51 51h16v16H51zM8 51h16v16H8z'/%3E%3C/g%3E%3Cg fill='%23B88846'%3E%3Ccircle cx='16' cy='16' r='2'/%3E%3Ccircle cx='59' cy='16' r='2'/%3E%3Ccircle cx='59' cy='59' r='2'/%3E%3Ccircle cx='16' cy='59' r='2'/%3E%3C/g%3E%3C/svg%3E")
+    25;
 }

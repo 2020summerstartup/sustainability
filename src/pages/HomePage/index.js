@@ -5,6 +5,7 @@ import ProgressCircle from "../../components/ProgressCircle";
 // import FavoriteCard from "./faveCard";
 import actionTab from "../../img/actionTab.svg";
 import badgeImg from "../../img/badge.svg";
+import "./toastify.css";
 
 import CountUp from "react-countup";
 import Modal from "react-modal";
@@ -99,7 +100,6 @@ function initPoints(email) {
   }
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
-
 
 // sound play for certain buttons
 const likeAudio = new Audio(like);
@@ -234,7 +234,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       background: "linear-gradient(to top, #f48fb1, rgba(0,0,0,0))",
-    },  
+    },
   },
   card2: {
     borderRadius: "1rem",
@@ -383,7 +383,6 @@ const useStyles = makeStyles((theme) => ({
   buttonClose: {
     marginTop: theme.spacing(2),
   },
-
   totalPoints: {
     position: "relative",
     top: "0.5rem",
@@ -396,6 +395,30 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+// JESSICA WAS WORKING HERE AT END OF DAY
+// const uploadUserData = (email) => {
+//     // Get user's dorm set in local storage
+//     console.log(email)
+//     getUser(email).get().then(snap => {
+//         if (snap.exists) {
+//           initImpactPoints(email)
+//           assignData(snap.data());
+//           function assignData(data) {
+//             localStorage.setItem("dorm", data.userDorm);
+//             localStorage.setItem('total', data.total);
+//           }
+//         } else {
+//           createUser(email);
+//           initPoints(email);
+//           initImpactPoints(email)
+//           uploadUserTotalPoint(email, total);
+//         }
+//       },
+//       (err) => {
+//         console.log(`Encountered error: ${err}`);
+//       })
+//     };
+// uploadUserData(localStorage.getItem('email'))
 
 // Text to display on the homepage
 function HomePage() {
@@ -464,19 +487,18 @@ function HomePage() {
     }
   };
 
-  // this function is called upon increment 
-  // sets the state of userTotal so that user's total point display is correct 
+  // this function is called upon increment
+  // sets the state of userTotal so that user's total point display is correct
   const updateDisplayTotal = (actionPoint) => {
-    const newTotal = parseInt(localStorage.getItem('total')) + parseInt(actionPoint)
+    const newTotal =
+      parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
     updateUserTotal(newTotal);
-  }
+  };
 
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
-
     // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
-
 
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the specific action point count
@@ -486,8 +508,8 @@ function HomePage() {
     );
     // add specified number of points to the user's total point count
     localStorage.setItem(
-      'total',
-      parseInt(localStorage.getItem('total')) + parseInt(action.points)
+      "total",
+      parseInt(localStorage.getItem("total")) + parseInt(action.points)
     );
 
     // updates user's point in firestore
@@ -509,11 +531,7 @@ function HomePage() {
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
-   
-
   }; // increment
-
-
 
   // to check with the mastered actions that firestore has upon loading page
   var firestoreMastered = [];
@@ -539,7 +557,10 @@ function HomePage() {
     var storageName = action.susAction.concat("Mastered");
     firestoreMastered = localStorage.getItem("firestoreMastered");
 
-    if ( firestoreMastered != null && firestoreMastered.includes(stringActionName)) {
+    if (
+      firestoreMastered != null &&
+      firestoreMastered.includes(stringActionName)
+    ) {
       masterActions[el - 1] = true; //disable button when action is mastered
       localStorage.setItem(storageName, true); // update local storage accordingly
     } else {
@@ -587,8 +608,6 @@ function HomePage() {
   const handleClose = () => {
     setBadgeModalIsOpen(false);
   };
-
-
 
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
@@ -638,7 +657,6 @@ function HomePage() {
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
-
   // Set the "progress message" to be displayed when the user pressed "check progress"
   var progressMessage = "";
   const setProgressMessage = () => {
@@ -660,14 +678,19 @@ function HomePage() {
     progressMessage = (
       <>
         {progressMessage}
-        <Typography variant="body1" component={'span'}><b>Total points: {userTotal}</b></Typography>
+        <Typography
+          variant="h6"
+          component={"span"}
+          className={classes.totalPoints}
+        >
+          <b>Total points: {userTotal}</b>
+        </Typography>
       </>
     );
   }; // setProgressMessage
 
   // Call the function immediately so that it runs before the return statement
   setProgressMessage();
-
 
   // HTML to be displayed
   return (
@@ -715,7 +738,14 @@ function HomePage() {
             component={"span"}
           >
             You have earned&nbsp;
-            {<CountUp start={0} end={parseInt(userTotal)} duration={1}></CountUp>} points!
+            {
+              <CountUp
+                start={0}
+                end={parseInt(userTotal)}
+                duration={1}
+              ></CountUp>
+            }{" "}
+            points!
           </Typography>
           {/* Mobile Screens */}
           <Fab
@@ -755,7 +785,7 @@ function HomePage() {
                 <div className={styles.nonSemanticProtector}>
                   <h1 className={styles.ribbon}>
                     <strong className={styles.ribbonContent}>
-                      Congratulations {localStorage.getItem('name')}!
+                      Congratulations {localStorage.getItem("name")}!
                     </strong>
                   </h1>
                 </div>
@@ -803,7 +833,10 @@ function HomePage() {
           >
             <DialogTitle
               id="alert-dialog-slide-title"
-              style={{ backgroundColor: "var(--theme-secondary)", color: "#FFFFFF" }}
+              style={{
+                backgroundColor: "var(--theme-secondary)",
+                color: "#FFFFFF",
+              }}
             >
               {"Check Your Progress!"}
             </DialogTitle>
@@ -813,7 +846,7 @@ function HomePage() {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-                colors={["grey", "white", "green", "black", "pink"]}
+                // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -833,31 +866,30 @@ function HomePage() {
           </Dialog>
         </div>
         <TabPanel value={value} index={0} className="tab-container">
-           {/* Action galaxy card*/}
-        <NoSsr>
-                    <GoogleFontLoader
-                      fonts={[
-                        { font: "Spartan", weights: [300] },
-                        { font: "Montserrat", weights: [200, 400, 700] },
-                      ]}
-                    />
-                 
-                  </NoSsr>
-                  <Card className={classes.card2}>
-                    <CardMedia classes={mediaStyles2} image={actionTab} />
-                    <Box py={3} px={2} className={classes.content}>
-                      <Info useStyles={useGalaxyInfoStyles}>
-                        <InfoSubtitle></InfoSubtitle>
-                        <InfoTitle>Log your actions here!</InfoTitle>
-                        <InfoCaption>
-                        Tap the drop down menu to find out more 
-                          <span role="img" aria-label="down arrow">
-                             🔽
-                          </span>
-                        </InfoCaption>
-                      </Info>
-                    </Box>
-                  </Card>
+          {/* Action galaxy card*/}
+          <NoSsr>
+            <GoogleFontLoader
+              fonts={[
+                { font: "Spartan", weights: [300] },
+                { font: "Montserrat", weights: [200, 400, 700] },
+              ]}
+            />
+          </NoSsr>
+          <Card className={classes.card2}>
+            <CardMedia classes={mediaStyles2} image={actionTab} />
+            <Box py={3} px={2} className={classes.content}>
+              <Info useStyles={useGalaxyInfoStyles}>
+                <InfoSubtitle></InfoSubtitle>
+                <InfoTitle>Log your actions here!</InfoTitle>
+                <InfoCaption>
+                  Tap the drop down menu to find out more
+                  <span role="img" aria-label="down arrow">
+                    🔽
+                  </span>
+                </InfoCaption>
+              </Info>
+            </Box>
+          </Card>
           <Fragment>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -874,7 +906,12 @@ function HomePage() {
               />
             </div>
             {/* Card for actions */}
-            <Grid container spacing={2} className={classes.actionContainer}>
+            <Grid
+              container
+              justify="center"
+              spacing={2}
+              className={classes.actionContainer}
+            >
               {/* All actions (this loops using search) */}
               {ActionData.map(
                 (action, i) =>
@@ -962,12 +999,19 @@ function HomePage() {
             <AuthUserContext.Consumer>
               {(authUser) => (
                 <>
-                  <Suspense fallback={<center><ProgressCircle /></center>}>
+                  <Suspense
+                    fallback={
+                      <center>
+                        <ProgressCircle />
+                      </center>
+                    }
+                  >
                     <FavoriteCard />
                   </Suspense>
 
                   <Grid
                     container
+                    justify="center"
                     spacing={2}
                     className={classes.actionContainer}
                   >
