@@ -92,8 +92,8 @@ class EnvImpactCards extends React.Component {
         <Grid container justify="center" spacing={2} style={{ marginTop: "2rem" }}>
           {this.state.cards ? (
             this.state.cards.map((card, i) => (
-              <Grid item xs={12} md={6}>
-                <div key={i}>
+              <Grid item xs={12} md={6} key={i}>
+                <div>
                   <Reward
                     ref={(ref) => {
                       this.reward = ref;
