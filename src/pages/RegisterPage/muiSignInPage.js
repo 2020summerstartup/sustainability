@@ -112,7 +112,7 @@ class SignInFormBase extends Component {
         // takes user to home page
         this.props.history.push(ROUTES.HOME);
         // refresh needed to have points initially displayed
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => {
         this.setState({ error });
@@ -125,6 +125,8 @@ class SignInFormBase extends Component {
           assignData(docSnapshot.data());
       },
     );
+    // initalizes user's impact points in local storage 
+    getUserImpact(email);
 
     event.preventDefault();
   };
