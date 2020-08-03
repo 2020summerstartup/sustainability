@@ -67,8 +67,8 @@ function AppBase() {
     <Router>
       <Switch>
         {/* FOR PAGES WITH SPECIAL HEADERS */}
-        <Route exact path="/home" component={HomeHeader} />
-        <Route exact path="/compete" component={CompeteHeader} />
+        <Route path="/home" component={HomeHeader} />
+        <Route path="/compete" component={CompeteHeader} />
         <Route exact path="/info" component={InfoHeader} />
         <Route path="/account" component={AccountHeader} />
         <Route
@@ -120,8 +120,6 @@ function AppBase() {
             component={MuiPasswordForgetPage}
           />
 
-          <Route path={ROUTES.HOME} component={HomePage} />
-
           <Route path={ROUTES.INFO} component={InfoPage} />
 
           <Route path={ROUTES.COMPETE} component={CompetePage} />
@@ -142,6 +140,15 @@ function AppBase() {
               exact
               path="/account/:page?"
               render={(props) => <AccountPage {...props} />}
+            />
+          </Switch>
+
+          <Switch>
+            <Redirect exact from={ROUTES.HOME} to={ROUTES.HOME_ACTION} />
+            <Route
+              exact
+              path="/home/:page?"
+              render={(props) => <HomePage {...props} />}
             />
           </Switch>
         </Suspense>
