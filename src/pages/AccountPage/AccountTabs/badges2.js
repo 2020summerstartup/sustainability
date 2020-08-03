@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./badges2.module.css";
 import fans from "../../../img/fans.svg";
 
+import SignOutButtom from "../../../components/SignOut";
 import Typography from "@material-ui/core/Typography";
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -50,10 +51,31 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
 }));
+// stores string for badge
+var theBadge;
+var theCongrats
+
+
+var arrayMaster = JSON.parse(localStorage.getItem("firestoreMastered"));
+var masterLength = arrayMaster.length;
+
+const badgeSay = () => {
+  if (masterLength === 0) {
+    theCongrats = <p> Hi, {localStorage.getItem("name")}! Go log more actions to earn some badges!</p>
+    theBadge = <p>I believe in you </p>;
+  } else if (masterLength > 0 && masterLength < 5) {
+    theCongrats = <p> Congratulations {localStorage.getItem("name")}! </p>
+    theBadge = <p> You've earned {masterLength} badges!</p>
+  } else {
+    theCongrats = <p>Omg {localStorage.getItem("name")}! That's awesome!</p>
+    theBadge = <p> You've earned {masterLength} badges! </p>
+  }
+};
 
 export const BadgesCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
   const classes = useStyles();
+  badgeSay();
 
   return (
 
@@ -71,8 +93,7 @@ export const BadgesCard = React.memo(function GalaxyCard() {
               <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
                   <InfoSubtitle></InfoSubtitle>
-                  <InfoTitle>Congratulations {localStorage.getItem("name")}! You have earned
-            [number] badges!</InfoTitle>
+                  <InfoTitle>{theCongrats} {theBadge}</InfoTitle>
                   <InfoCaption> Click on the badges for another surprise!</InfoCaption>
                 </Info>
               </Box>
@@ -291,8 +312,11 @@ class Badges2 extends React.Component {
             <Typography variant="h5">
               You haven't earned any badges yet :(
             </Typography>
+           
           </div>
+           
         )}
+        <SignOutButtom />
       </div>
       </>
     );
