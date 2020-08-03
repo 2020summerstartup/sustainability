@@ -794,7 +794,6 @@ function HomePage(props) {
           >
             {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
             <DialogContent className={styles.dialogContent}>
-              <DialogContentText id="alert-dialog-description">
                 {/* RIBBON */}
                 <div className={styles.nonSemanticProtector}>
                   <h1 className={styles.ribbon}>
@@ -811,17 +810,14 @@ function HomePage(props) {
                   you have completed this action 20 times. Great job and keep being
                   sustainable!
                 </Typography> */}
-              </DialogContentText>
               <img alt="badge" src={badgeImg} className={classes.badgeImg} />
               {/* MUST ATTRIBUTE AUTHOR */}
-              <DialogContentText id="alert-dialog-description">
                 {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
-                <Typography variant="subtitle" className={classes.textBody}>
+                <Typography variant="subtitle1" className={classes.textBody}>
                   You just earned a new badge for mastering the {badgeAction} task! This means
                   you have completed the {badgeAction} task {badgeActionCount} times. Great job and keep being
                   sustainable!
                 </Typography>
-              </DialogContentText>
               <Button
                 onClick={handleClose}
                 variant="contained"
