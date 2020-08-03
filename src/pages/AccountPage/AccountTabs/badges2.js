@@ -23,8 +23,8 @@ for (const el in ActionData) {
       title: action.badgeName,
       titleStylingFront: null,
       titleStylingBack: null,
-      leafStyling: null,
-      flipStatus: null,
+      leafStyling: null, //float left or right
+      flipStatus: null, //show back or front
       toMaster: action.toMaster,
     };
     // adds the necessary attributes to the masterBadgesArray that we will loop through to render the cards later
@@ -37,40 +37,24 @@ class Badges2 extends React.Component {
     super();
     this.state = {
       badges: [],
-      // active: true,
-      selectedItemId: null,
-      selectedItemState: false
-      // activeItemId: null,
-      // flippedId: -1,
+      selectedBadgeId: null, //id of the badge that user clicks on
+      selectedBadgeState: false, //state of the badge that use clicks on
     };
     this.getData = this.getData.bind(this);
   }
 
+  // function for when user clicks on card with specific id
   cardClick = (id) => {
-    const currentState = this.state.active;
-    this.setState({
-      active: !currentState,
-      // activeItemId: i,
-    });
-    if (id === this.state.selectedItemId) {
+    if (id === this.state.selectedBadgeId) {
       this.setState({
-        selectedItemState: !this.state.selectedItemState
+        selectedBadgeState: !this.state.selectedBadgeState, //toggle to change state to what it wasn't before
       });
     } else {
       this.setState({
-        selectedItemId: id,
-        selectedItemState: true
+        selectedBadgeId: id,
+        selectedBadgeState: true,
       });
     }
-    // this.setState({
-    //   activeItemId: i,
-    // });
-    // if (flippedId === i) {
-    //   this.setState({
-    //     flippedId: i,
-    //   });
-    // }
-    // console.log(activeItemId);
   };
 
   getData() {
@@ -87,10 +71,10 @@ class Badges2 extends React.Component {
         badge.titleStylingBack = styles.titleRightBack;
         badge.leafStyling = styles.right;
       }
-      if (badge.leafStyling == styles.left) {
+      if (badge.leafStyling === styles.left) {
         badge.flipStatus = styles.flipLeft;
       }
-      if (badge.leafStyling == styles.right) {
+      if (badge.leafStyling === styles.right) {
         badge.flipStatus = styles.flipRight;
       }
     });
@@ -105,8 +89,7 @@ class Badges2 extends React.Component {
   }
 
   render() {
-    // const { activeItemId } = this.state;
-    const { selectedItemId, selectedItemState } = this.state;
+    const { selectedBadgeId, selectedBadgeState } = this.state;
 
     return (
       <div className={styles.root}>
@@ -158,27 +141,17 @@ class Badges2 extends React.Component {
         {/* MAPPING THROUGH EACH MASTERED BADGE */}
         {this.state.badges ? (
           this.state.badges.map((badge, i) => (
-            <div key={i}>
+            <div key={badge.id}>
               <div className={styles.column}>
-              <div
+                <div
+                  // if badge id is the selected one and the badge state is true, then we flip the badge
                   className={`${
-                    badge.id === selectedItemId && selectedItemState ? `${badge.flipStatus}` : null
+                    badge.id === selectedBadgeId && selectedBadgeState
+                      ? `${badge.flipStatus}`
+                      : null
                   } ${badge.leafStyling}`}
                   onClick={() => this.cardClick(badge.id)}
                 >
-                {/* <div
-                  className={`${
-                    activeItemId === badge.id ? null : `${badge.flipStatus}`
-                  } ${badge.leafStyling}`}
-                  onClick={() => this.cardClick(badge.id)}
-                > */}
-                  {/* <div
-                  className={`${
-                    this.state.active ? null : `${badge.flipStatus}`
-                  } ${badge.leafStyling}`}
-                  onClick={() => this.cardClick(i)}
-                > */}
-                  {/* <div className={badge.leafStyling}> */}
                   <div className={styles.leafFront}>
                     <Typography
                       variant="h6"
@@ -192,7 +165,6 @@ class Badges2 extends React.Component {
                       {badge.toMaster} <br /> Times Completed!
                     </Typography>
                   </div>
-                  {/* </div> */}
                 </div>
               </div>
             </div>
