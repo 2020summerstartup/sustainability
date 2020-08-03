@@ -141,7 +141,6 @@ export const updateUserDorm = (userEmail, value) => {
 
 // updates firestore when a user favorites an action
 export const addFav = (userEmail, susAction) => {
-  console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayUnion(susAction)
   })
@@ -156,7 +155,6 @@ export const deleteFav = (userEmail, susAction) => {
 
 // adds action to mastered list in firestore when called (user has mastered action)
 export const actionMastered = (userEmail, susAction) => {
-  console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
     masteredActions: app.firestore.FieldValue.arrayUnion(susAction)
   })
