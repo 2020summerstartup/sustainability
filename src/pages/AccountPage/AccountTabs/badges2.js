@@ -71,8 +71,9 @@ export const BadgesCard = React.memo(function GalaxyCard() {
               <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
                   <InfoSubtitle></InfoSubtitle>
-                  <InfoTitle></InfoTitle>
-                  <InfoCaption> </InfoCaption>
+                  <InfoTitle>Congratulations {localStorage.getItem("name")}! You have earned
+            [number] badges!</InfoTitle>
+                  <InfoCaption> Click on the badges for another surprise!</InfoCaption>
                 </Info>
               </Box>
             </Card>
@@ -218,7 +219,7 @@ class Badges2 extends React.Component {
      
     <BadgesCard />
       <div className={styles.root}>
-        <div className={styles.fancyBorder}>
+        {/* <div className={styles.fancyBorder}>
           <Typography
             variant="h5"
             style={{
@@ -236,7 +237,7 @@ class Badges2 extends React.Component {
           >
             Hover over the badges for another surprise!
           </Typography>
-        </div>
+        </div> */}
 
         <div className={styles.leaves}>
           <i></i>
