@@ -807,7 +807,7 @@ function HomePage(props) {
                 {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
                 <Typography variant="subtitle1" className={classes.textBody}>
                   You just earned a new badge for mastering the {badgeAction} task! This means
-                  you have completed the {badgeAction} task {badgeActionCount} times. Great job and keep being
+                  you have completed the {badgeAction} task {badgeActionCount} times. Great job, and keep being
                   sustainable!
                 </Typography>
               <Button
