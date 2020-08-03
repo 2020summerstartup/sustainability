@@ -17,7 +17,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
 import EmailIcon from "@material-ui/icons/Email";
@@ -107,26 +106,25 @@ class SignInFormBase extends Component {
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then( () => {
-        // initalizes user's data into local storage 
-        // needed to display total point, progress modal, and enable app to run withour error
-        getUser(email).onSnapshot(
-          (docSnapshot) => {
-              assignData(docSnapshot.data());
-          },
-        );
-      }).then( () => {
         // initalizes user's impact points in local storage 
         getUserImpact(email);
-      }).then(() => {
         this.setState({ ...INITIAL_STATE });
+        // takes user to home page
         this.props.history.push(ROUTES.HOME);
-        // page refresh is needed to have total point display properly 
-        // REVISIT SOON SO THAT WE CAN HOPEFULLY ELIMINATE THIS
+        // refresh needed to have points initially displayed
         window.location.reload();
-      }).catch((error) => {
+      })
+      .catch((error) => {
         this.setState({ error });
         console.log(error);
       });
+    // initalizes user's data into local storage 
+    // needed to display total point, progress modal, and enable app to run withour error
+    getUser(email).onSnapshot(
+      (docSnapshot) => {
+          assignData(docSnapshot.data());
+      },
+    );
 
     event.preventDefault();
   };

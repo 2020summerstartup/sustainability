@@ -1,5 +1,4 @@
 import React from "react";
-import { Spring } from "react-spring/renderprops";
 import styles from "./totalBuzz.module.css";
 
 import Grid from "@material-ui/core/Grid";
@@ -18,7 +17,8 @@ const useStyles = (theme) => ({
 // cards to be rendered on the points page in account
 class TotalBuzz extends React.Component {
   render() {
-    const { classes } = this.props;
+    // Following line was unused so I commented it out -Katie
+    //const { classes } = this.props;
 
     return (
       // <Spring
@@ -44,7 +44,8 @@ class TotalBuzz extends React.Component {
             {localStorage.getItem("buzzes")}
           </Typography>
           <Typography variant="h5">Action(s) Logged!</Typography>
-          <Grid item direction="column">
+          <Grid item>
+            {/* I removed 'direction="column"' from the above Grid tag before it threw an error and didn't do anyhthing -Katie */}
             <Typography variant="body2">
               Click impact cards below for a fun surprise!
             </Typography>

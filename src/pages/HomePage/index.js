@@ -118,7 +118,8 @@ function assignData(data) {
   // the data parameter is meant to be a firestore document snapshot
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
-  localStorage.setItem("total", data.total);const points = data.points;
+  localStorage.setItem("total", data.total);
+  const points = data.points;
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
@@ -454,9 +455,6 @@ function HomePage(props) {
     initUserTotal = localStorage.getItem('total')
   }
   const [userTotal, updateUserTotal] = useState(initUserTotal);
-
-
-
 
   const classes = useStyles();
   const [value, setValue] = React.useState(indexToTabName[page]);

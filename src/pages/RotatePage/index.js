@@ -12,7 +12,8 @@ import pointsGif from "../../img/points.gif";
 // import Result from './result.gif';
 // import './css/Main.css';
 
-const Button = require("@material-ui/core/Button").default;
+// Following line was unused and throwing a warning so I commented it out -Katie
+// const Button = require("@material-ui/core/Button").default;
 
 export class Rotate extends Component {
     constructor() {

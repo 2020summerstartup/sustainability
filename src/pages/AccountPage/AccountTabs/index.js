@@ -146,8 +146,6 @@ const AccountTabs = props => {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          // non selected one is grayed out
-          // textColor="default"
           aria-label="scrollable tabs"
           className={classes.tabs}
           TabIndicatorProps={{ className: classes.indicator }}
