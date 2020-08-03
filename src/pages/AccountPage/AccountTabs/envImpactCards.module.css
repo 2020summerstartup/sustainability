@@ -1,0 +1,73 @@
+/* square shape */
+.burstShape {
+  margin: 3rem auto;
+  width: 9rem;
+  height: 9rem;
+  position: relative;
+  text-align: center;
+  display: flex;
+  /* CSS TRICK: this combines justify-content & align-items! */
+  place-items: center;
+  color: white;
+  text-shadow: 1px 1px 5px black;
+  transition: all 0.2s ease-in-out;
+}
+
+.burstShape:hover {
+  transform: scale(1.25);
+}
+
+/* points besides the original square aka squares that turn */
+.burstShape:before,
+.burstShape:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 9rem;
+  width: 9rem;
+  z-index: -1;
+}
+.burstShape:before {
+  transform: rotate(30deg);
+}
+.burstShape:after {
+  transform: rotate(60deg);
+}
+
+/* for card.colorStyling so that each impact card will have it's own color */
+.co2,
+.co2:before,
+.co2:after {
+  /* background: #FDE74C; */
+  background: rgb(255, 251, 18);
+  background: radial-gradient(
+    circle,
+    rgba(255, 251, 18, 1) 0%,
+    rgba(255, 184, 24, 1) 100%
+  );
+}
+
+.energy,
+.energy:before,
+.energy:after {
+  /* background: #9bc53d; */
+  background: rgb(173, 240, 25);
+  background: radial-gradient(
+    circle,
+    rgba(173, 240, 25, 1) 0%,
+    rgba(75, 179, 11, 1) 100%
+  );
+}
+
+.water,
+.water:before,
+.water:after {
+  /* background: #5bc0eb; */
+  background: rgb(91, 194, 250);
+  background: radial-gradient(
+    circle,
+    rgba(91, 194, 250, 1) 0%,
+    rgba(26, 97, 168, 1) 100%
+  );
+}

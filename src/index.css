@@ -113,13 +113,13 @@ code {
 }
 
 /* mobile landscape */
-@media screen and (min-width: 320px) and (max-width: 766px) and (orientation: landscape) {
+@media only screen and (min-width: 320px) and (max-width: 766px) and (orientation: landscape) {
   .base-container,
   .tab-container,
   .top-container {
     margin-left: 0 !important;
     padding-left: 2rem !important;
-    margin-bottom: 4rem !important;
+    margin-bottom: 5rem !important;
   }
   .top-container {
     margin-bottom: 0 !important;
@@ -157,7 +157,7 @@ body {
 }
 
 /* Better native app experience  */
-@media (max-width: 991px) {
+@media only screen and (max-width: 991px) {
   body {
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;

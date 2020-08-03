@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./addToHomeScreen.module.css";
-import spectrum1 from "../../img/spectrum1.svg";
-import spectrum2 from "../../img/spectrum2.svg";
+// import spectrum1 from "../../img/spectrum1.svg";
+// import spectrum2 from "../../img/spectrum2.svg";
 import spectrum3 from "../../img/spectrum3.svg";
-import spectrum4 from "../../img/spectrum4.svg";
+// import spectrum4 from "../../img/spectrum4.svg";
 
 
 class AddToHomeScreen extends React.Component {

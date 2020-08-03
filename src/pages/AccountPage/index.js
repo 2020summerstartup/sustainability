@@ -14,7 +14,7 @@ function assignDorm(data) {
   }
 }
 
-function AccountPage() {
+function AccountPage(props) {
   leaderBoardUpdate();
 
   const authContext = useContext(AuthUserContext);
@@ -51,7 +51,7 @@ function AccountPage() {
     <div>
       <AuthUserContext.Consumer>
         {(authUser) => (
-          <AccountTabs />
+          <AccountTabs props={props}/>
         )}
       </AuthUserContext.Consumer>
     </div>

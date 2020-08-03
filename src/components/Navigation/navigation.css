@@ -2,12 +2,12 @@
   font-size: 16px;
   font-family: "Open Sans";
   --theme: #24a113;
+  --theme-secondary: #E36588;
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --bg-primary: #23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;
-  --theme-secondary: #f48fb1;
 }
 
 body {
@@ -155,10 +155,13 @@ main {
     display: none;
   }
   .signout-btn {
-    position: absolute !important;
+    position: relative !important;
+    bottom: 0rem;
+    margin-top: 2rem !important;
+    /* position: absolute !important;
     left: 50%;
     bottom: 5rem;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0); */
   }
 }
 
@@ -171,22 +174,18 @@ main {
     height: 3.5rem;
     overflow: hidden;
   }
-
   .logo {
     display: none;
   }
-
   .nav-item {
     display: flex;
     justify-content: space-around;
   }
-
   .navbar-nav {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
-
   .nav-link {
     flex-direction: column;
     justify-content: center;
@@ -195,16 +194,13 @@ main {
     height: 3rem;
     margin-bottom: 0;
   }
-
   .logout {
     display: none;
   }
-
   .base-container {
     margin-bottom: 3.5rem;
     overflow-x: hidden;
   }
-
   .link-text {
     display: inline;
     text-align: center;
@@ -212,12 +208,10 @@ main {
     margin: 0;
     font-size: 0.9rem;
   }
-
   .navbar:hover .link-text .page-text {
     display: inline;
     color: var(--theme);
   }
-
   .icons {
     position: relative;
     top: 1.5rem;
@@ -225,7 +219,6 @@ main {
     padding: 0;
     font-size: 1.3rem;
   }
-
   .page-text {
     margin: 0;
     padding: 0;
@@ -233,7 +226,6 @@ main {
     bottom: 0.9rem;
     color: var(--text-secondary);
   }
-
   .signout-btn {
     display: inline;
   }
@@ -318,7 +310,7 @@ main {
   }
 
   .signout-btn {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -340,8 +332,14 @@ main {
 }
 
 /* For mobile landscape */
-@media screen and (min-width: 320px) and (max-width: 766px) and (orientation: landscape) {
+@media only screen and (min-width: 320px) and (max-width: 766px) and (orientation: landscape) {
   .navbar {
     display: none;
+  }
+  .signout-btn {
+    position: absolute !important;
+    left: 50%;
+    transform: translate(-50%, -75%);
+    margin-top: 2rem !important;
   }
 }

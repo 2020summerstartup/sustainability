@@ -12,9 +12,7 @@ import pointsGif from "../../img/points.gif";
 // import Result from './result.gif';
 // import './css/Main.css';
 
-
-const { indigo, lightBlue, blue, cyan} = require('@material-ui/core/colors');
-const Button = require('@material-ui/core/Button').default;
+const Button = require("@material-ui/core/Button").default;
 
 export class Rotate extends Component {
     constructor() {

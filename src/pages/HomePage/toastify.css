@@ -1,0 +1,4 @@
+/* https://fkhadra.github.io/react-toastify/how-to-style/ */
+.Toastify__toast--success {
+    background: var(--theme-secondary);
+}

@@ -1,26 +1,24 @@
 import styles from "./badgeModal.module.css";
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
+import { withRouter } from "react-router";
 import ProgressCircle from "../../components/ProgressCircle";
 
 // import FavoriteCard from "./faveCard";
 import actionTab from "../../img/actionTab.svg";
 import badgeImg from "../../img/badge.svg";
+import "./toastify.css";
 
 import CountUp from "react-countup";
 import Modal from "react-modal";
 import Confetti from "react-confetti";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {
-  getUser,
-  createUser,
-  uploadUserTotalPoint,
   updateUserPoint,
   updateDormPoint,
   actionMastered,
   firestore,
-  updateUserImpact
+  updateUserImpact,
 } from "../../services/Firebase";
-import {functions} from "../../services/Firebase/firebase"
 
 import PropTypes from "prop-types";
 
@@ -88,6 +86,7 @@ const FavoriteCard = lazy(() => import("./faveCard.js"));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
+//DONT THINK WE NEED THIS ANYMORE?
 var total;
 function initPoints(email) {
   total = 0;
@@ -103,17 +102,6 @@ function initPoints(email) {
   localStorage.setItem("total", total); // After initializing individual points, initialize total.
 }
 
-function initImpactPoints (email) {
-    // pull impact data from firestore & intialize in local storage
-    getUser(email).onSnapshot( (snapshot) => {
-      let envImpact = snapshot.get('impact')
-      localStorage.setItem("buzzes", envImpact.buzzes);
-      localStorage.setItem("energy", envImpact.energy);
-      localStorage.setItem("coEmiss", envImpact.coEmiss);
-      localStorage.setItem("water", envImpact.water);
-  });
-}
-
 // sound play for certain buttons
 const likeAudio = new Audio(like);
 const unlikeAudio = new Audio(unlike);
@@ -125,16 +113,15 @@ const playSound = (audioFile) => {
 };
 
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
-// should only be called when page first loads, not when increment
+// should only be called when page first loads, not when points are increment
 function assignData(data) {
-  // the data parameter is meant to be the firestore document snapshot
-  const points = data.points;
+  // the data parameter is meant to be a firestore document snapshot
+  localStorage.setItem("dorm", data.userDorm);
+  localStorage.setItem("name", data.name);
+  localStorage.setItem("total", data.total);const points = data.points;
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
-  localStorage.setItem("dorm", data.userDorm);
-  localStorage.setItem("name", data.name);
-  localStorage.setItem("total", data.total);
 }
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
@@ -248,7 +235,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       background: "linear-gradient(to top, #f48fb1, rgba(0,0,0,0))",
-    },  
+    },
   },
   card2: {
     borderRadius: "1rem",
@@ -397,7 +384,6 @@ const useStyles = makeStyles((theme) => ({
   buttonClose: {
     marginTop: theme.spacing(2),
   },
-
   totalPoints: {
     position: "relative",
     top: "0.5rem",
@@ -409,8 +395,6 @@ const useStyles = makeStyles((theme) => ({
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-
 
 // JESSICA WAS WORKING HERE AT END OF DAY
 // const uploadUserData = (email) => {
@@ -437,58 +421,44 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 //     };
 // uploadUserData(localStorage.getItem('email'))
 
-
 // Text to display on the homepage
-function HomePage() {
-  console.log(localStorage.getItem('total'))
-  console.log(localStorage.getItem('email'))
+function HomePage(props) {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
   const [badgeAction, setBadgeAction] = useState("");
+  const [badgeActionCount, setBadgeActionCount] = useState("");
   const authContext = useContext(AuthUserContext);
-  // THE ERROR WITH TOTAL POINT DISPLAY WHEN A USER SIGNS IN/UP IS THAT LOCAL STORAGE 
-  // IS NOT YET SET -> IT IS SET BY AN ASYNC CALL TO FIRESTORE 
-  const [userTotal, updateUserTotal] = useState(localStorage.getItem('total'));
-  
 
-  // Get user's info set in local storage
-  getUser(authContext.email).onSnapshot(
-    (docSnapshot) => {
-      if (docSnapshot.exists) {
-        assignData(docSnapshot.data());
-      } else {
-        createUser(authContext.email);
-        initPoints(authContext.email);
-        uploadUserTotalPoint(authContext.email, total);
-      }
-    },
-    (err) => {
-      console.log(`Encountered error: ${err}`);
-    }
-  );
+  // nested routing
+  let { match, history } = props;
+  let { params } = match;
+  let { page } = params;
+  const tabNameToIndex = {
+    0: "actions",
+    1: "favorites",
+  };
 
-  // KATIE: A function I'm playing with for reading challenges from firebase:
-  // getChallenges(authContext.email).onSnapshot(
-  //   (docSnapshot) => {
-  //     if (docSnapshot.exists) {
-  //       assignData(docSnapshot.data());
-  //     } else {
-  //       createUser(authContext.email);
-  //       initPoints(authContext.email);
-  //       uploadUserTotalPoint(authContext.email, total);
-  //     }
-  //   },
-  //   (err) => {
-  //     console.log(`Encountered error: ${err}`);
-  //   }
-  // );
+  const indexToTabName = {
+    actions: 0,
+    favorites: 1,
+  };
 
-  // getMastered(authContext.email);
+
+  // this is needed to prevent error in console when user signs into their account
+  // hopefully will revisit later to get rid of refresh page solution 
+  var initUserTotal;
+  if (localStorage.getItem('total') == null) {
+    initUserTotal = 0
+  } else {
+    initUserTotal = localStorage.getItem('total')
+  }
+  const [userTotal, updateUserTotal] = useState(initUserTotal);
+
 
 
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(indexToTabName[page]);
   const [expandedId, setExpandedId] = React.useState(-1);
   // const [height, setHeight] = React.useState("");
   const [filter, setFilter] = useState("");
@@ -499,7 +469,9 @@ function HomePage() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    history.push(`/home/${tabNameToIndex[newValue]}`);
   };
+
 
   const handleExpandClick = (i) => {
     // WILL MAYBE REVISITED TO HAVE CARDS SAME HEIGHT
@@ -531,13 +503,18 @@ function HomePage() {
     }
   };
 
+  // this function is called upon increment
+  // sets the state of userTotal so that user's total point display is correct
   const updateDisplayTotal = (actionPoint) => {
-    const newTotal = parseInt(userTotal) + parseInt(actionPoint)
+    const newTotal =
+      parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
     updateUserTotal(newTotal);
-  }
+  };
 
   // Updates all necessary values in firestore and local storage when user completes sus action
   const increment = (action) => {
+    // function is what updates UserTotal state so that correct score is displayed!!
+    updateDisplayTotal(action.points);
 
     // allows us to increment the correct values by writing the action & value to local storage
     // add specified number of points to the specific action point count
@@ -547,8 +524,8 @@ function HomePage() {
     );
     // add specified number of points to the user's total point count
     localStorage.setItem(
-      'total',
-      parseInt(localStorage.getItem('total')) + parseInt(action.points)
+      "total",
+      parseInt(localStorage.getItem("total")) + parseInt(action.points)
     );
 
     // updates user's point in firestore
@@ -561,45 +538,18 @@ function HomePage() {
       // window.location.reload(true);
     });
 
+    // add's associated impact points in firestore and local storage
     updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
 
- 
-
-    // get the user's dorm from firestore and update the dorm's points
-    getUser(authContext.email).onSnapshot(
-      (docSnapshot) => {
-        if (docSnapshot.exists) {
-          assignData(docSnapshot.data());
-        } else {
-          createUser(authContext.email);
-          initPoints(authContext.email);
-          initImpactPoints(authContext.email)
-          uploadUserTotalPoint(
-            authContext.email,
-            localStorage.getItem("total")
-          );
-        }
-      },
-      (err) => {
-        console.log(`Encountered error: ${err}`);
-      }
-    );
-
+    // check if action has been completed enough time to be considered "mastered"
+    // also sends user a progress notifications if action has not yet been mastered
     checkMastered(action);
 
     // update dorm's point in firestore
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
-
-
-    updateDisplayTotal(action.points);
-
-    
-
   }; // increment
 
   // to check with the mastered actions that firestore has upon loading page
-  // may need to change this because every time the page loads we will read firestore data
-  //(and page load everytime action is logged) so we may reach limit if many people are using the app
   var firestoreMastered = [];
   const getMastered = (userEmail) => {
     let userDocRef = firestore.doc("users/" + userEmail);
@@ -623,7 +573,10 @@ function HomePage() {
     var storageName = action.susAction.concat("Mastered");
     firestoreMastered = localStorage.getItem("firestoreMastered");
 
-    if ( firestoreMastered != null && firestoreMastered.includes(stringActionName)) {
+    if (
+      firestoreMastered != null &&
+      firestoreMastered.includes(stringActionName)
+    ) {
       masterActions[el - 1] = true; //disable button when action is mastered
       localStorage.setItem(storageName, true); // update local storage accordingly
     } else {
@@ -638,25 +591,30 @@ function HomePage() {
 
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
-    const actionTotal = localStorage.getItem(action.susAction);
     // if (storedMaster == null) {
     //   console.log('null')
     // }
-    if (20 * action.points >= actionTotal) {
+    const actionTotal = localStorage.getItem(action.susAction);
+    if (action.toMaster * action.points > actionTotal) {
       // If action has not been mastered, the button will remain enabled
-      console.log(
-        "You are " +
-          (20 * action.points - actionTotal) +
-          ` points away from mastering ${action.susAction}!`
-      );
+      // send user a progress alert to tell them how many more points they need to complete the action
+      var displayText;
+      // display a different message depending on if the user needs to buzz one or several more times to complete
+      if ((action.toMaster - (actionTotal/action.points)) !== 1 ){
+        displayText = `You are ${action.toMaster - (actionTotal/action.points)} buzzes away from mastering the ${action.title} task!` ;
+      } else {
+        displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!` ;
+      }
+      //  AMY!!!! THIS IS WHERE MY TOASTIFY POP-UP THING IS!!! PLZ MAKE IT PRETTY
+      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+      // possibly want a new sound for this?
       setBadgeModalIsOpen(false);
-      setBadgeAction("");
-    } else if (20 * action.points < actionTotal) {
+    } else if (action.toMaster * action.points <= actionTotal) {
       actionMastered(localStorage.getItem("email"), action.susAction);
       // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
       setBadgeAction(action.title);
-      console.log(`You have mastered ${localStorage.getItem("badgeAction")}!`);
+      setBadgeActionCount(action.toMaster);
       setBadgeModalIsOpen(true);
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
@@ -715,13 +673,12 @@ function HomePage() {
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
-
   // Set the "progress message" to be displayed when the user pressed "check progress"
   var progressMessage = "";
   const setProgressMessage = () => {
-    // Why is this here? Doesn't initPoints run when the page loads so local storage should be good if they
-    // want to check their progress?
-    // initPoints();
+    // initPoints has to be called here so that any values that aren't yet initialized are displayed as 0 instead
+    // appearing as blank
+    initPoints(); // DO NOT REMOVE
     for (const el in ActionData) {
       // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
@@ -737,14 +694,19 @@ function HomePage() {
     progressMessage = (
       <>
         {progressMessage}
-        <Typography variant="body1" component={'span'}><b>Total points: {userTotal}</b></Typography>
+        <Typography
+          variant="h6"
+          component={"span"}
+          className={classes.totalPoints}
+        >
+          <b>Total points: {userTotal}</b>
+        </Typography>
       </>
     );
   }; // setProgressMessage
 
   // Call the function immediately so that it runs before the return statement
   setProgressMessage();
-
 
   // HTML to be displayed
   return (
@@ -792,7 +754,14 @@ function HomePage() {
             component={"span"}
           >
             You have earned&nbsp;
-            {<CountUp start={0} end={userTotal} duration={1}></CountUp>} points!
+            {
+              <CountUp
+                start={0}
+                end={parseInt(userTotal)}
+                duration={1}
+              ></CountUp>
+            }{" "}
+            points!
           </Typography>
           {/* Mobile Screens */}
           <Fab
@@ -832,7 +801,7 @@ function HomePage() {
                 <div className={styles.nonSemanticProtector}>
                   <h1 className={styles.ribbon}>
                     <strong className={styles.ribbonContent}>
-                      Congratulations {localStorage.getItem('name')}!
+                      Congratulations {localStorage.getItem("name")}!
                     </strong>
                   </h1>
                 </div>
@@ -850,8 +819,8 @@ function HomePage() {
               <DialogContentText id="alert-dialog-description">
                 {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
                 <Typography variant="subtitle" className={classes.textBody}>
-                  You just earned a new badge for completing {badgeAction}! This means
-                  you have completed {badgeAction} 20 times. Great job and keep being
+                  You just earned a new badge for mastering the {badgeAction} task! This means
+                  you have completed the {badgeAction} task {badgeActionCount} times. Great job and keep being
                   sustainable!
                 </Typography>
               </DialogContentText>
@@ -880,7 +849,10 @@ function HomePage() {
           >
             <DialogTitle
               id="alert-dialog-slide-title"
-              style={{ backgroundColor: "var(--theme-secondary)", color: "#FFFFFF" }}
+              style={{
+                backgroundColor: "var(--theme-secondary)",
+                color: "#FFFFFF",
+              }}
             >
               {"Check Your Progress!"}
             </DialogTitle>
@@ -890,7 +862,7 @@ function HomePage() {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-                // colors={["grey", "white", "green", "black"]}
+                // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -908,61 +880,32 @@ function HomePage() {
               </Button>
             </DialogActions>
           </Dialog>
-
-          {/* OLD MODAL */}
-          {/* <Modal
-            isOpen={progressModalIsOpen}
-            onRequestClose={() => setProgressModalIsOpen(false)}
-            className={styles.modal}
-            overlayClassName={styles.overlay}
-          >
-            <center>
-              <Confetti
-                width={1500}
-                numberOfPieces={2000}
-                recycle={false}
-                opacity={0.7}
-                // colors={["grey", "white", "green", "black"]}
-              />
-              <h1>Your Progress:</h1>
-              {progressMessage}
-              <div>
-                <button
-                  onClick={() => setProgressModalIsOpen(false)}
-                  className="button"
-                >
-                  Close
-                </button>
-              </div>
-            </center>
-          </Modal> */}
         </div>
         <TabPanel value={value} index={0} className="tab-container">
-           {/* Action galaxy card*/}
-        <NoSsr>
-                    <GoogleFontLoader
-                      fonts={[
-                        { font: "Spartan", weights: [300] },
-                        { font: "Montserrat", weights: [200, 400, 700] },
-                      ]}
-                    />
-                 
-                  </NoSsr>
-                  <Card className={classes.card2}>
-                    <CardMedia classes={mediaStyles2} image={actionTab} />
-                    <Box py={3} px={2} className={classes.content}>
-                      <Info useStyles={useGalaxyInfoStyles}>
-                        <InfoSubtitle></InfoSubtitle>
-                        <InfoTitle>Log your actions here!</InfoTitle>
-                        <InfoCaption>
-                        Tap the drop down menu to find out more 
-                          <span role="img" aria-label="down arrow">
-                             🔽
-                          </span>
-                        </InfoCaption>
-                      </Info>
-                    </Box>
-                  </Card>
+          {/* Action galaxy card*/}
+          <NoSsr>
+            <GoogleFontLoader
+              fonts={[
+                { font: "Spartan", weights: [300] },
+                { font: "Montserrat", weights: [200, 400, 700] },
+              ]}
+            />
+          </NoSsr>
+          <Card className={classes.card2}>
+            <CardMedia classes={mediaStyles2} image={actionTab} />
+            <Box py={3} px={2} className={classes.content}>
+              <Info useStyles={useGalaxyInfoStyles}>
+                <InfoSubtitle></InfoSubtitle>
+                <InfoTitle>Log your actions here!</InfoTitle>
+                <InfoCaption>
+                  Tap the drop down menu to find out more
+                  <span role="img" aria-label="down arrow">
+                    🔽
+                  </span>
+                </InfoCaption>
+              </Info>
+            </Box>
+          </Card>
           <Fragment>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -979,7 +922,12 @@ function HomePage() {
               />
             </div>
             {/* Card for actions */}
-            <Grid container spacing={2} className={classes.actionContainer}>
+            <Grid
+              container
+              justify="center"
+              spacing={2}
+              className={classes.actionContainer}
+            >
               {/* All actions (this loops using search) */}
               {ActionData.map(
                 (action, i) =>
@@ -1067,12 +1015,19 @@ function HomePage() {
             <AuthUserContext.Consumer>
               {(authUser) => (
                 <>
-                  <Suspense fallback={<ProgressCircle />}>
+                  <Suspense
+                    fallback={
+                      <center>
+                        <ProgressCircle />
+                      </center>
+                    }
+                  >
                     <FavoriteCard />
                   </Suspense>
 
                   <Grid
                     container
+                    justify="center"
                     spacing={2}
                     className={classes.actionContainer}
                   >
@@ -1167,5 +1122,6 @@ function HomePage() {
 } // end of function
 
 const condition = (authUser) => !!authUser;
-export default withAuthorization(condition)(HomePage);
+const HomePageAuthorized = withAuthorization(condition)(HomePage);
+export default withRouter(HomePageAuthorized);
 export { initPoints, assignData };

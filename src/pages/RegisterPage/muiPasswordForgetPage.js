@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import EmailIcon from "@material-ui/icons/Email";
 
@@ -17,36 +16,6 @@ const MuiPasswordForgetPage = () => (
     <PasswordForgetForm />
   </div>
 );
-
-const useStyles = (theme) => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  formIcon: {
-    marginRight: "1rem",
-  },
-  eye: {
-    cursor: "pointer",
-  },
-  linkText: {
-    color: theme.palette.primary.main,
-    textDecoration: "none",
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  errorText: {
-    color: "red",
-    marginTop: "1rem",
-  },
-});
 
 const INITIAL_STATE = {
   email: "",
@@ -87,14 +56,25 @@ class PasswordForgetFormBase extends Component {
     return (
       <Container maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}>
+        <div
+          style={{
+            marginTop: "1.5rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Typography component="h1" variant="h5">
             You forgot your password :(
           </Typography>
           <div className="image">
             <img alt="forgot password" src={pwImg} />
           </div>
-          <form onSubmit={this.onSubmit} className={classes.form} noValidate>
+          <form
+            onSubmit={this.onSubmit}
+            style={{ width: "100%", marginTop: "1rem" }}
+            noValidate
+          >
             <TextField
               variant="outlined"
               margin="normal"
@@ -106,10 +86,7 @@ class PasswordForgetFormBase extends Component {
               autoComplete="email"
               onChange={this.onChange}
               InputProps={{
-                startAdornment: <EmailIcon className={classes.formIcon} />,
-                classes: {
-                  adornedEnd: classes.adornedEnd,
-                },
+                startAdornment: <EmailIcon style={{ marginRight: "1rem" }} />,
               }}
             />
             <Button
@@ -117,7 +94,7 @@ class PasswordForgetFormBase extends Component {
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              style={{ margin: "1rem auto 1.5rem auto" }}
               disabled={isInvalid}
             >
               Change your Password
@@ -125,13 +102,11 @@ class PasswordForgetFormBase extends Component {
           </form>
         </div>
       </Container>
-    )
+    );
   }
 }
 
-const PasswordForgetFormStyled = withStyles(useStyles)(PasswordForgetFormBase);
-
-const PasswordForgetForm = withFirebase(PasswordForgetFormStyled);
+const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
 
 export { PasswordForgetForm };
 

@@ -1,18 +1,24 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Reward from "react-rewards";
 
-import { withFirebase, createUser } from "../../services/Firebase";
+import {
+  withFirebase,
+  createUser,
+  getUser,
+  getUserImpact,
+} from "../../services/Firebase";
+import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 import { PasswordInput } from "./muiSignInPage";
 import signupImg from "../../img/login2.svg";
 
+import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
@@ -41,33 +47,6 @@ const SignUpPage = () => (
     <SignUpForm />
   </div>
 );
-
-// Styles for main signup page
-const useStyles = (theme) => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  formIcon: {
-    marginRight: "1rem",
-  },
-  eye: {
-    cursor: "pointer",
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  errorText: {
-    color: "red",
-    marginTop: "1rem",
-  },
-});
 
 class PasswordInput2 extends Component {
   constructor(props) {
@@ -111,7 +90,7 @@ class PasswordInput2 extends Component {
               </IconButton>
             </InputAdornment>
           ),
-          startAdornment: <LockOpenIcon className={classes.formIcon} />,
+          startAdornment: <LockOpenIcon style={{ marginRight: "1rem" }} />,
         }}
       />
     );
@@ -119,12 +98,9 @@ class PasswordInput2 extends Component {
 }
 
 PasswordInput2.propTypes = {
-  classes: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   // value: PropTypes.func.isRequired,
 };
-
-PasswordInput2 = withStyles(useStyles)(PasswordInput2);
 
 // The initial state of all information to be completed by the user
 const INITIAL_STATE = {
@@ -159,9 +135,6 @@ class SignUpFormBase extends Component {
     localStorage.clear();
     const { username, email, passwordOne, dorm } = this.state;
 
-    createUser(email, username, dorm);
-    localStorage.setItem("email", email);
-
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
@@ -170,6 +143,22 @@ class SignUpFormBase extends Component {
           username,
           email,
         });
+      })
+      .then(() => {
+        //create user in firebase firestore database
+        createUser(email, username, dorm);
+        localStorage.setItem("email", email);
+      })
+      .then(() => {
+        // once user is created in firestore we need to pull that data and update data into local storage
+        // needed to display total point, progress modal, and enable app to run withour error
+        getUser(email).onSnapshot((docSnapshot) => {
+          assignData(docSnapshot.data());
+        });
+      })
+      .then(() => {
+        // fetches user's impact points from firestore and updates local storage
+        getUserImpact(email);
       })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
@@ -186,7 +175,7 @@ class SignUpFormBase extends Component {
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
     // If the user changed the dorm in the dropdown
-    if(event.target.name === "dorm") {
+    if (event.target.name === "dorm") {
       // Update the dormValue (value displayed in the dropdown) so they see their current selection
       dormValue = event.target.value;
     }
@@ -225,14 +214,24 @@ class SignUpFormBase extends Component {
     return (
       <Container maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}>
+        <div
+          style={{
+            marginTop: "1.5rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
           <div className="image">
             <img alt="sign up" src={signupImg} />
           </div>
-          <form onSubmit={this.onSubmit} className={classes.form}>
+          <form
+            onSubmit={this.onSubmit}
+            styles={{ width: "100%", marginTop: "1rem" }}
+          >
             <TextField
               variant="outlined"
               margin="normal"
@@ -243,10 +242,7 @@ class SignUpFormBase extends Component {
               autoComplete="name"
               onChange={this.onChange}
               InputProps={{
-                startAdornment: <PersonIcon className={classes.formIcon} />,
-                classes: {
-                  adornedEnd: classes.adornedEnd,
-                },
+                startAdornment: <PersonIcon style={{ marginRight: "1rem" }} />,
               }}
             />
             <TextField
@@ -259,32 +255,32 @@ class SignUpFormBase extends Component {
               autoComplete="email"
               onChange={this.onChange}
               InputProps={{
-                startAdornment: <EmailIcon className={classes.formIcon} />,
+                startAdornment: <EmailIcon style={{ marginRight: "1rem" }} />,
               }}
             />
-              <FormControl variant="filled" className={classes.formControl}>
-                <InputLabel>Dorm</InputLabel>
-                <Select
-                  native
-                  value={dormValue}
-                  name="dorm"
-                  label="Dorm"
-                  onChange={this.onChange}
-                  inputProps={{ "aria-label": "dorm" }}
-                  style={{ width: "24.75rem", margin: "1rem 0" }}
-                  variant="outlined"
-                >
-                  <option aria-label="None" value="" />
-                  <option value={"South"}>South</option>
-                  <option value={"Case"}>Case</option>
-                  <option value={"East"}>East</option>
-                  <option value={"West"}>West</option>
-                  <option value={"North"}>North</option>
-                  <option value={"Drinkward"}>Drinkward</option>
-                  <option value={"Sontag"}>Sontag</option>
-                  <option value={"Linde"}>Linde</option>
-                </Select>
-              </FormControl>
+            <FormControl variant="filled" fullWidth margin="normal">
+              <InputLabel>Dorm</InputLabel>
+              <Select
+                native
+                value={dormValue}
+                name="dorm"
+                // label="Dorm"
+                onChange={this.onChange}
+                inputProps={{ "aria-label": "dorm" }}
+                variant="outlined"
+              >
+                <option aria-label="None" value="" />
+                <option value={"South"}>South</option>
+                <option value={"Case"}>Case</option>
+                <option value={"East"}>East</option>
+                <option value={"West"}>West</option>
+                <option value={"North"}>North</option>
+                <option value={"Drinkward"}>Drinkward</option>
+                <option value={"Sontag"}>Sontag</option>
+                <option value={"Linde"}>Linde</option>
+                <option value={"Atwood"}>Atwood</option>
+              </Select>
+            </FormControl>
             <PasswordInput2
               label="Password"
               name="passwordOne"
@@ -299,7 +295,10 @@ class SignUpFormBase extends Component {
             />
 
             {error && (
-              <Typography variant="body2" className={classes.errorText}>
+              <Typography
+                variant="body2"
+                style={{ color: "red", marginTop: "1rem" }}
+              >
                 {error.message}
               </Typography>
             )}
@@ -315,7 +314,7 @@ class SignUpFormBase extends Component {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
+                style={{ margin: "1rem auto 1.5rem auto" }}
                 disabled={isInvalid}
                 onClick={() => {
                   playSound(signupAudio);
@@ -324,12 +323,25 @@ class SignUpFormBase extends Component {
               >
                 Sign Up
               </Button>
-              <p>
-                <center>
-                  Make sure all fields are completed!{" "}
-                </center>
-              </p>
+              {/* <p>
+                <center>Make sure all fields are completed! </center>
+              </p> */}
             </Reward>
+
+            <Grid container justify="center">
+              <Grid item>
+                <Link
+                  to={ROUTES.SIGN_IN}
+                  style={{
+                    color: "var(--theme)",
+                    textDecoration: "none",
+                    paddingBottom: "2rem",
+                  }}
+                >
+                  Already have an account? Sign In
+                </Link>
+              </Grid>
+            </Grid>
           </form>
         </div>
       </Container>
@@ -337,8 +349,7 @@ class SignUpFormBase extends Component {
   }
 }
 
-const SignUpFormStyled = withStyles(useStyles)(SignUpFormBase);
-const SignUpForm = withRouter(withFirebase(SignUpFormStyled));
+const SignUpForm = withRouter(withFirebase(SignUpFormBase));
 
 export default SignUpPage;
 export { SignUpForm, PasswordInput2 };
