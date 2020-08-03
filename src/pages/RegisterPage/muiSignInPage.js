@@ -113,16 +113,15 @@ class SignInFormBase extends Component {
               assignData(docSnapshot.data());
           },
         );
-      }).then( () => {
         // initalizes user's impact points in local storage 
         getUserImpact(email);
-      }).then(() => {
         this.setState({ ...INITIAL_STATE });
+        // takes user to home page
         this.props.history.push(ROUTES.HOME);
-        // page refresh is needed to have total point display properly 
-        // REVISIT SOON SO THAT WE CAN HOPEFULLY ELIMINATE THIS
+        // refresh needed to have points initially displayed
         window.location.reload();
-      }).catch((error) => {
+      })
+      .catch((error) => {
         this.setState({ error });
         console.log(error);
       });
