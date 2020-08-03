@@ -86,6 +86,7 @@ PasswordInput.propTypes = {
 const INITIAL_STATE = {
   email: "",
   password: "",
+  pw: "",
   error: null,
 };
 
@@ -94,9 +95,6 @@ class SignInFormBase extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-    this.state = {
-      pw: "",
-    };
   }
 
   onSubmit = (event) => {
