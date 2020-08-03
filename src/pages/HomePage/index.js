@@ -1028,6 +1028,7 @@ function HomePage(props) {
                                 className={classes.cardContent}
                                 action={
                                   <IconButton
+                                    disabled={firestoreMastered.includes(action.susAction)}
                                     onClick={() => confirmIncrement(action)}
                                     // Finally found how to get rid of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
