@@ -132,7 +132,7 @@ function assignData(data) {
   }
   // initialize favorite actions
   const favorites = data.favorites;
-  for (const [index, susAction] of Object.entries(favorites)) {
+  for (const [susAction] of Object.entries(favorites)) {
     var storageName = susAction.concat("Fav");
     localStorage.setItem(storageName, true)
   }
