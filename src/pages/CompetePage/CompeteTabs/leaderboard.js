@@ -33,9 +33,21 @@ class Leaderboard extends React.Component {
     super();
     this.state = {
       leaders: [],
-      maxPoints: 1650, // TODO: Don't hardcode this
     };
     this.getData = this.getData.bind(this);
+  }
+  // sets the maxScore to the leading dorm's score
+  getLeaderScore() {
+    // find the document/dorm that has rank 1 --> is in first place 
+    firestore.collection('dorms').where('rank', '==', 1).get().then ( (snapshot) => {
+      // set the maxPoints state to rank 1 dorm's score
+      snapshot.forEach( doc => {
+        const leaderScore = doc.data().score
+        this.setState({
+          maxPoints: leaderScore,
+        })
+      })
+    })
   }
   getData() {
     //import the real dorm score data from firestore
@@ -52,12 +64,13 @@ class Leaderboard extends React.Component {
           newLeaders.sort((a, b) => b.points - a.points);
           this.setState({
             leaders: newLeaders,
-            maxScore: newLeaders[0].points,
           });
         });
     };
+    this.getLeaderScore();
     getLeaders();
   }
+ 
 
   //implement later with real data TODO: This has been implemented with real data? I think this comment is just outdated lol
   componentDidMount() {
