@@ -12,6 +12,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import {
   Info,
   InfoSubtitle,
+  InfoCaption,
   InfoTitle,
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
@@ -51,10 +52,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+var thePoints;
+
+const pointsDisplay = () => {
+  if (parseInt(localStorage.getItem("total")) === 0) {
+    thePoints = <p> Go to the home page and log points!</p>;
+  } else if (parseInt(localStorage.getItem("total")) < 400 ) {
+    thePoints = <p> You're amazing! Keep it up!</p>
+  } else {
+    thePoints = <p> You're a superstar 🤩 </p>
+  }
+};
+  // const getPoints = () => {
+  //   if (parseInt(localStorage.getItem("total")) === 0) {
+  //     return <h1> No </h1>
+  //   } return <h1> Yes </h1>
+  // };
+
 export const TotalPointsCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
-  // const authContext = useContext(AuthUserContext);
+  pointsDisplay();
+  
+
 
   // getUser(authContext.email).onSnapshot(
   //   (docSnapshot) => {
@@ -89,6 +109,7 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 <Info useStyles={useGalaxyInfoStyles}>
                   <InfoSubtitle>You have earned</InfoSubtitle>
                   <InfoTitle> {localStorage.getItem("total")} Points</InfoTitle>
+                  <InfoCaption>{thePoints} </InfoCaption>
                 </Info>
               </Box>
             </Card>

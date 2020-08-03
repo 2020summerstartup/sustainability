@@ -105,17 +105,29 @@ PasswordInput2.propTypes = {
 
 // The initial state of all information to be completed by the user
 const INITIAL_STATE = {
-  user: {
-    username: "",
-    email: "",
-    passwordOne: "",
-    passwordTwo: "",
-    dorm: "",
-    image: null,
-    points: 0,
-  },
+  username: "",
+  email: "",
+  passwordOne: "",
+  passwordTwo: "",
+  dorm: "",
+  image: null,
+  points: 0,
   error: null,
 };
+
+// Previously INITIAL_STATE was set like this, but the user wrapper caused an error in the console. I don't think the wrapper was necessary, so I've removed it. -Katie
+// const INITIAL_STATE = {
+//   user: {
+//     username: "",
+//     email: "",
+//     passwordOne: "",
+//     passwordTwo: "",
+//     dorm: "",
+//     image: null,
+//     points: 0,
+//   },
+//   error: null,
+// };
 
 // sound play for favorites button
 const signupAudio = new Audio(signup);

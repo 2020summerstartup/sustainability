@@ -16,7 +16,8 @@ import {
   updateUserPoint,
   updateDormPoint,
   actionMastered,
-  firestore,
+  addFav,
+  deleteFav,
   updateUserImpact,
 } from "../../services/Firebase";
 
@@ -119,9 +120,21 @@ function assignData(data) {
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
   localStorage.setItem("total", data.total);
-  const points = data.points;
-  for (const [key, value] of Object.entries(points)) {
+  // initialize mastered action
+  var firestoreMastered = data.masteredActions;
+  localStorage.setItem(
+    "firestoreMastered",
+    JSON.stringify(firestoreMastered)
+  );
+  // initialize points
+  for (const [key, value] of Object.entries(data.points)) {
     localStorage.setItem(key, value);
+  }
+  // initialize favorite actions
+  const favorites = data.favorites;
+  for (const [index, susAction] of Object.entries(favorites)) {
+    var storageName = susAction.concat("Fav");
+    localStorage.setItem(storageName, true)
   }
 }
 
@@ -287,6 +300,7 @@ const useStyles = makeStyles((theme) => ({
   },
   indicator: {
     height: "3px",
+    backgroundColor: "#FFFFFF",
     [theme.breakpoints.up("sm")]: {
       height: "5px",
     },
@@ -492,6 +506,16 @@ function HomePage(props) {
     setFilter(e.target.value);
   };
 
+  var temp = localStorage.getItem("firestoreMastered");
+  var firestoreMastered = [];
+  for (const el in ActionData) {
+    var action = ActionData[el]; // Take the current action
+    var stringActionName = JSON.stringify(action.susAction);
+    if (temp.includes(stringActionName)) {
+      firestoreMastered.push(action.susAction);
+    }
+  }
+
   // This function is the one that is called when the user presses the increment susAction button. If they confirm that
   // they meant to, then this function calls increment.
   const confirmIncrement = (action) => {
@@ -547,42 +571,6 @@ function HomePage(props) {
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
   }; // increment
 
-  // to check with the mastered actions that firestore has upon loading page
-  var firestoreMastered = [];
-  const getMastered = (userEmail) => {
-    let userDocRef = firestore.doc("users/" + userEmail);
-    userDocRef.get().then((snapshot) => {
-      // finds which actions have been previously mastered from firestore -> this is an array!
-      firestoreMastered = snapshot.get("masteredActions");
-      // need json.stringify to put the array into local storage as an array!
-      localStorage.setItem(
-        "firestoreMastered",
-        JSON.stringify(firestoreMastered)
-      );
-    });
-  };
-  getMastered(localStorage.getItem("email"));
-
-  var masterActions = []; // Initalize array of the mastered status for each action
-  for (const el in ActionData) {
-    // Iterate over every action in ActionData & determine if button needs to load as enabled or disabled
-    var action = ActionData[el]; // Take the current action
-    var stringActionName = JSON.stringify(action.susAction);
-    var storageName = action.susAction.concat("Mastered");
-    firestoreMastered = localStorage.getItem("firestoreMastered");
-
-    if (
-      firestoreMastered != null &&
-      firestoreMastered.includes(stringActionName)
-    ) {
-      masterActions[el - 1] = true; //disable button when action is mastered
-      localStorage.setItem(storageName, true); // update local storage accordingly
-    } else {
-      masterActions[el - 1] = false; //enable button is action is not yet mastered
-      localStorage.setItem(storageName, false); // update local storage accordingly
-    }
-  }
-
   //This function checks if (upon increment) the action should be mastered & acts according
   const checkMastered = (action) => {
     // Get the name and info of the stored action that we're working with
@@ -607,7 +595,7 @@ function HomePage(props) {
       // possibly want a new sound for this?
       setBadgeModalIsOpen(false);
     } else if (action.toMaster * action.points <= actionTotal) {
-      actionMastered(localStorage.getItem("email"), action.susAction);
+      actionMastered(authContext.email, action.susAction);
       // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
       // that action has been mastered -> will be disabled upon reload
       setBadgeAction(action.title);
@@ -615,6 +603,8 @@ function HomePage(props) {
       setBadgeModalIsOpen(true);
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
+      firestoreMastered.push(action.susAction);
+      localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
     }
   };
 
@@ -661,11 +651,13 @@ function HomePage(props) {
       favIconColor.style.color = "#f48fb1"; // Turn red
       playSound(likeAudio);
       toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+      addFav(authContext.email, action.susAction);
     } else {
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
       playSound(unlikeAudio);
       toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
+      deleteFav(authContext.email, action.susAction);
     }
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
@@ -793,7 +785,6 @@ function HomePage(props) {
           >
             {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
             <DialogContent className={styles.dialogContent}>
-              <DialogContentText id="alert-dialog-description">
                 {/* RIBBON */}
                 <div className={styles.nonSemanticProtector}>
                   <h1 className={styles.ribbon}>
@@ -810,17 +801,14 @@ function HomePage(props) {
                   you have completed this action 20 times. Great job and keep being
                   sustainable!
                 </Typography> */}
-              </DialogContentText>
               <img alt="badge" src={badgeImg} className={classes.badgeImg} />
               {/* MUST ATTRIBUTE AUTHOR */}
-              <DialogContentText id="alert-dialog-description">
                 {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
-                <Typography variant="subtitle" className={classes.textBody}>
+                <Typography variant="subtitle1" className={classes.textBody}>
                   You just earned a new badge for mastering the {badgeAction} task! This means
                   you have completed the {badgeAction} task {badgeActionCount} times. Great job and keep being
                   sustainable!
                 </Typography>
-              </DialogContentText>
               <Button
                 onClick={handleClose}
                 variant="contained"
@@ -935,7 +923,7 @@ function HomePage(props) {
                           className={classes.cardContent}
                           action={
                             <IconButton
-                              disabled={masterActions[i - 1]}
+                              disabled={firestoreMastered.includes(action.susAction)}
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
                               aria-label="increment"
                               title="Complete this sustainable action"

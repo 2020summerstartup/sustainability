@@ -13,6 +13,7 @@ const theme = createMuiTheme({
     secondary: {
       main: "#E36588", // pink found on coolors
       // main: "#f48fb1", // pink
+      light: "#FFFFFF",
     },
     divider: "rgba(0, 0, 0, 0.04)",
   },
