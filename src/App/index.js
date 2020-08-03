@@ -21,7 +21,6 @@ import BottomNav from "../components/Navigation/bottomNav";
 // import MuiChangeDorm from "../pages/AccountPage/Settings/muiChangeDorm";
 // import DeleteAccount from "../pages/AccountPage/Settings/deleteAccount";
 // import AdminPage from "../pages/AdminPage";
-import IntroPage from "../pages/IntroPage";
 import RotatePage from "../pages/RotatePage";
 import Header, {
   HomeHeader,
@@ -38,9 +37,6 @@ import { withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
 
 // React lazy
-const MuiLandingPage = lazy(() =>
-  import("../pages/LandingPage/muiLandingPage")
-);
 const MuiSignInPage = lazy(() => import("../pages/RegisterPage/muiSignInPage"));
 const MuiSignUpPage = lazy(() => import("../pages/RegisterPage/muiSignUpPage"));
 const MuiPasswordForgetPage = lazy(() =>
