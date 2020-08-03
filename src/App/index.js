@@ -43,8 +43,8 @@ const MuiPasswordForgetPage = lazy(() =>
   import("../pages/RegisterPage/muiPasswordForgetPage")
 );
 const HomePage = lazy(() => import("../pages/HomePage"));
-const AccountTabs = lazy(() =>
-  import("../pages/AccountPage/AccountTabs/index")
+const AccountPage = lazy(() =>
+  import("../pages/AccountPage/index")
 );
 const InfoPage = lazy(() => import("../pages/InfoPage"));
 const CompetePage = lazy(() => import("../pages/CompetePage"));
@@ -141,7 +141,7 @@ function AppBase() {
             <Route
               exact
               path="/account/:page?"
-              render={(props) => <AccountTabs {...props} />}
+              render={(props) => <AccountPage {...props} />}
             />
           </Switch>
         </Suspense>
