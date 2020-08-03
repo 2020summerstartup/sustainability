@@ -455,9 +455,6 @@ function HomePage(props) {
   }
   const [userTotal, updateUserTotal] = useState(initUserTotal);
 
-
-
-
   const classes = useStyles();
   const [value, setValue] = React.useState(indexToTabName[page]);
   const [expandedId, setExpandedId] = React.useState(-1);
