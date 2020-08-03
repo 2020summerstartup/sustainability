@@ -106,10 +106,11 @@ class EnvImpactCards extends React.Component {
                   >
                     <div id={i} key={i}
                       className={`${styles.burstShape} ${card.colorStyling}`}
-                      // style={{ cursor: "pointer" }}
-                      // for some reason the onclick only refers to the last impact card
                       onClick={() => this.reward.rewardMe(i)}
                     >
+                      {/* The next two comments are taken out of the above div tag to fix netlify deploy:
+                      // style={{ cursor: "pointer" }}
+                      // for some reason the onclick only refers to the last impact card */}
                       <Grid container justify="center">
                         <Typography variant="h3" component="h1">
                           {card.score}
