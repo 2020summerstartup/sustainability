@@ -19,6 +19,7 @@ for (const el in ActionData) {
   ) {
     // sets attributes for the specific action
     const masteredActionProps = {
+      id: action.id,
       title: action.badgeName,
       titleStylingFront: null,
       titleStylingBack: null,
@@ -37,22 +38,27 @@ class Badges2 extends React.Component {
     this.state = {
       badges: [],
       active: true,
+      activeItemId: null,
       flippedId: -1,
     };
     this.getData = this.getData.bind(this);
   }
 
-  cardClick = (flippedId, i) => {
+  cardClick = (i) => {
     const currentState = this.state.active;
     this.setState({
       active: !currentState,
+      activeItemId: i,
     });
-    if (flippedId === i) {
-      this.setState({
-        flippedId: i,
-      });
-    }
-    // console.log(flippedId);
+    // this.setState({
+    //   activeItemId: i,
+    // });
+    // if (flippedId === i) {
+    //   this.setState({
+    //     flippedId: i,
+    //   });
+    // }
+    // console.log(activeItemId);
   };
 
   getData() {
@@ -87,6 +93,8 @@ class Badges2 extends React.Component {
   }
 
   render() {
+    const { activeItemId } = this.state;
+
     return (
       <div className={styles.root}>
         <div className={styles.fancyBorder}>
@@ -134,17 +142,23 @@ class Badges2 extends React.Component {
           <i></i>
         </div>
 
-        {/* MAPPING THROUGH EACH  MASTERED BADGE */}
+        {/* MAPPING THROUGH EACH MASTERED BADGE */}
         {this.state.badges ? (
           this.state.badges.map((badge, i) => (
             <div key={i}>
               <div className={styles.column}>
                 <div
                   className={`${
+                    activeItemId === badge.id ? null : `${badge.flipStatus}`
+                  } ${badge.leafStyling}`}
+                  onClick={() => this.cardClick(badge.id)}
+                >
+                  {/* <div
+                  className={`${
                     this.state.active ? null : `${badge.flipStatus}`
                   } ${badge.leafStyling}`}
                   onClick={() => this.cardClick(i)}
-                >
+                > */}
                   {/* <div className={badge.leafStyling}> */}
                   <div className={styles.leafFront}>
                     <Typography
