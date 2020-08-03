@@ -37,19 +37,31 @@ class Badges2 extends React.Component {
     super();
     this.state = {
       badges: [],
-      active: true,
-      activeItemId: null,
-      flippedId: -1,
+      // active: true,
+      selectedItemId: null,
+      selectedItemState: false
+      // activeItemId: null,
+      // flippedId: -1,
     };
     this.getData = this.getData.bind(this);
   }
 
-  cardClick = (i) => {
+  cardClick = (id) => {
     const currentState = this.state.active;
     this.setState({
       active: !currentState,
-      activeItemId: i,
+      // activeItemId: i,
     });
+    if (id === this.state.selectedItemId) {
+      this.setState({
+        selectedItemState: !this.state.selectedItemState
+      });
+    } else {
+      this.setState({
+        selectedItemId: id,
+        selectedItemState: true
+      });
+    }
     // this.setState({
     //   activeItemId: i,
     // });
@@ -93,7 +105,8 @@ class Badges2 extends React.Component {
   }
 
   render() {
-    const { activeItemId } = this.state;
+    // const { activeItemId } = this.state;
+    const { selectedItemId, selectedItemState } = this.state;
 
     return (
       <div className={styles.root}>
@@ -147,12 +160,18 @@ class Badges2 extends React.Component {
           this.state.badges.map((badge, i) => (
             <div key={i}>
               <div className={styles.column}>
-                <div
+              <div
+                  className={`${
+                    badge.id === selectedItemId && selectedItemState ? `${badge.flipStatus}` : null
+                  } ${badge.leafStyling}`}
+                  onClick={() => this.cardClick(badge.id)}
+                >
+                {/* <div
                   className={`${
                     activeItemId === badge.id ? null : `${badge.flipStatus}`
                   } ${badge.leafStyling}`}
                   onClick={() => this.cardClick(badge.id)}
-                >
+                > */}
                   {/* <div
                   className={`${
                     this.state.active ? null : `${badge.flipStatus}`
