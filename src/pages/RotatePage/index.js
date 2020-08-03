@@ -1,11 +1,10 @@
 import { AutoRotatingCarousel } from "material-auto-rotating-carousel";
 import React, { Component } from "react";
 import { Slide } from "material-auto-rotating-carousel";
-import LandingPage from "../LandingPage/muiLandingPage";
-import welcomeImg from "../../img/welcome.svg";
 import suslogoImg from "../../img/suslogo.svg";
 
-const Button = require("@material-ui/core/Button").default;
+// Following line was unused and throwing a warning so I commented it out -Katie
+// const Button = require("@material-ui/core/Button").default;
 
 export class Rotate extends Component {
   constructor() {
@@ -26,7 +25,7 @@ export class Rotate extends Component {
         >
           <Slide
             // media ={<LandingPage class="responsive"/> }
-            media={<img src={suslogoImg} class="responsive" />}
+            media={<img alt="" src={suslogoImg} class="responsive" />}
             mediaBackgroundStyle={{ backgroundColor: "#15601e" }}
             style={{ backgroundColor: "#15601e" }}
             title="What will we accomplish?"
