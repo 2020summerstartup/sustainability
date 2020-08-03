@@ -44,7 +44,7 @@ class TotalBuzz extends React.Component {
             {localStorage.getItem("buzzes")}
           </Typography>
           <Typography variant="h5">Action(s) Logged!</Typography>
-          <Grid item direction="column">
+          <Grid container direction="column">
             <Typography variant="body2">
               Click impact cards below for a fun surprise!
             </Typography>

@@ -589,8 +589,7 @@ function HomePage() {
       } else {
         displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!` ;
       }
-      //  AMY!!!! THIS IS WHERE MY TOASTIFY POP-UP THING IS!!! PLZ MAKE IT PRETTY
-      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
       // possibly want a new sound for this?
       setBadgeModalIsOpen(false);
     } else if (action.toMaster * action.points <= actionTotal) {

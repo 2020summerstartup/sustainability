@@ -1,127 +1,84 @@
 import React from "react";
 import styles from "./badges2.module.css";
+import ActionData from "../../HomePage/actionData.json";
 
 import Typography from "@material-ui/core/Typography";
+
+var masterBadgesArray = []; // Initalize an array that will contain only the mastered actions
+for (const el in ActionData) {
+  // Iterate over every action in ActionData & determine if the action has been mastered
+  var action = ActionData[el]; // Take the current action
+  var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
+  var storageName = action.susAction.concat("Mastered"); // variable that adds "Mastered" to end of action title
+  var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage when user
+  // first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds
+
+  if (
+    firestoreMastered != null && // if the array is not empty / if the array exists
+    firestoreMastered.includes(stringActionName) // if the array contains the actions --> the action is mastered
+  ) {
+    // sets attributes for the specific action
+    const masteredActionProps = {
+      title: action.badgeName,
+      titleStylingFront: null,
+      titleStylingBack: null,
+      leafStyling: null,
+      flipStatus: null,
+      toMaster: action.toMaster,
+    };
+    // adds the necessary attributes to the masterBadgesArray that we will loop through to render the cards later
+    masterBadgesArray.push(masteredActionProps);
+  }
+}
 
 class Badges2 extends React.Component {
   constructor() {
     super();
     this.state = {
       badges: [],
+      active: true,
+      flippedId: -1,
     };
     this.getData = this.getData.bind(this);
   }
 
+  cardClick = (flippedId, i) => {
+    const currentState = this.state.active;
+    this.setState({
+      active: !currentState,
+    });
+    if (flippedId === i) {
+      this.setState({
+        flippedId: i,
+      });
+    }
+    // console.log(flippedId);
+  };
+
   getData() {
-    let data = {
-      success: true,
-      badges: [
-        {
-          id: 1,
-          title: "Recycle Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 2,
-          title: "Walking Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 3,
-          title: "Straw Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 4,
-          title: "Bag Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 5,
-          title: "Market Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 6,
-          title: "Tea Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 7,
-          title: "No Waste Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 8,
-          title: "Meatless Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 9,
-          title: "Cleaning Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 10,
-          title: "Save Gas Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 11,
-          title: "Clothing Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 12,
-          title: "Air Dry Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 13,
-          title: "Climate Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-      ],
-    };
-    data.badges.forEach((badge, id) => {
+    // loop through our array of mastered badges and determines if they need to have LHS or RHS side properties
+    masterBadgesArray.forEach((badge, id) => {
       if (id % 2 === 0) {
+        // if the badge is even, give it LHS properties
         badge.titleStylingFront = styles.titleLeftFront;
         badge.titleStylingBack = styles.titleLeftBack;
         badge.leafStyling = styles.left;
       } else {
+        // if the badge is odd, give it RHS properties
         badge.titleStylingFront = styles.titleRightFront;
         badge.titleStylingBack = styles.titleRightBack;
         badge.leafStyling = styles.right;
       }
+      if (badge.leafStyling == styles.left) {
+        badge.flipStatus = styles.flipLeft;
+      }
+      if (badge.leafStyling == styles.right) {
+        badge.flipStatus = styles.flipRight;
+      }
     });
+
     this.setState({
-      badges: data.badges,
+      badges: masterBadgesArray,
     });
   }
 
@@ -142,7 +99,8 @@ class Badges2 extends React.Component {
             }}
           >
             Congratulations {localStorage.getItem("name")}! You have earned
-            [number] badges!
+            &nbsp;
+            {masterBadgesArray.length} badges!
           </Typography>
           <Typography
             variant="subtitle1"
@@ -152,6 +110,7 @@ class Badges2 extends React.Component {
           </Typography>
         </div>
 
+        {/* ANIMATED FALLING LEAVES */}
         <div className={styles.leaves}>
           <i></i>
           <i></i>
@@ -175,12 +134,18 @@ class Badges2 extends React.Component {
           <i></i>
         </div>
 
+        {/* MAPPING THROUGH EACH  MASTERED BADGE */}
         {this.state.badges ? (
           this.state.badges.map((badge, i) => (
             <div key={i}>
               <div className={styles.column}>
-                {/* <div className={styles.flipLeaf}> */}
-                <div className={badge.leafStyling}>
+                <div
+                  className={`${
+                    this.state.active ? null : `${badge.flipStatus}`
+                  } ${badge.leafStyling}`}
+                  onClick={() => this.cardClick(i)}
+                >
+                  {/* <div className={badge.leafStyling}> */}
                   <div className={styles.leafFront}>
                     <Typography
                       variant="h6"
@@ -191,11 +156,11 @@ class Badges2 extends React.Component {
                   </div>
                   <div className={styles.leafBack}>
                     <Typography variant="h6" className={badge.titleStylingBack}>
-                      {badge.id} <br /> Actions Completed!
+                      {badge.toMaster} <br /> Times Completed!
                     </Typography>
                   </div>
+                  {/* </div> */}
                 </div>
-                {/* </div> */}
               </div>
             </div>
           ))

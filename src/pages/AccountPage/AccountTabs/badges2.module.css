@@ -1,11 +1,3 @@
-/* .root {
-  background-image: url("");
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center center; */
-/* background: skyblue;
-} */
-
 /* Regular Phone Screen */
 .column {
   display: flex;
@@ -100,13 +92,21 @@ div.right {
   ); */
 }
 
-div.left:hover {
+.flipLeft {
+  transform: rotate3d(1, -1, 0, 180deg);
+}
+
+.flipRight {
+  transform: rotate3d(-1, -1, 0, 180deg);
+}
+
+/* div.left:hover {
   transform: rotate3d(1, -1, 0, 180deg);
 }
 
 div.right:hover {
   transform: rotate3d(-1, -1, 0, 180deg);
-}
+} */
 
 .leafFront,
 .leafBack {
@@ -137,11 +137,10 @@ div.right:hover {
   text-shadow: 2px 2px 5px black;
 }
 
-/* leaf animations */
-
+/* LEAF ANIMATIONS */
 .leaves {
   position: relative;
-  top: -15rem;
+  top: -20rem;
   width: 100%;
   text-align: center;
   z-index: -1;
