@@ -300,6 +300,7 @@ const useStyles = makeStyles((theme) => ({
   },
   indicator: {
     height: "3px",
+    backgroundColor: "#FFFFFF",
     [theme.breakpoints.up("sm")]: {
       height: "5px",
     },
