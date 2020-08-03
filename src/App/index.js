@@ -122,8 +122,6 @@ function AppBase() {
 
           <Route path={ROUTES.INFO} component={InfoPage} />
 
-          <Route path={ROUTES.COMPETE} component={CompetePage} />
-
           <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
 
           <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
@@ -151,6 +149,15 @@ function AppBase() {
               render={(props) => <HomePage {...props} />}
             />
           </Switch>
+
+          <Switch>
+          <Redirect exact from={ROUTES.COMPETE} to={ROUTES.COMPETE_LEADERBOARD} />
+          <Route
+            exact
+            path="/compete/:page?"
+            render={(props) => <CompetePage {...props} />}
+          />
+        </Switch>
         </Suspense>
         {/* </Switch> */}
 
