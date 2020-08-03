@@ -882,7 +882,7 @@ function HomePage() {
                 <InfoSubtitle></InfoSubtitle>
                 <InfoTitle>Log your actions here!</InfoTitle>
                 <InfoCaption>
-                  Tap the drop down menu to find out more
+                  Tap the drop down menu to find out more hello there world lol
                   <span role="img" aria-label="down arrow">
                     🔽
                   </span>
