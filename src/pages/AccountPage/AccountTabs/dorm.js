@@ -73,7 +73,7 @@ var rank;
 var dormName = localStorage.getItem("dorm")
 if (dormName !== "") {
   getDorm()
-    .doc(localStorage.getItem("dorm"))
+    .doc(dormName)
     .onSnapshot((docSnapshot) => {
       assignRanking(docSnapshot.data());
     });
