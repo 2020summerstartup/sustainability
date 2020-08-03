@@ -64,7 +64,8 @@ class PasswordInput2 extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    // Following line was unused -Katie
+    // const { classes } = this.props;
     const { passwordIsMasked } = this.state;
 
     return (
@@ -182,7 +183,8 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    // Following line was unused -Katie
+    // const { classes } = this.props;
 
     const {
       username,
