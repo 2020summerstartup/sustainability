@@ -1,5 +1,4 @@
 import React from "react";
-import { Spring } from "react-spring/renderprops";
 import styles from "./totalBuzz.module.css";
 
 import Grid from "@material-ui/core/Grid";
@@ -18,7 +17,8 @@ const useStyles = (theme) => ({
 // cards to be rendered on the points page in account
 class TotalBuzz extends React.Component {
   render() {
-    const { classes } = this.props;
+    // Following line was unused so I commented it out -Katie
+    //const { classes } = this.props;
 
     return (
       // <Spring
