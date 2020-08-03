@@ -156,12 +156,9 @@ class SignUpFormBase extends Component {
         getUser(email).onSnapshot((docSnapshot) => {
           assignData(docSnapshot.data());
         });
-      })
-      .then(() => {
         // fetches user's impact points from firestore and updates local storage
         getUserImpact(email);
-      })
-      .then(() => {
+        // routes user to home page
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })

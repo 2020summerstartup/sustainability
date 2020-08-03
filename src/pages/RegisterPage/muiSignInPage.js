@@ -108,13 +108,13 @@ class SignInFormBase extends Component {
       .then( () => {
         // initalizes user's impact points in local storage 
         getUserImpact(email);
-      }).then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME_ACTION);
-        // page refresh is needed to have total point display properly 
-        // REVISIT SOON SO THAT WE CAN HOPEFULLY ELIMINATE THIS
+        // takes user to home page
+        this.props.history.push(ROUTES.HOME);
+        // refresh needed to have points initially displayed
         window.location.reload();
-      }).catch((error) => {
+      })
+      .catch((error) => {
         this.setState({ error });
         console.log(error);
       });
