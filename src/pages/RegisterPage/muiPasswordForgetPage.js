@@ -49,7 +49,8 @@ class PasswordForgetFormBase extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    // Following line was unused so I commented it out -Katie
+    // const { classes } = this.props;
     const { email } = this.state;
     const isInvalid = email === "";
 
