@@ -1,7 +1,86 @@
 import React from "react";
 import styles from "./badges2.module.css";
+import fans from "../../../img/fans.svg";
 
 import Typography from "@material-ui/core/Typography";
+import GoogleFontLoader from "react-google-font-loader";
+import NoSsr from "@material-ui/core/NoSsr";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import {
+  Info,
+  InfoSubtitle,
+  InfoCaption,
+  InfoTitle,
+} from "@mui-treasury/components/info";
+import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
+import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
+
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    borderRadius: "1rem",
+    boxShadow: "none",
+    position: "relative",
+    margin: "auto",
+    maxWidth: "60rem",
+    minHeight: "15rem",
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "60rem",
+      minHeight: "20rem",
+    },
+    "&:after": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      bottom: 0,
+      zIndex: 1,
+      borderRadius: "black",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0) 45%)",
+    },
+  },
+  content: {
+    position: "absolute",
+    zIndex: 2,
+    bottom: 0,
+    width: "100%",
+  },
+}));
+
+export const BadgesCard = React.memo(function GalaxyCard() {
+  const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
+  const classes = useStyles();
+
+  return (
+
+          <>
+            <NoSsr>
+              <GoogleFontLoader
+                fonts={[
+                  { font: "Spartan", weights: [300] },
+                  { font: "Montserrat", weights: [200, 400, 700] },
+                ]}
+              />
+            </NoSsr>
+            <Card className={classes.card}>
+              <CardMedia classes={mediaStyles} image={fans} />
+              <Box py={3} px={2} className={classes.content}>
+                <Info useStyles={useGalaxyInfoStyles}>
+                  <InfoSubtitle></InfoSubtitle>
+                  <InfoTitle></InfoTitle>
+                  <InfoCaption> </InfoCaption>
+                </Info>
+              </Box>
+            </Card>
+
+    </>
+  );
+});
+
 
 class Badges2 extends React.Component {
   constructor() {
@@ -11,6 +90,8 @@ class Badges2 extends React.Component {
     };
     this.getData = this.getData.bind(this);
   }
+  
+ 
 
   getData() {
     let data = {
@@ -130,7 +211,12 @@ class Badges2 extends React.Component {
   }
 
   render() {
+    
+
     return (
+      <>
+     
+    <BadgesCard />
       <div className={styles.root}>
         <div className={styles.fancyBorder}>
           <Typography
@@ -207,8 +293,10 @@ class Badges2 extends React.Component {
           </div>
         )}
       </div>
+      </>
     );
   }
+  
 }
 
 export default Badges2;
