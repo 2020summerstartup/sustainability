@@ -1,9 +1,7 @@
 import React from "react";
 import Reward from "react-rewards";
-import { Spring } from "react-spring/renderprops";
 import styles from "./envImpactCards.module.css";
 
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
@@ -76,7 +74,6 @@ class EnvImpactCards extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
 
     return (
       // <Spring
@@ -92,8 +89,8 @@ class EnvImpactCards extends React.Component {
         <Grid container justify="center" spacing={2} style={{ marginTop: "2rem" }}>
           {this.state.cards ? (
             this.state.cards.map((card, i) => (
-              <Grid item xs={12} md={6}>
-                <div key={i}>
+              <Grid item xs={12} md={6} key={i}>
+                <div>
                   <Reward
                     ref={(ref) => {
                       this.reward = ref;
@@ -106,10 +103,11 @@ class EnvImpactCards extends React.Component {
                   >
                     <div id={i} key={i}
                       className={`${styles.burstShape} ${card.colorStyling}`}
-                      // style={{ cursor: "pointer" }}
-                      // for some reason the onclick only refers to the last impact card
                       onClick={() => this.reward.rewardMe(i)}
                     >
+                      {/* The next two comments are taken out of the above div tag to fix netlify deploy:
+                      // style={{ cursor: "pointer" }}
+                      // for some reason the onclick only refers to the last impact card */}
                       <Grid container justify="center">
                         <Typography variant="h3" component="h1">
                           {card.score}

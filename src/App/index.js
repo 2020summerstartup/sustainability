@@ -21,7 +21,6 @@ import BottomNav from "../components/Navigation/bottomNav";
 // import MuiChangeDorm from "../pages/AccountPage/Settings/muiChangeDorm";
 // import DeleteAccount from "../pages/AccountPage/Settings/deleteAccount";
 // import AdminPage from "../pages/AdminPage";
-import IntroPage from "../pages/IntroPage";
 import RotatePage from "../pages/RotatePage";
 import Header, {
   HomeHeader,
@@ -38,17 +37,14 @@ import { withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
 
 // React lazy
-const MuiLandingPage = lazy(() =>
-  import("../pages/LandingPage/muiLandingPage")
-);
 const MuiSignInPage = lazy(() => import("../pages/RegisterPage/muiSignInPage"));
 const MuiSignUpPage = lazy(() => import("../pages/RegisterPage/muiSignUpPage"));
 const MuiPasswordForgetPage = lazy(() =>
   import("../pages/RegisterPage/muiPasswordForgetPage")
 );
 const HomePage = lazy(() => import("../pages/HomePage"));
-const AccountTabs = lazy(() =>
-  import("../pages/AccountPage/AccountTabs/index")
+const AccountPage = lazy(() =>
+  import("../pages/AccountPage/index")
 );
 const InfoPage = lazy(() => import("../pages/InfoPage"));
 const CompetePage = lazy(() => import("../pages/CompetePage"));
@@ -71,8 +67,8 @@ function AppBase() {
     <Router>
       <Switch>
         {/* FOR PAGES WITH SPECIAL HEADERS */}
-        <Route exact path="/home" component={HomeHeader} />
-        <Route exact path="/compete" component={CompeteHeader} />
+        <Route path="/home" component={HomeHeader} />
+        <Route path="/compete" component={CompeteHeader} />
         <Route exact path="/info" component={InfoHeader} />
         <Route path="/account" component={AccountHeader} />
         <Route
@@ -124,11 +120,7 @@ function AppBase() {
             component={MuiPasswordForgetPage}
           />
 
-          <Route path={ROUTES.HOME} component={HomePage} />
-
           <Route path={ROUTES.INFO} component={InfoPage} />
-
-          <Route path={ROUTES.COMPETE} component={CompetePage} />
 
           <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
 
@@ -145,9 +137,27 @@ function AppBase() {
             <Route
               exact
               path="/account/:page?"
-              render={(props) => <AccountTabs {...props} />}
+              render={(props) => <AccountPage {...props} />}
             />
           </Switch>
+
+          <Switch>
+            <Redirect exact from={ROUTES.HOME} to={ROUTES.HOME_ACTION} />
+            <Route
+              exact
+              path="/home/:page?"
+              render={(props) => <HomePage {...props} />}
+            />
+          </Switch>
+
+          <Switch>
+          <Redirect exact from={ROUTES.COMPETE} to={ROUTES.COMPETE_LEADERBOARD} />
+          <Route
+            exact
+            path="/compete/:page?"
+            render={(props) => <CompetePage {...props} />}
+          />
+        </Switch>
         </Suspense>
         {/* </Switch> */}
 

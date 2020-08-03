@@ -1,5 +1,6 @@
 import styles from "./badgeModal.module.css";
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
+import { withRouter } from "react-router";
 import ProgressCircle from "../../components/ProgressCircle";
 
 // import FavoriteCard from "./faveCard";
@@ -117,7 +118,8 @@ function assignData(data) {
   // the data parameter is meant to be a firestore document snapshot
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
-  localStorage.setItem("total", data.total);const points = data.points;
+  localStorage.setItem("total", data.total);
+  const points = data.points;
   for (const [key, value] of Object.entries(points)) {
     localStorage.setItem(key, value);
   }
@@ -421,12 +423,26 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 // uploadUserData(localStorage.getItem('email'))
 
 // Text to display on the homepage
-function HomePage() {
+function HomePage(props) {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
   const [badgeAction, setBadgeAction] = useState("");
   const [badgeActionCount, setBadgeActionCount] = useState("");
   const authContext = useContext(AuthUserContext);
+
+  // nested routing
+  let { match, history } = props;
+  let { params } = match;
+  let { page } = params;
+  const tabNameToIndex = {
+    0: "actions",
+    1: "favorites",
+  };
+
+  const indexToTabName = {
+    actions: 0,
+    favorites: 1,
+  };
 
 
   // this is needed to prevent error in console when user signs into their account
@@ -439,11 +455,8 @@ function HomePage() {
   }
   const [userTotal, updateUserTotal] = useState(initUserTotal);
 
-
-
-
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(indexToTabName[page]);
   const [expandedId, setExpandedId] = React.useState(-1);
   // const [height, setHeight] = React.useState("");
   const [filter, setFilter] = useState("");
@@ -454,6 +467,7 @@ function HomePage() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    history.push(`/home/${tabNameToIndex[newValue]}`);
   };
 
 
@@ -584,7 +598,7 @@ function HomePage() {
       // send user a progress alert to tell them how many more points they need to complete the action
       var displayText;
       // display a different message depending on if the user needs to buzz one or several more times to complete
-      if ((action.toMaster - (actionTotal/action.points)) != 1 ){
+      if ((action.toMaster - (actionTotal/action.points)) !== 1 ){
         displayText = `You are ${action.toMaster - (actionTotal/action.points)} buzzes away from mastering the ${action.title} task!` ;
       } else {
         displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!` ;
@@ -1105,5 +1119,6 @@ function HomePage() {
 } // end of function
 
 const condition = (authUser) => !!authUser;
-export default withAuthorization(condition)(HomePage);
+const HomePageAuthorized = withAuthorization(condition)(HomePage);
+export default withRouter(HomePageAuthorized);
 export { initPoints, assignData };

@@ -64,7 +64,8 @@ class PasswordInput2 extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    // Following line was unused -Katie
+    // const { classes } = this.props;
     const { passwordIsMasked } = this.state;
 
     return (
@@ -155,12 +156,9 @@ class SignUpFormBase extends Component {
         getUser(email).onSnapshot((docSnapshot) => {
           assignData(docSnapshot.data());
         });
-      })
-      .then(() => {
         // fetches user's impact points from firestore and updates local storage
         getUserImpact(email);
-      })
-      .then(() => {
+        // routes user to home page
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -182,7 +180,8 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    // Following line was unused -Katie
+    // const { classes } = this.props;
 
     const {
       username,

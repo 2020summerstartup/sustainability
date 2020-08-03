@@ -23,7 +23,8 @@ const confirmSignOut = ({ firebase }) => {
   var confirmed = window.confirm("Are you sure you want to sign out?"); // Check with the user
   if (confirmed === true) {
     firebase.doSignOut();
-    toast.configure(); // Configure for toast messages later
+    localStorage.clear(); // Wipe the local storage
+    toast.configure(); // Configure for toast messages
     toast.info("You have signed out. Come back soon!"); // Can play with colors here if anyone wants to. :)
   }
 };

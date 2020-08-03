@@ -1,4 +1,6 @@
 import React, { lazy, Suspense } from "react";
+import { withRouter } from "react-router";
+
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import ProgressCircle from "../../../components/ProgressCircle";
@@ -91,12 +93,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CompeteTabs() {
+function CompeteTabs(props) {
+  let { match, history } = props;
+  let { params } = match;
+  let { page } = params;
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+
+  const tabNameToIndex = {
+    0: "leaderboard",
+    1: "challenges",
+  };
+
+  const indexToTabName = {
+    leaderboard: 0,
+    challenges: 1,
+  };
+
+  const [value, setValue] = React.useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    history.push(`/compete/${tabNameToIndex[newValue]}`);
   };
   return (
     <div>
@@ -152,4 +169,4 @@ function CompeteTabs() {
   );
 }
 
-export default CompeteTabs;
+export default withRouter(CompeteTabs);

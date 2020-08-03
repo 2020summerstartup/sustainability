@@ -2,10 +2,10 @@ import React from "react"; // No longer imports component because it wasn't used
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import CompeteTabs from "./CompeteTabs";
 
-const CompetePage = () => (
+const CompetePage = (props) => (
     <AuthUserContext.Consumer>
       {(authUser) => (
-        <CompeteTabs />
+        <CompeteTabs props={props}/>
       )}
     </AuthUserContext.Consumer>
 );
