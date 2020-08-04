@@ -6,7 +6,6 @@ import spectrum3 from "../../img/spectrum3.svg";
 // import spectrum4 from "../../img/spectrum4.svg";
 
 class AddToHomeScreen extends React.Component {
-
   render() {
     return (
       <div
@@ -28,12 +27,17 @@ class AddToHomeScreen extends React.Component {
         <div className={styles.ribbon}>
           <span>Special!</span>
         </div>
-        <h1 className="card-name">Add App to <br/> Your Home Screen!</h1>
+        <h1 className="card-name">
+          Add App to <br /> Your Home Screen!
+        </h1>
         <p className="card-description">
-          For IOS devices: Press the "Share Icon" at the bottom of your Safari browser, then press the "Add to Homescreen" button.
+          For IOS devices: Make sure you're on Safari and then tap the Share
+          button at the bottom of your screen. Then tap on the "Add to Home
+          Screen" button and our app will appear!
         </p>
         <p className="card-description">
-          For Andriod devices: [idk I have an iPhone sorry].
+          For Andriod devices: In Chrome, go to Settings in the rop right
+          corner, then slide down and tap "Add to Home Screen".
         </p>
       </div>
     );
