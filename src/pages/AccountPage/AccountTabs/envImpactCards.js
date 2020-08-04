@@ -26,6 +26,9 @@ class EnvImpactCards extends React.Component {
     super();
     this.state = {
       cards: [],
+      coEmiss: coEmissImpact,
+      energy: energyImpact,
+      water: waterImpact,
     };
     this.getData = this.getData.bind(this);
   }
@@ -36,19 +39,19 @@ class EnvImpactCards extends React.Component {
       cards: [
         {
           id: 1,
-          score: coEmissImpact,
+          score: this.state.coEmiss,
           title: "Pounds of CO2 saved!",
           colorStyling: null,
         },
         {
           id: 2,
-          score: energyImpact,
+          score: this.state.energy,
           title: "Kilojoules of energy conserved!",
           colorStyling: null,
         },
         {
           id: 3,
-          score: waterImpact,
+          score: this.state.water,
           title: "Gallons of water conserved!",
           colorStyling: null,
         },
