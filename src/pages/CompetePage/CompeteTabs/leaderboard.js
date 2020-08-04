@@ -87,10 +87,10 @@ class Leaderboard extends React.Component {
 
     return (
       <>
-        <Typography variant="h5" className={classes.title} component={"span"}>
-          Way to be sustainable [#1] Dorm!
-        </Typography>
         <div className="Leaderboard">
+          <Typography variant="h5" className={classes.title} component={"span"}>
+            Way to be sustainable [#1] Dorm!
+          </Typography>
           <div style={{ marginTop: "1rem" }}>
             {this.state.leaders ? (
               this.state.leaders.map((dorm, i) => (
