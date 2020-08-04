@@ -1,5 +1,4 @@
 import React from "react";
-import ChallengeData from "../challengeData.json";
 
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -100,9 +99,15 @@ function notify() {
   });
 }
 
+// get current challenge data from local storage
+var data = localStorage.getItem('challengeData');
+// convert challenge data from string to object
+var challengeData = JSON.parse(data)
+
 class ChallengeCard2 extends React.Component {
   render() {
     const { classes } = this.props;
+
 
     return (
       <>
@@ -114,8 +119,8 @@ class ChallengeCard2 extends React.Component {
           spacing={3}
           style={{ marginTop: "0.5rem" }}
         >
-          {ChallengeData.map((challenge, i) => (
-            <Grid item xs={12} lg={6} key={i}>
+          {challengeData.map((challenge, id) => (
+            <Grid item xs={12} lg={6} key={id}>
               <Card className={classes.root}>
                 <div className={classes.details}>
                   <CardContent className={classes.content}>
