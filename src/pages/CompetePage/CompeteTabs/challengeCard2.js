@@ -1,5 +1,4 @@
 import React from "react";
-import Reward from "react-rewards";
 import ChallengeData from "../challengeData.json";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -10,7 +9,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import StarIcon from "@material-ui/icons/Star";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
