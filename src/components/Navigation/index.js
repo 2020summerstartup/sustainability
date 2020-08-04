@@ -99,6 +99,7 @@ const NavigationAuth = ({authUser}) => (
         </span>
       </li>
 
+      
       <li className="nav-item logout">
         <span href="#" className="nav-link">
           <FontAwesomeIcon icon="sign-out-alt" className="icons" />
@@ -112,6 +113,13 @@ const NavigationAuth = ({authUser}) => (
             <Link to={ROUTES.ADMIN}>Admin</Link>
           </li>
         )}
+
+<li className="nav-item logout">
+        <span href="#" className="nav-link">
+          <FontAwesomeIcon icon="sign-out-alt" className="icons" />
+          <SignOutButton />
+        </span>
+      </li>
       
     </ul>
   </nav>
