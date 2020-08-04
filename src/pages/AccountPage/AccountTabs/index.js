@@ -16,7 +16,8 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
-import NewReleasesIcon from "@material-ui/icons/NewReleases";
+import NewReleasesIcon from "@material-ui/icons/NewReleases"
+import ActionData from "../../HomePage/actionData.json"
 
 // probably delete later
 // import Grid from "@material-ui/core/Grid";
@@ -132,6 +133,16 @@ const AccountTabs = props => {
     history.push(`/account/${tabNameToIndex[newValue]}`);
   };
 
+  var temp = localStorage.getItem("firestoreMastered");
+  var firestoreMastered = [];
+  for (const el in ActionData) {
+    var action = ActionData[el]; // Take the current action
+    var stringActionName = JSON.stringify(action.susAction);
+    if (temp.includes(stringActionName)) {
+      firestoreMastered.push(action.susAction);
+    }
+  }
+
   return (
     <div>
       <AppBar
@@ -235,7 +246,7 @@ const AccountTabs = props => {
           {/* <h1> </h1> */}
           {/* <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={4}> */}
-              <Badges2 />
+              <Badges2 earnedBadges={firestoreMastered}/>
             {/* </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Badges2 />
