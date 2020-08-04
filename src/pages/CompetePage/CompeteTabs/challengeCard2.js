@@ -1,42 +1,63 @@
-import React from 'react';
-import { makeStyles, } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import React from "react";
+import Reward from "react-rewards";
+import ChallengeData from "../challengeData.json";
+
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import StarIcon from "@material-ui/icons/Star";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import challenges from "../../../img/challenges.svg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (theme) => ({
   root: {
-    display: 'flex',
-    justifyItems: 'center',
+    display: "flex",
+    justifyItems: "center",
     justifyContent: "center",
     alignContent: "center",
-    background: 'linear-gradient(to right, #BF953F, #FCF6BA, #B38728,#FBF5B7, #AA771C)',
-    maxWidth: 600,
-    maxHeight: 500,
+    background:
+      "linear-gradient(to right, #BF953F, #FCF6BA, #B38728,#FBF5B7, #AA771C)",
+    // maxWidth: 600,
+    // maxHeight: 500,
+    height: "100%",
+    margin: 0,
     // minHeight: "300",
-
   },
   details: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
+    width: "50%",
   },
   content: {
-    flex: '1 0 auto',
+    flex: "1 0 auto",
   },
   cover: {
-    display: 'flex',
-    // alignItems: 'start',
-    width: 300,
+    display: "flex",
+    minWidth: "50%",
+    minHeight: "100%",
+    margin: "auto",
+    [theme.breakpoints.down("xs")]: {
+      minHeight: "60%",
+    },
+    [theme.breakpoints.up(475)]: {
+      minHeight: "80%",
+    },
+    [theme.breakpoints.up("md")]: {
+      minHeight: "100%",
+      minWidth: "40%",
+    },
   },
   controls: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     paddingLeft: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
@@ -45,64 +66,106 @@ const useStyles = makeStyles((theme) => ({
     width: 60,
     fontSize: 20,
   },
-  button: {
+  buttonBigScreen: {
     backgroundColor: "hsla(40, 50%, 50%, 1)",
     // backgroundColor: "#4CAF50",
     border: "none",
     color: "white",
-    padding: "15px 32px",
     textAlign: "center",
-    textDecoration: "none",
-    display: "inlineBlock",
-    fontSize: 16,
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
-}));
+  buttonSmallScreen: {
+    display: "inline",
+    backgroundColor: "hsla(40, 50%, 50%, 1)",
+    // backgroundColor: "#4CAF50",
+    border: "none",
+    color: "white",
+    textAlign: "center",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+});
 
-export default function MediaControlCard() {
-  const classes = useStyles();
-  // const theme = useTheme();
-
-
-  function Notify() {
-    toast("Saved to do later", {
-        position: "top-right"
-    });
+function notify() {
+  toast("Saved to do later", {
+    position: "top-right",
+  });
 }
 
-  return (
-    <Card className={classes.root}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            Zero Food Waste Challenge
-          </Typography>
-          <Typography variant="subtitle2" color="textSecondary">
-            Don't waste any food all week
-          </Typography>
-        </CardContent>
-        <div className={classes.controls}>
-          <IconButton aria-label="previous" onClick={Notify}>
-            <FavoriteIcon />
-          </IconButton>
-          <button className={classes.button}>
-        
-                Start challenge!
+class ChallengeCard2 extends React.Component {
+  render() {
+    const { classes } = this.props;
 
-          {/* <IconButton className={classes.button}>
-            <p >
-                Start challenge!
-            </p> */}
-          </button>
-          {/* <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-          </IconButton> */}
-        </div>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image={challenges}
-        title="Food Challenge"
-      />
-    </Card>
-  );
+    return (
+      <>
+        <Typography variant="h5">Challenges</Typography>
+        <Grid
+          container
+          justify="center"
+          spacing={3}
+          style={{ marginTop: "0.5rem" }}
+        >
+          {ChallengeData.map((challenge, i) => (
+            <Grid item xs={12} lg={6} key={i}>
+              <Card className={classes.root}>
+                <div className={classes.details}>
+                  <CardContent className={classes.content}>
+                    <Typography component="h5" variant="h5" gutterBottom>
+                      {challenge.title}
+                    </Typography>
+                    <Typography variant="subtitle2" color="textSecondary">
+                      {challenge.info}
+                    </Typography>
+                  </CardContent>
+                  <div className={classes.controls}>
+                    <IconButton aria-label="previous" onClick={notify}>
+                      <StarIcon />
+                    </IconButton>
+                    {/* REWARD HAS THE SAME ISSUES AS IMPACT CARD- ONLY LAST ITEM IN MAP FUNCTION IS REWARDED */}
+                    {/* <Reward
+                      ref={(ref) => {
+                        this.reward = ref;
+                      }}
+                      type="emoji"
+                      config={{
+                        springAnimation: true,
+                        elementCount: 100,
+                      }}
+                    > */}
+                    <Button
+                      variant="contained"
+                      // color="secondary"
+                      className={classes.buttonBigScreen}
+                      onClick={() => this.reward.rewardMe()}
+                    >
+                      Start Challenge!
+                    </Button>
+                    <Button
+                      variant="contained"
+                      // color="secondary"
+                      className={classes.buttonSmallScreen}
+                      onClick={() => this.reward.rewardMe()}
+                    >
+                      Start!
+                    </Button>
+                    {/* </Reward> */}
+                  </div>
+                </div>
+                <CardMedia
+                  className={classes.cover}
+                  image={challenges}
+                  title={challenge.title}
+                />
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </>
+    );
+  }
 }
+
+export default withStyles(useStyles)(ChallengeCard2);

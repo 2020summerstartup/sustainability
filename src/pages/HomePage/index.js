@@ -122,10 +122,7 @@ function assignData(data) {
   localStorage.setItem("total", data.total);
   // initialize mastered action
   var firestoreMastered = data.masteredActions;
-  localStorage.setItem(
-    "firestoreMastered",
-    JSON.stringify(firestoreMastered)
-  );
+  localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
   // initialize points
   for (const [key, value] of Object.entries(data.points)) {
     localStorage.setItem(key, value);
@@ -134,7 +131,7 @@ function assignData(data) {
   const favorites = data.favorites;
   for (const [susAction] of Object.entries(favorites)) {
     var storageName = susAction.concat("Fav");
-    localStorage.setItem(storageName, true)
+    localStorage.setItem(storageName, true);
   }
 }
 
@@ -458,14 +455,13 @@ function HomePage(props) {
     favorites: 1,
   };
 
-
   // this is needed to prevent error in console when user signs into their account
-  // hopefully will revisit later to get rid of refresh page solution 
+  // hopefully will revisit later to get rid of refresh page solution
   var initUserTotal;
-  if (localStorage.getItem('total') == null) {
-    initUserTotal = 0
+  if (localStorage.getItem("total") == null) {
+    initUserTotal = 0;
   } else {
-    initUserTotal = localStorage.getItem('total')
+    initUserTotal = localStorage.getItem("total");
   }
   const [userTotal, updateUserTotal] = useState(initUserTotal);
 
@@ -483,7 +479,6 @@ function HomePage(props) {
     setValue(newValue);
     history.push(`/home/${tabNameToIndex[newValue]}`);
   };
-
 
   const handleExpandClick = (i) => {
     // WILL MAYBE REVISITED TO HAVE CARDS SAME HEIGHT
@@ -561,7 +556,12 @@ function HomePage(props) {
     });
 
     // add's associated impact points in firestore and local storage
-    updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
+    updateUserImpact(
+      authContext.email,
+      action.coEmiss,
+      action.energy,
+      action.water
+    );
 
     // check if action has been completed enough time to be considered "mastered"
     // also sends user a progress notifications if action has not yet been mastered
@@ -586,10 +586,12 @@ function HomePage(props) {
       // send user a progress alert to tell them how many more points they need to complete the action
       var displayText;
       // display a different message depending on if the user needs to buzz one or several more times to complete
-      if ((action.toMaster - (actionTotal/action.points)) !== 1 ){
-        displayText = `You are ${action.toMaster - (actionTotal/action.points)} buzzes away from mastering the ${action.title} task!` ;
+      if (action.toMaster - actionTotal / action.points !== 1) {
+        displayText = `You are ${
+          action.toMaster - actionTotal / action.points
+        } buzzes away from mastering the ${action.title} task!`;
       } else {
-        displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!` ;
+        displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!`;
       }
       toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
       // possibly want a new sound for this?
@@ -604,7 +606,10 @@ function HomePage(props) {
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
       firestoreMastered.push(action.susAction);
-      localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
+      localStorage.setItem(
+        "firestoreMastered",
+        JSON.stringify(firestoreMastered)
+      );
     }
   };
 
@@ -785,30 +790,30 @@ function HomePage(props) {
           >
             {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
             <DialogContent className={styles.dialogContent}>
-                {/* RIBBON */}
-                <div className={styles.nonSemanticProtector}>
-                  <h1 className={styles.ribbon}>
-                    <strong className={styles.ribbonContent}>
-                      Congratulations {localStorage.getItem("name")}!
-                    </strong>
-                  </h1>
-                </div>
-                {/* <Typography variant="h5" className={classes.textTitle}>
+              {/* RIBBON */}
+              <div className={styles.nonSemanticProtector}>
+                <h1 className={styles.ribbon}>
+                  <strong className={styles.ribbonContent}>
+                    Congratulations {localStorage.getItem("name")}!
+                  </strong>
+                </h1>
+              </div>
+              {/* <Typography variant="h5" className={classes.textTitle}>
                   Congratulations [user's name]!
                 </Typography> */}
-                {/* <Typography variant="subtitle" className={classes.textBody}>
+              {/* <Typography variant="subtitle" className={classes.textBody}>
                   You just earned a new badge for completing {badgeAction}! This means
                   you have completed this action 20 times. Great job and keep being
                   sustainable!
                 </Typography> */}
               <img alt="badge" src={badgeImg} className={classes.badgeImg} />
               {/* MUST ATTRIBUTE AUTHOR */}
-                {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
-                <Typography variant="subtitle1" className={classes.textBody}>
-                  You just earned a new badge for mastering the {badgeAction} task! This means
-                  you have completed the {badgeAction} task {badgeActionCount} times. Great job, and keep being
-                  sustainable!
-                </Typography>
+              {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
+              <Typography variant="subtitle1" className={classes.textBody}>
+                You just earned a new badge for mastering the {badgeAction}{" "}
+                task! This means you have completed the {badgeAction} task{" "}
+                {badgeActionCount} times. Great job, and keep being sustainable!
+              </Typography>
               <Button
                 onClick={handleClose}
                 variant="contained"
@@ -907,12 +912,7 @@ function HomePage(props) {
               />
             </div>
             {/* Card for actions */}
-            <Grid
-              container
-              justify="center"
-              spacing={2}
-              className={classes.actionContainer}
-            >
+            <Grid container justify="center" spacing={2}>
               {/* All actions (this loops using search) */}
               {ActionData.map(
                 (action, i) =>
@@ -923,7 +923,9 @@ function HomePage(props) {
                           className={classes.cardContent}
                           action={
                             <IconButton
-                              disabled={firestoreMastered.includes(action.susAction)}
+                              disabled={firestoreMastered.includes(
+                                action.susAction
+                              )}
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
                               aria-label="increment"
                               title="Complete this sustainable action"
@@ -1027,7 +1029,9 @@ function HomePage(props) {
                                 className={classes.cardContent}
                                 action={
                                   <IconButton
-                                    disabled={firestoreMastered.includes(action.susAction)}
+                                    disabled={firestoreMastered.includes(
+                                      action.susAction
+                                    )}
                                     onClick={() => confirmIncrement(action)}
                                     // Finally found how to get rid of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}

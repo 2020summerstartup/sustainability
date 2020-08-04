@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
 }));
+
 // stores string for badge
 var theBadge;
 var theCongrats;
