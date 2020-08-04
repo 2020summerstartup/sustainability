@@ -29,6 +29,7 @@ import Header, {
   AccountHeader,
   BackArrowSettingsHeader,
   BackArrowHeader,
+  AdminHeader,
 } from "../components/Headers";
 import * as ROUTES from "../constants/routes";
 import ProgressCircle from "../components/ProgressCircle";
@@ -88,6 +89,7 @@ function AppBase() {
           path="/forgetpassword"
           component={BackArrowSettingsHeader}
         />
+        <Route path="/admin" component={AdminHeader} />
         <Route component={Header} />
       </Switch>
 
