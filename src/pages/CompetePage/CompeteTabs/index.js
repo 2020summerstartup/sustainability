@@ -17,7 +17,7 @@ import StarIcon from "@material-ui/icons/Star";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 
 // React lazy
-const Challenges = lazy(() => import("./challenges.js"));
+// const Challenges = lazy(() => import("./challenges.js"));
 // const Leaderboard = lazy(() => import("./leaderboard"));
 
 function TabPanel(props) {
