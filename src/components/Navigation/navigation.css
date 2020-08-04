@@ -2,7 +2,7 @@
   font-size: 16px;
   font-family: "Open Sans";
   --theme: #24a113;
-  --theme-secondary: #E36588;
+  --theme-secondary: #e36588;
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --bg-primary: #23232e;
@@ -131,6 +131,7 @@ main {
 
 .navbar:hover .icons {
   color: var(--theme);
+  transform: translate(0, 0.25rem)
 }
 
 .icons {
@@ -143,6 +144,7 @@ main {
   font-size: 1.5rem;
   letter-spacing: 0.3ch;
   width: 100%;
+
 }
 
 .signout-btn {
@@ -285,8 +287,14 @@ main {
     margin: 0;
     padding: 0 !important;
     position: absolute;
-    top: 2rem;
+    /* THIS CAUSED ALL THE ICONS TO ALL MOVE UP IN SAFARI/CHROME */
+    /* top: 2rem; */
     left: 0.75rem;
+    transform: translate(0, -0.6rem)
+  }
+
+  .signout-icon {
+    transform: translate(0, 0.25rem)
   }
 
   .page-text {

@@ -1,5 +1,5 @@
 import React from "react";
-
+import trophyImg from "../../../img/trophy.svg";
 import "./leaderboard.css";
 import { firestore } from "../../../services/Firebase/firebase";
 // DELETE this after we know firebase didn't break
@@ -10,8 +10,24 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = (theme) => ({
+  trophyWrapper: {
+    position: "relative",
+    textAlign: "center",
+    marginTop: "1rem",
+  },
   title: {
-    marginBottom: theme.spacing(2),
+    
+  },
+  firstDorm: {
+    position: "absolute",
+    top: "25%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+  trophy: {
+    height: "15rem",
   },
 });
 
@@ -38,17 +54,21 @@ class Leaderboard extends React.Component {
   }
   // sets the maxScore to the leading dorm's score
   getLeaderScore() {
-    // find the document/dorm that has rank 1 --> is in first place 
-    firestore.collection('dorms').where('rank', '==', 1).get().then ( (snapshot) => {
-      // set the maxPoints state to rank 1 dorm's score
-      snapshot.forEach( doc => {
-        const leaderScore = doc.data().score
-        this.setState({
-          maxPoints: leaderScore,
-          firstDorm: doc.id
-        })
-      })
-    })
+    // find the document/dorm that has rank 1 --> is in first place
+    firestore
+      .collection("dorms")
+      .where("rank", "==", 1)
+      .get()
+      .then((snapshot) => {
+        // set the maxPoints state to rank 1 dorm's score
+        snapshot.forEach((doc) => {
+          const leaderScore = doc.data().score;
+          this.setState({
+            maxPoints: leaderScore,
+            firstDorm: doc.id,
+          });
+        });
+      });
   }
   getData() {
     //import the real dorm score data from firestore
@@ -85,8 +105,18 @@ class Leaderboard extends React.Component {
       <>
         <div className="Leaderboard">
           <Typography variant="h5" className={classes.title} component={"span"}>
-            Way to be sustainable, {this.state.firstDorm} Dorm!
+            Way to be sustainable Mudders!
           </Typography>
+          <div className={classes.trophyWrapper}>
+            <img alt="trophy" src={trophyImg} className={classes.trophy} />
+            <Typography
+              variant="h6"
+              className={classes.firstDorm}
+              component={"span"}
+            >
+              {this.state.firstDorm} <br/> Dorm
+            </Typography>
+          </div>
           <div style={{ marginTop: "1rem" }}>
             {this.state.leaders ? (
               this.state.leaders.map((dorm, i) => (

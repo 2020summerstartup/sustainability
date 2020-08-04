@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import { Admin } from 'react-admin';
+// import { Admin } from 'react-admin';
 
 function AdminPage() {
   return (
