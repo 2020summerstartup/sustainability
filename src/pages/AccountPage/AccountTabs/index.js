@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { withRouter } from "react-router";
+import {retry} from "../../../App/index";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 // import DormCard from "./dorm";
@@ -24,7 +25,7 @@ import ActionData from "../../HomePage/actionData.json"
 
 //React lazy
 // const TotalPointsCard = lazy(() => import("./points"));
-const DormCard = lazy(() => import("./dorm"));
+const DormCard = lazy(() => retry(() => import("./dorm")));
 // const Badges = lazy(() => import("./badges"));
 // const Badges2 = lazy(() => import("./badges2"));
 // const Badges3 = lazy(() => import("./badges3"));

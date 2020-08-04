@@ -36,31 +36,50 @@ import ProgressCircle from "../components/ProgressCircle";
 import { withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
 
+function retry(fn, retriesLeft = 5, interval = 1000) {
+  return new Promise((resolve, reject) => {
+    fn()
+      .then(resolve)
+      .catch((error) => {
+        setTimeout(() => {
+          if (retriesLeft === 1) {
+            // reject('maximum retries exceeded');
+            reject(error);
+            return;
+          }
+
+          // Passing on "reject" is the important part
+          retry(fn, retriesLeft - 1, interval).then(resolve, reject);
+        }, interval);
+      });
+  });
+}
+
 // React lazy
-const MuiSignInPage = lazy(() => import("../pages/RegisterPage/muiSignInPage"));
-const MuiSignUpPage = lazy(() => import("../pages/RegisterPage/muiSignUpPage"));
-const MuiPasswordForgetPage = lazy(() =>
+const MuiSignInPage = lazy(() => retry(() => import("../pages/RegisterPage/muiSignInPage")));
+const MuiSignUpPage = lazy(() => retry(() => import("../pages/RegisterPage/muiSignUpPage")));
+const MuiPasswordForgetPage = lazy(retry(() =>
   import("../pages/RegisterPage/muiPasswordForgetPage")
-);
-const HomePage = lazy(() => import("../pages/HomePage"));
-const AccountPage = lazy(() =>
+));
+const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
+const AccountPage = lazy(() => retry(() =>
   import("../pages/AccountPage/index")
-);
-const InfoPage = lazy(() => import("../pages/InfoPage"));
-const CompetePage = lazy(() => import("../pages/CompetePage"));
-const MuiOfflinePage = lazy(() =>
+));
+const InfoPage = lazy(() => retry(() => import("../pages/InfoPage")));
+const CompetePage = lazy(() => retry(() => import("../pages/CompetePage")));
+const MuiOfflinePage = lazy(() => retry(() => 
   import("../pages/OfflinePage/muiOfflinePage")
-);
-const MuiChangePw = lazy(() =>
+));
+const MuiChangePw = lazy(() => retry(() => 
   import("../pages/AccountPage/Settings/muiChangePw")
-);
-const MuiChangeDorm = lazy(() =>
+));
+const MuiChangeDorm = lazy(() => retry(() =>
   import("../pages/AccountPage/Settings/muiChangeDorm")
-);
-const DeleteAccount = lazy(() =>
+));
+const DeleteAccount = lazy(() => retry(() =>
   import("../pages/AccountPage/Settings/deleteAccount")
-);
-const AdminPage = lazy(() => import("../pages/AdminPage"));
+));
+const AdminPage = lazy(() => retry(() =>import("../pages/AdminPage")));
 
 function AppBase() {
   return (
@@ -186,3 +205,4 @@ function AppBase() {
 
 const App = withTheme(AppBase);
 export default withAuthentication(App);
+export {retry}

@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { withRouter } from "react-router";
+import { retry } from "../../../App/index"
 
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
@@ -17,7 +18,7 @@ import StarIcon from "@material-ui/icons/Star";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 
 // React lazy
-const Challenges = lazy(() => import("./challenges.js"));
+const Challenges = lazy(() => retry(() => import("./challenges.js")));
 // const Leaderboard = lazy(() => import("./leaderboard"));
 
 function TabPanel(props) {
