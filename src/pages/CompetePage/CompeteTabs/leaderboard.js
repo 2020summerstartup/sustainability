@@ -45,6 +45,7 @@ class Leaderboard extends React.Component {
         const leaderScore = doc.data().score
         this.setState({
           maxPoints: leaderScore,
+          firstDorm: doc.id
         })
       })
     })
