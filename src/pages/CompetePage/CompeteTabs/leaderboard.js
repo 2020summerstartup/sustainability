@@ -86,7 +86,7 @@ class Leaderboard extends React.Component {
       <>
         <div className="Leaderboard">
           <Typography variant="h5" className={classes.title} component={"span"}>
-            Way to be sustainable {this.state.firstDorm} Dorm!
+            Way to be sustainable, {this.state.firstDorm} Dorm!
           </Typography>
           <div style={{ marginTop: "1rem" }}>
             {this.state.leaders ? (
