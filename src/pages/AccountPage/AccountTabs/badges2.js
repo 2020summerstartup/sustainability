@@ -268,7 +268,7 @@ class Badges2 extends React.Component {
                         variant="h6"
                         className={badge.titleStylingBack}
                       >
-                        {badge.toMaster} <br /> Times Completed!
+                      Completed <br /> {badge.toMaster} <br /> Times!
                       </Typography>
                     </div>
                   </div>
