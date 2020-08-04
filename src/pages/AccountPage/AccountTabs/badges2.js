@@ -102,7 +102,7 @@ export const BadgesCard = React.memo(function GalaxyCard() {
             </InfoTitle>
             <InfoCaption>
               {" "}
-              Click on the badges for another surprise!
+              Click on the badges for another surprise! 🍃
             </InfoCaption>
           </Info>
         </Box>
