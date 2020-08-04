@@ -80,6 +80,24 @@ const CompeteHeader = ({ firebase }) => {
   );
 };
 
+// AdminHeader
+const AdminHeader = ({ firebase }) => {
+  const classes = useStyles1();
+  return (
+    <>
+      <AppBar position="static" className={classes.header} elevation={0}>
+        <Toolbar className={classes.toolbar}>
+          <SusLogo className={classes.logo} />
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
+          <Typography variant="h6" className={classes.title} noWrap>
+            Admin
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
 // InfoHeader
 const InfoHeader = ({ firebase }) => {
   const classes = useStyles1();
@@ -363,5 +381,6 @@ export {
   AccountHeader,
   BackArrowSettingsHeader,
   BackArrowHeader,
+  AdminHeader,
 };
 export default withFirebase(Header);

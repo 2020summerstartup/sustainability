@@ -4,6 +4,7 @@ import { Slide } from "material-auto-rotating-carousel";
 // import suslogoImg from "../../img/suslogo.svg";
 import suslogoroundImg from "../../img/suslogo_roundedcorners.svg";
 import pointsGif from "../../img/points.gif";
+import addGif from "../../img/add.gif";
 // import First from './first.png';
 // import Login from './login.gif';
 // import Swipe from './Swipe.png';
