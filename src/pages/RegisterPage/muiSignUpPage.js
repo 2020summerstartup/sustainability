@@ -3,6 +3,10 @@ import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Reward from "react-rewards";
 
+// Admin stuff roles
+import * as ROLES from '../../constants/roles';
+
+
 import {
   withFirebase,
   createUser,
@@ -112,6 +116,8 @@ const INITIAL_STATE = {
   dorm: "",
   image: null,
   points: 0,
+  // Admin stuff
+  isAdmin: false,
   error: null,
 };
 
@@ -144,9 +150,25 @@ class SignUpFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  // Used for admin stuff
+  onChangeCheckbox = event => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
+
+  // Used to make users - "Sign Up" Button
   onSubmit = (event) => {
     localStorage.clear();
-    const { username, email, passwordOne, dorm } = this.state;
+    // Start of admin stuff
+    const { username, email, passwordOne, dorm, isAdmin } = this.state;
+    const roles = {};
+ 
+    if (isAdmin) {
+      roles[ROLES.ADMIN] = ROLES.ADMIN;
+    }
+    // End of admin stuff
+
+    // Commented out code is from before admin stuff
+    // const { username, email, passwordOne, dorm } = this.state;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -155,6 +177,7 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
+          roles, // for admin control
         });
       })
       .then(() => {
@@ -201,6 +224,7 @@ class SignUpFormBase extends Component {
       dorm,
       passwordOne,
       passwordTwo,
+      isAdmin,
       error,
     } = this.state;
 
@@ -304,6 +328,16 @@ class SignUpFormBase extends Component {
               value={passwordTwo}
               onChange={this.onChange}
             />
+            {/* Added in admin checkbox */}
+            <label>
+              Admin:
+              <input
+                name="isAdmin"
+                type="checkbox"
+                checked={isAdmin}
+                onChange={this.onChangeCheckbox}
+              />
+            </label>
 
             {error && (
               <Typography
