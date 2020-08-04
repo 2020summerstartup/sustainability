@@ -5,7 +5,7 @@ import PwaCard from "./pwa";
 
 // list of colors for each dorm to display in a different color depending on their ranking
 // I grabbed the background color from the monochrome spread here: https://www.colorhexa.com/24a113
-let colors = ["#134611", "var(--theme)", "#E87461", "var(--theme-secondary)"];
+let colors = ["#134611", "var(--theme)", "#e36569", "var(--theme-secondary)"];
 
 class InfoCards extends React.Component {
   constructor() {

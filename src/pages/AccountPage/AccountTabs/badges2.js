@@ -61,16 +61,27 @@ var masterLength = arrayMaster.length;
 
 const badgeSay = () => {
   if (masterLength === 0) {
-    theCongrats = <p> Hi, {localStorage.getItem("name")}! Go log more actions to earn some badges!</p>
-    theBadge = <p>I believe in you  <span role="img" aria-label="hug">
-    🤗
-    </span></p>;
+    theCongrats = (
+      <p>
+        {" "}
+        Hi, {localStorage.getItem("name")}! Go log more actions to earn some
+        badges!
+      </p>
+    );
+    theBadge = (
+      <p>
+        I believe in you{" "}
+        <span role="img" aria-label="hug">
+          🤗
+        </span>
+      </p>
+    );
   } else if (masterLength > 0 && masterLength < 5) {
-    theCongrats = <p> Congratulations {localStorage.getItem("name")}! </p>
-    theBadge = <p> You've earned {masterLength} badges! Keep it going 🥳 </p>
+    theCongrats = <p> Congratulations {localStorage.getItem("name")}! </p>;
+    theBadge = <p> You've earned {masterLength} badges! Keep it going 🥳 </p>;
   } else {
-    theCongrats = <p>Omg {localStorage.getItem("name")}! </p>
-    theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>
+    theCongrats = <p>Omg {localStorage.getItem("name")}! </p>;
+    theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
   }
 };
 
@@ -93,11 +104,9 @@ export const BadgesCard = React.memo(function GalaxyCard() {
         <CardMedia classes={mediaStyles} image={fans} />
         <Box py={3} px={2} className={classes.content}>
           <Info useStyles={useGalaxyInfoStyles}>
-            <InfoSubtitle></InfoSubtitle>
-            <InfoTitle>
-              {theCongrats} {theBadge}
-            </InfoTitle>
-            <InfoCaption>
+            <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>{theCongrats}</InfoSubtitle>
+            <InfoTitle>{theBadge}</InfoTitle>
+            <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
               {" "}
               Click on the badges for another surprise! 🍃
             </InfoCaption>
@@ -270,7 +279,7 @@ class Badges2 extends React.Component {
                         variant="h6"
                         className={badge.titleStylingBack}
                       >
-                      Completed <br /> {badge.toMaster} <br /> Times!
+                        Completed <br /> {badge.toMaster} <br /> Times!
                       </Typography>
                     </div>
                   </div>

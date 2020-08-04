@@ -883,9 +883,11 @@ function HomePage(props) {
             <CardMedia classes={mediaStyles2} image={actionTab} />
             <Box py={3} px={2} className={classes.content}>
               <Info useStyles={useGalaxyInfoStyles}>
-                <InfoSubtitle></InfoSubtitle>
+                <InfoSubtitle
+                  style={{ color: "white", fontWeight: "bold" }}
+                ></InfoSubtitle>
                 <InfoTitle>Log your actions here!</InfoTitle>
-                <InfoCaption>
+                <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
                   Tap the drop down menu to find out more
                   <span role="img" aria-label="down arrow">
                     🔽
