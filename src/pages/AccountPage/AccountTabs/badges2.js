@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       borderRadius: "black",
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0) 45%)",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
     },
   },
   content: {
@@ -61,20 +61,14 @@ var masterLength = arrayMaster.length;
 
 const badgeSay = () => {
   if (masterLength === 0) {
-    theCongrats = (
-      <p>
-        {" "}
-        Hi, {localStorage.getItem("name")}! Go log more actions to earn some
-        badges!
-      </p>
-    );
-    theBadge = <p>I believe in you </p>;
+    theCongrats = <p> Hi, {localStorage.getItem("name")}! Go log more actions to earn some badges!</p>
+    theBadge = <p>I believe in you 🤗 </p>;
   } else if (masterLength > 0 && masterLength < 5) {
-    theCongrats = <p> Congratulations {localStorage.getItem("name")}! </p>;
-    theBadge = <p> You've earned {masterLength} badges!</p>;
+    theCongrats = <p> Congratulations {localStorage.getItem("name")}! </p>
+    theBadge = <p> You've earned {masterLength} badges! Keep it going 🥳 </p>
   } else {
-    theCongrats = <p>Omg {localStorage.getItem("name")}! That's awesome!</p>;
-    theBadge = <p> You've earned {masterLength} badges! </p>;
+    theCongrats = <p>Omg {localStorage.getItem("name")}! </p>
+    theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>
   }
 };
 

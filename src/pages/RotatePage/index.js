@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Slide} from 'material-auto-rotating-carousel';
 import suslogoImg from "../../img/suslogo.svg";
 import pointsGif from "../../img/points.gif";
+import addGif from "../../img/add.gif";
 // import First from './first.png';
 // import Login from './login.gif';
 // import Swipe from './Swipe.png';
@@ -57,7 +58,10 @@ export class Rotate extends Component {
                   subtitle='Encourage your dorm friends to be more eco-friendly!'
                 />
                 <Slide
-                //   media={<img src={Result} class="snapgrid" />}
+                media={<img src={addGif} style={{
+                  marginTop: "2rem",
+                  maxHeight: "40rem" ,
+                maxWidth: "15rem"}} />}  
                   mediaBackgroundStyle={{ backgroundColor: "#4fb35b" }}
                   style={{ backgroundColor: "#4fb35b" }}
                   title='Add to Home Screen!'

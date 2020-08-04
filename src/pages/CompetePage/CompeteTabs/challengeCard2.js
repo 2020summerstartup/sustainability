@@ -15,6 +15,8 @@ import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import challenges from "../../../img/challenges.svg";
+import Paper from '@material-ui/core/Paper';
+
 
 const useStyles = (theme) => ({
   root: {
@@ -22,13 +24,11 @@ const useStyles = (theme) => ({
     justifyItems: "center",
     justifyContent: "center",
     alignContent: "center",
+    margin: "auto",
     background:
       "linear-gradient(to right, #BF953F, #FCF6BA, #B38728,#FBF5B7, #AA771C)",
-    // maxWidth: 600,
-    // maxHeight: 500,
     height: "100%",
-    margin: 0,
-    // minHeight: "300",
+    maxWidth: "30rem",
   },
   details: {
     display: "flex",
@@ -86,6 +86,14 @@ const useStyles = (theme) => ({
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
+    root2: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
   },
 });
 
@@ -102,6 +110,7 @@ class ChallengeCard2 extends React.Component {
     return (
       <>
         <Typography variant="h5">Challenges</Typography>
+        <div className = {classes.root2}>
         <Grid
           container
           justify="center"
@@ -163,6 +172,7 @@ class ChallengeCard2 extends React.Component {
             </Grid>
           ))}
         </Grid>
+        </div>
       </>
     );
   }
