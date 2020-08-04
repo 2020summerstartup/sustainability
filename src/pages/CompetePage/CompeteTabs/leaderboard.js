@@ -44,6 +44,8 @@ let colors = [
   "#7A7574",
 ];
 
+leaderBoardUpdate();
+
 class Leaderboard extends React.Component {
   constructor() {
     super();
@@ -52,6 +54,7 @@ class Leaderboard extends React.Component {
     };
     this.getData = this.getData.bind(this);
   }
+
   // sets the maxScore to the leading dorm's score
   getLeaderScore() {
     // find the document/dorm that has rank 1 --> is in first place
