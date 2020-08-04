@@ -62,7 +62,9 @@ var masterLength = arrayMaster.length;
 const badgeSay = () => {
   if (masterLength === 0) {
     theCongrats = <p> Hi, {localStorage.getItem("name")}! Go log more actions to earn some badges!</p>
-    theBadge = <p>I believe in you 🤗 </p>;
+    theBadge = <p>I believe in you  <span role="img" aria-label="hug">
+    🤗
+    </span></p>;
   } else if (masterLength > 0 && masterLength < 5) {
     theCongrats = <p> Congratulations {localStorage.getItem("name")}! </p>
     theBadge = <p> You've earned {masterLength} badges! Keep it going 🥳 </p>

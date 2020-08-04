@@ -6,7 +6,7 @@ import { firestore } from "../../../services/Firebase/firebase";
 // import "firebase/firestore";
 import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
 
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = (theme) => ({
@@ -80,7 +80,7 @@ class Leaderboard extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
 
     return (
       <>
