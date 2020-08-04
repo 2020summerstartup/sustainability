@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
@@ -201,9 +201,4 @@ export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact)
   })
 }
 
-const db = firebase.firestore;
-
-export {Axios, db}
-
-
-export {firestore}
+export {Axios, firestore};
