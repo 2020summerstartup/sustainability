@@ -1,4 +1,4 @@
-// import firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
@@ -23,7 +23,30 @@ const config = {
 
 app.initializeApp(config);
 // firebase.initializeApp(config)
-const firestore = app.firestore()
+const firestore = app.firestore();
+
+// function resolveAfterSecond(){
+//   return new Promise(resolve => {
+//     setTimeout( () => {
+//       resolve('resolved');
+//     }, 1000);
+//   });
+// }
+
+var challengeDataArray;
+async function getChallengeData() {
+  // sync with firebasse RT database changes
+  const dbRefObject = firebase.database().ref('1N2PhiprrCvWWYbyjEFwNjR18k13GOYhlkY34luOJe-w/ChallengeData');
+  dbRefObject.on('value', function(snap){
+    challengeDataArray = snap.val();
+    console.log(challengeDataArray);
+    localStorage.setItem('challengeData', JSON.stringify(challengeDataArray))
+  })
+  // const result = await resolveAfterSecond();
+}
+getChallengeData();
+
+
 
 class Firebase {
   constructor() {
