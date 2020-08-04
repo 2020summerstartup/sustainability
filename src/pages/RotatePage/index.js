@@ -31,7 +31,6 @@ export class Rotate extends Component {
           onStart={() => (window.location.href = "/signup")}
         >
           <Slide
-            // media ={<LandingPage class="responsive"/> }
 
             media={
               <img
