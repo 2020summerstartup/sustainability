@@ -17,6 +17,11 @@ import IconButton from "@material-ui/core/IconButton";
 
 // import suslogoImg from "../../img/suslogo.svg";
 import { ReactComponent as SusLogo } from "../../img/suslogo.svg";
+import { ReactComponent as SusLogo1 } from "../../img/logo_skin1.svg";
+import { ReactComponent as SusLogo2 } from "../../img/logo_skin2.svg";
+import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
+
+
 
 
 // imports for homeheader
@@ -69,7 +74,7 @@ const CompeteHeader = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
-          <SusLogo className={classes.logo} />
+          <SusLogo1 className={classes.logo} />
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography variant="h6" className={classes.title} noWrap>
             Compete
@@ -87,7 +92,7 @@ const AdminHeader = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
-          <SusLogo className={classes.logo} />
+          <SusLogo1 className={classes.logo} />
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography variant="h6" className={classes.title} noWrap>
             Admin
@@ -105,7 +110,7 @@ const InfoHeader = ({ firebase }) => {
     <>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
-          <SusLogo className={classes.logo} />
+          <SusLogo3 className={classes.logo} />
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography variant="h6" className={classes.title} noWrap>
             Information
@@ -152,7 +157,7 @@ const AccountHeader = ({ firebase }) => {
           <Grid justify="space-between" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
-                <SusLogo className={classes.logo} />
+                <SusLogo2 className={classes.logo} />
                 {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
                 Profile
               </Typography>
@@ -219,7 +224,7 @@ const BackArrowSettingsHeader = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo className={classes.logo}/>
+          <SusLogo3 className={classes.logo}/>
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Grid justify="flex-start" container>
             <Grid item>
@@ -260,7 +265,7 @@ const BackArrowHeader = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo className={classes.logo} />
+          <SusLogo2 className={classes.logo} />
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Grid justify="flex-start" container>
             <Grid item>
@@ -349,7 +354,7 @@ const HomeHeader = ({ firebase }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <SusLogo className={classes.logo} />
+          <SusLogo3 className={classes.logo} />
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography className={classes.title} variant="h6">
             Home
