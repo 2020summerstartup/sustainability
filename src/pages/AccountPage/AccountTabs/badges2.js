@@ -111,7 +111,6 @@ for (const el in ActionData) {
   // Iterate over every action in ActionData & determine if the action has been mastered
   var action = ActionData[el]; // Take the current action
   var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
-  var storageName = action.susAction.concat("Mastered"); // variable that adds "Mastered" to end of action title
   var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage when user
   // first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds
 
