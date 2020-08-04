@@ -13,7 +13,6 @@ import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import challenges from "../../../img/challenges.svg";
-import Paper from '@material-ui/core/Paper';
 
 
 const useStyles = (theme) => ({
