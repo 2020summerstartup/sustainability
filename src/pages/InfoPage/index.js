@@ -5,9 +5,9 @@ import FBContactForm from "./fbContactForm";
 
 const InfoPage = () => (
   <div className="base-container">
-    <AddtoHomeScreen />
     {/* <PwaCard /> */}
     <InfoCards />
+    <AddtoHomeScreen />
     <FBContactForm />
   </div>
 );

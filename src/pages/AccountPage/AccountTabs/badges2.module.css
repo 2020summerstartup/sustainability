@@ -128,7 +128,7 @@ div.right:hover {
 
 .titleLeftBack {
   position: relative;
-  transform: rotate(-135deg) translate(17%, 20%);
+  transform: rotate(-135deg) translate(17%, 30%);
   top: 45%;
   color: white;
   text-shadow: 2px 2px 5px black;
@@ -136,7 +136,7 @@ div.right:hover {
 
 .titleRightBack {
   position: relative;
-  transform: rotate(135deg) translate(-17%, 20%);
+  transform: rotate(135deg) translate(-17%, 30%);
   top: 45%;
   color: white;
   text-shadow: 2px 2px 5px black;
