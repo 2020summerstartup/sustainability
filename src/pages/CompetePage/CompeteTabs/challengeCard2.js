@@ -109,8 +109,8 @@ class ChallengeCard2 extends React.Component {
 
     return (
       <>
-        <Typography variant="h5">Challenges</Typography>
-        <div className = {classes.root2}>
+        {/* <Typography variant="h5">Challenges</Typography> */}
+        <div className = {classes.root}>
         <Grid
           container
           justify="center"
