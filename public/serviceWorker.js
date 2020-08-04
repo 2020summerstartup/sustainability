@@ -1,7 +1,7 @@
 // -------- SW from Weather PWA
 
 const CACHE_NAME = "version-1";
-const urlsToCache = [ 'index.html', 'offline.html' ];
+const urlsToCache = [ 'index.html', 'offline.html', 'offline.svg' ];
 
 const self = this;
 

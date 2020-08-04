@@ -1,3 +1,7 @@
+.root {
+  overflow: hidden;
+}
+
 /* Regular Phone Screen */
 .column {
   display: flex;
@@ -6,13 +10,13 @@
   width: 17rem;
   margin: auto;
   position: relative;
-  margin-top: -1rem;
+  margin-top: -1.5rem;
 }
 
 /* Large screens */
 @media only screen and (min-width: 500px) {
   .column {
-    margin-top: 0rem;
+    margin-top: 1rem;
   }
 }
 
@@ -140,7 +144,7 @@ div.right:hover {
 /* LEAF ANIMATIONS */
 .leaves {
   position: relative;
-  top: -20rem;
+  top: -5rem;
   width: 100%;
   text-align: center;
   z-index: -1;
