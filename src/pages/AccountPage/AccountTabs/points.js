@@ -105,7 +105,9 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
               <CardMedia classes={mediaStyles} image={points} />
               <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
-                  <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>You have earned</InfoSubtitle>
+                  <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
+                    You have earned
+                  </InfoSubtitle>
                   <InfoTitle> {localStorage.getItem("total")} Points</InfoTitle>
                   <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
                     {thePoints}{" "}
