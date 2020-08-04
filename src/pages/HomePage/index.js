@@ -717,8 +717,6 @@ function HomePage(props) {
             onChange={handleChange}
             variant="fullWidth"
             scrollButtons="off"
-            // TODO: need to set text color to white if we don't want non-selected tab to have grayed out text
-            // textColor="#ffff"
             aria-label="scrollable tabs"
             className={classes.tabs}
             TabIndicatorProps={{ className: classes.indicator }}
