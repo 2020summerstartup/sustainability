@@ -25,24 +25,21 @@ app.initializeApp(config);
 // firebase.initializeApp(config)
 const firestore = app.firestore();
 
-// function resolveAfterSecond(){
-//   return new Promise(resolve => {
-//     setTimeout( () => {
-//       resolve('resolved');
-//     }, 1000);
-//   });
-// }
 
-var challengeDataArray;
+
+// sync with firebasse RT database changes
+// NOTE: must refresh page/sign in/sign up to get the updated challenges bc even though local storage updates, 
+// the text that is displayed does not
 async function getChallengeData() {
-  // sync with firebasse RT database changes
+  // reference to where all the challenge data is stored
   const dbRefObject = firebase.database().ref('1N2PhiprrCvWWYbyjEFwNjR18k13GOYhlkY34luOJe-w/ChallengeData');
+  // when any field relating to challenge data within the Firebase RT database changes the following function will be called
   dbRefObject.on('value', function(snap){
-    challengeDataArray = snap.val();
-    console.log(challengeDataArray);
+    // get the array containing an object for each challenge from firebase RT database
+    const challengeDataArray = snap.val();
+    // set this array to local storage so we can access it on the challenge pages
     localStorage.setItem('challengeData', JSON.stringify(challengeDataArray))
   })
-  // const result = await resolveAfterSecond();
 }
 getChallengeData();
 
