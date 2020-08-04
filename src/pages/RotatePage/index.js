@@ -1,9 +1,6 @@
 import { AutoRotatingCarousel} from 'material-auto-rotating-carousel';
 import React, { Component } from 'react';
-import styles from "./rotate.module.css";
 import {Slide} from 'material-auto-rotating-carousel';
-import LandingPage from "../LandingPage/muiLandingPage";
-import welcomeImg from "../../img/welcome.svg";
 import suslogoImg from "../../img/suslogo.svg";
 import pointsGif from "../../img/points.gif";
 import addGif from "../../img/add.gif";
@@ -29,7 +26,7 @@ export class Rotate extends Component {
                 <Slide
                 // media ={<LandingPage class="responsive"/> }
                
-                  media={<img src={suslogoImg} class="responsive" />}
+                  media={<img alt="" src={suslogoImg} class="responsive" />}
                   mediaBackgroundStyle={{ backgroundColor: "#15601e" }}
                   style={{ backgroundColor:  "#15601e" }}
                   title='What will we accomplish?'
@@ -37,7 +34,7 @@ export class Rotate extends Component {
                 />
                 
                 <Slide
-                media={<img src={pointsGif} style={{
+                media={<img alt="" src={pointsGif} style={{
                     // display: "flex",
                     // alignContent: "center",
                     // justifyContent: "center",

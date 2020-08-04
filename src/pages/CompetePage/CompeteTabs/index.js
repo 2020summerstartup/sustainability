@@ -160,10 +160,9 @@ function CompeteTabs(props) {
       </TabPanel>
 
       <TabPanel value={value} index={1} className="tab-container">
-
         <Suspense fallback={<ProgressCircle />}>
-          <center><ChallengeCard2 /></center>
-          <Challenges />
+          <ChallengeCard2 />
+          {/* <Challenges /> */}
         </Suspense>
       </TabPanel>
     </div>

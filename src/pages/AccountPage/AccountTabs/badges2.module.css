@@ -1,26 +1,23 @@
-/* .root {
-  background-image: url("");
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center center; */
-/* background: skyblue;
-} */
+.root {
+  overflow: hidden;
+}
 
 /* Regular Phone Screen */
 .column {
   display: flex;
   flex-direction: column;
-  /* width: 80%; */
-  width: 17rem;
+  max-width: 25%;
+  min-width: 17rem;
   margin: auto;
   position: relative;
-  margin-top: -1rem;
+  margin-top: -1.5rem;
+  margin-bottom: 2rem;
 }
 
 /* Large screens */
 @media only screen and (min-width: 500px) {
   .column {
-    margin-top: 0rem;
+    margin-top: 1rem;
   }
 }
 
@@ -100,13 +97,21 @@ div.right {
   ); */
 }
 
-div.left:hover {
+.flipLeft {
+  transform: rotate3d(1, -1, 0, 180deg);
+}
+
+.flipRight {
+  transform: rotate3d(-1, -1, 0, 180deg);
+}
+
+/* div.left:hover {
   transform: rotate3d(1, -1, 0, 180deg);
 }
 
 div.right:hover {
   transform: rotate3d(-1, -1, 0, 180deg);
-}
+} */
 
 .leafFront,
 .leafBack {
@@ -137,11 +142,10 @@ div.right:hover {
   text-shadow: 2px 2px 5px black;
 }
 
-/* leaf animations */
-
+/* LEAF ANIMATIONS */
 .leaves {
   position: relative;
-  top: -15rem;
+  top: -5rem;
   width: 100%;
   text-align: center;
   z-index: -1;

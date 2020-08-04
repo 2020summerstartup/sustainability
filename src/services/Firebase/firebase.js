@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
@@ -81,6 +81,17 @@ export const createUser = (userEmail, userName, dorm) => {
               "noFoodWaste": 0,
               "meatlessMon": 0,
               "ecoClean": 0,
+              "publicTransit": 0,
+              "usedClothes": 0,
+              "hangDry": 0,
+              "climateClass": 0,
+              "reuseBBQ": 0,
+              "reuseBottle": 0,
+              "shower5": 0,
+              "donateClothes": 0,
+              "layerCold": 0,
+              "bulkGrocery": 0,
+              "emailReceipt": 0,
           },
           impact: {
             "coEmiss": 0,
@@ -141,7 +152,6 @@ export const updateUserDorm = (userEmail, value) => {
 
 // updates firestore when a user favorites an action
 export const addFav = (userEmail, susAction) => {
-  console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayUnion(susAction)
   })
@@ -156,7 +166,6 @@ export const deleteFav = (userEmail, susAction) => {
 
 // adds action to mastered list in firestore when called (user has mastered action)
 export const actionMastered = (userEmail, susAction) => {
-  console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
     masteredActions: app.firestore.FieldValue.arrayUnion(susAction)
   })
@@ -192,9 +201,4 @@ export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact)
   })
 }
 
-const db = firebase.firestore;
-
-export {Axios, db}
-
-
-export {firestore}
+export {Axios, firestore};

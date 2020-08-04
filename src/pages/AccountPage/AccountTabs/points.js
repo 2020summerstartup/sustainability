@@ -56,11 +56,11 @@ var thePoints;
 
 const pointsDisplay = () => {
   if (parseInt(localStorage.getItem("total")) === 0) {
-    thePoints = <p> Go to the home page and log points!</p>;
+    thePoints = " Go to the home page and log points!";
   } else if (parseInt(localStorage.getItem("total")) < 400 ) {
-    thePoints = <p> You're amazing! Keep it up!</p>
+    thePoints = " You're amazing! Keep it up!"
   } else {
-    thePoints = <p> You're a superstar 🤩 </p>
+    thePoints = " You're a superstar 🤩 "
   }
 };
   // const getPoints = () => {

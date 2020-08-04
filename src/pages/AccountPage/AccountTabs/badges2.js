@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./badges2.module.css";
+import ActionData from "../../HomePage/actionData.json";
 import fans from "../../../img/fans.svg";
 
 import SignOutButtom from "../../../components/SignOut";
@@ -18,7 +19,6 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -51,10 +51,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
 }));
+
 // stores string for badge
 var theBadge;
-var theCongrats
-
+var theCongrats;
 
 var arrayMaster = JSON.parse(localStorage.getItem("firestoreMastered"));
 var masterLength = arrayMaster.length;
@@ -78,153 +78,111 @@ export const BadgesCard = React.memo(function GalaxyCard() {
   badgeSay();
 
   return (
-
-          <>
-            <NoSsr>
-              <GoogleFontLoader
-                fonts={[
-                  { font: "Spartan", weights: [300] },
-                  { font: "Montserrat", weights: [200, 400, 700] },
-                ]}
-              />
-            </NoSsr>
-            <Card className={classes.card}>
-              <CardMedia classes={mediaStyles} image={fans} />
-              <Box py={3} px={2} className={classes.content}>
-                <Info useStyles={useGalaxyInfoStyles}>
-                  <InfoSubtitle></InfoSubtitle>
-                  <InfoTitle>{theCongrats} {theBadge}</InfoTitle>
-                  <InfoCaption> Click on the badges for another surprise!</InfoCaption>
-                </Info>
-              </Box>
-            </Card>
-
+    <>
+      <NoSsr>
+        <GoogleFontLoader
+          fonts={[
+            { font: "Spartan", weights: [300] },
+            { font: "Montserrat", weights: [200, 400, 700] },
+          ]}
+        />
+      </NoSsr>
+      <Card className={classes.card}>
+        <CardMedia classes={mediaStyles} image={fans} />
+        <Box py={3} px={2} className={classes.content}>
+          <Info useStyles={useGalaxyInfoStyles}>
+            <InfoSubtitle></InfoSubtitle>
+            <InfoTitle>
+              {theCongrats} {theBadge}
+            </InfoTitle>
+            <InfoCaption>
+              {" "}
+              Click on the badges for another surprise! 🍃
+            </InfoCaption>
+          </Info>
+        </Box>
+      </Card>
     </>
   );
 });
 
+var masterBadgesArray = []; // Initalize an array that will contain only the mastered actions
+for (const el in ActionData) {
+  // Iterate over every action in ActionData & determine if the action has been mastered
+  var action = ActionData[el]; // Take the current action
+  var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
+  var storageName = action.susAction.concat("Mastered"); // variable that adds "Mastered" to end of action title
+  var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage when user
+  // first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds
+
+  if (
+    firestoreMastered != null && // if the array is not empty / if the array exists
+    firestoreMastered.includes(stringActionName) // if the array contains the actions --> the action is mastered
+  ) {
+    // sets attributes for the specific action
+    const masteredActionProps = {
+      id: action.id,
+      title: action.badgeName,
+      titleStylingFront: null,
+      titleStylingBack: null,
+      leafStyling: null, //float left or right
+      flipStatus: null, //show back or front
+      toMaster: action.toMaster,
+    };
+    // adds the necessary attributes to the masterBadgesArray that we will loop through to render the cards later
+    masterBadgesArray.push(masteredActionProps);
+  }
+}
 
 class Badges2 extends React.Component {
   constructor() {
     super();
     this.state = {
       badges: [],
+      selectedBadgeId: null, //id of the badge that user clicks on
+      selectedBadgeState: false, //state of the badge that use clicks on
     };
     this.getData = this.getData.bind(this);
   }
-  
- 
+
+  // function for when user clicks on card with specific id
+  cardClick = (id) => {
+    if (id === this.state.selectedBadgeId) {
+      this.setState({
+        selectedBadgeState: !this.state.selectedBadgeState, //toggle to change state to what it wasn't before
+      });
+    } else {
+      this.setState({
+        selectedBadgeId: id,
+        selectedBadgeState: true,
+      });
+    }
+  };
 
   getData() {
-    let data = {
-      success: true,
-      badges: [
-        {
-          id: 1,
-          title: "Recycle Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 2,
-          title: "Walking Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 3,
-          title: "Straw Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 4,
-          title: "Bag Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 5,
-          title: "Market Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 6,
-          title: "Tea Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 7,
-          title: "No Waste Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 8,
-          title: "Meatless Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 9,
-          title: "Cleaning Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 10,
-          title: "Save Gas Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 11,
-          title: "Clothing Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 12,
-          title: "Air Dry Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-        {
-          id: 13,
-          title: "Climate Badge",
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null,
-        },
-      ],
-    };
-    data.badges.forEach((badge, id) => {
+    // loop through our array of mastered badges and determines if they need to have LHS or RHS side properties
+    masterBadgesArray.forEach((badge, id) => {
       if (id % 2 === 0) {
+        // if the badge is even, give it LHS properties
         badge.titleStylingFront = styles.titleLeftFront;
         badge.titleStylingBack = styles.titleLeftBack;
         badge.leafStyling = styles.left;
       } else {
+        // if the badge is odd, give it RHS properties
         badge.titleStylingFront = styles.titleRightFront;
         badge.titleStylingBack = styles.titleRightBack;
         badge.leafStyling = styles.right;
       }
+      if (badge.leafStyling === styles.left) {
+        badge.flipStatus = styles.flipLeft;
+      }
+      if (badge.leafStyling === styles.right) {
+        badge.flipStatus = styles.flipRight;
+      }
     });
+
     this.setState({
-      badges: data.badges,
+      badges: masterBadgesArray,
     });
   }
 
@@ -233,14 +191,13 @@ class Badges2 extends React.Component {
   }
 
   render() {
-    
+    const { selectedBadgeId, selectedBadgeState } = this.state;
 
     return (
       <>
-     
-    <BadgesCard />
-      <div className={styles.root}>
-        {/* <div className={styles.fancyBorder}>
+        <BadgesCard />
+        <div className={styles.root}>
+          {/* <div className={styles.fancyBorder}>
           <Typography
             variant="h5"
             style={{
@@ -250,7 +207,8 @@ class Badges2 extends React.Component {
             }}
           >
             Congratulations {localStorage.getItem("name")}! You have earned
-            [number] badges!
+            &nbsp;
+            {masterBadgesArray.length} badges!
           </Typography>
           <Typography
             variant="subtitle1"
@@ -260,68 +218,76 @@ class Badges2 extends React.Component {
           </Typography>
         </div> */}
 
-        <div className={styles.leaves}>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-        </div>
+          {/* ANIMATED FALLING LEAVES */}
+          <div className={styles.leaves}>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
 
-        {this.state.badges ? (
-          this.state.badges.map((badge, i) => (
-            <div key={i}>
-              <div className={styles.column}>
-                {/* <div className={styles.flipLeaf}> */}
-                <div className={badge.leafStyling}>
-                  <div className={styles.leafFront}>
-                    <Typography
-                      variant="h6"
-                      className={badge.titleStylingFront}
-                    >
-                      {badge.title}
-                    </Typography>
-                  </div>
-                  <div className={styles.leafBack}>
-                    <Typography variant="h6" className={badge.titleStylingBack}>
-                      {badge.id} <br /> Actions Completed!
-                    </Typography>
+          {/* MAPPING THROUGH EACH MASTERED BADGE */}
+          {this.state.badges ? (
+            this.state.badges.map((badge, i) => (
+              <div key={badge.id}>
+                <div className={styles.column}>
+                  <div
+                    // if badge id is the selected one and the badge state is true, then we flip the badge
+                    className={`${
+                      badge.id === selectedBadgeId && selectedBadgeState
+                        ? `${badge.flipStatus}`
+                        : null
+                    } ${badge.leafStyling}`}
+                    onClick={() => this.cardClick(badge.id)}
+                  >
+                    <div className={styles.leafFront}>
+                      <Typography
+                        variant="h6"
+                        className={badge.titleStylingFront}
+                      >
+                        {badge.title}
+                      </Typography>
+                    </div>
+                    <div className={styles.leafBack}>
+                      <Typography
+                        variant="h6"
+                        className={badge.titleStylingBack}
+                      >
+                        {badge.toMaster} <br /> Times Completed!
+                      </Typography>
+                    </div>
                   </div>
                 </div>
-                {/* </div> */}
               </div>
+            ))
+          ) : (
+            <div className="empty">
+              <Typography variant="h5">
+                You haven't earned any badges yet :(
+              </Typography>
             </div>
-          ))
-        ) : (
-          <div className="empty">
-            <Typography variant="h5">
-              You haven't earned any badges yet :(
-            </Typography>
-           
-          </div>
-           
-        )}
-        <SignOutButtom />
-      </div>
+          )}
+          <SignOutButtom />
+        </div>
       </>
     );
   }
-  
 }
 
 export default Badges2;

@@ -68,7 +68,7 @@ class InfoCards extends React.Component {
               <PwaCard />
                 {this.state.cards ? (
                   this.state.cards.map((card, i) => (
-                    <div key={i} >
+                    <div key={card.id} >
                       <div
                         style={{
                           backgroundColor: colors[i],

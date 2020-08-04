@@ -59,6 +59,7 @@ const useStyles = (theme) => ({
 const INITIAL_STATE = {
   passwordOne: "",
   passwordTwo: "",
+  pw: "",
   error: null,
 };
 
@@ -77,9 +78,6 @@ class PasswordChangeFormBase extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-    this.state = {
-      pw: "",
-    };
   }
 
   onSubmit = (event) => {

@@ -74,65 +74,53 @@ class EnvImpactCards extends React.Component {
   }
 
   render() {
-
     return (
-      // <Spring
-      //   from={{ opacity: 0, marginTop: -1200 }}
-      //   to={{ opacity: 1, marginTop: 0 }}
-      //   config={{ delay: 0, duration: 2000 }}
-      // >
-      //   {(props) => (
-      //     <div style={props}>
-      //       <div className="InfoCards">
-      //         <div className="cards">
-      <>
-        <Grid container justify="center" spacing={2} style={{ marginTop: "2rem" }}>
-          {this.state.cards ? (
-            this.state.cards.map((card, i) => (
-              <Grid item xs={12} md={6} key={i}>
+      <Grid
+        container
+        justify="center"
+        spacing={2}
+        style={{ marginTop: "2rem", overflow: "hidden !important" }}
+      >
+        {this.state.cards ? (
+          this.state.cards.map((card, i) => (
+            <Grid item xs={12} md={6} key={i}>
+              <Reward
+                ref={(ref) => {
+                  this.reward = ref;
+                }}
+                type="confetti"
+                config={{
+                  springAnimation: false,
+                  elementCount: 300,
+                  startVelocity: 40,
+                  spread: 90,
+                }}
+              >
                 <div>
-                  <Reward
-                    ref={(ref) => {
-                      this.reward = ref;
-                    }}
-                    type="confetti"
-                    config={{
-                      springAnimation: true,
-                      elementCount: 100,
-                    }}
+                  <div
+                    id={card.id}
+                    key={card.id}
+                    style={{ cursor: "pointer" }}
+                    className={`${styles.burstShape} ${card.colorStyling}`}
+                    onClick={() => this.reward.rewardMe(card.id)}
                   >
-                    <div id={i} key={i}
-                      className={`${styles.burstShape} ${card.colorStyling}`}
-                      onClick={() => this.reward.rewardMe(i)}
-                    >
-                      {/* The next two comments are taken out of the above div tag to fix netlify deploy:
-                      // style={{ cursor: "pointer" }}
-                      // for some reason the onclick only refers to the last impact card */}
-                      <Grid container justify="center">
-                        <Typography variant="h3" component="h1">
-                          {card.score}
-                        </Typography>
-                        <Typography variant="subtitle1">
-                          {card.title}
-                        </Typography>
-                      </Grid>
-                    </div>
-                  </Reward>
+                    <Grid container justify="center">
+                      <Typography variant="h3" component="h1">
+                        {card.score}
+                      </Typography>
+                      <Typography variant="subtitle1">{card.title}</Typography>
+                    </Grid>
+                  </div>
                 </div>
-              </Grid>
-            ))
-          ) : (
-            <div className="empty">
-              Sorry no information is currently available
-            </div>
-          )}
-        </Grid>
-      </>
-      //         </div>
-      //       </div>
-      // </div>
-      //   )}
-      // </Spring>
+              </Reward>
+            </Grid>
+          ))
+        ) : (
+          <div className="empty">
+            Sorry no information is currently available
+          </div>
+        )}
+      </Grid>
     );
   }
 }
