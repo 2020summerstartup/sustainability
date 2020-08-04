@@ -1,5 +1,9 @@
 import React from "react"; // No longer imports component because it wasn't used
 import { AuthUserContext, withAuthorization } from "../../services/Session";
+import { compose } from 'recompose';
+
+import { withFirebase } from "../../services/Firebase";
+import * as ROLES from '../../constants/roles';
 
 import Paper from "@material-ui/core/Paper";
 
@@ -23,6 +27,14 @@ function AdminPage() {
   )
 }
 
-const condition = (authUser) => !!authUser;
+// const condition = (authUser) => !!authUser;
 
-export default withAuthorization(condition)(AdminPage);
+// export default withAuthorization(condition)(AdminPage);
+
+const condition = authUser =>
+  authUser && !!authUser.roles[ROLES.ADMIN];
+ 
+export default compose(
+  withAuthorization(condition),
+  withFirebase,
+)(AdminPage);

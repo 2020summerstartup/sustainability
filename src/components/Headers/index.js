@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 
-// import suslogoImg from "../../img/suslogo.svg";
+// Makes svg files into React Components
 import { ReactComponent as SusLogo } from "../../img/suslogo.svg";
 import { ReactComponent as SusLogo1 } from "../../img/logo_skin1.svg";
 import { ReactComponent as SusLogo2 } from "../../img/logo_skin2.svg";
@@ -67,7 +67,7 @@ const Header = ({ firebase }) => {
   );
 };
 
-// CompeteHeader
+// Compete Page Header
 const CompeteHeader = ({ firebase }) => {
   const classes = useStyles1();
   return (
@@ -85,7 +85,7 @@ const CompeteHeader = ({ firebase }) => {
   );
 };
 
-// AdminHeader
+// Admin Page Header
 const AdminHeader = ({ firebase }) => {
   const classes = useStyles1();
   return (
@@ -93,7 +93,6 @@ const AdminHeader = ({ firebase }) => {
       <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
           <SusLogo1 className={classes.logo} />
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography variant="h6" className={classes.title} noWrap>
             Admin
           </Typography>
@@ -103,7 +102,7 @@ const AdminHeader = ({ firebase }) => {
   );
 };
 
-// InfoHeader
+// Info Page Header
 const InfoHeader = ({ firebase }) => {
   const classes = useStyles1();
   return (
@@ -121,7 +120,7 @@ const InfoHeader = ({ firebase }) => {
   );
 };
 
-// Styles for Account Page Header
+// Styles for Account Page Header - includes Settings icon
 const useStyles2 = makeStyles((theme) => ({
   logo: {
     width: "3rem",
@@ -147,7 +146,7 @@ const useStyles2 = makeStyles((theme) => ({
   },
 }));
 
-// Header for account page
+// Account Page Header - has settings icon
 const AccountHeader = ({ firebase }) => {
   const classes = useStyles2();
   return (
@@ -158,25 +157,20 @@ const AccountHeader = ({ firebase }) => {
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
                 <SusLogo2 className={classes.logo} />
-                {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
                 Profile
               </Typography>
             </Grid>
             <Grid item>
               <SettingsDrawer />
             </Grid>
-            {/* <Grid item>
-              <AccountTabs/>
-            </Grid> */}
           </Grid>
         </Toolbar>
       </AppBar>
-      {/* <AccountTabs/> */}
     </>
   );
 };
 
-// Styles used for pages that have a back arrow & settings header
+// Styles used for headers with back arrow
 const useStyles3 = makeStyles((theme) => ({
   title: {
     color: "white",
@@ -207,7 +201,7 @@ const useStyles3 = makeStyles((theme) => ({
   },
 }));
 
-// Header for Change Dorm and Change PW- back arrow & settings icon
+// Header for Change Dorm and Change PW - back arrow & settings icon
 const BackArrowSettingsHeader = ({ firebase }) => {
   let history = useHistory();
 
@@ -248,7 +242,7 @@ const BackArrowSettingsHeader = ({ firebase }) => {
   );
 };
 
-// Header for Signup Page- only need back arrow not settings icon
+// Header for Signup Page - only need back arrow not settings icon
 const BackArrowHeader = ({ firebase }) => {
   let history = useHistory();
 
@@ -281,7 +275,7 @@ const BackArrowHeader = ({ firebase }) => {
   );
 };
 
-// HomeHeader
+// Home Page styles
 const useStyles4 = makeStyles((theme) => ({
   logo: {
     width: "3rem",
@@ -334,7 +328,6 @@ const useStyles4 = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -347,6 +340,7 @@ const useStyles4 = makeStyles((theme) => ({
   },
 }));
 
+// Home page header
 const HomeHeader = ({ firebase }) => {
   const classes = useStyles4();
 
@@ -355,7 +349,6 @@ const HomeHeader = ({ firebase }) => {
       <AppBar position="static">
         <Toolbar>
           <SusLogo3 className={classes.logo} />
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography className={classes.title} variant="h6">
             Home
           </Typography>

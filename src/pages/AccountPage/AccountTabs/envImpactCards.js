@@ -12,6 +12,7 @@ let coEmissImpact = localStorage.getItem("coEmiss");
 let energyImpact = localStorage.getItem("energy");
 let waterImpact = localStorage.getItem("water");
 
+
 const useStyles = (theme) => ({
   color: {
     "&:after": {
@@ -20,15 +21,33 @@ const useStyles = (theme) => ({
   },
 });
 
+
 // cards to be rendered on the points page in account
 class EnvImpactCards extends React.Component {
   constructor() {
     super();
+  
     this.state = {
       cards: [],
     };
+
     this.getData = this.getData.bind(this);
   }
+//   var theCO;
+// CODisplay = () => {
+//         if (parseInt(coEmissImpact) === 0) {
+//           theCO = <p>Pounds of CO2 saved! It's ok! Go log more actions to see some impact</p>
+//       } else if (parseInt(coEmissImpact) === 1 ) {
+//           theCO = <p> Pound of CO2 saved!</p>
+//         } else {
+//           theCO = <p>Pounds of CO2 saved!</p>
+//         }
+  // }; 
+
+
+  
+  
+
   getData() {
     // sets the data that we will use to render the cards
     let data = {
