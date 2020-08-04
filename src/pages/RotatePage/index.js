@@ -1,6 +1,5 @@
-import { AutoRotatingCarousel } from "material-auto-rotating-carousel";
 import React, { Component } from "react";
-import { Slide } from "material-auto-rotating-carousel";
+import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 // import suslogoImg from "../../img/suslogo.svg";
 import suslogoroundImg from "../../img/suslogo_roundedcorners.svg";
 import pointsGif from "../../img/points.gif";
