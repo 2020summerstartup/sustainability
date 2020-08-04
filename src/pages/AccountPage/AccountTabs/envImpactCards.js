@@ -75,70 +75,52 @@ class EnvImpactCards extends React.Component {
 
   render() {
     return (
-      // <Spring
-      //   from={{ opacity: 0, marginTop: -1200 }}
-      //   to={{ opacity: 1, marginTop: 0 }}
-      //   config={{ delay: 0, duration: 2000 }}
-      // >
-      //   {(props) => (
-      //     <div style={props}>
-      //       <div className="InfoCards">
-      //         <div className="cards">
-      <>
-        <Grid
-          container
-          justify="center"
-          spacing={2}
-          style={{ marginTop: "2rem" }}
-        >
-          {this.state.cards ? (
-            this.state.cards.map((card, i) => (
-              <Grid item xs={12} md={6} key={i}>
-                <Reward
-                  ref={(ref) => {
-                    this.reward = ref;
-                  }}
-                  type="confetti"
-                  config={{
-                    springAnimation: true,
-                    elementCount: 300,
-                    startVelocity: 50,
-                    spread: 90,
-                  }}
-                >
-                  <div>
-                    <div
-                      id={card.id}
-                      key={card.id}
-                      style={{ cursor: "pointer" }}
-                      className={`${styles.burstShape} ${card.colorStyling}`}
-                      onClick={() => this.reward.rewardMe(card.id)}
-                    >
-                      <Grid container justify="center">
-                        <Typography variant="h3" component="h1">
-                          {card.score}
-                        </Typography>
-                        <Typography variant="subtitle1">
-                          {card.title}
-                        </Typography>
-                      </Grid>
-                    </div>
+      <Grid
+        container
+        justify="center"
+        spacing={2}
+        style={{ marginTop: "2rem", overflow: "hidden !important" }}
+      >
+        {this.state.cards ? (
+          this.state.cards.map((card, i) => (
+            <Grid item xs={12} md={6} key={i}>
+              <Reward
+                ref={(ref) => {
+                  this.reward = ref;
+                }}
+                type="confetti"
+                config={{
+                  springAnimation: false,
+                  elementCount: 300,
+                  startVelocity: 40,
+                  spread: 90,
+                }}
+              >
+                <div>
+                  <div
+                    id={card.id}
+                    key={card.id}
+                    style={{ cursor: "pointer" }}
+                    className={`${styles.burstShape} ${card.colorStyling}`}
+                    onClick={() => this.reward.rewardMe(card.id)}
+                  >
+                    <Grid container justify="center">
+                      <Typography variant="h3" component="h1">
+                        {card.score}
+                      </Typography>
+                      <Typography variant="subtitle1">{card.title}</Typography>
+                    </Grid>
                   </div>
-                </Reward>
-              </Grid>
-            ))
-          ) : (
-            <div className="empty">
-              Sorry no information is currently available
-            </div>
-          )}
-        </Grid>
-      </>
-      //         </div>
-      //       </div>
-      // </div>
-      //   )}
-      // </Spring>
+                </div>
+              </Reward>
+            </Grid>
+          ))
+        ) : (
+          <div className="empty">
+            Sorry no information is currently available
+          </div>
+        )}
+      </Grid>
     );
   }
 }
