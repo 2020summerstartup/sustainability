@@ -93,7 +93,7 @@ const NavigationAuth = () => (
 
       <li className="nav-item logout">
         <span href="#" className="nav-link">
-          <FontAwesomeIcon icon="sign-out-alt" className="icons" />
+          <FontAwesomeIcon icon="sign-out-alt" className="icons signout-icon" />
           <SignOutButton />
         </span>
       </li>
