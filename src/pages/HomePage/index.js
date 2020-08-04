@@ -132,7 +132,7 @@ function assignData(data) {
   }
   // initialize favorite actions
   const favorites = data.favorites;
-  for (const [index, susAction] of Object.entries(favorites)) {
+  for (const [susAction] of Object.entries(favorites)) {
     var storageName = susAction.concat("Fav");
     localStorage.setItem(storageName, true)
   }
@@ -806,7 +806,7 @@ function HomePage(props) {
                 {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
                 <Typography variant="subtitle1" className={classes.textBody}>
                   You just earned a new badge for mastering the {badgeAction} task! This means
-                  you have completed the {badgeAction} task {badgeActionCount} times. Great job and keep being
+                  you have completed the {badgeAction} task {badgeActionCount} times. Great job, and keep being
                   sustainable!
                 </Typography>
               <Button
@@ -1027,6 +1027,7 @@ function HomePage(props) {
                                 className={classes.cardContent}
                                 action={
                                   <IconButton
+                                    disabled={firestoreMastered.includes(action.susAction)}
                                     onClick={() => confirmIncrement(action)}
                                     // Finally found how to get rid of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}
