@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { withRouter } from "react-router";
 // admin stuff
 import { AuthUserContext } from "../../../services/Session";
