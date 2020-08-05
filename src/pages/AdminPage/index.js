@@ -9,7 +9,6 @@ import * as ROLES from '../../constants/roles';
 import Container from "@material-ui/core/Container";
 
 import "react-toastify/dist/ReactToastify.css";
-import { getDefaultNormalizer } from "@testing-library/react";
 
 import Button from "@material-ui/core/Button";
 
