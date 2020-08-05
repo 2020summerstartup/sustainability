@@ -12,7 +12,7 @@ import "../FontAwesomeIcons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // admin stuff
-import * as ROLES from '../../constants/roles';
+// import * as ROLES from '../../constants/roles';
 
 // users can only see certain pages when nonauthorized/authorized
 const Navigation = ({ authUser }) => (
@@ -98,16 +98,16 @@ const NavigationAuth = ({ authUser }) => (
           </Link>
         </span>
       </li>
-      {/* Admin stuff */}
+      {/* Admin stuff
       {!!authUser.roles[ROLES.ADMIN] && (
         <li>
           <Link to={ROUTES.ADMIN}>Admin</Link>
         </li>
-      )}
+      )} */}
 
       <li className="nav-item logout">
         <span href="#" className="nav-link">
-          <FontAwesomeIcon icon="sign-out-alt" className="icons" />
+          <FontAwesomeIcon icon="sign-out-alt" className="icons signout-icon" />
           <SignOutButton />
         </span>
       </li>

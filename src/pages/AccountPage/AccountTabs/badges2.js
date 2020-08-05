@@ -56,17 +56,22 @@ const useStyles = makeStyles((theme) => ({
 var theBadge;
 var theCongrats;
 
-var arrayMaster = JSON.parse(localStorage.getItem("firestoreMastered"));
-var masterLength = arrayMaster.length;
+var masteredActions = localStorage.getItem("firestoreMastered");
+var masterLength;
+if (masteredActions !== 'undefined') { // If masteredActions is defined
+  masterLength = JSON.parse(masteredActions).length;
+} else { // Otherwise, zero mastered actions
+  masterLength = 0;
+}
 
 const badgeSay = () => {
   if (masterLength === 0) {
     theCongrats = (
-      <p>
+      <>
         {" "}
         Hi, {localStorage.getItem("name")}! Go log more actions to earn some
         badges!
-      </p>
+      </>
     );
     theBadge = (
       <p>
@@ -263,7 +268,7 @@ class Badges2 extends React.Component {
                       badge.id === selectedBadgeId && selectedBadgeState
                         ? `${badge.flipStatus}`
                         : null
-                    } ${badge.leafStyling}`}
+                      } ${badge.leafStyling}`}
                     onClick={() => this.cardClick(badge.id)}
                   >
                     <div className={styles.leafFront}>
@@ -287,12 +292,12 @@ class Badges2 extends React.Component {
               </div>
             ))
           ) : (
-            <div className="empty">
-              <Typography variant="h5">
-                You haven't earned any badges yet :(
+              <div className="empty">
+                <Typography variant="h5">
+                  You haven't earned any badges yet :(
               </Typography>
-            </div>
-          )}
+              </div>
+            )}
           <SignOutButtom />
         </div>
       </>

@@ -14,6 +14,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import EmailIcon from "@material-ui/icons/Email";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../../constants/routes";
+import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
@@ -35,12 +36,12 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteIcon: {
     minWidth: "2.5rem",
-    color: theme.palette.error.dark,
+    color: theme.palette.error.main,
   },
   deleteAccount: {
     position: "fixed",
     bottom: "5px",
-    color: theme.palette.error.dark,
+    color: theme.palette.error.main,
   },
 }));
 
@@ -81,6 +82,7 @@ function SettingsDrawer(props) {
             </Typography>
           </ListItemText>
         </ListItem>
+        <Divider />
         <ListItem>
           <ListItemIcon className={classes.listItemIcon}>
             <EmailIcon />
