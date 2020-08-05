@@ -273,7 +273,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0)40%)",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
     },
   },
   content: {
@@ -874,12 +874,19 @@ function HomePage(props) {
             />
           </NoSsr>
           <Card className={classes.card2}>
-            <CardMedia classes={mediaStyles2} image={actionTab} />
+            <CardMedia
+              classes={mediaStyles2}
+              image={actionTab}
+              style={{ backgroundPosition: "center center" }}
+            />
+            {/* now we can see the fireworks^ */}
             <Box py={3} px={2} className={classes.content}>
               <Info useStyles={useGalaxyInfoStyles}>
-                <InfoSubtitle></InfoSubtitle>
+                <InfoSubtitle
+                  style={{ color: "white", fontWeight: "bold" }}
+                ></InfoSubtitle>
                 <InfoTitle>Log your actions here!</InfoTitle>
-                <InfoCaption>
+                <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
                   Tap the drop down menu to find out more
                   <span role="img" aria-label="down arrow">
                     🔽
