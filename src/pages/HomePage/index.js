@@ -759,8 +759,6 @@ function HomePage(props) {
             }{" "}
             points!
           </Typography>
-          <myComponent/>
-
           {/* Mobile Screens */}
           <Fab
             variant="extended"
