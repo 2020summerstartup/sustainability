@@ -150,7 +150,7 @@ class ChallengeCard2 extends React.Component {
                       variant="contained"
                       // color="secondary"
                       className={classes.buttonBigScreen}
-                      onClick={() => this.reward.rewardMe()}
+                      // onClick={() => this.reward.rewardMe()}
                     >
                       Start Challenge!
                     </Button>
@@ -158,7 +158,7 @@ class ChallengeCard2 extends React.Component {
                       variant="contained"
                       // color="secondary"
                       className={classes.buttonSmallScreen}
-                      onClick={() => this.reward.rewardMe()}
+                      // onClick={() => this.reward.rewardMe()}
                     >
                       Start!
                     </Button>
