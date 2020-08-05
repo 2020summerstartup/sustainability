@@ -80,7 +80,7 @@ export const FavoriteCard = React.memo(function GalaxyCard() {
             </InfoSubtitle>
             <InfoTitle>Add more!</InfoTitle>
             <InfoCaption
-              style={{ color: "white", fontWeight: "bold", fontWeight: "bold" }}
+              style={{ color: "white", fontWeight: "bold" }}
             >
               Go to actions tab and press the heart to add&nbsp;
               <span role="img" aria-label="heart">
