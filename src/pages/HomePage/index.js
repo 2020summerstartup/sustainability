@@ -19,6 +19,7 @@ import {
   addFav,
   deleteFav,
   updateUserImpact,
+  firestore,
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -123,6 +124,9 @@ function assignData(data) {
   // initialize mastered action
   var firestoreMastered = data.masteredActions;
   localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
+  // initialize favorited actions
+  var firestoreFavs = data.favorites;
+  localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
   // initialize points
   for (const [key, value] of Object.entries(data.points)) {
     localStorage.setItem(key, value);
@@ -408,30 +412,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-// JESSICA WAS WORKING HERE AT END OF DAY
-// const uploadUserData = (email) => {
-//     // Get user's dorm set in local storage
-//     console.log(email)
-//     getUser(email).get().then(snap => {
-//         if (snap.exists) {
-//           initImpactPoints(email)
-//           assignData(snap.data());
-//           function assignData(data) {
-//             localStorage.setItem("dorm", data.userDorm);
-//             localStorage.setItem('total', data.total);
-//           }
-//         } else {
-//           createUser(email);
-//           initPoints(email);
-//           initImpactPoints(email)
-//           uploadUserTotalPoint(email, total);
-//         }
-//       },
-//       (err) => {
-//         console.log(`Encountered error: ${err}`);
-//       })
-//     };
-// uploadUserData(localStorage.getItem('email'))
 
 // Text to display on the homepage
 function HomePage(props) {
@@ -501,12 +481,12 @@ function HomePage(props) {
     setFilter(e.target.value);
   };
 
-  var temp = localStorage.getItem("firestoreMastered");
+  var tempMastered = localStorage.getItem("firestoreMastered");
   var firestoreMastered = [];
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (temp.includes(stringActionName)) {
+    if (tempMastered.includes(stringActionName)) {
       firestoreMastered.push(action.susAction);
     }
   }
@@ -617,15 +597,24 @@ function HomePage(props) {
     setBadgeModalIsOpen(false);
   };
 
+
+  var tempFavs = localStorage.getItem("firestoreFavs");
+  var firestoreFavs = [];
+  for (const el in ActionData) {
+    var action = ActionData[el]; // Take the current action
+    var stringActionName = JSON.stringify(action.susAction);
+    if (tempFavs.includes(stringActionName)) {
+      firestoreFavs.push(action.susAction);
+    }
+  }
+
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
   for (const el in ActionData) {
     // Iterate over every action in ActionData
-    var action2 = ActionData[el]; // Take the current action
-    var storageName2 = action2.susAction.concat("Fav");
-    var storedFav = localStorage.getItem(storageName2) === "true";
-    if (storedFav) {
+    var action = ActionData[el]; // Take the current action
+    if (firestoreFavs.includes(action.susAction)) {
       // If the action is favorited
       favIconColors[el - 1] = "#f48fb1"; // Turn red
     } else {
@@ -634,17 +623,20 @@ function HomePage(props) {
   }
 
   const favAction = (action) => {
-    // Get the name and info of the stored action that we're working with
-    var storageName = action.susAction.concat("Fav");
-    // storedFav is a boolean (is the current action favorited?)
-    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
-    var storedFav = localStorage.getItem(storageName) === "true";
+    var storedFav;
+    // to flip the status of storedFav --> so that color changes
+    if (firestoreMastered.includes(JSON.stringify(action.susAction))){
+      storedFav = "false";
+    } else {
+      storedFav = "true";
+    }
+    // var storedFav = firestoreMastered.includes(JSON.stringify(action.susAction)) === "true";
     // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
-    if (storedFav == null) {
-      storedFav = false; // If not initialized, initialize here
-    }
-    storedFav = !storedFav; // Toggle the favorite
+    // if (storedFav == null) {
+    //   storedFav = false; // If not initialized, initialize here
+    // }
+    // storedFav = !storedFav; // Toggle the favorite
     // variable for getting color of fav icon
     var favIconColor = document.getElementById(
       "favoriteIcon".concat(action.susAction)
@@ -652,19 +644,21 @@ function HomePage(props) {
     // Notify user that action was added/removed from favorites
     var displayText;
     if (storedFav) {
+      console.log('yes')
       displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#f48fb1"; // Turn red
       playSound(likeAudio);
       toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
       addFav(authContext.email, action.susAction);
     } else {
+      console.log('no')
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
       playSound(unlikeAudio);
       toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
       deleteFav(authContext.email, action.susAction);
     }
-    localStorage.setItem(storageName, storedFav); // Save the updated favorite value
+    // localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
   // Set the "progress message" to be displayed when the user pressed "check progress"
