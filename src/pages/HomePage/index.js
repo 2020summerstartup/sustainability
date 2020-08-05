@@ -511,7 +511,7 @@ function HomePage(props) {
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (temp.includes(stringActionName)) {
+    if (temp != null && temp.includes(stringActionName)) {
       firestoreMastered.push(action.susAction);
     }
   }
