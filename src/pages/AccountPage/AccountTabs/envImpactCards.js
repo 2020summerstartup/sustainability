@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 
-// set variables that I will need later when rendering cards
 let colors = ["yellow", "green", "blue"];
 let coEmissImpact = localStorage.getItem("coEmiss");
 let energyImpact = localStorage.getItem("energy");
@@ -20,7 +19,6 @@ const useStyles = (theme) => ({
     },
   },
 });
-
 
 // cards to be rendered on the points page in account
 class EnvImpactCards extends React.Component {
@@ -52,7 +50,6 @@ class EnvImpactCards extends React.Component {
   
 
   getData() {
-    // sets the data that we will use to render the cards
     let data = {
       success: true,
       cards: [

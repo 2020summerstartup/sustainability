@@ -1,6 +1,7 @@
 import styles from "./badgeModal.module.css";
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
+import { retry } from "../../App/index"
 import ProgressCircle from "../../components/ProgressCircle";
 
 // import FavoriteCard from "./faveCard";
@@ -83,7 +84,7 @@ import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 
 // Lazy load the fave card
-const FavoriteCard = lazy(() => import("./faveCard.js"));
+const FavoriteCard = lazy(() => retry(() => import("./faveCard.js")));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
@@ -506,10 +507,8 @@ function HomePage(props) {
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (temp) {
-      if (temp.includes(stringActionName)) {
-        firestoreMastered.push(action.susAction);
-      }
+    if (temp != null && temp.includes(stringActionName)) {
+      firestoreMastered.push(action.susAction);
     }
   }
 
