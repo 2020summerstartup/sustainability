@@ -11,17 +11,25 @@ import "../FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+// admin stuff
+import * as ROLES from '../../constants/roles';
+
 // users can only see certain pages when nonauthorized/authorized
 const Navigation = ({ authUser }) => (
   <AuthUserContext.Consumer>
-    {(authUser) => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+    {(authUser) => (authUser ? (
+      <NavigationAuth authUser={authUser} />
+    ) : (
+        <NavigationNonAuth />
+      )
+    )}
   </AuthUserContext.Consumer>
 );
 
 // start making fancy navbar!
 
 // user is authorized
-const NavigationAuth = () => (
+const NavigationAuth = ({ authUser }) => (
   <nav className="navbar">
     <ul className="navbar-nav">
       <li className="logo">
@@ -73,14 +81,14 @@ const NavigationAuth = () => (
         </span>
       </li>
 
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <span href="#" className="nav-link">
           <Link to={ROUTES.INFO} className="link-text">
             <FontAwesomeIcon icon="info" className="icons" />
             <p className="page-text">Info</p>
           </Link>
         </span>
-      </li>
+      </li> */}
 
       <li className="nav-item">
         <span href="#" className="nav-link">
@@ -90,6 +98,12 @@ const NavigationAuth = () => (
           </Link>
         </span>
       </li>
+      {/* Admin stuff */}
+      {!!authUser.roles[ROLES.ADMIN] && (
+        <li>
+          <Link to={ROUTES.ADMIN}>Admin</Link>
+        </li>
+      )}
 
       <li className="nav-item logout">
         <span href="#" className="nav-link">
@@ -97,6 +111,7 @@ const NavigationAuth = () => (
           <SignOutButton />
         </span>
       </li>
+
     </ul>
   </nav>
 );

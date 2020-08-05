@@ -17,10 +17,9 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
-
 const useStyles = makeStyles((theme) => ({
   card: {
-  borderRadius: "1rem",
+    borderRadius: "1rem",
     boxShadow: "none",
     position: "relative",
     margin: "auto",
@@ -58,45 +57,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-
 export const FavoriteCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
 
-
   return (
     <>
-        <NoSsr>
-            <GoogleFontLoader
-            fonts={[
-                { font: "Spartan", weights: [300] },
-                { font: "Montserrat", weights: [200, 400, 700] },
-            ]}
-            />
-        </NoSsr>
-        <Card className={classes.card}>
-            <CardMedia classes={mediaStyles} image={favorite2} />
-            <Box py={3} px={2} className={classes.content}>
-                <Info useStyles={useGalaxyInfoStyles}>
-                    <InfoSubtitle>Your faves are here </InfoSubtitle>
-                    <InfoTitle>Add more!</InfoTitle>
-                    <InfoCaption>
-                    Go to actions tab and press the heart to add&nbsp;
-                    <span role="img" aria-label="heart">
-                        ❤️
-                    </span>
-                    </InfoCaption>
-                </Info>
-            </Box>
-        </Card>
+      <NoSsr>
+        <GoogleFontLoader
+          fonts={[
+            { font: "Spartan", weights: [300] },
+            { font: "Montserrat", weights: [200, 400, 700] },
+          ]}
+        />
+      </NoSsr>
+      <Card className={classes.card}>
+        <CardMedia classes={mediaStyles} image={favorite2} />
+        <Box py={3} px={2} className={classes.content}>
+          <Info useStyles={useGalaxyInfoStyles}>
+            <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
+              Your faves are here{" "}
+            </InfoSubtitle>
+            <InfoTitle>Add more!</InfoTitle>
+            <InfoCaption
+              style={{ color: "white", fontWeight: "bold" }}
+            >
+              Go to actions tab and press the heart to add&nbsp;
+              <span role="img" aria-label="heart">
+                ❤️
+              </span>
+            </InfoCaption>
+          </Info>
+        </Box>
+      </Card>
     </>
-            
-    );
+  );
 });
 
-
 export default FavoriteCard;
-
-

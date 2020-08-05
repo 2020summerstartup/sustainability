@@ -27,6 +27,7 @@
     "muicss": "^0.10.2",
     "nodemailer": "^6.4.10",
     "react": "^16.13.1",
+    "react-admin": "^3.7.1",
     "react-beforeunload": "^2.2.2",
     "react-confetti": "^5.1.0",
     "react-countup": "^4.3.3",

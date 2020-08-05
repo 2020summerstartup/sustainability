@@ -11,6 +11,7 @@ let coEmissImpact = localStorage.getItem("coEmiss");
 let energyImpact = localStorage.getItem("energy");
 let waterImpact = localStorage.getItem("water");
 
+
 const useStyles = (theme) => ({
   color: {
     "&:after": {
@@ -19,33 +20,54 @@ const useStyles = (theme) => ({
   },
 });
 
+// cards to be rendered on the points page in account
 class EnvImpactCards extends React.Component {
   constructor() {
     super();
+  
     this.state = {
       cards: [],
+      coEmiss: coEmissImpact,
+      energy: energyImpact,
+      water: waterImpact,
     };
+
     this.getData = this.getData.bind(this);
   }
+//   var theCO;
+// CODisplay = () => {
+//         if (parseInt(coEmissImpact) === 0) {
+//           theCO = <p>Pounds of CO2 saved! It's ok! Go log more actions to see some impact</p>
+//       } else if (parseInt(coEmissImpact) === 1 ) {
+//           theCO = <p> Pound of CO2 saved!</p>
+//         } else {
+//           theCO = <p>Pounds of CO2 saved!</p>
+//         }
+  // }; 
+
+
+  
+  
+
   getData() {
     let data = {
       success: true,
       cards: [
         {
           id: 1,
-          score: coEmissImpact,
+          score: this.state.coEmiss,
           title: "Pounds of CO2 saved!",
           colorStyling: null,
         },
         {
           id: 2,
-          score: energyImpact,
+          score: this.state.energy,
           title: "Kilojoules of energy conserved!",
           colorStyling: null,
         },
         {
           id: 3,
-          score: waterImpact,
+          score: this.state.water,
           title: "Gallons of water conserved!",
           colorStyling: null,
         },
@@ -71,51 +93,53 @@ class EnvImpactCards extends React.Component {
   }
 
   render() {
-
     return (
-      <>
-        <Grid container justify="center" spacing={2} style={{ marginTop: "2rem" }}>
-          {this.state.cards ? (
-            this.state.cards.map((card, i) => (
-              <Grid item xs={12} md={6} key={i}>
+      <Grid
+        container
+        justify="center"
+        spacing={2}
+        style={{ marginTop: "2rem", overflow: "hidden !important" }}
+      >
+        {this.state.cards ? (
+          this.state.cards.map((card, i) => (
+            <Grid item xs={12} md={6} key={i}>
+              <Reward
+                ref={(ref) => {
+                  this.reward = ref;
+                }}
+                type="confetti"
+                config={{
+                  springAnimation: false,
+                  elementCount: 300,
+                  startVelocity: 40,
+                  spread: 90,
+                }}
+              >
                 <div>
-                  <Reward
-                    ref={(ref) => {
-                      this.reward = ref;
-                    }}
-                    type="confetti"
-                    config={{
-                      springAnimation: true,
-                      elementCount: 100,
-                    }}
+                  <div
+                    id={card.id}
+                    key={card.id}
+                    style={{ cursor: "pointer" }}
+                    className={`${styles.burstShape} ${card.colorStyling}`}
+                    onClick={() => this.reward.rewardMe(card.id)}
                   >
-                    <div id={i} key={i}
-                      className={`${styles.burstShape} ${card.colorStyling}`}
-                      onClick={() => this.reward.rewardMe(i)}
-                    >
-                      {/* The next two comments are taken out of the above div tag to fix netlify deploy:
-                         style={{ cursor: "pointer" }}
-                         for some reason the onclick only refers to the last impact card */}
-                      <Grid container justify="center">
-                        <Typography variant="h3" component="h1">
-                          {card.score}
-                        </Typography>
-                        <Typography variant="subtitle1">
-                          {card.title}
-                        </Typography>
-                      </Grid>
-                    </div>
-                  </Reward>
+                    <Grid container justify="center">
+                      <Typography variant="h3" component="h1">
+                        {card.score}
+                      </Typography>
+                      <Typography variant="subtitle1">{card.title}</Typography>
+                    </Grid>
+                  </div>
                 </div>
-              </Grid>
-            ))
-          ) : (
-            <div className="empty">
-              Sorry no information is currently available
-            </div>
-          )}
-        </Grid>
-      </>
+              </Reward>
+            </Grid>
+          ))
+        ) : (
+          <div className="empty">
+            Sorry no information is currently available
+          </div>
+        )}
+      </Grid>
     );
   }
 }

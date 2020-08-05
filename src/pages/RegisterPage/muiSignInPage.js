@@ -120,7 +120,10 @@ class SignInFormBase extends Component {
     // needed to display total point, progress modal, and enable app to run withour error
     getUser(email).onSnapshot(
       (docSnapshot) => {
+        // Only assign data if the user was legit. (If they tried to sign up with ane mail address not associated with any current user, this won't run.)
+        if(docSnapshot.data()) {
           assignData(docSnapshot.data());
+        }
       },
     );
     // initalizes user's impact points in local storage 

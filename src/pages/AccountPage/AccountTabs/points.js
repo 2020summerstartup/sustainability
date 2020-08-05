@@ -12,12 +12,13 @@ import CardMedia from "@material-ui/core/CardMedia";
 import {
   Info,
   InfoSubtitle,
+  InfoCaption,
   InfoTitle,
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-import TotalBuzz from './totalBuzz';
-import EnvImpactCards from './envImpactCards'
+import TotalBuzz from "./totalBuzz";
+import EnvImpactCards from "./envImpactCards";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       borderRadius: "black",
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0) 45%)",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
     },
   },
   content: {
@@ -51,10 +52,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+var thePoints;
+
+const pointsDisplay = () => {
+  if (parseInt(localStorage.getItem("total")) === 0) {
+    thePoints = " Go to the home page and log points!";
+  } else if (parseInt(localStorage.getItem("total")) < 400) {
+    thePoints = " You're amazing! Keep it up!";
+  } else {
+    thePoints = " You're a superstar 🤩 ";
+  }
+};
+// const getPoints = () => {
+//   if (parseInt(localStorage.getItem("total")) === 0) {
+//     return <h1> No </h1>
+//   } return <h1> Yes </h1>
+// };
+
 export const TotalPointsCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
-  // const authContext = useContext(AuthUserContext);
+  pointsDisplay();
 
   // getUser(authContext.email).onSnapshot(
   //   (docSnapshot) => {
@@ -87,13 +105,18 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
               <CardMedia classes={mediaStyles} image={points} />
               <Box py={3} px={2} className={classes.content}>
                 <Info useStyles={useGalaxyInfoStyles}>
-                  <InfoSubtitle>You have earned</InfoSubtitle>
+                  <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
+                    You have earned
+                  </InfoSubtitle>
                   <InfoTitle> {localStorage.getItem("total")} Points</InfoTitle>
+                  <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
+                    {thePoints}{" "}
+                  </InfoCaption>
                 </Info>
               </Box>
             </Card>
             <TotalBuzz />
-            <EnvImpactCards/>
+            <EnvImpactCards />
             <SignOutButton />
           </>
         )}

@@ -1,74 +1,45 @@
 import React from "react"; // No longer imports component because it wasn't used
 import { AuthUserContext, withAuthorization } from "../../services/Session";
+import { compose } from 'recompose';
 
-import Paper from "@material-ui/core/Paper";
+import { withFirebase } from "../../services/Firebase";
+import * as ROLES from '../../constants/roles';
 
-import { toast } from "react-toastify";
+// import Paper from "@material-ui/core/Paper";
+import Container from "@material-ui/core/Container";
+
 import "react-toastify/dist/ReactToastify.css";
 
-import { getDorm } from "../../services/Firebase";
+// import { Admin } from 'react-admin';
 
 function AdminPage() {
-
-  toast.configure(); // Configure to be able to display goasts to user later in the file
-
-  var challengeData2 = [
-    {
-      "title": "Recycling",
-      "info": "further description of the challenge here. (Maybe double points for recycling or something)"
-    },
-    {
-      "title": "Decrease Energy Use",
-      "info": "here's some more info about the second thing"
-    }
-  ]
-
-  const getInfo = () => {
-    var enteredTitle = prompt('Choose a title for your new challenge');
-    var enteredInfo = prompt('Enter an explanation of the new challenge');
-    // var confirmationMessage = 
-    var confirmed = window.confirm('Here is your new challenge: Title: '.concat(enteredTitle, ' Info: ', enteredInfo, ' Are you sure you want to add this challenge?')); // , 'Info:', enteredInfo, 'Are you sure you want to add this challenge?'
-    if (confirmed) {
-      console.log('user confirmed');
-      toast.success('New challenge will be added! (not actually we need to get it working lol)', { autoClose: 5000 }); // It's "success" so that the window is green
-    } else {
-      console.log('user aborted');
-      toast.error('Challenge was not added', { autoClose: 5000 }); // It's "error" so that the window is red
-    }
-    // console.log("ChallengeData2 before change", challengeData2);
-    console.log('new title:', enteredTitle);
-    console.log('new info:', enteredInfo);
-    challengeData2[challengeData2.length] = { "title": enteredTitle };
-    // console.log("Changed ChallengeData2", challengeData2);
-  }
-
-  var dormInfo;
-  getDorm()
-    .doc("East")
-    .onSnapshot((docSnapshot) => {
-      console.log('dorm info', docSnapshot.data());
-      dormInfo = 'hello world';
-    });
-  dormInfo = 'second val';
-
-  console.log('this logs first');
   return (
     <div>
       <AuthUserContext.Consumer>
         {(authUser) => (
-          <Paper>
-            <div className="base-container">
-              <center>THIS IS THE ADMIN PAGE.</center>
-              <button onClick={() => getInfo()}>Add a new challenge</button>
-              dormInfo: {dormInfo}
-            </div>
-          </Paper>
+          // <Paper>
+            <Container maxWidth="xs" style={{ margin: "auto" }}>
+              {/* <div className="base-container"> */}
+                {/* The google form for admins to fill out to add challenges */}
+                <iframe title="challengeForm" src="https://docs.google.com/forms/d/e/1FAIpQLSfHIX4V2KaPP8bgbmpl79E93rBVmr6Q6KH5Yu4nR7bpAiXqAg/viewform?embedded=true" width="1000rem" height="800rem" frameBorder="0" margin="auto" style={{ maxWidth: "inherit" }}>Loading…</iframe>
+                Want to remove a challenge? Email the developers at suscompetitionteam@gmail.com (or by completing the "contact us" form in settings), and we'll get to it as soon as we can!
+              {/* </div> */}
+            </Container >
+          // </Paper>
         )}
       </AuthUserContext.Consumer>
     </div>
   )
 }
 
-const condition = (authUser) => !!authUser;
+// const condition = (authUser) => !!authUser;
 
-export default withAuthorization(condition)(AdminPage);
+// export default withAuthorization(condition)(AdminPage);
+
+const condition = authUser =>
+  authUser && !!authUser.roles[ROLES.ADMIN];
+ 
+export default compose(
+  withAuthorization(condition),
+  withFirebase,
+)(AdminPage);

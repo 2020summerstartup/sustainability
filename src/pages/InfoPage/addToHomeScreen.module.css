@@ -1,3 +1,30 @@
+/* FANCY BACKGROUND ANIMATION */
+.cardWrapper {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 200% 200%;
+  animation: gradient 5s ease infinite;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 0 0.5rem;
+  max-width: 600px;
+  margin-top: 2rem;
+  position: relative;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* SPECIAL RIBBON STYLING */
 .ribbon {
   width: 150px;
   height: 150px;
@@ -13,7 +40,8 @@
   z-index: -1;
   content: "";
   display: block;
-  border: 5px solid #510000;
+  /* border: 5px solid #510000; */
+  border: 5px solid #ca2452;
   border-top-color: transparent;
   border-right-color: transparent;
 }
@@ -33,7 +61,8 @@
   display: block;
   width: 225px;
   padding: 15px 0;
-  background-color: #aa0000;
+  /* background-color: #aa0000; */
+  background-color: var(--theme-secondary);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
   font: 700 18px/1 "Lato", sans-serif;
@@ -44,4 +73,3 @@
   top: 30px;
   transform: rotate(45deg);
 }
-

@@ -3,6 +3,9 @@ import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Reward from "react-rewards";
 
+// Admin stuff roles
+import * as ROLES from '../../constants/roles';
+
 import {
   withFirebase,
   createUser,
@@ -105,17 +108,31 @@ PasswordInput2.propTypes = {
 
 // The initial state of all information to be completed by the user
 const INITIAL_STATE = {
-  user: {
-    username: "",
-    email: "",
-    passwordOne: "",
-    passwordTwo: "",
-    dorm: "",
-    image: null,
-    points: 0,
-  },
+  username: "",
+  email: "",
+  passwordOne: "",
+  passwordTwo: "",
+  dorm: "",
+  image: null,
+  points: 0,
+  // Admin stuff
+  isAdmin: false,
   error: null,
 };
+
+// Previously INITIAL_STATE was set like this, but the user wrapper caused an error in the console. I don't think the wrapper was necessary, so I've removed it. -Katie
+// const INITIAL_STATE = {
+//   user: {
+//     username: "",
+//     email: "",
+//     passwordOne: "",
+//     passwordTwo: "",
+//     dorm: "",
+//     image: null,
+//     points: 0,
+//   },
+//   error: null,
+// };
 
 // sound play for favorites button
 const signupAudio = new Audio(signup);
@@ -132,9 +149,25 @@ class SignUpFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  // Used for admin stuff
+  onChangeCheckbox = event => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
+
+  // Used to make users - "Sign Up" Button
   onSubmit = (event) => {
     localStorage.clear();
-    const { username, email, passwordOne, dorm } = this.state;
+    // Start of admin stuff
+    const { username, email, passwordOne, dorm, isAdmin } = this.state;
+    const roles = {};
+ 
+    if (isAdmin) {
+      roles[ROLES.ADMIN] = ROLES.ADMIN;
+    }
+    // End of admin stuff
+
+    // Commented out code is from before admin stuff
+    // const { username, email, passwordOne, dorm } = this.state;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -143,6 +176,7 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
+          roles, // for admin control
         });
       })
       .then(() => {
@@ -189,6 +223,7 @@ class SignUpFormBase extends Component {
       dorm,
       passwordOne,
       passwordTwo,
+      isAdmin,
       error,
     } = this.state;
 
@@ -292,6 +327,16 @@ class SignUpFormBase extends Component {
               value={passwordTwo}
               onChange={this.onChange}
             />
+            {/* Added in admin checkbox */}
+            <label>
+              Admin:
+              <input
+                name="isAdmin"
+                type="checkbox"
+                checked={isAdmin}
+                onChange={this.onChangeCheckbox}
+              />
+            </label>
 
             {error && (
               <Typography

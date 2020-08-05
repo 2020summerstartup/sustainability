@@ -51,7 +51,7 @@ code {
     padding: 0 1rem !important;
     margin-bottom: 4rem !important;
     padding-bottom: 0rem !important;
-    overflow-x: hidden;
+    overflow: hidden;
     overscroll-behavior-y: contain;
   }
 }
@@ -81,7 +81,7 @@ code {
     margin-bottom: 4rem !important;
     padding-bottom: 0rem !important;
     padding-top: 0rem !important;
-    overflow-x: hidden;
+    overflow: hidden;
     overscroll-behavior-y: contain;
   }
 }

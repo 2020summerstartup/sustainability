@@ -1,8 +1,8 @@
 /* square shape */
 .burstShape {
   margin: 3rem auto;
-  width: 9rem;
-  height: 9rem;
+  width: 10rem;
+  height: 10rem;
   position: relative;
   text-align: center;
   display: flex;
@@ -24,8 +24,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 9rem;
-  width: 9rem;
+  height: 10rem;
+  width: 10rem;
   z-index: -1;
 }
 .burstShape:before {

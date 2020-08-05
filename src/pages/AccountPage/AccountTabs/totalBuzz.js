@@ -33,8 +33,7 @@ class TotalBuzz extends React.Component {
             {localStorage.getItem("buzzes")}
           </Typography>
           <Typography variant="h5">Action(s) Logged!</Typography>
-          <Grid item>
-            {/* I removed 'direction="column"' from the above Grid tag before it threw an error and didn't do anyhthing -Katie */}
+          <Grid container justify="center">
             <Typography variant="body2">
               Click impact cards below for a fun surprise!
             </Typography>

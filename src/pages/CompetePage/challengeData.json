@@ -1,10 +1,14 @@
 [
     {
+        "title": "Zero Food Waste",
+        "info": "Don't waste any food all week (includes all meals & snacks)"
+    },
+    {
         "title": "Recycling",
-        "info": "further description of the challenge here. (Maybe double points for recycling or something)"
+        "info": "Recycle all your use plastics and paper this month"
     },
     {
         "title": "Decrease Energy Use",
-        "info": "here's some more info about the second thing. you should join this challenge, it'll be so much fun!"
+        "info": "Make sure to not waste any energy these 2 weeks"
     }
 ]

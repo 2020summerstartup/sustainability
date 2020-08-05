@@ -4,6 +4,7 @@ export const LANDING = '/';
 export const SIGN_UP = '/signup';
 export const SIGN_IN = '/signin';
 export const INFO = '/info';
+export const CONTACT = '/contact';
 export const PASSWORD_FORGET = '/forgetpassword';
 export const CHANGEPW = '/changepassword';
 export const CHANGEDORM = '/changedorm';

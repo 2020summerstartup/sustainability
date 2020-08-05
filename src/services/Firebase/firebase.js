@@ -1,4 +1,4 @@
-// import firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
@@ -23,7 +23,27 @@ const config = {
 
 app.initializeApp(config);
 // firebase.initializeApp(config)
-const firestore = app.firestore()
+const firestore = app.firestore();
+
+
+
+// sync with firebasse RT database changes
+// NOTE: must refresh page/sign in/sign up to get the updated challenges bc even though local storage updates, 
+// the text that is displayed does not
+async function getChallengeData() {
+  // reference to where all the challenge data is stored
+  const dbRefObject = firebase.database().ref('1N2PhiprrCvWWYbyjEFwNjR18k13GOYhlkY34luOJe-w/ChallengeData');
+  // when any field relating to challenge data within the Firebase RT database changes the following function will be called
+  dbRefObject.on('value', function(snap){
+    // get the array containing an object for each challenge from firebase RT database
+    const challengeDataArray = snap.val();
+    // set this array to local storage so we can access it on the challenge pages
+    localStorage.setItem('challengeData', JSON.stringify(challengeDataArray))
+  })
+}
+getChallengeData();
+
+
 
 class Firebase {
   constructor() {
@@ -50,7 +70,35 @@ class Firebase {
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password);
 
-  
+  // Admin stuff again
+  // *** Merge Auth and DB User API *** //
+ 
+  onAuthUserListener = (next, fallback) =>
+    this.auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        this.user(authUser.uid)
+          .once('value')
+          .then(snapshot => {
+            const dbUser = snapshot.val();
+ 
+            // default empty roles
+            if (!dbUser.roles) {
+              dbUser.roles = {};
+            }
+ 
+            // merge auth and db user
+            authUser = {
+              uid: authUser.uid,
+              email: authUser.email,
+              ...dbUser,
+            };
+ 
+            next(authUser);
+          });
+      } else {
+        fallback();
+      }
+    });
 
   // *** User API ***
  
@@ -81,6 +129,17 @@ export const createUser = (userEmail, userName, dorm) => {
               "noFoodWaste": 0,
               "meatlessMon": 0,
               "ecoClean": 0,
+              "publicTransit": 0,
+              "usedClothes": 0,
+              "hangDry": 0,
+              "climateClass": 0,
+              "reuseBBQ": 0,
+              "reuseBottle": 0,
+              "shower5": 0,
+              "donateClothes": 0,
+              "layerCold": 0,
+              "bulkGrocery": 0,
+              "emailReceipt": 0,
           },
           impact: {
             "coEmiss": 0,
@@ -141,7 +200,6 @@ export const updateUserDorm = (userEmail, value) => {
 
 // updates firestore when a user favorites an action
 export const addFav = (userEmail, susAction) => {
-  console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayUnion(susAction)
   })
@@ -156,7 +214,6 @@ export const deleteFav = (userEmail, susAction) => {
 
 // adds action to mastered list in firestore when called (user has mastered action)
 export const actionMastered = (userEmail, susAction) => {
-  console.log("updating")
   return firestore.collection('users').doc(userEmail).update({
     masteredActions: app.firestore.FieldValue.arrayUnion(susAction)
   })

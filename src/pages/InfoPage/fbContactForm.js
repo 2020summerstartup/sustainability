@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Axios } from "../../services/Firebase/firebase";
-import { firestore } from '../../services/Firebase';
-import 'firebase/firestore';
+import { firestore } from "../../services/Firebase";
+import "firebase/firestore";
 
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
@@ -20,10 +20,10 @@ import SendIcon from "@material-ui/icons/Send";
 const useStyles = makeStyles((theme) => ({
   paper: {
     maxWidth: "35rem",
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(5),
   },
   formWrapper: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -89,11 +89,13 @@ const FBContactForm = () => {
         <Avatar className={classes.avatar}>
           <QuestionAnswerIcon />
         </Avatar>
-        <Typography variant="h4" style={{ margin: "1rem 0"}}>
+        <Typography variant="h4" style={{ margin: "1rem 0" }}>
           Contact Us
         </Typography>
         <Typography variant="subtitle1">
-          Let us know your questions, comments, and concerns!
+          Let us know what new actions, challenges, and badges you would like to
+          see in the future! Or any other general questions, comments, and
+          concerns.
         </Typography>
         <form onSubmit={handleSubmit} id="contact" className={classes.form}>
           <TextField

@@ -123,19 +123,16 @@ function assignData(data) {
   localStorage.setItem("total", data.total);
   // initialize mastered action
   var firestoreMastered = data.masteredActions;
-  localStorage.setItem(
-    "firestoreMastered",
-    JSON.stringify(firestoreMastered)
-  );
+  localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
   // initialize points
   for (const [key, value] of Object.entries(data.points)) {
     localStorage.setItem(key, value);
   }
   // initialize favorite actions
   const favorites = data.favorites;
-  for (const [index, susAction] of Object.entries(favorites)) {
+  for (const [susAction] of Object.entries(favorites)) {
     var storageName = susAction.concat("Fav");
-    localStorage.setItem(storageName, true)
+    localStorage.setItem(storageName, true);
   }
 }
 
@@ -273,7 +270,7 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       bottom: 0,
       zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0)40%)",
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
     },
   },
   content: {
@@ -301,6 +298,7 @@ const useStyles = makeStyles((theme) => ({
   },
   indicator: {
     height: "3px",
+    backgroundColor: "#FFFFFF",
     [theme.breakpoints.up("sm")]: {
       height: "5px",
     },
@@ -458,14 +456,13 @@ function HomePage(props) {
     favorites: 1,
   };
 
-
   // this is needed to prevent error in console when user signs into their account
-  // hopefully will revisit later to get rid of refresh page solution 
+  // hopefully will revisit later to get rid of refresh page solution
   var initUserTotal;
-  if (localStorage.getItem('total') == null) {
-    initUserTotal = 0
+  if (localStorage.getItem("total") == null) {
+    initUserTotal = 0;
   } else {
-    initUserTotal = localStorage.getItem('total')
+    initUserTotal = localStorage.getItem("total");
   }
   const [userTotal, updateUserTotal] = useState(initUserTotal);
 
@@ -483,7 +480,6 @@ function HomePage(props) {
     setValue(newValue);
     history.push(`/home/${tabNameToIndex[newValue]}`);
   };
-
 
   const handleExpandClick = (i) => {
     // WILL MAYBE REVISITED TO HAVE CARDS SAME HEIGHT
@@ -561,7 +557,12 @@ function HomePage(props) {
     });
 
     // add's associated impact points in firestore and local storage
-    updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
+    updateUserImpact(
+      authContext.email,
+      action.coEmiss,
+      action.energy,
+      action.water
+    );
 
     // check if action has been completed enough time to be considered "mastered"
     // also sends user a progress notifications if action has not yet been mastered
@@ -586,13 +587,14 @@ function HomePage(props) {
       // send user a progress alert to tell them how many more points they need to complete the action
       var displayText;
       // display a different message depending on if the user needs to buzz one or several more times to complete
-      if ((action.toMaster - (actionTotal/action.points)) !== 1 ){
-        displayText = `You are ${action.toMaster - (actionTotal/action.points)} buzzes away from mastering the ${action.title} task!` ;
+      if (action.toMaster - actionTotal / action.points !== 1) {
+        displayText = `You are ${
+          action.toMaster - actionTotal / action.points
+          } buzzes away from mastering the ${action.title} task!`;
       } else {
-        displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!` ;
+        displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!`;
       }
-      //  AMY!!!! THIS IS WHERE MY TOASTIFY POP-UP THING IS!!! PLZ MAKE IT PRETTY
-      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
       // possibly want a new sound for this?
       setBadgeModalIsOpen(false);
     } else if (action.toMaster * action.points <= actionTotal) {
@@ -605,7 +607,10 @@ function HomePage(props) {
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
       firestoreMastered.push(action.susAction);
-      localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
+      localStorage.setItem(
+        "firestoreMastered",
+        JSON.stringify(firestoreMastered)
+      );
     }
   };
 
@@ -713,8 +718,6 @@ function HomePage(props) {
             onChange={handleChange}
             variant="fullWidth"
             scrollButtons="off"
-            // TODO: need to set text color to white if we don't want non-selected tab to have grayed out text
-            // textColor="#ffff"
             aria-label="scrollable tabs"
             className={classes.tabs}
             TabIndicatorProps={{ className: classes.indicator }}
@@ -786,34 +789,30 @@ function HomePage(props) {
           >
             {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
             <DialogContent className={styles.dialogContent}>
-              <DialogContentText id="alert-dialog-description">
-                {/* RIBBON */}
-                <div className={styles.nonSemanticProtector}>
-                  <h1 className={styles.ribbon}>
-                    <strong className={styles.ribbonContent}>
-                      Congratulations {localStorage.getItem("name")}!
-                    </strong>
-                  </h1>
-                </div>
-                {/* <Typography variant="h5" className={classes.textTitle}>
+              {/* RIBBON */}
+              <div className={styles.nonSemanticProtector}>
+                <h1 className={styles.ribbon}>
+                  <strong className={styles.ribbonContent}>
+                    Congratulations {localStorage.getItem("name")}!
+                  </strong>
+                </h1>
+              </div>
+              {/* <Typography variant="h5" className={classes.textTitle}>
                   Congratulations [user's name]!
                 </Typography> */}
-                {/* <Typography variant="subtitle" className={classes.textBody}>
+              {/* <Typography variant="subtitle" className={classes.textBody}>
                   You just earned a new badge for completing {badgeAction}! This means
                   you have completed this action 20 times. Great job and keep being
                   sustainable!
                 </Typography> */}
-              </DialogContentText>
               <img alt="badge" src={badgeImg} className={classes.badgeImg} />
               {/* MUST ATTRIBUTE AUTHOR */}
-              <DialogContentText id="alert-dialog-description">
-                {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
-                <Typography variant="subtitle" className={classes.textBody}>
-                  You just earned a new badge for mastering the {badgeAction} task! This means
-                  you have completed the {badgeAction} task {badgeActionCount} times. Great job and keep being
-                  sustainable!
-                </Typography>
-              </DialogContentText>
+              {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
+              <Typography variant="subtitle1" className={classes.textBody}>
+                You just earned a new badge for mastering the {badgeAction}{" "}
+                task! This means you have completed the {badgeAction} task{" "}
+                {badgeActionCount} times. Great job, and keep being sustainable!
+              </Typography>
               <Button
                 onClick={handleClose}
                 variant="contained"
@@ -852,7 +851,7 @@ function HomePage(props) {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-                // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
+              // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -882,12 +881,19 @@ function HomePage(props) {
             />
           </NoSsr>
           <Card className={classes.card2}>
-            <CardMedia classes={mediaStyles2} image={actionTab} />
+            <CardMedia
+              classes={mediaStyles2}
+              image={actionTab}
+              style={{ backgroundPosition: "center center" }}
+            />
+            {/* now we can see the fireworks^ */}
             <Box py={3} px={2} className={classes.content}>
               <Info useStyles={useGalaxyInfoStyles}>
-                <InfoSubtitle></InfoSubtitle>
+                <InfoSubtitle
+                  style={{ color: "white", fontWeight: "bold" }}
+                ></InfoSubtitle>
                 <InfoTitle>Log your actions here!</InfoTitle>
-                <InfoCaption>
+                <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
                   Tap the drop down menu to find out more
                   <span role="img" aria-label="down arrow">
                     🔽
@@ -912,12 +918,7 @@ function HomePage(props) {
               />
             </div>
             {/* Card for actions */}
-            <Grid
-              container
-              justify="center"
-              spacing={2}
-              className={classes.actionContainer}
-            >
+            <Grid container justify="center" spacing={2}>
               {/* All actions (this loops using search) */}
               {ActionData.map(
                 (action, i) =>
@@ -928,7 +929,9 @@ function HomePage(props) {
                           className={classes.cardContent}
                           action={
                             <IconButton
-                              disabled={firestoreMastered.includes(action.susAction)}
+                              disabled={firestoreMastered.includes(
+                                action.susAction
+                              )}
                               onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
                               aria-label="increment"
                               title="Complete this sustainable action"
@@ -1025,13 +1028,16 @@ function HomePage(props) {
                     {ActionData.map(
                       (action, i) =>
                         localStorage.getItem(action.susAction.concat("Fav")) ===
-                          "true" && (
+                        "true" && (
                           <Grid item xs={12} md={6} lg={4} key={i}>
                             <Card className={classes.root}>
                               <CardHeader
                                 className={classes.cardContent}
                                 action={
                                   <IconButton
+                                    disabled={firestoreMastered.includes(
+                                      action.susAction
+                                    )}
                                     onClick={() => confirmIncrement(action)}
                                     // Finally found how to get rid of random old green from click and hover!
                                     style={{ backgroundColor: "transparent" }}

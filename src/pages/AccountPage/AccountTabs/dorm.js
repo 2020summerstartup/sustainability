@@ -1,7 +1,6 @@
 import React from "react";
 import dorm4 from "../../../img/dorm4.svg";
 
-
 import { AuthUserContext } from "../../../services/Session";
 import SignOutButton from "../../../components/SignOut";
 
@@ -12,7 +11,7 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Link } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import * as ROUTES from "../../../constants/routes";
 import {
   Info,
@@ -66,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 var rank;
-var dormName = localStorage.getItem("dorm")
+var dormName = localStorage.getItem("dorm");
 if (dormName !== "") {
   getDorm()
     .doc(dormName)
@@ -79,11 +78,9 @@ leaderBoardUpdate();
 const rankDisplay = () => {
   if (parseInt(localStorage.getItem("ranking")) === 1) {
     rank = <p>You're in 1st place!</p>;
-  }
-  else if (parseInt(localStorage.getItem("ranking")) === 2) {
+  } else if (parseInt(localStorage.getItem("ranking")) === 2) {
     rank = <p>You're in 2nd place!</p>;
-  }
-  else if (parseInt(localStorage.getItem("ranking")) === 3) {
+  } else if (parseInt(localStorage.getItem("ranking")) === 3) {
     rank = <p>You're in 3rd place!</p>;
   } else if (parseInt(localStorage.getItem("ranking")) >= 4) {
     rank = <p>You're in {localStorage.getItem("ranking")}th place!</p>;
@@ -111,24 +108,28 @@ export const DormCard = React.memo(function GalaxyCard() {
             <CardMedia classes={mediaStyles} image={dorm4} />
             <Box py={3} px={2} className={classes.content}>
               <Info useStyles={useGalaxyInfoStyles}>
-                <InfoSubtitle>
+                <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
                   {localStorage.getItem("name")}, you're representing{" "}
-                  {localStorage.getItem("dorm")} dorm
-                  </InfoSubtitle>
+                  {localStorage.getItem("dorm")} Dorm
+                </InfoSubtitle>
                 <InfoTitle>{rank}</InfoTitle>
                 <InfoCaption>
-                  <Link to={ROUTES.CHANGEDORM} className={classes.link}>
-                    <Typography
+                  <Link
+                    to={ROUTES.CHANGEDORM}
+                    className={classes.link}
+                    style={{ underline: "enum: none", color: "white", fontWeight: "bold" }}
+                  >
+                    {/* <Typography
                       variant="body1"
                       className={classes.linkText}
                       style={{ underline: "enum: none" }}
                       component={'span'}
-                    >
-                      Change your dorm in settings&nbsp;
-                        <span role="img" aria-label="settings">
-                        ⚙️
-                        </span>
-                    </Typography>
+                    > */}
+                    Change your dorm in settings&nbsp;
+                    <span role="img" aria-label="settings">
+                      ⚙️
+                    </span>
+                    {/* </Typography> */}
                   </Link>
                 </InfoCaption>
               </Info>

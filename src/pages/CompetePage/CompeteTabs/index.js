@@ -1,6 +1,11 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { withRouter } from "react-router";
 import { retry } from "../../../App/index"
+// admin stuff
+import { AuthUserContext } from "../../../services/Session";
+import * as ROLES from '../../../constants/roles';
+import AdminPage from "../../AdminPage";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
@@ -17,9 +22,9 @@ import Box from "@material-ui/core/Box";
 import StarIcon from "@material-ui/icons/Star";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 
+
 // React lazy
 const Challenges = lazy(() => retry(() => import("./challenges.js")));
-// const Leaderboard = lazy(() => import("./leaderboard"));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -86,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
   },
   indicator: {
     height: "3px",
+    backgroundColor: "#FFFFFF",
     [theme.breakpoints.up("sm")]: {
       height: "4.5px",
       width: "20px",
@@ -94,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CompeteTabs(props) {
+function CompeteTabs(props, {authUser}) {
   let { match, history } = props;
   let { params } = match;
   let { page } = params;
@@ -117,7 +123,11 @@ function CompeteTabs(props) {
     history.push(`/compete/${tabNameToIndex[newValue]}`);
   };
   return (
+<AuthUserContext.Consumer>
+      {(authUser) => (
     <div>
+      
+
       <AppBar
         position="static"
         color="primary"
@@ -153,20 +163,47 @@ function CompeteTabs(props) {
             {...a11yProps(1)}
             style={{ backgroundColor: "transparent" }}
           />
+
+        {!!authUser.roles[ROLES.ADMIN] && (
+           <Tab
+           label={
+             <div className={classes.tabText}>
+               <SupervisorAccountIcon className={classes.tabIcon} /> Admin{" "}
+             </div>
+           }
+           {...a11yProps(1)}
+           style={{ backgroundColor: "transparent" }}
+         />
+        )}
+        
         </Tabs>
       </AppBar>
+
       <TabPanel value={value} index={0} className="tab-container">
         <Leaderboard />
       </TabPanel>
 
       <TabPanel value={value} index={1} className="tab-container">
-
         <Suspense fallback={<ProgressCircle />}>
-          <center><ChallengeCard2 /></center>
-          <Challenges />
+          <ChallengeCard2 />
+          {/* <Challenges /> */}
         </Suspense>
       </TabPanel>
+
+      {/* ADMIN TAB */}
+      {!!authUser.roles[ROLES.ADMIN] && (
+          <TabPanel value={value} index={2} className="tab-container">
+          <Suspense fallback={<ProgressCircle />}>
+          <AdminPage/>
+          </Suspense>
+       </TabPanel>
+        )}
+      
     </div>
+    )}
+    </AuthUserContext.Consumer>
+
+
   );
 }
 
