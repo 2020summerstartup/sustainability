@@ -94,7 +94,7 @@ function AppBase() {
         <Route path="/home" component={HomeHeader} />
         <Route path="/compete" component={CompeteHeader} />
         {/* <Route exact path="/info" component={InfoHeader} /> */}
-        <Route path="/account" component={AccountHeader} />
+        <Route path="/profile" component={AccountHeader} />
         <Route
           exact
           path="/deleteaccount"
@@ -163,10 +163,10 @@ function AppBase() {
           <Route path={ROUTES.ADMIN} component={AdminPage} />
 
           <Switch>
-            <Redirect exact from={ROUTES.ACCOUNT} to={ROUTES.ACCOUNT_POINT} />
+            <Redirect exact from={ROUTES.PROFILE} to={ROUTES.PROFILE_POINT} />
             <Route
               exact
-              path="/account/:page?"
+              path="/profile/:page?"
               render={(props) => <AccountPage {...props} />}
             />
           </Switch>

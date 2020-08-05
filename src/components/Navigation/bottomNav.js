@@ -72,9 +72,9 @@ function BottomNavAuth() {
         icon={<InfoIcon />}
       /> */}
       <BottomNavigationAction
-        label="Account"
+        label="Profile"
         component={Link}
-        to="/account"
+        to="/profile"
         icon={<AccountCircleIcon />}
       />
     </BottomNavigation>

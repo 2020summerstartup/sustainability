@@ -31,6 +31,7 @@ import ActionData from "./actionData.json";
 
 import { makeStyles, fade } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
+import ToolBar from "@material-ui/core/Toolbar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -82,7 +83,7 @@ import like from "../../sounds/state-change_confirm-up.wav";
 import unlike from "../../sounds/state-change_confirm-down.wav";
 import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
-// import Popup from "./modal.js";
+import increment from "../../sounds/navigation_selection-complete-celebration.wav";
 
 // Lazy load the fave card
 const FavoriteCard = lazy(() => retry(() => import("./faveCard.js")));
@@ -109,6 +110,7 @@ function initPoints(email) {
 const likeAudio = new Audio(like);
 const unlikeAudio = new Audio(unlike);
 const confettiAudio = new Audio(confetti);
+const incrementAudio = new Audio(increment);
 
 // called by onclick to play the audio file
 const playSound = (audioFile) => {
@@ -596,7 +598,7 @@ function HomePage(props) {
         displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
       }
       toast(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
-      // possibly want a new sound for this?
+      playSound(incrementAudio);
       setBadgeModalIsOpen(false);
     } else if (action.toMaster * action.points <= actionTotal) {
       actionMastered(authContext.email, action.susAction);
@@ -710,12 +712,12 @@ function HomePage(props) {
     <>
       <>
      
-        <AppBar
+        {/* <AppBar
           position="static"
           color="primary"
           elevation={0}
           className={classes.appbar}
-        >
+        > */}
           <Tabs
             value={value}
             onChange={handleChange}
@@ -742,7 +744,7 @@ function HomePage(props) {
               {...a11yProps(1)}
             />
           </Tabs>
-        </AppBar>
+        {/* </AppBar> */}
         <div className="top-container">
           <Typography
             variant="h5"

@@ -122,7 +122,7 @@ const AccountTabs = props => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    history.push(`/account/${tabNameToIndex[newValue]}`);
+    history.push(`/profile/${tabNameToIndex[newValue]}`);
   };
 
   var temp = localStorage.getItem("firestoreMastered");
