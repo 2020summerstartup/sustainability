@@ -598,23 +598,15 @@ function HomePage(props) {
   };
 
 
-  var tempFavs = localStorage.getItem("firestoreFavs");
-  var firestoreFavs = [];
-  for (const el in ActionData) {
-    var action = ActionData[el]; // Take the current action
-    var stringActionName = JSON.stringify(action.susAction);
-    if (tempFavs.includes(stringActionName)) {
-      firestoreFavs.push(action.susAction);
-    }
-  }
 
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
+  var tempFavs = localStorage.getItem("firestoreFavs"); //favorited actions from firestore 
   for (const el in ActionData) {
     // Iterate over every action in ActionData
     var action = ActionData[el]; // Take the current action
-    if (firestoreFavs.includes(action.susAction)) {
+    if (tempFavs.includes(action.susAction)) {
       // If the action is favorited
       favIconColors[el - 1] = "#f48fb1"; // Turn red
     } else {
@@ -648,33 +640,6 @@ function HomePage(props) {
       // add favorited action to array & update firestore
       addFav(authContext.email, action.susAction);
     }
-    // var storedFav = firestoreMastered.includes(JSON.stringify(action.susAction)) === "true";
-    // In case the action hasn't been favorited before
-    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
-    // if (storedFav == null) {
-    //   storedFav = false; // If not initialized, initialize here
-    // }
-    // storedFav = !storedFav; // Toggle the favorite
-    // variable for getting color of fav icon
-
-    // Notify user that action was added/removed from favorites
-    // var displayText;
-    // if (storedFav) {
-    //   // console.log('yes')
-    //   // displayText = action.title.concat(" added to favorites");
-    //   // favIconColor.style.color = "#f48fb1"; // Turn red
-    //   // playSound(likeAudio);
-    //   // toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
-    //   // addFav(authContext.email, action.susAction);
-    // } else {
-    //   // console.log('no')
-    //   // displayText = action.title.concat(" removed from favorites");
-    //   // favIconColor.style.color = "#6c6c6c"; // Back to grey
-    //   // playSound(unlikeAudio);
-    //   // toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
-    //   // deleteFav(authContext.email, action.susAction);
-    // }
-    // localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
   // Set the "progress message" to be displayed when the user pressed "check progress"
