@@ -486,7 +486,9 @@ function HomePage(props) {
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (tempMastered.includes(stringActionName)) {
+    if (tempMastered === "null" ){
+      console.log('no tasks mastered')
+    } else if (tempMastered.includes(stringActionName)) {
       firestoreMastered.push(action.susAction);
     }
   }
