@@ -21,7 +21,7 @@ function AdminPage() {
             <Container maxWidth="xs" style={{ margin: "auto" }}>
               {/* <div className="base-container"> */}
                 {/* The google form for admins to fill out to add challenges */}
-                <iframe title="challengeForm" src="https://docs.google.com/forms/d/e/1FAIpQLSfHIX4V2KaPP8bgbmpl79E93rBVmr6Q6KH5Yu4nR7bpAiXqAg/viewform?embedded=true" maxwidth="1000rem" height="800rem" frameBorder="0" margin="auto">Loading…</iframe>
+                <iframe title="challengeForm" src="https://docs.google.com/forms/d/e/1FAIpQLSfHIX4V2KaPP8bgbmpl79E93rBVmr6Q6KH5Yu4nR7bpAiXqAg/viewform?embedded=true" width="1000rem" height="800rem" frameBorder="0" margin="auto" style={{ maxWidth: "inherit" }}>Loading…</iframe>
                 Want to remove a challenge? Email the developers at suscompetitionteam@gmail.com (or by completing the "contact us" form in settings), and we'll get to it as soon as we can!
               {/* </div> */}
             </Container >
