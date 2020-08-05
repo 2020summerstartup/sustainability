@@ -83,6 +83,7 @@ import unlike from "../../sounds/state-change_confirm-down.wav";
 import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 
+
 // Lazy load the fave card
 const FavoriteCard = lazy(() => import("./faveCard.js"));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
@@ -127,19 +128,24 @@ function assignData(data) {
   // initialize favorited actions
   var firestoreFavs = data.favorites;
   localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
+  console.log(firestoreFavs)
   // initialize points
   for (const [key, value] of Object.entries(data.points)) {
     localStorage.setItem(key, value);
   }
+
   // initialize favorite actions
   const favorites = data.favorites;
-  for (const [susAction] of Object.entries(favorites)) {
-    var storageName = susAction.concat("Fav");
-    localStorage.setItem(storageName, true);
-  }
+  ActionData.forEach( (action) => {
+    if (firestoreFavs.includes(action.susAction)){
+    // addToFavsData(action)
+    }
+  });
 }
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
+const SUSACTION = ActionData.find( action => action.susAction === 'waterBottle')
+console.log(SUSACTION)
 
 // Amy or Kobe (I think) wrote this function. -Katie
 function TabPanel(props) {
@@ -625,8 +631,8 @@ function HomePage(props) {
     );
     tempFavs = JSON.parse(localStorage.getItem('firestoreFavs'));
     // if array of favorited action includes the selected action 
-    // action has previouslly been favorited, unfavorite it!
     if (tempFavs.includes((action.susAction))){
+      // action has previouslly been favorited, unfavorite it!
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Turn heart gray
       playSound(unlikeAudio);
@@ -1003,8 +1009,8 @@ function HomePage(props) {
                     {/* Favorite actions (this loops using favs) */}
                     {ActionData.map(
                       (action, i) =>
-                        localStorage.getItem(action.susAction.concat("Fav")) ===
-                          "true" && (
+                        (JSON.parse(localStorage.getItem('firestoreFavs')).includes(JSON.stringify(action.susAction))) ===
+                        "true" && (
                           <Grid item xs={12} md={6} lg={4} key={i}>
                             <Card className={classes.root}>
                               <CardHeader
@@ -1012,7 +1018,7 @@ function HomePage(props) {
                                 action={
                                   <IconButton
                                     disabled={firestoreMastered.includes(
-                                      action.susAction
+                                      action
                                     )}
                                     onClick={() => confirmIncrement(action)}
                                     // Finally found how to get rid of random old green from click and hover!
@@ -1023,9 +1029,9 @@ function HomePage(props) {
                                     <AddCircleIcon fontSize="large" />
                                   </IconButton>
                                 }
-                                title={action.title}
+                                title={SUSACTION.title}
                                 subheader={"Earn ".concat(
-                                  action.points,
+                                  SUSACTION.points,
                                   " Points!"
                                 )}
                               />

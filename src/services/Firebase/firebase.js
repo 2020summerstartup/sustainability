@@ -4,6 +4,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import 'firebase/database';
 import Axios from 'axios'
+import zIndex from '@material-ui/core/styles/zIndex';
 require('dotenv').config();
 
 // import firebase/auth from 'firebase/auth';
@@ -213,11 +214,15 @@ export const addFav = (userEmail, susAction) => {
 export const deleteFav = (userEmail, susAction) => {
   // updat local storage array when user deletes fav 
   const favs = JSON.parse(localStorage.getItem('firestoreFavs'));
-  const index = favs.indexOf(JSON.stringify(susAction));
+  const index = favs.indexOf(susAction);
   if (index > -1){
     favs.splice(index, 1);
+  } else{
+    alert('an error has occured')
   }
+  console.log('two')
   localStorage.setItem('firestoreFavs', JSON.stringify(favs));
+  console.log('three')
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayRemove(susAction)
   })
