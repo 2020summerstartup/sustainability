@@ -158,10 +158,14 @@ body {
 
 /* Better native app experience  */
 @media only screen and (max-width: 991px) {
+  html,
   body {
+    width: 100vw;
+    height: 100vh;
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
+    -webkit-overflow-scrolling: touch;
     /* suppposed to not allow the screen to overscroll on mobile */
     overscroll-behavior: none;
   }

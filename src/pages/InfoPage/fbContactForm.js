@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%",
@@ -83,89 +83,94 @@ const FBContactForm = () => {
   };
 
   return (
-    <Paper elevation={5} className={classes.paper}>
-      <CssBaseline />
-      <div className={classes.formWrapper}>
-        <Avatar className={classes.avatar}>
-          <QuestionAnswerIcon />
-        </Avatar>
-        <Typography variant="h4" style={{ margin: "1rem 0" }}>
-          Contact Us
-        </Typography>
-        <Typography variant="subtitle1">
-          Let us know what new actions, challenges, and badges you would like to
-          see in the future! Or any other general questions, comments, and
-          concerns.
-        </Typography>
-        <form onSubmit={handleSubmit} id="contact" className={classes.form}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            onChange={updateInput}
-            value={formData.name || ""}
-            id="name"
-            label="Name"
-            name="name"
-            autoComplete="name"
-            InputProps={{
-              startAdornment: <PersonIcon className={classes.formIcon} />,
-              classes: {
-                adornedEnd: classes.adornedEnd,
-              },
-            }}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            onChange={updateInput}
-            value={formData.email || ""}
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            InputProps={{
-              startAdornment: <EmailIcon className={classes.formIcon} />,
-              classes: {
-                adornedEnd: classes.adornedEnd,
-              },
-            }}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            multiline
-            rows={3}
-            required
-            fullWidth
-            onChange={updateInput}
-            value={formData.message || ""}
-            name="message"
-            label="Your Message"
-            id="message"
-            InputProps={{
-              startAdornment: <MessageIcon className={classes.formIcon} />,
-              classes: {
-                adornedEnd: classes.adornedEnd,
-              },
-            }}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            endIcon={<SendIcon />}
-          >
-            Send
-          </Button>
-        </form>
-      </div>
-    </Paper>
+    <div className="base-container">
+      <Paper elevation={5} className={classes.paper}>
+        <CssBaseline />
+        <div className={classes.formWrapper}>
+          <Avatar className={classes.avatar}>
+            <QuestionAnswerIcon />
+          </Avatar>
+          <Typography variant="h4" style={{ margin: "1rem 0" }}>
+            Contact Us
+          </Typography>
+          <Typography variant="subtitle1">
+            Let us know what new actions, challenges, and badges you would like
+            to see in the future! Or any other general questions, comments, and
+            concerns.
+          </Typography>
+          <form onSubmit={handleSubmit} id="contact" className={classes.form}>
+            <TextField
+              color="secondary"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              onChange={updateInput}
+              value={formData.name || ""}
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
+              InputProps={{
+                startAdornment: <PersonIcon className={classes.formIcon} />,
+                classes: {
+                  adornedEnd: classes.adornedEnd,
+                },
+              }}
+            />
+            <TextField
+              color="secondary"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              onChange={updateInput}
+              value={formData.email || ""}
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              InputProps={{
+                startAdornment: <EmailIcon className={classes.formIcon} />,
+                classes: {
+                  adornedEnd: classes.adornedEnd,
+                },
+              }}
+            />
+            <TextField
+              color="secondary"
+              variant="outlined"
+              margin="normal"
+              multiline
+              rows={3}
+              required
+              fullWidth
+              onChange={updateInput}
+              value={formData.message || ""}
+              name="message"
+              label="Your Message"
+              id="message"
+              InputProps={{
+                startAdornment: <MessageIcon className={classes.formIcon} />,
+                classes: {
+                  adornedEnd: classes.adornedEnd,
+                },
+              }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+              endIcon={<SendIcon />}
+            >
+              Send
+            </Button>
+          </form>
+        </div>
+      </Paper>
+    </div>
   );
 };
 

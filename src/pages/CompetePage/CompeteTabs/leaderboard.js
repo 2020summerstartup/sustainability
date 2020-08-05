@@ -2,6 +2,8 @@ import React from "react";
 import trophyImg from "../../../img/trophy.svg";
 import "./leaderboard.css";
 import { firestore } from "../../../services/Firebase/firebase";
+// DELETE this after we know firebase didn't break
+// import "firebase/firestore";
 import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
 
 import Typography from "@material-ui/core/Typography";
@@ -29,11 +31,12 @@ const useStyles = (theme) => ({
   },
 });
 
+// list of colors for each dorm to display in a different color depending on their ranking
 let colors = [
-  "#FFD700", 
-  "#C0C0C0", 
-  "#cd7f32", 
-  "#7A7574", 
+  "#FFD700", //gold
+  "#C0C0C0", //silver
+  "#cd7f32", //bronze
+  "#7A7574", //gray
   "#7A7574",
   "#7A7574",
   "#7A7574",
@@ -71,6 +74,7 @@ class Leaderboard extends React.Component {
       });
   }
   getData() {
+    //import the real dorm score data from firestore
     const getLeaders = () => {
       const newLeaders = [];
       firestore
@@ -80,6 +84,7 @@ class Leaderboard extends React.Component {
           snapshot.docs.forEach((doc) => {
             newLeaders.push({ id: 1, name: doc.id, points: doc.data().score });
           });
+          // orders by decreasing points property
           newLeaders.sort((a, b) => b.points - a.points);
           this.setState({
             leaders: newLeaders,
@@ -92,6 +97,8 @@ class Leaderboard extends React.Component {
 
   componentDidMount() {
     this.getData();
+    /*data is refreshing every 3 minutes*/
+    setInterval(this.getData, 180000);
   }
 
   render() {
@@ -170,23 +177,11 @@ class Leaderboard extends React.Component {
                     />
                   </div>
                 </div>
-                <div
-                  style={{ animationDelay: 0.5 + i * 0.5 + "s" }}
-                  className="leader-bar"
-                >
-                  <div
-                    style={{
-                      backgroundColor: colors[i],
-                      width: (dorm.points / this.state.maxPoints) * 100 + "%",
-                    }}
-                    className="bar"
-                  />
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="empty">No leaders</div>
-          )}
+              ))
+            ) : (
+              <div className="empty">No leaders</div>
+            )}
+          </div>
         </div>
       </>
     );

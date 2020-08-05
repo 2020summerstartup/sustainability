@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { withRouter } from "react-router";
 import { retry } from "../../../App/index"
 // admin stuff
