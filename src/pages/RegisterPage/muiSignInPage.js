@@ -104,7 +104,6 @@ class SignInFormBase extends Component {
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then( () => {
-        console.log('pretty sure this only shows for a legit user');
         // initalizes user's impact points in local storage 
         getUserImpact(email);
         this.setState({ ...INITIAL_STATE });
@@ -114,7 +113,6 @@ class SignInFormBase extends Component {
         // window.location.reload();
       })
       .catch((error) => {
-        console.log('email was BAD');
         this.setState({ error });
         console.log(error);
       });
