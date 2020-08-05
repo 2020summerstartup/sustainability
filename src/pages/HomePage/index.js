@@ -506,8 +506,10 @@ function HomePage(props) {
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (temp.includes(stringActionName)) {
-      firestoreMastered.push(action.susAction);
+    if (temp) {
+      if (temp.includes(stringActionName)) {
+        firestoreMastered.push(action.susAction);
+      }
     }
   }
 
@@ -589,7 +591,7 @@ function HomePage(props) {
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
           action.toMaster - actionTotal / action.points
-        } buzzes away from mastering the ${action.title} task!`;
+          } buzzes away from mastering the ${action.title} task!`;
       } else {
         displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!`;
       }
@@ -850,7 +852,7 @@ function HomePage(props) {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-                // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
+              // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -1027,7 +1029,7 @@ function HomePage(props) {
                     {ActionData.map(
                       (action, i) =>
                         localStorage.getItem(action.susAction.concat("Fav")) ===
-                          "true" && (
+                        "true" && (
                           <Grid item xs={12} md={6} lg={4} key={i}>
                             <Card className={classes.root}>
                               <CardHeader
