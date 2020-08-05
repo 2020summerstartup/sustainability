@@ -1,5 +1,10 @@
-import React, { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { withRouter } from "react-router";
+// admin stuff
+import { AuthUserContext } from "../../../services/Session";
+import * as ROLES from '../../../constants/roles';
+import AdminPage from "../../AdminPage";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
@@ -15,10 +20,6 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import StarIcon from "@material-ui/icons/Star";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
-
-// React lazy
-// const Challenges = lazy(() => import("./challenges.js"));
-// const Leaderboard = lazy(() => import("./leaderboard"));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CompeteTabs(props) {
+function CompeteTabs(props, {authUser}) {
   let { match, history } = props;
   let { params } = match;
   let { page } = params;
@@ -117,7 +118,11 @@ function CompeteTabs(props) {
     history.push(`/compete/${tabNameToIndex[newValue]}`);
   };
   return (
+<AuthUserContext.Consumer>
+      {(authUser) => (
     <div>
+      
+
       <AppBar
         position="static"
         color="primary"
@@ -153,8 +158,22 @@ function CompeteTabs(props) {
             {...a11yProps(1)}
             style={{ backgroundColor: "transparent" }}
           />
+
+        {!!authUser.roles[ROLES.ADMIN] && (
+           <Tab
+           label={
+             <div className={classes.tabText}>
+               <SupervisorAccountIcon className={classes.tabIcon} /> Admin{" "}
+             </div>
+           }
+           {...a11yProps(1)}
+           style={{ backgroundColor: "transparent" }}
+         />
+        )}
+        
         </Tabs>
       </AppBar>
+
       <TabPanel value={value} index={0} className="tab-container">
         <Leaderboard />
       </TabPanel>
@@ -165,7 +184,21 @@ function CompeteTabs(props) {
           {/* <Challenges /> */}
         </Suspense>
       </TabPanel>
+
+      {/* ADMIN TAB */}
+      {!!authUser.roles[ROLES.ADMIN] && (
+          <TabPanel value={value} index={2} className="tab-container">
+          <Suspense fallback={<ProgressCircle />}>
+          <AdminPage/>
+          </Suspense>
+       </TabPanel>
+        )}
+      
     </div>
+    )}
+    </AuthUserContext.Consumer>
+
+
   );
 }
 

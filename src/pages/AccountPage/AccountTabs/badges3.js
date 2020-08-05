@@ -3,22 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-// import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import EcoIcon from "@material-ui/icons/Eco";
 import styles from "./badge3.module.css";
 
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   // display: "flex",
-  //   backgroundColor: theme.palette.divider,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   textAlign: "center",
-  // },
   details: {
     display: "flex",
-    // margin: "auto",
     margin: "6px",
     marginBottom: 0,
     backgroundColor: "#777",
@@ -34,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "1rem",
   },
   content: {
-    // flex: "1 0 auto",
     display: "flex",
     flexDirection: "column",
     margin: "auto",

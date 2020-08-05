@@ -25,9 +25,11 @@ import RotatePage from "../pages/RotatePage";
 import Header, {
   HomeHeader,
   CompeteHeader,
-  InfoHeader,
+  // InfoHeader,
   AccountHeader,
   BackArrowSettingsHeader,
+  BackArrowSettingsHeader2,
+  BackArrowSettingsHeader3,
   BackArrowHeader,
   AdminHeader,
 } from "../components/Headers";
@@ -37,31 +39,52 @@ import ProgressCircle from "../components/ProgressCircle";
 import { withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
 
+function retry(fn, retriesLeft = 5, interval = 1000) {
+  return new Promise((resolve, reject) => {
+    fn()
+      .then(resolve)
+      .catch((error) => {
+        setTimeout(() => {
+          if (retriesLeft === 1) {
+            // reject('maximum retries exceeded');
+            reject(error);
+            return;
+          }
+
+          // Passing on "reject" is the important part
+          retry(fn, retriesLeft - 1, interval).then(resolve, reject);
+        }, interval);
+      });
+  });
+}
+
 // React lazy
-const MuiSignInPage = lazy(() => import("../pages/RegisterPage/muiSignInPage"));
-const MuiSignUpPage = lazy(() => import("../pages/RegisterPage/muiSignUpPage"));
-const MuiPasswordForgetPage = lazy(() =>
+const MuiSignInPage = lazy(() => retry(() => import("../pages/RegisterPage/muiSignInPage")));
+const MuiSignUpPage = lazy(() => retry(() => import("../pages/RegisterPage/muiSignUpPage")));
+const MuiPasswordForgetPage = lazy(retry(() =>
   import("../pages/RegisterPage/muiPasswordForgetPage")
-);
-const HomePage = lazy(() => import("../pages/HomePage"));
-const AccountPage = lazy(() =>
+));
+const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
+const AccountPage = lazy(() => retry(() =>
   import("../pages/AccountPage/index")
-);
-const InfoPage = lazy(() => import("../pages/InfoPage"));
-const CompetePage = lazy(() => import("../pages/CompetePage"));
-const MuiOfflinePage = lazy(() =>
+));
+const InfoPage = lazy(() => retry(() => import("../pages/InfoPage")));
+const CompetePage = lazy(() => retry(() => import("../pages/CompetePage")));
+const MuiOfflinePage = lazy(() => retry(() => 
   import("../pages/OfflinePage/muiOfflinePage")
-);
-const MuiChangePw = lazy(() =>
+));
+const MuiChangePw = lazy(() => retry(() => 
   import("../pages/AccountPage/Settings/muiChangePw")
-);
-const MuiChangeDorm = lazy(() =>
+));
+const MuiChangeDorm = lazy(() => retry(() =>
   import("../pages/AccountPage/Settings/muiChangeDorm")
-);
-const DeleteAccount = lazy(() =>
+));
+const DeleteAccount = lazy(() => retry(() =>
   import("../pages/AccountPage/Settings/deleteAccount")
-);
-const AdminPage = lazy(() => import("../pages/AdminPage"));
+));
+const AdminPage = lazy(() => retry(() =>import("../pages/AdminPage")));
+
+const ContactPage = lazy(() => import("../pages/InfoPage/fbContactForm"));
 
 function AppBase() {
   return (
@@ -70,7 +93,7 @@ function AppBase() {
         {/* FOR PAGES WITH SPECIAL HEADERS */}
         <Route path="/home" component={HomeHeader} />
         <Route path="/compete" component={CompeteHeader} />
-        <Route exact path="/info" component={InfoHeader} />
+        {/* <Route exact path="/info" component={InfoHeader} /> */}
         <Route path="/account" component={AccountHeader} />
         <Route
           exact
@@ -82,13 +105,16 @@ function AppBase() {
         <Route
           exact
           path="/changepassword"
-          component={BackArrowSettingsHeader}
+          component={BackArrowSettingsHeader2}
         />
         <Route
           exact
           path="/forgetpassword"
           component={BackArrowSettingsHeader}
         />
+        <Route exact path="/info" component={BackArrowSettingsHeader3} />
+        <Route exact path="/contact" component={BackArrowSettingsHeader} />
+
         <Route path="/admin" component={AdminHeader} />
         <Route component={Header} />
       </Switch>
@@ -123,6 +149,8 @@ function AppBase() {
           />
 
           <Route path={ROUTES.INFO} component={InfoPage} />
+
+          <Route path={ROUTES.CONTACT} component={ContactPage} />
 
           <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
 
@@ -188,3 +216,4 @@ function AppBase() {
 
 const App = withTheme(AppBase);
 export default withAuthentication(App);
+export {retry}

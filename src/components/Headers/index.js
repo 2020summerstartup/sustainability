@@ -103,22 +103,22 @@ const AdminHeader = ({ firebase }) => {
 };
 
 // Info Page Header
-const InfoHeader = ({ firebase }) => {
-  const classes = useStyles1();
-  return (
-    <>
-      <AppBar position="static" className={classes.header}>
-        <Toolbar className={classes.toolbar}>
-          <SusLogo3 className={classes.logo} />
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
-          <Typography variant="h6" className={classes.title} noWrap>
-            Information
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-};
+// const InfoHeader = ({ firebase }) => {
+//   const classes = useStyles1();
+//   return (
+//     <>
+//       <AppBar position="static" className={classes.header}>
+//         <Toolbar className={classes.toolbar}>
+//           <SusLogo3 className={classes.logo} />
+//           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
+//           <Typography variant="h6" className={classes.title} noWrap>
+//             Information
+//           </Typography>
+//         </Toolbar>
+//       </AppBar>
+//     </>
+//   );
+// };
 
 // Styles for Account Page Header - includes Settings icon
 const useStyles2 = makeStyles((theme) => ({
@@ -218,7 +218,7 @@ const BackArrowSettingsHeader = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo3 className={classes.logo}/>
+          <SusLogo1 className={classes.logo}/>
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Grid justify="flex-start" container>
             <Grid item>
@@ -242,6 +242,85 @@ const BackArrowSettingsHeader = ({ firebase }) => {
   );
 };
 
+const BackArrowSettingsHeader2 = ({ firebase }) => {
+  let history = useHistory();
+
+  const classes = useStyles3();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          {/* Back Button using history */}
+          <IconButton
+            className={classes.buttonIcon}
+            onClick={() => history.goBack()}
+            style={{ backgroundColor: "transparent" }}
+          >
+            <ArrowBackIcon className={classes.backarrow} />
+          </IconButton>
+          <SusLogo2 className={classes.logo}/>
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
+          <Grid justify="flex-start" container>
+            <Grid item>
+              <Typography variant="h6" className={classes.title} noWrap>
+                Sus Comp
+                {/* <EcoIcon className={classes.leaf} /> */}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid justify="flex-end" container>
+            <Grid item>
+              <SettingsDrawer />
+            </Grid>
+            {/* <Grid item>
+              <AccountTabs/>
+            </Grid> */}
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+const BackArrowSettingsHeader3 = ({ firebase }) => {
+  let history = useHistory();
+
+  const classes = useStyles3();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          {/* Back Button using history */}
+          <IconButton
+            className={classes.buttonIcon}
+            onClick={() => history.goBack()}
+            style={{ backgroundColor: "transparent" }}
+          >
+            <ArrowBackIcon className={classes.backarrow} />
+          </IconButton>
+          <SusLogo3 className={classes.logo}/>
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
+          <Grid justify="flex-start" container>
+            <Grid item>
+              <Typography variant="h6" className={classes.title} noWrap>
+                Sus Comp
+                {/* <EcoIcon className={classes.leaf} /> */}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid justify="flex-end" container>
+            <Grid item>
+              <SettingsDrawer />
+            </Grid>
+            {/* <Grid item>
+              <AccountTabs/>
+            </Grid> */}
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
 // Header for Signup Page - only need back arrow not settings icon
 const BackArrowHeader = ({ firebase }) => {
   let history = useHistory();
@@ -375,7 +454,9 @@ const HomeHeader = ({ firebase }) => {
 export {
   HomeHeader,
   CompeteHeader,
-  InfoHeader,
+  BackArrowSettingsHeader2,
+  BackArrowSettingsHeader3,
+  // InfoHeader,
   AccountHeader,
   BackArrowSettingsHeader,
   BackArrowHeader,

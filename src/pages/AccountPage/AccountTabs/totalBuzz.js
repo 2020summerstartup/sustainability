@@ -17,19 +17,8 @@ const useStyles = (theme) => ({
 // cards to be rendered on the points page in account
 class TotalBuzz extends React.Component {
   render() {
-    // Following line was unused so I commented it out -Katie
-    //const { classes } = this.props;
 
     return (
-      // <Spring
-      //   from={{ opacity: 0, marginTop: -1200 }}
-      //   to={{ opacity: 1, marginTop: 0 }}
-      //   config={{ delay: 0, duration: 2000 }}
-      // >
-      //   {(props) => (
-      //     <div style={props}>
-      //       <div className="InfoCards">
-      //         <div className="cards">
       <div className={styles.bannerShape}>
         <Grid
           container
@@ -51,11 +40,6 @@ class TotalBuzz extends React.Component {
           </Grid>
         </Grid>
       </div>
-      //         </div>
-      //       </div>
-      // </div>
-      //   )}
-      // </Spring>
     );
   }
 }

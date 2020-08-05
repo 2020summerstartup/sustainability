@@ -1,6 +1,7 @@
 import styles from "./badgeModal.module.css";
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
+import { retry } from "../../App/index"
 import ProgressCircle from "../../components/ProgressCircle";
 
 // import FavoriteCard from "./faveCard";
@@ -85,7 +86,7 @@ import badge from "../../sounds/hero_simple-celebration-01.wav";
 
 
 // Lazy load the fave card
-const FavoriteCard = lazy(() => import("./faveCard.js"));
+const FavoriteCard = lazy(() => retry(() => import("./faveCard.js")));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
@@ -492,9 +493,7 @@ function HomePage(props) {
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (tempMastered === null ){
-      console.log('no tasks mastered')
-    } else if (tempMastered.includes(stringActionName)) {
+    if (temp != null && temp.includes(stringActionName)) {
       firestoreMastered.push(action.susAction);
     }
   }
@@ -577,11 +576,11 @@ function HomePage(props) {
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
           action.toMaster - actionTotal / action.points
-        } buzzes away from mastering the ${action.title} task!`;
+        } buzzes away from mastering the ${action.title} action!`;
       } else {
-        displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!`;
+        displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
       }
-      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
+      toast(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
       // possibly want a new sound for this?
       setBadgeModalIsOpen(false);
     } else if (action.toMaster * action.points <= actionTotal) {
@@ -616,7 +615,7 @@ function HomePage(props) {
     var action = ActionData[el]; // Take the current action
     if (tempFavs.includes(action.susAction)) {
       // If the action is favorited
-      favIconColors[el - 1] = "#f48fb1"; // Turn red
+      favIconColors[el - 1] = "var(--theme-secondary)"; // Turn pink
     } else {
       favIconColors[el - 1] = "#6c6c6c"; // Otherwise turn gray
     }
@@ -792,7 +791,7 @@ function HomePage(props) {
               {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
               <Typography variant="subtitle1" className={classes.textBody}>
                 You just earned a new badge for mastering the {badgeAction}{" "}
-                task! This means you have completed the {badgeAction} task{" "}
+                action! This means you have completed the {badgeAction} action{" "}
                 {badgeActionCount} times. Great job, and keep being sustainable!
               </Typography>
               <Button
@@ -833,7 +832,7 @@ function HomePage(props) {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-                // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
+              // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -1009,7 +1008,7 @@ function HomePage(props) {
                     {/* Favorite actions (this loops using favs) */}
                     {ActionData.map(
                       (action, i) =>
-                        (JSON.parse(localStorage.getItem('firestoreFavs')).includes(JSON.stringify(action.susAction))) ===
+                        localStorage.getItem(action.susAction.concat("Fav")) ===
                         "true" && (
                           <Grid item xs={12} md={6} lg={4} key={i}>
                             <Card className={classes.root}>

@@ -1,8 +1,4 @@
 import React from "react";
-// Unused dorm photos
-// import dorm from "../../../img/dorm.svg";
-// import dorm2 from "../../../img/dorm2.svg";
-// import dorm3 from "../../../img/dorm3.svg";
 import dorm4 from "../../../img/dorm4.svg";
 
 import { AuthUserContext } from "../../../services/Session";
@@ -15,7 +11,7 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Link } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import * as ROUTES from "../../../constants/routes";
 import {
   Info,

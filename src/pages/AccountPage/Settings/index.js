@@ -14,8 +14,11 @@ import HomeIcon from "@material-ui/icons/Home";
 import EmailIcon from "@material-ui/icons/Email";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../../constants/routes";
+import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
+import ContactMailIcon from '@material-ui/icons/ContactMail';
 import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -33,12 +36,12 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteIcon: {
     minWidth: "2.5rem",
-    color: theme.palette.error.dark,
+    color: theme.palette.error.main,
   },
   deleteAccount: {
     position: "fixed",
     bottom: "5px",
-    color: theme.palette.error.dark,
+    color: theme.palette.error.main,
   },
 }));
 
@@ -79,6 +82,7 @@ function SettingsDrawer(props) {
             </Typography>
           </ListItemText>
         </ListItem>
+        <Divider />
         <ListItem>
           <ListItemIcon className={classes.listItemIcon}>
             <EmailIcon />
@@ -135,6 +139,24 @@ function SettingsDrawer(props) {
             ) : (
               <Typography>Light Mode</Typography>
             )}
+          </ListItemText>
+        </ListItem>
+
+        <ListItem button component={Link} to={ROUTES.INFO}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            More Info
+          </ListItemText>
+        </ListItem>
+
+        <ListItem button component={Link} to={ROUTES.CONTACT}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <ContactMailIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            Contact Us
           </ListItemText>
         </ListItem>
 

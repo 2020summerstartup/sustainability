@@ -339,6 +339,13 @@ main {
   }
 }
 
+/* Large screens */
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+  .signout-btn {
+    display: none !important;
+  }
+}
+
 /* For mobile landscape */
 @media only screen and (min-width: 320px) and (max-width: 766px) and (orientation: landscape) {
   .navbar {
