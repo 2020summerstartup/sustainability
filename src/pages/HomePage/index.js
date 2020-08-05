@@ -622,13 +622,31 @@ function HomePage(props) {
     }
   }
 
+   // to flip the status of favorited action --> so that color changes
   const favAction = (action) => {
-    var storedFav;
-    // to flip the status of storedFav --> so that color changes
-    if (firestoreMastered.includes(JSON.stringify(action.susAction))){
-      storedFav = "false";
+    // var storedFav;
+    var displayText;
+    var favIconColor = document.getElementById(
+      "favoriteIcon".concat(action.susAction)
+    );
+    tempFavs = JSON.parse(localStorage.getItem('firestoreFavs'));
+    // if array of favorited action includes the selected action 
+    // action has previouslly been favorited, unfavorite it!
+    if (tempFavs.includes((action.susAction))){
+      displayText = action.title.concat(" removed from favorites");
+      favIconColor.style.color = "#6c6c6c"; // Turn heart gray
+      playSound(unlikeAudio);
+      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+      // remove favorited action from array & update firestore
+      deleteFav(authContext.email, action.susAction);
     } else {
-      storedFav = "true";
+      // if action is not favorited, favorite it!
+      displayText = action.title.concat(" added to favorites");
+      favIconColor.style.color = "#f48fb1"; // Turn heart pink
+      playSound(likeAudio);
+      toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
+      // add favorited action to array & update firestore
+      addFav(authContext.email, action.susAction);
     }
     // var storedFav = firestoreMastered.includes(JSON.stringify(action.susAction)) === "true";
     // In case the action hasn't been favorited before
@@ -638,26 +656,24 @@ function HomePage(props) {
     // }
     // storedFav = !storedFav; // Toggle the favorite
     // variable for getting color of fav icon
-    var favIconColor = document.getElementById(
-      "favoriteIcon".concat(action.susAction)
-    );
+
     // Notify user that action was added/removed from favorites
-    var displayText;
-    if (storedFav) {
-      console.log('yes')
-      displayText = action.title.concat(" added to favorites");
-      favIconColor.style.color = "#f48fb1"; // Turn red
-      playSound(likeAudio);
-      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
-      addFav(authContext.email, action.susAction);
-    } else {
-      console.log('no')
-      displayText = action.title.concat(" removed from favorites");
-      favIconColor.style.color = "#6c6c6c"; // Back to grey
-      playSound(unlikeAudio);
-      toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
-      deleteFav(authContext.email, action.susAction);
-    }
+    // var displayText;
+    // if (storedFav) {
+    //   // console.log('yes')
+    //   // displayText = action.title.concat(" added to favorites");
+    //   // favIconColor.style.color = "#f48fb1"; // Turn red
+    //   // playSound(likeAudio);
+    //   // toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+    //   // addFav(authContext.email, action.susAction);
+    // } else {
+    //   // console.log('no')
+    //   // displayText = action.title.concat(" removed from favorites");
+    //   // favIconColor.style.color = "#6c6c6c"; // Back to grey
+    //   // playSound(unlikeAudio);
+    //   // toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
+    //   // deleteFav(authContext.email, action.susAction);
+    // }
     // localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
