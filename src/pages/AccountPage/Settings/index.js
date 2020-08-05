@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 import * as ROUTES from "../../../constants/routes";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
+import ContactMailIcon from '@material-ui/icons/ContactMail';
 import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -135,6 +137,24 @@ function SettingsDrawer(props) {
             ) : (
               <Typography>Light Mode</Typography>
             )}
+          </ListItemText>
+        </ListItem>
+
+        <ListItem button component={Link} to={ROUTES.INFO}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            More Info
+          </ListItemText>
+        </ListItem>
+
+        <ListItem button component={Link} to={ROUTES.CONTACT}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <ContactMailIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            Contact Us
           </ListItemText>
         </ListItem>
 

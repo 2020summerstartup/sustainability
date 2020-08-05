@@ -25,9 +25,11 @@ import RotatePage from "../pages/RotatePage";
 import Header, {
   HomeHeader,
   CompeteHeader,
-  InfoHeader,
+  // InfoHeader,
   AccountHeader,
   BackArrowSettingsHeader,
+  BackArrowSettingsHeader2,
+  BackArrowSettingsHeader3,
   BackArrowHeader,
   AdminHeader,
 } from "../components/Headers";
@@ -63,6 +65,8 @@ const DeleteAccount = lazy(() =>
 );
 const AdminPage = lazy(() => import("../pages/AdminPage"));
 
+const ContactPage = lazy(() => import("../pages/InfoPage/fbContactForm"));
+
 function AppBase() {
   return (
     <Router>
@@ -70,7 +74,7 @@ function AppBase() {
         {/* FOR PAGES WITH SPECIAL HEADERS */}
         <Route path="/home" component={HomeHeader} />
         <Route path="/compete" component={CompeteHeader} />
-        <Route exact path="/info" component={InfoHeader} />
+        {/* <Route exact path="/info" component={InfoHeader} /> */}
         <Route path="/account" component={AccountHeader} />
         <Route
           exact
@@ -82,13 +86,16 @@ function AppBase() {
         <Route
           exact
           path="/changepassword"
-          component={BackArrowSettingsHeader}
+          component={BackArrowSettingsHeader2}
         />
         <Route
           exact
           path="/forgetpassword"
           component={BackArrowSettingsHeader}
         />
+        <Route exact path="/info" component={BackArrowSettingsHeader3} />
+        <Route exact path="/contact" component={BackArrowSettingsHeader} />
+
         <Route path="/admin" component={AdminHeader} />
         <Route component={Header} />
       </Switch>
@@ -123,6 +130,8 @@ function AppBase() {
           />
 
           <Route path={ROUTES.INFO} component={InfoPage} />
+
+          <Route path={ROUTES.CONTACT} component={ContactPage} />
 
           <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
 

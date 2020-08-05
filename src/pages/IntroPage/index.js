@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import IntroSlider from "react-intro-slider";
 
 function IntroPage() {
