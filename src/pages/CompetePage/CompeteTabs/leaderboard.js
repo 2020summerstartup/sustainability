@@ -2,8 +2,6 @@ import React from "react";
 
 import "./leaderboard.css";
 import { firestore } from "../../../services/Firebase/firebase";
-// DELETE this after we know firebase didn't break
-// import "firebase/firestore";
 import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
 
 import Typography from "@material-ui/core/Typography";
@@ -15,7 +13,6 @@ const useStyles = (theme) => ({
   },
 });
 
-// list of colors for each dorm to display in a different color depending on their ranking
 let colors = [
   "#FFD700", //gold
   "#C0C0C0", //silver
@@ -36,11 +33,9 @@ class Leaderboard extends React.Component {
     };
     this.getData = this.getData.bind(this);
   }
-  // sets the maxScore to the leading dorm's score
+  
   getLeaderScore() {
-    // find the document/dorm that has rank 1 --> is in first place 
     firestore.collection('dorms').where('rank', '==', 1).get().then ( (snapshot) => {
-      // set the maxPoints state to rank 1 dorm's score
       snapshot.forEach( doc => {
         const leaderScore = doc.data().score
         this.setState({
@@ -50,7 +45,6 @@ class Leaderboard extends React.Component {
     })
   }
   getData() {
-    //import the real dorm score data from firestore
     const getLeaders = () => {
       const newLeaders = [];
       firestore
@@ -71,8 +65,6 @@ class Leaderboard extends React.Component {
     getLeaders();
   }
  
-
-  //implement later with real data TODO: This has been implemented with real data? I think this comment is just outdated lol
   componentDidMount() {
     this.getData();
   }
@@ -88,7 +80,6 @@ class Leaderboard extends React.Component {
             this.state.leaders.map((dorm, i) => (
               <div
                 key={i}
-                // animation for dorm name and score
                 style={{
                   animationDelay: i * 0.5 + "s",
                 }}
@@ -126,14 +117,12 @@ class Leaderboard extends React.Component {
                   </div>
                 </div>
                 <div
-                  // animation for bar
                   style={{ animationDelay: 0.5 + i * 0.5 + "s" }}
                   className="leader-bar"
                 >
                   <div
                     style={{
                       backgroundColor: colors[i],
-                      // calculates the bar to show how many points
                       width: (dorm.points / this.state.maxPoints) * 100 + "%",
                     }}
                     className="bar"
