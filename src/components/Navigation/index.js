@@ -18,10 +18,10 @@ import * as ROLES from '../../constants/roles';
 const Navigation = ({ authUser }) => (
   <AuthUserContext.Consumer>
     {(authUser) => (authUser ? (
-    <NavigationAuth authUser={authUser} />
+      <NavigationAuth authUser={authUser} />
     ) : (
-    <NavigationNonAuth />
-    )
+        <NavigationNonAuth />
+      )
     )}
   </AuthUserContext.Consumer>
 );
@@ -29,7 +29,7 @@ const Navigation = ({ authUser }) => (
 // start making fancy navbar!
 
 // user is authorized
-const NavigationAuth = ({authUser}) => (
+const NavigationAuth = ({ authUser }) => (
   <nav className="navbar">
     <ul className="navbar-nav">
       <li className="logo">
@@ -98,29 +98,20 @@ const NavigationAuth = ({authUser}) => (
           </Link>
         </span>
       </li>
+      {/* Admin stuff */}
+      {!!authUser.roles[ROLES.ADMIN] && (
+        <li>
+          <Link to={ROUTES.ADMIN}>Admin</Link>
+        </li>
+      )}
 
-      
       <li className="nav-item logout">
-        <span href="#" className="nav-link">
-          <FontAwesomeIcon icon="sign-out-alt" className="icons signout-icon" />
-          <SignOutButton />
-        </span>
-      </li>
-{/* Admin stuff */}
-      
-        {!!authUser.roles[ROLES.ADMIN] && (
-          <li>
-            <Link to={ROUTES.ADMIN}>Admin</Link>
-          </li>
-        )}
-
-<li className="nav-item logout">
         <span href="#" className="nav-link">
           <FontAwesomeIcon icon="sign-out-alt" className="icons" />
           <SignOutButton />
         </span>
       </li>
-      
+
     </ul>
   </nav>
 );
