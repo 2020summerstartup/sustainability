@@ -167,7 +167,8 @@ class ChallengeCard2 extends React.Component {
                 </div>
                 <CardMedia
                   className={classes.cover}
-                  image={challenges}
+                  // image={challenges}
+                  image={challenge.picture}
                   title={challenge.title}
                 />
               </Card>

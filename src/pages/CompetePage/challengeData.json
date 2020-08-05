@@ -1,14 +1,17 @@
 [
     {
         "title": "Zero Food Waste",
-        "info": "Don't waste any food all week (includes all meals & snacks)"
+        "info": "Don't waste any food all week (includes all meals & snacks)",
+        "picture": "https://images.unsplash.com/photo-1588503812457-f289d7f27314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60"
     },
     {
         "title": "Recycling",
-        "info": "Recycle all your use plastics and paper this month"
+        "info": "Recycle all your use plastics and paper this month",
+        "picture": "https://images.unsplash.com/photo-1585545337229-1853a901b54e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
     },
     {
         "title": "Decrease Energy Use",
-        "info": "Make sure to not waste any energy these 2 weeks"
+        "info": "Make sure to not waste any energy these 2 weeks",
+        "picture": "https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60"
     }
 ]
