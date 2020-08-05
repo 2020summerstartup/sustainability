@@ -3,10 +3,7 @@ import { withRouter } from "react-router";
 import {retry} from "../../../App/index";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
-// import DormCard from "./dorm";
-// import Badges from "./badges";
 import Badges2 from "./badges2";
-// import Badges3 m "./badges3";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,15 +17,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import NewReleasesIcon from "@material-ui/icons/NewReleases"
 import ActionData from "../../HomePage/actionData.json"
 
-// probably delete later
-// import Grid from "@material-ui/core/Grid";
-
-//React lazy
-// const TotalPointsCard = lazy(() => import("./points"));
 const DormCard = lazy(() => retry(() => import("./dorm")));
-// const Badges = lazy(() => import("./badges"));
-// const Badges2 = lazy(() => import("./badges2"));
-// const Badges3 = lazy(() => import("./badges3"));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -73,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "6.5rem",
       marginTop: "0.5rem",
     },
-    // styles for mobile landscape
     [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
       marginLeft: "0",
     },
@@ -137,7 +125,7 @@ const AccountTabs = props => {
   var temp = localStorage.getItem("firestoreMastered");
   var firestoreMastered = [];
   for (const el in ActionData) {
-    var action = ActionData[el]; // Take the current action
+    var action = ActionData[el]; 
     var stringActionName = JSON.stringify(action.susAction);
     if (temp.includes(stringActionName)) {
       firestoreMastered.push(action.susAction);

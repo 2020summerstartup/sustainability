@@ -14,10 +14,10 @@ const useStyles = (theme) => ({
 });
 
 let colors = [
-  "#FFD700", //gold
-  "#C0C0C0", //silver
-  "#cd7f32", //bronze
-  "#7A7574", //gray
+  "#FFD700", 
+  "#C0C0C0", 
+  "#cd7f32", 
+  "#7A7574", 
   "#7A7574",
   "#7A7574",
   "#7A7574",
@@ -54,7 +54,6 @@ class Leaderboard extends React.Component {
           snapshot.docs.forEach((doc) => {
             newLeaders.push({ id: 1, name: doc.id, points: doc.data().score });
           });
-          // orders by decreasing points property
           newLeaders.sort((a, b) => b.points - a.points);
           this.setState({
             leaders: newLeaders,

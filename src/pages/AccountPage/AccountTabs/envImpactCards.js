@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 
-// set variables that I will need later when rendering cards
 let colors = ["yellow", "green", "blue"];
 let coEmissImpact = localStorage.getItem("coEmiss");
 let energyImpact = localStorage.getItem("energy");
@@ -20,7 +19,6 @@ const useStyles = (theme) => ({
   },
 });
 
-// cards to be rendered on the points page in account
 class EnvImpactCards extends React.Component {
   constructor() {
     super();
@@ -30,7 +28,6 @@ class EnvImpactCards extends React.Component {
     this.getData = this.getData.bind(this);
   }
   getData() {
-    // sets the data that we will use to render the cards
     let data = {
       success: true,
       cards: [
@@ -76,15 +73,6 @@ class EnvImpactCards extends React.Component {
   render() {
 
     return (
-      // <Spring
-      //   from={{ opacity: 0, marginTop: -1200 }}
-      //   to={{ opacity: 1, marginTop: 0 }}
-      //   config={{ delay: 0, duration: 2000 }}
-      // >
-      //   {(props) => (
-      //     <div style={props}>
-      //       <div className="InfoCards">
-      //         <div className="cards">
       <>
         <Grid container justify="center" spacing={2} style={{ marginTop: "2rem" }}>
           {this.state.cards ? (
@@ -106,8 +94,8 @@ class EnvImpactCards extends React.Component {
                       onClick={() => this.reward.rewardMe(i)}
                     >
                       {/* The next two comments are taken out of the above div tag to fix netlify deploy:
-                      // style={{ cursor: "pointer" }}
-                      // for some reason the onclick only refers to the last impact card */}
+                         style={{ cursor: "pointer" }}
+                         for some reason the onclick only refers to the last impact card */}
                       <Grid container justify="center">
                         <Typography variant="h3" component="h1">
                           {card.score}
@@ -128,11 +116,6 @@ class EnvImpactCards extends React.Component {
           )}
         </Grid>
       </>
-      //         </div>
-      //       </div>
-      // </div>
-      //   )}
-      // </Spring>
     );
   }
 }
