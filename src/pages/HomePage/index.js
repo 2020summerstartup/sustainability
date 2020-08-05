@@ -590,11 +590,11 @@ function HomePage(props) {
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
           action.toMaster - actionTotal / action.points
-          } buzzes away from mastering the ${action.title} task!`;
+        } buzzes away from mastering the ${action.title} action!`;
       } else {
-        displayText = `You are only 1 buzz away from mastering the ${action.title} task! You got this!`;
+        displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
       }
-      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
+      toast(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
       // possibly want a new sound for this?
       setBadgeModalIsOpen(false);
     } else if (action.toMaster * action.points <= actionTotal) {
@@ -628,7 +628,7 @@ function HomePage(props) {
     var storedFav = localStorage.getItem(storageName2) === "true";
     if (storedFav) {
       // If the action is favorited
-      favIconColors[el - 1] = "#f48fb1"; // Turn red
+      favIconColors[el - 1] = "var(--theme-secondary)"; // Turn pink
     } else {
       favIconColors[el - 1] = "#6c6c6c"; // Otherwise turn gray
     }
@@ -810,7 +810,7 @@ function HomePage(props) {
               {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
               <Typography variant="subtitle1" className={classes.textBody}>
                 You just earned a new badge for mastering the {badgeAction}{" "}
-                task! This means you have completed the {badgeAction} task{" "}
+                action! This means you have completed the {badgeAction} action{" "}
                 {badgeActionCount} times. Great job, and keep being sustainable!
               </Typography>
               <Button
