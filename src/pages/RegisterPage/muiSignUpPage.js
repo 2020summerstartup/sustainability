@@ -6,7 +6,6 @@ import Reward from "react-rewards";
 // Admin stuff roles
 import * as ROLES from '../../constants/roles';
 
-
 import {
   withFirebase,
   createUser,

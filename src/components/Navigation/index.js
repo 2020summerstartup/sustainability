@@ -81,14 +81,14 @@ const NavigationAuth = ({authUser}) => (
         </span>
       </li>
 
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <span href="#" className="nav-link">
           <Link to={ROUTES.INFO} className="link-text">
             <FontAwesomeIcon icon="info" className="icons" />
             <p className="page-text">Info</p>
           </Link>
         </span>
-      </li>
+      </li> */}
 
       <li className="nav-item">
         <span href="#" className="nav-link">
@@ -100,19 +100,13 @@ const NavigationAuth = ({authUser}) => (
       </li>
 
       
-      <li className="nav-item logout">
-        <span href="#" className="nav-link">
-          <FontAwesomeIcon icon="sign-out-alt" className="icons signout-icon" />
-          <SignOutButton />
-        </span>
-      </li>
 {/* Admin stuff */}
       
-        {!!authUser.roles[ROLES.ADMIN] && (
+        {/* {!!authUser.roles[ROLES.ADMIN] && (
           <li>
             <Link to={ROUTES.ADMIN}>Admin</Link>
           </li>
-        )}
+        )} */}
 
 <li className="nav-item logout">
         <span href="#" className="nav-link">
