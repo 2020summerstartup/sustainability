@@ -104,6 +104,7 @@ class SignInFormBase extends Component {
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then( () => {
+        console.log('pretty sure this only shows for a legit user');
         // initalizes user's impact points in local storage 
         getUserImpact(email);
         this.setState({ ...INITIAL_STATE });
@@ -113,6 +114,7 @@ class SignInFormBase extends Component {
         // window.location.reload();
       })
       .catch((error) => {
+        console.log('email was BAD');
         this.setState({ error });
         console.log(error);
       });
@@ -120,7 +122,7 @@ class SignInFormBase extends Component {
     // needed to display total point, progress modal, and enable app to run withour error
     getUser(email).onSnapshot(
       (docSnapshot) => {
-        // Only assign data if the user was legit. (If they tried to sign up with ane mail address not associated with any current user, this won't run.)
+        // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
         if(docSnapshot.data()) {
           assignData(docSnapshot.data());
         }
