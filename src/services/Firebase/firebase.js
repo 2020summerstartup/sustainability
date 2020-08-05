@@ -118,6 +118,7 @@ export const createUser = (userEmail, userName, dorm) => {
           createdBy: userEmail,
           total: 0,
           favorites: {},
+          masteredActions: {},
           userDorm: dorm,
           points: {
               "waterBottle": 0,
