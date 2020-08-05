@@ -9,8 +9,16 @@ import * as ROLES from '../../constants/roles';
 import Container from "@material-ui/core/Container";
 
 import "react-toastify/dist/ReactToastify.css";
+import { getDefaultNormalizer } from "@testing-library/react";
+
+import Button from "@material-ui/core/Button";
 
 // import { Admin } from 'react-admin';
+
+const getEmail = () => {
+  var newEmail = prompt("Enter the new admin's email address");
+  console.log('entered email was', newEmail);
+}
 
 function AdminPage() {
   return (
@@ -22,6 +30,16 @@ function AdminPage() {
               {/* <div className="base-container"> */}
                 {/* The google form for admins to fill out to add challenges */}
                 <iframe title="challengeForm" src="https://docs.google.com/forms/d/e/1FAIpQLSfHIX4V2KaPP8bgbmpl79E93rBVmr6Q6KH5Yu4nR7bpAiXqAg/viewform?embedded=true" width="1000rem" height="800rem" frameBorder="0" margin="auto" style={{ maxWidth: "inherit" }}>Loading…</iframe>
+                <center>
+                  <Button
+                   color="secondary"
+                   variant="contained"
+                   onClick={() => {
+                     getEmail()
+                   }}
+                  >Add another admin</Button>
+                  </center>
+                <br/>
                 Want to remove a challenge? Email the developers at suscompetitionteam@gmail.com (or by completing the "contact us" form in settings), and we'll get to it as soon as we can!
               {/* </div> */}
             </Container >
