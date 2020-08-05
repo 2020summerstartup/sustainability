@@ -12,7 +12,7 @@ import "../FontAwesomeIcons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // admin stuff
-import * as ROLES from '../../constants/roles';
+// import * as ROLES from '../../constants/roles';
 
 // users can only see certain pages when nonauthorized/authorized
 const Navigation = ({ authUser }) => (

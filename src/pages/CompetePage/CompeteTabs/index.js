@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
 import { withRouter } from "react-router";
-import { retry } from "../../../App/index"
 // admin stuff
 import { AuthUserContext } from "../../../services/Session";
 import * as ROLES from '../../../constants/roles';
@@ -21,10 +20,6 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import StarIcon from "@material-ui/icons/Star";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
-
-
-// React lazy
-const Challenges = lazy(() => retry(() => import("./challenges.js")));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
