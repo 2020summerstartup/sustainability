@@ -217,12 +217,8 @@ export const deleteFav = (userEmail, susAction) => {
   const index = favs.indexOf(susAction);
   if (index > -1){
     favs.splice(index, 1);
-  } else{
-    alert('an error has occured')
-  }
-  console.log('two')
+  } 
   localStorage.setItem('firestoreFavs', JSON.stringify(favs));
-  console.log('three')
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayRemove(susAction)
   })

@@ -132,12 +132,16 @@ function addToFavsArray (action) {
     "impact": action.impact
   }
   FavsArray.push(FavAdd);
+  console.log(FavsArray)
 }
 
 function removeFromFavsArray (action) {
-  const index = FavsArray.indexOf(action);
+  console.log(FavsArray)
+  const currentFavs = JSON.parse(localStorage.getItem('firestoreFavs'));
+  const index = currentFavs.indexOf(action.susAction);
   if (index > -1){
     FavsArray.splice(index, 1)
+    console.log(FavsArray)
   } 
 }
 
