@@ -116,9 +116,36 @@ const playSound = (audioFile) => {
   audioFile.play();
 };
 
+var FavsArray = [];
+function addToFavsArray (action) {
+  var FavAdd = {
+    "title": action.title,
+    "id": action.id,
+    "points": action.points,
+    "susAction": action.susAction,
+    "badgeName": action.badgeName,
+    "toMaster": action.toMaster,
+    "coEmiss": action.coEmiss,
+    "energy": action.energy,
+    "water": action.water,
+    "image": action.image,
+    "impact": action.impact
+  }
+  FavsArray.push(FavAdd);
+}
+
+function removeFromFavsArray (action) {
+  const index = FavsArray.indexOf(action);
+  if (index > -1){
+    FavsArray.splice(index, 1)
+  } 
+}
+
+
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
 // should only be called when page first loads, not when points are increment
 function assignData(data) {
+  console.log('here')
   // the data parameter is meant to be a firestore document snapshot
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
@@ -129,24 +156,21 @@ function assignData(data) {
   // initialize favorited actions
   var firestoreFavs = data.favorites;
   localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
-  console.log(firestoreFavs)
   // initialize points
   for (const [key, value] of Object.entries(data.points)) {
     localStorage.setItem(key, value);
   }
-
   // initialize favorite actions
   const favorites = data.favorites;
   ActionData.forEach( (action) => {
     if (firestoreFavs.includes(action.susAction)){
-    // addToFavsData(action)
+    addToFavsArray(action)
     }
   });
 }
+console.log(FavsArray)
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
-const SUSACTION = ActionData.find( action => action.susAction === 'waterBottle')
-console.log(SUSACTION)
 
 // Amy or Kobe (I think) wrote this function. -Katie
 function TabPanel(props) {
@@ -493,7 +517,7 @@ function HomePage(props) {
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (temp != null && temp.includes(stringActionName)) {
+    if (tempMastered != null && tempMastered.includes(stringActionName)) {
       firestoreMastered.push(action.susAction);
     }
   }
@@ -636,6 +660,7 @@ function HomePage(props) {
       favIconColor.style.color = "#6c6c6c"; // Turn heart gray
       playSound(unlikeAudio);
       toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+      removeFromFavsArray(action);
       // remove favorited action from array & update firestore
       deleteFav(authContext.email, action.susAction);
     } else {
@@ -644,6 +669,7 @@ function HomePage(props) {
       favIconColor.style.color = "#f48fb1"; // Turn heart pink
       playSound(likeAudio);
       toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
+      addToFavsArray(action)
       // add favorited action to array & update firestore
       addFav(authContext.email, action.susAction);
     }
@@ -1006,10 +1032,9 @@ function HomePage(props) {
                     className={classes.actionContainer}
                   >
                     {/* Favorite actions (this loops using favs) */}
-                    {ActionData.map(
+                    {FavsArray.map(
                       (action, i) =>
-                        localStorage.getItem(action.susAction.concat("Fav")) ===
-                        "true" && (
+                        (
                           <Grid item xs={12} md={6} lg={4} key={i}>
                             <Card className={classes.root}>
                               <CardHeader
@@ -1028,9 +1053,9 @@ function HomePage(props) {
                                     <AddCircleIcon fontSize="large" />
                                   </IconButton>
                                 }
-                                title={SUSACTION.title}
+                                title={action.title}
                                 subheader={"Earn ".concat(
-                                  SUSACTION.points,
+                                  action.points,
                                   " Points!"
                                 )}
                               />
@@ -1039,7 +1064,7 @@ function HomePage(props) {
                                   title="Add to favorites"
                                   aria-label="add to favorites"
                                   style={{
-                                    color: favIconColors[i - 1],
+                                    color: "#f48fb1",
                                     backgroundColor: "transparent",
                                   }} // Set the favIcon color (i-1 prevents off-by-one error)
                                   onClick={() => favAction(action)}
