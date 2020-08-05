@@ -170,23 +170,11 @@ class Leaderboard extends React.Component {
                     />
                   </div>
                 </div>
-                <div
-                  style={{ animationDelay: 0.5 + i * 0.5 + "s" }}
-                  className="leader-bar"
-                >
-                  <div
-                    style={{
-                      backgroundColor: colors[i],
-                      width: (dorm.points / this.state.maxPoints) * 100 + "%",
-                    }}
-                    className="bar"
-                  />
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="empty">No leaders</div>
-          )}
+              ))
+            ) : (
+              <div className="empty">No leaders</div>
+            )}
+          </div>
         </div>
       </>
     );
