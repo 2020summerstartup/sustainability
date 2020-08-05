@@ -1,5 +1,6 @@
 // gives each page a url directory
 
+// export const LANDING_L = '/landing'
 export const LANDING = '/';
 export const SIGN_UP = '/signup';
 export const SIGN_IN = '/signin';

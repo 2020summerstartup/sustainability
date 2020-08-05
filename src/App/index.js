@@ -118,7 +118,7 @@ function AppBase() {
         >
           {/* <Route exact path={ROUTES.LANDING} component={IntroPage} /> */}
           <Route exact path={ROUTES.LANDING} component={RotatePage} />
-          {/* <Route exact path={ROUTES.LANDING} component={MuiLandingPage} /> */}
+          {/* <Route exact path={ROUTES.LANDING_L} component={MuiLandingPage} /> */}
 
           <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
 

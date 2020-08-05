@@ -81,6 +81,7 @@ import like from "../../sounds/state-change_confirm-up.wav";
 import unlike from "../../sounds/state-change_confirm-down.wav";
 import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
+// import Popup from "./modal.js";
 
 // Lazy load the fave card
 const FavoriteCard = lazy(() => import("./faveCard.js"));
@@ -141,7 +142,7 @@ Modal.setAppElement("#root"); // Need this for modal to not get error in console
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
-  return (
+  return ( 
     <div
       role="tabpanel"
       hidden={value !== index}
@@ -704,8 +705,10 @@ function HomePage(props) {
 
   // HTML to be displayed
   return (
+
     <>
       <>
+     
         <AppBar
           position="static"
           color="primary"
@@ -755,6 +758,8 @@ function HomePage(props) {
             }{" "}
             points!
           </Typography>
+          <myComponent/>
+
           {/* Mobile Screens */}
           <Fab
             variant="extended"
