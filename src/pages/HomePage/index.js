@@ -695,7 +695,7 @@ function HomePage(props) {
   for (const el in ActionData) {
     // Iterate over every action in ActionData
     var action = ActionData[el]; // Take the current action
-    if (tempFavs.includes(action.susAction)) {
+    if (tempFavs != null && tempFavs.includes(action.susAction)) {
       // If the action is favorited
       favIconColors[el - 1] = "var(--theme-secondary)"; // Turn pink
     } else {
