@@ -117,7 +117,8 @@ export const createUser = (userEmail, userName, dorm) => {
           name: userName,
           createdBy: userEmail,
           total: 0,
-          favorites: {},
+          favorites: [],
+          masteredActions: [],
           userDorm: dorm,
           points: {
               "waterBottle": 0,
@@ -198,15 +199,25 @@ export const updateUserDorm = (userEmail, value) => {
 }
 
 
-// updates firestore when a user favorites an action
+// updates firestore & local storage when a user favorites an action
 export const addFav = (userEmail, susAction) => {
+  var favs = JSON.parse(localStorage.getItem('firestoreFavs'));
+  favs.push(susAction);
+  localStorage.setItem('firestoreFavs', JSON.stringify(favs));
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayUnion(susAction)
   })
 }
 
-// updates firestore when a user deletes a favorite
+// updates firestore & local storage array when a user deletes a favorite
 export const deleteFav = (userEmail, susAction) => {
+  // updat local storage array when user deletes fav 
+  const favs = JSON.parse(localStorage.getItem('firestoreFavs'));
+  const index = favs.indexOf(susAction);
+  if (index > -1){
+    favs.splice(index, 1);
+  } 
+  localStorage.setItem('firestoreFavs', JSON.stringify(favs));
   return firestore.collection('users').doc(userEmail).update({
     favorites: app.firestore.FieldValue.arrayRemove(susAction)
   })
