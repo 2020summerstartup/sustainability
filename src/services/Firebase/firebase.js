@@ -120,6 +120,7 @@ export const createUser = (userEmail, userName, dorm) => {
           favorites: [],
           masteredActions: [],
           userDorm: dorm,
+          pop_done: false,
           points: {
               "waterBottle": 0,
               "cmontWalk": 0,
@@ -247,6 +248,13 @@ export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact)
     'impact.energy': app.firestore.FieldValue.increment(energyImpact),
     'impact.water': app.firestore.FieldValue.increment(waterImpact),
     'impact.buzzes': app.firestore.FieldValue.increment(1),
+  })
+}
+
+export const DarkModeOpened = (userEmail) => {
+  localStorage.setItem('pop_done', true)
+  return firestore.doc('users/' + userEmail).update({
+    "pop_done": true,
   })
 }
 

@@ -181,7 +181,6 @@ const initalizeFavs = (data) => {
   });
 }
 
-
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
 // should only be called when page first loads, not when points are increment
 const assignData = (data) => {
@@ -189,6 +188,7 @@ const assignData = (data) => {
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
   localStorage.setItem("total", data.total);
+  localStorage.setItem("pop_done", data.pop_done);
   // initialize mastered action
   var firestoreMastered = data.masteredActions;
   localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));

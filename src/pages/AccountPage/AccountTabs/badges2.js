@@ -80,20 +80,26 @@ const badgeSay = () => {
           🤗
         </span>
       </p>
-    );
-  } else if (masterLength > 0 && masterLength < 5) {
+    ); 
+
+  } else if (masterLength === 1) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
-    theBadge = <p> You've earned {masterLength} badges! Keep it going 🥳 </p>;
+    theBadge = <p> You've earned {masterLength} badge! Keep it going 🥳 </p>;
+  }
+  else if (masterLength > 1 && masterLength < 5) {
+    theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
+    theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
   } else {
     theCongrats = <>Omg {localStorage.getItem("name")}! </>;
-    theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
+    theBadge = <p> You've earned {masterLength} badges! That's how it's done 🤩</p>;
   }
 };
+
+badgeSay();
 
 export const BadgesCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
   const classes = useStyles();
-  badgeSay();
 
   return (
     <>
