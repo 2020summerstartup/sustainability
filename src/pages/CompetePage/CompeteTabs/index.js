@@ -134,8 +134,6 @@ function CompeteTabs(props, {authUser}) {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          // now it is grayed out when not selected
-          // textColor="default"
           aria-label="scrollable tabs"
           className={classes.tabs}
           TabIndicatorProps={{ className: classes.indicator }}
