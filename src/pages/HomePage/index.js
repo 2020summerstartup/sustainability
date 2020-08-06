@@ -99,7 +99,7 @@ function initPoints(email) {
   total = 0;
   for (const el in ActionData) {
     var action = localStorage.getItem(ActionData[el].susAction); // Action to initialize
-    if (isNaN(action) || action == null) {
+    if (isNaN(action) || action === null) {
       // If it hasn't been initialized
       localStorage.setItem(ActionData[el].susAction, 0); // Initialize to 0
       action = 0;
@@ -530,7 +530,7 @@ function HomePage(props) {
   // this is needed to prevent error in console when user signs into their account
   // hopefully will revisit later to get rid of refresh page solution
   var initUserTotal;
-  if (localStorage.getItem("total") == null) {
+  if (localStorage.getItem("total") === null) {
     initUserTotal = 0;
   } else {
     initUserTotal = localStorage.getItem("total");
