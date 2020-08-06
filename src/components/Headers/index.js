@@ -15,14 +15,13 @@ import { useHistory } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 
+//old way of importing svg files
+import suslogoImg from "../../img/suslogo.svg";
 // Makes svg files into React Components
 import { ReactComponent as SusLogo } from "../../img/suslogo.svg";
 import { ReactComponent as SusLogo1 } from "../../img/logo_skin1.svg";
 import { ReactComponent as SusLogo2 } from "../../img/logo_skin2.svg";
 import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
-
-
-
 
 // imports for homeheader
 import { fade, makeStyles } from "@material-ui/core/styles";
@@ -154,13 +153,13 @@ const AccountHeader = ({ firebase }) => {
       <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
           <Grid justify="space-between" container>
-            <Grid item>
+            <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
               <Typography variant="h6" className={classes.title} noWrap>
                 <SusLogo2 className={classes.logo} />
                 Profile
               </Typography>
             </Grid>
-            <Grid item>
+            <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
               <SettingsDrawer />
             </Grid>
           </Grid>
@@ -190,7 +189,7 @@ const useStyles3 = makeStyles((theme) => ({
     },
   },
   logo: {
-    width: "4rem",
+    width: "3rem",
     height: "100%",
     paddingRight: "0.5rem",
     padding: "0",
@@ -218,8 +217,8 @@ const BackArrowSettingsHeader = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo1 className={classes.logo}/>
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
+          {/* <SusLogo1 className={classes.logo}/> */}
+          <img src={suslogoImg} alt="logo" className={classes.logo} />
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
@@ -431,20 +430,6 @@ const HomeHeader = ({ firebase }) => {
           <Typography className={classes.title} variant="h6">
             Home
           </Typography>
-          {/* OLD SEARCH BAR IN HEADER THAT WASN'T FUNCTIONAL wait a little before deleting */}
-          {/* <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div> */}
         </Toolbar>
       </AppBar>
     </div>

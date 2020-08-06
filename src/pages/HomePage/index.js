@@ -4,6 +4,8 @@ import { withRouter } from "react-router";
 import { retry } from "../../App/index"
 import ProgressCircle from "../../components/ProgressCircle";
 
+import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
+
 // import FavoriteCard from "./faveCard";
 import actionTab from "../../img/actionTab.svg";
 import badgeImg from "../../img/badge.svg";
@@ -31,7 +33,7 @@ import ActionData from "./actionData.json";
 
 import { makeStyles, fade } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
-import ToolBar from "@material-ui/core/Toolbar";
+import Toolbar from "@material-ui/core/Toolbar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -315,12 +317,12 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginLeft: 0,
+    margin: 0,
     width: "12rem",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
       width: "auto",
-      top: "1rem",
+      // top: "1rem",
     },
   },
   searchIcon: {
@@ -404,6 +406,36 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     top: "0.5rem",
     fontWeight: "bold",
+  },
+  // styles for homeheader
+  toolbar: {
+    minHeight: "auto",
+  },
+  logo: {
+    width: "3rem",
+    height: "100%",
+    paddingRight: "0.5rem",
+    padding: "0",
+    margin: "0",
+    marginTop: "0.5rem",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "6.5rem",
+    },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
+    },
+  },
+  title: {
+    fontWeight: "bold",
+    display: "inline",
+    marginRight: "2rem",
+    marginTop: "0.5rem",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+      // margin: "0",
+      // marginTop: "0.75rem",
+    },
   },
 }));
 
@@ -711,7 +743,13 @@ function HomePage(props) {
 
     <>
       <>
-     
+      <AppBar position="static">
+        <Toolbar className={classes.toolbar}>
+          <SusLogo3 className={classes.logo} />
+          <Typography className={classes.title} variant="h6">
+            Home
+          </Typography>
+        </Toolbar>
         {/* <AppBar
           position="static"
           color="primary"
@@ -744,7 +782,7 @@ function HomePage(props) {
               {...a11yProps(1)}
             />
           </Tabs>
-        {/* </AppBar> */}
+        </AppBar>
         <div className="top-container">
           <Typography
             variant="h5"
