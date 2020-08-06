@@ -134,7 +134,7 @@ function addToFavsArray (action) {
     "impact": action.impact
   }
   FavsArray.push(FavAdd);
-  console.log(FavsArray)
+  console.log('fav added', FavsArray)
 }
 }
 
@@ -144,11 +144,11 @@ function removeFromFavsArray (action) {
   const index = currentFavs.indexOf(action.susAction);
   if (index > -1){
     FavsArray.splice(index, 1)
-    console.log(FavsArray)
+    console.log('fav removed', FavsArray)
   } 
 }
 
-function initalizeFavs (data) {
+const initalizeFavs = (data) => {
   var firestoreFavs = data.favorites;
   // initialize favorited actions
   localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
@@ -163,7 +163,7 @@ function initalizeFavs (data) {
 
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
 // should only be called when page first loads, not when points are increment
-function assignData(data) {
+const assignData = (data) => {
   // the data parameter is meant to be a firestore document snapshot
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
@@ -177,6 +177,7 @@ function assignData(data) {
   }
   // initialize favorite actions
   initalizeFavs(data);
+  console.log('assignData has run')
 }
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
