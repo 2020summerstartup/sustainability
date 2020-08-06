@@ -4,7 +4,6 @@ import "firebase/auth";
 import "firebase/firestore";
 import 'firebase/database';
 import Axios from 'axios'
-import zIndex from '@material-ui/core/styles/zIndex';
 require('dotenv').config();
 
 // import firebase/auth from 'firebase/auth';

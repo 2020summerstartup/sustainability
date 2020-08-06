@@ -118,6 +118,8 @@ const playSound = (audioFile) => {
 
 var FavsArray = [];
 function addToFavsArray (action) {
+  const currentFavs = JSON.parse(localStorage.getItem('firestoreFavs'));
+  if (!currentFavs.includes(JSON.stringify(action.susAction))){
   var FavAdd = {
     "title": action.title,
     "id": action.id,
@@ -134,6 +136,7 @@ function addToFavsArray (action) {
   FavsArray.push(FavAdd);
   console.log(FavsArray)
 }
+}
 
 function removeFromFavsArray (action) {
   console.log(FavsArray)
@@ -145,11 +148,22 @@ function removeFromFavsArray (action) {
   } 
 }
 
+function initalizeFavs (data) {
+  var firestoreFavs = data.favorites;
+  // initialize favorited actions
+  localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
+  ActionData.forEach( (action) => {
+    if (firestoreFavs.includes(action.susAction)){
+    addToFavsArray(action)
+    console.log('favs init')
+    }
+  });
+}
+
 
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
 // should only be called when page first loads, not when points are increment
 function assignData(data) {
-  console.log('here')
   // the data parameter is meant to be a firestore document snapshot
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
@@ -157,22 +171,13 @@ function assignData(data) {
   // initialize mastered action
   var firestoreMastered = data.masteredActions;
   localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
-  // initialize favorited actions
-  var firestoreFavs = data.favorites;
-  localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
   // initialize points
   for (const [key, value] of Object.entries(data.points)) {
     localStorage.setItem(key, value);
   }
   // initialize favorite actions
-  const favorites = data.favorites;
-  ActionData.forEach( (action) => {
-    if (firestoreFavs.includes(action.susAction)){
-    addToFavsArray(action)
-    }
-  });
+  initalizeFavs(data);
 }
-console.log(FavsArray)
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
 
