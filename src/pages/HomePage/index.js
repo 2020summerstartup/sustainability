@@ -139,7 +139,7 @@ const addToFavsArray = (action) => {
     "energy": action.energy,
     "water": action.water,
     "image": action.image,
-    "impact": action.impact
+    "impact": action.impact,
   }
   // add new action data to favroites array
   FavsArray.push(FavAdd);
@@ -499,6 +499,7 @@ const useStyles = makeStyles((theme) => ({
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
 
 
 // Text to display on the homepage
@@ -1108,7 +1109,7 @@ function HomePage(props) {
                                 action={
                                   <IconButton
                                     disabled={firestoreMastered.includes(
-                                      action
+                                      action.susAction
                                     )}
                                     onClick={() => confirmIncrement(action)}
                                     // Finally found how to get rid of random old green from click and hover!
