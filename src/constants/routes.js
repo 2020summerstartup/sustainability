@@ -11,7 +11,6 @@ export const CHANGEPW = '/changepassword';
 export const CHANGEDORM = '/changedorm';
 export const OFFLINE = '/offline';
 export const DELETE_ACCOUNT = '/deleteaccount';
-export const ADMIN = '/admin';
 // profile page
 export const PROFILE = '/profile';
 export const PROFILE_POINT = '/profile/points';
@@ -25,3 +24,4 @@ export const HOME_FAVORITE = 'home/favorites';
 export const COMPETE = '/compete';
 export const COMPETE_LEADERBOARD = '/compete/leaderboard';
 export const COMPETE_CHALLENGE = '/compete/challenges';
+export const COMPETE_ADMIN = '/compete/admin';

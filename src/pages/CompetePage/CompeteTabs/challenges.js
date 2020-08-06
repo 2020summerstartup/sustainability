@@ -69,8 +69,6 @@ class Challenges extends React.Component {
   render() {
     return (
       <div>
-        
-
         <Typography variant="h5">Current Challenges</Typography>
         {challengeInfo}
         <p> </p>

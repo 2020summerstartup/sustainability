@@ -68,7 +68,7 @@ const badgeSay = () => {
   if (masterLength === 0) {
     theCongrats = (
       <>
-        {/* {" "} */}
+        {" "}
         Hi, {localStorage.getItem("name")}! Go log more actions to earn some
         badges!
       </>
