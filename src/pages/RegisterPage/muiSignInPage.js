@@ -109,8 +109,8 @@ class SignInFormBase extends Component {
         this.setState({ ...INITIAL_STATE });
         // takes user to home page
         this.props.history.push(ROUTES.HOME);
-        // refresh needed to have points initially displayed
-        // window.location.reload();
+        // This refresh is necessary!!! It forces the page to reload and update/rerender variable across many pages and tabs.
+        window.location.reload();
       })
       .catch((error) => {
         this.setState({ error });
