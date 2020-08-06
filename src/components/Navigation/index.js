@@ -92,9 +92,9 @@ const NavigationAuth = ({ authUser }) => (
 
       <li className="nav-item">
         <span href="#" className="nav-link">
-          <Link to={ROUTES.ACCOUNT} className="link-text">
+          <Link to={ROUTES.PROFILE} className="link-text">
             <FontAwesomeIcon icon="user" className="icons" />
-            <p className="page-text">Account</p>
+            <p className="page-text">Profile</p>
           </Link>
         </span>
       </li>

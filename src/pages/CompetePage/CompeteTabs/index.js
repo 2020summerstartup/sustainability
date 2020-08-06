@@ -9,7 +9,8 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import ProgressCircle from "../../../components/ProgressCircle";
-import ChallengeCard2 from "./challengeCard2";
+// import ChallengeCard2 from "./challengeCard2";
+import ComingSoon from "./comingSoon";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,6 +21,10 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import StarIcon from "@material-ui/icons/Star";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
+
+// For Compete Header
+import Toolbar from "@material-ui/core/Toolbar";
+import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,12 +60,7 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  appbar: {
-    boxShadow: "2px 2px 6px #242424",
-  },
   tabs: {
-    // flexGrow: 1,
-    backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
       marginTop: "0.5rem",
@@ -93,6 +93,28 @@ const useStyles = makeStyles((theme) => ({
       margin: "auto",
     },
   },
+  // styles for competeheader
+  toolbar: {
+    minHeight: "auto",
+  },
+  logo: {
+    width: "3rem",
+    height: "3rem",
+    paddingRight: "0.5rem",
+    marginTop: "0.25rem",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "6.5rem",
+    },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
+    },
+  },
+  title: {
+    color: "white",
+    fontWeight: "bold",
+    marginTop: "0.25rem",
+  },
 }));
 
 function CompeteTabs(props, {authUser}) {
@@ -121,21 +143,19 @@ function CompeteTabs(props, {authUser}) {
 <AuthUserContext.Consumer>
       {(authUser) => (
     <div>
-      
-
-      <AppBar
-        position="static"
-        color="primary"
-        elevation={0}
-        className={classes.appbar}
-      >
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          <SusLogo1 className={classes.logo} />
+          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
+          <Typography variant="h6" className={classes.title} noWrap>
+            Compete
+          </Typography>
+        </Toolbar>
         <Tabs
           value={value}
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          // now it is grayed out when not selected
-          // textColor="default"
           aria-label="scrollable tabs"
           className={classes.tabs}
           TabIndicatorProps={{ className: classes.indicator }}
@@ -170,7 +190,6 @@ function CompeteTabs(props, {authUser}) {
            style={{ backgroundColor: "transparent" }}
          />
         )}
-        
         </Tabs>
       </AppBar>
 
@@ -180,8 +199,9 @@ function CompeteTabs(props, {authUser}) {
 
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
-          <ChallengeCard2 />
+          {/* <ChallengeCard2 /> */}
           {/* <Challenges /> */}
+          <ComingSoon/>
         </Suspense>
       </TabPanel>
 

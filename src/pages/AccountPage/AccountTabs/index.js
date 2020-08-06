@@ -4,6 +4,8 @@ import {retry} from "../../../App/index";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 import Badges2 from "./badges2";
+// import Badges3 m "./badges3";
+import DarkModeModal from "../../HomePage/darkModeModal";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,6 +18,12 @@ import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
 import NewReleasesIcon from "@material-ui/icons/NewReleases"
 import ActionData from "../../HomePage/actionData.json"
+
+// For Compete Header
+import Toolbar from "@material-ui/core/Toolbar";
+import Grid from "@material-ui/core/Grid";
+import { ReactComponent as SusLogo2 } from "../../../img/logo_skin2.svg";
+import SettingsDrawer from "../Settings";
 
 const DormCard = lazy(() => retry(() => import("./dorm")));
 
@@ -53,11 +61,7 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  appbar: {
-    boxShadow: "2px 2px 6px #242424",
-  },
   tabs: {
-    backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
       marginTop: "0.5rem",
@@ -96,6 +100,30 @@ const useStyles = makeStyles((theme) => ({
       margin: "auto",
     },
   },
+    // styles for accountheader
+    toolbar: {
+      minHeight: "50px",
+    },
+    logo: {
+      width: "3rem",
+      height: "3rem",
+      paddingRight: "0.5rem",
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: "6.5rem",
+      },
+      // styles for mobile landscape
+      [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+        marginLeft: "0",
+      },
+    },
+    title: {
+      color: "white",
+      fontWeight: "bold",
+      display: "inline-flex",
+      alignItems: "center",
+      padding: "0",
+      marginTop: "0.25rem",
+    },
 }));
 
 const AccountTabs = props => {
@@ -120,7 +148,7 @@ const AccountTabs = props => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    history.push(`/account/${tabNameToIndex[newValue]}`);
+    history.push(`/profile/${tabNameToIndex[newValue]}`);
   };
 
   var temp = localStorage.getItem("firestoreMastered");
@@ -134,13 +162,22 @@ const AccountTabs = props => {
   }
 
   return (
-    <div>
-      <AppBar
-        position="static"
-        color="primary"
-        elevation={0}
-        className={classes.appbar}
-      >
+    <div> 
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          <Grid justify="space-between" container style={{height: "52px"}}>
+            <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
+              <Typography variant="h6" className={classes.title} noWrap>
+                <SusLogo2 className={classes.logo} />
+                Profile
+              </Typography>
+            </Grid>
+            <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
+              <SettingsDrawer />
+            </Grid>
+          </Grid>
+        </Toolbar>
+        <DarkModeModal />
         <Tabs
           value={value}
           onChange={handleChange}

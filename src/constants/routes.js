@@ -1,5 +1,6 @@
 // gives each page a url directory
 
+// export const LANDING_L = '/landing'
 export const LANDING = '/';
 export const SIGN_UP = '/signup';
 export const SIGN_IN = '/signin';
@@ -11,11 +12,11 @@ export const CHANGEDORM = '/changedorm';
 export const OFFLINE = '/offline';
 export const DELETE_ACCOUNT = '/deleteaccount';
 export const ADMIN = '/admin';
-// account page
-export const ACCOUNT = '/account';
-export const ACCOUNT_POINT = '/account/points';
-export const ACCOUNT_DORM = '/account/dorm';
-export const ACCOUNT_Badge = '/account/badge';
+// profile page
+export const PROFILE = '/profile';
+export const PROFILE_POINT = '/profile/points';
+export const PROFILE_DORM = '/profile/dorm';
+export const PROFILE_Badge = '/profile/badge';
 // home page
 export const HOME = '/home';
 export const HOME_ACTION = '/home/actions';

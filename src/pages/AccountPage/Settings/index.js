@@ -26,7 +26,7 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 const useStyles = makeStyles((theme) => ({
   settingsIcon: {
     color: "white",
-    paddingRight: "0",
+    padding: "0",
   },
   listItemIcon: {
     minWidth: "2.5rem",
@@ -116,7 +116,6 @@ function SettingsDrawer(props) {
         <ListItem
           button
           checked={darkMode}
-          // onChange={() => window.location.reload()}
           onClick={() => {
             setDarkMode(!darkMode);
             window.location.reload();
@@ -210,4 +209,5 @@ function SettingsDrawer(props) {
 }
 
 export default withTheme(SettingsDrawer);
+// export default SettingsDrawer;export default withTheme(SettingsDrawer);
 // export default SettingsDrawer;

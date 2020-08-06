@@ -67,11 +67,11 @@ if (masteredActions !== 'undefined') { // If masteredActions is defined
 const badgeSay = () => {
   if (masterLength === 0) {
     theCongrats = (
-      <p>
-        {" "}
+      <>
+        {/* {" "} */}
         Hi, {localStorage.getItem("name")}! Go log more actions to earn some
         badges!
-      </p>
+      </>
     );
     theBadge = (
       <p>
@@ -82,10 +82,10 @@ const badgeSay = () => {
       </p>
     );
   } else if (masterLength > 0 && masterLength < 5) {
-    theCongrats = <p> Congratulations {localStorage.getItem("name")}! </p>;
+    theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
     theBadge = <p> You've earned {masterLength} badges! Keep it going 🥳 </p>;
   } else {
-    theCongrats = <p>Omg {localStorage.getItem("name")}! </p>;
+    theCongrats = <>Omg {localStorage.getItem("name")}! </>;
     theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
   }
 };

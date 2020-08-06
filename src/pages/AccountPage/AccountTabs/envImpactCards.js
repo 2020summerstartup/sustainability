@@ -20,11 +20,35 @@ const useStyles = (theme) => ({
   },
 });
 
+// Change message depending on number of pounds
+var theCO;
+var theEeee;
+var theH2O;
+function CODisplay() {
+  if (parseInt(coEmissImpact) === 0) {
+    theCO = "Pounds of CO2 saved! It's fine...😐"
+  } else if (parseInt(coEmissImpact) === 1) {
+    theCO = "Pound of CO2 saved!"
+  } else {
+    theCO = "Pounds of CO2 saved!"
+  }
+};
+
+// function CODisplay() {
+//   if (parseInt(coEmissImpact) === 0) {
+//     theCO = "Pounds of CO2 saved! It's fine...😐"
+//   } else if (parseInt(coEmissImpact) === 1) {
+//     theCO = "Pound of CO2 saved!"
+//   } else {
+//     theCO = "Pounds of CO2 saved!"
+//   }
+// };
+
 // cards to be rendered on the points page in account
 class EnvImpactCards extends React.Component {
   constructor() {
     super();
-  
+
     this.state = {
       cards: [],
       coEmiss: coEmissImpact,
@@ -34,20 +58,6 @@ class EnvImpactCards extends React.Component {
 
     this.getData = this.getData.bind(this);
   }
-//   var theCO;
-// CODisplay = () => {
-//         if (parseInt(coEmissImpact) === 0) {
-//           theCO = <p>Pounds of CO2 saved! It's ok! Go log more actions to see some impact</p>
-//       } else if (parseInt(coEmissImpact) === 1 ) {
-//           theCO = <p> Pound of CO2 saved!</p>
-//         } else {
-//           theCO = <p>Pounds of CO2 saved!</p>
-//         }
-  // }; 
-
-
-  
-  
 
   getData() {
     let data = {
@@ -56,18 +66,22 @@ class EnvImpactCards extends React.Component {
         {
           id: 1,
           score: this.state.coEmiss,
-          title: "Pounds of CO2 saved!",
+          // title: "Pounds of CO2 saved!", 
+          title: `${theCO}`,
           colorStyling: null,
+
         },
         {
           id: 2,
           score: this.state.energy,
+          // title: "Kilojoules of energy conserved!",
           title: "Kilojoules of energy conserved!",
           colorStyling: null,
         },
         {
           id: 3,
           score: this.state.water,
+          // title: "Gallons of water conserved!",
           title: "Gallons of water conserved!",
           colorStyling: null,
         },
@@ -93,6 +107,8 @@ class EnvImpactCards extends React.Component {
   }
 
   render() {
+    CODisplay();
+
     return (
       <Grid
         container
@@ -135,10 +151,10 @@ class EnvImpactCards extends React.Component {
             </Grid>
           ))
         ) : (
-          <div className="empty">
-            Sorry no information is currently available
-          </div>
-        )}
+            <div className="empty">
+              Sorry no information is currently available
+            </div>
+          )}
       </Grid>
     );
   }
