@@ -136,16 +136,13 @@ const addToFavsArray = (action) => {
     "impact": action.impact
   }
   FavsArray.push(FavAdd);
-  console.log(FavAdd.title, 'was added, now array is', FavsArray);
 }
 }
 
 const removeFromFavsArray = (action) => {
   var index = FavsArray.map(function(x) {return x.susAction;}).indexOf(action.susAction)
   if (index > -1){
-    console.log('index', index)
     FavsArray.splice(index, 1)
-    console.log('fav removed', FavsArray)
   } 
 }
 
@@ -155,11 +152,9 @@ const initalizeFavs = (data) => {
   localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
   var actionName = FavsArray.map(function(x) {return x.susAction;})
   ActionData.forEach( (action) => {
-    console.log(FavsArray)
     if (firestoreFavs.includes(action.susAction)){
       if (FavsArray.includes(JSON.stringify(actionName)) === false ){
       addToFavsArray(action)
-      console.log('favs init')
       }
     }
   });
@@ -182,7 +177,6 @@ const assignData = (data) => {
   }
   // initialize favorite actions
   initalizeFavs(data);
-  console.log('assignData has run')
 }
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
@@ -668,10 +662,8 @@ function HomePage(props) {
       "favoriteIcon".concat(action.susAction)
     );
     tempFavs = FavsArray.map(function(x) {return x.susAction;}) //.indexOf(susAction)
-    console.log(tempFavs, 'hiiii');
     // if array of favorited action includes the selected action 
     if (tempFavs.includes(action.susAction)){
-      console.log('unfavoriting')
       // action has previouslly been favorited, unfavorite it!
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Turn heart gray
@@ -681,10 +673,9 @@ function HomePage(props) {
       // remove favorited action from array & update firestore
       deleteFav(authContext.email, action.susAction);
     } else {
-      console.log('favoriting')
       // if action is not favorited, favorite it!
       displayText = action.title.concat(" added to favorites");
-      favIconColor.style.color = "#f48fb1"; // Turn heart pink
+      favIconColor.style.color = "var(--theme-secondary)"; // Turn heart pink
       playSound(likeAudio);
       toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
       addToFavsArray(action)
@@ -1084,7 +1075,7 @@ function HomePage(props) {
                                   title="Add to favorites"
                                   aria-label="add to favorites"
                                   style={{
-                                    color: "#f48fb1",
+                                    color: "var(--theme-secondary)",
                                     backgroundColor: "transparent",
                                   }} // Set the favIcon color (i-1 prevents off-by-one error)
                                   onClick={() => favAction(action)}
