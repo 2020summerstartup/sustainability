@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./badgeModal.module.css";
+import styles from "./badgeDarkModal.module.css";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";

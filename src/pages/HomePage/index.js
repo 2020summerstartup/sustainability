@@ -1,10 +1,9 @@
-import styles from "./badgeModal.module.css";
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
 import { retry } from "../../App/index"
 import ProgressCircle from "../../components/ProgressCircle";
-
 import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
+import styles from "./badgeDarkModal.module.css";
 
 // import FavoriteCard from "./faveCard";
 import actionTab from "../../img/actionTab.svg";
