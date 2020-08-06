@@ -775,7 +775,6 @@ function HomePage(props) {
 
   // HTML to be displayed
   return (
-
     <>
       <>
       <AppBar position="static">
@@ -785,12 +784,6 @@ function HomePage(props) {
             Home
           </Typography>
         </Toolbar>
-        {/* <AppBar
-          position="static"
-          color="primary"
-          elevation={0}
-          className={classes.appbar}
-        > */}
           <Tabs
             value={value}
             onChange={handleChange}
