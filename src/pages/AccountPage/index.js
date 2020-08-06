@@ -23,6 +23,9 @@ function AccountPage(props) {
     (docSnapshot) => {
       if (docSnapshot.exists) {
         assignDorm(docSnapshot.data());
+      } else {
+        console.log(null);
+        // alert("Sorry, please choose your dorm in setting!");
       }
     },
     (err) => {
