@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { withRouter } from "react-router";
 // admin stuff
 import { AuthUserContext } from "../../../services/Session";
@@ -155,8 +155,6 @@ function CompeteTabs(props, {authUser}) {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          // now it is grayed out when not selected
-          // textColor="default"
           aria-label="scrollable tabs"
           className={classes.tabs}
           TabIndicatorProps={{ className: classes.indicator }}
