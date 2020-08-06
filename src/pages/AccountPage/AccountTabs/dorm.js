@@ -26,6 +26,12 @@ import leaderBoardUpdate, {
 } from "../../CompetePage/leaderBoardUpdate";
 import { getDorm } from "../../../services/Firebase";
 
+import styles from "./totalBuzz.module.css";
+
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+
 const useStyles = makeStyles((theme) => ({
   card: {
     borderRadius: "1rem",
@@ -74,6 +80,18 @@ if (dormName !== "") {
     });
 }
 leaderBoardUpdate();
+
+var totalBuzzText;
+const totalBuzzDisplay = () => {
+  if ( localStorage.getItem('SchoolBuzzes') === 1 ) {
+    totalBuzzText = <Typography variant="body4">Logged 1 Action!</Typography>
+  } else {
+    totalBuzzText = <Typography variant="body4">Logged {localStorage.getItem('SchoolBuzzes')} Action!</Typography>
+  }
+}
+
+totalBuzzDisplay();
+
 
 const rankDisplay = () => {
   if (parseInt(localStorage.getItem("ranking")) === 1) {
@@ -136,9 +154,24 @@ export const DormCard = React.memo(function GalaxyCard() {
             </Box>
           </Card>
           <SignOutButton />
+          <div className={styles.bannerShape}>
+        <Grid
+          container
+          justify="center"
+          style={{ placeItems: "center", marginBottom: "0.5rem"}}
+        >
+          <Typography variant="h5">As a school we have...</Typography>
+          <Grid container justify="center">
+            {totalBuzzText}
+          </Grid>
+        </Grid>
+      </div>
         </>
       )}
     </AuthUserContext.Consumer>
   );
 });
+
+
+
 export default DormCard;
