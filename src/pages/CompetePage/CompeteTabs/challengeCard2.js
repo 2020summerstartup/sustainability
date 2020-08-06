@@ -148,17 +148,13 @@ class ChallengeCard2 extends React.Component {
                     > */}
                     <Button
                       variant="contained"
-                      // color="secondary"
                       className={classes.buttonBigScreen}
-                      // onClick={() => this.reward.rewardMe()}
                     >
                       Start Challenge!
                     </Button>
                     <Button
                       variant="contained"
-                      // color="secondary"
                       className={classes.buttonSmallScreen}
-                      // onClick={() => this.reward.rewardMe()}
                     >
                       Start!
                     </Button>
@@ -167,7 +163,6 @@ class ChallengeCard2 extends React.Component {
                 </div>
                 <CardMedia
                   className={classes.cover}
-                  // image={challenges}
                   image={challenge.picture}
                   title={challenge.title}
                 />
