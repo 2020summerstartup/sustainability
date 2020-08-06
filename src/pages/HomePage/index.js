@@ -20,7 +20,6 @@ import {
   addFav,
   deleteFav,
   updateUserImpact,
-  firestore,
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -117,10 +116,13 @@ const playSound = (audioFile) => {
   audioFile.play();
 };
 
+// initalize array filled with action data of favorited actions
 var FavsArray = [];
+// called when a user favorites an action, adds all necessary data for the action to the array
 const addToFavsArray = (action) => {
-  const currentFavs = JSON.parse(localStorage.getItem('firestoreFavs'));
+  // finds the index of the action's object in the array of favorited activities
   var index = FavsArray.map(function(x) {return x.susAction;}).indexOf(action.susAction)
+  // if the action is not currently favorited, get its action data and add it to favorites array 
   if ( index < 0){
   var FavAdd = {
     "title": action.title,
@@ -135,25 +137,37 @@ const addToFavsArray = (action) => {
     "image": action.image,
     "impact": action.impact
   }
+  // add new action data to favroites array
   FavsArray.push(FavAdd);
 }
 }
 
+// called when a user unfavorites an action, removes the action & its data from the favorites array
 const removeFromFavsArray = (action) => {
+  // find the index of the action's object in the favorites array
   var index = FavsArray.map(function(x) {return x.susAction;}).indexOf(action.susAction)
+  // if action is currently in favorites array, remove it
   if (index > -1){
     FavsArray.splice(index, 1)
   } 
 }
 
+// called when the user signs in & up --> gets favorited actions from firestore and sets up FavsArray 
 const initalizeFavs = (data) => {
+  // sets firestore array containing favorited actions equal to var firestoreFavs
   var firestoreFavs = data.favorites;
-  // initialize favorited actions
+  // puts array of favorited action in local storage
   localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
-  var actionName = FavsArray.map(function(x) {return x.susAction;})
+  // gets the actionTitle from FavsArray 
+  // note: this is part of a check for if assignData runs once the user has signed in/up --> was doing it for me but theroetically 
+  // should not happen
+  var actionTitle = FavsArray.map(function(x) {return x.susAction;})
   ActionData.forEach( (action) => {
+    // if action has been favorited previously 
     if (firestoreFavs.includes(action.susAction)){
-      if (FavsArray.includes(JSON.stringify(actionName)) === false ){
+      // if action has not already been added to FavsArray --> prevents duplicate action cards appearing (part of safety check)
+      if (FavsArray.includes(JSON.stringify(actionTitle)) === false ){
+        // if the action needs to be added to FavsArray, add it
       addToFavsArray(action)
       }
     }
@@ -613,7 +627,7 @@ function HomePage(props) {
       } else {
         displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
       }
-      toast(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
+      toast(displayText, { autoClose: 3000 }); // It's "success" so that the toast is pink
       // possibly want a new sound for this?
       setBadgeModalIsOpen(false);
     } else if (action.toMaster * action.points <= actionTotal) {
@@ -656,30 +670,31 @@ function HomePage(props) {
 
    // to flip the status of favorited action --> so that color changes
   const favAction = (action) => {
-    // var storedFav;
+    // variable set later depending on the message we want the user to see when they click the heart to fav
     var displayText;
     var favIconColor = document.getElementById(
       "favoriteIcon".concat(action.susAction)
     );
-    tempFavs = FavsArray.map(function(x) {return x.susAction;}) //.indexOf(susAction)
+    // puts current favorited actions in an array consistign of just their names
+    tempFavs = FavsArray.map(function(x) {return x.susAction;}) 
     // if array of favorited action includes the selected action 
     if (tempFavs.includes(action.susAction)){
       // action has previouslly been favorited, unfavorite it!
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Turn heart gray
       playSound(unlikeAudio);
-      toast.success(displayText, { autoClose: 5000 }); // It's "success" so that the window is green
+      toast.success(displayText, { autoClose: 3000 }); // It's "success" so that the window is green
+      // remove favorited action from array & update firestore & local storage
       removeFromFavsArray(action);
-      // remove favorited action from array & update firestore
       deleteFav(authContext.email, action.susAction);
     } else {
       // if action is not favorited, favorite it!
       displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "var(--theme-secondary)"; // Turn heart pink
       playSound(likeAudio);
-      toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
+      toast.warn(displayText, { autoClose: 3000 }); // It's a warning so that the window is yellow
+      // add favorited action to array & update firestore & local storage
       addToFavsArray(action)
-      // add favorited action to array & update firestore
       addFav(authContext.email, action.susAction);
     }
   };
