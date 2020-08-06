@@ -118,9 +118,10 @@ const playSound = (audioFile) => {
 };
 
 var FavsArray = [];
-function addToFavsArray (action) {
+const addToFavsArray = (action) => {
   const currentFavs = JSON.parse(localStorage.getItem('firestoreFavs'));
-  if (!currentFavs.includes(JSON.stringify(action.susAction))){
+  var index = FavsArray.map(function(x) {return x.susAction;}).indexOf(action.susAction)
+  if ( index < 0){
   var FavAdd = {
     "title": action.title,
     "id": action.id,
@@ -135,15 +136,14 @@ function addToFavsArray (action) {
     "impact": action.impact
   }
   FavsArray.push(FavAdd);
-  console.log('fav added', FavsArray)
+  console.log(FavAdd.title, 'was added, now array is', FavsArray);
 }
 }
 
-function removeFromFavsArray (action) {
-  console.log(FavsArray)
-  const currentFavs = JSON.parse(localStorage.getItem('firestoreFavs'));
-  const index = currentFavs.indexOf(action.susAction);
+const removeFromFavsArray = (action) => {
+  var index = FavsArray.map(function(x) {return x.susAction;}).indexOf(action.susAction)
   if (index > -1){
+    console.log('index', index)
     FavsArray.splice(index, 1)
     console.log('fav removed', FavsArray)
   } 
@@ -153,10 +153,14 @@ const initalizeFavs = (data) => {
   var firestoreFavs = data.favorites;
   // initialize favorited actions
   localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
+  var actionName = FavsArray.map(function(x) {return x.susAction;})
   ActionData.forEach( (action) => {
+    console.log(FavsArray)
     if (firestoreFavs.includes(action.susAction)){
-    addToFavsArray(action)
-    console.log('favs init')
+      if (FavsArray.includes(JSON.stringify(actionName)) === false ){
+      addToFavsArray(action)
+      console.log('favs init')
+      }
     }
   });
 }
@@ -663,9 +667,11 @@ function HomePage(props) {
     var favIconColor = document.getElementById(
       "favoriteIcon".concat(action.susAction)
     );
-    tempFavs = JSON.parse(localStorage.getItem('firestoreFavs'));
+    tempFavs = FavsArray.map(function(x) {return x.susAction;}) //.indexOf(susAction)
+    console.log(tempFavs, 'hiiii');
     // if array of favorited action includes the selected action 
-    if (tempFavs.includes((action.susAction))){
+    if (tempFavs.includes(action.susAction)){
+      console.log('unfavoriting')
       // action has previouslly been favorited, unfavorite it!
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Turn heart gray
@@ -675,6 +681,7 @@ function HomePage(props) {
       // remove favorited action from array & update firestore
       deleteFav(authContext.email, action.susAction);
     } else {
+      console.log('favoriting')
       // if action is not favorited, favorite it!
       displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#f48fb1"; // Turn heart pink
