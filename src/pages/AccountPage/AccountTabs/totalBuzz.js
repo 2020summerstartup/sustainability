@@ -5,6 +5,15 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
+var totalBuzzText;
+const totalBuzzDisplay = () => {
+  if ( localStorage.getItem('buzz') == 1 ) {
+    totalBuzzText = <Typography variant="h5">Action Logged!</Typography>
+  } else {
+    totalBuzzText = <Typography variant="h5">Actions Logged!</Typography>
+  }
+}
+
 const useStyles = (theme) => ({
   //   borderBottom: {
   //     "&:after": {
@@ -13,6 +22,8 @@ const useStyles = (theme) => ({
   //     },
   //   },
 });
+
+totalBuzzDisplay();
 
 // cards to be rendered on the points page in account
 class TotalBuzz extends React.Component {
@@ -32,7 +43,7 @@ class TotalBuzz extends React.Component {
           >
             {localStorage.getItem("buzzes")}
           </Typography>
-          <Typography variant="h5">Action(s) Logged!</Typography>
+          {totalBuzzText}
           <Grid container justify="center">
             <Typography variant="body2">
               Click impact cards below for a fun surprise!
