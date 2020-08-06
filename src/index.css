@@ -30,6 +30,17 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  height  : 100%;
+  overflow: hidden;
+  position: relative;
+}
+body {
+  height  : 100%;
+  overflow: auto;
+  position: relative;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

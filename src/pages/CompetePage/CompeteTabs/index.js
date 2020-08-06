@@ -9,7 +9,8 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import ProgressCircle from "../../../components/ProgressCircle";
-import ChallengeCard2 from "./challengeCard2";
+// import ChallengeCard2 from "./challengeCard2";
+import ComingSoon from "./comingSoon";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -198,8 +199,9 @@ function CompeteTabs(props, {authUser}) {
 
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
-          <ChallengeCard2 />
+          {/* <ChallengeCard2 /> */}
           {/* <Challenges /> */}
+          <ComingSoon/>
         </Suspense>
       </TabPanel>
 
