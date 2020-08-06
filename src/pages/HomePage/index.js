@@ -121,7 +121,7 @@ const playSound = (audioFile) => {
 };
 
 // initalize array filled with action data of favorited actions
-var FavsArray = [];
+var FavsArray = JSON.parse(localStorage.getItem('localFavsArray'));
 // called when a user favorites an action, adds all necessary data for the action to the array
 const addToFavsArray = (action) => {
   // finds the index of the action's object in the array of favorited activities
@@ -139,10 +139,12 @@ const addToFavsArray = (action) => {
     "energy": action.energy,
     "water": action.water,
     "image": action.image,
-    "impact": action.impact
+    "impact": action.impact,
   }
   // add new action data to favroites array
   FavsArray.push(FavAdd);
+  // const localFavsArray = JSON.parse(localStorage.getItem('localFavsArray'));
+  localStorage.setItem('localFavsArray', JSON.stringify(FavsArray))
 }
 }
 
@@ -162,6 +164,7 @@ const initalizeFavs = (data) => {
   var firestoreFavs = data.favorites;
   // puts array of favorited action in local storage
   localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
+  localStorage.setItem('localFavsArray', '[]');
   // gets the actionTitle from FavsArray 
   // note: this is part of a check for if assignData runs once the user has signed in/up --> was doing it for me but theroetically 
   // should not happen
@@ -170,7 +173,7 @@ const initalizeFavs = (data) => {
     // if action has been favorited previously 
     if (firestoreFavs.includes(action.susAction)){
       // if action has not already been added to FavsArray --> prevents duplicate action cards appearing (part of safety check)
-      if (FavsArray.includes(JSON.stringify(actionTitle)) === false ){
+      if (JSON.parse(localStorage.getItem('localFavsArray')).includes(JSON.stringify(actionTitle)) === false ){
         // if the action needs to be added to FavsArray, add it
       addToFavsArray(action)
       }
@@ -501,6 +504,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 
+
 // Text to display on the homepage
 function HomePage(props) {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
@@ -694,7 +698,7 @@ function HomePage(props) {
   for (const el in ActionData) {
     // Iterate over every action in ActionData
     var action = ActionData[el]; // Take the current action
-    if (tempFavs.includes(action.susAction)) {
+    if (tempFavs != null && tempFavs.includes(action.susAction)) {
       // If the action is favorited
       favIconColors[el - 1] = "var(--theme-secondary)"; // Turn pink
     } else {
@@ -709,6 +713,7 @@ function HomePage(props) {
     var favIconColor = document.getElementById(
       "favoriteIcon".concat(action.susAction)
     );
+    FavsArray = JSON.parse(localStorage.getItem('localFavsArray'));
     // puts current favorited actions in an array consistign of just their names
     tempFavs = FavsArray.map(function(x) {return x.susAction;}) 
     // if array of favorited action includes the selected action 
@@ -1101,7 +1106,7 @@ function HomePage(props) {
                                 action={
                                   <IconButton
                                     disabled={firestoreMastered.includes(
-                                      action
+                                      action.susAction
                                     )}
                                     onClick={() => confirmIncrement(action)}
                                     // Finally found how to get rid of random old green from click and hover!
