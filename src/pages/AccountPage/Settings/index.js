@@ -116,7 +116,6 @@ function SettingsDrawer(props) {
         <ListItem
           button
           checked={darkMode}
-          // onChange={() => window.location.reload()}
           onClick={() => {
             setDarkMode(!darkMode);
             window.location.reload();
