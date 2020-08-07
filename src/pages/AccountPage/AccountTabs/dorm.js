@@ -1,4 +1,5 @@
 import React from "react";
+import Chart from "react-google-charts";
 import dorm4 from "../../../img/dorm4.svg";
 
 import { AuthUserContext } from "../../../services/Session";
@@ -35,8 +36,8 @@ import Reward from "react-rewards";
 import styles1 from "./envImpactCards.module.css";
 
 getSchoolImpact();
-// synchronize school's total impact with firestore, when they remain on the page, they will not see immediate changes that other users 
-// make but each time to return to the page, this function will run and new school impact points will be determined 
+// synchronize school's total impact with firestore, when they remain on the page, they will not see immediate changes that other users
+// make but each time to return to the page, this function will run and new school impact points will be determined
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -76,7 +77,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 var dormName = localStorage.getItem("dorm");
 if (dormName !== "") {
   getDorm()
@@ -87,23 +87,25 @@ if (dormName !== "") {
 }
 leaderBoardUpdate();
 
-
-// set global variable var to be displayed on pink card --> total school buzzes & assocaited text 
-// May consider removing this later because it doesn't really seem like it would be that big of an issue & would likely only appear 
-// for a few people only momentarily 
+// set global variable var to be displayed on pink card --> total school buzzes & assocaited text
+// May consider removing this later because it doesn't really seem like it would be that big of an issue & would likely only appear
+// for a few people only momentarily
 var totalBuzzText;
 const totalBuzzDisplay = () => {
-  if ( localStorage.getItem('SchoolBuzzes') === 1 ) {
+  if (localStorage.getItem("SchoolBuzzes") === 1) {
     // if school has only logged one action, display this text
-    totalBuzzText = <Typography variant="h5">Logged 1 Action!</Typography>
+    totalBuzzText = <Typography variant="h5">Logged 1 Action!</Typography>;
   } else {
     // once school has logged for than one action, dispaly this text
-    totalBuzzText = <Typography variant="h5">Logged <b>{localStorage.getItem('SchoolBuzzes')}</b> Actions!</Typography>
+    totalBuzzText = (
+      <Typography variant="h5">
+        Logged <b>{localStorage.getItem("SchoolBuzzes")}</b> Actions!
+      </Typography>
+    );
   }
-}
+};
 
-
-// dynamically render the text displayed for the user dorm's place depending on the ranking of their dorm 
+// dynamically render the text displayed for the user dorm's place depending on the ranking of their dorm
 var rank;
 const rankDisplay = () => {
   if (parseInt(localStorage.getItem("ranking")) === 1) {
@@ -117,128 +119,167 @@ const rankDisplay = () => {
   }
 };
 
-
 // these variables will be use to render the cards in class EnvImpactCards
-let colors = ["yellow", "green", "blue"];
-let coEmissImpact = localStorage.getItem("SchoolCoEmiss");
-let energyImpact = localStorage.getItem("SchoolEnergy");
-let waterImpact = localStorage.getItem("SchoolWater");
+// JSON.parse makes it a string!
+let coEmissImpact = JSON.parse(localStorage.getItem("SchoolCoEmiss"));
+let energyImpact = JSON.parse(localStorage.getItem("SchoolEnergy"));
+let waterImpact = JSON.parse(localStorage.getItem("SchoolWater"));
 
+// FOR PIE CHART!
+const data = [
+  ["Impact", "Quantity"],
+  [`${coEmissImpact} Pounds of CO2 Saved`, 5000],  
+  [`${energyImpact} Kilojoules of Energy Saved`, energyImpact],
+  [`${waterImpact} Gallons of Water Saved`, waterImpact], // CSS-style declaration
+];
+const options = {
+  title: "Harvey Mudd's Positive Sustainability Impacts!",
+  slices: [
+    {
+      color: "rgb(255, 184, 24)",
+    },
+    { color: "rgb(75, 179, 11)" },
+    { color: "rgb(26, 97, 168)" },
+  ],
+  is3D: true,
+  tooltip: {
+    showColorCode: true,
+  },
+  chartArea: {
+    left: 0,
+    top: 0,
+    width: "100%",
+    height: "100%",
+    position: "center",
+    alignment: "center",
+  },
+  legend: {
+    position: "right",
+    alignment: "center",
+    textStyle: {
+      color: "233238",
+      fontSize: 14
+    }
+  },
+};
 
 // cards to be rendered on the points page in account
-class EnvImpactCards extends React.Component {
-  constructor() {
-    super();
-  
-    this.state = {
-      cards: [],
-      coEmiss: coEmissImpact,
-      energy: energyImpact,
-      water: waterImpact,
-    };
+class EnvImpactCardsSchool extends React.Component {
+  // constructor() {
+  //   super();
 
-    this.getData = this.getData.bind(this);
-  }
+  //   this.state = {
+  //     cards: [],
+  //     coEmiss: coEmissImpact,
+  //     energy: energyImpact,
+  //     water: waterImpact,
+  //   };
 
+  //   this.getData = this.getData.bind(this);
+  // }
 
- 
   useStyles = (theme) => ({
-    color: {
-      "&:after": {
-        backgroundColor: `${colors}`,
-      },
-    },
+    // color: {
+    //   "&:after": {
+    //     backgroundColor: `${colors}`,
+    //   },
+    // },
   });
-  
 
-  getData() {
-    let data = {
-      success: true,
-      cards: [
-        {
-          id: 1,
-          title: `Saved ${this.state.coEmiss} pounds of CO2!`,
-          colorStyling: null,
-        },
-        {
-          id: 2,
-          title: `Conserved ${this.state.energy} kilojoules of energy!`,
-          colorStyling: null,
-        },
-        {
-          id: 3,
-          title: `Conserved ${this.state.water} gallons of water!`,
-          colorStyling: null,
-        },
-      ],
-    };
-    data.cards.forEach((card, id) => {
-      if (id === 0) {
-        card.colorStyling = styles1.co2;
-      }
-      if (id === 1) {
-        card.colorStyling = styles1.energy;
-      }
-      if (id === 2) {
-        card.colorStyling = styles1.water;
-      }
-    });
-    this.setState({
-      cards: data.cards,
-    });
-  }
+  // getData() {
+  //   let data = {
+  //     success: true,
+  //     cards: [
+  //       {
+  //         id: 1,
+  //         title: `Saved ${this.state.coEmiss} pounds of CO2!`,
+  //         colorStyling: null,
+  //       },
+  //       {
+  //         id: 2,
+  //         title: `Conserved ${this.state.energy} kilojoules of energy!`,
+  //         colorStyling: null,
+  //       },
+  //       {
+  //         id: 3,
+  //         title: `Conserved ${this.state.water} gallons of water!`,
+  //         colorStyling: null,
+  //       },
+  //     ],
+  //   };
+  //   data.cards.forEach((card, id) => {
+  //     if (id === 0) {
+  //       card.colorStyling = styles1.co2;
+  //     }
+  //     if (id === 1) {
+  //       card.colorStyling = styles1.energy;
+  //     }
+  //     if (id === 2) {
+  //       card.colorStyling = styles1.water;
+  //     }
+  //   });
+  //   this.setState({
+  //     cards: data.cards,
+  //   });
+  // }
 
-  componentDidMount() {
-    this.getData();
-  }
-  
-
+  // componentDidMount() {
+  //   this.getData();
+  // }
 
   render() {
     return (
-      <Grid
-        container
-        justify="center"
-        spacing={2}
-        style={{ marginTop: "2rem", overflow: "hidden !important" }}
-      >
-        {this.state.cards ? (
-          this.state.cards.map((card, i) => (
-            <Grid item xs={12} md={6} key={i}>
-              <Reward
-                ref={(ref) => {
-                  this.reward = ref;
-                }}
-                type="confetti"
-                config={{
-                  springAnimation: false,
-                  elementCount: 300,
-                  startVelocity: 40,
-                  spread: 90,
-                }}
-              >
-                <div>
-                  <div
-                    id={card.id}
-                    key={card.id}
-                    style={{ cursor: "pointer" }}
-                    className={`${styles.burstShape} ${card.colorStyling}`}
-                    onClick={() => this.reward.rewardMe(card.id)}
-                  >
-                    <Grid container justify="center">
-                      <Typography variant="h5">{card.title}</Typography>
-                    </Grid>
-                  </div>
-                </div>
-              </Reward>
-            </Grid>
-          ))
-        ) : (
-          <div className="empty">
-            Sorry no information is currently available
-          </div>
-        )}
-      </Grid>
+      <Chart
+        chartType="PieChart"
+        width="100%"
+        height="20rem"
+        loader={<div>Loading Impact Chart...</div>}
+        data={data}
+        options={options}
+      />
+      // <Grid
+      //   container
+      //   justify="center"
+      //   spacing={2}
+      //   style={{ marginTop: "2rem", overflow: "hidden !important" }}
+      // >
+      //   {this.state.cards ? (
+      //     this.state.cards.map((card, i) => (
+      //       <Grid item xs={12} md={6} key={i}>
+      //         <Reward
+      //           ref={(ref) => {
+      //             this.reward = ref;
+      //           }}
+      //           type="confetti"
+      //           config={{
+      //             springAnimation: false,
+      //             elementCount: 300,
+      //             startVelocity: 40,
+      //             spread: 90,
+      //           }}
+      //         >
+      //           <div>
+      //             <div
+      //               id={card.id}
+      //               key={card.id}
+      //               style={{ cursor: "pointer" }}
+      //               className={`${styles.burstShape} ${card.colorStyling}`}
+      //               onClick={() => this.reward.rewardMe(card.id)}
+      //             >
+      //               <Grid container justify="center">
+      //                 <Typography variant="h5">{card.title}</Typography>
+      //               </Grid>
+      //             </div>
+      //           </div>
+      //         </Reward>
+      //       </Grid>
+      //     ))
+      //   ) : (
+      //     <div className="empty">
+      //       Sorry no information is currently available
+      //     </div>
+      //   )}
+      // </Grid>
     );
   }
 }
@@ -275,7 +316,11 @@ export const DormCard = React.memo(function GalaxyCard() {
                   <Link
                     to={ROUTES.CHANGEDORM}
                     className={classes.link}
-                    style={{ underline: "enum: none", color: "white", fontWeight: "bold" }}
+                    style={{
+                      underline: "enum: none",
+                      color: "white",
+                      fontWeight: "bold",
+                    }}
                   >
                     {/* <Typography
                       variant="body1"
@@ -293,30 +338,25 @@ export const DormCard = React.memo(function GalaxyCard() {
               </Info>
             </Box>
           </Card>
-          <SignOutButton />
+
           <div className={styles.bannerShape}>
-        <Grid
-          container
-          justify="center"
-          style={{ placeItems: "center", marginBottom: "0.5rem"}}
-        >
-          <Typography variant="body2">As a school, we have...</Typography>
-          <Grid container justify="center">
-            {totalBuzzText}
-          </Grid>
-        </Grid>
-      </div>
-      <EnvImpactCards />
+            <Grid
+              container
+              justify="center"
+              style={{ placeItems: "center", marginBottom: "0.5rem" }}
+            >
+              <Typography variant="h6">As a school, we have...</Typography>
+              <Grid container justify="center">
+                {totalBuzzText}
+              </Grid>
+            </Grid>
+          </div>
+          <EnvImpactCardsSchool />
+          <SignOutButton />
         </>
       )}
     </AuthUserContext.Consumer>
   );
 });
-
-
-
-
-
-
 
 export default DormCard;
