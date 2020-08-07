@@ -136,6 +136,16 @@ const assignData = (userData) => {
   for (const [key, value] of Object.entries(userData.points)) {
     localStorage.setItem(key, value);
   }
+  // initalize favorites 
+  var firestoreFavs = userData.favorites;
+  // check if action has been previously favroited --> action is favorited in firestore 
+  for (const [key, value] of Object.entries(userData.points)) {
+    if (firestoreFavs.includes(key)) {
+      // if action is saved as a favorite in firestore, set actionFav in firestore to true
+      var actionFavLSName = key.concat("Fav");
+      localStorage.setItem(actionFavLSName, true);
+    } 
+  }
 }
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
@@ -670,19 +680,23 @@ function HomePage(props) {
     );
     // Notify user that action was added/removed from favorites
     var displayText;
+    const email = localStorage.getItem('email')
     if (storedFav) {
-      // if the action is now favoirted 
+      // if the action is now favorited
       displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#f48fb1"; // Turn red
       playSound(likeAudio);
       toast.success(displayText, { autoClose: 5000 });
+      addFav(email, action.susAction);
     } else {
       // if the action is now unfavorited
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
       playSound(unlikeAudio);
       toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
+      deleteFav(email, action.susAction);
     }
+    // set local storage actionFav to either true or false depending on fav status
     localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
