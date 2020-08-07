@@ -21,6 +21,7 @@ import {
   addFav,
   deleteFav,
   updateUserImpact,
+  updateSchoolImpact
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -184,21 +185,22 @@ const initalizeFavs = (data) => {
 
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
 // should only be called when page first loads, not when points are increment
-const assignData = (data) => {
+const assignData = (userData) => {
   // the data parameter is meant to be a firestore document snapshot
-  localStorage.setItem("dorm", data.userDorm);
-  localStorage.setItem("name", data.name);
-  localStorage.setItem("total", data.total);
+  localStorage.setItem("dorm", userData.userDorm);
+  localStorage.setItem("name", userData.name);
+  localStorage.setItem("total", userData.total);
   // initialize mastered action
-  var firestoreMastered = data.masteredActions;
+  var firestoreMastered = userData.masteredActions;
   localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
   // initialize points
-  for (const [key, value] of Object.entries(data.points)) {
+  for (const [key, value] of Object.entries(userData.points)) {
     localStorage.setItem(key, value);
   }
   // initialize favorite actions
-  initalizeFavs(data);
-};
+  initalizeFavs(userData);
+}
+
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
 
@@ -630,9 +632,16 @@ function HomePage(props) {
       // window.location.reload(true);
     });
 
-    // add's associated impact points in firestore and local storage
+    // add's associated impact points to user & dorm data in firestore and local storage
     updateUserImpact(
       authContext.email,
+      action.coEmiss,
+      action.energy,
+      action.water
+    );
+
+      // add's associated impact points to school in firestore and local storage
+      updateSchoolImpact(
       action.coEmiss,
       action.energy,
       action.water

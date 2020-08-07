@@ -115,9 +115,9 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 </Info>
               </Box>
             </Card>
+            <SignOutButton />
             <TotalBuzz />
             <EnvImpactCards />
-            <SignOutButton />
           </>
         )}
       </AuthUserContext.Consumer>

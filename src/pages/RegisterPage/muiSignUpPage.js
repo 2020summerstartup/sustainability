@@ -11,6 +11,7 @@ import {
   createUser,
   getUser,
   getUserImpact,
+  getSchoolImpact,
 } from "../../services/Firebase";
 import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
@@ -192,6 +193,7 @@ class SignUpFormBase extends Component {
         });
         // fetches user's impact points from firestore and updates local storage
         getUserImpact(email);
+        getSchoolImpact();
         // routes user to home page
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
