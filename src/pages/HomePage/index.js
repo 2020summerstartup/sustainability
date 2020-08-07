@@ -655,7 +655,7 @@ function HomePage(props) {
     var storedFav = localStorage.getItem(storageName2) === "true";
     if (storedFav) {
       // If the action is favorited
-      favIconColors[i - 1] = "#f48fb1"; // Turn red
+      favIconColors[i - 1] = "var(--theme-secondary)"; // Turn red
     } else {
       favIconColors[i - 1] = "#6c6c6c"; // Otherwise turn gray
     }
