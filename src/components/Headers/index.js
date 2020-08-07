@@ -188,6 +188,12 @@ const useStyles3 = makeStyles((theme) => ({
       display: "none",
     },
   },
+  logoTooSmall: {
+    width: "7rem !important",
+  },
+  logoSignup: {
+    width: "3.75rem !important",
+  },
   logo: {
     width: "3rem",
     height: "100%",
@@ -195,7 +201,7 @@ const useStyles3 = makeStyles((theme) => ({
     padding: "0",
     margin: "0",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: "6.5rem",
+      marginLeft: "5.75rem",
     },
   },
 }));
@@ -257,7 +263,7 @@ const BackArrowSettingsHeader2 = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo2 className={classes.logo}/>
+          <SusLogo2 className={`${classes.logo} ${classes.logoTooSmall}`}/>
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Grid justify="flex-start" container>
             <Grid item>
@@ -297,7 +303,7 @@ const BackArrowSettingsHeader3 = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo3 className={classes.logo}/>
+          <SusLogo3 className={`${classes.logo} ${classes.logoTooSmall}`}/>
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Grid justify="flex-start" container>
             <Grid item>
@@ -320,6 +326,7 @@ const BackArrowSettingsHeader3 = ({ firebase }) => {
     </>
   );
 };
+
 // Header for Signup Page - only need back arrow not settings icon
 const BackArrowHeader = ({ firebase }) => {
   let history = useHistory();
@@ -337,7 +344,7 @@ const BackArrowHeader = ({ firebase }) => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo2 className={classes.logo} />
+          <SusLogo2 className={`${classes.logo} ${classes.logoSignup}`} />
           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Grid justify="flex-start" container>
             <Grid item>
