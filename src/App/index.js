@@ -82,7 +82,6 @@ const MuiChangeDorm = lazy(() => retry(() =>
 const DeleteAccount = lazy(() => retry(() =>
   import("../pages/AccountPage/Settings/deleteAccount")
 ));
-const AdminPage = lazy(() => retry(() => import("../pages/AdminPage")));
 
 const ContactPage = lazy(() => import("../pages/InfoPage/fbContactForm"));
 
@@ -215,9 +214,14 @@ function AppBase() {
 
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
 
-          <Route path={ROUTES.ADMIN} component={AdminPage} />
-
-         
+          <Switch>
+            <Redirect exact from={ROUTES.PROFILE} to={ROUTES.PROFILE_POINT} />
+            <Route
+              exact
+              path="/profile/:page?"
+              render={(props) => <AccountPage {...props} />}
+            />
+          </Switch>
 
 
         </Suspense>
