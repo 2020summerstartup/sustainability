@@ -59,29 +59,33 @@ function retry(fn, retriesLeft = 5, interval = 1000) {
 }
 
 // React lazy
-const MuiSignInPage = lazy(() => retry(() => import("../pages/RegisterPage/muiSignInPage")));
-const MuiSignUpPage = lazy(() => retry(() => import("../pages/RegisterPage/muiSignUpPage")));
-const MuiPasswordForgetPage = lazy(retry(() =>
-  import("../pages/RegisterPage/muiPasswordForgetPage")
-));
+const MuiSignInPage = lazy(() =>
+  retry(() => import("../pages/RegisterPage/muiSignInPage"))
+);
+const MuiSignUpPage = lazy(() =>
+  retry(() => import("../pages/RegisterPage/muiSignUpPage"))
+);
+const MuiPasswordForgetPage = lazy(
+  retry(() => import("../pages/RegisterPage/muiPasswordForgetPage"))
+);
 const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
-const AccountPage = lazy(() => retry(() =>
-  import("../pages/AccountPage/index")
-));
+const AccountPage = lazy(() =>
+  retry(() => import("../pages/AccountPage/index"))
+);
 const InfoPage = lazy(() => retry(() => import("../pages/InfoPage")));
 const CompetePage = lazy(() => retry(() => import("../pages/CompetePage")));
-const MuiOfflinePage = lazy(() => retry(() =>
-  import("../pages/OfflinePage/muiOfflinePage")
-));
-const MuiChangePw = lazy(() => retry(() =>
-  import("../pages/AccountPage/Settings/muiChangePw")
-));
-const MuiChangeDorm = lazy(() => retry(() =>
-  import("../pages/AccountPage/Settings/muiChangeDorm")
-));
-const DeleteAccount = lazy(() => retry(() =>
-  import("../pages/AccountPage/Settings/deleteAccount")
-));
+const MuiOfflinePage = lazy(() =>
+  retry(() => import("../pages/OfflinePage/muiOfflinePage"))
+);
+const MuiChangePw = lazy(() =>
+  retry(() => import("../pages/AccountPage/Settings/muiChangePw"))
+);
+const MuiChangeDorm = lazy(() =>
+  retry(() => import("../pages/AccountPage/Settings/muiChangeDorm"))
+);
+const DeleteAccount = lazy(() =>
+  retry(() => import("../pages/AccountPage/Settings/deleteAccount"))
+);
 
 const ContactPage = lazy(() => import("../pages/InfoPage/fbContactForm"));
 
@@ -128,14 +132,16 @@ function AppBase() {
         {/* <Switch> */}
         {/* For each page's content */}
 
-        <Suspense fallback={
+        <Suspense
+          fallback={
             <>
               <HomeHeader />
               <div className="base-container">
                 <ProgressCircle />
               </div>
             </>
-          }>
+          }
+        >
           <Switch>
             <Redirect exact from={ROUTES.HOME} to={ROUTES.HOME_ACTION} />
             <Route
@@ -146,33 +152,41 @@ function AppBase() {
           </Switch>
         </Suspense>
 
-        <Suspense fallback={
+        <Suspense
+          fallback={
             <>
               <CompeteHeader />
               <div className="base-container">
                 <ProgressCircle />
               </div>
             </>
-          }>
-        <Switch>
-          <Redirect exact from={ROUTES.COMPETE} to={ROUTES.COMPETE_LEADERBOARD} />
-          <Route
-            exact
-            path="/compete/:page?"
-            render={(props) => <CompetePage {...props} />}
-          />
-        </Switch>
+          }
+        >
+          <Switch>
+            <Redirect
+              exact
+              from={ROUTES.COMPETE}
+              to={ROUTES.COMPETE_LEADERBOARD}
+            />
+            <Route
+              exact
+              path="/compete/:page?"
+              render={(props) => <CompetePage {...props} />}
+            />
+          </Switch>
         </Suspense>
 
-        <Suspense fallback={
+        <Suspense
+          fallback={
             <>
               <AccountHeader />
               <div className="base-container">
                 <ProgressCircle />
               </div>
             </>
-          }>
-        <Switch>
+          }
+        >
+          <Switch>
             <Redirect exact from={ROUTES.PROFILE} to={ROUTES.PROFILE_POINT} />
             <Route
               exact
@@ -180,7 +194,7 @@ function AppBase() {
               render={(props) => <AccountPage {...props} />}
             />
           </Switch>
-          </Suspense>
+        </Suspense>
 
         <Suspense
           fallback={
@@ -214,16 +228,6 @@ function AppBase() {
 
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
 
-          <Switch>
-            <Redirect exact from={ROUTES.PROFILE} to={ROUTES.PROFILE_POINT} />
-            <Route
-              exact
-              path="/profile/:page?"
-              render={(props) => <AccountPage {...props} />}
-            />
-          </Switch>
-
-
         </Suspense>
         {/* </Switch> */}
 
@@ -252,4 +256,4 @@ function AppBase() {
 
 const App = withTheme(AppBase);
 export default withAuthentication(App);
-export { retry }
+export { retry };
