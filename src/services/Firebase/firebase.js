@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase, { auth } from 'firebase/app';
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
@@ -25,7 +25,7 @@ app.initializeApp(config);
 // firebase.initializeApp(config)
 const firestore = app.firestore();
 
-
+var UserUidVar;
 
 // sync with firebasse RT database changes
 // NOTE: must refresh page/sign in/sign up to get the updated challenges bc even though local storage updates, 
@@ -43,7 +43,7 @@ async function getChallengeData() {
 }
 getChallengeData();
 
-
+var authUserID;
 
 class Firebase {
   constructor() {
@@ -72,10 +72,12 @@ class Firebase {
 
   // Admin stuff again
   // *** Merge Auth and DB User API *** //
+
  
   onAuthUserListener = (next, fallback) =>
     this.auth.onAuthStateChanged(authUser => {
       if (authUser) {
+        authUserID = authUser.uid
         this.user(authUser.uid)
           .once('value')
           .then(snapshot => {
@@ -94,6 +96,7 @@ class Firebase {
             };
  
             next(authUser);
+
           });
       } else {
         fallback();
@@ -122,6 +125,7 @@ export const createUser = (userEmail, userName, dorm) => {
           userDorm: dorm,
           darkPop_done: false,
           addHomePop_done: false,
+          UserUID: authUserID,
           points: {
               "waterBottle": 0,
               "cmontWalk": 0,
@@ -150,7 +154,7 @@ export const createUser = (userEmail, userName, dorm) => {
             "energy": 0,
             "buzzes":0,
           },
-      });
+      }, {merge: true});
 };
 
 // fetches the user collection from firestore
