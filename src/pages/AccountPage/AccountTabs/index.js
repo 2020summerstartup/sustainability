@@ -5,7 +5,7 @@ import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 import Badges2 from "./badges2";
 // import Badges3 m "./badges3";
-import DarkModeModal from "../../HomePage/darkModeModal";
+import DarkModeModal from "./darkModeModal";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -134,13 +134,13 @@ const AccountTabs = (props) => {
 
   const tabNameToIndex = {
     0: "points",
-    1: "dorm",
+    1: "college",
     2: "badge",
   };
 
   const indexToTabName = {
     points: 0,
-    dorm: 1,
+    college: 1,
     badge: 2,
   };
 
@@ -205,10 +205,10 @@ const AccountTabs = (props) => {
             label={
               <>
                 <div className={classes.tabTextBigScreen}>
-                  <HomeIcon className={classes.tabIcon} /> Your Dorm{" "}
+                  <HomeIcon className={classes.tabIcon} /> Your College{" "}
                 </div>
                 <div className={classes.tabTextSmallScreen}>
-                  <HomeIcon className={classes.tabIcon} /> Dorm{" "}
+                  <HomeIcon className={classes.tabIcon} /> Mudd{" "}
                 </div>
               </>
             }

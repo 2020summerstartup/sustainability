@@ -485,7 +485,7 @@ function HomePage(props) {
   const [value, setValue] = React.useState(indexToTabName[page]);
   const [expandedId, setExpandedId] = React.useState(-1);
   // const [height, setHeight] = React.useState("");
-  const [filter, setFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
   // const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top"});
@@ -514,12 +514,12 @@ function HomePage(props) {
   };
 
   const handleSearchChange = (e) => {
-    setFilter(e.target.value);
+    setSearchQuery(e.target.value);
   };
 
   const filteredOptions = ActionData.filter(
     (action) =>
-      action.title.toLowerCase().includes(filter.toLowerCase()) || !filter
+      action.title.toLowerCase().includes(searchQuery.toLowerCase()) || !searchQuery
   );
 
   var tempMastered = localStorage.getItem("firestoreMastered");
@@ -964,7 +964,7 @@ function HomePage(props) {
                   (action, i) =>
                     action.title
                       .toLowerCase()
-                      .includes(filter.toLowerCase()) && (
+                      .includes(searchQuery.toLowerCase()) && (
                       <Grid item xs={12} md={6} lg={4} key={i}>
                         <Card className={classes.root}>
                           <CardHeader
@@ -1046,11 +1046,11 @@ function HomePage(props) {
                     )
                 )
               ) : (
-                  <>
-                    <Typography variant="h6" gutterBottom>Sorry no actions found for "{filter}" 😢</Typography>
-                    <Typography variant="body1">
-                      Feel free to fill out the "contact us" form in settings if you would
-                    like us to add "{filter}" as a sustainable action!
+                <>
+                  <Typography variant="h6" gutterBottom>Sorry no actions found for "{searchQuery}" 😢</Typography>
+                  <Typography variant="body1">
+                    Feel free to fill out the "contact us" form in settings if you would
+                    like us to add "{searchQuery}" as a sustainable action!
                   </Typography>
                   </>
                 )}
