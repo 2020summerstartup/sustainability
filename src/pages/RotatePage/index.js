@@ -75,7 +75,7 @@ export class Rotate extends Component {
             subtitle="Encourage your dorm friends to be more eco-friendly!"
           />
           <Slide
-              media={<img src={addGif} class="snapgrid" style={{
+              media={<img alt="" src={addGif} class="snapgrid" style={{
                 marginTop: "2rem",
                 margin: "auto",
                 height: "auto",
