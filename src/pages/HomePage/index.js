@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
-import { retry } from "../../App/index"
+import { retry } from "../../App/index";
 import ProgressCircle from "../../components/ProgressCircle";
 import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
 import styles from "./badgeDarkModal.module.css";
@@ -86,7 +86,6 @@ import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 import increment from "../../sounds/navigation_selection-complete-celebration.wav";
 
-
 // Lazy load the fave card
 const FavoriteCard = lazy(() => retry(() => import("./faveCard.js")));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
@@ -124,59 +123,64 @@ var FavsArray = [];
 // called when a user favorites an action, adds all necessary data for the action to the array
 const addToFavsArray = (action) => {
   // finds the index of the action's object in the array of favorited activities
-  var index = FavsArray.map(function(x) {return x.susAction;}).indexOf(action.susAction)
-  // if the action is not currently favorited, get its action data and add it to favorites array 
-  if ( index < 0){
-  var FavAdd = {
-    "title": action.title,
-    "id": action.id,
-    "points": action.points,
-    "susAction": action.susAction,
-    "badgeName": action.badgeName,
-    "toMaster": action.toMaster,
-    "coEmiss": action.coEmiss,
-    "energy": action.energy,
-    "water": action.water,
-    "image": action.image,
-    "impact": action.impact,
+  var index = FavsArray.map(function (x) {
+    return x.susAction;
+  }).indexOf(action.susAction);
+  // if the action is not currently favorited, get its action data and add it to favorites array
+  if (index < 0) {
+    var FavAdd = {
+      title: action.title,
+      id: action.id,
+      points: action.points,
+      susAction: action.susAction,
+      badgeName: action.badgeName,
+      toMaster: action.toMaster,
+      coEmiss: action.coEmiss,
+      energy: action.energy,
+      water: action.water,
+      image: action.image,
+      impact: action.impact,
+    };
+    // add new action data to favroites array
+    FavsArray.push(FavAdd);
   }
-  // add new action data to favroites array
-  FavsArray.push(FavAdd);
-}
-}
+};
 
 // called when a user unfavorites an action, removes the action & its data from the favorites array
 const removeFromFavsArray = (action) => {
   // find the index of the action's object in the favorites array
-  var index = FavsArray.map(function(x) {return x.susAction;}).indexOf(action.susAction)
+  var index = FavsArray.map(function (x) {
+    return x.susAction;
+  }).indexOf(action.susAction);
   // if action is currently in favorites array, remove it
-  if (index > -1){
-    FavsArray.splice(index, 1)
-  } 
-}
+  if (index > -1) {
+    FavsArray.splice(index, 1);
+  }
+};
 
-// called when the user signs in & up --> gets favorited actions from firestore and sets up FavsArray 
+// called when the user signs in & up --> gets favorited actions from firestore and sets up FavsArray
 const initalizeFavs = (data) => {
   // sets firestore array containing favorited actions equal to var firestoreFavs
   var firestoreFavs = data.favorites;
   // puts array of favorited action in local storage
   localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
-  // gets the actionTitle from FavsArray 
-  // note: this is part of a check for if assignData runs once the user has signed in/up --> was doing it for me but theroetically 
+  // gets the actionTitle from FavsArray
+  // note: this is part of a check for if assignData runs once the user has signed in/up --> was doing it for me but theroetically
   // should not happen
-  var actionTitle = FavsArray.map(function(x) {return x.susAction;})
-  ActionData.forEach( (action) => {
-    // if action has been favorited previously 
-    if (firestoreFavs.includes(action.susAction)){
+  var actionTitle = FavsArray.map(function (x) {
+    return x.susAction;
+  });
+  ActionData.forEach((action) => {
+    // if action has been favorited previously
+    if (firestoreFavs.includes(action.susAction)) {
       // if action has not already been added to FavsArray --> prevents duplicate action cards appearing (part of safety check)
-      if (FavsArray.includes(JSON.stringify(actionTitle)) === false ){
+      if (FavsArray.includes(JSON.stringify(actionTitle)) === false) {
         // if the action needs to be added to FavsArray, add it
-      addToFavsArray(action)
+        addToFavsArray(action);
       }
     }
   });
-}
-
+};
 
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
 // should only be called when page first loads, not when points are increment
@@ -194,7 +198,7 @@ const assignData = (data) => {
   }
   // initialize favorite actions
   initalizeFavs(data);
-}
+};
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
 
@@ -202,7 +206,7 @@ Modal.setAppElement("#root"); // Need this for modal to not get error in console
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
-  return ( 
+  return (
     <div
       role="tabpanel"
       hidden={value !== index}
@@ -499,8 +503,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
 // Text to display on the homepage
 function HomePage(props) {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
@@ -568,6 +570,11 @@ function HomePage(props) {
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
   };
+
+  const filteredOptions = ActionData.filter(
+    (action) =>
+      action.title.toLowerCase().includes(filter.toLowerCase()) || !filter
+  );
 
   var tempMastered = localStorage.getItem("firestoreMastered");
   var firestoreMastered = [];
@@ -685,12 +692,10 @@ function HomePage(props) {
     setBadgeModalIsOpen(false);
   };
 
-
-
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
-  var tempFavs = localStorage.getItem("firestoreFavs"); //favorited actions from firestore 
+  var tempFavs = localStorage.getItem("firestoreFavs"); //favorited actions from firestore
   for (const el in ActionData) {
     // Iterate over every action in ActionData
     var action = ActionData[el]; // Take the current action
@@ -702,7 +707,7 @@ function HomePage(props) {
     }
   }
 
-   // to flip the status of favorited action --> so that color changes
+  // to flip the status of favorited action --> so that color changes
   const favAction = (action) => {
     // variable set later depending on the message we want the user to see when they click the heart to fav
     var displayText;
@@ -710,9 +715,11 @@ function HomePage(props) {
       "favoriteIcon".concat(action.susAction)
     );
     // puts current favorited actions in an array consistign of just their names
-    tempFavs = FavsArray.map(function(x) {return x.susAction;}) 
-    // if array of favorited action includes the selected action 
-    if (tempFavs.includes(action.susAction)){
+    tempFavs = FavsArray.map(function (x) {
+      return x.susAction;
+    });
+    // if array of favorited action includes the selected action
+    if (tempFavs.includes(action.susAction)) {
       // action has previouslly been favorited, unfavorite it!
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Turn heart gray
@@ -728,7 +735,7 @@ function HomePage(props) {
       playSound(likeAudio);
       toast.warn(displayText, { autoClose: 3000 }); // It's a warning so that the window is yellow
       // add favorited action to array & update firestore & local storage
-      addToFavsArray(action)
+      addToFavsArray(action);
       addFav(authContext.email, action.susAction);
     }
   };
@@ -770,17 +777,16 @@ function HomePage(props) {
 
   // HTML to be displayed
   return (
-
     <>
       <>
-      <AppBar position="static">
-        <Toolbar className={classes.toolbar}>
-          <SusLogo3 className={classes.logo} />
-          <Typography className={classes.title} variant="h6">
-            Home
-          </Typography>
-        </Toolbar>
-        {/* <AppBar
+        <AppBar position="static">
+          <Toolbar className={classes.toolbar}>
+            <SusLogo3 className={classes.logo} />
+            <Typography className={classes.title} variant="h6">
+              Home
+            </Typography>
+          </Toolbar>
+          {/* <AppBar
           position="static"
           color="primary"
           elevation={0}
@@ -924,7 +930,7 @@ function HomePage(props) {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-              // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
+                // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -993,85 +999,100 @@ function HomePage(props) {
             {/* Card for actions */}
             <Grid container justify="center" spacing={2}>
               {/* All actions (this loops using search) */}
-              {ActionData.map(
-                (action, i) =>
-                  action.title.toLowerCase().includes(filter.toLowerCase()) && (
-                    <Grid item xs={12} md={6} lg={4} key={i}>
-                      <Card className={classes.root}>
-                        <CardHeader
-                          className={classes.cardContent}
-                          action={
-                            <IconButton
-                              disabled={firestoreMastered.includes(
-                                action.susAction
-                              )}
-                              onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
-                              aria-label="increment"
-                              title="Complete this sustainable action"
-                            >
-                              <AddCircleIcon fontSize="large" />
-                            </IconButton>
-                          }
-                          title={action.title}
-                          subheader={"Earn ".concat(action.points, " Points!")}
-                        />
+              {filteredOptions.length ? (
+                ActionData.map(
+                  (action, i) =>
+                    action.title
+                      .toLowerCase()
+                      .includes(filter.toLowerCase()) && (
+                      <Grid item xs={12} md={6} lg={4} key={i}>
+                        <Card className={classes.root}>
+                          <CardHeader
+                            className={classes.cardContent}
+                            action={
+                              <IconButton
+                                disabled={firestoreMastered.includes(
+                                  action.susAction
+                                )}
+                                onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
+                                aria-label="increment"
+                                title="Complete this sustainable action"
+                              >
+                                <AddCircleIcon fontSize="large" />
+                              </IconButton>
+                            }
+                            title={action.title}
+                            subheader={"Earn ".concat(
+                              action.points,
+                              " Points!"
+                            )}
+                          />
 
-                        <CardActions
-                          disableSpacing
-                          className={classes.cardActions}
-                        >
-                          <IconButton
-                            title="Add to favorites"
-                            aria-label="add to favorites"
-                            style={{
-                              color: favIconColors[i - 1],
-                            }} // Set the favIcon color (i-1 prevents off-by-one error)
-                            onClick={() => favAction(action)}
-                            id={"favoriteIcon".concat(action.susAction)}
-                            className={classes.favoriteIcon}
+                          <CardActions
+                            disableSpacing
+                            className={classes.cardActions}
                           >
-                            <FavoriteIcon />
-                          </IconButton>
-                          <IconButton
-                            className={clsx(classes.expand, {
-                              [classes.expandOpen]: !expandedId,
-                            })}
-                            onClick={() => {
-                              handleExpandClick(i);
-                            }}
-                            aria-expanded={expandedId === i}
-                            aria-label="Show More"
-                            title="Learn more"
-                          >
-                            <ExpandMoreIcon />
-                          </IconButton>
-                        </CardActions>
-                        <Collapse
-                          in={expandedId === i}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          <CardContent>
-                            <CardMedia
-                              className={classes.media}
-                              image={action.image}
-                              title={action.title}
-                            />
-                            <Typography
-                              variant="h5"
-                              component={"span"}
-                              gutterBottom
+                            <IconButton
+                              title="Add to favorites"
+                              aria-label="add to favorites"
+                              style={{
+                                color: favIconColors[i - 1],
+                              }} // Set the favIcon color (i-1 prevents off-by-one error)
+                              onClick={() => favAction(action)}
+                              id={"favoriteIcon".concat(action.susAction)}
+                              className={classes.favoriteIcon}
                             >
-                              Environmental Impact:
-                            </Typography>
-                            <Typography variant="body1">
-                              {action.impact}
-                            </Typography>
-                          </CardContent>
-                        </Collapse>
-                      </Card>
-                    </Grid>
-                  )
+                              <FavoriteIcon />
+                            </IconButton>
+                            <IconButton
+                              className={clsx(classes.expand, {
+                                [classes.expandOpen]: !expandedId,
+                              })}
+                              onClick={() => {
+                                handleExpandClick(i);
+                              }}
+                              aria-expanded={expandedId === i}
+                              aria-label="Show More"
+                              title="Learn more"
+                            >
+                              <ExpandMoreIcon />
+                            </IconButton>
+                          </CardActions>
+                          <Collapse
+                            in={expandedId === i}
+                            timeout="auto"
+                            unmountOnExit
+                          >
+                            <CardContent>
+                              <CardMedia
+                                className={classes.media}
+                                image={action.image}
+                                title={action.title}
+                              />
+                              <Typography
+                                variant="h5"
+                                component={"span"}
+                                gutterBottom
+                              >
+                                Environmental Impact:
+                              </Typography>
+                              <Typography variant="body1">
+                                {action.impact}
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </Grid>
+                    )
+                )
+              ) : (
+                <>
+                  <Typography variant="h6" gutterBottom>Sorry no actions found for "{filter}" 😢</Typography>
+                  <Typography variant="body1">
+                    Feel free to fill out the "contact us" form in settings if you would
+                    like us to add "{filter}" as a sustainable action!
+                  </Typography>
+                </>
               )}
             </Grid>
           </Fragment>
@@ -1098,86 +1119,83 @@ function HomePage(props) {
                     className={classes.actionContainer}
                   >
                     {/* Favorite actions (this loops using favs) */}
-                    {FavsArray.map(
-                      (action, i) =>
-                        (
-                          <Grid item xs={12} md={6} lg={4} key={i}>
-                            <Card className={classes.root}>
-                              <CardHeader
-                                className={classes.cardContent}
-                                action={
-                                  <IconButton
-                                    disabled={firestoreMastered.includes(
-                                      action.susAction
-                                    )}
-                                    onClick={() => confirmIncrement(action)}
-                                    // Finally found how to get rid of random old green from click and hover!
-                                    style={{ backgroundColor: "transparent" }}
-                                    aria-label="settings"
-                                    title="Complete this sustainable action"
-                                  >
-                                    <AddCircleIcon fontSize="large" />
-                                  </IconButton>
-                                }
-                                title={action.title}
-                                subheader={"Earn ".concat(
-                                  action.points,
-                                  " Points!"
+                    {FavsArray.map((action, i) => (
+                      <Grid item xs={12} md={6} lg={4} key={i}>
+                        <Card className={classes.root}>
+                          <CardHeader
+                            className={classes.cardContent}
+                            action={
+                              <IconButton
+                                disabled={firestoreMastered.includes(
+                                  action.susAction
                                 )}
-                              />
-                              <CardActions disableSpacing>
-                                <IconButton
-                                  title="Add to favorites"
-                                  aria-label="add to favorites"
-                                  style={{
-                                    color: "var(--theme-secondary)",
-                                    backgroundColor: "transparent",
-                                  }} // Set the favIcon color (i-1 prevents off-by-one error)
-                                  onClick={() => favAction(action)}
-                                  id={"favoriteIcon".concat(action.susAction)}
-                                  className={classes.favoriteIcon}
-                                >
-                                  <FavoriteIcon />
-                                </IconButton>
-                                <IconButton
-                                  className={clsx(classes.expand, {
-                                    [classes.expandOpen]: !expandedId,
-                                  })}
-                                  onClick={() => handleExpandClick(i)}
-                                  aria-expanded={expandedId === i}
-                                  aria-label="Show More"
-                                  title="Learn more"
-                                >
-                                  <ExpandMoreIcon />
-                                </IconButton>
-                              </CardActions>
-                              <Collapse
-                                in={expandedId === i}
-                                timeout="auto"
-                                unmountOnExit
+                                onClick={() => confirmIncrement(action)}
+                                // Finally found how to get rid of random old green from click and hover!
+                                style={{ backgroundColor: "transparent" }}
+                                aria-label="settings"
+                                title="Complete this sustainable action"
                               >
-                                <CardContent>
-                                  <CardMedia
-                                    className={classes.media}
-                                    image={action.image}
-                                    title={action.title}
-                                  />
-                                  <Typography
-                                    variant="h5"
-                                    component={"span"}
-                                    gutterBottom
-                                  >
-                                    Environmental Impact:
-                                  </Typography>
-                                  <Typography component={"span"}>
-                                    {action.impact}
-                                  </Typography>
-                                </CardContent>
-                              </Collapse>
-                            </Card>
-                          </Grid>
-                        )
-                    )}
+                                <AddCircleIcon fontSize="large" />
+                              </IconButton>
+                            }
+                            title={action.title}
+                            subheader={"Earn ".concat(
+                              action.points,
+                              " Points!"
+                            )}
+                          />
+                          <CardActions disableSpacing>
+                            <IconButton
+                              title="Add to favorites"
+                              aria-label="add to favorites"
+                              style={{
+                                color: "var(--theme-secondary)",
+                                backgroundColor: "transparent",
+                              }} // Set the favIcon color (i-1 prevents off-by-one error)
+                              onClick={() => favAction(action)}
+                              id={"favoriteIcon".concat(action.susAction)}
+                              className={classes.favoriteIcon}
+                            >
+                              <FavoriteIcon />
+                            </IconButton>
+                            <IconButton
+                              className={clsx(classes.expand, {
+                                [classes.expandOpen]: !expandedId,
+                              })}
+                              onClick={() => handleExpandClick(i)}
+                              aria-expanded={expandedId === i}
+                              aria-label="Show More"
+                              title="Learn more"
+                            >
+                              <ExpandMoreIcon />
+                            </IconButton>
+                          </CardActions>
+                          <Collapse
+                            in={expandedId === i}
+                            timeout="auto"
+                            unmountOnExit
+                          >
+                            <CardContent>
+                              <CardMedia
+                                className={classes.media}
+                                image={action.image}
+                                title={action.title}
+                              />
+                              <Typography
+                                variant="h5"
+                                component={"span"}
+                                gutterBottom
+                              >
+                                Environmental Impact:
+                              </Typography>
+                              <Typography component={"span"}>
+                                {action.impact}
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </Grid>
+                    ))}
                   </Grid>
                 </>
               )}
