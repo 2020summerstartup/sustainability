@@ -3,7 +3,7 @@ import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 // import suslogoImg from "../../img/suslogo.svg";
 import suslogoroundImg from "../../img/suslogo_roundedcorners.svg";
 import pointsGif from "../../img/points.gif";
-// import addGif from "../../img/add.gif";
+import addGif from "../../img/add.gif";
 // import First from './first.png';
 // import Login from './login.gif';
 // import Swipe from './Swipe.png';
@@ -29,6 +29,7 @@ export class Rotate extends Component {
           mobile={true}
           label="Get started"
           onStart={() => (window.location.href = "/signup")}
+          
         >
           <Slide
 
@@ -74,7 +75,13 @@ export class Rotate extends Component {
             subtitle="Encourage your dorm friends to be more eco-friendly!"
           />
           <Slide
-            //   media={<img src={Result} class="snapgrid" />}
+              media={<img src={addGif} class="snapgrid" style={{
+                marginTop: "2rem",
+                margin: "auto",
+                height: "auto",
+                width: "auto",
+              }}
+            />}
             mediaBackgroundStyle={{ backgroundColor: "#4fb35b" }}
             style={{ backgroundColor: "#4fb35b" }}
             title="Add to Home Screen!"

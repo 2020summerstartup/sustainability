@@ -1,9 +1,10 @@
+import styles from "./modal.module.css";
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
 import { retry } from "../../App/index";
 import ProgressCircle from "../../components/ProgressCircle";
 import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
-import styles from "./badgeDarkModal.module.css";
+// import styles from "./badgeDarkModal.module.css";
 
 // import FavoriteCard from "./faveCard";
 import actionTab from "../../img/actionTab.svg";
@@ -181,7 +182,7 @@ const initalizeFavs = (data) => {
       }
     }
   });
-};
+}
 
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
 // should only be called when page first loads, not when points are increment
@@ -190,6 +191,8 @@ const assignData = (userData) => {
   localStorage.setItem("dorm", userData.userDorm);
   localStorage.setItem("name", userData.name);
   localStorage.setItem("total", userData.total);
+  localStorage.setItem("darkPop_done", userData.darkPop_done);
+  localStorage.setItem("addHomePop_done", userData.addHomePop_done);
   // initialize mastered action
   var firestoreMastered = userData.masteredActions;
   localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
