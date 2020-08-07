@@ -41,7 +41,21 @@ const useStyles = makeStyles((theme) => ({
 
 function BottomNavAuth() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const pathname = window.location.pathname;
+  
+  const tabNameToIndex = (pathname) => {
+    if (pathname.includes("home")){
+      return 0
+    }
+    if (pathname.includes("compete")){
+      return 1
+    }
+    if (pathname.includes("profile")){
+      return 2
+    }
+  };
+  
+  const [value, setValue] = React.useState(tabNameToIndex(pathname));
 
   return (
     <BottomNavigation
