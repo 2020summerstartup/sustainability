@@ -93,10 +93,10 @@ export default function DarkModeModal() {
                 </h1>
               </div>
             </DialogContentText>
-            <DarkLogo className={classes.badgeImg} />
+            <img src={DarkLogo} className={classes.badgeImg} />
             <DialogContentText id="alert-dialog-description">
               <Typography variant="body1" className={classes.textTitle}>
-                Make sure you checkout our cool feature!{" "}
+                Make sure you check out our cool feature!{" "}
               </Typography>
               <Typography variant="body2" className={classes.textBody}>
                 You can now switch from Light Mode to Dark Mode! Just click on
