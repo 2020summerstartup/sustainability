@@ -121,6 +121,7 @@ export const createUser = (userEmail, userName, dorm) => {
           masteredActions: [],
           userDorm: dorm,
           darkPop_done: false,
+          addHomePop_done: false,
           points: {
               "waterBottle": 0,
               "cmontWalk": 0,
