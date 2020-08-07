@@ -18,6 +18,8 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {
   updateUserPoint,
   updateDormPoint,
+  addFav,
+  deleteFav,
   actionMastered,
   updateUserImpact,
   updateSchoolImpact
