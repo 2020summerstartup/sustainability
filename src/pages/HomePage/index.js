@@ -671,11 +671,13 @@ function HomePage(props) {
     // Notify user that action was added/removed from favorites
     var displayText;
     if (storedFav) {
+      // if the action is now favoirted 
       displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#f48fb1"; // Turn red
       playSound(likeAudio);
       toast.success(displayText, { autoClose: 5000 });
     } else {
+      // if the action is now unfavorited
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
       playSound(unlikeAudio);
