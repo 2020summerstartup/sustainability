@@ -24,13 +24,19 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import leaderBoardUpdate, {
   assignRanking,
 } from "../../CompetePage/leaderBoardUpdate";
-import { getDorm } from "../../../services/Firebase";
+import { getDorm, getSchoolImpact } from "../../../services/Firebase";
 
 import styles from "./totalBuzz.module.css";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
+
+import Reward from "react-rewards";
+import styles1 from "./envImpactCards.module.css";
+
+getSchoolImpact();
+// synchronize school's total impact with firestore, when they remain on the page, they will not see immediate changes that other users 
+// make but each time to return to the page, this function will run and new school impact points will be determined 
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -70,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-var rank;
+
 var dormName = localStorage.getItem("dorm");
 if (dormName !== "") {
   getDorm()
@@ -81,18 +87,24 @@ if (dormName !== "") {
 }
 leaderBoardUpdate();
 
+
+// set global variable var to be displayed on pink card --> total school buzzes & assocaited text 
+// May consider removing this later because it doesn't really seem like it would be that big of an issue & would likely only appear 
+// for a few people only momentarily 
 var totalBuzzText;
 const totalBuzzDisplay = () => {
   if ( localStorage.getItem('SchoolBuzzes') === 1 ) {
-    totalBuzzText = <Typography variant="body4">Logged 1 Action!</Typography>
+    // if school has only logged one action, display this text
+    totalBuzzText = <Typography variant="h5">Logged 1 Action!</Typography>
   } else {
-    totalBuzzText = <Typography variant="body4">Logged {localStorage.getItem('SchoolBuzzes')} Action!</Typography>
+    // once school has logged for than one action, dispaly this text
+    totalBuzzText = <Typography variant="h5">Logged <b>{localStorage.getItem('SchoolBuzzes')}</b> Actions!</Typography>
   }
 }
 
-totalBuzzDisplay();
 
-
+// dynamically render the text displayed for the user dorm's place depending on the ranking of their dorm 
+var rank;
 const rankDisplay = () => {
   if (parseInt(localStorage.getItem("ranking")) === 1) {
     rank = <p>You're in 1st place!</p>;
@@ -105,11 +117,139 @@ const rankDisplay = () => {
   }
 };
 
+
+// these variables will be use to render the cards in class EnvImpactCards
+let colors = ["yellow", "green", "blue"];
+let coEmissImpact = localStorage.getItem("SchoolCoEmiss");
+let energyImpact = localStorage.getItem("SchoolEnergy");
+let waterImpact = localStorage.getItem("SchoolWater");
+
+
+// cards to be rendered on the points page in account
+class EnvImpactCards extends React.Component {
+  constructor() {
+    super();
+  
+    this.state = {
+      cards: [],
+      coEmiss: coEmissImpact,
+      energy: energyImpact,
+      water: waterImpact,
+    };
+
+    this.getData = this.getData.bind(this);
+  }
+
+
+ 
+  useStyles = (theme) => ({
+    color: {
+      "&:after": {
+        backgroundColor: `${colors}`,
+      },
+    },
+  });
+  
+
+  getData() {
+    let data = {
+      success: true,
+      cards: [
+        {
+          id: 1,
+          title: `Saved ${this.state.coEmiss} pounds of CO2!`,
+          colorStyling: null,
+        },
+        {
+          id: 2,
+          title: `Conserved ${this.state.energy} kilojoules of energy!`,
+          colorStyling: null,
+        },
+        {
+          id: 3,
+          title: `Conserved ${this.state.water} gallons of water!`,
+          colorStyling: null,
+        },
+      ],
+    };
+    data.cards.forEach((card, id) => {
+      if (id === 0) {
+        card.colorStyling = styles1.co2;
+      }
+      if (id === 1) {
+        card.colorStyling = styles1.energy;
+      }
+      if (id === 2) {
+        card.colorStyling = styles1.water;
+      }
+    });
+    this.setState({
+      cards: data.cards,
+    });
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+  
+
+
+  render() {
+    return (
+      <Grid
+        container
+        justify="center"
+        spacing={2}
+        style={{ marginTop: "2rem", overflow: "hidden !important" }}
+      >
+        {this.state.cards ? (
+          this.state.cards.map((card, i) => (
+            <Grid item xs={12} md={6} key={i}>
+              <Reward
+                ref={(ref) => {
+                  this.reward = ref;
+                }}
+                type="confetti"
+                config={{
+                  springAnimation: false,
+                  elementCount: 300,
+                  startVelocity: 40,
+                  spread: 90,
+                }}
+              >
+                <div>
+                  <div
+                    id={card.id}
+                    key={card.id}
+                    style={{ cursor: "pointer" }}
+                    className={`${styles.burstShape} ${card.colorStyling}`}
+                    onClick={() => this.reward.rewardMe(card.id)}
+                  >
+                    <Grid container justify="center">
+                      <Typography variant="h5">{card.title}</Typography>
+                    </Grid>
+                  </div>
+                </div>
+              </Reward>
+            </Grid>
+          ))
+        ) : (
+          <div className="empty">
+            Sorry no information is currently available
+          </div>
+        )}
+      </Grid>
+    );
+  }
+}
+
 export const DormCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
 
+  // update the dorm rank text & total school buzz text
   rankDisplay();
+  totalBuzzDisplay();
   return (
     <AuthUserContext.Consumer>
       {(authUser) => (
@@ -160,17 +300,22 @@ export const DormCard = React.memo(function GalaxyCard() {
           justify="center"
           style={{ placeItems: "center", marginBottom: "0.5rem"}}
         >
-          <Typography variant="h5">As a school we have...</Typography>
+          <Typography variant="body2">As a school, we have...</Typography>
           <Grid container justify="center">
             {totalBuzzText}
           </Grid>
         </Grid>
       </div>
+      <EnvImpactCards />
         </>
       )}
     </AuthUserContext.Consumer>
   );
 });
+
+
+
+
 
 
 
