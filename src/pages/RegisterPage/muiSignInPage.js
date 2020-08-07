@@ -7,7 +7,7 @@ import { compose } from "recompose";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import { withFirebase, getUser, getUserImpact } from "../../services/Firebase";
+import { withFirebase, getUser, getUserImpact, getSchoolImpact } from "../../services/Firebase";
 import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/login3.svg";
@@ -30,6 +30,8 @@ const SignInPage = () => (
     <SignInForm />
   </div>
 );
+
+
 
 class PasswordInput extends Component {
   constructor(props) {
@@ -106,6 +108,7 @@ class SignInFormBase extends Component {
       .then( () => {
         // initalizes user's impact points in local storage 
         getUserImpact(email);
+        getSchoolImpact();
         this.setState({ ...INITIAL_STATE });
         // takes user to home page
         this.props.history.push(ROUTES.HOME);
