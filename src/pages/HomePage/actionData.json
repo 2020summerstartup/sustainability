@@ -86,7 +86,7 @@
     "toMaster": 30,
     "coEmiss": 1,
     "energy": 0,
-    "water": 0,
+    "water": 2,
     "image": "https://images.unsplash.com/photo-1529942376973-7dd96721339c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Reducing food waste is environmentally important as it keeps food out of landfills. It makes economic sense at the small scale, by lowering household food bills and at the large scale by reducing disposal costs for restaurants, processors and farmers. Finally, reducing food waste is socially important when the rescued food is redirected to emergency food providers working to eliminate hunger in our communities."
   },
@@ -112,7 +112,7 @@
     "toMaster": 20,
     "coEmiss": 0,
     "energy": 0,
-    "water": 0,
+    "water": 5,
     "image": "https://images.unsplash.com/photo-1583907659441-addbe699e921?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Shifting to eco-friendly cleaning products and methods is a sure way of ensuring that we live in healthy, clean and toxic-free environments."
   },
@@ -139,7 +139,7 @@
     "toMaster": 15,
     "coEmiss": 0,
     "energy": 5,
-    "water": 50,
+    "water": 15,
     "image": "https://images.unsplash.com/photo-1521335629791-ce4aec67dd15?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
     "impact": "Opting to purchase your clothing second-hand (and avoiding fast-fashion) reduces your carbon footprint. You'll also save lots of money!"
   },
@@ -179,7 +179,7 @@
     "toMaster": 15,
     "coEmiss": 0,
     "energy": 6,
-    "water": 1,
+    "water": 7,
     "image": "https://images.unsplash.com/photo-1517241165176-52610c81d064?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Many students have the own dishes and utensils. Help minimize the number of single use products at dorm BBQs by bringing your own utensils and plates!"
   },
@@ -205,7 +205,7 @@
     "toMaster": 25,
     "coEmiss": 0,
     "energy": 0,
-    "water": 1,
+    "water": 8,
     "image": "https://images.unsplash.com/photo-1530984575892-9c76ba2d187e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "The average American's shower last for about 8 minutes and uses about 17 gallons of water. Taking shorter showers will help decrease your water usage!"
   },
@@ -218,7 +218,7 @@
     "toMaster": 10,
     "coEmiss": 0,
     "energy": 5,
-    "water": 50,
+    "water": 15,
     "image": "https://images.unsplash.com/photo-1551867356-29c991e1e8d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
     "impact": "Donating your gently used items to non-profit organizations such as GoodWill or Salvation Army will help extend the item's life. You are not only helping to reduce our reliance on single use products and fast fashion, but you are also likely helping those less fortunate than you!"
   },

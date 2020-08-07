@@ -7,12 +7,13 @@ import { withStyles } from "@material-ui/core/styles";
 
 var totalBuzzText;
 const totalBuzzDisplay = () => {
-  if ( localStorage.getItem('buzzes') === 1 ) {
+  if ( JSON.parse(localStorage.getItem('buzzes')) === 1 ) {
     totalBuzzText = <Typography variant="h5">Action Logged!</Typography>
   } else {
     totalBuzzText = <Typography variant="h5">Actions Logged!</Typography>
   }
 }
+totalBuzzDisplay();
 
 const useStyles = (theme) => ({
   //   borderBottom: {
@@ -41,7 +42,7 @@ class TotalBuzz extends React.Component {
           >
             {localStorage.getItem("buzzes")}
           </Typography>
-          <Typography variant="h5">Action(s) Logged!</Typography>
+          {totalBuzzText}
           <Grid container justify="center">
             <Typography variant="body2">
               Click impact cards below for a fun surprise!
