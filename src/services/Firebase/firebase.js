@@ -120,6 +120,8 @@ export const createUser = (userEmail, userName, dorm) => {
           favorites: [],
           masteredActions: [],
           userDorm: dorm,
+          darkPop_done: false,
+          addHomePop_done: false,
           points: {
               "waterBottle": 0,
               "cmontWalk": 0,
@@ -250,6 +252,12 @@ export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact)
   })
 }
 
+export const DarkModeOpened = (userEmail) => {
+  localStorage.setItem('darkPop_done', true)
+  return firestore.doc('users/' + userEmail).update({
+    "darkPop_done": true,
+  })
+}
 export const updateSchoolImpact = (coImpact, energyImpact, waterImpact) => {
   // updates local storage with incremented impact data
   localStorage.setItem('SchoolCoEmiss', (parseInt(localStorage.getItem('SchoolCoEmiss'))+ parseInt(coImpact)));
@@ -263,6 +271,13 @@ return firestore.collection('dorms').doc('wholeSchool').update({
   'water': app.firestore.FieldValue.increment(waterImpact),
   'buzzes': app.firestore.FieldValue.increment(1),
 })
+}
+
+export const AddHomeOpened = (userEmail) => {
+  localStorage.setItem('addHomePop_done', true)
+  return firestore.doc('users/' + userEmail).update({
+    "addHomePop_done": true,
+  })
 }
 
 // gets user's impact data from firestore and sets in in local storage

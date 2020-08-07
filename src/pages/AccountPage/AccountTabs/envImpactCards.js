@@ -20,6 +20,44 @@ const useStyles = (theme) => ({
   },
 });
 
+// Change message depending on number of pounds
+var theCO;
+var theEnergy;
+var theH2O;
+const CODisplay = () => {
+  if (parseInt(coEmissImpact) === 0) {
+    theCO = "Pounds of CO2 saved! It's fine...😐"
+  } else if (parseInt(coEmissImpact) === 1) {
+    theCO = "Pound of CO2 saved!"
+  } else {
+    theCO = "Pounds of CO2 saved!"
+  }
+};
+
+const EnergyDisplay = () => {
+  if (parseInt(energyImpact) === 0) {
+    theEnergy = "Kilojoules of energy conserved! It's fine...😐"
+  } else if (parseInt(coEmissImpact) === 1) {
+    theEnergy = "Kilojoule of energy conserved!"
+  } else {
+    theEnergy = "Kilojoules of energy conserved!"
+  }
+};
+
+const H2ODisplay = () => {
+  if (parseInt(waterImpact) === 0) {
+    theH2O = "Gallons of water saved! It's fine...😐"
+  } else if (parseInt(waterImpact) === 1) {
+    theH2O = "Gallon of water saved!"
+  } else {
+    theH2O = "Gallons of water saved"
+  }
+};
+
+CODisplay();
+EnergyDisplay();
+H2ODisplay();
+
 // cards to be rendered on the points page in account
 class EnvImpactCards extends React.Component {
   constructor() {
@@ -62,13 +100,15 @@ class EnvImpactCards extends React.Component {
         {
           id: 2,
           score: this.state.energy,
-          title: "Kilojoules of energy conserved!",
+          // title: "Kilojoules of energy conserved!",
+          title: `${theEnergy}`,
           colorStyling: null,
         },
         {
           id: 3,
           score: this.state.water,
-          title: "Gallons of water conserved!",
+          // title: "Gallons of water conserved!",
+          title: `${theH2O}`,
           colorStyling: null,
         },
       ],

@@ -1,0 +1,52 @@
+[debug] [2020-08-06T22:11:52.121Z] ----------------------------------------------------------------------
+[debug] [2020-08-06T22:11:52.123Z] Command:       /usr/local/bin/firebase /Users/koberico/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase functions:shell
+[debug] [2020-08-06T22:11:52.123Z] CLI Version:   8.4.3
+[debug] [2020-08-06T22:11:52.123Z] Platform:      darwin
+[debug] [2020-08-06T22:11:52.123Z] Node Version:  v12.16.1
+[debug] [2020-08-06T22:11:52.128Z] Time:          Thu Aug 06 2020 15:11:52 GMT-0700 (Pacific Daylight Time)
+[debug] [2020-08-06T22:11:52.129Z] ----------------------------------------------------------------------
+[debug] [2020-08-06T22:11:52.129Z] 
+[debug] [2020-08-06T22:11:52.141Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-08-06T22:11:52.142Z] > authorizing via signed-in user
+[debug] [2020-08-06T22:11:52.142Z] [iam] checking project sustainabilitycompetition for permissions ["firebase.projects.get"]
+[debug] [2020-08-06T22:11:52.143Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-08-06T22:11:52.143Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-08-06T22:11:53.560Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 06 Aug 2020 22:11:53 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-08-06T22:11:53.573Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sustainabilitycompetition:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-08-06T22:11:53.823Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 06 Aug 2020 22:11:53 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=91","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "12" {"metadata":{"emulator":{"name":"functions"},"message":"Your requested \"node\" version \"8\" doesn't match your global version \"12\""}}
+[debug] [2020-08-06T22:11:53.841Z] [functions] Watching "/Users/koberico/sustainability/functions" for Cloud Functions...
+[debug] [2020-08-06T22:11:53.849Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-08-06T22:11:53.849Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2020-08-06T22:11:53.849Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-08-06T22:11:53.850Z] DEBUG: [worker-~diagnostic~-63c258bc-99cd-4aa4-a1e6-c92aa1850a45]: Assigning socketPath: /var/folders/f7/8yqfv48x1x1_y7r69byqk9rr0000gn/T/fire_emu_23823.sock
+[debug] [2020-08-06T22:11:53.850Z] DEBUG: [worker-~diagnostic~-63c258bc-99cd-4aa4-a1e6-c92aa1850a45]: BUSY
+[debug] [2020-08-06T22:11:54.163Z] DEBUG: [runtime-status] [23823] Functions runtime initialized. {"cwd":"/Users/koberico/sustainability/functions","node_version":"12.16.1"}
+[debug] [2020-08-06T22:11:54.164Z] DEBUG: [runtime-status] [23823] Disabled runtime features: undefined
+[debug] [2020-08-06T22:11:54.169Z] DEBUG: [runtime-status] [23823] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.13.0","resolution":"/Users/koberico/sustainability/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-08-06T22:11:54.172Z] DEBUG: [runtime-status] [23823] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.8.0","resolution":"/Users/koberico/sustainability/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-08-06T22:11:54.174Z] DEBUG: [runtime-status] [23823] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-08-06T22:11:54.175Z] DEBUG: [runtime-status] [23823] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.8.0","resolution":"/Users/koberico/sustainability/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-08-06T22:11:54.241Z] DEBUG: [runtime-status] [23823] Checked functions.config() {"config":{}}
+[debug] [2020-08-06T22:11:54.241Z] DEBUG: [runtime-status] [23823] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.8.0","resolution":"/Users/koberico/sustainability/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2020-08-06T22:11:54.241Z] DEBUG: [runtime-status] [23823] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.8.0","resolution":"/Users/koberico/sustainability/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-08-06T22:11:54.242Z] DEBUG: [runtime-status] [23823] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.13.0","resolution":"/Users/koberico/sustainability/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-08-06T22:11:54.243Z] DEBUG: [runtime-status] [23823] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.8.0","resolution":"/Users/koberico/sustainability/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-08-06T22:11:54.243Z] DEBUG: [runtime-status] [23823] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.13.0","resolution":"/Users/koberico/sustainability/functions/node_modules/firebase-admin/lib/index.js"}}
+[warn] ⚠  It looks like you're trying to access functions.config().gmail but there is no value there. You can learn more about setting up config here: https://firebase.google.com/docs/functions/local-emulator {"metadata":{"emulator":{"name":"functions"},"message":"It looks like you're trying to access functions.config().gmail but there is no value there. You can learn more about setting up config here: https://firebase.google.com/docs/functions/local-emulator"}}
+[warn] ⚠  TypeError: Cannot read property 'email' of undefined
+    at Object.<anonymous> (/Users/koberico/sustainability/functions/index.js:6:44)
+    at Module._compile (internal/modules/cjs/loader.js:1156:30)
+    at Module._compile (pkg/prelude/bootstrap.js:1281:32)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1176:10)
+    at Module.load (internal/modules/cjs/loader.js:1000:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:899:14)
+    at Module.require (internal/modules/cjs/loader.js:1042:19)
+    at Module.require (pkg/prelude/bootstrap.js:1225:31)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at /Users/koberico/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:664:33 {"metadata":{"emulator":{"name":"functions"},"message":"TypeError: Cannot read property 'email' of undefined\n    at Object.<anonymous> (/Users/koberico/sustainability/functions/index.js:6:44)\n    at Module._compile (internal/modules/cjs/loader.js:1156:30)\n    at Module._compile (pkg/prelude/bootstrap.js:1281:32)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1176:10)\n    at Module.load (internal/modules/cjs/loader.js:1000:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:899:14)\n    at Module.require (internal/modules/cjs/loader.js:1042:19)\n    at Module.require (pkg/prelude/bootstrap.js:1225:31)\n    at require (internal/modules/cjs/helpers.js:77:18)\n    at /Users/koberico/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:664:33"}}
+[warn] ⚠  We were unable to load your functions code. (see above) {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2020-08-06T22:11:54.349Z] DEBUG: [worker-~diagnostic~-63c258bc-99cd-4aa4-a1e6-c92aa1850a45]: exited
+[debug] [2020-08-06T22:11:54.350Z] DEBUG: [worker-~diagnostic~-63c258bc-99cd-4aa4-a1e6-c92aa1850a45]: FINISHED
