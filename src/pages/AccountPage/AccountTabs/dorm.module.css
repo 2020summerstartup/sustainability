@@ -1,0 +1,44 @@
+.ribbon {
+    background-color: var(--theme-secondary);
+    width: 60%;
+    min-width: 12rem;
+    height: 6rem;
+    place-items: center;
+    text-align: center;
+    position: relative;
+    display: flex;
+    margin: 1.5rem auto;
+    margin-bottom: 0;
+    color: #fff;
+    text-shadow: 1px 1px 5px black;
+}
+.ribbonText {
+    position: relative;
+    margin: auto;
+    z-index: 1;
+ }
+.ribbon:before {
+    content: '';
+    border: 3rem solid var(--theme-secondary);
+    border-left-color: transparent;
+    border-left-width: 21px;
+    position: absolute;
+    top: 0;
+    left: -40px;
+}
+.ribbon:after {
+    content: '';
+    border: 3rem solid var(--theme-secondary);
+    border-right-color: transparent;
+    border-right-width: 21px;
+    position: absolute;
+    top: 0;
+    right: -40px;
+}
+
+.chartTitle{
+    font-weight: bold;
+    position: relative;
+    top: 2.5rem;
+    z-index: 1;
+}
