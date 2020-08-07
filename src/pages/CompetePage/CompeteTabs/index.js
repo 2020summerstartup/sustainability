@@ -27,6 +27,13 @@ import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  console.log('value', value);
+  console.log('auth user context', AuthUserContext);
+  if(value > 1 ) {
+    console.log('yikes, switch value to 0 here');
+  } else {
+    console.log('value is fine');
+  }
 
   return (
     <div
