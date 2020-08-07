@@ -19,8 +19,6 @@ import {
   updateUserPoint,
   updateDormPoint,
   actionMastered,
-  addFav,
-  deleteFav,
   updateUserImpact,
   updateSchoolImpact
 } from "../../services/Firebase";
