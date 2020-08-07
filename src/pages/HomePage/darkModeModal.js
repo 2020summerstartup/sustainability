@@ -93,7 +93,7 @@ export default function DarkModeModal() {
                 </h1>
               </div>
             </DialogContentText>
-            <DarkLogo className={classes.badgeImg} />
+            <img src={DarkLogo} className={classes.badgeImg} />
             <DialogContentText id="alert-dialog-description">
               <Typography variant="body1" className={classes.textTitle}>
                 Make sure you checkout our cool feature!{" "}
