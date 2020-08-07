@@ -1,11 +1,15 @@
 import React from "react"; // No longer imports component because it wasn't used
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import CompeteTabs from "./CompeteTabs";
+import AddToHomeScreenModal from "./addToHomeScreenModal";
 
 const CompetePage = (props) => (
     <AuthUserContext.Consumer>
       {(authUser) => (
-        <CompeteTabs props={props}/>
+        <>
+          <AddToHomeScreenModal />
+          <CompeteTabs props={props}/>
+        </>
       )}
     </AuthUserContext.Consumer>
 );

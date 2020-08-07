@@ -5,6 +5,15 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
+var totalBuzzText;
+const totalBuzzDisplay = () => {
+  if ( localStorage.getItem('buzzes') === 1 ) {
+    totalBuzzText = <Typography variant="h5">Action Logged!</Typography>
+  } else {
+    totalBuzzText = <Typography variant="h5">Actions Logged!</Typography>
+  }
+}
+
 const useStyles = (theme) => ({
   //   borderBottom: {
   //     "&:after": {

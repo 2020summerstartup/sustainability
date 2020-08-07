@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from "react";
-import styles from "./badgeDarkModal.module.css";
-import { ReactComponent as DarkLightModeImg } from "../../img/darklightmode.svg";
+import React, { useState, useEffect } from 'react';
+// import Modal from 'react-modal';
+// import AlertDialog from "./badgeModal";
+import styles from "./modal.module.css";
+// import { ReactComponent as DarkLogo } from "../../img/darkMode.png";
+import DarkLogo from "../../img/darkMode.png"; 
+import { DarkModeOpened } from "../../services/Firebase"; 
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -37,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-localStorage.setItem("pop_done", false);
+// localStorage.setItem("pop_done", false);
 
 export default function DarkModeModal() {
   const [visible, setVisible] = useState(false);
@@ -58,11 +62,12 @@ export default function DarkModeModal() {
   };
 
   useEffect(() => {
-    let pop_done = localStorage.getItem("pop_done");
-    if (!pop_done) {
+    let darkPop_done = JSON.parse(localStorage.getItem('darkPop_done'));
+    let email = localStorage.getItem('email');
+    if (!darkPop_done ) {
       setVisible(true);
       playSound(badgeAudio);
-      localStorage.setItem("pop_done", true);
+      DarkModeOpened(email);
     }
   }, []);
   if (!visible) return null;

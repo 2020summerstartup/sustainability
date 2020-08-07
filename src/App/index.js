@@ -132,16 +132,14 @@ function AppBase() {
         {/* <Switch> */}
         {/* For each page's content */}
 
-        <Suspense
-          fallback={
-            <>
-              <HomeHeader />
-              <div className="base-container">
-                <ProgressCircle />
-              </div>
-            </>
-          }
-        >
+        <Suspense fallback={
+          <>
+            <HomeHeader />
+            <div className="base-container">
+              <ProgressCircle />
+            </div>
+          </>
+        }>
           <Switch>
             <Redirect exact from={ROUTES.HOME} to={ROUTES.HOME_ACTION} />
             <Route
@@ -152,22 +150,16 @@ function AppBase() {
           </Switch>
         </Suspense>
 
-        <Suspense
-          fallback={
-            <>
-              <CompeteHeader />
-              <div className="base-container">
-                <ProgressCircle />
-              </div>
-            </>
-          }
-        >
+        <Suspense fallback={
+          <>
+            <CompeteHeader />
+            <div className="base-container">
+              <ProgressCircle />
+            </div>
+          </>
+        }>
           <Switch>
-            <Redirect
-              exact
-              from={ROUTES.COMPETE}
-              to={ROUTES.COMPETE_LEADERBOARD}
-            />
+            <Redirect exact from={ROUTES.COMPETE} to={ROUTES.COMPETE_LEADERBOARD} />
             <Route
               exact
               path="/compete/:page?"
@@ -176,16 +168,14 @@ function AppBase() {
           </Switch>
         </Suspense>
 
-        <Suspense
-          fallback={
-            <>
-              <AccountHeader />
-              <div className="base-container">
-                <ProgressCircle />
-              </div>
-            </>
-          }
-        >
+        <Suspense fallback={
+          <>
+            <AccountHeader />
+            <div className="base-container">
+              <ProgressCircle />
+            </div>
+          </>
+        }>
           <Switch>
             <Redirect exact from={ROUTES.PROFILE} to={ROUTES.PROFILE_POINT} />
             <Route
@@ -227,6 +217,11 @@ function AppBase() {
           <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
 
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
+
+          <Route path={ROUTES.ADMIN} component={AdminPage} />
+
+
+
 
         </Suspense>
         {/* </Switch> */}
