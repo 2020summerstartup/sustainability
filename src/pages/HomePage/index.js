@@ -1,4 +1,4 @@
-import styles from "./badgeModal.module.css";
+import styles from "./modal.module.css";
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
 import { retry } from "../../App/index"
@@ -188,7 +188,8 @@ const assignData = (data) => {
   localStorage.setItem("dorm", data.userDorm);
   localStorage.setItem("name", data.name);
   localStorage.setItem("total", data.total);
-  localStorage.setItem("pop_done", data.pop_done);
+  localStorage.setItem("darkPop_done", data.darkPop_done);
+  localStorage.setItem("addHomePop_done", data.addHomePop_done);
   // initialize mastered action
   var firestoreMastered = data.masteredActions;
   localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));

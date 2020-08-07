@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import Modal from 'react-modal';
 // import AlertDialog from "./badgeModal";
-import styles from "./badgeModal.module.css";
+import styles from "./modal.module.css";
 // import { ReactComponent as DarkLogo } from "../../img/darkMode.png";
 import DarkLogo from "../../img/darkMode.png"; 
 import { DarkModeOpened } from "../../services/Firebase"; 
@@ -68,9 +68,9 @@ export default function DarkModeModal() {
   };
 
   useEffect(() => {
-    let pop_done = JSON.parse(localStorage.getItem('pop_done'));
+    let darkPop_done = JSON.parse(localStorage.getItem('darkPop_done'));
     let email = localStorage.getItem('email');
-    if (!pop_done ) {
+    if (!darkPop_done ) {
       setVisible(true);
       playSound(badgeAudio);
       DarkModeOpened(email);

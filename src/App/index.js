@@ -130,13 +130,13 @@ function AppBase() {
         {/* For each page's content */}
 
         <Suspense fallback={
-            <>
-              <HomeHeader />
-              <div className="base-container">
-                <ProgressCircle />
-              </div>
-            </>
-          }>
+          <>
+            <HomeHeader />
+            <div className="base-container">
+              <ProgressCircle />
+            </div>
+          </>
+        }>
           <Switch>
             <Redirect exact from={ROUTES.HOME} to={ROUTES.HOME_ACTION} />
             <Route
@@ -148,32 +148,32 @@ function AppBase() {
         </Suspense>
 
         <Suspense fallback={
-            <>
-              <CompeteHeader />
-              <div className="base-container">
-                <ProgressCircle />
-              </div>
-            </>
-          }>
-        <Switch>
-          <Redirect exact from={ROUTES.COMPETE} to={ROUTES.COMPETE_LEADERBOARD} />
-          <Route
-            exact
-            path="/compete/:page?"
-            render={(props) => <CompetePage {...props} />}
-          />
-        </Switch>
+          <>
+            <CompeteHeader />
+            <div className="base-container">
+              <ProgressCircle />
+            </div>
+          </>
+        }>
+          <Switch>
+            <Redirect exact from={ROUTES.COMPETE} to={ROUTES.COMPETE_LEADERBOARD} />
+            <Route
+              exact
+              path="/compete/:page?"
+              render={(props) => <CompetePage {...props} />}
+            />
+          </Switch>
         </Suspense>
 
         <Suspense fallback={
-            <>
-              <AccountHeader />
-              <div className="base-container">
-                <ProgressCircle />
-              </div>
-            </>
-          }>
-        <Switch>
+          <>
+            <AccountHeader />
+            <div className="base-container">
+              <ProgressCircle />
+            </div>
+          </>
+        }>
+          <Switch>
             <Redirect exact from={ROUTES.PROFILE} to={ROUTES.PROFILE_POINT} />
             <Route
               exact
@@ -181,7 +181,7 @@ function AppBase() {
               render={(props) => <AccountPage {...props} />}
             />
           </Switch>
-          </Suspense>
+        </Suspense>
 
         <Suspense
           fallback={
@@ -217,7 +217,7 @@ function AppBase() {
 
           <Route path={ROUTES.ADMIN} component={AdminPage} />
 
-         
+
 
 
         </Suspense>

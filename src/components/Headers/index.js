@@ -188,6 +188,9 @@ const useStyles3 = makeStyles((theme) => ({
       display: "none",
     },
   },
+  extraTinyLogo: {
+    width: "6rem",
+  },
   logo: {
     width: "3rem",
     height: "100%",
