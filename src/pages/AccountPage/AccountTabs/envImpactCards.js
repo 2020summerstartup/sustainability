@@ -10,6 +10,7 @@ let colors = ["yellow", "green", "blue"];
 let coEmissImpact = localStorage.getItem("coEmiss");
 let energyImpact = localStorage.getItem("energy");
 let waterImpact = localStorage.getItem("water");
+let totalBuzz = localStorage.getItem("buzzes")
 
 
 const useStyles = (theme) => ({
@@ -20,10 +21,11 @@ const useStyles = (theme) => ({
   },
 });
 
-// Change message depending on number of pounds
+// Change message depending on value of impact
 var theCO;
 var theEnergy;
 var theH2O;
+
 const CODisplay = () => {
   if (parseInt(coEmissImpact) === 0) {
     theCO = "Pounds of CO2 saved! It's fine...😐"
@@ -36,11 +38,11 @@ const CODisplay = () => {
 
 const EnergyDisplay = () => {
   if (parseInt(energyImpact) === 0) {
-    theEnergy = "Kilojoules of energy conserved! It's fine...😐"
+    theEnergy = "Milojoules of energy conserved! It's fine...😐"
   } else if (parseInt(coEmissImpact) === 1) {
-    theEnergy = "Kilojoule of energy conserved!"
+    theEnergy = "Milojoule of energy conserved!"
   } else {
-    theEnergy = "Kilojoules of energy conserved!"
+    theEnergy = "Milojoules of energy conserved!"
   }
 };
 
