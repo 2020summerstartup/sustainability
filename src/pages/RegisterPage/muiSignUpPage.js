@@ -164,6 +164,8 @@ class SignUpFormBase extends Component {
  
     if (isAdmin) {
       roles[ROLES.ADMIN] = ROLES.ADMIN;
+    } else {
+      roles[ROLES.USER] = ROLES.USER;
     }
     // End of admin stuff
 
