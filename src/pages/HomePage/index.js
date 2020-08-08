@@ -22,7 +22,7 @@ import {
   deleteFav,
   actionMastered,
   updateUserImpact,
-  updateSchoolImpact
+  updateSchoolImpact,
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -136,17 +136,17 @@ const assignData = (userData) => {
   for (const [key, value] of Object.entries(userData.points)) {
     localStorage.setItem(key, value);
   }
-  // initalize favorites 
+  // initalize favorites
   var firestoreFavs = userData.favorites;
-  // check if action has been previously favroited --> action is favorited in firestore 
+  // check if action has been previously favroited --> action is favorited in firestore
   for (const [key, value] of Object.entries(userData.points)) {
     if (firestoreFavs.includes(key)) {
       // if action is saved as a favorite in firestore, set actionFav in firestore to true
       var actionFavLSName = key.concat("Fav");
       localStorage.setItem(actionFavLSName, true);
-    } 
+    }
   }
-}
+};
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
 
@@ -519,7 +519,8 @@ function HomePage(props) {
 
   const filteredOptions = ActionData.filter(
     (action) =>
-      action.title.toLowerCase().includes(searchQuery.toLowerCase()) || !searchQuery
+      action.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      !searchQuery
   );
 
   var tempMastered = localStorage.getItem("firestoreMastered");
@@ -585,11 +586,7 @@ function HomePage(props) {
     );
 
     // add's associated impact points to school in firestore and local storage
-    updateSchoolImpact(
-      action.coEmiss,
-      action.energy,
-      action.water
-    );
+    updateSchoolImpact(action.coEmiss, action.energy, action.water);
 
     // check if action has been completed enough time to be considered "mastered"
     // also sends user a progress notifications if action has not yet been mastered
@@ -617,7 +614,7 @@ function HomePage(props) {
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
           action.toMaster - actionTotal / action.points
-          } buzzes away from mastering the ${action.title} action!`;
+        } buzzes away from mastering the ${action.title} action!`;
       } else {
         displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
       }
@@ -680,7 +677,7 @@ function HomePage(props) {
     );
     // Notify user that action was added/removed from favorites
     var displayText;
-    const email = localStorage.getItem('email')
+    const email = localStorage.getItem("email");
     if (storedFav) {
       // if the action is now favorited
       displayText = action.title.concat(" added to favorites");
@@ -890,7 +887,7 @@ function HomePage(props) {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-              // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
+                // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -1024,6 +1021,10 @@ function HomePage(props) {
                             unmountOnExit
                           >
                             <CardContent>
+                              <Typography variant="h6" gutterBottom>
+                                Complete this action {action.toMaster} times to earn a
+                                badge!
+                              </Typography>
                               <CardMedia
                                 className={classes.media}
                                 image={action.image}
@@ -1047,13 +1048,16 @@ function HomePage(props) {
                 )
               ) : (
                 <>
-                  <Typography variant="h6" gutterBottom>Sorry no actions found for "{searchQuery}" 😢</Typography>
-                  <Typography variant="body1">
-                    Feel free to fill out the "contact us" form in settings if you would
-                    like us to add "{searchQuery}" as a sustainable action!
+                  <Typography variant="h6" gutterBottom>
+                    Sorry no actions found for "{searchQuery}" 😢
                   </Typography>
-                  </>
-                )}
+                  <Typography variant="body1">
+                    Feel free to fill out the "contact us" form in settings if
+                    you would like us to add "{searchQuery}" as a sustainable
+                    action!
+                  </Typography>
+                </>
+              )}
             </Grid>
           </Fragment>
         </TabPanel>
@@ -1082,7 +1086,7 @@ function HomePage(props) {
                     {ActionData.map(
                       (action, i) =>
                         localStorage.getItem(action.susAction.concat("Fav")) ===
-                        "true" && (
+                          "true" && (
                           <Grid item xs={12} md={6} lg={4} key={i}>
                             <Card className={classes.root}>
                               <CardHeader
@@ -1150,7 +1154,7 @@ function HomePage(props) {
                                     gutterBottom
                                   >
                                     Environmental Impact:
-                              </Typography>
+                                  </Typography>
                                   <Typography component={"span"}>
                                     {action.impact}
                                   </Typography>
@@ -1158,7 +1162,8 @@ function HomePage(props) {
                               </Collapse>
                             </Card>
                           </Grid>
-                        ))}
+                        )
+                    )}
                   </Grid>
                 </>
               )}
