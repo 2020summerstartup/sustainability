@@ -3,6 +3,7 @@ import PasswordChangeForm from './formChangePw';
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import accountImg from "../../../img/account.svg";
 
+// Authorized Page for signed in users to change password, inside settings drawer
 const ChangePW = () => (
     <div>
     <AuthUserContext.Consumer>

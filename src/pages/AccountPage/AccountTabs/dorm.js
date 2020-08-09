@@ -1,9 +1,11 @@
 import React from "react";
+// Image import
 import dorm4 from "../../../img/dorm4.svg";
 
 import { AuthUserContext } from "../../../services/Session";
 import SignOutButton from "../../../components/SignOut";
 
+// Material UI imports
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
 import { makeStyles } from "@material-ui/core/styles";
@@ -64,7 +66,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-var rank;
 var dormName = localStorage.getItem("dorm");
 if (dormName !== "") {
   getDorm()
@@ -75,6 +76,8 @@ if (dormName !== "") {
 }
 leaderBoardUpdate();
 
+// Displays message depending on ranking
+var rank;
 const rankDisplay = () => {
   if (parseInt(localStorage.getItem("ranking")) === 1) {
     rank = <p>You're in 1st place!</p>;
@@ -87,15 +90,20 @@ const rankDisplay = () => {
   }
 };
 
+// Main Component - Galaxy Card for Dorm
 export const DormCard = React.memo(function GalaxyCard() {
+  // Image aligned on top, styles called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
 
+  // Rank message function call
   rankDisplay();
   return (
+    // Authorized users only
     <AuthUserContext.Consumer>
       {(authUser) => (
         <>
+        {/* Dorm Galaxy Card */}
           <NoSsr>
             <GoogleFontLoader
               fonts={[
@@ -113,23 +121,17 @@ export const DormCard = React.memo(function GalaxyCard() {
                   {localStorage.getItem("dorm")} Dorm
                 </InfoSubtitle>
                 <InfoTitle>{rank}</InfoTitle>
+                {/* Direct link to change dorm from line on Galaxy Card */}
                 <InfoCaption>
                   <Link
                     to={ROUTES.CHANGEDORM}
                     className={classes.link}
                     style={{ underline: "enum: none", color: "white", fontWeight: "bold" }}
                   >
-                    {/* <Typography
-                      variant="body1"
-                      className={classes.linkText}
-                      style={{ underline: "enum: none" }}
-                      component={'span'}
-                    > */}
                     Change your dorm in settings&nbsp;
                     <span role="img" aria-label="settings">
                       ⚙️
                     </span>
-                    {/* </Typography> */}
                   </Link>
                 </InfoCaption>
               </Info>

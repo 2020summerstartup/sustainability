@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   error: null,
 };
 
+// Form for authorized users to change their password
 class PasswordChangeForm extends Component {
   constructor(props) {
     super(props);

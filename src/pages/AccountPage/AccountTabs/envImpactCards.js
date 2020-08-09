@@ -20,13 +20,16 @@ const useStyles = (theme) => ({
   },
 });
 
-// Change message depending on number of pounds
+// Changes display message depnding on user's impact
+// Intializes variables for text to be displayed on impact cards
 var theCO;
 var theEnergy;
 var theH2O;
+
+// Carbon Dioxide message
 const CODisplay = () => {
   if (parseInt(coEmissImpact) === 0) {
-    theCO = "Pounds of CO2 saved! It's fine...😐"
+    theCO = "Pounds of CO2 saved :("
   } else if (parseInt(coEmissImpact) === 1) {
     theCO = "Pound of CO2 saved!"
   } else {
@@ -34,9 +37,10 @@ const CODisplay = () => {
   }
 };
 
+// Energy message
 const EnergyDisplay = () => {
   if (parseInt(energyImpact) === 0) {
-    theEnergy = "Kilojoules of energy conserved! It's fine...😐"
+    theEnergy = "Kilojoules of energy conserved :("
   } else if (parseInt(coEmissImpact) === 1) {
     theEnergy = "Kilojoule of energy conserved!"
   } else {
@@ -44,9 +48,10 @@ const EnergyDisplay = () => {
   }
 };
 
+// Water conserved message
 const H2ODisplay = () => {
   if (parseInt(waterImpact) === 0) {
-    theH2O = "Gallons of water saved! It's fine...😐"
+    theH2O = "Gallons of water saved :("
   } else if (parseInt(waterImpact) === 1) {
     theH2O = "Gallon of water saved!"
   } else {
@@ -54,11 +59,12 @@ const H2ODisplay = () => {
   }
 };
 
+// Need to call functions, either inside or outside of class
 CODisplay();
 EnergyDisplay();
 H2ODisplay();
 
-// cards to be rendered on the points page in account
+// Enviornmental impact cards for account/points page
 class EnvImpactCards extends React.Component {
   constructor() {
     super();
@@ -80,7 +86,6 @@ class EnvImpactCards extends React.Component {
         {
           id: 1,
           score: this.state.coEmiss,
-          // title: "Pounds of CO2 saved!", 
           title: `${theCO}`,
           colorStyling: null,
 
@@ -88,19 +93,18 @@ class EnvImpactCards extends React.Component {
         {
           id: 2,
           score: this.state.energy,
-          // title: "Kilojoules of energy conserved!",
           title: `${theEnergy}`,
           colorStyling: null,
         },
         {
           id: 3,
           score: this.state.water,
-          // title: "Gallons of water conserved!",
           title: `${theH2O}`,
           colorStyling: null,
         },
       ],
     };
+
     data.cards.forEach((card, id) => {
       if (id === 0) {
         card.colorStyling = styles.co2;

@@ -52,9 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// stores string for badge
-var theBadge;
-var theCongrats;
+
 
 var masteredActions = localStorage.getItem("firestoreMastered");
 var masterLength;
@@ -64,7 +62,13 @@ if (masteredActions !== 'undefined') { // If masteredActions is defined
   masterLength = 0;
 }
 
+// Stores messages for Galaxy card
+var theBadge;
+var theCongrats;
+
+// Determines message depending on number of badges the user has for Galaxy Card
 const badgeSay = () => {
+  // No mastered actions
   if (masterLength === 0) {
     theCongrats = (
       <>
@@ -81,28 +85,34 @@ const badgeSay = () => {
         </span>
       </p>
     ); 
-
+  // One mastered activity
   } else if (masterLength === 1) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
     theBadge = <p> You've earned {masterLength} badge! Keep it going 🥳 </p>;
-  }
+ // two to five mastered actions 
+  } 
   else if (masterLength > 1 && masterLength < 5) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
     theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
+  // More than 4 mastered actiions
   } else {
     theCongrats = <>Omg {localStorage.getItem("name")}! </>;
     theBadge = <p> You've earned {masterLength} badges! That's how it's done 🤩</p>;
   }
 };
 
+// Call function so theCongrats and theBadge can be updated
 badgeSay();
 
+// Main component - Galaxy Card for badges
 export const BadgesCard = React.memo(function GalaxyCard() {
+  // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
   const classes = useStyles();
 
   return (
     <>
+    {/* Galaxy Card */}
       <NoSsr>
         <GoogleFontLoader
           fonts={[
@@ -127,6 +137,7 @@ export const BadgesCard = React.memo(function GalaxyCard() {
     </>
   );
 });
+
 
 var masterBadgesArray = []; // Initalize an array that will contain only the mastered actions
 for (const el in ActionData) {

@@ -4,7 +4,6 @@ import {retry} from "../../../App/index";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 import Badges2 from "./badges2";
-// import Badges3 m "./badges3";
 import DarkModeModal from "../../HomePage/darkModeModal";
 
 import PropTypes from "prop-types";
@@ -27,6 +26,7 @@ import SettingsDrawer from "../Settings";
 
 const DormCard = lazy(() => retry(() => import("./dorm")));
 
+// Tabs functions from Material UI
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -60,6 +60,7 @@ function a11yProps(index) {
   };
 }
 
+// Styles for Tabs
 const useStyles = makeStyles((theme) => ({
   tabs: {
     [theme.breakpoints.up("sm")]: {
@@ -93,6 +94,7 @@ const useStyles = makeStyles((theme) => ({
   },
   indicator: {
     height: "3px",
+    // Color for underline
     backgroundColor: "#FFFFFF",
     [theme.breakpoints.up("sm")]: {
       height: "4.5px",
@@ -100,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
       margin: "auto",
     },
   },
-    // styles for accountheader
+    // Styles for accountheader
     toolbar: {
       minHeight: "50px",
     },
@@ -111,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up("sm")]: {
         marginLeft: "6.5rem",
       },
-      // styles for mobile landscape
+      // Styles for mobile landscape
       [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
         marginLeft: "0",
       },
@@ -126,6 +128,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+// Main component of AccountTabs file
 const AccountTabs = props => {
   let { match, history } = props;
   let { params } = match;
@@ -163,20 +166,24 @@ const AccountTabs = props => {
 
   return (
     <div> 
+      {/* Appbar has both Header and Tabs to avoid line in between */}
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           <Grid justify="space-between" container style={{height: "52px"}}>
+            {/* Top left corner styling with logo */}
             <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
               <Typography variant="h6" className={classes.title} noWrap>
                 <SusLogo2 className={classes.logo} />
                 Profile
               </Typography>
             </Grid>
+            {/* For settings access on top right corner */}
             <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
               <SettingsDrawer />
             </Grid>
           </Grid>
         </Toolbar>
+        {/* Modal with info for Dark Mode is displayed the first time user signs up */}
         <DarkModeModal />
         <Tabs
           value={value}
@@ -230,17 +237,17 @@ const AccountTabs = props => {
           />
         </Tabs>
       </AppBar>
+      {/* Points Page */}
       <TabPanel value={value} index={0} className="tab-container">
          <TotalPointsCard />
-        {/* </Suspense> */}
       </TabPanel>
-
+      {/* Mudd/dorm Page */}
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
           <DormCard />
         </Suspense>
       </TabPanel>
-
+      {/* Badge Page */}
       <TabPanel value={value} index={2} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
           {/* THIRD BADGE */}

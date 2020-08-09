@@ -47,6 +47,7 @@ const setAdmin = (email) => {
 // );
 };
 
+// Goole form for Admins to fill out only
 function AdminPage() {
   return (
     <div>
@@ -95,9 +96,6 @@ function AdminPage() {
   );
 }
 
-// const condition = (authUser) => !!authUser;
-
-// export default withAuthorization(condition)(AdminPage);
 
 const condition = (authUser) => authUser && !!authUser.roles[ROLES.ADMIN];
 
