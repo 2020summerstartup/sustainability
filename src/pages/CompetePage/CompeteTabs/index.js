@@ -25,17 +25,46 @@ import EqualizerIcon from "@material-ui/icons/Equalizer";
 import Toolbar from "@material-ui/core/Toolbar";
 import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 
+import firebase from 'firebase/app';
+import { getUser } from "../../../services/Firebase";
+
+
 // Functions from Material UI for tabs
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  var tabNumber = value;
+  console.log('when does thi sprint"');
 
-  // The following commented out lines are for fixing an error where, if a non-admin types in the admin URL, the console throws an error.
-  // It isn't finished though, and I was having trouble determining if the current user is an admin, so I've stopped for now. -Katie
-  // console.log('value', value);
-  // console.log('auth user context', AuthUserContext);
-  // if(value > 1 ) {
-  //   // If user is also not an admin, switch value to 0
-  // }
+  const getRole = () => {
+    // Check if the email address is associated with any of the current users.
+    var email = localStorage.getItem('email');
+    console.log('email', email);
+    getUser(email).onSnapshot(
+      () => {
+        console.log('inside thingy');
+        // console.log('docsnapshot data', docSnapshot.data());
+        // Now we want to see if this user is already an admin. 
+        // Following two lines get the user id of the currenlty logged in user
+        var userId = firebase.auth().currentUser.uid;
+        firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
+          var role = (snapshot.val() && snapshot.val().roles) || 'Anonymous';
+          if (role.ADMIN || tabNumber < 2) { // If role.ADMIN is defined it means the user is an admin. And if tabnumber is less than 2 then the user is on an unrestricted tab.
+            console.log('User is on an allowed page.');
+          } else {
+            console.log('Non-admin attempted to access the admin page.');
+            tabNumber = 0;
+          }
+        });
+      },
+    );
+  };
+  getRole();
+
+
+
+
+
+
 
   return (
     <div
@@ -45,7 +74,7 @@ function TabPanel(props) {
       aria-labelledby={`scrollable-force-tab-${index}`}
       {...other}
     >
-      {value === index && (
+      {tabNumber === index && (
         <Box p={3}>
           <Typography component={"span"}>{children}</Typography>
         </Box>
@@ -126,7 +155,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 // Main Component - Tabs for Compete Page
-function CompeteTabs(props, {authUser}) {
+function CompeteTabs(props, { authUser }) {
   let { match, history } = props;
   let { params } = match;
   let { page } = params;
@@ -144,90 +173,90 @@ function CompeteTabs(props, {authUser}) {
     admin: 2,
   };
 
-  const [value, setValue] = React.useState(indexToTabName[page]);
+  const [tabNumber, setTabNumber] = React.useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setTabNumber(newValue);
     history.push(`/compete/${tabNameToIndex[newValue]}`);
   };
   return (
-<AuthUserContext.Consumer>
+    <AuthUserContext.Consumer>
       {(authUser) => (
-    <div>
-      {/* Header */}
-      <AppBar position="static" className={classes.header}>
-        <Toolbar className={classes.toolbar}>
-          <SusLogo1 className={classes.logo} />
-          <Typography variant="h6" className={classes.title} noWrap>
-            Compete
+        <div>
+          {/* Header */}
+          <AppBar position="static" className={classes.header}>
+            <Toolbar className={classes.toolbar}>
+              <SusLogo1 className={classes.logo} />
+              <Typography variant="h6" className={classes.title} noWrap>
+                Compete
           </Typography>
-        </Toolbar>
-         {/* Tabs directly underneath header */}
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="fullWidth"
-          scrollButtons="off"
-          aria-label="scrollable tabs"
-          className={classes.tabs}
-          TabIndicatorProps={{ className: classes.indicator }}
-        >
-          <Tab
-            label={
-              <div className={classes.tabText}>
-                <EqualizerIcon className={classes.tabIcon} /> Leaderboard{" "}
-              </div>
-            }
-            {...a11yProps(0)}
-          />
+            </Toolbar>
+            {/* Tabs directly underneath header */}
+            <Tabs
+              value={tabNumber}
+              onChange={handleChange}
+              variant="fullWidth"
+              scrollButtons="off"
+              aria-label="scrollable tabs"
+              className={classes.tabs}
+              TabIndicatorProps={{ className: classes.indicator }}
+            >
+              <Tab
+                label={
+                  <div className={classes.tabText}>
+                    <EqualizerIcon className={classes.tabIcon} /> Leaderboard{" "}
+                  </div>
+                }
+                {...a11yProps(0)}
+              />
 
-          <Tab
-            label={
-              <div className={classes.tabText}>
-                <StarIcon className={classes.tabIcon} /> Challenges{" "}
-              </div>
-            }
-            {...a11yProps(1)}
-            style={{ backgroundColor: "transparent" }}
-          />
-        {/* Admin Tab */}
-        {!!authUser.roles[ROLES.ADMIN] && (
-           <Tab
-           label={
-             <div className={classes.tabText}>
-               <SupervisorAccountIcon className={classes.tabIcon} /> Admin{" "}
-             </div>
-           }
-           {...a11yProps(1)}
-           style={{ backgroundColor: "transparent" }}
-         />
-        )}
-        </Tabs>
-      </AppBar>
+              <Tab
+                label={
+                  <div className={classes.tabText}>
+                    <StarIcon className={classes.tabIcon} /> Challenges{" "}
+                  </div>
+                }
+                {...a11yProps(1)}
+                style={{ backgroundColor: "transparent" }}
+              />
+              {/* Admin Tab */}
+              {!!authUser.roles[ROLES.ADMIN] && (
+                <Tab
+                  label={
+                    <div className={classes.tabText}>
+                      <SupervisorAccountIcon className={classes.tabIcon} /> Admin{" "}
+                    </div>
+                  }
+                  {...a11yProps(1)}
+                  style={{ backgroundColor: "transparent" }}
+                />
+              )}
+            </Tabs>
+          </AppBar>
 
-      {/* LeaderBoard Tab */}
-      <TabPanel value={value} index={0} className="tab-container">
-        <Leaderboard />
-      </TabPanel>
-      
-      {/* Challenges Tab - in progress */}
-      <TabPanel value={value} index={1} className="tab-container">
-        <Suspense fallback={<ProgressCircle />}>
-          <ComingSoon/>
-        </Suspense>
-      </TabPanel>
+          {/* LeaderBoard Tab */}
+          <TabPanel value={tabNumber} index={0} className="tab-container">
+            <Leaderboard />
+          </TabPanel>
 
-      {/* ADMIN TAB */}
-      {!!authUser.roles[ROLES.ADMIN] && (
-          <TabPanel value={value} index={2} className="tab-container">
-          <Suspense fallback={<ProgressCircle />}>
-          <AdminPage/>
-          </Suspense>
-       </TabPanel>
-        )}
-      
-    </div>
-    )}
+          {/* Challeneges Tab - in progress */}
+          <TabPanel value={tabNumber} index={1} className="tab-container">
+            <Suspense fallback={<ProgressCircle />}>
+              <ComingSoon />
+            </Suspense>
+          </TabPanel>
+
+          {/* ADMIN TAB */}
+          {!!authUser.roles[ROLES.ADMIN] && (
+            <TabPanel value={tabNumber} index={2} className="tab-container">
+              <Suspense fallback={<ProgressCircle />}>
+                <AdminPage />
+              </Suspense>
+            </TabPanel>
+          )}
+
+        </div>
+      )}
     </AuthUserContext.Consumer>
 
 

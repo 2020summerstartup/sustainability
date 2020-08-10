@@ -1,19 +1,7 @@
-import styles from "./modal.module.css";
-import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
+import React, { useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
 import { retry } from "../../App/index";
-import ProgressCircle from "../../components/ProgressCircle";
-import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
-// import styles from "./badgeDarkModal.module.css";
-
-// import FavoriteCard from "./faveCard";
-import actionTab from "../../img/actionTab.svg";
-import badgeImg from "../../img/badge.svg";
-import "./toastify.css";
-
-import CountUp from "react-countup";
-import Modal from "react-modal";
-import Confetti from "react-confetti";
+import PropTypes from "prop-types";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {
   updateUserPoint,
@@ -24,22 +12,31 @@ import {
   updateUserImpact,
   updateSchoolImpact,
 } from "../../services/Firebase";
+import ActionData from "./actionData.json";
+import ProgressCircle from "../../components/ProgressCircle";
 
-import PropTypes from "prop-types";
-
+// import outside libraries
+import CountUp from "react-countup";
+import Confetti from "react-confetti";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import ActionData from "./actionData.json";
+// import svg & css files
+import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
+import actionTab from "../../img/actionTab.svg";
+import badgeImg from "../../img/badge.svg";
+import styles from "./modal.module.css";
+import "./toastify.css";
 
+// import material ui
 import { makeStyles, fade } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import EcoIcon from "@material-ui/icons/Eco";
 
 import Grid from "@material-ui/core/Grid";
@@ -139,7 +136,8 @@ const assignData = (userData) => {
   // initalize favorites
   var firestoreFavs = userData.favorites;
   // check if action has been previously favroited --> action is favorited in firestore
-  for (const [key] of Object.entries(userData.points)) { // Changed this to only get key instead of key value pair (because value is never used)
+  for (const [key] of Object.entries(userData.points)) {
+    // Changed this to only get key instead of key value pair (because value is never used)
     if (firestoreFavs.includes(key)) {
       // if action is saved as a favorite in firestore, set actionFav in firestore to true
       var actionFavLSName = key.concat("Fav");
@@ -148,12 +146,8 @@ const assignData = (userData) => {
   }
 };
 
-Modal.setAppElement("#root"); // Need this for modal to not get error in console
-
-// Amy or Kobe (I think) wrote this function. -Katie
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -177,7 +171,6 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-// Idk who wrote this or what it does -Katie
 function a11yProps(index) {
   return {
     id: `scrollable-force-tab-${index}`,
@@ -186,8 +179,36 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  // styles for HomeHeader
+  toolbar: {
+    minHeight: "auto",
+  },
+  logo: {
+    width: "3rem",
+    height: "100%",
+    paddingRight: "0.5rem",
+    padding: "0",
+    margin: "0",
+    marginTop: "0.5rem",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "6.5rem",
+    },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
+    },
+  },
+  title: {
+    fontWeight: "bold",
+    display: "inline",
+    marginRight: "2rem",
+    marginTop: "0.5rem",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+    },
+  },
+  // styles for tabs
   tabs: {
-    // flexGrow: 1,
     backgroundColor: "primary",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "6.5rem",
@@ -197,105 +218,6 @@ const useStyles = makeStyles((theme) => ({
     [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
       marginLeft: "0",
     },
-  },
-  root: {
-    minWidth: "280",
-    // maxHeight: "168px",
-    backgroundColor: theme.palette.divider,
-    // height: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  actionContainer: {
-    padding: "0",
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
-    marginBottom: "1rem",
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-  avatar: {
-    backgroundColor: "var(--theme)",
-  },
-  cardContent: {
-    textAlign: "left",
-    paddingBottom: "0",
-  },
-  cardActions: {
-    display: "flex",
-    flex: "1 0 auto",
-    alignItems: "flex-end",
-    justifyContent: "center",
-  },
-  card: {
-    borderRadius: "1rem",
-    boxShadow: "none",
-    position: "relative",
-    margin: "auto",
-    marginBottom: "1rem",
-    maxWidth: "36rem",
-    minHeight: "15rem",
-    zIndex: 0,
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "75vh",
-      minHeight: "40vh",
-    },
-    "&:after": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      bottom: 0,
-      zIndex: 1,
-      background: "linear-gradient(to top, #f48fb1, rgba(0,0,0,0))",
-    },
-  },
-  card2: {
-    borderRadius: "1rem",
-    boxShadow: "none",
-    position: "relative",
-    margin: "auto",
-    marginBottom: "1rem",
-    maxWidth: "36rem",
-    minHeight: "15rem",
-    zIndex: 0,
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "75vh",
-      minHeight: "40vh",
-    },
-    "&:after": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      bottom: 0,
-      zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },
-  },
-  content: {
-    position: "absolute",
-    zIndex: 2,
-    bottom: 0,
-    width: "100%",
-  },
-  appbar: {
-    boxShadow: "2px 2px 6px #242424",
-  },
-  bar: {
-    padding: 0,
   },
   tabIcon: {
     position: "relative",
@@ -315,6 +237,7 @@ const useStyles = makeStyles((theme) => ({
       height: "5px",
     },
   },
+  // styles for search bar
   search: {
     position: "absolute",
     top: "0.75rem",
@@ -329,7 +252,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
       width: "auto",
-      // top: "1rem",
     },
   },
   searchIcon: {
@@ -365,6 +287,79 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  // styles for total points text
+  totalPoints: {
+    position: "relative",
+    top: "0.5rem",
+    fontWeight: "bold",
+  },
+  // styles for action tab galaxycard (fave galaxy card is lazy loaded from its own file)
+  galaxyCard: {
+    borderRadius: "1rem",
+    boxShadow: "none",
+    position: "relative",
+    margin: "auto",
+    marginBottom: "1rem",
+    maxWidth: "36rem",
+    minHeight: "15rem",
+    zIndex: 0,
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "75vh",
+      minHeight: "40vh",
+    },
+    "&:after": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      bottom: 0,
+      zIndex: 1,
+      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
+    },
+  },
+  galaxyContent: {
+    position: "absolute",
+    zIndex: 2,
+    bottom: 0,
+    width: "100%",
+  },
+  // styles for actioncards
+  actionCard: {
+    minWidth: "280",
+    backgroundColor: theme.palette.divider,
+    display: "flex",
+    flexDirection: "column",
+  },
+  actionContainer: {
+    padding: "0",
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%", // 16:9
+    marginBottom: "1rem",
+  },
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: "rotate(180deg)",
+  },
+  cardContent: {
+    textAlign: "left",
+    paddingBottom: "0",
+  },
+  cardActions: {
+    display: "flex",
+    flex: "1 0 auto",
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+  // floating action button (fab) on mobile screen
   fab: {
     backgroundColor: "secondary",
     right: "1rem",
@@ -375,6 +370,7 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  // styles for checkprogress modal
   checkProgress: {
     backgroundColor: "secondary",
     display: "none",
@@ -387,9 +383,6 @@ const useStyles = makeStyles((theme) => ({
   dialogPaper: {
     overflow: "hidden !important",
     backgroundColor: "secondary",
-  },
-  buttonModal: {
-    marginTop: theme.spacing(2),
   },
   dialogTitle: {
     textAlign: "center",
@@ -408,41 +401,6 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonClose: {
     marginTop: theme.spacing(2),
-  },
-  totalPoints: {
-    position: "relative",
-    top: "0.5rem",
-    fontWeight: "bold",
-  },
-  // styles for homeheader
-  toolbar: {
-    minHeight: "auto",
-  },
-  logo: {
-    width: "3rem",
-    height: "100%",
-    paddingRight: "0.5rem",
-    padding: "0",
-    margin: "0",
-    marginTop: "0.5rem",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "6.5rem",
-    },
-    // styles for mobile landscape
-    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
-      marginLeft: "0",
-    },
-  },
-  title: {
-    fontWeight: "bold",
-    display: "inline",
-    marginRight: "2rem",
-    marginTop: "0.5rem",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-      // margin: "0",
-      // marginTop: "0.75rem",
-    },
   },
 }));
 
@@ -732,214 +690,178 @@ function HomePage(props) {
   // Call the function immediately so that it runs before the return statement
   setProgressMessage();
 
-  // HTML to be displayed
   return (
-    <>
-      <>
-        <AppBar position="static">
-          <Toolbar className={classes.toolbar}>
-            <SusLogo3 className={classes.logo} />
-            <Typography className={classes.title} variant="h6">
-              Home
-            </Typography>
-          </Toolbar>
-          {/* <AppBar
-          position="static"
-          color="primary"
-          elevation={0}
-          className={classes.appbar}
-        > */}
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant="fullWidth"
-            scrollButtons="off"
-            aria-label="scrollable tabs"
-            className={classes.tabs}
-            TabIndicatorProps={{ className: classes.indicator }}
-          >
-            <Tab
-              label={
-                <div className={classes.tabText}>
-                  <EcoIcon className={classes.tabIcon} /> Actions{" "}
-                </div>
-              }
-              {...a11yProps(0)}
-            />
-            <Tab
-              label={
-                <div className={classes.tabText}>
-                  <FavoriteIcon className={classes.tabIcon} /> Favorites{" "}
-                </div>
-              }
-              {...a11yProps(1)}
-            />
-          </Tabs>
-        </AppBar>
-        <div className="top-container">
-          <Typography
-            variant="h5"
-            style={{ marginTop: "1rem" }}
-            component={"span"}
-          >
-            You have earned&nbsp;
-            {
-              <CountUp
-                start={0}
-                end={parseInt(userTotal)}
-                duration={1}
-              ></CountUp>
-            }{" "}
-            points!
-          </Typography>
-          {/* Mobile Screens */}
-          <Fab
-            variant="extended"
-            size="medium"
-            color="secondary"
-            onClick={() => setProgressModalIsOpen(true)}
-            aria-label="check progress"
-            className={classes.fab}
-          >
-            <CheckIcon />
-            &nbsp;Progress
-          </Fab>
-          {/* Large Screens */}
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={() => {
-              setProgressModalIsOpen(true);
-              playSound(confettiAudio);
-            }}
-            className={classes.checkProgress}
-          >
-            Check Progress
-          </Button>
-
-          <Dialog
-            open={badgeModalIsOpen}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
-            <DialogContent className={styles.dialogContent}>
-              {/* RIBBON */}
-              <div className={styles.nonSemanticProtector}>
-                <h1 className={styles.ribbon}>
-                  <strong className={styles.ribbonContent}>
-                    Congratulations {localStorage.getItem("name")}!
-                  </strong>
-                </h1>
-              </div>
-              {/* <Typography variant="h5" className={classes.textTitle}>
-                  Congratulations [user's name]!
-                </Typography> */}
-              {/* <Typography variant="subtitle" className={classes.textBody}>
-                  You just earned a new badge for completing {badgeAction}! This means
-                  you have completed this action 20 times. Great job and keep being
-                  sustainable!
-                </Typography> */}
-              <img alt="badge" src={badgeImg} className={classes.badgeImg} />
-              {/* MUST ATTRIBUTE AUTHOR */}
-              {/* <Typography variant="h5">Congratulations [user's name]!</Typography> */}
-              <Typography variant="subtitle1" className={classes.textBody}>
-                You just earned a new badge for mastering the {badgeAction}{" "}
-                action! This means you have completed the {badgeAction} action{" "}
-                {badgeActionCount} times. Great job, and keep being sustainable!
+    <AuthUserContext.Consumer>
+      {(authUser) => (
+        <>
+          {/* BOTH ACTIONS AND FAVORITES TABS DISPLAY SAME TOP PART- up to galaxy card */}
+          {/* HOMEHEADER */}
+          <AppBar position="static">
+            <Toolbar className={classes.toolbar}>
+              <SusLogo3 className={classes.logo} />
+              <Typography className={classes.title} variant="h6">
+                Home
               </Typography>
-              <Button
-                onClick={handleClose}
-                variant="contained"
-                color="primary"
-                autoFocus
-                className={classes.buttonClose}
-              >
-                Got it
-              </Button>
-            </DialogContent>
-          </Dialog>
+            </Toolbar>
 
-          {/* NEW MODAL for Check Progress */}
-          <Dialog
-            open={progressModalIsOpen}
-            onClose={() => setProgressModalIsOpen(false)}
-            TransitionComponent={Transition}
-            keepMounted
-            fullWidth
-            aria-labelledby="alert-dialog-slide-title"
-            aria-describedby="alert-dialog-slide-description"
-            classes={{ paper: classes.dialogPaper }}
-          >
-            <DialogTitle
-              id="alert-dialog-slide-title"
-              style={{
-                backgroundColor: "var(--theme-secondary)",
-                color: "#FFFFFF",
-              }}
+            {/* HOMETABS */}
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant="fullWidth"
+              scrollButtons="off"
+              aria-label="scrollable tabs"
+              className={classes.tabs}
+              TabIndicatorProps={{ className: classes.indicator }}
             >
-              {"Check Your Progress!"}
-            </DialogTitle>
-            <DialogContent>
-              <Confetti
-                width={1500}
-                numberOfPieces={2000}
-                recycle={false}
-                opacity={0.7}
-              // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
+              <Tab
+                label={
+                  <div className={classes.tabText}>
+                    <EcoIcon className={classes.tabIcon} /> Actions{" "}
+                  </div>
+                }
+                {...a11yProps(0)}
               />
-              <DialogContentText id="alert-dialog-slide-description">
-                {progressMessage}
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={() => {
-                  setProgressModalIsOpen(false);
+              <Tab
+                label={
+                  <div className={classes.tabText}>
+                    <FavoriteIcon className={classes.tabIcon} /> Favorites{" "}
+                  </div>
+                }
+                {...a11yProps(1)}
+              />
+            </Tabs>
+          </AppBar>
+
+          {/* top-container includes total points & check progress */}
+          <div className="top-container">
+            {/* TOTAL POINTS */}
+            <Typography
+              variant="h5"
+              style={{ marginTop: "1rem" }}
+              component={"span"}
+            >
+              You have earned&nbsp;
+              {
+                <CountUp
+                  start={0}
+                  end={parseInt(userTotal)}
+                  duration={1}
+                ></CountUp>
+              }{" "}
+              points!
+            </Typography>
+
+            {/* Mobile Screens- floating action button */}
+            <Fab
+              variant="extended"
+              size="medium"
+              color="secondary"
+              onClick={() => setProgressModalIsOpen(true)}
+              aria-label="check progress"
+              className={classes.fab}
+            >
+              <CheckIcon />
+              &nbsp;Progress
+            </Fab>
+            {/* Large Screens- regular button under total points*/}
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={() => {
+                setProgressModalIsOpen(true);
+                playSound(confettiAudio);
+              }}
+              className={classes.checkProgress}
+            >
+              Check Progress
+            </Button>
+
+            {/* BADGE MODAL- opens when user logs their last action to master the badge! */}
+            <Dialog
+              open={badgeModalIsOpen}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
+              <DialogContent className={styles.dialogContent}>
+                {/* RIBBON */}
+                <div className={styles.ribbonWrapper}>
+                  <h1 className={styles.ribbon}>
+                    <strong className={styles.ribbonContent}>
+                      Congratulations {localStorage.getItem("name")}!
+                    </strong>
+                  </h1>
+                </div>
+                <img alt="badge" src={badgeImg} className={classes.badgeImg} />
+                {/* MUST ATTRIBUTE AUTHOR */}
+                <Typography variant="subtitle1" className={classes.textBody}>
+                  You just earned a new badge for mastering the {badgeAction}{" "}
+                  action! This means you have completed this action{" "}
+                  {badgeActionCount} times. Great job, and keep being
+                  sustainable!
+                </Typography>
+                <Button
+                  onClick={handleClose}
+                  variant="contained"
+                  color="primary"
+                  autoFocus
+                  className={classes.buttonClose}
+                >
+                  Got it
+                </Button>
+              </DialogContent>
+            </Dialog>
+
+            {/* CHECK PROGRESS MODAL */}
+            <Dialog
+              open={progressModalIsOpen}
+              onClose={() => setProgressModalIsOpen(false)}
+              TransitionComponent={Transition}
+              keepMounted
+              fullWidth
+              aria-labelledby="alert-dialog-slide-title"
+              aria-describedby="alert-dialog-slide-description"
+              classes={{ paper: classes.dialogPaper }}
+            >
+              <DialogTitle
+                id="alert-dialog-slide-title"
+                style={{
+                  backgroundColor: "var(--theme-secondary)",
+                  color: "#FFFFFF",
                 }}
-                variant="contained"
-                color="secondary"
               >
-                Close
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-        <TabPanel value={value} index={0} className="tab-container">
-          {/* Action galaxy card*/}
-          <NoSsr>
-            <GoogleFontLoader
-              fonts={[
-                { font: "Spartan", weights: [300] },
-                { font: "Montserrat", weights: [200, 400, 700] },
-              ]}
-            />
-          </NoSsr>
-          <Card className={classes.card2}>
-            {/* Fireworks picture for galaxy card */}
-            <CardMedia
-              classes={mediaStyles2}
-              image={actionTab}
-              style={{ backgroundPosition: "center center" }}
-            />
-            {/* now we can see the fireworks^ */}
-            <Box py={3} px={2} className={classes.content}>
-              <Info useStyles={useGalaxyInfoStyles}>
-                <InfoSubtitle
-                  style={{ color: "white", fontWeight: "bold" }}
-                ></InfoSubtitle>
-                <InfoTitle>Log your actions here!</InfoTitle>
-                <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
-                  Tap the drop down menu to find out more
-                  <span role="img" aria-label="down arrow">
-                    🔽
-                  </span>
-                </InfoCaption>
-              </Info>
-            </Box>
-          </Card>
-          <Fragment>
+                {"Check Your Progress!"}
+              </DialogTitle>
+              <DialogContent>
+                <Confetti
+                  width={1500}
+                  numberOfPieces={2000}
+                  recycle={false}
+                  opacity={0.7}
+                />
+                <DialogContentText id="alert-dialog-slide-description">
+                  {progressMessage}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  onClick={() => {
+                    setProgressModalIsOpen(false);
+                  }}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Close
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+
+          {/* ACTIONS TAB */}
+          <TabPanel value={value} index={0} className="tab-container">
+            {/* SEARCH BAR for ACTIONS */}
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -954,9 +876,42 @@ function HomePage(props) {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            {/* Card for actions */}
+
+            {/* FONTS for ACTION GALAXY CARD */}
+            <NoSsr>
+              <GoogleFontLoader
+                fonts={[
+                  { font: "Spartan", weights: [300] },
+                  { font: "Montserrat", weights: [200, 400, 700] },
+                ]}
+              />
+            </NoSsr>
+            {/* ACTION GALAXY CARD */}
+            <Card className={classes.galaxyCard}>
+              <CardMedia
+                classes={mediaStyles2}
+                image={actionTab}
+                style={{ backgroundPosition: "center center" }}
+              />
+              <Box py={3} px={2} className={classes.galaxyContent}>
+                <Info useStyles={useGalaxyInfoStyles}>
+                  <InfoSubtitle
+                    style={{ color: "white", fontWeight: "bold" }}
+                  ></InfoSubtitle>
+                  <InfoTitle>Log your actions here!</InfoTitle>
+                  <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
+                    Tap the drop down menu to find out more
+                    <span role="img" aria-label="down arrow">
+                      🔽
+                    </span>
+                  </InfoCaption>
+                </Info>
+              </Box>
+            </Card>
+
+            {/* ACTION CARDS */}
             <Grid container justify="center" spacing={2}>
-              {/* All actions (this loops using search) */}
+              {/* All actions (this loops using search- toLowerCase makes it non-case sensitive) */}
               {filteredOptions.length ? (
                 ActionData.map(
                   (action, i) =>
@@ -964,7 +919,8 @@ function HomePage(props) {
                       .toLowerCase()
                       .includes(searchQuery.toLowerCase()) && (
                       <Grid item xs={12} md={6} lg={4} key={i}>
-                        <Card className={classes.root}>
+                        <Card className={classes.actionCard}>
+                          {/* Top part of the action card- title, points, add icon */}
                           <CardHeader
                             className={classes.cardContent}
                             action={
@@ -986,6 +942,7 @@ function HomePage(props) {
                             )}
                           />
 
+                          {/* Bottom part of the action card- favorites icon & expand icon */}
                           <CardActions
                             disableSpacing
                             className={classes.cardActions}
@@ -1002,6 +959,7 @@ function HomePage(props) {
                             >
                               <FavoriteIcon />
                             </IconButton>
+                            {/* cards expand one by one since we pass in the index parament */}
                             <IconButton
                               className={clsx(classes.expand, {
                                 [classes.expandOpen]: !expandedId,
@@ -1016,6 +974,8 @@ function HomePage(props) {
                               <ExpandMoreIcon />
                             </IconButton>
                           </CardActions>
+
+                          {/* Expanded part of the action card- #times to master action, image, & impact */}
                           <Collapse
                             in={expandedId === i}
                             timeout="auto"
@@ -1023,8 +983,8 @@ function HomePage(props) {
                           >
                             <CardContent>
                               <Typography variant="h6" gutterBottom>
-                                Complete this action {action.toMaster} times to earn a
-                                badge!
+                                Complete this action {action.toMaster} times to
+                                earn a badge!
                               </Typography>
                               <CardMedia
                                 className={classes.media}
@@ -1048,9 +1008,13 @@ function HomePage(props) {
                     )
                 )
               ) : (
-                  <>
-                    <Typography variant="h6" gutterBottom>
-                      Sorry no actions found for "{searchQuery}" 😢
+                <>
+                  {/* IF NO RESULTS FROM SEARCH */}
+                  <Typography variant="h6" gutterBottom>
+                    Sorry no actions found for "{searchQuery}"{" "}
+                    <span role="img" aria-label="sad face">
+                      😢
+                    </span>
                   </Typography>
                     <Typography variant="body1">
                       Feel free to fill out the "contact us" form in settings if
@@ -1060,119 +1024,114 @@ function HomePage(props) {
                   </>
                 )}
             </Grid>
-          </Fragment>
-        </TabPanel>
-        <TabPanel value={value} index={1} className="tab-container">
-          <div>
-            <AuthUserContext.Consumer>
-              {(authUser) => (
-                <>
-                  <Suspense
-                    fallback={
-                      <center>
-                        <ProgressCircle />
-                      </center>
-                    }
-                  >
-                    <FavoriteCard />
-                  </Suspense>
+          </TabPanel>
 
-                  <Grid
-                    container
-                    justify="center"
-                    spacing={2}
-                    className={classes.actionContainer}
-                  >
-                    {/* Favorite actions (this loops using favs) */}
-                    {ActionData.map(
-                      (action, i) =>
-                        localStorage.getItem(action.susAction.concat("Fav")) ===
-                        "true" && (
-                          <Grid item xs={12} md={6} lg={4} key={i}>
-                            <Card className={classes.root}>
-                              <CardHeader
-                                className={classes.cardContent}
-                                action={
-                                  <IconButton
-                                    disabled={firestoreMastered.includes(
-                                      action.susAction
-                                    )}
-                                    onClick={() => confirmIncrement(action)}
-                                    // Finally found how to get rid of random old green from click and hover!
-                                    style={{ backgroundColor: "transparent" }}
-                                    aria-label="settings"
-                                    title="Complete this sustainable action"
-                                  >
-                                    <AddCircleIcon fontSize="large" />
-                                  </IconButton>
-                                }
-                                title={action.title}
-                                subheader={"Earn ".concat(
-                                  action.points,
-                                  " Points!"
+          {/* FAVORITES TAB */}
+          <TabPanel value={value} index={1} className="tab-container">
+            <>
+              {/* lazy loading favorites galaxy card */}
+              <Suspense fallback={<ProgressCircle />}>
+                <FavoriteCard />
+              </Suspense>
+
+              {/* FAVORITE ACTIONS */}
+              <Grid
+                container
+                justify="center"
+                spacing={2}
+                className={classes.actionContainer}
+              >
+                {/* Favorite actions (this loops using favs) */}
+                {ActionData.map(
+                  (action, i) =>
+                    localStorage.getItem(action.susAction.concat("Fav")) ===
+                      "true" && (
+                      <Grid item xs={12} md={6} lg={4} key={i}>
+                        {/* Top part of the action card- title, points, add icon */}
+                        <Card className={classes.actionCard}>
+                          <CardHeader
+                            className={classes.cardContent}
+                            action={
+                              <IconButton
+                                disabled={firestoreMastered.includes(
+                                  action.susAction
                                 )}
-                              />
-                              <CardActions disableSpacing>
-                                <IconButton
-                                  title="Add to favorites"
-                                  aria-label="add to favorites"
-                                  style={{
-                                    color: "var(--theme-secondary)",
-                                    backgroundColor: "transparent",
-                                  }} // Set the favIcon color (i-1 prevents off-by-one error)
-                                  onClick={() => favAction(action)}
-                                  id={"favoriteIcon".concat(action.susAction)}
-                                  className={classes.favoriteIcon}
-                                >
-                                  <FavoriteIcon />
-                                </IconButton>
-                                <IconButton
-                                  className={clsx(classes.expand, {
-                                    [classes.expandOpen]: !expandedId,
-                                  })}
-                                  onClick={() => handleExpandClick(i)}
-                                  aria-expanded={expandedId === i}
-                                  aria-label="Show More"
-                                  title="Learn more"
-                                >
-                                  <ExpandMoreIcon />
-                                </IconButton>
-                              </CardActions>
-                              <Collapse
-                                in={expandedId === i}
-                                timeout="auto"
-                                unmountOnExit
+                                onClick={() => confirmIncrement(action)}
+                                aria-label="settings"
+                                title="Complete this sustainable action"
                               >
-                                <CardContent>
-                                  <CardMedia
-                                    className={classes.media}
-                                    image={action.image}
-                                    title={action.title}
-                                  />
-                                  <Typography
-                                    variant="h5"
-                                    component={"span"}
-                                    gutterBottom
-                                  >
-                                    Environmental Impact:
-                                  </Typography>
-                                  <Typography component={"span"}>
-                                    {action.impact}
-                                  </Typography>
-                                </CardContent>
-                              </Collapse>
-                            </Card>
-                          </Grid>
-                        )
-                    )}
-                  </Grid>
-                </>
-              )}
-            </AuthUserContext.Consumer>
-          </div>
-        </TabPanel>
-      </>
-    </>
+                                <AddCircleIcon fontSize="large" />
+                              </IconButton>
+                            }
+                            title={action.title}
+                            subheader={"Earn ".concat(
+                              action.points,
+                              " Points!"
+                            )}
+                          />
+
+                          {/* Bottom part of the action card- favorites icon & expand icon */}
+                          <CardActions disableSpacing>
+                            <IconButton
+                              title="Add to favorites"
+                              aria-label="add to favorites"
+                              style={{
+                                color: "var(--theme-secondary)",
+                                backgroundColor: "transparent",
+                              }} // Set the favIcon color (i-1 prevents off-by-one error)
+                              onClick={() => favAction(action)}
+                              id={"favoriteIcon".concat(action.susAction)}
+                              className={classes.favoriteIcon}
+                            >
+                              <FavoriteIcon />
+                            </IconButton>
+                            <IconButton
+                              className={clsx(classes.expand, {
+                                [classes.expandOpen]: !expandedId,
+                              })}
+                              onClick={() => handleExpandClick(i)}
+                              aria-expanded={expandedId === i}
+                              aria-label="Show More"
+                              title="Learn more"
+                            >
+                              <ExpandMoreIcon />
+                            </IconButton>
+                          </CardActions>
+
+                          {/* Expanded part of the action card- #times to master action, image, & impact */}
+                          <Collapse
+                            in={expandedId === i}
+                            timeout="auto"
+                            unmountOnExit
+                          >
+                            <CardContent>
+                              <CardMedia
+                                className={classes.media}
+                                image={action.image}
+                                title={action.title}
+                              />
+                              <Typography
+                                variant="h5"
+                                component={"span"}
+                                gutterBottom
+                              >
+                                Environmental Impact:
+                              </Typography>
+                              <Typography component={"span"}>
+                                {action.impact}
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </Grid>
+                    )
+                )}
+              </Grid>
+            </>
+          </TabPanel>
+        </>
+      )}
+    </AuthUserContext.Consumer>
   ); // end of return statement
 } // end of function
 

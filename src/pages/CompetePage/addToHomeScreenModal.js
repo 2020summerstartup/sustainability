@@ -65,13 +65,13 @@ export default function DarkModeModal() {
   // Ran to display modal only if user has never seen it before
   useEffect(() => {
     let addHomePop_done = JSON.parse(localStorage.getItem("addHomePop_done"));
-    // let email = localStorage.getItem("email");
+    let email = localStorage.getItem("email");
     if (!addHomePop_done) {
       // Displays modal and plays sound when it opens
       setVisible(true);
       playSound(badgeAudio);
       // Tells firebase the action has been done
-      //   AddHomeOpened(email);
+      AddHomeOpened(email);
     }
   }, [badgeAudio]);
   // Otherwise, does nothing
@@ -93,7 +93,11 @@ export default function DarkModeModal() {
               your homescreen!
             </Typography>
           </DialogContentText>
-          <img alt="dark logo" src={addHomeGif} className={classes.addHomeImg} />
+          <img
+            alt="dark logo"
+            src={addHomeGif}
+            className={classes.addHomeImg}
+          />
           <DialogContentText
             id="alert-dialog-description"
             className={classes.textEntireBody}
