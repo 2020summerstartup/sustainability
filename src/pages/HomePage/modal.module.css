@@ -115,7 +115,7 @@
 }
 
 /* make sure ribbon shows above other elements */
-.nonSemanticProtector {
+.ribbonWrapper {
   position: relative;
   z-index: 1;
 }
