@@ -9,8 +9,9 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import ProgressCircle from "../../../components/ProgressCircle";
-import ChallengeCard2 from "./challengeCard2";
-
+// import ChallengeCard2 from "./challengeCard2";
+import ComingSoon from "./comingSoon";
+// Material UI Imports 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -25,6 +26,7 @@ import EqualizerIcon from "@material-ui/icons/Equalizer";
 import Toolbar from "@material-ui/core/Toolbar";
 import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 
+// Functions from Material UI for tabs
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   console.log('value', value);
@@ -65,6 +67,7 @@ function a11yProps(index) {
   };
 }
 
+// Styles
 const useStyles = makeStyles((theme) => ({
   tabs: {
     [theme.breakpoints.up("sm")]: {
@@ -122,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "0.25rem",
   },
 }));
-
+// Main Component - Tabs for Compete Page
 function CompeteTabs(props, {authUser}) {
   let { match, history } = props;
   let { params } = match;
@@ -151,14 +154,15 @@ function CompeteTabs(props, {authUser}) {
 <AuthUserContext.Consumer>
       {(authUser) => (
     <div>
+      {/* Header */}
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           <SusLogo1 className={classes.logo} />
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
           <Typography variant="h6" className={classes.title} noWrap>
             Compete
           </Typography>
         </Toolbar>
+         {/* Tabs directly underneath header */}
         <Tabs
           value={value}
           onChange={handleChange}
@@ -186,7 +190,7 @@ function CompeteTabs(props, {authUser}) {
             {...a11yProps(1)}
             style={{ backgroundColor: "transparent" }}
           />
-
+        {/* Admin Tab */}
         {!!authUser.roles[ROLES.ADMIN] && (
            <Tab
            label={
@@ -200,15 +204,14 @@ function CompeteTabs(props, {authUser}) {
         )}
         </Tabs>
       </AppBar>
-
+      {/* LeaderBoard Tab */}
       <TabPanel value={value} index={0} className="tab-container">
         <Leaderboard />
       </TabPanel>
-
+      {/* Challeneges Tab - in progress */}
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
-          <ChallengeCard2 />
-          {/* <Challenges /> */}
+          <ComingSoon/>
         </Suspense>
       </TabPanel>
 
