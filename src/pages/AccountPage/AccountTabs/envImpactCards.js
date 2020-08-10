@@ -10,7 +10,7 @@ let colors = ["yellow", "green", "blue"];
 let coEmissImpact = localStorage.getItem("coEmiss");
 let energyImpact = localStorage.getItem("energy");
 let waterImpact = localStorage.getItem("water");
-let totalBuzz = localStorage.getItem("buzzes")
+// let totalBuzz = localStorage.getItem("buzzes")
 
 
 const useStyles = (theme) => ({
