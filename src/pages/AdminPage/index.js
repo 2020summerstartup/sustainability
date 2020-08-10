@@ -33,8 +33,8 @@ const setAdmin = (email) => {
         toast.info('A user with that email adress exists. Good first step!');
         // Now we want to see if this user is already an admin. 
         // Following two lines get the user id of the currenlty logged in user
-        var userId = firebase.auth().currentUser.uid;
-        console.log('userID', userId);
+        // var userId = firebase.auth().currentUser.uid;
+        // console.log('userID', userId);
         // firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
         //   var role = (snapshot.val() && snapshot.val().roles) || 'Anonymous';
         //   console.log('role', role);
