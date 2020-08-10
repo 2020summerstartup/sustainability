@@ -1,4 +1,7 @@
 import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import challengeData from "./challengeData.json";
 
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -9,11 +12,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import StarIcon from "@material-ui/icons/Star";
 import Button from "@material-ui/core/Button";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import challengeData from "../challengeData.json";
-// import challenges from "../../../img/challenges.svg";
-// import Paper from "@material-ui/core/Paper";
 
 const useStyles = (theme) => ({
   root: {
@@ -65,7 +63,6 @@ const useStyles = (theme) => ({
   },
   buttonBigScreen: {
     backgroundColor: "hsla(40, 50%, 50%, 1)",
-    // backgroundColor: "#4CAF50",
     border: "none",
     color: "white",
     textAlign: "center",
@@ -76,7 +73,6 @@ const useStyles = (theme) => ({
   buttonSmallScreen: {
     display: "inline",
     backgroundColor: "hsla(40, 50%, 50%, 1)",
-    // backgroundColor: "#4CAF50",
     border: "none",
     color: "white",
     textAlign: "center",
@@ -100,6 +96,7 @@ function notify() {
   });
 }
 
+// Do we still need this code?? It was commented out -Amy
 // get current challenge data from local storage
 // var data = localStorage.getItem('challengeData');
 // console.log('data', data);
@@ -107,14 +104,11 @@ function notify() {
 // var challengeData = JSON.parse(data)
 // console.log('challenge data', challengeData);
 
-class ChallengeCard2 extends React.Component {
+class ChallengeCards extends React.Component {
   render() {
     const { classes } = this.props;
 
     return (
-      <>
-        {/* <Typography variant="h5">Challenges</Typography> */}
-        {/* <div className = {classes.root2}> */}
         <Grid
           container
           justify="center"
@@ -137,17 +131,6 @@ class ChallengeCard2 extends React.Component {
                     <IconButton aria-label="previous" onClick={notify}>
                       <StarIcon />
                     </IconButton>
-                    {/* REWARD HAS THE SAME ISSUES AS IMPACT CARD- ONLY LAST ITEM IN MAP FUNCTION IS REWARDED */}
-                    {/* <Reward
-                      ref={(ref) => {
-                        this.reward = ref;
-                      }}
-                      type="emoji"
-                      config={{
-                        springAnimation: true,
-                        elementCount: 100,
-                      }}
-                    > */}
                     <Button
                       variant="contained"
                       className={classes.buttonBigScreen}
@@ -160,7 +143,6 @@ class ChallengeCard2 extends React.Component {
                     >
                       Start!
                     </Button>
-                    {/* </Reward> */}
                   </div>
                 </div>
                 <CardMedia
@@ -173,10 +155,8 @@ class ChallengeCard2 extends React.Component {
             </Grid>
           ))}
         </Grid>
-        {/* </div> */}
-      </>
     );
   }
 }
 
-export default withStyles(useStyles)(ChallengeCard2);
+export default withStyles(useStyles)(ChallengeCards);

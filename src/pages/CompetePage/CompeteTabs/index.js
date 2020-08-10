@@ -205,10 +205,12 @@ function CompeteTabs(props, {authUser}) {
         )}
         </Tabs>
       </AppBar>
+
       {/* LeaderBoard Tab */}
       <TabPanel value={value} index={0} className="tab-container">
         <Leaderboard />
       </TabPanel>
+      
       {/* Challeneges Tab - in progress */}
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
