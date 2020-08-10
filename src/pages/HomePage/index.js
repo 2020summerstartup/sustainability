@@ -614,7 +614,7 @@ function HomePage(props) {
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
           action.toMaster - actionTotal / action.points
-        } buzzes away from mastering the ${action.title} action!`;
+          } buzzes away from mastering the ${action.title} action!`;
       } else {
         displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
       }
@@ -887,7 +887,7 @@ function HomePage(props) {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-                // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
+              // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -1048,17 +1048,17 @@ function HomePage(props) {
                     )
                 )
               ) : (
-                <>
-                  <Typography variant="h6" gutterBottom>
-                    Sorry no actions found for "{searchQuery}" 😢
+                  <>
+                    <Typography variant="h6" gutterBottom>
+                      Sorry no actions found for "{searchQuery}" 😢
                   </Typography>
-                  <Typography variant="body1">
-                    Feel free to fill out the "contact us" form in settings if
+                    <Typography variant="body1">
+                      Feel free to fill out the "contact us" form in settings if
                     you would like us to add "{searchQuery}" as a sustainable
                     action!
                   </Typography>
-                </>
-              )}
+                  </>
+                )}
             </Grid>
           </Fragment>
         </TabPanel>
@@ -1087,7 +1087,7 @@ function HomePage(props) {
                     {ActionData.map(
                       (action, i) =>
                         localStorage.getItem(action.susAction.concat("Fav")) ===
-                          "true" && (
+                        "true" && (
                           <Grid item xs={12} md={6} lg={4} key={i}>
                             <Card className={classes.root}>
                               <CardHeader

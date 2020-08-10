@@ -5,7 +5,6 @@ import { AuthUserContext } from "../../../services/Session";
 import * as ROLES from '../../../constants/roles';
 import AdminPage from "../../AdminPage";
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import ProgressCircle from "../../../components/ProgressCircle";
@@ -211,7 +210,7 @@ function CompeteTabs(props, {authUser}) {
         <Leaderboard />
       </TabPanel>
       
-      {/* Challeneges Tab - in progress */}
+      {/* Challenges Tab - in progress */}
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
           <ComingSoon/>
