@@ -133,9 +133,9 @@ const data = [
 ];
 
 const options = {
-  height: "350px",
+  height: "400px",
   width: "100%",
-  bar: { groupWidth: "95%" },
+  charArea: { width: "100%" },
   legend: { position: "none" },
 };
 
