@@ -34,7 +34,6 @@ import { getUser } from "../../../services/Firebase";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   var tabNumber = value;
-  console.log('when does thi sprint"');
 
   const getRole = () => {
     // Check if the email address is associated with any of the current users.
@@ -42,7 +41,6 @@ function TabPanel(props) {
     console.log('email', email);
     getUser(email).onSnapshot(
       () => {
-        console.log('inside thingy');
         // console.log('docsnapshot data', docSnapshot.data());
         // Now we want to see if this user is already an admin. 
         // Following two lines get the user id of the currenlty logged in user
