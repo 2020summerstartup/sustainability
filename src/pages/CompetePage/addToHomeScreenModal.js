@@ -80,7 +80,7 @@ export default function DarkModeModal() {
             AddHomeOpened(email);
         }
         
-    }, [])
+    }, [badgeAudio])
     // Otherwise, does nothing
     if (!visible) return null;
 
