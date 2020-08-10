@@ -3,9 +3,6 @@ import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Reward from "react-rewards";
 
-// Admin stuff roles
-import * as ROLES from '../../constants/roles';
-
 import {
   withFirebase,
   createUser,
@@ -20,7 +17,6 @@ import signupImg from "../../img/login2.svg";
 
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -32,16 +28,17 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-// Sounds
-import signup from "../../sounds/hero_simple-celebration-03.wav";
-
-// import your fontawesome library
-import "../../components/FontAwesomeIcons";
-
 // Imports to support the dorm dropdown
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
+
+// Admin stuff roles
+import * as ROLES from "../../constants/roles";
+// import Checkbox from "@material-ui/core/Checkbox";
+
+// Sounds
+import signup from "../../sounds/hero_simple-celebration-03.wav";
 
 // The value displayed in the dorm dropdown menu.
 var dormValue = "Select your dorm...";
@@ -116,24 +113,10 @@ const INITIAL_STATE = {
   dorm: "",
   image: null,
   points: 0,
-  // Admin stuff
+  // Admin
   isAdmin: false,
   error: null,
 };
-
-// Previously INITIAL_STATE was set like this, but the user wrapper caused an error in the console. I don't think the wrapper was necessary, so I've removed it. -Katie
-// const INITIAL_STATE = {
-//   user: {
-//     username: "",
-//     email: "",
-//     passwordOne: "",
-//     passwordTwo: "",
-//     dorm: "",
-//     image: null,
-//     points: 0,
-//   },
-//   error: null,
-// };
 
 // sound play for favorites button
 const signupAudio = new Audio(signup);
@@ -151,7 +134,7 @@ class SignUpFormBase extends Component {
   }
 
   // Used for admin stuff
-  onChangeCheckbox = event => {
+  onChangeCheckbox = (event) => {
     this.setState({ [event.target.name]: event.target.checked });
   };
 
@@ -161,7 +144,7 @@ class SignUpFormBase extends Component {
     // Start of admin stuff
     const { username, email, passwordOne, dorm, isAdmin } = this.state;
     const roles = {};
- 
+
     if (isAdmin) {
       roles[ROLES.ADMIN] = ROLES.ADMIN;
     } else {
@@ -218,9 +201,6 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    // Following line was unused -Katie
-    // const { classes } = this.props;
-
     const {
       username,
       email,
@@ -251,7 +231,6 @@ class SignUpFormBase extends Component {
 
     return (
       <Container maxWidth="xs">
-        <CssBaseline />
         <div
           style={{
             marginTop: "1.5rem",
@@ -296,6 +275,7 @@ class SignUpFormBase extends Component {
                 startAdornment: <EmailIcon style={{ marginRight: "1rem" }} />,
               }}
             />
+            {/* DORM DROPDOWN */}
             <FormControl variant="outlined" fullWidth margin="normal">
               <InputLabel>Dorm</InputLabel>
               <Select
@@ -350,6 +330,7 @@ class SignUpFormBase extends Component {
               </Typography>
             )}
 
+            {/* Memphis reward for users when click sign up button */}
             <Reward
               ref={(ref) => {
                 this.reward = ref;
@@ -370,9 +351,6 @@ class SignUpFormBase extends Component {
               >
                 Sign Up
               </Button>
-              {/* <p>
-                <center>Make sure all fields are completed! </center>
-              </p> */}
             </Reward>
 
             <Grid container justify="center">
