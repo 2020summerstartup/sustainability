@@ -1,16 +1,19 @@
 /* FANCY BACKGROUND ANIMATION */
 .cardWrapper {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 200% 200%;
-  animation: gradient 5s ease infinite;
   color: white;
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   border-radius: 10px;
   margin: 0 0.5rem;
   margin-bottom: 1rem;
   max-width: 600px;
   margin-top: 2rem;
   position: relative;
+}
+
+.gradientBg {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 200% 200%;
+  animation: gradient 5s ease infinite;
 }
 
 @keyframes gradient {
@@ -25,8 +28,8 @@
   }
 }
 
-/* SPECIAL RIBBON STYLING */
-.ribbon {
+/* SPECIAL CORNER RIBBON STYLING for AddHome InfoCard */
+.cornerRibbon {
   width: 150px;
   height: 150px;
   overflow: hidden;
@@ -35,8 +38,8 @@
   right: -10px;
 }
 
-.ribbon::before,
-.ribbon::after {
+.cornerRibbon::before,
+.cornerRibbon::after {
   position: absolute;
   z-index: -1;
   content: "";
@@ -47,17 +50,17 @@
   border-right-color: transparent;
 }
 
-.ribbon::before {
+.cornerRibbon::before {
   top: 0;
   left: 0;
 }
 
-.ribbon::after {
+.cornerRibbon::after {
   bottom: 0;
   right: 0;
 }
 
-.ribbon span {
+.cornerRibbon span {
   position: absolute;
   display: block;
   width: 225px;
