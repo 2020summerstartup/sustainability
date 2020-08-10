@@ -157,7 +157,7 @@ const AccountTabs = props => {
   for (const el in ActionData) {
     var action = ActionData[el];
     var stringActionName = JSON.stringify(action.susAction);
-    if (temp.includes(stringActionName)) {
+    if (temp !== null && temp.includes(stringActionName)) {
       firestoreMastered.push(action.susAction);
     }
   }

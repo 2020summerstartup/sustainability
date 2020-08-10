@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../HomePage/modal.module.css";
-import { AddHomeOpened } from "../../services/Firebase";
+// import { AddHomeOpened } from "../../services/Firebase";
 import addHomeGif from "../../img/add.gif";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -65,7 +65,7 @@ export default function DarkModeModal() {
   // Ran to display modal only if user has never seen it before
   useEffect(() => {
     let addHomePop_done = JSON.parse(localStorage.getItem("addHomePop_done"));
-    let email = localStorage.getItem("email");
+    // let email = localStorage.getItem("email");
     if (!addHomePop_done) {
       // Displays modal and plays sound when it opens
       setVisible(true);
