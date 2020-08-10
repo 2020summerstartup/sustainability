@@ -37,6 +37,7 @@
 }
 
 .chartTitle{
+    color: black;
     font-weight: bold;
     position: relative;
     top: 2.5rem;
