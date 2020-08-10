@@ -296,16 +296,15 @@ class SignUpFormBase extends Component {
                 startAdornment: <EmailIcon style={{ marginRight: "1rem" }} />,
               }}
             />
-            <FormControl variant="filled" fullWidth margin="normal">
+            <FormControl variant="outlined" fullWidth margin="normal">
               <InputLabel>Dorm</InputLabel>
               <Select
                 native
                 value={dormValue}
                 name="dorm"
-                // label="Dorm"
+                label="Dorm"
                 onChange={this.onChange}
                 inputProps={{ "aria-label": "dorm" }}
-                variant="outlined"
               >
                 <option aria-label="None" value="" />
                 <option value={"South"}>South</option>

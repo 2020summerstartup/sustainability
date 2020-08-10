@@ -1,22 +1,19 @@
 import React, { useContext } from "react";
+import { AuthUserContext } from "../../services/Session";
+import { updateUserDorm, getDorm } from "../../services/Firebase";
+import { assignRanking } from "../../pages/CompetePage/CompeteTabs/leaderboard";
+
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-import { AuthUserContext } from "../../services/Session";
-import { updateUserDorm, getDorm } from "../../services/Firebase";
-import { assignRanking } from "../../pages/CompetePage/CompeteTabs/leaderboard";
-
 // Styles for dropdown menu
 const useStyles = makeStyles((theme) => ({
   // Provides context for form inputs
   formControl: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
   },
 }));
 
@@ -50,12 +47,10 @@ export default function DormSelect() {
     <div>
       <FormControl variant="filled" className={classes.formControl}>
         <InputLabel>Dorm</InputLabel>
-        {/* <InputLabel>{newPlaceholder}</InputLabel> */}
         <Select
           native
           value={placeholder}
           onChange={handleChange}
-          label="Dorm"
           inputProps={{ "aria-label": "dorm" }}
           style={{ width: "10rem"}}
         >
@@ -69,30 +64,7 @@ export default function DormSelect() {
           <option value={"Sontag"}>Sontag</option>
           <option value={"Linde"}>Linde</option>
         </Select>
-        {/* <Select
-          native
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={dorm}
-          onChange={handleChange}
-          label="Dorm"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"South"}>South</MenuItem>
-          <MenuItem value={"Case"}>Case</MenuItem>
-          <MenuItem value={"East"}>East</MenuItem>
-          <MenuItem value={"West"}>West</MenuItem>
-          <MenuItem value={"North"}>North</MenuItem>
-          <MenuItem value={"Drinkward"}>Drinkward</MenuItem>
-          <MenuItem value={"Sontag"}>Sontag</MenuItem>
-          <MenuItem value={"Linde"}>Linde</MenuItem>
-        </Select> */}
       </FormControl>
-      {/* <div>
-      Your dorm is {dorm}
-    </div> */}
     </div>
   );
 }
