@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     textBody: {
         color: "white",
         margin: "0.5rem",
-        [theme.breakpoints.up('sm')]:{
+        [theme.breakpoints.up('sm')]: {
             fontSize: "16px"
         }
     },
@@ -73,13 +73,13 @@ export default function DarkModeModal() {
         let addHomePop_done = JSON.parse(localStorage.getItem('addHomePop_done'));
         let email = localStorage.getItem('email');
         if (!addHomePop_done) {
-            // Displays modal and plays sound when it opens
-            setVisible(true);
-            playSound(badgeAudio);
-            // Tells firebase the action has been done
-            AddHomeOpened(email);
+        // Displays modal and plays sound when it opens
+        setVisible(true);
+        playSound(badgeAudio);
+        // Tells firebase the action has been done
+        AddHomeOpened(email);
         }
-        
+
     }, [badgeAudio])
     // Otherwise, does nothing
     if (!visible) return null;
@@ -94,20 +94,11 @@ export default function DarkModeModal() {
             >
                 {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
                 <DialogContent className={styles.dialogContentAddHome}>
-                    <DialogContentText id="alert-dialog-description">
-                        {/* RIBBON */}
-                        {/* <div className={styles.nonSemanticProtector}> */}
-                            {/* <h1 className={styles.ribbon}> */}
-                                {/* <strong className={styles.ribbonContent}> */}
-                                    <Typography variant="h5" className={classes.textTitle}>Hey {localStorage.getItem('name')}! Make sure you add our app to your homescreen!</Typography>
-                                {/* </strong> */}
-                            {/* </h1> */}
-                        {/* </div> */}
-                    </DialogContentText>
+                    {/* <DialogContentText id="alert-dialog-description"> */}
+                        <Typography variant="h5" className={classes.textTitle}>Hey {localStorage.getItem('name')}! Make sure you add our app to your homescreen!</Typography>
+                    {/* </DialogContentText> */}
                     <img alt="dark logo" src={addHomeGif} className={classes.badgeImg} />
-                    {/* <DarkLogo className={classes.badgeImg} /> */}
-                    <DialogContentText id="alert-dialog-description" className={classes.textEntireBody}>
-                        {/* <Typography variant="h6" className={classes.textTitle}>Make sure you add our app to your homescreen!</Typography> */}
+                    {/* <DialogContentText id="alert-dialog-description" className={classes.textEntireBody}> */}
                         <Typography variant="body2" className={classes.textBody}>
                             <strong>For IOS devices: </strong> Make sure you're on Safari and then tap the Share
                             button at the bottom of your screen. Then tap on the "Add to Home
@@ -117,7 +108,7 @@ export default function DarkModeModal() {
                             <strong>For Andriod devices: </strong>In Chrome, go to Settings in the rop right
                             corner, then slide down and tap "Add to Home Screen".
                         </Typography>
-                    </DialogContentText>
+                    {/* </DialogContentText> */}
                     <Button
                         onClick={() => { handleClose(); setVisible(false); }}
                         variant="contained"
