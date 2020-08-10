@@ -11,17 +11,17 @@ export const CHANGEPW = '/changepassword';
 export const CHANGEDORM = '/changedorm';
 export const OFFLINE = '/offline';
 export const DELETE_ACCOUNT = '/deleteaccount';
-// profile page
-export const PROFILE = '/profile';
-export const PROFILE_POINT = '/profile/points';
-export const PROFILE_DORM = '/profile/dorm';
-export const PROFILE_Badge = '/profile/badge';
 // home page
 export const HOME = '/home';
 export const HOME_ACTION = '/home/actions';
-export const HOME_FAVORITE = 'home/favorites';
+export const HOME_FAVORITE = '/home/favorites';
 // compete page
 export const COMPETE = '/compete';
 export const COMPETE_LEADERBOARD = '/compete/leaderboard';
 export const COMPETE_CHALLENGE = '/compete/challenges';
 export const COMPETE_ADMIN = '/compete/admin';
+// profile page
+export const PROFILE = '/profile';
+export const PROFILE_POINT = '/profile/points';
+export const PROFILE_DORM = '/profile/dorm';
+export const PROFILE_Badge = '/profile/badge';

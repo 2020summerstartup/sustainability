@@ -2,8 +2,6 @@ import React from "react";
 import trophyImg from "../../../img/trophy.svg";
 import "./leaderboard.css";
 import { firestore } from "../../../services/Firebase/firebase";
-// DELETE this after we know firebase didn't break
-// import "firebase/firestore";
 import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
 
 import Typography from "@material-ui/core/Typography";
@@ -14,9 +12,6 @@ const useStyles = (theme) => ({
     position: "relative",
     textAlign: "center",
     marginTop: "1rem",
-  },
-  title: {
-    
   },
   firstDorm: {
     position: "absolute",
@@ -82,9 +77,14 @@ class Leaderboard extends React.Component {
         .get()
         .then((snapshot) => {
           snapshot.docs.forEach((doc) => {
-            if (doc.id != "wholeSchool"){
-            newLeaders.push({ id: 1, name: doc.id, points: doc.data().score });
-          }});
+            if (doc.id !== "wholeSchool") {
+              newLeaders.push({
+                id: 1,
+                name: doc.id,
+                points: doc.data().score,
+              });
+            }
+          });
           // orders by decreasing points property
           newLeaders.sort((a, b) => b.points - a.points);
           this.setState({
@@ -108,7 +108,7 @@ class Leaderboard extends React.Component {
     return (
       <>
         <div className="Leaderboard">
-          <Typography variant="h5" className={classes.title} component={"span"}>
+          <Typography variant="h5" component={"span"}>
             Way to be sustainable Mudders!
           </Typography>
           <div className={classes.trophyWrapper}>
@@ -118,7 +118,7 @@ class Leaderboard extends React.Component {
               className={classes.firstDorm}
               component={"span"}
             >
-              {this.state.firstDorm} <br/> Dorm
+              {this.state.firstDorm} <br /> Dorm
             </Typography>
           </div>
           <div style={{ marginTop: "1rem" }}>
@@ -158,7 +158,6 @@ class Leaderboard extends React.Component {
                         {i + 1 + ". " + dorm.name}
                       </div>
                       <div className="leader-score">
-                        {/* insert avatar here if we want */}
                         <div className="leader-score_title">{dorm.points}</div>
                       </div>
                     </div>

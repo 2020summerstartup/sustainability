@@ -66,7 +66,7 @@ export default function DarkModeModal() {
       playSound(badgeAudio);
       DarkModeOpened(email);
     }
-  }, []);
+  }, [badgeAudio]);
   if (!visible) return null;
 
   return (

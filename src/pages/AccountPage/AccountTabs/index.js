@@ -1,6 +1,6 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { withRouter } from "react-router";
-import { retry } from "../../../App/index";
+import DormCard from "./dorm";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 import Badges2 from "./badges2";
@@ -23,8 +23,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
 import { ReactComponent as SusLogo2 } from "../../../img/logo_skin2.svg";
 import SettingsDrawer from "../Settings";
-
-const DormCard = lazy(() => retry(() => import("./dorm")));
 
 // Tabs functions from Material UI
 function TabPanel(props) {

@@ -1,6 +1,5 @@
+/* THESE ARE VARIABLES THAT WE CAN REFERENCE IN ANY OF OUR FILES */
 :root {
-  font-size: 16px;
-  font-family: "Open Sans";
   --theme: #24a113;
   --theme-secondary: #e36588;
   --text-primary: #b6b6b6;
@@ -10,28 +9,22 @@
   --transition-speed: 600ms;
 }
 
-body {
-  color: black;
-  background-color: white;
-}
-
+/* CUSTOM SCROLLBAR */
 body::-webkit-scrollbar {
   width: 0.5rem;
 }
 
 body::-webkit-scrollbar-track {
-  background: #1e1e24;
+  /* background: #1e1e24; */
+  background: var(--bg-primary);
 }
 
 body::-webkit-scrollbar-thumb {
-  background: var(--text-primary);
+  /* background: var(--text-primary); */
+  background: var(--theme-secondary);
 }
 
-main {
-  margin-left: 6.5rem;
-  padding: 1rem;
-}
-
+/* STYLES FOR NAVBAR */
 .navbar {
   position: fixed;
   background-color: var(--bg-primary);
@@ -106,6 +99,7 @@ main {
   width: 100%;
 }
 
+/* STYLES FOR BIG DOUBLE ARROW */
 .logo svg {
   transform: rotate(0deg);
   transition: var(--transition-speed);
@@ -131,7 +125,7 @@ main {
 
 .navbar:hover .icons {
   color: var(--theme);
-  transform: translate(0, 0.25rem)
+  transform: translate(0, 0.25rem);
 }
 
 .icons {
@@ -140,98 +134,28 @@ main {
   margin-bottom: 1rem;
   text-align: center;
   color: var(--text-secondary);
-  /* background: var(--bg-secondary); */
   font-size: 1.5rem;
   letter-spacing: 0.3ch;
   width: 100%;
-
 }
 
 .signout-btn {
   display: none;
 }
 
+/* ---MEDIA QUERIES--- */
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
     display: none;
   }
+  /* signout button is currently at bottom of all profile tabs */
   .signout-btn {
     position: relative !important;
     bottom: 0rem;
     margin-top: 2rem !important;
-    /* position: absolute !important;
-    left: 50%;
-    bottom: 5rem;
-    transform: translate(-50%, 0); */
   }
 }
-
-/* @media only screen and (max-width: 600px) {
-  .navbar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3.5rem;
-    overflow: hidden;
-  }
-  .logo {
-    display: none;
-  }
-  .nav-item {
-    display: flex;
-    justify-content: space-around;
-  }
-  .navbar-nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .nav-link {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding: 0 !important;
-    height: 3rem;
-    margin-bottom: 0;
-  }
-  .logout {
-    display: none;
-  }
-  .base-container {
-    margin-bottom: 3.5rem;
-    overflow-x: hidden;
-  }
-  .link-text {
-    display: inline;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-    font-size: 0.9rem;
-  }
-  .navbar:hover .link-text .page-text {
-    display: inline;
-    color: var(--theme);
-  }
-  .icons {
-    position: relative;
-    top: 1.5rem;
-    margin: 0;
-    padding: 0;
-    font-size: 1.3rem;
-  }
-  .page-text {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    bottom: 0.9rem;
-    color: var(--text-secondary);
-  }
-  .signout-btn {
-    display: inline;
-  }
-} */
 
 /* Large screens */
 @media only screen and (min-width: 600px) {
@@ -247,7 +171,6 @@ main {
 
   .page-text {
     display: none;
-    /* visibility: hidden; */
   }
 
   .navbar:hover .page-text {
@@ -287,14 +210,12 @@ main {
     margin: 0;
     padding: 0 !important;
     position: absolute;
-    /* THIS CAUSED ALL THE ICONS TO ALL MOVE UP IN SAFARI/CHROME */
-    /* top: 2rem; */
     left: 0.75rem;
-    transform: translate(0, -0.6rem)
+    transform: translate(0, -0.6rem);
   }
 
   .signout-icon {
-    transform: translate(0, 0.25rem)
+    transform: translate(0, 0.25rem);
   }
 
   .page-text {
@@ -305,23 +226,12 @@ main {
     left: 4.5rem;
   }
 
-  body {
-    margin-right: 5rem;
-    /* padding: 1rem; */
-  }
-
-  .base-container {
-    margin-right: 6.5rem;
-    padding-right: 2rem;
-    padding-left: 8.5rem;
-    padding-bottom: 2rem;
-  }
-
   .signout-btn {
     display: none;
   }
 }
 
+/* animation for page-text & signout button so that navbar slides out first then the words appear */
 @keyframes fade {
   0% {
     opacity: 0;
@@ -339,7 +249,7 @@ main {
   }
 }
 
-/* Large screens */
+/* Specific range Medium screens */
 @media only screen and (min-width: 600px) and (max-width: 767px) {
   .signout-btn {
     display: none !important;

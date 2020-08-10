@@ -10,7 +10,7 @@ let colors = ["yellow", "green", "blue"];
 let coEmissImpact = localStorage.getItem("coEmiss");
 let energyImpact = localStorage.getItem("energy");
 let waterImpact = localStorage.getItem("water");
-let totalBuzz = localStorage.getItem("buzzes")
+// let totalBuzz = localStorage.getItem("buzzes")
 
 
 const useStyles = (theme) => ({
@@ -79,12 +79,6 @@ class EnvImpactCards extends React.Component {
 
     this.getData = this.getData.bind(this);
   }
-
-
-
-  
-  
-
   getData() {
     let data = {
       success: true,
@@ -173,7 +167,7 @@ class EnvImpactCards extends React.Component {
           ))
         ) : (
           <div className="empty">
-            Sorry no information is currently available
+            Sorry, no information is currently available
           </div>
         )}
       </Grid>

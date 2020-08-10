@@ -139,7 +139,7 @@ const assignData = (userData) => {
   // initalize favorites
   var firestoreFavs = userData.favorites;
   // check if action has been previously favroited --> action is favorited in firestore
-  for (const [key, value] of Object.entries(userData.points)) {
+  for (const [key] of Object.entries(userData.points)) { // Changed this to only get key instead of key value pair (because value is never used)
     if (firestoreFavs.includes(key)) {
       // if action is saved as a favorite in firestore, set actionFav in firestore to true
       var actionFavLSName = key.concat("Fav");

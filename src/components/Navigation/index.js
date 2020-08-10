@@ -11,9 +11,6 @@ import "../FontAwesomeIcons";
 // import when you need to use icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// admin stuff
-// import * as ROLES from '../../constants/roles';
-
 // users can only see certain pages when nonauthorized/authorized
 const Navigation = ({ authUser }) => (
   <AuthUserContext.Consumer>
@@ -26,9 +23,7 @@ const Navigation = ({ authUser }) => (
   </AuthUserContext.Consumer>
 );
 
-// start making fancy navbar!
-
-// user is authorized
+// Navbar displayed when user is authorized
 const NavigationAuth = ({ authUser }) => (
   <nav className="navbar">
     <ul className="navbar-nav">
@@ -36,6 +31,7 @@ const NavigationAuth = ({ authUser }) => (
         <span href="#" className="nav-link">
           <Link to={ROUTES.HOME} className="link-text">
             <span className="link-text logo-text">Go Green</span>
+            {/* the big double arrow logo that turns when navbar is hovered over */}
             <svg
               aria-hidden="true"
               focusable="false"
@@ -81,15 +77,6 @@ const NavigationAuth = ({ authUser }) => (
         </span>
       </li>
 
-      {/* <li className="nav-item">
-        <span href="#" className="nav-link">
-          <Link to={ROUTES.INFO} className="link-text">
-            <FontAwesomeIcon icon="info" className="icons" />
-            <p className="page-text">Info</p>
-          </Link>
-        </span>
-      </li> */}
-
       <li className="nav-item">
         <span href="#" className="nav-link">
           <Link to={ROUTES.PROFILE} className="link-text">
@@ -98,12 +85,6 @@ const NavigationAuth = ({ authUser }) => (
           </Link>
         </span>
       </li>
-      {/* Admin stuff
-      {!!authUser.roles[ROLES.ADMIN] && (
-        <li>
-          <Link to={ROUTES.ADMIN}>Admin</Link>
-        </li>
-      )} */}
 
       <li className="nav-item logout">
         <span href="#" className="nav-link">
@@ -116,7 +97,7 @@ const NavigationAuth = ({ authUser }) => (
   </nav>
 );
 
-// user is non-authorized
+// Navbar displayed when user is non-authorized
 const NavigationNonAuth = () => (
   <nav className="navbar">
     <ul className="navbar-nav">

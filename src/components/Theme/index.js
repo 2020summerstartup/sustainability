@@ -7,12 +7,10 @@ const theme = createMuiTheme({
   palette: {
     type: "light",
     primary: {
-      main: "#24a113",
-      mainGradient: "linear-gradient(to right, #24a113, #f48fb1)",
+      main: "#24a113", // green = var(--theme)
     },
     secondary: {
-      main: "#E36588", // pink found on coolors
-      // main: "#f48fb1", // pink
+      main: "#E36588", // pink found on coolors = var(--theme-secondary)
       light: "#FFFFFF",
     },
     divider: "rgba(0, 0, 0, 0.04)",
@@ -23,11 +21,6 @@ const theme = createMuiTheme({
       root: {
         backgroundColor: "var(--bg-primary)",
       },
-      // Mui: {
-      //   selected: {
-      //     color: "var(--theme)",
-      //   },
-      // },
     },
     MuiBottomNavigationAction: {
       root: {
@@ -47,12 +40,10 @@ const themeDark = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: "#24a113",
-      mainGradient: "linear-gradient(to right, #24a113, #f48fb1)",
+      main: "#24a113", // green 
     },
     secondary: {
-      main: "#E36588", // pink found on coolors
-      // main: "#f48fb1",
+      main: "#E36588", // pink 
     },
   },
 });

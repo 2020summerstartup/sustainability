@@ -1,8 +1,7 @@
 import React from "react";
 import { AuthUserContext } from "../../../services/Session";
 
-// Material UI Imports and Icons
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { withTheme } from "../../../components/Theme";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
@@ -23,6 +22,10 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Switch from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
+
+var globalMute = false;
 
 // Styles for settings drawer
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +50,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Material UI Swipeable Drawer for Settings
+const MuteSwitch = withStyles((theme) => ({
+  root: {
+    width: 28,
+    height: 16,
+    padding: 0,
+    display: 'flex',
+  },
+  switchBase: {
+    padding: 2,
+    color: theme.palette.grey[500],
+    '&$checked': {
+      transform: 'translateX(12px)',
+      color: theme.palette.common.white,
+      '& + $track': {
+        opacity: 1,
+        backgroundColor: theme.palette.primary.main,
+        borderColor: theme.palette.primary.main,
+      },
+    },
+  },
+  thumb: {
+    width: 12,
+    height: 12,
+    boxShadow: 'none',
+  },
+  track: {
+    border: `1px solid ${theme.palette.grey[500]}`,
+    borderRadius: 16 / 2,
+    opacity: 1,
+    backgroundColor: theme.palette.common.white,
+  },
+  checked: {},
+}))(Switch);
+
 function SettingsDrawer(props) {
   const classes = useStyles();
   const { darkMode, setDarkMode } = props;
@@ -57,6 +93,7 @@ function SettingsDrawer(props) {
     bottom: false,
     right: false,
   });
+  const [mute, setMute] = React.useState(false)
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -68,6 +105,11 @@ function SettingsDrawer(props) {
     }
 
     setState({ ...state, [anchor]: open });
+  };
+
+  const handleChange = (event) => {
+    setMute(event.target.checked);
+    globalMute = event.target.checked;
   };
 
   const list = (anchor) => (
@@ -175,6 +217,19 @@ function SettingsDrawer(props) {
             Delete your account
           </ListItemText>
         </ListItem>
+        <ListItem>
+        <ListItemText className={classes.listItemText}>
+        <Typography component="div">
+        <Grid component="label" container alignItems="center" spacing={1}>
+          <Grid item>Audio Off</Grid>
+          <Grid item>
+            <MuteSwitch checked={mute} onChange={handleChange} name="mute" />
+          </Grid>
+          <Grid item>Audio On</Grid>
+        </Grid>
+      </Typography>
+        </ListItemText>
+        </ListItem>
       </List>
     </div>
   );
@@ -207,5 +262,6 @@ function SettingsDrawer(props) {
 }
 
 export default withTheme(SettingsDrawer);
+export const audioContext = React.createContext(globalMute);
 // export default SettingsDrawer;export default withTheme(SettingsDrawer);
 // export default SettingsDrawer;

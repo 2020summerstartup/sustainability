@@ -30,6 +30,14 @@ import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
+  // The following commented out lines are for fixing an error where, if a non-admin types in the admin URL, the console throws an error.
+  // It isn't finished though, and I was having trouble determining if the current user is an admin, so I've stopped for now. -Katie
+  // console.log('value', value);
+  // console.log('auth user context', AuthUserContext);
+  // if(value > 1 ) {
+  //   // If user is also not an admin, switch value to 0
+  // }
+
   return (
     <div
       role="tabpanel"
@@ -197,10 +205,12 @@ function CompeteTabs(props, {authUser}) {
         )}
         </Tabs>
       </AppBar>
+
       {/* LeaderBoard Tab */}
       <TabPanel value={value} index={0} className="tab-container">
         <Leaderboard />
       </TabPanel>
+      
       {/* Challeneges Tab - in progress */}
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
