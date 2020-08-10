@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import styles from "./badgeDarkModal.module.css";
-import { ReactComponent as DarkLightModeImg } from "../../img/darklightmode.svg";
+import React, { useState, useEffect } from 'react';
+import styles from "../../HomePage/modal.module.css";
+import { ReactComponent as DarkLightModeImg } from "../../../img/darklightmode.svg";
+import { DarkModeOpened } from "../../../services/Firebase"; 
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -10,7 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
 // sound
-import badge from "../../sounds/hero_simple-celebration-01.wav";
+import badge from "../../../sounds/hero_simple-celebration-01.wav";
 
 const useStyles = makeStyles((theme) => ({
   buttonModal: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-localStorage.setItem("pop_done", false);
+// localStorage.setItem("pop_done", false);
 
 export default function DarkModeModal() {
   const [visible, setVisible] = useState(false);
@@ -58,11 +59,12 @@ export default function DarkModeModal() {
   };
 
   useEffect(() => {
-    let pop_done = localStorage.getItem("pop_done");
-    if (!pop_done) {
+    let darkPop_done = JSON.parse(localStorage.getItem('darkPop_done'));
+    let email = localStorage.getItem('email');
+    if (!darkPop_done ) {
       setVisible(true);
       playSound(badgeAudio);
-      localStorage.setItem("pop_done", true);
+      DarkModeOpened(email);
     }
   }, []);
   if (!visible) return null;
@@ -91,7 +93,7 @@ export default function DarkModeModal() {
             <DarkLightModeImg className={classes.badgeImg} />
             <DialogContentText id="alert-dialog-description">
               <Typography variant="body1" className={classes.textTitle}>
-                Make sure you checkout our cool feature!{" "}
+                Make sure you check out our cool feature!{" "}
               </Typography>
               <Typography variant="body2" className={classes.textBody}>
                 You can now switch from Light Mode to Dark Mode! Just click on

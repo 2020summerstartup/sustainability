@@ -11,6 +11,7 @@ import StarIcon from "@material-ui/icons/Star";
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import challengeData from "../challengeData.json";
 // import challenges from "../../../img/challenges.svg";
 // import Paper from "@material-ui/core/Paper";
 
@@ -100,14 +101,15 @@ function notify() {
 }
 
 // get current challenge data from local storage
-var data = localStorage.getItem('challengeData');
-// convert challenge data from string to object
-var challengeData = JSON.parse(data)
+// var data = localStorage.getItem('challengeData');
+// console.log('data', data);
+// // convert challenge data from string to object
+// var challengeData = JSON.parse(data)
+console.log('challenge data', challengeData);
 
 class ChallengeCard2 extends React.Component {
   render() {
     const { classes } = this.props;
-
 
     return (
       <>

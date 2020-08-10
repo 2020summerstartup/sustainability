@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase, { auth } from 'firebase/app';
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
@@ -25,7 +25,7 @@ app.initializeApp(config);
 // firebase.initializeApp(config)
 const firestore = app.firestore();
 
-
+var UserUidVar;
 
 // sync with firebasse RT database changes
 // NOTE: must refresh page/sign in/sign up to get the updated challenges bc even though local storage updates, 
@@ -43,7 +43,7 @@ async function getChallengeData() {
 }
 getChallengeData();
 
-
+var authUserID;
 
 class Firebase {
   constructor() {
@@ -72,10 +72,12 @@ class Firebase {
 
   // Admin stuff again
   // *** Merge Auth and DB User API *** //
+
  
   onAuthUserListener = (next, fallback) =>
     this.auth.onAuthStateChanged(authUser => {
       if (authUser) {
+        authUserID = authUser.uid
         this.user(authUser.uid)
           .once('value')
           .then(snapshot => {
@@ -94,6 +96,7 @@ class Firebase {
             };
  
             next(authUser);
+
           });
       } else {
         fallback();
@@ -120,6 +123,9 @@ export const createUser = (userEmail, userName, dorm) => {
           favorites: [],
           masteredActions: [],
           userDorm: dorm,
+          darkPop_done: false,
+          addHomePop_done: false,
+          UserUID: authUserID,
           points: {
               "waterBottle": 0,
               "cmontWalk": 0,
@@ -148,7 +154,7 @@ export const createUser = (userEmail, userName, dorm) => {
             "energy": 0,
             "buzzes":0,
           },
-      });
+      }, {merge: true});
 };
 
 // fetches the user collection from firestore
@@ -247,6 +253,48 @@ export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact)
     'impact.energy': app.firestore.FieldValue.increment(energyImpact),
     'impact.water': app.firestore.FieldValue.increment(waterImpact),
     'impact.buzzes': app.firestore.FieldValue.increment(1),
+  })
+}
+
+export const DarkModeOpened = (userEmail) => {
+  localStorage.setItem('darkPop_done', true)
+  return firestore.doc('users/' + userEmail).update({
+    "darkPop_done": true,
+  })
+}
+export const updateSchoolImpact = (coImpact, energyImpact, waterImpact) => {
+  // updates local storage with incremented impact data
+  localStorage.setItem('SchoolCoEmiss', (parseInt(localStorage.getItem('SchoolCoEmiss'))+ parseInt(coImpact)));
+  localStorage.setItem('SchoolEnergy', (parseInt(localStorage.getItem('SchoolEnergy'))+ parseInt(energyImpact)));
+  localStorage.setItem('SchoolWater', (parseInt(localStorage.getItem('SchoolWater'))+ parseInt(waterImpact)));
+  localStorage.setItem('SchoolBuzzes', (parseInt(localStorage.getItem('SchoolBuzzes'))+ 1));
+//updates firestore with incremented impact data
+return firestore.collection('dorms').doc('wholeSchool').update({
+  'coEmiss': app.firestore.FieldValue.increment(coImpact),
+  'energy': app.firestore.FieldValue.increment(energyImpact),
+  'water': app.firestore.FieldValue.increment(waterImpact),
+  'buzzes': app.firestore.FieldValue.increment(1),
+})
+}
+
+export const AddHomeOpened = (userEmail) => {
+  localStorage.setItem('addHomePop_done', true)
+  return firestore.doc('users/' + userEmail).update({
+    "addHomePop_done": true,
+  })
+}
+
+// gets user's impact data from firestore and sets in in local storage
+export const getSchoolImpact = () => {
+  firestore.collection('dorms').doc('wholeSchool').onSnapshot( (snap) => {
+    const firestoreCoEmiss = snap.get('coEmiss')
+    localStorage.setItem('SchoolCoEmiss', firestoreCoEmiss);
+    const firestoreEnergy = snap.get('energy')
+    localStorage.setItem('SchoolEnergy', firestoreEnergy);
+    const firestoreWater = snap.get('water')
+    localStorage.setItem('SchoolWater', firestoreWater);
+    const firestoreBuzzes = snap.get('buzzes')
+    localStorage.setItem('SchoolBuzzes', firestoreBuzzes);
   })
 }
 

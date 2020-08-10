@@ -58,9 +58,11 @@ var theCongrats;
 
 var masteredActions = localStorage.getItem("firestoreMastered");
 var masterLength;
-if (masteredActions !== 'undefined') { // If masteredActions is defined
+if (masteredActions !== "undefined") {
+  // If masteredActions is defined
   masterLength = JSON.parse(masteredActions).length;
-} else { // Otherwise, zero mastered actions
+} else {
+  // Otherwise, zero mastered actions
   masterLength = 0;
 }
 
@@ -81,19 +83,44 @@ const badgeSay = () => {
         </span>
       </p>
     );
-  } else if (masterLength > 0 && masterLength < 5) {
+  } else if (masterLength === 1) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
-    theBadge = <p> You've earned {masterLength} badges! Keep it going 🥳 </p>;
+    theBadge = <p> You've earned {masterLength} badge! Keep it going 🥳 </p>;
+  } else if (masterLength > 1 && masterLength < 5) {
+    theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
+    theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
   } else {
     theCongrats = <>Omg {localStorage.getItem("name")}! </>;
-    theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
+    theBadge = (
+      <p> You've earned {masterLength} badges! That's how it's done 🤩</p>
+    );
   }
 };
+
+badgeSay();
+
+var backText;
+const leafBackSay = () => {
+  if (masterLength === 1) {
+    backText = (
+      <center>
+        Completed <br /> 1 <br /> Time!
+      </center>
+    );
+  } else {
+    backText = (
+      <center>
+        Completed <br /> {masterBadgesArray.length} <br /> Times!
+      </center>
+    );
+  }
+};
+
+leafBackSay();
 
 export const BadgesCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
   const classes = useStyles();
-  badgeSay();
 
   return (
     <>
@@ -109,7 +136,9 @@ export const BadgesCard = React.memo(function GalaxyCard() {
         <CardMedia classes={mediaStyles} image={fans} />
         <Box py={3} px={2} className={classes.content}>
           <Info useStyles={useGalaxyInfoStyles}>
-            <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>{theCongrats}</InfoSubtitle>
+            <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
+              {theCongrats}
+            </InfoSubtitle>
             <InfoTitle>{theBadge}</InfoTitle>
             <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
               {" "}
@@ -268,7 +297,7 @@ class Badges2 extends React.Component {
                       badge.id === selectedBadgeId && selectedBadgeState
                         ? `${badge.flipStatus}`
                         : null
-                      } ${badge.leafStyling}`}
+                    } ${badge.leafStyling}`}
                     onClick={() => this.cardClick(badge.id)}
                   >
                     <div className={styles.leafFront}>
@@ -284,7 +313,7 @@ class Badges2 extends React.Component {
                         variant="h6"
                         className={badge.titleStylingBack}
                       >
-                        Completed <br /> {badge.toMaster} <br /> Times!
+                        {backText}
                       </Typography>
                     </div>
                   </div>
@@ -292,12 +321,12 @@ class Badges2 extends React.Component {
               </div>
             ))
           ) : (
-              <div className="empty">
-                <Typography variant="h5">
-                  You haven't earned any badges yet :(
+            <div className="empty">
+              <Typography variant="h5">
+                You haven't earned any badges yet :(
               </Typography>
-              </div>
-            )}
+            </div>
+          )}
           <SignOutButtom />
         </div>
       </>
