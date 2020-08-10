@@ -13,7 +13,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 
 // import badgeImg from "../../img/badge.svg";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
-
+// Styles for Modal
 const useStyles = makeStyles((theme) => ({
     buttonModal: {
         marginTop: theme.spacing(2),
@@ -51,10 +51,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// localStorage.setItem("addHomePop_done", false);
-
+// Main Component - used to prompt users about dark mode
 export default function DarkModeModal() {
     const classes = useStyles();
+    // Visibility of modal
     const [visible, setVisible] = useState(false);
     const [open, setOpen] = React.useState(true);
 
@@ -69,17 +69,20 @@ export default function DarkModeModal() {
     const playSound = (audioFile) => {
         audioFile.play();
     };
-
+    // Ran to display modal only if user has never seen it before
     useEffect(() => {
         let addHomePop_done = JSON.parse(localStorage.getItem('addHomePop_done'));
         let email = localStorage.getItem('email');
         if (!addHomePop_done) {
+            // Displays modal and plays sound when it opens
             setVisible(true);
             playSound(badgeAudio);
+            // Tells firebase the action has been done
             AddHomeOpened(email);
         }
         
     }, [])
+    // Otherwise, does nothing
     if (!visible) return null;
 
     return (
