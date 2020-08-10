@@ -71,7 +71,7 @@ export default function DarkModeModal() {
       setVisible(true);
       playSound(badgeAudio);
       // Tells firebase the action has been done
-      //   AddHomeOpened(email);
+      AddHomeOpened(email);
     }
   }, [badgeAudio]);
   // Otherwise, does nothing
@@ -93,7 +93,11 @@ export default function DarkModeModal() {
               your homescreen!
             </Typography>
           </DialogContentText>
-          <img alt="dark logo" src={addHomeGif} className={classes.addHomeImg} />
+          <img
+            alt="dark logo"
+            src={addHomeGif}
+            className={classes.addHomeImg}
+          />
           <DialogContentText
             id="alert-dialog-description"
             className={classes.textEntireBody}
