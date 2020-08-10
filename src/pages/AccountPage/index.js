@@ -15,7 +15,7 @@ function assignDorm(data) {
   }
 }
 
-// Main Component - Account Page
+// ACCOUNTPAGE
 const AccountPage = props => {
   leaderBoardUpdate();
 
@@ -50,14 +50,11 @@ const AccountPage = props => {
   }
   
   return (
-    <div>
-      {/* Authorized users only, calls AccountTabs */}
       <AuthUserContext.Consumer>
         {(authUser) => (
           <AccountTabs props={props}/>
         )}
       </AuthUserContext.Consumer>
-    </div>
   );
 }
 
