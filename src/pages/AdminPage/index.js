@@ -3,7 +3,7 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import { compose } from "recompose";
 
 import Typography from "@material-ui/core/Typography";
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 
 import { withFirebase, getUser } from "../../services/Firebase";
 import * as ROLES from '../../constants/roles';
