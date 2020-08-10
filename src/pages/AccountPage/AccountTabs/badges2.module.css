@@ -1,7 +1,3 @@
-.root {
-  overflow: hidden;
-}
-
 /* Regular Phone Screen */
 .column {
   display: flex;

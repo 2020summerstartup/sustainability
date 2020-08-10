@@ -52,12 +52,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-var masteredActions = []
+var masteredActions = [];
 masteredActions = localStorage.getItem("firestoreMastered");
 var masterLength;
-if (masteredActions !== null && masteredActions !== 'undefined') {
+if (masteredActions !== null && masteredActions !== "undefined") {
   // If masteredActions is defined
   masterLength = JSON.parse(masteredActions).length;
 } else {
@@ -87,17 +85,16 @@ const badgeSay = () => {
           🤗
         </span>
       </p>
-    ); 
-  // One mastered activity
+    );
+    // One mastered activity
   } else if (masterLength === 1) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
     theBadge = <p> You've earned {masterLength} badge! Keep it going 🥳 </p>;
- // two to five mastered actions 
-  } 
-  else if (masterLength > 1 && masterLength < 5) {
+    // two to five mastered actions
+  } else if (masterLength > 1 && masterLength < 5) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
     theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
-  // More than 4 mastered actiions
+    // More than 4 mastered actiions
   } else {
     theCongrats = <>Omg {localStorage.getItem("name")}! </>;
     theBadge = (
@@ -163,7 +160,7 @@ export const BadgesCard = React.memo(function GalaxyCard() {
 
   return (
     <>
-    {/* Galaxy Card */}
+      {/* Galaxy Card */}
       <NoSsr>
         <GoogleFontLoader
           fonts={[
@@ -253,8 +250,7 @@ class Badges2 extends React.Component {
     return (
       <>
         <BadgesCard />
-        <div className={styles.root}>
-          {/* <div className={styles.fancyBorder}>
+        {/* <div className={styles.fancyBorder}>
           <Typography
             variant="h5"
             style={{
@@ -275,73 +271,69 @@ class Badges2 extends React.Component {
           </Typography>
         </div> */}
 
-          {/* ANIMATED FALLING LEAVES */}
-          <div className={styles.leaves}>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
+        {/* ANIMATED FALLING LEAVES */}
+        <div className={styles.leaves}>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
 
-          {/* MAPPING THROUGH EACH MASTERED BADGE */}
-          {this.state.badges ? (
-            this.state.badges.map((badge, i) => (
-              <div key={badge.id}>
-                <div className={styles.column}>
-                  <div
-                    // if badge id is the selected one and the badge state is true, then we flip the badge
-                    className={`${
-                      badge.id === selectedBadgeId && selectedBadgeState
-                        ? `${badge.flipStatus}`
-                        : null
-                    } ${badge.leafStyling}`}
-                    onClick={() => this.cardClick(badge.id)}
-                  >
-                    <div className={styles.leafFront}>
-                      <Typography
-                        variant="h6"
-                        className={badge.titleStylingFront}
-                      >
-                        {badge.title}
-                      </Typography>
-                    </div>
-                    <div className={styles.leafBack}>
-                      <Typography
-                        variant="h6"
-                        className={badge.titleStylingBack}
-                      >
-                        {backText}
-                      </Typography>
-                    </div>
+        {/* MAPPING THROUGH EACH MASTERED BADGE */}
+        {this.state.badges ? (
+          this.state.badges.map((badge, i) => (
+            <div key={badge.id}>
+              <div className={styles.column}>
+                <div
+                  // if badge id is the selected one and the badge state is true, then we flip the badge
+                  className={`${
+                    badge.id === selectedBadgeId && selectedBadgeState
+                      ? `${badge.flipStatus}`
+                      : null
+                  } ${badge.leafStyling}`}
+                  onClick={() => this.cardClick(badge.id)}
+                >
+                  <div className={styles.leafFront}>
+                    <Typography
+                      variant="h6"
+                      className={badge.titleStylingFront}
+                    >
+                      {badge.title}
+                    </Typography>
+                  </div>
+                  <div className={styles.leafBack}>
+                    <Typography variant="h6" className={badge.titleStylingBack}>
+                      {backText}
+                    </Typography>
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="empty">
-              <Typography variant="h5">
-                You haven't earned any badges yet :(
-              </Typography>
             </div>
-          )}
-          <SignOutButtom />
-        </div>
+          ))
+        ) : (
+          <div className="empty">
+            <Typography variant="h5">
+              You haven't earned any badges yet :(
+            </Typography>
+          </div>
+        )}
+        <SignOutButtom />
       </>
     );
   }
