@@ -25,7 +25,7 @@ app.initializeApp(config);
 // firebase.initializeApp(config)
 const firestore = app.firestore();
 
-var UserUidVar;
+// var UserUidVar;
 
 // sync with firebasse RT database changes
 // NOTE: must refresh page/sign in/sign up to get the updated challenges bc even though local storage updates, 
