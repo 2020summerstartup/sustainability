@@ -16,7 +16,7 @@ function assignDorm(data) {
 }
 
 // Main Component - Account Page
-function AccountPage(props) {
+const AccountPage = props => {
   leaderBoardUpdate();
 
   const authContext = useContext(AuthUserContext);
@@ -62,5 +62,4 @@ function AccountPage(props) {
 }
 
 const condition = (authUser) => !!authUser;
-
 export default withAuthorization(condition)(AccountPage);
