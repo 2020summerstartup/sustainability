@@ -164,7 +164,7 @@ class EnvImpactCards extends React.Component {
           ))
         ) : (
           <div className="empty">
-            Sorry no information is currently available
+            Sorry, no information is currently available
           </div>
         )}
       </Grid>
