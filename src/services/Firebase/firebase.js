@@ -1,4 +1,4 @@
-import firebase, { auth } from 'firebase/app';
+import firebase from 'firebase/app'; // Used to import { auth }, but it was never used so I removed it. -Katie
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
@@ -25,7 +25,7 @@ app.initializeApp(config);
 // firebase.initializeApp(config)
 const firestore = app.firestore();
 
-var UserUidVar;
+// var UserUidVar;
 
 // sync with firebasse RT database changes
 // NOTE: must refresh page/sign in/sign up to get the updated challenges bc even though local storage updates, 
