@@ -7,7 +7,6 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeIcon from "@material-ui/icons/Home";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
-// import InfoIcon from "@material-ui/icons/Info";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import EcoIcon from "@material-ui/icons/Eco";
 import PersonIcon from "@material-ui/icons/Person";
@@ -27,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     left: 0,
     width: "100%",
-    zIndex: 20,
+    zIndex: 100,
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
@@ -36,9 +35,9 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
     },
   },
-  selected: {},
 }));
 
+// BottomNav users that are logged into thier account
 function BottomNavAuth() {
   const classes = useStyles();
   const pathname = window.location.pathname;
@@ -79,12 +78,6 @@ function BottomNavAuth() {
         to="/compete"
         icon={<EmojiEventsIcon />}
       />
-      {/* <BottomNavigationAction
-        label="Info"
-        component={Link}
-        to="/info"
-        icon={<InfoIcon />}
-      /> */}
       <BottomNavigationAction
         label="Profile"
         component={Link}
@@ -95,6 +88,7 @@ function BottomNavAuth() {
   );
 }
 
+// BottomNav users that are NOT logged into thier account
 function BottomNavNonAuth() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
