@@ -3,6 +3,7 @@ import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import DormSelect from "../../../components/DormSelect";
 import changedorm from "../../../img/changedorm.svg";
 
+// Authorized Page for signed in users to change dorm, inside Settings Drawer
 const ChangeDorm = () => (
   <div>
     <AuthUserContext.Consumer>
@@ -19,6 +20,7 @@ const ChangeDorm = () => (
     </AuthUserContext.Consumer>
   </div>
 );
+
 
 const condition = (authUser) => !!authUser;
 

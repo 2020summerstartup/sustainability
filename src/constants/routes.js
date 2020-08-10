@@ -19,7 +19,7 @@ export const PROFILE_Badge = '/profile/badge';
 // home page
 export const HOME = '/home';
 export const HOME_ACTION = '/home/actions';
-export const HOME_FAVORITE = 'home/favorites';
+export const HOME_FAVORITE = '/home/favorites';
 // compete page
 export const COMPETE = '/compete';
 export const COMPETE_LEADERBOARD = '/compete/leaderboard';

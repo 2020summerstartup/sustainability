@@ -1,4 +1,5 @@
 import React from "react";
+// Image import
 import Chart from "react-google-charts";
 import dorm4 from "../../../img/dorm4.svg";
 import styles from "./dorm.module.css";
@@ -6,6 +7,7 @@ import styles from "./dorm.module.css";
 import { AuthUserContext } from "../../../services/Session";
 import SignOutButton from "../../../components/SignOut";
 
+// Material UI imports
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
 import { makeStyles } from "@material-ui/core/styles";
@@ -124,40 +126,55 @@ let coEmissImpact = JSON.parse(localStorage.getItem("SchoolCoEmiss"));
 let energyImpact = JSON.parse(localStorage.getItem("SchoolEnergy"));
 let waterImpact = JSON.parse(localStorage.getItem("SchoolWater"));
 
-// FOR PIE CHART!
+// FOR BAR CHART
 const data = [
-  ["Impact", "Quantity"],
-  [`${coEmissImpact} Pounds of CO2 Saved`, 5000],
-  [`${energyImpact} Kilojoules of Energy Saved`, energyImpact],
-  [`${waterImpact} Gallons of Water Saved`, waterImpact], // CSS-style declaration
+  ["Impact", "Quantity", { role: "style" }],
+  ["Pounds of CO2 Saved", coEmissImpact, "rgb(255, 184, 24)"],
+  ["Kilojoules of Energy Saved", energyImpact, "rgb(75, 179, 11)"],
+  ["Gallons of Water Saved", waterImpact, "rgb(26, 97, 168)"], // CSS-style declaration
 ];
+
 const options = {
-  // title: "Harvey Mudd's Positive Sustainability Impacts!",
-  height: "350px",
+  height: "400px",
   width: "100%",
-  slices: [
-    { color: "rgb(255, 184, 24)" },
-    { color: "rgb(75, 179, 11)" },
-    { color: "rgb(26, 97, 168)" },
-  ],
-  is3D: true,
-  tooltip: {
-    showColorCode: true,
-  },
-  chartArea: {
-    left: "0",
-    width: "100%",
-  },
-  legend: {
-    maxLines: 10,
-    position: "right",
-    alignment: "center",
-    textStyle: {
-      color: "233238",
-      fontSize: 14,
-    },
-  },
+  charArea: { width: "100%" },
+  legend: { position: "none" },
 };
+
+// FOR PIE CHART!
+// const data = [
+//   ["Impact", "Quantity"],
+//   [`${coEmissImpact} Pounds of CO2 Saved`, 5000],
+//   [`${energyImpact} Kilojoules of Energy Saved`, energyImpact],
+//   [`${waterImpact} Gallons of Water Saved`, waterImpact], // CSS-style declaration
+// ];
+// const options = {
+//   // title: "Harvey Mudd's Positive Sustainability Impacts!",
+//   height: "350px",
+//   width: "100%",
+//   slices: [
+//     { color: "rgb(255, 184, 24)" },
+//     { color: "rgb(75, 179, 11)" },
+//     { color: "rgb(26, 97, 168)" },
+//   ],
+//   is3D: true,
+//   tooltip: {
+//     showColorCode: true,
+//   },
+//   chartArea: {
+//     left: "0",
+//     width: "100%",
+//   },
+//   legend: {
+//     maxLines: 10,
+//     position: "right",
+//     alignment: "center",
+//     textStyle: {
+//       color: "233238",
+//       fontSize: 14,
+//     },
+//   },
+// };
 
 // cards to be rendered on the points page in account
 class EnvImpactCardsSchool extends React.Component {
@@ -168,18 +185,26 @@ class EnvImpactCardsSchool extends React.Component {
           Harvey Mudd's Positive Sustainability Impacts!
         </Typography>
         <Chart
+          chartType="ColumnChart"
+          // loader={<div>Loading Impact Chart...</div>}
+          data={data}
+          options={options}
+          style={{ margin: "auto", maxWidth: "50rem" }}
+        />
+        {/* <Chart
           chartType="PieChart"
           loader={<div>Loading Impact Chart...</div>}
           data={data}
           options={options}
           style={{ margin: "auto" }}
-        />
+        /> */}
       </>
     );
   }
 }
 
 export const DormCard = React.memo(function GalaxyCard() {
+  // Image aligned on top, styles called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
 
@@ -187,9 +212,11 @@ export const DormCard = React.memo(function GalaxyCard() {
   rankDisplay();
   totalBuzzDisplay();
   return (
+    // Authorized users only
     <AuthUserContext.Consumer>
       {(authUser) => (
         <>
+        {/* Dorm Galaxy Card */}
           <NoSsr>
             <GoogleFontLoader
               fonts={[
@@ -207,6 +234,7 @@ export const DormCard = React.memo(function GalaxyCard() {
                   {localStorage.getItem("dorm")} Dorm
                 </InfoSubtitle>
                 <InfoTitle>{rank}</InfoTitle>
+                {/* Direct link to change dorm from line on Galaxy Card */}
                 <InfoCaption>
                   <Link
                     to={ROUTES.CHANGEDORM}
@@ -217,17 +245,10 @@ export const DormCard = React.memo(function GalaxyCard() {
                       fontWeight: "bold",
                     }}
                   >
-                    {/* <Typography
-                      variant="body1"
-                      className={classes.linkText}
-                      style={{ underline: "enum: none" }}
-                      component={'span'}
-                    > */}
                     Change your dorm in settings&nbsp;
                     <span role="img" aria-label="settings">
                       ⚙️
                     </span>
-                    {/* </Typography> */}
                   </Link>
                 </InfoCaption>
               </Info>

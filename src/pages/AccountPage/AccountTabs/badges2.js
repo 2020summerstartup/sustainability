@@ -52,9 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// stores string for badge
-var theBadge;
-var theCongrats;
+
 
 var masteredActions = localStorage.getItem("firestoreMastered");
 var masterLength;
@@ -66,7 +64,13 @@ if (masteredActions !== "undefined") {
   masterLength = 0;
 }
 
+// Stores messages for Galaxy card
+var theBadge;
+var theCongrats;
+
+// Determines message depending on number of badges the user has for Galaxy Card
 const badgeSay = () => {
+  // No mastered actions
   if (masterLength === 0) {
     theCongrats = (
       <>
@@ -82,13 +86,17 @@ const badgeSay = () => {
           🤗
         </span>
       </p>
-    );
+    ); 
+  // One mastered activity
   } else if (masterLength === 1) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
     theBadge = <p> You've earned {masterLength} badge! Keep it going 🥳 </p>;
-  } else if (masterLength > 1 && masterLength < 5) {
+ // two to five mastered actions 
+  } 
+  else if (masterLength > 1 && masterLength < 5) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
     theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
+  // More than 4 mastered actiions
   } else {
     theCongrats = <>Omg {localStorage.getItem("name")}! </>;
     theBadge = (
@@ -97,59 +105,8 @@ const badgeSay = () => {
   }
 };
 
+// Call function so theCongrats and theBadge can be updated
 badgeSay();
-
-var backText;
-const leafBackSay = () => {
-  if (masterLength === 1) {
-    backText = (
-      <center>
-        Completed <br /> 1 <br /> Time!
-      </center>
-    );
-  } else {
-    backText = (
-      <center>
-        Completed <br /> {masterBadgesArray.length} <br /> Times!
-      </center>
-    );
-  }
-};
-
-leafBackSay();
-
-export const BadgesCard = React.memo(function GalaxyCard() {
-  const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
-  const classes = useStyles();
-
-  return (
-    <>
-      <NoSsr>
-        <GoogleFontLoader
-          fonts={[
-            { font: "Spartan", weights: [300] },
-            { font: "Montserrat", weights: [200, 400, 700] },
-          ]}
-        />
-      </NoSsr>
-      <Card className={classes.card}>
-        <CardMedia classes={mediaStyles} image={fans} />
-        <Box py={3} px={2} className={classes.content}>
-          <Info useStyles={useGalaxyInfoStyles}>
-            <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
-              {theCongrats}
-            </InfoSubtitle>
-            <InfoTitle>{theBadge}</InfoTitle>
-            <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
-              {" "}
-              Click on the badges for another surprise! 🍃
-            </InfoCaption>
-          </Info>
-        </Box>
-      </Card>
-    </>
-  );
-});
 
 var masterBadgesArray = []; // Initalize an array that will contain only the mastered actions
 for (const el in ActionData) {
@@ -177,6 +134,64 @@ for (const el in ActionData) {
     masterBadgesArray.push(masteredActionProps);
   }
 }
+
+var backText;
+const leafBackSay = () => {
+  if (masterLength === 1) {
+    backText = (
+      <center>
+        Completed <br /> 1 <br /> Time!
+      </center>
+    );
+  } else {
+    backText = (
+      <center>
+        Completed <br /> {masterBadgesArray.length} <br /> Times!
+      </center>
+    );
+  }
+};
+
+leafBackSay();
+
+// Main component - Galaxy Card for badges
+export const BadgesCard = React.memo(function GalaxyCard() {
+  // Image is centered and styles are called
+  const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
+  const classes = useStyles();
+
+  return (
+    <>
+    {/* Galaxy Card */}
+      <NoSsr>
+        <GoogleFontLoader
+          fonts={[
+            { font: "Spartan", weights: [300] },
+            { font: "Montserrat", weights: [200, 400, 700] },
+          ]}
+        />
+      </NoSsr>
+      <Card className={classes.card}>
+        <CardMedia classes={mediaStyles} image={fans} />
+        <Box py={3} px={2} className={classes.content}>
+          <Info useStyles={useGalaxyInfoStyles}>
+            <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
+              {theCongrats}
+            </InfoSubtitle>
+            <InfoTitle>{theBadge}</InfoTitle>
+            <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
+              {" "}
+              Click on the badges for another surprise! 🍃
+            </InfoCaption>
+          </Info>
+        </Box>
+      </Card>
+    </>
+  );
+});
+
+
+
 
 class Badges2 extends React.Component {
   constructor() {

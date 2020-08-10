@@ -37,6 +37,11 @@
 }
 
 .chartTitle{
+    color: black;
+    background-color: white;
+    padding-top: 0.5rem;
+    max-width: 50rem;
+    margin: auto;
     font-weight: bold;
     position: relative;
     top: 2.5rem;

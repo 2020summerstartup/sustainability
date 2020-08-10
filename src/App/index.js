@@ -65,12 +65,12 @@ const MuiSignInPage = lazy(() =>
 const MuiSignUpPage = lazy(() =>
   retry(() => import("../pages/RegisterPage/muiSignUpPage"))
 );
-const MuiPasswordForgetPage = lazy(
+const MuiPasswordForgetPage = lazy(() =>
   retry(() => import("../pages/RegisterPage/muiPasswordForgetPage"))
 );
 const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
 const AccountPage = lazy(() =>
-  retry(() => import("../pages/AccountPage/index"))
+  retry(() => import("../pages/AccountPage"))
 );
 const InfoPage = lazy(() => retry(() => import("../pages/InfoPage")));
 const CompetePage = lazy(() => retry(() => import("../pages/CompetePage")));
@@ -87,7 +87,7 @@ const DeleteAccount = lazy(() =>
   retry(() => import("../pages/AccountPage/Settings/deleteAccount"))
 );
 
-const ContactPage = lazy(() => import("../pages/InfoPage/fbContactForm"));
+const ContactPage = lazy(() => retry (() => import("../pages/InfoPage/fbContactForm")));
 
 function AppBase() {
   return (

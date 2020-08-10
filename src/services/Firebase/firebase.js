@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase/app'; // Used to import { auth }, but it was never used so I removed it. -Katie
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";

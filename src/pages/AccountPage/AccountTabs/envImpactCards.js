@@ -21,14 +21,16 @@ const useStyles = (theme) => ({
   },
 });
 
-// Change message depending on value of impact
+// Changes display message depnding on user's impact
+// Intializes variables for text to be displayed on impact cards
 var theCO;
 var theEnergy;
 var theH2O;
 
+// Carbon Dioxide message
 const CODisplay = () => {
   if (parseInt(coEmissImpact) === 0) {
-    theCO = "Pounds of CO2 saved! It's fine...😐"
+    theCO = "Pounds of CO2 saved :("
   } else if (parseInt(coEmissImpact) === 1) {
     theCO = "Pound of CO2 saved!"
   } else {
@@ -36,9 +38,10 @@ const CODisplay = () => {
   }
 };
 
+// Energy message
 const EnergyDisplay = () => {
   if (parseInt(energyImpact) === 0) {
-    theEnergy = "Milojoules of energy conserved! It's fine...😐"
+    theEnergy = "Milojoules of energy conserved :("
   } else if (parseInt(coEmissImpact) === 1) {
     theEnergy = "Milojoule of energy conserved!"
   } else {
@@ -46,9 +49,10 @@ const EnergyDisplay = () => {
   }
 };
 
+// Water conserved message
 const H2ODisplay = () => {
   if (parseInt(waterImpact) === 0) {
-    theH2O = "Gallons of water saved! It's fine...😐"
+    theH2O = "Gallons of water saved :("
   } else if (parseInt(waterImpact) === 1) {
     theH2O = "Gallon of water saved!"
   } else {
@@ -56,11 +60,12 @@ const H2ODisplay = () => {
   }
 };
 
+// Need to call functions, either inside or outside of class
 CODisplay();
 EnergyDisplay();
 H2ODisplay();
 
-// cards to be rendered on the points page in account
+// Enviornmental impact cards for account/points page
 class EnvImpactCards extends React.Component {
   constructor() {
     super();
@@ -74,21 +79,6 @@ class EnvImpactCards extends React.Component {
 
     this.getData = this.getData.bind(this);
   }
-//   var theCO;
-// CODisplay = () => {
-//         if (parseInt(coEmissImpact) === 0) {
-//           theCO = <p>Pounds of CO2 saved! It's ok! Go log more actions to see some impact</p>
-//       } else if (parseInt(coEmissImpact) === 1 ) {
-//           theCO = <p> Pound of CO2 saved!</p>
-//         } else {
-//           theCO = <p>Pounds of CO2 saved!</p>
-//         }
-  // }; 
-
-
-  
-  
-
   getData() {
     let data = {
       success: true,
@@ -96,25 +86,24 @@ class EnvImpactCards extends React.Component {
         {
           id: 1,
           score: this.state.coEmiss,
-          title: "Pounds of CO2 saved!",
+          title: `${theCO}`,
           colorStyling: null,
         },
         {
           id: 2,
           score: this.state.energy,
-          // title: "Kilojoules of energy conserved!",
           title: `${theEnergy}`,
           colorStyling: null,
         },
         {
           id: 3,
           score: this.state.water,
-          // title: "Gallons of water conserved!",
           title: `${theH2O}`,
           colorStyling: null,
         },
       ],
     };
+
     data.cards.forEach((card, id) => {
       if (id === 0) {
         card.colorStyling = styles.co2;
@@ -178,7 +167,7 @@ class EnvImpactCards extends React.Component {
           ))
         ) : (
           <div className="empty">
-            Sorry no information is currently available
+            Sorry, no information is currently available
           </div>
         )}
       </Grid>

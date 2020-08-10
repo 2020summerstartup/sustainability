@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 // Sounds
 import toastNotify from "../../../sounds/notification_simple-01.wav";
 
+// Authorized Page for signed in users to change dorm, inside Settings Drawer
 const ChangePW = () => (
   <div>
     <AuthUserContext.Consumer>
