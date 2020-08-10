@@ -54,9 +54,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-var masteredActions = localStorage.getItem("firestoreMastered");
+var masteredActions = []
+masteredActions = localStorage.getItem("firestoreMastered");
 var masterLength;
-if (masteredActions !== "undefined") {
+if (masteredActions !== null) {
   // If masteredActions is defined
   masterLength = JSON.parse(masteredActions).length;
 } else {
@@ -189,9 +190,6 @@ export const BadgesCard = React.memo(function GalaxyCard() {
     </>
   );
 });
-
-
-
 
 class Badges2 extends React.Component {
   constructor() {

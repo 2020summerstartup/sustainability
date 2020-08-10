@@ -70,7 +70,6 @@ export default function DarkModeModal() {
   if (!visible) return null;
 
   return (
-    <div>
       <div id="badgewindow">
         <Dialog
           open={open}
@@ -80,22 +79,22 @@ export default function DarkModeModal() {
         >
           {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
           <DialogContent className={styles.dialogContentDarkMode}>
-            <DialogContentText id="alert-dialog-description">
+            <DialogContentText component={'span'} id="alert-dialog-description">
               {/* RIBBON */}
               <div className={styles.nonSemanticProtector}>
-                <h1 className={styles.ribbon}>
+                <Typography className={styles.ribbon} component={'span'} variant={'body2'}>
                   <strong className={styles.ribbonContent}>
                     Hey our sustainable buddy, {localStorage.getItem("name")}!
                   </strong>
-                </h1>
+                </Typography>
               </div>
             </DialogContentText>
             <DarkLightModeImg className={classes.badgeImg} />
             <DialogContentText id="alert-dialog-description">
-              <Typography variant="body1" className={classes.textTitle}>
+              <Typography variant="body1" component={'span'} className={classes.textTitle}>
                 Make sure you check out our cool feature!{" "}
               </Typography>
-              <Typography variant="body2" className={classes.textBody}>
+              <Typography variant="body2" component={'span'} className={classes.textBody}>
                 You can now switch from Light Mode to Dark Mode! Just click on
                 the settings icon in the upper right corner on your profile
                 page.
@@ -116,6 +115,5 @@ export default function DarkModeModal() {
           </DialogContent>
         </Dialog>
       </div>
-    </div>
   );
 }
