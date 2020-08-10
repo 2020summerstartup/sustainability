@@ -72,13 +72,13 @@ export default function DarkModeModal() {
     useEffect(() => {
         let addHomePop_done = JSON.parse(localStorage.getItem('addHomePop_done'));
         let email = localStorage.getItem('email');
-        // if (!addHomePop_done) {
+        if (!addHomePop_done) {
         // Displays modal and plays sound when it opens
         setVisible(true);
         playSound(badgeAudio);
         // Tells firebase the action has been done
         AddHomeOpened(email);
-        // }
+        }
 
     }, [badgeAudio])
     // Otherwise, does nothing
