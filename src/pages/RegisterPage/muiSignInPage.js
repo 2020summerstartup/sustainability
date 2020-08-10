@@ -103,12 +103,20 @@ class SignInFormBase extends Component {
     localStorage.clear();
     const { email, password } = this.state;
 
-    this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
+    firebase.auth()
+      .signInWithEmailAndPassword(email, password)
       .then( () => {
         // initalizes user's impact points in local storage 
         getUserImpact(email);
         getSchoolImpact();
+        getUser(email).onSnapshot(
+          (docSnapshot) => {
+            // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
+            if(docSnapshot.data()) {
+              assignData(docSnapshot.data());
+            }
+          },
+        );
         this.setState({ ...INITIAL_STATE });
         // refresh needed to have points initially displayed
         // window.location.reload();
@@ -117,23 +125,11 @@ class SignInFormBase extends Component {
         this.setState({ error });
         console.log(error);
       });
-    // initalizes user's data into local storage 
-    // needed to display total point, progress modal, and enable app to run without error
-    getUser(email).onSnapshot(
-      (docSnapshot) => {
-        // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
-        if(docSnapshot.data()) {
-          assignData(docSnapshot.data());
-        }
-      },
-    );
-    // initalizes user's impact points in local storage 
-    // getUserImpact(email);
-
+      event.preventDefault();
     // takes user to home page
     this.props.history.push(ROUTES.HOME);
 
-    event.preventDefault();
+    
   };
 
 
