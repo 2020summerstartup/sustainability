@@ -31,8 +31,8 @@ import { getDorm, getSchoolImpact } from "../../../services/Firebase";
 
 // import styles from "./totalBuzz.module.css";
 
-import Reward from "react-rewards";
-import styles1 from "./envImpactCards.module.css";
+// import Reward from "react-rewards";
+// import styles1 from "./envImpactCards.module.css";
 
 getSchoolImpact();
 // synchronize school's total impact with firestore, when they remain on the page, they will not see immediate changes that other users
