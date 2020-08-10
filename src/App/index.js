@@ -9,6 +9,7 @@ import {
 import Navigation from "../components/Navigation";
 import BottomNav from "../components/Navigation/bottomNav";
 import RotatePage from "../pages/RotatePage";
+import AccountPage from "../pages/AccountPage"
 import Header, {
   HomeHeader,
   CompeteHeader,
@@ -54,9 +55,9 @@ const MuiPasswordForgetPage = lazy(() =>
   retry(() => import("../pages/RegisterPage/muiPasswordForgetPage"))
 );
 const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
-const AccountPage = lazy(() =>
-  retry(() => import("../pages/AccountPage"))
-);
+// const AccountPage = lazy(() =>
+//   retry(() => import("../pages/AccountPage"))
+// );
 const InfoPage = lazy(() => retry(() => import("../pages/InfoPage")));
 const CompetePage = lazy(() => retry(() => import("../pages/CompetePage")));
 const MuiOfflinePage = lazy(() =>
