@@ -36,7 +36,7 @@ const AccountPage = props => {
   );
 
   var dormName = localStorage.getItem("dorm")
-  if (dormName !== ""){
+  if (dormName && dormName !== ""){
     getDorm()
     .doc(dormName)
     .onSnapshot(
