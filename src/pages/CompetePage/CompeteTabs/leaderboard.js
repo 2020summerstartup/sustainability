@@ -82,7 +82,7 @@ class Leaderboard extends React.Component {
         .get()
         .then((snapshot) => {
           snapshot.docs.forEach((doc) => {
-            if (doc.id != "wholeSchool"){
+            if (doc.id !== "wholeSchool"){
             newLeaders.push({ id: 1, name: doc.id, points: doc.data().score });
           }});
           // orders by decreasing points property

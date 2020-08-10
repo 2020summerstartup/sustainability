@@ -29,13 +29,14 @@ import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 // Functions from Material UI for tabs
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-  console.log('value', value);
-  console.log('auth user context', AuthUserContext);
-  if(value > 1 ) {
-    console.log('yikes, switch value to 0 here');
-  } else {
-    console.log('value is fine');
-  }
+
+  // The following commented out lines are for fixing an error where, if a non-admin types in the admin URL, the console throws an error.
+  // It isn't finished though, and I was having trouble determining if the current user is an admin, so I've stopped for now. -Katie
+  // console.log('value', value);
+  // console.log('auth user context', AuthUserContext);
+  // if(value > 1 ) {
+  //   // If user is also not an admin, switch value to 0
+  // }
 
   return (
     <div

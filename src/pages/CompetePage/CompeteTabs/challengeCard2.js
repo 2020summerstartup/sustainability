@@ -105,7 +105,7 @@ function notify() {
 // console.log('data', data);
 // // convert challenge data from string to object
 // var challengeData = JSON.parse(data)
-console.log('challenge data', challengeData);
+// console.log('challenge data', challengeData);
 
 class ChallengeCard2 extends React.Component {
   render() {
