@@ -11,7 +11,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
-// import badgeImg from "../../img/badge.svg";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 // Styles for Modal
 const useStyles = makeStyles((theme) => ({

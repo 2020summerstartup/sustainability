@@ -1,10 +1,10 @@
 import styles from "./modal.module.css";
 import React, { Fragment, useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
-import { retry } from "../../App/index"
+import { retry } from "../../App/index";
 import ProgressCircle from "../../components/ProgressCircle";
-
 import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
+// import styles from "./badgeDarkModal.module.css";
 
 // import FavoriteCard from "./faveCard";
 import actionTab from "../../img/actionTab.svg";
@@ -18,10 +18,11 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {
   updateUserPoint,
   updateDormPoint,
-  actionMastered,
   addFav,
   deleteFav,
+  actionMastered,
   updateUserImpact,
+  updateSchoolImpact,
 } from "../../services/Firebase";
 
 import PropTypes from "prop-types";
@@ -87,7 +88,6 @@ import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 import increment from "../../sounds/navigation_selection-complete-celebration.wav";
 
-
 // Lazy load the fave card
 const FavoriteCard = lazy(() => retry(() => import("./faveCard.js")));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
@@ -120,86 +120,33 @@ const playSound = (audioFile) => {
   audioFile.play();
 };
 
-// initalize array filled with action data of favorited actions
-var FavsArray = JSON.parse(localStorage.getItem('localFavsArray'));
-// called when a user favorites an action, adds all necessary data for the action to the array
-const addToFavsArray = (action) => {
-  // finds the index of the action's object in the array of favorited activities
-  var index = FavsArray.map(function(x) {return x.susAction;}).indexOf(action.susAction)
-  // if the action is not currently favorited, get its action data and add it to favorites array 
-  if ( index < 0){
-  var FavAdd = {
-    "title": action.title,
-    "id": action.id,
-    "points": action.points,
-    "susAction": action.susAction,
-    "badgeName": action.badgeName,
-    "toMaster": action.toMaster,
-    "coEmiss": action.coEmiss,
-    "energy": action.energy,
-    "water": action.water,
-    "image": action.image,
-    "impact": action.impact,
-  }
-  // add new action data to favroites array
-  FavsArray.push(FavAdd);
-  // const localFavsArray = JSON.parse(localStorage.getItem('localFavsArray'));
-  localStorage.setItem('localFavsArray', JSON.stringify(FavsArray))
-}
-}
-
-// called when a user unfavorites an action, removes the action & its data from the favorites array
-const removeFromFavsArray = (action) => {
-  // find the index of the action's object in the favorites array
-  var index = FavsArray.map(function(x) {return x.susAction;}).indexOf(action.susAction)
-  // if action is currently in favorites array, remove it
-  if (index > -1){
-    FavsArray.splice(index, 1)
-  } 
-}
-
-// called when the user signs in & up --> gets favorited actions from firestore and sets up FavsArray 
-const initalizeFavs = (data) => {
-  // sets firestore array containing favorited actions equal to var firestoreFavs
-  var firestoreFavs = data.favorites;
-  // puts array of favorited action in local storage
-  localStorage.setItem("firestoreFavs", JSON.stringify(firestoreFavs));
-  localStorage.setItem('localFavsArray', '[]');
-  // gets the actionTitle from FavsArray 
-  // note: this is part of a check for if assignData runs once the user has signed in/up --> was doing it for me but theroetically 
-  // should not happen
-  var actionTitle = FavsArray.map(function(x) {return x.susAction;})
-  ActionData.forEach( (action) => {
-    // if action has been favorited previously 
-    if (firestoreFavs.includes(action.susAction)){
-      // if action has not already been added to FavsArray --> prevents duplicate action cards appearing (part of safety check)
-      if (JSON.parse(localStorage.getItem('localFavsArray')).includes(JSON.stringify(actionTitle)) === false ){
-        // if the action needs to be added to FavsArray, add it
-      addToFavsArray(action)
-      }
-    }
-  });
-}
-
 // this function is meant to get each action's point value from firestore and then set each action's points in local storage
 // should only be called when page first loads, not when points are increment
-const assignData = (data) => {
+const assignData = (userData) => {
   // the data parameter is meant to be a firestore document snapshot
-  localStorage.setItem("dorm", data.userDorm);
-  localStorage.setItem("name", data.name);
-  localStorage.setItem("total", data.total);
-  localStorage.setItem("darkPop_done", data.darkPop_done);
-  localStorage.setItem("addHomePop_done", data.addHomePop_done);
+  localStorage.setItem("dorm", userData.userDorm);
+  localStorage.setItem("name", userData.name);
+  localStorage.setItem("total", userData.total);
+  localStorage.setItem("darkPop_done", userData.darkPop_done);
+  localStorage.setItem("addHomePop_done", userData.addHomePop_done);
   // initialize mastered action
-  var firestoreMastered = data.masteredActions;
+  var firestoreMastered = userData.masteredActions;
   localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
   // initialize points
-  for (const [key, value] of Object.entries(data.points)) {
+  for (const [key, value] of Object.entries(userData.points)) {
     localStorage.setItem(key, value);
   }
-  // initialize favorite actions
-  initalizeFavs(data);
-}
+  // initalize favorites
+  var firestoreFavs = userData.favorites;
+  // check if action has been previously favroited --> action is favorited in firestore
+  for (const [key, value] of Object.entries(userData.points)) {
+    if (firestoreFavs.includes(key)) {
+      // if action is saved as a favorite in firestore, set actionFav in firestore to true
+      var actionFavLSName = key.concat("Fav");
+      localStorage.setItem(actionFavLSName, true);
+    }
+  }
+};
 
 Modal.setAppElement("#root"); // Need this for modal to not get error in console
 
@@ -207,7 +154,7 @@ Modal.setAppElement("#root"); // Need this for modal to not get error in console
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
-  return ( 
+  return (
     <div
       role="tabpanel"
       hidden={value !== index}
@@ -499,14 +446,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// transition to make modal open by slideing up and close by sliding down
+// transition to make modal open by sliding up and close by sliding down
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
-// Text to display on the homepage
 function HomePage(props) {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
   const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
@@ -529,7 +473,6 @@ function HomePage(props) {
   };
 
   // this is needed to prevent error in console when user signs into their account
-  // hopefully will revisit later to get rid of refresh page solution
   var initUserTotal;
   if (localStorage.getItem("total") == null) {
     initUserTotal = 0;
@@ -542,7 +485,7 @@ function HomePage(props) {
   const [value, setValue] = React.useState(indexToTabName[page]);
   const [expandedId, setExpandedId] = React.useState(-1);
   // const [height, setHeight] = React.useState("");
-  const [filter, setFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
   // the one Amy wrote so I assume it's necessary here too) -Katie
   // const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top"});
@@ -571,8 +514,14 @@ function HomePage(props) {
   };
 
   const handleSearchChange = (e) => {
-    setFilter(e.target.value);
+    setSearchQuery(e.target.value);
   };
+
+  const filteredOptions = ActionData.filter(
+    (action) =>
+      action.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      !searchQuery
+  );
 
   var tempMastered = localStorage.getItem("firestoreMastered");
   var firestoreMastered = [];
@@ -628,13 +577,16 @@ function HomePage(props) {
       // window.location.reload(true);
     });
 
-    // add's associated impact points in firestore and local storage
+    // add's associated impact points to user & dorm data in firestore and local storage
     updateUserImpact(
       authContext.email,
       action.coEmiss,
       action.energy,
       action.water
     );
+
+    // add's associated impact points to school in firestore and local storage
+    updateSchoolImpact(action.coEmiss, action.energy, action.water);
 
     // check if action has been completed enough time to be considered "mastered"
     // also sends user a progress notifications if action has not yet been mastered
@@ -690,53 +642,59 @@ function HomePage(props) {
     setBadgeModalIsOpen(false);
   };
 
-
-
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
-  var tempFavs = localStorage.getItem("firestoreFavs"); //favorited actions from firestore 
-  for (const el in ActionData) {
+  for (const i in ActionData) {
     // Iterate over every action in ActionData
-    var action = ActionData[el]; // Take the current action
-    if (tempFavs != null && tempFavs.includes(action.susAction)) {
+    var action2 = ActionData[i]; // Take the current action
+    var storageName2 = action2.susAction.concat("Fav");
+    var storedFav = localStorage.getItem(storageName2) === "true";
+    if (storedFav) {
       // If the action is favorited
-      favIconColors[el - 1] = "var(--theme-secondary)"; // Turn pink
+      favIconColors[i - 1] = "var(--theme-secondary)"; // Turn red
     } else {
-      favIconColors[el - 1] = "#6c6c6c"; // Otherwise turn gray
+      favIconColors[i - 1] = "#6c6c6c"; // Otherwise turn gray
     }
   }
 
-   // to flip the status of favorited action --> so that color changes
+  // to flip the status of favorited action --> so that color changes
   const favAction = (action) => {
-    // variable set later depending on the message we want the user to see when they click the heart to fav
-    var displayText;
+    // Get the name and info of the stored action that we're working with
+    var storageName = action.susAction.concat("Fav");
+    // storedFav is a boolean (is the current action favorited?)
+    // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
+    var storedFav = localStorage.getItem(storageName) === "true";
+    // In case the action hasn't been favorited before
+    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
+    if (storedFav == null) {
+      storedFav = false; // If not initialized, initialize here
+    }
+    storedFav = !storedFav; // Toggle the favorite
+    // variable for getting color of fav icon
     var favIconColor = document.getElementById(
       "favoriteIcon".concat(action.susAction)
     );
-    FavsArray = JSON.parse(localStorage.getItem('localFavsArray'));
-    // puts current favorited actions in an array consistign of just their names
-    tempFavs = FavsArray.map(function(x) {return x.susAction;}) 
-    // if array of favorited action includes the selected action 
-    if (tempFavs.includes(action.susAction)){
-      // action has previouslly been favorited, unfavorite it!
-      displayText = action.title.concat(" removed from favorites");
-      favIconColor.style.color = "#6c6c6c"; // Turn heart gray
-      playSound(unlikeAudio);
-      toast.success(displayText, { autoClose: 3000 }); // It's "success" so that the window is green
-      // remove favorited action from array & update firestore & local storage
-      removeFromFavsArray(action);
-      deleteFav(authContext.email, action.susAction);
-    } else {
-      // if action is not favorited, favorite it!
+    // Notify user that action was added/removed from favorites
+    var displayText;
+    const email = localStorage.getItem("email");
+    if (storedFav) {
+      // if the action is now favorited
       displayText = action.title.concat(" added to favorites");
-      favIconColor.style.color = "var(--theme-secondary)"; // Turn heart pink
+      favIconColor.style.color = "#f48fb1"; // Turn red
       playSound(likeAudio);
-      toast.warn(displayText, { autoClose: 3000 }); // It's a warning so that the window is yellow
-      // add favorited action to array & update firestore & local storage
-      addToFavsArray(action)
-      addFav(authContext.email, action.susAction);
+      toast.success(displayText, { autoClose: 5000 });
+      addFav(email, action.susAction);
+    } else {
+      // if the action is now unfavorited
+      displayText = action.title.concat(" removed from favorites");
+      favIconColor.style.color = "#6c6c6c"; // Back to grey
+      playSound(unlikeAudio);
+      toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
+      deleteFav(email, action.susAction);
     }
+    // set local storage actionFav to either true or false depending on fav status
+    localStorage.setItem(storageName, storedFav); // Save the updated favorite value
   };
 
   // Set the "progress message" to be displayed when the user pressed "check progress"
@@ -778,13 +736,19 @@ function HomePage(props) {
   return (
     <>
       <>
-      <AppBar position="static">
-        <Toolbar className={classes.toolbar}>
-          <SusLogo3 className={classes.logo} />
-          <Typography className={classes.title} variant="h6">
-            Home
-          </Typography>
-        </Toolbar>
+        <AppBar position="static">
+          <Toolbar className={classes.toolbar}>
+            <SusLogo3 className={classes.logo} />
+            <Typography className={classes.title} variant="h6">
+              Home
+            </Typography>
+          </Toolbar>
+          {/* <AppBar
+          position="static"
+          color="primary"
+          elevation={0}
+          className={classes.appbar}
+        > */}
           <Tabs
             value={value}
             onChange={handleChange}
@@ -923,7 +887,7 @@ function HomePage(props) {
                 numberOfPieces={2000}
                 recycle={false}
                 opacity={0.7}
-              // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
+                // colors={["grey", "white", "var(--theme)", "black", "var(--theme-secondary)"]}
               />
               <DialogContentText id="alert-dialog-slide-description">
                 {progressMessage}
@@ -992,85 +956,107 @@ function HomePage(props) {
             {/* Card for actions */}
             <Grid container justify="center" spacing={2}>
               {/* All actions (this loops using search) */}
-              {ActionData.map(
-                (action, i) =>
-                  action.title.toLowerCase().includes(filter.toLowerCase()) && (
-                    <Grid item xs={12} md={6} lg={4} key={i}>
-                      <Card className={classes.root}>
-                        <CardHeader
-                          className={classes.cardContent}
-                          action={
-                            <IconButton
-                              disabled={firestoreMastered.includes(
-                                action.susAction
-                              )}
-                              onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
-                              aria-label="increment"
-                              title="Complete this sustainable action"
-                            >
-                              <AddCircleIcon fontSize="large" />
-                            </IconButton>
-                          }
-                          title={action.title}
-                          subheader={"Earn ".concat(action.points, " Points!")}
-                        />
+              {filteredOptions.length ? (
+                ActionData.map(
+                  (action, i) =>
+                    action.title
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase()) && (
+                      <Grid item xs={12} md={6} lg={4} key={i}>
+                        <Card className={classes.root}>
+                          <CardHeader
+                            className={classes.cardContent}
+                            action={
+                              <IconButton
+                                disabled={firestoreMastered.includes(
+                                  action.susAction
+                                )}
+                                onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
+                                aria-label="increment"
+                                title="Complete this sustainable action"
+                              >
+                                <AddCircleIcon fontSize="large" />
+                              </IconButton>
+                            }
+                            title={action.title}
+                            subheader={"Earn ".concat(
+                              action.points,
+                              " Points!"
+                            )}
+                          />
 
-                        <CardActions
-                          disableSpacing
-                          className={classes.cardActions}
-                        >
-                          <IconButton
-                            title="Add to favorites"
-                            aria-label="add to favorites"
-                            style={{
-                              color: favIconColors[i - 1],
-                            }} // Set the favIcon color (i-1 prevents off-by-one error)
-                            onClick={() => favAction(action)}
-                            id={"favoriteIcon".concat(action.susAction)}
-                            className={classes.favoriteIcon}
+                          <CardActions
+                            disableSpacing
+                            className={classes.cardActions}
                           >
-                            <FavoriteIcon />
-                          </IconButton>
-                          <IconButton
-                            className={clsx(classes.expand, {
-                              [classes.expandOpen]: !expandedId,
-                            })}
-                            onClick={() => {
-                              handleExpandClick(i);
-                            }}
-                            aria-expanded={expandedId === i}
-                            aria-label="Show More"
-                            title="Learn more"
-                          >
-                            <ExpandMoreIcon />
-                          </IconButton>
-                        </CardActions>
-                        <Collapse
-                          in={expandedId === i}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          <CardContent>
-                            <CardMedia
-                              className={classes.media}
-                              image={action.image}
-                              title={action.title}
-                            />
-                            <Typography
-                              variant="h5"
-                              component={"span"}
-                              gutterBottom
+                            <IconButton
+                              title="Add to favorites"
+                              aria-label="add to favorites"
+                              style={{
+                                color: favIconColors[i - 1],
+                              }} // Set the favIcon color (i-1 prevents off-by-one error)
+                              onClick={() => favAction(action)}
+                              id={"favoriteIcon".concat(action.susAction)}
+                              className={classes.favoriteIcon}
                             >
-                              Environmental Impact:
-                            </Typography>
-                            <Typography variant="body1">
-                              {action.impact}
-                            </Typography>
-                          </CardContent>
-                        </Collapse>
-                      </Card>
-                    </Grid>
-                  )
+                              <FavoriteIcon />
+                            </IconButton>
+                            <IconButton
+                              className={clsx(classes.expand, {
+                                [classes.expandOpen]: !expandedId,
+                              })}
+                              onClick={() => {
+                                handleExpandClick(i);
+                              }}
+                              aria-expanded={expandedId === i}
+                              aria-label="Show More"
+                              title="Learn more"
+                            >
+                              <ExpandMoreIcon />
+                            </IconButton>
+                          </CardActions>
+                          <Collapse
+                            in={expandedId === i}
+                            timeout="auto"
+                            unmountOnExit
+                          >
+                            <CardContent>
+                              <Typography variant="h6" gutterBottom>
+                                Complete this action {action.toMaster} times to earn a
+                                badge!
+                              </Typography>
+                              <CardMedia
+                                className={classes.media}
+                                image={action.image}
+                                title={action.title}
+                              />
+                              <Typography
+                                variant="h5"
+                                component={"span"}
+                                gutterBottom
+                              >
+                                Environmental Impact:
+                              </Typography>
+                              <Typography variant="body1">
+                                {action.impact}
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </Grid>
+                    )
+                )
+              ) : (
+                <>
+                  <Typography variant="h6" gutterBottom>
+                    Sorry no actions found for "{searchQuery}" 😢
+                  </Typography>
+                  <Typography variant="body1">
+                    Feel free to fill out the "contact us" form in settings if
+                    you would like us to add "{searchQuery}" as a sustainable
+                    action!
+                  </Typography>
+                </>
               )}
             </Grid>
           </Fragment>
@@ -1097,9 +1083,10 @@ function HomePage(props) {
                     className={classes.actionContainer}
                   >
                     {/* Favorite actions (this loops using favs) */}
-                    {FavsArray.map(
+                    {ActionData.map(
                       (action, i) =>
-                        (
+                        localStorage.getItem(action.susAction.concat("Fav")) ===
+                          "true" && (
                           <Grid item xs={12} md={6} lg={4} key={i}>
                             <Card className={classes.root}>
                               <CardHeader

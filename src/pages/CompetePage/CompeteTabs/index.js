@@ -128,11 +128,13 @@ function CompeteTabs(props, {authUser}) {
   const tabNameToIndex = {
     0: "leaderboard",
     1: "challenges",
+    2: "admin",
   };
 
   const indexToTabName = {
     leaderboard: 0,
     challenges: 1,
+    admin: 2,
   };
 
   const [value, setValue] = React.useState(indexToTabName[page]);

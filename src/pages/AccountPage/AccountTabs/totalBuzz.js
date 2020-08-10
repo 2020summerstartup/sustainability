@@ -7,12 +7,13 @@ import { withStyles } from "@material-ui/core/styles";
 
 var totalBuzzText;
 const totalBuzzDisplay = () => {
-  if ( localStorage.getItem('buzzes') === 1 ) {
-    totalBuzzText = <Typography variant="h5">Action Logged!</Typography>
+  if (JSON.parse(localStorage.getItem("buzzes")) === 1) {
+    totalBuzzText = <Typography variant="h5">Action Logged!</Typography>;
   } else {
-    totalBuzzText = <Typography variant="h5">Actions Logged!</Typography>
+    totalBuzzText = <Typography variant="h5">Actions Logged!</Typography>;
   }
-}
+};
+totalBuzzDisplay();
 
 const useStyles = (theme) => ({
   //   borderBottom: {
@@ -23,25 +24,21 @@ const useStyles = (theme) => ({
   //   },
 });
 
-totalBuzzDisplay();
-
 // cards to be rendered on the points page in account
 class TotalBuzz extends React.Component {
   render() {
-
     return (
       <div className={styles.bannerShape}>
         <Grid
           container
           justify="center"
-          style={{ placeItems: "center", marginBottom: "0.5rem"}}
+          style={{ placeItems: "center", marginBottom: "0.5rem" }}
         >
           <Typography
             variant="h3"
-            component="h1"
             style={{ marginRight: "1rem" }}
           >
-            {localStorage.getItem("buzzes")}
+            <b>{localStorage.getItem("buzzes")}</b>
           </Typography>
           {totalBuzzText}
           <Grid container justify="center">

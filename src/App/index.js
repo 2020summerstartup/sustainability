@@ -59,30 +59,33 @@ function retry(fn, retriesLeft = 5, interval = 1000) {
 }
 
 // React lazy
-const MuiSignInPage = lazy(() => retry(() => import("../pages/RegisterPage/muiSignInPage")));
-const MuiSignUpPage = lazy(() => retry(() => import("../pages/RegisterPage/muiSignUpPage")));
-const MuiPasswordForgetPage = lazy(retry(() =>
-  import("../pages/RegisterPage/muiPasswordForgetPage")
-));
+const MuiSignInPage = lazy(() =>
+  retry(() => import("../pages/RegisterPage/muiSignInPage"))
+);
+const MuiSignUpPage = lazy(() =>
+  retry(() => import("../pages/RegisterPage/muiSignUpPage"))
+);
+const MuiPasswordForgetPage = lazy(
+  retry(() => import("../pages/RegisterPage/muiPasswordForgetPage"))
+);
 const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
-const AccountPage = lazy(() => retry(() =>
-  import("../pages/AccountPage/index")
-));
+const AccountPage = lazy(() =>
+  retry(() => import("../pages/AccountPage/index"))
+);
 const InfoPage = lazy(() => retry(() => import("../pages/InfoPage")));
 const CompetePage = lazy(() => retry(() => import("../pages/CompetePage")));
-const MuiOfflinePage = lazy(() => retry(() =>
-  import("../pages/OfflinePage/muiOfflinePage")
-));
-const MuiChangePw = lazy(() => retry(() =>
-  import("../pages/AccountPage/Settings/muiChangePw")
-));
-const MuiChangeDorm = lazy(() => retry(() =>
-  import("../pages/AccountPage/Settings/muiChangeDorm")
-));
-const DeleteAccount = lazy(() => retry(() =>
-  import("../pages/AccountPage/Settings/deleteAccount")
-));
-const AdminPage = lazy(() => retry(() => import("../pages/AdminPage")));
+const MuiOfflinePage = lazy(() =>
+  retry(() => import("../pages/OfflinePage/muiOfflinePage"))
+);
+const MuiChangePw = lazy(() =>
+  retry(() => import("../pages/AccountPage/Settings/muiChangePw"))
+);
+const MuiChangeDorm = lazy(() =>
+  retry(() => import("../pages/AccountPage/Settings/muiChangeDorm"))
+);
+const DeleteAccount = lazy(() =>
+  retry(() => import("../pages/AccountPage/Settings/deleteAccount"))
+);
 
 const ContactPage = lazy(() => import("../pages/InfoPage/fbContactForm"));
 
@@ -215,7 +218,7 @@ function AppBase() {
 
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
 
-          <Route path={ROUTES.ADMIN} component={AdminPage} />
+          {/* <Route path={ROUTES.ADMIN} component={AdminPage} /> */}
 
 
 
@@ -248,4 +251,4 @@ function AppBase() {
 
 const App = withTheme(AppBase);
 export default withAuthentication(App);
-export { retry }
+export { retry };

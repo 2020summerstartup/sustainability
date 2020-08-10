@@ -10,6 +10,7 @@ let colors = ["yellow", "green", "blue"];
 let coEmissImpact = localStorage.getItem("coEmiss");
 let energyImpact = localStorage.getItem("energy");
 let waterImpact = localStorage.getItem("water");
+let totalBuzz = localStorage.getItem("buzzes")
 
 
 const useStyles = (theme) => ({
@@ -40,11 +41,11 @@ const CODisplay = () => {
 // Energy message
 const EnergyDisplay = () => {
   if (parseInt(energyImpact) === 0) {
-    theEnergy = "Kilojoules of energy conserved :("
+    theEnergy = "Milojoules of energy conserved :("
   } else if (parseInt(coEmissImpact) === 1) {
-    theEnergy = "Kilojoule of energy conserved!"
+    theEnergy = "Milojoule of energy conserved!"
   } else {
-    theEnergy = "Kilojoules of energy conserved!"
+    theEnergy = "Milojoules of energy conserved!"
   }
 };
 
@@ -68,7 +69,7 @@ H2ODisplay();
 class EnvImpactCards extends React.Component {
   constructor() {
     super();
-
+  
     this.state = {
       cards: [],
       coEmiss: coEmissImpact,
@@ -79,6 +80,11 @@ class EnvImpactCards extends React.Component {
     this.getData = this.getData.bind(this);
   }
 
+
+
+  
+  
+
   getData() {
     let data = {
       success: true,
@@ -88,7 +94,6 @@ class EnvImpactCards extends React.Component {
           score: this.state.coEmiss,
           title: `${theCO}`,
           colorStyling: null,
-
         },
         {
           id: 2,
@@ -167,10 +172,10 @@ class EnvImpactCards extends React.Component {
             </Grid>
           ))
         ) : (
-            <div className="empty">
-              Sorry no information is currently available
-            </div>
-          )}
+          <div className="empty">
+            Sorry no information is currently available
+          </div>
+        )}
       </Grid>
     );
   }

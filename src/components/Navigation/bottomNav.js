@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { AuthUserContext } from "../../services/Session";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     left: 0,
     width: "100%",
-    zIndex: 5,
+    zIndex: 20,
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
@@ -41,7 +41,21 @@ const useStyles = makeStyles((theme) => ({
 
 function BottomNavAuth() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const pathname = window.location.pathname;
+  
+  const tabNameToIndex = (pathname) => {
+    if (pathname.includes("home")){
+      return 0
+    }
+    if (pathname.includes("compete")){
+      return 1
+    }
+    if (pathname.includes("profile")){
+      return 2
+    }
+  };
+  
+  const [value, setValue] = React.useState(tabNameToIndex(pathname));
 
   return (
     <BottomNavigation
@@ -111,4 +125,4 @@ function BottomNavNonAuth() {
   );
 }
 
-export default BottomNav;
+export default withRouter(BottomNav);

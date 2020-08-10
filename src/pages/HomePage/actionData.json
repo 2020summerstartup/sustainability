@@ -20,7 +20,7 @@
     "badgeName": "Walking",
     "toMaster": 15,
     "coEmiss": 0,
-    "energy": 253,
+    "energy": 1,
     "water": 0,
     "image": "https://images.unsplash.com/photo-1529083660546-904a258c8a1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Whenever possible, walk, bike, car pool, or use mass transit. Every gallon of gasoline you save avoids 22 pounds of CO2 emissions, and every mile you walk burns an average of 100 calories. Avoiding just 10 miles of driving every week would eliminate about 500 pounds of carbon dioxide emissions a year! "
@@ -33,7 +33,7 @@
     "badgeName": "Reusable Straw",
     "toMaster": 30,
     "coEmiss": 0,
-    "energy": 12,
+    "energy": 1,
     "water": 0,
     "image": "https://images.unsplash.com/photo-1586898993878-b33cd116520b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "The United States goes through some 500 million plastic straws a day, and that plastic severely impacts the environment, as they make up about 7% of the total plastic waste humans produce. It’s no surprise, then, that major rivers all around the world carry some 1.15-2.41 million tons of plastic into our seas each year. But you can make an effort to reverse this harrowing trend by moving toward eco-conscious, reusable straws as alternatives."
@@ -86,7 +86,7 @@
     "toMaster": 30,
     "coEmiss": 1,
     "energy": 0,
-    "water": 0,
+    "water": 2,
     "image": "https://images.unsplash.com/photo-1529942376973-7dd96721339c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Reducing food waste is environmentally important as it keeps food out of landfills. It makes economic sense at the small scale, by lowering household food bills and at the large scale by reducing disposal costs for restaurants, processors and farmers. Finally, reducing food waste is socially important when the rescued food is redirected to emergency food providers working to eliminate hunger in our communities."
   },
@@ -112,7 +112,7 @@
     "toMaster": 20,
     "coEmiss": 0,
     "energy": 0,
-    "water": 0,
+    "water": 5,
     "image": "https://images.unsplash.com/photo-1583907659441-addbe699e921?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Shifting to eco-friendly cleaning products and methods is a sure way of ensuring that we live in healthy, clean and toxic-free environments."
   },
@@ -138,8 +138,8 @@
     "badgeName": "Clothing",
     "toMaster": 15,
     "coEmiss": 0,
-    "energy": 5500,
-    "water": 500,
+    "energy": 5,
+    "water": 15,
     "image": "https://images.unsplash.com/photo-1521335629791-ce4aec67dd15?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
     "impact": "Opting to purchase your clothing second-hand (and avoiding fast-fashion) reduces your carbon footprint. You'll also save lots of money!"
   },
@@ -152,7 +152,7 @@
     "badgeName": "Air Dry Clothes",
     "toMaster": 15,
     "coEmiss": 0,
-    "energy": 4320,
+    "energy": 4,
     "water": 0,
     "image": "https://images.unsplash.com/photo-1529391409740-59f2cea08bc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Hanging your clothes to dry instead of using a clothes dryer reduces your energy-use. And while you're at college, it means you won't have to pay for dryer use!"
@@ -178,8 +178,8 @@
     "badgeName": "Dorm BBQ",
     "toMaster": 15,
     "coEmiss": 0,
-    "energy": 6000,
-    "water": 0.25,
+    "energy": 6,
+    "water": 7,
     "image": "https://images.unsplash.com/photo-1517241165176-52610c81d064?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Many students have the own dishes and utensils. Help minimize the number of single use products at dorm BBQs by bringing your own utensils and plates!"
   },
@@ -191,7 +191,7 @@
     "badgeName": "Reusable Bottle",
     "toMaster": 25,
     "coEmiss": 0,
-    "energy": 4000,
+    "energy": 4,
     "water": 1,
     "image": "https://images.unsplash.com/photo-1517559421643-54bc2e32021c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "One of the best and easiest ways to eliminate watse from single use products is to invest in their reusable alternatives. Reusable bottles are a great eco-friendly alternative to plastic bottles!"
@@ -205,7 +205,7 @@
     "toMaster": 25,
     "coEmiss": 0,
     "energy": 0,
-    "water": 7,
+    "water": 8,
     "image": "https://images.unsplash.com/photo-1530984575892-9c76ba2d187e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "The average American's shower last for about 8 minutes and uses about 17 gallons of water. Taking shorter showers will help decrease your water usage!"
   },
@@ -217,8 +217,8 @@
     "badgeName": "Donation",
     "toMaster": 10,
     "coEmiss": 0,
-    "energy": 5500,
-    "water": 500,
+    "energy": 5,
+    "water": 15,
     "image": "https://images.unsplash.com/photo-1551867356-29c991e1e8d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
     "impact": "Donating your gently used items to non-profit organizations such as GoodWill or Salvation Army will help extend the item's life. You are not only helping to reduce our reliance on single use products and fast fashion, but you are also likely helping those less fortunate than you!"
   },
@@ -230,7 +230,7 @@
     "badgeName": "Sweater Up",
     "toMaster": 20,
     "coEmiss": 0,
-    "energy": 10000,
+    "energy": 6,
     "water": 0,
     "image": "https://images.unsplash.com/photo-1581497396202-5645e76a3a8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Running your heater requires a lot of energy. If you can be comfortable simply by putting on a jacket or grabbing a blanket instead of turning on the heater, this will help reduce your energy usage!"

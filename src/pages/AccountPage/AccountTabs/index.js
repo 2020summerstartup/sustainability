@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { withRouter } from "react-router";
-import {retry} from "../../../App/index";
+import { retry } from "../../../App/index";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 import Badges2 from "./badges2";
@@ -15,8 +15,8 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
-import NewReleasesIcon from "@material-ui/icons/NewReleases"
-import ActionData from "../../HomePage/actionData.json"
+import NewReleasesIcon from "@material-ui/icons/NewReleases";
+import ActionData from "../../HomePage/actionData.json";
 
 // For Compete Header
 import Toolbar from "@material-ui/core/Toolbar";
@@ -102,30 +102,30 @@ const useStyles = makeStyles((theme) => ({
       margin: "auto",
     },
   },
-    // Styles for accountheader
-    toolbar: {
-      minHeight: "50px",
+  // styles for accountheader
+  toolbar: {
+    minHeight: "50px",
+  },
+  logo: {
+    width: "3rem",
+    height: "3rem",
+    paddingRight: "0.5rem",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "6.5rem",
     },
-    logo: {
-      width: "3rem",
-      height: "3rem",
-      paddingRight: "0.5rem",
-      [theme.breakpoints.up("sm")]: {
-        marginLeft: "6.5rem",
-      },
-      // Styles for mobile landscape
-      [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
-        marginLeft: "0",
-      },
+    // styles for mobile landscape
+    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
+      marginLeft: "0",
     },
-    title: {
-      color: "white",
-      fontWeight: "bold",
-      display: "inline-flex",
-      alignItems: "center",
-      padding: "0",
-      marginTop: "0.25rem",
-    },
+  },
+  title: {
+    color: "white",
+    fontWeight: "bold",
+    display: "inline-flex",
+    alignItems: "center",
+    padding: "0",
+    marginTop: "0.25rem",
+  },
 }));
 
 // Main component of AccountTabs file
@@ -137,13 +137,13 @@ const AccountTabs = props => {
 
   const tabNameToIndex = {
     0: "points",
-    1: "dorm",
+    1: "college",
     2: "badge",
   };
 
   const indexToTabName = {
     points: 0,
-    dorm: 1,
+    college: 1,
     badge: 2,
   };
 
@@ -157,7 +157,7 @@ const AccountTabs = props => {
   var temp = localStorage.getItem("firestoreMastered");
   var firestoreMastered = [];
   for (const el in ActionData) {
-    var action = ActionData[el]; 
+    var action = ActionData[el];
     var stringActionName = JSON.stringify(action.susAction);
     if (temp.includes(stringActionName)) {
       firestoreMastered.push(action.susAction);
@@ -212,10 +212,10 @@ const AccountTabs = props => {
             label={
               <>
                 <div className={classes.tabTextBigScreen}>
-                  <HomeIcon className={classes.tabIcon} /> Your Dorm{" "}
+                  <HomeIcon className={classes.tabIcon} /> Your College{" "}
                 </div>
                 <div className={classes.tabTextSmallScreen}>
-                  <HomeIcon className={classes.tabIcon} /> Dorm{" "}
+                  <HomeIcon className={classes.tabIcon} /> Mudd{" "}
                 </div>
               </>
             }
@@ -280,8 +280,8 @@ const AccountTabs = props => {
           {/* <h1> </h1> */}
           {/* <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={4}> */}
-              <Badges2 earnedBadges={firestoreMastered}/>
-            {/* </Grid>
+          <Badges2 earnedBadges={firestoreMastered} />
+          {/* </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <Badges2 />
             </Grid>
@@ -293,6 +293,6 @@ const AccountTabs = props => {
       </TabPanel>
     </div>
   );
-}
+};
 
 export default withRouter(AccountTabs);
