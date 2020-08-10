@@ -95,19 +95,10 @@ export default function DarkModeModal() {
                 {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
                 <DialogContent className={styles.dialogContentAddHome}>
                     <DialogContentText id="alert-dialog-description">
-                        {/* RIBBON */}
-                        {/* <div className={styles.nonSemanticProtector}> */}
-                            {/* <h1 className={styles.ribbon}> */}
-                                {/* <strong className={styles.ribbonContent}> */}
                                     <Typography variant="h5" className={classes.textTitle}>Hey {localStorage.getItem('name')}! Make sure you add our app to your homescreen!</Typography>
-                                {/* </strong> */}
-                            {/* </h1> */}
-                        {/* </div> */}
                     </DialogContentText>
                     <img alt="dark logo" src={addHomeGif} className={classes.badgeImg} />
-                    {/* <DarkLogo className={classes.badgeImg} /> */}
                     <DialogContentText id="alert-dialog-description" className={classes.textEntireBody}>
-                        {/* <Typography variant="h6" className={classes.textTitle}>Make sure you add our app to your homescreen!</Typography> */}
                         <Typography variant="body2" className={classes.textBody}>
                             <strong>For IOS devices: </strong> Make sure you're on Safari and then tap the Share
                             button at the bottom of your screen. Then tap on the "Add to Home
