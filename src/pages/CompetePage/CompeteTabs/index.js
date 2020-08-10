@@ -38,7 +38,6 @@ function TabPanel(props) {
   const getRole = () => {
     // Check if the email address is associated with any of the current users.
     var email = localStorage.getItem('email');
-    console.log('email', email);
     getUser(email).onSnapshot(
       () => {
         // console.log('docsnapshot data', docSnapshot.data());
