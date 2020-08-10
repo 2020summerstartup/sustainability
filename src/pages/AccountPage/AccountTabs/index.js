@@ -4,7 +4,7 @@ import { retry } from "../../../App/index";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 import Badges2 from "./badges2";
-import DarkModeModal from "../../HomePage/darkModeModal";
+import DarkModeModal from "./darkModeModal";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
