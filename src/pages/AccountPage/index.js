@@ -6,6 +6,7 @@ import { getUser, getDorm } from "../../services/Firebase";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import AccountTabs from "./AccountTabs";
 
+// Set's user's dorm from firestore data
 function assignDorm(data) {
   if (data.userDorm === "") {
     alert("If you want to contribute to your dorm, choose your dorm in settings!");
@@ -14,6 +15,7 @@ function assignDorm(data) {
   }
 }
 
+// Main Component - Account Page
 function AccountPage(props) {
   leaderBoardUpdate();
 
@@ -49,6 +51,7 @@ function AccountPage(props) {
   
   return (
     <div>
+      {/* Authorized users only, calls AccountTabs */}
       <AuthUserContext.Consumer>
         {(authUser) => (
           <AccountTabs props={props}/>

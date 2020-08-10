@@ -1,4 +1,5 @@
 import React from "react";
+// Image import
 import Chart from "react-google-charts";
 import dorm4 from "../../../img/dorm4.svg";
 import styles from "./dorm.module.css";
@@ -6,6 +7,7 @@ import styles from "./dorm.module.css";
 import { AuthUserContext } from "../../../services/Session";
 import SignOutButton from "../../../components/SignOut";
 
+// Material UI imports
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
 import { makeStyles } from "@material-ui/core/styles";
@@ -202,6 +204,7 @@ class EnvImpactCardsSchool extends React.Component {
 }
 
 export const DormCard = React.memo(function GalaxyCard() {
+  // Image aligned on top, styles called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
 
@@ -209,9 +212,11 @@ export const DormCard = React.memo(function GalaxyCard() {
   rankDisplay();
   totalBuzzDisplay();
   return (
+    // Authorized users only
     <AuthUserContext.Consumer>
       {(authUser) => (
         <>
+        {/* Dorm Galaxy Card */}
           <NoSsr>
             <GoogleFontLoader
               fonts={[
@@ -229,6 +234,7 @@ export const DormCard = React.memo(function GalaxyCard() {
                   {localStorage.getItem("dorm")} Dorm
                 </InfoSubtitle>
                 <InfoTitle>{rank}</InfoTitle>
+                {/* Direct link to change dorm from line on Galaxy Card */}
                 <InfoCaption>
                   <Link
                     to={ROUTES.CHANGEDORM}
@@ -239,17 +245,10 @@ export const DormCard = React.memo(function GalaxyCard() {
                       fontWeight: "bold",
                     }}
                   >
-                    {/* <Typography
-                      variant="body1"
-                      className={classes.linkText}
-                      style={{ underline: "enum: none" }}
-                      component={'span'}
-                    > */}
                     Change your dorm in settings&nbsp;
                     <span role="img" aria-label="settings">
                       ⚙️
                     </span>
-                    {/* </Typography> */}
                   </Link>
                 </InfoCaption>
               </Info>

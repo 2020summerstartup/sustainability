@@ -1,6 +1,7 @@
 import React from "react";
 import { AuthUserContext } from "../../../services/Session";
 
+// Material UI Imports and Icons
 import { makeStyles } from "@material-ui/core/styles";
 import { withTheme } from "../../../components/Theme";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
@@ -23,6 +24,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 
+// Styles for settings drawer
 const useStyles = makeStyles((theme) => ({
   settingsIcon: {
     color: "white",
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// Material UI Swipeable Drawer for Settings
 function SettingsDrawer(props) {
   const classes = useStyles();
   const { darkMode, setDarkMode } = props;
@@ -75,6 +78,7 @@ function SettingsDrawer(props) {
     >
       <List>
         <ListItem>
+          {/* User's greeting */}
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
             <Typography variant="h6">
@@ -83,6 +87,7 @@ function SettingsDrawer(props) {
           </ListItemText>
         </ListItem>
         <Divider />
+        {/* User's email */}
         <ListItem>
           <ListItemIcon className={classes.listItemIcon}>
             <EmailIcon />
@@ -95,6 +100,7 @@ function SettingsDrawer(props) {
             )}
           </AuthUserContext.Consumer>
         </ListItem>
+        {/* Password change */}
         <ListItem button component={Link} to={ROUTES.CHANGEPW}>
           <ListItemIcon className={classes.listItemIcon}>
             <LockOpenIcon />
@@ -103,7 +109,7 @@ function SettingsDrawer(props) {
             Change password
           </ListItemText>
         </ListItem>
-
+        {/* Dorm change */}
         <ListItem button component={Link} to={ROUTES.CHANGEDORM}>
           <ListItemIcon className={classes.listItemIcon}>
             <HomeIcon />
@@ -112,11 +118,10 @@ function SettingsDrawer(props) {
             Change your dorm
           </ListItemText>
         </ListItem>
-
+        {/* Dark Mode */}
         <ListItem
           button
           checked={darkMode}
-          // onChange={() => window.location.reload()}
           onClick={() => {
             setDarkMode(!darkMode);
             window.location.reload();
@@ -124,14 +129,6 @@ function SettingsDrawer(props) {
         >
           <ListItemIcon className={classes.listItemIcon}>
             {darkMode ? <Brightness4Icon /> : <Brightness7Icon />}
-            {/* <Switch
-              checked={darkMode}
-              onChange={() => setDarkMode(!darkMode)}
-              onClick={() => window.location.reload()}
-              color="primary"
-              name="mode"
-              inputProps={{ "aria-label": "mode changed" }}
-            /> */}
           </ListItemIcon>
           <ListItemText className={classes.listItemText}>
             {darkMode ? (
@@ -141,7 +138,7 @@ function SettingsDrawer(props) {
             )}
           </ListItemText>
         </ListItem>
-
+        {/* Info Page */}
         <ListItem button component={Link} to={ROUTES.INFO}>
           <ListItemIcon className={classes.listItemIcon}>
             <InfoIcon />
@@ -150,7 +147,7 @@ function SettingsDrawer(props) {
             More Info
           </ListItemText>
         </ListItem>
-
+        {/* Contact us form */}
         <ListItem button component={Link} to={ROUTES.CONTACT}>
           <ListItemIcon className={classes.listItemIcon}>
             <ContactMailIcon />
@@ -159,12 +156,12 @@ function SettingsDrawer(props) {
             Contact Us
           </ListItemText>
         </ListItem>
-
+        {/* Sign out button */}
         {/* Moving this for now because always get error when signing out */}
         {/* <ListItem className={classes.settingsSignOut}>
           <SignOutButton />
         </ListItem> */}
-
+      {/* Account Deletion */}
         <ListItem
           button
           component={Link}

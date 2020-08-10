@@ -20,12 +20,14 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import TotalBuzz from "./totalBuzz";
 import EnvImpactCards from "./envImpactCards";
 
+
 const useStyles = makeStyles((theme) => ({
   card: {
     borderRadius: "1rem",
     boxShadow: "none",
     position: "relative",
     margin: "auto",
+    // Width and height change the size of the card
     maxWidth: "60rem",
     minHeight: "15rem",
     [theme.breakpoints.up("sm")]: {
@@ -41,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       borderRadius: "black",
+      // Gradient in background, black to transparent
       background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
     },
   },
@@ -52,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// Encouraging message on bottom of card
 var thePoints;
 
 const pointsDisplay = () => {
@@ -63,15 +67,14 @@ const pointsDisplay = () => {
     thePoints = " You're a superstar 🤩 ";
   }
 };
-// const getPoints = () => {
-//   if (parseInt(localStorage.getItem("total")) === 0) {
-//     return <h1> No </h1>
-//   } return <h1> Yes </h1>
-// };
 
+// Main compoenent - Displays the number of points user has
 export const TotalPointsCard = React.memo(function GalaxyCard() {
+  // Image's top portion is prioritized to display
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
+  // Grabs styles defined above
   const classes = useStyles();
+  // For message created with thePoints
   pointsDisplay();
 
   // getUser(authContext.email).onSnapshot(
@@ -90,9 +93,11 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
 
   return (
     <>
+      {/* Only authorized users cna view points */}
       <AuthUserContext.Consumer>
         {(authUser) => (
           <>
+          {/* Galaxy Card */}
             <NoSsr>
               <GoogleFontLoader
                 fonts={[
@@ -115,6 +120,7 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
                 </Info>
               </Box>
             </Card>
+            {/* Displays number of actions and overall impact */}
             <TotalBuzz />
             <EnvImpactCards />
             <SignOutButton />

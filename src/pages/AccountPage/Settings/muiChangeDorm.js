@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
 }));
+// Authorized Page for signed in users to change password, inside Settings Drawer
 
 function ChangeDorm() {
   const classes = useStyles();
