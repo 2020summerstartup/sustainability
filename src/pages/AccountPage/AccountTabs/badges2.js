@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 var masteredActions = []
 masteredActions = localStorage.getItem("firestoreMastered");
 var masterLength;
-if (masteredActions !== null) {
+if (masteredActions !== null && masteredActions !== 'undefined') {
   // If masteredActions is defined
   masterLength = JSON.parse(masteredActions).length;
 } else {

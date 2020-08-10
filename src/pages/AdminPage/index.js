@@ -35,6 +35,10 @@ const setAdmin = (email) => {
         // Following two lines get the user id of the currenlty logged in user
         var userId = firebase.auth().currentUser.uid;
         console.log('userID', userId);
+        // firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+        //   var role = (snapshot.val() && snapshot.val().roles) || 'Anonymous';
+        //   console.log('role', role);
+        // });
       } else {
         toast.error("That email address isn't associated with any user!");
       }
