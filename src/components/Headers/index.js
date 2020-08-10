@@ -1,34 +1,26 @@
 import React from "react";
-import { withFirebase } from "../../services/Firebase";
-
-// import material ui
-import { AppBar, Toolbar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-// account header imports
+// AccountHeader imports
 import SettingsDrawer from "../../pages/AccountPage/Settings";
 import Grid from "@material-ui/core/Grid";
 
-// change dorm/pw imports
-// import material ui
+// BackArrowSettingsHeader imports
 import { useHistory } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 
-//old way of importing svg files
-import suslogoImg from "../../img/suslogo.svg";
 // Makes svg files into React Components
 import { ReactComponent as SusLogo } from "../../img/suslogo.svg";
 import { ReactComponent as SusLogo1 } from "../../img/logo_skin1.svg";
 import { ReactComponent as SusLogo2 } from "../../img/logo_skin2.svg";
 import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
 
-// imports for homeheader
-import { fade, makeStyles } from "@material-ui/core/styles";
-// const suslogoImg = import("../../img/suslogo.svg");
-
-// Styles for Header
-const useStyles1 = makeStyles((theme) => ({
+// Styles for ALL Headers
+const useStyles = makeStyles((theme) => ({
   logo: {
     width: "3rem",
     height: "3rem",
@@ -41,22 +33,44 @@ const useStyles1 = makeStyles((theme) => ({
       marginLeft: "0",
     },
   },
+  // importing svg as react components caused SusLogo123 to shrink
+  logoTooSmall: {
+    width: "7rem !important",
+  },
+  logoSignup: {
+    width: "3.75rem !important",
+  },
   title: {
     color: "white",
     fontWeight: "bold",
     margin: "0",
   },
+  // style for title in account header (since it has the settings icon)
+  titleSettings: {
+    color: "white",
+    fontWeight: "bold",
+    display: "inline-flex",
+    alignItems: "center",
+    padding: "0",
+    marginTop: "0.5rem",
+  },
+  // for headers with the back arrow on mobile
+  backarrow: {
+    color: "white",
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
 }));
 
-// Standard Header for App
-const Header = ({ firebase }) => {
-  const classes = useStyles1();
+// Standard Default Header for App (currently not in use but save for later)
+const Header = () => {
+  const classes = useStyles();
   return (
     <>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
-          <SusLogo className = {classes.logo}/>
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
+          <SusLogo className={classes.logo} />
           <Typography variant="h6" className={classes.title} noWrap>
             Sus Comp
           </Typography>
@@ -66,369 +80,10 @@ const Header = ({ firebase }) => {
   );
 };
 
-// Compete Page Header
-const CompeteHeader = ({ firebase }) => {
-  const classes = useStyles1();
-  return (
-    <>
-      <AppBar position="static" className={classes.header} elevation={0}>
-        <Toolbar className={classes.toolbar}>
-          <SusLogo1 className={classes.logo} />
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
-          <Typography variant="h6" className={classes.title} noWrap>
-            Compete
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-};
-
-// Admin Page Header
-const AdminHeader = ({ firebase }) => {
-  const classes = useStyles1();
-  return (
-    <>
-      <AppBar position="static" className={classes.header} elevation={0}>
-        <Toolbar className={classes.toolbar}>
-          <SusLogo1 className={classes.logo} />
-          <Typography variant="h6" className={classes.title} noWrap>
-            Admin
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-};
-
-// Info Page Header
-// const InfoHeader = ({ firebase }) => {
-//   const classes = useStyles1();
-//   return (
-//     <>
-//       <AppBar position="static" className={classes.header}>
-//         <Toolbar className={classes.toolbar}>
-//           <SusLogo3 className={classes.logo} />
-//           {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
-//           <Typography variant="h6" className={classes.title} noWrap>
-//             Information
-//           </Typography>
-//         </Toolbar>
-//       </AppBar>
-//     </>
-//   );
-// };
-
-// Styles for Account Page Header - includes Settings icon
-const useStyles2 = makeStyles((theme) => ({
-  logo: {
-    width: "3rem",
-    height: "100%",
-    paddingRight: "0.5rem",
-    padding: "0",
-    margin: "0",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "6.5rem",
-    },
-    // styles for mobile landscape
-    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
-      marginLeft: "0",
-    },
-  },
-  title: {
-    color: "white",
-    fontWeight: "bold",
-    display: "inline-flex",
-    alignItems: "center",
-    padding: "0",
-    marginTop: "0.5rem",
-  },
-}));
-
-// Account Page Header - has settings icon
-const AccountHeader = ({ firebase }) => {
-  const classes = useStyles2();
-  return (
-    <>
-      <AppBar position="static" className={classes.header} elevation={0}>
-        <Toolbar className={classes.toolbar}>
-          <Grid justify="space-between" container>
-            <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
-              <Typography variant="h6" className={classes.title} noWrap>
-                <SusLogo2 className={classes.logo} />
-                Profile
-              </Typography>
-            </Grid>
-            <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
-              <SettingsDrawer />
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-};
-
-// Styles used for headers with back arrow
-const useStyles3 = makeStyles((theme) => ({
-  title: {
-    color: "white",
-    fontWeight: "bold",
-    marginTop: "0.5rem",
-    marginLeft: "0rem",
-    marginBottom: "0.5rem",
-    textAlign: "left",
-  },
-  buttonIcon: {
-    paddingLeft: "0",
-  },
-  backarrow: {
-    color: "white",
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-  logoTooSmall: {
-    width: "7rem !important",
-  },
-  logoSignup: {
-    width: "3.75rem !important",
-  },
-  logo: {
-    width: "3rem",
-    height: "100%",
-    paddingRight: "0.5rem",
-    padding: "0",
-    margin: "0",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "5.75rem",
-    },
-  },
-}));
-
-// Header for Change Dorm and Change PW - back arrow & settings icon
-const BackArrowSettingsHeader = ({ firebase }) => {
-  let history = useHistory();
-
-  const classes = useStyles3();
-  return (
-    <>
-      <AppBar position="static" className={classes.header}>
-        <Toolbar className={classes.toolbar}>
-          {/* Back Button using history */}
-          <IconButton
-            className={classes.buttonIcon}
-            onClick={() => history.goBack()}
-            style={{ backgroundColor: "transparent" }}
-          >
-            <ArrowBackIcon className={classes.backarrow} />
-          </IconButton>
-          {/* <SusLogo1 className={classes.logo}/> */}
-          <img src={suslogoImg} alt="logo" className={classes.logo} />
-          <Grid justify="flex-start" container>
-            <Grid item>
-              <Typography variant="h6" className={classes.title} noWrap>
-                Sus Comp
-                {/* <EcoIcon className={classes.leaf} /> */}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid justify="flex-end" container>
-            <Grid item>
-              <SettingsDrawer />
-            </Grid>
-            {/* <Grid item>
-              <AccountTabs/>
-            </Grid> */}
-          </Grid>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-};
-
-const BackArrowSettingsHeader2 = ({ firebase }) => {
-  let history = useHistory();
-
-  const classes = useStyles3();
-  return (
-    <>
-      <AppBar position="static" className={classes.header}>
-        <Toolbar className={classes.toolbar}>
-          {/* Back Button using history */}
-          <IconButton
-            className={classes.buttonIcon}
-            onClick={() => history.goBack()}
-            style={{ backgroundColor: "transparent" }}
-          >
-            <ArrowBackIcon className={classes.backarrow} />
-          </IconButton>
-          <SusLogo2 className={`${classes.logo} ${classes.logoTooSmall}`}/>
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
-          <Grid justify="flex-start" container>
-            <Grid item>
-              <Typography variant="h6" className={classes.title} noWrap>
-                Sus Comp
-                {/* <EcoIcon className={classes.leaf} /> */}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid justify="flex-end" container>
-            <Grid item>
-              <SettingsDrawer />
-            </Grid>
-            {/* <Grid item>
-              <AccountTabs/>
-            </Grid> */}
-          </Grid>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-};
-
-const BackArrowSettingsHeader3 = ({ firebase }) => {
-  let history = useHistory();
-
-  const classes = useStyles3();
-  return (
-    <>
-      <AppBar position="static" className={classes.header}>
-        <Toolbar className={classes.toolbar}>
-          {/* Back Button using history */}
-          <IconButton
-            className={classes.buttonIcon}
-            onClick={() => history.goBack()}
-            style={{ backgroundColor: "transparent" }}
-          >
-            <ArrowBackIcon className={classes.backarrow} />
-          </IconButton>
-          <SusLogo3 className={`${classes.logo} ${classes.logoTooSmall}`}/>
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
-          <Grid justify="flex-start" container>
-            <Grid item>
-              <Typography variant="h6" className={classes.title} noWrap>
-                Sus Comp
-                {/* <EcoIcon className={classes.leaf} /> */}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid justify="flex-end" container>
-            <Grid item>
-              <SettingsDrawer />
-            </Grid>
-            {/* <Grid item>
-              <AccountTabs/>
-            </Grid> */}
-          </Grid>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-};
-
-// Header for Signup Page - only need back arrow not settings icon
-const BackArrowHeader = ({ firebase }) => {
-  let history = useHistory();
-
-  const classes = useStyles3();
-  return (
-    <>
-      <AppBar position="static" className={classes.header}>
-        <Toolbar className={classes.toolbar}>
-          {/* Back Button using history */}
-          <IconButton
-            className={classes.buttonIcon}
-            onClick={() => history.goBack()}
-            style={{ backgroundColor: "transparent" }}
-          >
-            <ArrowBackIcon className={classes.backarrow} />
-          </IconButton>
-          <SusLogo2 className={`${classes.logo} ${classes.logoSignup}`} />
-          {/* <img src={suslogoImg} alt="logo" className={classes.logo} /> */}
-          <Grid justify="flex-start" container>
-            <Grid item>
-              <Typography variant="h6" className={classes.title} noWrap>
-                Sus Comp
-                {/* <EcoIcon className={classes.leaf} /> */}
-              </Typography>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-};
-
-// Home Page styles
-const useStyles4 = makeStyles((theme) => ({
-  logo: {
-    width: "3rem",
-    height: "100%",
-    paddingRight: "0.5rem",
-    padding: "0",
-    margin: "0",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "6.5rem",
-    },
-    // styles for mobile landscape
-    [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
-      marginLeft: "0",
-    },
-  },
-  title: {
-    fontWeight: "bold",
-    display: "inline",
-    marginRight: "2rem",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-      margin: "0",
-    },
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-// Home page header
-const HomeHeader = ({ firebase }) => {
-  const classes = useStyles4();
-
+// HEADERS FOR MAIN PAGES
+// HomePage header
+const HomeHeader = () => {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -443,15 +98,193 @@ const HomeHeader = ({ firebase }) => {
   );
 };
 
+// CompetePage Header
+const CompeteHeader = () => {
+  const classes = useStyles();
+  return (
+    <>
+      <AppBar position="static" className={classes.header} elevation={0}>
+        <Toolbar className={classes.toolbar}>
+          <SusLogo1 className={classes.logo} />
+          <Typography variant="h6" className={classes.title} noWrap>
+            Compete
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+// AccountPage Header (has settings icon)
+const AccountHeader = () => {
+  const classes = useStyles();
+  return (
+    <>
+      <AppBar position="static" className={classes.header} elevation={0}>
+        <Toolbar className={classes.toolbar}>
+          <Grid justify="space-between" container>
+            <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
+              <Typography variant="h6" className={classes.titleSettings} noWrap>
+                <SusLogo2 className={classes.logo} />
+                Profile
+              </Typography>
+            </Grid>
+            <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
+              <SettingsDrawer />
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+// SPECIAL HEADERS
+// Header for Signup Page - only need back arrow not settings icon
+const BackArrowHeader = () => {
+  let history = useHistory();
+  const classes = useStyles();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          {/* Back Button using history */}
+          <IconButton
+            className={classes.buttonIcon}
+            onClick={() => history.goBack()}
+            style={{ backgroundColor: "transparent" }}
+          >
+            <ArrowBackIcon className={classes.backarrow} />
+          </IconButton>
+          <SusLogo2 className={`${classes.logo} ${classes.logoSignup}`} />
+          <Grid justify="flex-start" container>
+            <Grid item>
+              <Typography variant="h6" className={classes.title} noWrap>
+                Sus Comp
+              </Typography>
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+// Header for DeleteAccount & ChangeDorm & ForgetPassword & Contact - back arrow & settings icon
+const BackArrowSettingsHeader = () => {
+  let history = useHistory();
+  const classes = useStyles();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          {/* Back Button using history */}
+          <IconButton
+            onClick={() => history.goBack()}
+            style={{ backgroundColor: "transparent" }}
+          >
+            <ArrowBackIcon className={classes.backarrow} />
+          </IconButton>
+          <SusLogo1 className={`${classes.logo} ${classes.logoTooSmall}`} />
+          <Grid justify="flex-start" container>
+            <Grid item>
+              <Typography variant="h6" className={classes.title} noWrap>
+                Sus Comp
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid justify="flex-end" container>
+            <Grid item>
+              <SettingsDrawer />
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+// Header for ChangePassword- Same as BackArrowSettingsHeader but with different skin color logo
+const BackArrowSettingsHeader2 = () => {
+  let history = useHistory();
+  const classes = useStyles();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          {/* Back Button using history */}
+          <IconButton
+            className={classes.buttonIcon}
+            onClick={() => history.goBack()}
+            style={{ backgroundColor: "transparent" }}
+          >
+            <ArrowBackIcon className={classes.backarrow} />
+          </IconButton>
+          <SusLogo2 className={`${classes.logo} ${classes.logoTooSmall}`} />
+          <Grid justify="flex-start" container>
+            <Grid item>
+              <Typography variant="h6" className={classes.title} noWrap>
+                Sus Comp
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid justify="flex-end" container>
+            <Grid item>
+              <SettingsDrawer />
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
+// Header for InfoPage- Same as BackArrowSettingsHeader but with different skin color logo
+const BackArrowSettingsHeader3 = () => {
+  let history = useHistory();
+  const classes = useStyles();
+  return (
+    <>
+      <AppBar position="static" className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          {/* Back Button using history */}
+          <IconButton
+            className={classes.buttonIcon}
+            onClick={() => history.goBack()}
+            style={{ backgroundColor: "transparent" }}
+          >
+            <ArrowBackIcon className={classes.backarrow} />
+          </IconButton>
+          <SusLogo3 className={`${classes.logo} ${classes.logoTooSmall}`} />
+          <Grid justify="flex-start" container>
+            <Grid item>
+              <Typography variant="h6" className={classes.title} noWrap>
+                Sus Comp
+                {/* <EcoIcon className={classes.leaf} /> */}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid justify="flex-end" container>
+            <Grid item>
+              <SettingsDrawer />
+            </Grid>
+            {/* <Grid item>
+              <AccountTabs/>
+            </Grid> */}
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
+
 export {
   HomeHeader,
   CompeteHeader,
   BackArrowSettingsHeader2,
   BackArrowSettingsHeader3,
-  // InfoHeader,
   AccountHeader,
   BackArrowSettingsHeader,
   BackArrowHeader,
-  AdminHeader,
 };
-export default withFirebase(Header);
+export default Header;
