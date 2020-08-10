@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from "../HomePage/modal.module.css";
 // import DarkLogo from "../../img/darkMode.png";
 import { AddHomeOpened } from "../../services/Firebase";
-import addHomeGif from "../../img/add.gif";
+import addHomeGif from "../../img/addToHome.GIF";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";

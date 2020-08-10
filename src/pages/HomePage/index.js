@@ -917,6 +917,7 @@ function HomePage(props) {
             />
           </NoSsr>
           <Card className={classes.card2}>
+            {/* Fireworks picture for galaxy card */}
             <CardMedia
               classes={mediaStyles2}
               image={actionTab}
