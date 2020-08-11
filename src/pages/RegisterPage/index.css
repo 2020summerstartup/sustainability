@@ -1,5 +1,5 @@
 /* styles for signup and signin forms! */
-:root {
+/* :root {
   --form_bg: #ffffff;
   --input_bg: #e5e5e5;
   --input_hover: #eaeaea;
@@ -56,10 +56,10 @@ input {
 }
 
 input:focus {
-  outline: none;
+  outline: none; */
   /* border-bottom: 1px solid var(--theme) !important;  */
   /* box-shadow: 0px 0px 12px 0.8px var(--theme); */
-}
+/* }
 
 .icon {
   color: var(--icon_color);
@@ -89,4 +89,4 @@ input:focus {
 .button:focus {
   outline: none;
   background-color: var(--theme);
-}
+} */

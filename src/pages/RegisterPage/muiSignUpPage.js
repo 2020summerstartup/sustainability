@@ -15,7 +15,8 @@ import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 // For PasswordOne data
 import { PasswordInput } from "./muiSignInPage";
-import signupImg from "../../img/login2.svg";
+import { ReactComponent as SignUp } from "../../img/signup.svg";
+// import signupImg from "../../img/signup.svg";
 // Material UI Imports
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -45,7 +46,7 @@ import signup from "../../sounds/hero_simple-celebration-03.wav";
 // The value displayed in the dorm dropdown menu.
 var dormValue = "Select your dorm...";
 
-// Main Component 
+// Main Component
 const SignUpPage = () => (
   <div className="base-container">
     <SignUpForm />
@@ -245,9 +246,8 @@ class SignUpFormBase extends Component {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          <div className="image">
-            <img alt="sign up" src={signupImg} />
-          </div>
+          <SignUp className="image"/>
+          {/* <img alt="sign up" src={signupImg} /> */}
           {/* SignUp form, on submit creates firebase user */}
           <form
             onSubmit={this.onSubmit}

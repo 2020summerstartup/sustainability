@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 // Image and Gif Imports
 import suslogoroundImg from "../../img/suslogo_roundedcorners.svg";
-import addToHomeGif from "../../img/addToHome.GIF";
-import competeGif from "../../img/compete.gif";
 import earnGif from "../../img/earn.gif";
+import competeGif from "../../img/compete.gif";
+import addtohomeGif from "../../img/addToHome.GIF";
 
-// Landing Page Carousel 
+// Landing Page Carousel
 export class Rotate extends Component {
   constructor() {
     super();
@@ -17,7 +17,7 @@ export class Rotate extends Component {
     return (
       <div>
         <AutoRotatingCarousel
-          autoplay={true}
+          autoplay={false}
           interval={7000}
           hideArrows={false}
           open={true}
@@ -25,7 +25,6 @@ export class Rotate extends Component {
           // Pushes user to signin page
           label="Get started"
           onStart={() => (window.location.href = "/signin")}
-
         >
           {/* Intro slide */}
           <Slide
@@ -42,6 +41,7 @@ export class Rotate extends Component {
             title="What will we achieve?"
             subtitle="Lets be sustainable together and make this world a better place one action at a time with some healthy competition for some awesome prizes!"
           />
+
           {/* Earn Points Slide */}
           <Slide
             media={
@@ -49,9 +49,7 @@ export class Rotate extends Component {
                 alt=""
                 src={earnGif}
                 style={{
-                  marginTop: "2rem",
-                  margin: "auto",
-                  height: "auto",
+                  paddingTop: "2rem",
                   width: "auto",
                 }}
               />
@@ -61,34 +59,38 @@ export class Rotate extends Component {
             title="Log actions, earn points."
             subtitle="Being sustainable earns points for you and your dorm! Save your favorites! Special surprise for mastering an action ;)"
           />
-          {/* Leadership board */}
+
+          {/* Leaderboard Slide */}
           <Slide
-          media={
-            <img
-              alt=""
-              src={competeGif}
-              style={{
-                marginTop: "2rem",
-                margin: "auto",
-                height: "auto",
-                width: "auto",
-              }}
-            />
-          }
-            //   media={<img src={Swipe} class="responsive"/>}
+            media={
+              <img
+                alt=""
+                src={competeGif}
+                style={{
+                  paddingTop: "2rem",
+                  width: "auto",
+                }}
+              />
+            }
             mediaBackgroundStyle={{ backgroundColor: "#24a133" }}
             style={{ backgroundColor: "#24a133" }}
             title="Compete Across Dorms!"
             subtitle="See how your dorm stacks up against your friends' dorms! Prizes for winning dorm!"
           />
+
+          {/* Add To Home Screen Slide */}
           <Slide
-            media={<img alt="" src={addToHomeGif} class="snapgrid" style={{
-              marginTop: "2rem",
-              margin: "auto",
-              height: "auto",
-              width: "auto",
-            }}
-            />}
+            media={
+              <img
+                alt=""
+                src={addtohomeGif}
+                class="snapgrid"
+                style={{
+                  paddingTop: "2rem",
+                  width: "auto",
+                }}
+              />
+            }
             mediaBackgroundStyle={{ backgroundColor: "#4fb35b" }}
             style={{ backgroundColor: "#4fb35b" }}
             title="Add to Home Screen!"
