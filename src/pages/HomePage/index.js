@@ -413,7 +413,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function HomePage(props) {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
-  const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(true);
+  const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
   const [badgeAction, setBadgeAction] = useState("");
   const [badgeActionCount, setBadgeActionCount] = useState("");
   const authContext = useContext(AuthUserContext);
