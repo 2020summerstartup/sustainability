@@ -97,7 +97,7 @@ function waitOneSec(){
   return new Promise(resolve => {
     setTimeout(() => {
       resolve('resolved');
-    }, 700);
+    }, 1000);
   });
 }
 

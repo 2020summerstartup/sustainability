@@ -183,6 +183,8 @@ export const createUser = (userEmail, userName, dorm) => {
 // often called as a shorter way to start the call to get a specific piece of firestore data
 // meant to be called then added to (ex: getUser().onSnapshot( (snap) => {..code here...}))
 export const getUser = (userEmail) => {
+  // IDK why but the compete page gets upset when this line (LS set) is not there?
+  localStorage.setItem('email', userEmail)
   return firestore.collection('users').doc(userEmail)
 }
 
