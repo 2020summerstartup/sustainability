@@ -31,15 +31,11 @@ import leaderBoardUpdate, {
 } from "../../CompetePage/leaderBoardUpdate";
 import { getDorm, getSchoolImpact } from "../../../services/Firebase";
 
-// import styles from "./totalBuzz.module.css";
-
-// import Reward from "react-rewards";
-// import styles1 from "./envImpactCards.module.css";
-
-getSchoolImpact();
 // synchronize school's total impact with firestore, when they remain on the page, they will not see immediate changes that other users
 // make but each time to return to the page, this function will run and new school impact points will be determined
+getSchoolImpact();
 
+// Styles used for Dorm Galaxy Card
 const useStyles = makeStyles((theme) => ({
   card: {
     borderRadius: "1rem",
@@ -77,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
     underline: "none",
   },
 }));
-
+// Pulls user's dorm name from local storage and updates leaderboard
 var dormName = localStorage.getItem("dorm");
 if (dormName && dormName !== "") {
   getDorm()
@@ -176,7 +172,7 @@ const options = {
 //   },
 // };
 
-// cards to be rendered on the points page in account
+// Cards to be rendered in profile/dorm
 class EnvImpactCardsSchool extends React.Component {
   render() {
     return (
@@ -202,7 +198,7 @@ class EnvImpactCardsSchool extends React.Component {
     );
   }
 }
-
+// Dorm Galaxy Card
 export const DormCard = React.memo(function GalaxyCard() {
   // Image aligned on top, styles called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
@@ -254,7 +250,7 @@ export const DormCard = React.memo(function GalaxyCard() {
               </Info>
             </Box>
           </Card>
-
+          {/* Displays actions logged for entire college */}
           <Grid container justify="center" style={{ placeItems: "center" }}>
             <div className={styles.ribbon}>
               <div className={styles.ribbonText}>

@@ -35,6 +35,8 @@ const AccountPage = props => {
     }
   );
 
+  // Retrieves user's dorm from firebase, otherwise throws an error
+  // Assigns ranking for mudd page using dorm name
   var dormName = localStorage.getItem("dorm")
   if (dormName && dormName !== ""){
     getDorm()

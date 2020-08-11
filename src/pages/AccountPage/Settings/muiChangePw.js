@@ -30,7 +30,7 @@ const ChangePW = () => (
     </AuthUserContext.Consumer>
   </div>
 );
-
+// Styles for change password form
 const useStyles = (theme) => ({
   paper: {
     marginTop: theme.spacing(3),
@@ -40,7 +40,6 @@ const useStyles = (theme) => ({
   },
   form: {
     width: "100%",
-    // marginTop: theme.spacing(1),
   },
   formIcon: {
     marginRight: "1rem",
@@ -73,14 +72,14 @@ const toastAudio = new Audio(toastNotify);
 const playSound = (audioFile) => {
   audioFile.play();
 };
-
+// Base of form - styled with material ui and composed with firebase below
 class PasswordChangeFormBase extends Component {
   constructor(props) {
     super(props);
 
     this.state = { ...INITIAL_STATE };
   }
-
+  // Captures new password and changes it
   onSubmit = (event) => {
     const { passwordOne } = this.state;
 
@@ -116,13 +115,16 @@ class PasswordChangeFormBase extends Component {
           <div className="image">
             <img alt="change your password" src={accountImg} />
           </div>
+          {/* Changes password for firebase authentication on submit */}
           <form onSubmit={this.onSubmit} className={classes.form}>
+            {/* New password input */}
             <PasswordInput2
               label="Password"
               name="passwordOne"
               value={passwordOne}
               onChange={this.onChange}
             />
+            {/* New password verified */}
             <PasswordInput
               label="Verify Password"
               name="passwordTwo"
@@ -134,6 +136,7 @@ class PasswordChangeFormBase extends Component {
                 {error.message}
               </Typography>
             )}
+            {/* Submit button - plays sound on click */}
             <Button
               type="submit"
               fullWidth
@@ -154,8 +157,9 @@ class PasswordChangeFormBase extends Component {
 
 const condition = (authUser) => !!authUser;
 
+// Styles Base form with material ui
 const PasswordChangeFormStyled = withStyles(useStyles)(PasswordChangeFormBase);
-
+// Wraps in Firebase
 const PasswordChange = withFirebase(PasswordChangeFormStyled);
 
 export { PasswordChangeForm };
