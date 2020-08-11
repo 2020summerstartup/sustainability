@@ -153,9 +153,6 @@ class SignUpFormBase extends Component {
     }
     // End of admin actions
 
-    // Commented out code is from before admin stuff
-    // const { username, email, passwordOne, dorm } = this.state;
-
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
