@@ -29,7 +29,8 @@ const setAdmin = (email) => {
   getUser(email).onSnapshot(
     (docSnapshot) => {
       if (docSnapshot.data()) {
-        console.log('docsnapshot data', docSnapshot.data());
+        var data = docSnapshot.data();
+        console.log('docsnapshot data', data);
         toast.info('A user with that email adress exists. Good first step!');
         // Now we want to see if this user is already an admin. 
         // Following two lines get the user id of the currenlty logged in user
