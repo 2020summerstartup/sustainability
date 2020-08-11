@@ -60,9 +60,6 @@ const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
 // );
 const InfoPage = lazy(() => retry(() => import("../pages/InfoPage")));
 const CompetePage = lazy(() => retry(() => import("../pages/CompetePage")));
-const MuiOfflinePage = lazy(() =>
-  retry(() => import("../pages/OfflinePage/muiOfflinePage"))
-);
 const MuiChangePw = lazy(() =>
   retry(() => import("../pages/AccountPage/Settings/muiChangePw"))
 );
@@ -194,7 +191,6 @@ function AppBase() {
           />
           <Route path={ROUTES.INFO} component={InfoPage} />
           <Route path={ROUTES.CONTACT} component={ContactPage} />
-          <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
           <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
           <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
