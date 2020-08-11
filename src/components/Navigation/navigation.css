@@ -139,8 +139,14 @@ body::-webkit-scrollbar-thumb {
   width: 100%;
 }
 
-.signout-btn {
+/* .signout-btn {
   display: none;
+} */
+
+.signout-btn {
+  position: relative !important;
+  bottom: 0rem;
+  margin-top: 2rem !important;
 }
 
 /* ---MEDIA QUERIES--- */
@@ -149,12 +155,11 @@ body::-webkit-scrollbar-thumb {
   .navbar {
     display: none;
   }
-  /* signout button is currently at bottom of all profile tabs */
-  .signout-btn {
+  /* .signout-btn {
     position: relative !important;
     bottom: 0rem;
     margin-top: 2rem !important;
-  }
+  } */
 }
 
 /* Large screens */
@@ -191,12 +196,12 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.5rem;
   }
 
-  .navbar:hover .signout-btn {
+  /* .navbar:hover .signout-btn {
     display: inline-flex !important;
     margin-left: 6rem;
     animation: fade 3s;
     width: 50%;
-  }
+  } */
 
   /* .nav-item:last-child {
     margin-top: auto;
@@ -227,9 +232,9 @@ body::-webkit-scrollbar-thumb {
     left: 4.5rem;
   }
 
-  .signout-btn {
+  /* .signout-btn {
     display: none;
-  }
+  } */
 }
 
 /* animation for page-text & signout button so that navbar slides out first then the words appear */
@@ -245,16 +250,16 @@ body::-webkit-scrollbar-thumb {
 
 /* Large screens */
 @media only screen and (min-width: 767px) {
-  .signout-btn {
+  /* .signout-btn {
     display: none !important;
-  }
+  } */
 }
 
 /* Specific range Medium screens */
 @media only screen and (min-width: 600px) and (max-width: 767px) {
-  .signout-btn {
+  /* .signout-btn {
     display: none !important;
-  }
+  } */
 }
 
 /* For mobile landscape */
@@ -262,10 +267,10 @@ body::-webkit-scrollbar-thumb {
   .navbar {
     display: none;
   }
-  .signout-btn {
+  /* .signout-btn {
     position: absolute !important;
     left: 50%;
     transform: translate(-50%, -75%);
     margin-top: 2rem !important;
-  }
+  } */
 }
