@@ -97,7 +97,7 @@ function waitOneSec(){
   return new Promise(resolve => {
     setTimeout(() => {
       resolve('resolved');
-    }, 400);
+    }, 700);
   });
 }
 
@@ -128,12 +128,15 @@ class SignInFormBase extends Component {
       async function getUserData (email){
         // to give authentication check some time to run --> user needs to be authenticated to access the data
         await waitOneSec();
+        // await waitOneSec();
         // initalizes user's impact points in local storage 
         getUserImpact(email);
+        console.log('inside')
         // initaizes the school's impact points in local storage 
         getSchoolImpact();
+
         // to give these functions some time to run 
-        await waitOneSec();
+        // await waitOneSec();
         // gets user's points, mastered & favroited actions from firebase & sets them all in local storage
         getUser(email).onSnapshot(
           (docSnapshot) => {
