@@ -79,6 +79,7 @@ class EnvImpactCards extends React.Component {
 
     this.getData = this.getData.bind(this);
   }
+  // Data for impact cards
   getData() {
     let data = {
       success: true,
@@ -103,7 +104,7 @@ class EnvImpactCards extends React.Component {
         },
       ],
     };
-
+    // Colors depending on impact category
     data.cards.forEach((card, id) => {
       if (id === 0) {
         card.colorStyling = styles.co2;
@@ -131,6 +132,7 @@ class EnvImpactCards extends React.Component {
         spacing={2}
         style={{ marginTop: "2rem", overflow: "hidden !important" }}
       >
+        {/* Display of cards - maps through data */}
         {this.state.cards ? (
           this.state.cards.map((card, i) => (
             <Grid item xs={12} md={6} key={i}>
@@ -174,5 +176,5 @@ class EnvImpactCards extends React.Component {
     );
   }
 }
-
+// Styles with Material UI
 export default withStyles(useStyles)(EnvImpactCards);

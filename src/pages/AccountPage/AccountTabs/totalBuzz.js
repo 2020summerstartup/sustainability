@@ -4,7 +4,7 @@ import styles from "./totalBuzz.module.css";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-
+// Displays text for total logs based on total
 var totalBuzzText;
 const totalBuzzDisplay = () => {
   if (JSON.parse(localStorage.getItem("buzzes")) === 1) {
@@ -24,10 +24,11 @@ const useStyles = (theme) => ({
   //   },
 });
 
-// cards to be rendered on the points page in account
+// Cards to be rendered on the points page in profile
 class TotalBuzz extends React.Component {
   render() {
     return (
+      // Banner for message
       <div className={styles.bannerShape}>
         <Grid
           container

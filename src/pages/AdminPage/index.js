@@ -3,7 +3,7 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import { compose } from "recompose";
 
 import Typography from "@material-ui/core/Typography";
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 
 import { withFirebase, getUser } from "../../services/Firebase";
 import * as ROLES from '../../constants/roles';
@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@material-ui/core/Button";
+import firebase from 'firebase/app';
 
 const getEmail = () => {
   var newEmail = prompt("Enter the new admin's email address");
@@ -23,33 +24,38 @@ const getEmail = () => {
   }
 }
 
+// Function to set a new user as an admin. Accepts user's email as a parameter.
 const setAdmin = (email) => {
+  email = email.toLowerCase(); // Make email all lower case (how the emails should all be stored in firebase)
   toast.configure(); // Configure for toast messages
-  // Check if the email address is associated with any of the current users.
   getUser(email).onSnapshot(
     (docSnapshot) => {
-      if (docSnapshot.data()) {
-        console.log('docsnapshot data', docSnapshot.data());
-        toast.info('A user with that email adress exists. Good first step!');
-        // Now we want to see if this user is already an admin. 
-        // Following two lines get the user id of the currenlty logged in user
-        var userId = firebase.auth().currentUser.uid;
-        console.log('userID', userId);
-        // firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-        //   var role = (snapshot.val() && snapshot.val().roles) || 'Anonymous';
-        //   console.log('role', role);
-        // });
+      if (docSnapshot.data()) { // Code in this if statement runs if the entered email is associated with a current user
+        var data = docSnapshot.data();
+        var userId = data.UserUID;
+        firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
+          var roles = (snapshot.val() && snapshot.val().roles) || 'Anonymous'; // get the roles folder of the user
+          if (roles.ADMIN) { // If roles.ADMIN is defined it means the user is already an admin
+            toast.warning(email.concat(' is already an admin!'));
+          } else { // This else statement runs if the user is not an admin
+            var confirmSetAdmin = window.confirm("Are you sure you want to make " + email + ' an admin?');
+            if (confirmSetAdmin) {
+              // Set ADMIN in the roles folder to have a value of ADMIN
+              firebase.database().ref('users/' + userId + '/roles').set({
+                ADMIN: 'ADMIN',
+              });
+              toast.info(email.concat(' is now an admin!'));
+            } else {
+              toast.warning('Okay, ' + email + ' will not be made an admin');
+            }
+          }
+        });
       } else {
         toast.error("That email address isn't associated with any user!");
-      }
-    },
-  );
-// return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-//   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-//   // ...
-// }
-// );
-};
+      } // if statement
+    }, // docSnapshot arrow function
+  ); // onSnapshot
+}; // setAdmin function
 
 // Goole form for Admins to fill out only
 function AdminPage() {
@@ -86,7 +92,7 @@ function AdminPage() {
               Want to remove a challenge? Email the developers at &nbsp;
               <a
                 href="mailto:suscompetitionteam@gmail.com"
-                style={{ }}
+                style={{}}
               >
                 suscompetitionteam@gmail.com
               </a>
