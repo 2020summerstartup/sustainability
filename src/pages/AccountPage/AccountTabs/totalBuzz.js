@@ -3,7 +3,7 @@ import styles from "./totalBuzz.module.css";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
+// import { withStyles } from "@material-ui/core/styles"; // Commented out because it was unused
 // Displays text for total logs based on total actions logged
 var totalBuzzText;
 const totalBuzzDisplay = () => {
