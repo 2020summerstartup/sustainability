@@ -6,6 +6,7 @@ import changedormImg from "../../../img/changedorm.svg";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+
 // Styles for change dorm
 const useStyles = makeStyles((theme) => ({
   paper: {

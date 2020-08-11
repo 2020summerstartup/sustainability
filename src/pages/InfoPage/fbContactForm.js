@@ -18,6 +18,10 @@ import EmailIcon from "@material-ui/icons/Email";
 import MessageIcon from "@material-ui/icons/Message";
 import SendIcon from "@material-ui/icons/Send";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../HomePage/toastify.css";
+
 // Styles for contact form
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -67,6 +71,8 @@ const FBContactForm = () => {
       email: "",
       message: "",
     });
+    toast.configure(); // Configure for toast messages
+    toast.success("Thanks for your email! We'll get back to you as soon as we can!");
   };
   // Function for sending email with info to support team
   const sendEmail = () => {
