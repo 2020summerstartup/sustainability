@@ -177,6 +177,35 @@ export const createUser = (userEmail, userName, dorm) => {
       {merge: true});
 };
 
+// this function is meant to get each action's point value from firestore and then set each action's points in local storage
+// should only be called when page first loads, not when points are increment
+export const assignData = (userData) => {
+  // the data parameter is meant to be a firestore document snapshot
+  localStorage.setItem("dorm", userData.userDorm);
+  localStorage.setItem("name", userData.name);
+  localStorage.setItem("total", userData.total);
+  localStorage.setItem("darkPop_done", userData.darkPop_done);
+  localStorage.setItem("addHomePop_done", userData.addHomePop_done);
+  // initialize mastered action
+  var firestoreMastered = userData.masteredActions;
+  localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
+  // initialize points
+  for (const [key, value] of Object.entries(userData.points)) {
+    localStorage.setItem(key, value);
+  }
+  // initalize favorites
+  var firestoreFavs = userData.favorites;
+  // check if action has been previously favroited --> action is favorited in firestore
+  for (const [key] of Object.entries(userData.points)) {
+    // Changed this to only get key instead of key value pair (because value is never used)
+    if (firestoreFavs.includes(key)) {
+      // if action is saved as a favorite in firestore, set actionFav in firestore to true
+      var actionFavLSName = key.concat("Fav");
+      localStorage.setItem(actionFavLSName, true);
+    }
+  }
+};
+
 // BELOW ARE FUNCTIONS THAT MAKE REFERENCES TO FIRESTORE & ARE USED THROUGHOUT THE APP FOR VARIOUS FUNCTIONS
 
 // fetches the user collection from firestore

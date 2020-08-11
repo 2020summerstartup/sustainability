@@ -7,8 +7,7 @@ import { compose } from "recompose";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import { withFirebase, getUser, getUserImpact, getSchoolImpact } from "../../services/Firebase";
-import { assignData } from "../HomePage";
+import { assignData, withFirebase, getUser, getUserImpact, getSchoolImpact } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/signin.svg";
 

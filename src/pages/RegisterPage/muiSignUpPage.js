@@ -6,12 +6,12 @@ import Reward from "react-rewards";
 // Firebase imports
 import {
   withFirebase,
+  assignData,
   createUser,
   getUser,
   getUserImpact,
   getSchoolImpact,
 } from "../../services/Firebase";
-import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 // For PasswordOne data
 import { PasswordInput } from "./muiSignInPage";
