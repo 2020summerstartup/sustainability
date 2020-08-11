@@ -163,7 +163,6 @@ export const DormCard = React.memo(function GalaxyCard() {
   rankDisplay();
   totalBuzzDisplay();
   return (
-    // Authorized users only
     <AuthUserContext.Consumer>
       {(authUser) => (
         <>

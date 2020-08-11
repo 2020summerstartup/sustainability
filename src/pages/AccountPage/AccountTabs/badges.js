@@ -287,7 +287,6 @@ getStyling() {
             <div key={badge.id}>
               <div className={styles.column}>
                 <div
-                  // if badge id is the selected one and the badge state is true, then we flip the badge
                   className={`${
                     badge.id === selectedBadgeId && selectedBadgeState
                       ? `${badge.flipStatus}`
