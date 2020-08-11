@@ -97,7 +97,7 @@ function waitOneSec(){
   return new Promise(resolve => {
     setTimeout(() => {
       resolve('resolved');
-    }, 500);
+    }, 400);
   });
 }
 
@@ -119,33 +119,46 @@ class SignInFormBase extends Component {
         console.log(error);
       });
 
-      // console.log(this.props, this.props.history)
-      // initalizes user's impact points in local storage 
-      getUserImpact(email);
-      getSchoolImpact();
-      getUser(email).onSnapshot(
-        (docSnapshot) => {
-          // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
-          if(docSnapshot.data()) {
-            assignData(docSnapshot.data());            
-          }
-        },
-      );
-      this.setState({ ...INITIAL_STATE });
-      // refresh needed to have points initially displayed
-      // window.location.reload();
+      async function getUserData (email){
+        await waitOneSec();
+        // console.log(this.props, this.props.history)
+        // initalizes user's impact points in local storage 
+        getUserImpact(email);
+        getSchoolImpact();
+        await waitOneSec();
+        getUser(email).onSnapshot(
+          (docSnapshot) => {
+            // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
+            if(docSnapshot.data()) {
+              assignData(docSnapshot.data());  
+            }
+          },
+        );
+        await waitOneSec();
+        
+        // refresh needed to have points initially displayed
+        // window.location.reload();
+      }
+      
     
       
       event.preventDefault();
     // takes user to home page
-    async function goHome(props) {
-      let wait = await waitOneSec();
+    async function goHome(props, email) {
+      console.log('one')
+      await getUserData(email);
+      console.log('two')
+      // await waitOneSec();
       props.history.push(ROUTES.HOME);
+      // await waitOneSec();
+      console.log('three')
     }
-    goHome(this.props).then(() => console.log('here'))
-    
 
-    
+    goHome(this.props, email)
+      .then(() => console.log('here'))
+      .then(() => {this.setState({ ...INITIAL_STATE });})
+      
+      
   };
 
 
