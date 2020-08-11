@@ -48,7 +48,7 @@ class InfoCards extends React.Component {
           id: 4,
           title: "Rewards for Being Most Sustainable ",
           description:
-            "Rewards include dorm pizza parties, sustainability swag, and BRAGGING RIGHTS. Funded by ASHMC Sustainability and ESW! (Except for the bragging rights. Those are free.) NOTE: We should talk about how these prizes would actually be funded. Can we chat with ASHMC Sustainability?",
+            "Rewards include dorm pizza parties, sustainability swag, and BRAGGING RIGHTS.",
         },
       ],
     };
