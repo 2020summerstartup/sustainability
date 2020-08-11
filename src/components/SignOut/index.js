@@ -2,6 +2,7 @@ import React from "react";
 import { withFirebase } from "../../services/Firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../../pages/HomePage/toastify.css";
 
 import Button from "@material-ui/core/Button";
 
@@ -25,7 +26,7 @@ const confirmSignOut = ({ firebase }) => {
     firebase.doSignOut();
     localStorage.clear(); // Wipe the local storage
     toast.configure(); // Configure for toast messages
-    toast.info("You have signed out. Come back soon!"); // Can play with colors here if anyone wants to. :)
+    toast.success("You have signed out. Come back soon!"); // Can play with colors here if anyone wants to. :)
     playSound(toastAudio);
   }
 };
