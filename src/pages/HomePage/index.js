@@ -86,7 +86,7 @@ import badge from "../../sounds/hero_simple-celebration-01.wav";
 import increment from "../../sounds/navigation_selection-complete-celebration.wav";
 
 // Lazy load the fave card
-const FavoriteCard = lazy(() => retry(() => import("./faveCard.js")));
+const FavoriteGalaxyCard = lazy(() => retry(() => import("./faveGalaxyCard.js")));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
@@ -1037,7 +1037,7 @@ function HomePage(props) {
             <>
               {/* lazy loading favorites galaxy card */}
               <Suspense fallback={<ProgressCircle />}>
-                <FavoriteCard />
+                <FavoriteGalaxyCard />
               </Suspense>
 
               {/* FAVORITE ACTIONS */}

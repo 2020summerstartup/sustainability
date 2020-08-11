@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Main Component, exported to 
-export const FavoriteCard = React.memo(function GalaxyCard() {
+export const FavoriteGalaxyCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
 
@@ -100,4 +100,4 @@ export const FavoriteCard = React.memo(function GalaxyCard() {
   );
 });
 
-export default FavoriteCard;
+export default FavoriteGalaxyCard;
