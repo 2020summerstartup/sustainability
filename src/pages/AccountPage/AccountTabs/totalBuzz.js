@@ -4,7 +4,7 @@ import styles from "./totalBuzz.module.css";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-// Displays text for total logs based on total
+// Displays text for total logs based on total actions logged
 var totalBuzzText;
 const totalBuzzDisplay = () => {
   if (JSON.parse(localStorage.getItem("buzzes")) === 1) {

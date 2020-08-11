@@ -25,6 +25,8 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 
+import SignOutButton from "../../../components/SignOut";
+
 var globalMute = false;
 
 // Styles for settings drawer
@@ -201,9 +203,9 @@ function SettingsDrawer(props) {
         </ListItem>
         {/* Sign out button */}
         {/* Moving this for now because always get error when signing out */}
-        {/* <ListItem className={classes.settingsSignOut}>
+        <ListItem className={classes.listItemIcon}>
           <SignOutButton />
-        </ListItem> */}
+        </ListItem>
         
       {/* Account Deletion */}
         <ListItem

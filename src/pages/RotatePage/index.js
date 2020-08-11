@@ -75,7 +75,7 @@ export class Rotate extends Component {
             mediaBackgroundStyle={{ backgroundColor: "#24a133" }}
             style={{ backgroundColor: "#24a133" }}
             title="Compete Across Dorms!"
-            subtitle="Prizes for the most sustainable dorm!"
+            subtitle="See how your dorm stacks up against your friends' dorms! Prizes for winning dorm!"
           />
 
           {/* Add To Home Screen Slide */}
