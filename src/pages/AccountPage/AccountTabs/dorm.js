@@ -137,41 +137,6 @@ const options = {
   legend: { position: "none" },
 };
 
-// FOR PIE CHART!
-// const data = [
-//   ["Impact", "Quantity"],
-//   [`${coEmissImpact} Pounds of CO2 Saved`, 5000],
-//   [`${energyImpact} Kilojoules of Energy Saved`, energyImpact],
-//   [`${waterImpact} Gallons of Water Saved`, waterImpact], // CSS-style declaration
-// ];
-// const options = {
-//   // title: "Harvey Mudd's Positive Sustainability Impacts!",
-//   height: "350px",
-//   width: "100%",
-//   slices: [
-//     { color: "rgb(255, 184, 24)" },
-//     { color: "rgb(75, 179, 11)" },
-//     { color: "rgb(26, 97, 168)" },
-//   ],
-//   is3D: true,
-//   tooltip: {
-//     showColorCode: true,
-//   },
-//   chartArea: {
-//     left: "0",
-//     width: "100%",
-//   },
-//   legend: {
-//     maxLines: 10,
-//     position: "right",
-//     alignment: "center",
-//     textStyle: {
-//       color: "233238",
-//       fontSize: 14,
-//     },
-//   },
-// };
-
 // Cards to be rendered in profile/dorm
 class EnvImpactCardsSchool extends React.Component {
   render() {

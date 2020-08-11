@@ -7,7 +7,7 @@ import earnGif from "../../img/earn.gif";
 import competeGif from "../../img/compete.gif";
 import addtohomeGif from "../../img/addToHome.GIF";
 
-// Landing Page Carousel 
+// Landing Page Carousel
 export class Rotate extends Component {
   constructor() {
     super();
@@ -25,7 +25,6 @@ export class Rotate extends Component {
           // Pushes user to signin page
           label="Get started"
           onStart={() => (window.location.href = "/signin")}
-
         >
           {/* Intro slide */}
           <Slide
@@ -63,16 +62,16 @@ export class Rotate extends Component {
 
           {/* Leaderboard Slide */}
           <Slide
-          media={
-            <img
-              alt=""
-              src={competeGif}
-              style={{
-                paddingTop: "2rem",
-                width: "auto",
-              }}
-            />
-          }
+            media={
+              <img
+                alt=""
+                src={competeGif}
+                style={{
+                  paddingTop: "2rem",
+                  width: "auto",
+                }}
+              />
+            }
             mediaBackgroundStyle={{ backgroundColor: "#24a133" }}
             style={{ backgroundColor: "#24a133" }}
             title="Compete Across Dorms!"
@@ -81,11 +80,17 @@ export class Rotate extends Component {
 
           {/* Add To Home Screen Slide */}
           <Slide
-            media={<img alt="" src={addtohomeGif} class="snapgrid" style={{
-              paddingTop: "2rem",
-              width: "auto",
-            }}
-            />}
+            media={
+              <img
+                alt=""
+                src={addtohomeGif}
+                class="snapgrid"
+                style={{
+                  paddingTop: "2rem",
+                  width: "auto",
+                }}
+              />
+            }
             mediaBackgroundStyle={{ backgroundColor: "#4fb35b" }}
             style={{ backgroundColor: "#4fb35b" }}
             title="Add to Home Screen!"
