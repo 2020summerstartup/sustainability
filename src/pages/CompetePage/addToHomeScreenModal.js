@@ -8,13 +8,12 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 
 // Styles for AddHome Modal
 const useStyles = makeStyles((theme) => ({
-  textTitle: {
+  dialogTitle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
@@ -55,13 +54,14 @@ export default function DarkModeModal() {
     setOpen(false);
   };
 
-  // sound for when badge modal is opened
+  // Sound for when badge modal is opened
   const badgeAudio = new Audio(badge);
 
-  // called by onclick to play the audio file
+  // Called by onclick to play the audio file
   const playSound = (audioFile) => {
     audioFile.play();
   };
+
   // Ran to display modal only if user has never seen it before
   useEffect(() => {
     let addHomePop_done = JSON.parse(localStorage.getItem("addHomePop_done"));
@@ -78,55 +78,41 @@ export default function DarkModeModal() {
   if (!visible) return null;
 
   return (
-    <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        {/* NOTE: dialogContent is styles in module.css to display the animated gradient background */}
-        <DialogContent className={styles.dialogContentAddHome}>
-          <DialogContentText id="alert-dialog-description">
-            <Typography variant="h5" className={classes.textTitle}>
-              Hey {localStorage.getItem("name")}! Make sure you add our app to
-              your homescreen!
-            </Typography>
-          </DialogContentText>
-          <img
-            alt="dark logo"
-            src={addHomeGif}
-            className={classes.addHomeImg}
-          />
-          <DialogContentText
-            id="alert-dialog-description"
-            className={classes.textEntireBody}
-          >
-            <Typography variant="body2" className={classes.textBody}>
-              <strong>For IOS devices: </strong> Make sure you're on Safari and
-              then tap the Share button at the bottom of your screen. Then tap
-              on the "Add to Home Screen" button and our app will appear!
-            </Typography>
-            <Typography variant="body2" className={classes.textBody}>
-              <strong>For Andriod devices: </strong>In Chrome, go to Settings in
-              the rop right corner, then slide down and tap "Add to Home
-              Screen".
-            </Typography>
-          </DialogContentText>
-          <Button
-            onClick={() => {
-              handleClose();
-              setVisible(false);
-            }}
-            variant="contained"
-            color="secondary"
-            autoFocus
-            className={`${classes.buttonClose} ${styles.buttonBackground}`}
-          >
-            Got it!
-          </Button>
-        </DialogContent>
-      </Dialog>
-    </div>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      {/* NOTE: dialogContent is styles in module.css to display the animated gradient background */}
+      <DialogContent className={styles.dialogContentAddHome}>
+          <Typography variant="h5" className={classes.dialogTitle}>
+            Hey {localStorage.getItem("name")}! Make sure you add our app to
+            your homescreen!
+          </Typography>
+        {/* Gif to show user how to add our app to their homescree */}
+        <img alt="dark logo" src={addHomeGif} className={classes.addHomeImg} />
+          <Typography variant="body2" className={classes.textBody}>
+            <strong>For IOS devices: </strong> Make sure you're on Safari and
+            then tap the Share button at the bottom of your screen. Then tap on
+            the "Add to Home Screen" button and our app will appear!
+          </Typography>
+          <Typography variant="body2" className={classes.textBody}>
+            <strong>For Andriod devices: </strong>In Chrome, go to Settings in
+            the rop right corner, then slide down and tap "Add to Home Screen".
+          </Typography>
+        <Button
+          onClick={() => {
+            handleClose();
+            setVisible(false);
+          }}
+          variant="contained"
+          color="secondary"
+          className={`${classes.buttonClose} ${styles.buttonBackground}`}
+        >
+          Got it!
+        </Button>
+      </DialogContent>
+    </Dialog>
   );
 }
