@@ -2,7 +2,7 @@ import React from "react";
 // Image import
 import Chart from "react-google-charts";
 import dorm4 from "../../../img/dorm4.svg";
-import styles from "./dorm.module.css";
+import styles from "./college.module.css";
 
 import { AuthUserContext } from "../../../services/Session";
 import SignOutButton from "../../../components/SignOut";

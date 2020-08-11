@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { withRouter } from "react-router";
-import DormCard from "./dorm";
+import College from "./college";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 import Badges from "./badges";
@@ -239,10 +239,10 @@ const AccountTabs = props => {
       <TabPanel value={value} index={0} className="tab-container">
          <TotalPointsCard />
       </TabPanel>
-      {/* Mudd/dorm Page */}
+      {/* Mudd/College Page */}
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
-          <DormCard />
+          <College />
         </Suspense>
       </TabPanel>
       {/* Badge Page */}
