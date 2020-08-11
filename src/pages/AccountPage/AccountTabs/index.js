@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import DormCard from "./dorm";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
-import Badges2 from "./badges2";
+import Badges from "./badges";
 import DarkModeModal from "./darkModeModal";
 
 import PropTypes from "prop-types";
@@ -248,45 +248,7 @@ const AccountTabs = props => {
       {/* Badge Page */}
       <TabPanel value={value} index={2} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
-          {/* THIRD BADGE */}
-          {/* <h1> </h1>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6} lg={4}>
-              <Badges3 />
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <Badges3 />
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <Badges3 />
-            </Grid>
-          </Grid> */}
-          {/* FIRST BADGE */}
-          {/* <h1> </h1> */}
-          {/* <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={4}>
-              <Badges />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Badges />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Badges />
-            </Grid>
-          </Grid> */}
-          {/* SECOND BADGE */}
-          {/* <h1> </h1> */}
-          {/* <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={4}> */}
-          <Badges2 earnedBadges={firestoreMastered} />
-          {/* </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Badges2 />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Badges2 />
-            </Grid>
-          </Grid> */}
+          <Badges earnedBadges={firestoreMastered} />
         </Suspense>
       </TabPanel>
     </div>

@@ -15,7 +15,7 @@ function assignDorm(data) {
   }
 }
 
-// Main Component - Account Page
+// ACCOUNTPAGE
 const AccountPage = props => {
   leaderBoardUpdate();
 
@@ -36,7 +36,7 @@ const AccountPage = props => {
   );
 
   var dormName = localStorage.getItem("dorm")
-  if (dormName !== ""){
+  if (dormName && dormName !== ""){
     getDorm()
     .doc(dormName)
     .onSnapshot(
@@ -50,14 +50,11 @@ const AccountPage = props => {
   }
   
   return (
-    <div>
-      {/* Authorized users only, calls AccountTabs */}
       <AuthUserContext.Consumer>
         {(authUser) => (
           <AccountTabs props={props}/>
         )}
       </AuthUserContext.Consumer>
-    </div>
   );
 }
 

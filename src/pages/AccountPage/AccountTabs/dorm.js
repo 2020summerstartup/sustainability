@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 var dormName = localStorage.getItem("dorm");
-if (dormName !== "") {
+if (dormName && dormName !== "") {
   getDorm()
     .doc(dormName)
     .onSnapshot((docSnapshot) => {

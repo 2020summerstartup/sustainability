@@ -36,9 +36,15 @@ const useStyles = makeStyles((theme) => ({
   // importing svg as react components caused SusLogo123 to shrink
   logoTooSmall: {
     width: "7rem !important",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "5.5rem !important",
+    },
   },
   logoSignup: {
-    width: "3.75rem !important",
+    width: "3.25rem !important",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "5rem !important",
+    },
   },
   title: {
     color: "white",
@@ -185,7 +191,9 @@ const BackArrowSettingsHeader = () => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo1 className={`${classes.logo} ${classes.logoTooSmall}`} />
+          <SusLogo1
+            className={`${classes.logo} ${classes.logoTooSmall} ${classes.logoWithBackArrow}`}
+          />
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
@@ -220,7 +228,9 @@ const BackArrowSettingsHeader2 = () => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo2 className={`${classes.logo} ${classes.logoTooSmall}`} />
+          <SusLogo2
+            className={`${classes.logo} ${classes.logoTooSmall} ${classes.logoWithBackArrow}`}
+          />
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
@@ -255,12 +265,13 @@ const BackArrowSettingsHeader3 = () => {
           >
             <ArrowBackIcon className={classes.backarrow} />
           </IconButton>
-          <SusLogo3 className={`${classes.logo} ${classes.logoTooSmall}`} />
+          <SusLogo3
+            className={`${classes.logo} ${classes.logoTooSmall} ${classes.logoWithBackArrow}`}
+          />
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
                 Sus Comp
-                {/* <EcoIcon className={classes.leaf} /> */}
               </Typography>
             </Grid>
           </Grid>
@@ -268,9 +279,6 @@ const BackArrowSettingsHeader3 = () => {
             <Grid item>
               <SettingsDrawer />
             </Grid>
-            {/* <Grid item>
-              <AccountTabs/>
-            </Grid> */}
           </Grid>
         </Toolbar>
       </AppBar>
