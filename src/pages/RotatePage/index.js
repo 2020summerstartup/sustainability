@@ -17,7 +17,7 @@ export class Rotate extends Component {
     return (
       <div>
         <AutoRotatingCarousel
-          autoplay={true}
+          autoplay={false}
           interval={7000}
           hideArrows={false}
           open={true}
@@ -42,6 +42,7 @@ export class Rotate extends Component {
             title="What will we achieve?"
             subtitle="Lets be sustainable together and make this world a better place one action at a time with some healthy competition for some awesome prizes!"
           />
+
           {/* Earn Points Slide */}
           <Slide
             media={
@@ -61,7 +62,8 @@ export class Rotate extends Component {
             title="Log actions, earn points."
             subtitle="Being sustainable earns points for you and your dorm! Save your favorites! Special surprise for mastering an action ;)"
           />
-          {/* Leadership board */}
+
+          {/* Leaderboard Slide */}
           <Slide
           media={
             <img
@@ -81,6 +83,8 @@ export class Rotate extends Component {
             title="Compete Across Dorms!"
             subtitle="Prizes for the most sustainable dorm!"
           />
+
+          {/* Add To Home Screen Slide */}
           <Slide
             media={<img alt="" src={addToHomeGif} class="snapgrid" style={{
               marginTop: "2rem",

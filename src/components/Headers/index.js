@@ -78,7 +78,7 @@ const Header = () => {
         <Toolbar className={classes.toolbar}>
           <SusLogo className={classes.logo} />
           <Typography variant="h6" className={classes.title} noWrap>
-            Eco Bud
+            EcoBud
           </Typography>
         </Toolbar>
       </AppBar>
@@ -197,7 +197,7 @@ const BackArrowSettingsHeader = () => {
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
-                Eco Bud
+                EcoBud
               </Typography>
             </Grid>
           </Grid>
@@ -234,7 +234,7 @@ const BackArrowSettingsHeader2 = () => {
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
-                Eco Bud
+                EcoBud
               </Typography>
             </Grid>
           </Grid>
@@ -271,7 +271,7 @@ const BackArrowSettingsHeader3 = () => {
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
-                Eco Bud
+                EcoBud
               </Typography>
             </Grid>
           </Grid>
