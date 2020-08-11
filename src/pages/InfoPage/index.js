@@ -5,10 +5,9 @@ import AddtoHomeScreen from "./addToHomeScreen";
 
 const InfoPage = () => (
   <div className="base-container">
-    {/* <PwaCard /> */}
     <InfoCards />
+    {/* Modal for adding app to home screen */}
     <AddtoHomeScreen />
-    {/* <FBContactForm /> */}
   </div>
 );
 
