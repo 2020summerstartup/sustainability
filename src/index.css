@@ -123,64 +123,6 @@ body {
   }
 }
 
-/* input {
-  margin-top: 6px;
-  min-width: 15em;
-  height: 37px;
-  padding: 0px 10px;
-  font-size: 16px;
-  font-family: "Open Sans", sans-serif;
-  background-color: #f3f3f3;
-  border: 0;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  transition: all 250ms ease-in-out;
-}
-
-input:focus {
-  outline: none;
-} */
-
-/* Trying to add new fonts to the app */
-
-body {
-  font-family: "Open Sans", sans-serif;
-}
-.heading {
-  font-weight: 700;
-}
-.subheading {
-  font-weight: 400;
-}
-
-/* Better native app experience  */
-@media only screen and (max-width: 991px) {
-  html,
-  body {
-    width: 100vw;
-    height: 100vh;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-overflow-scrolling: touch;
-    /* suppposed to not allow the screen to overscroll on mobile */
-    overscroll-behavior: none;
-  }
-  *::-webkit-scrollbar {
-    width: 0px;
-  }
-}
-
-/* styles for signup and signin forms! */
-:root {
-  --form_bg: #ffffff;
-  --input_bg: #e5e5e5;
-  --input_hover: #eaeaea;
-  --submit_bg: #1fcc44;
-  --submit_hover: #40e263;
-  --icon_color: #6b6b6b;
-}
-
 .image {
   width: 21em;
   padding: 1rem;
