@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 
@@ -66,13 +65,13 @@ export default function DarkModeModal() {
   useEffect(() => {
     let addHomePop_done = JSON.parse(localStorage.getItem("addHomePop_done"));
     let email = localStorage.getItem("email");
-    if (!addHomePop_done) {
+    // if (!addHomePop_done) {
       // Displays modal and plays sound when it opens
       setVisible(true);
       playSound(badgeAudio);
       // Tells firebase the action has been done
       AddHomeOpened(email);
-    }
+    // }
   }, [badgeAudio]);
   // Otherwise, does nothing
   if (!visible) return null;
@@ -87,21 +86,15 @@ export default function DarkModeModal() {
       >
         {/* NOTE: dialogContent is styles in module.css to display the animated gradient background */}
         <DialogContent className={styles.dialogContentAddHome}>
-          <DialogContentText id="alert-dialog-description">
             <Typography variant="h5" className={classes.textTitle}>
               Hey {localStorage.getItem("name")}! Make sure you add our app to
               your homescreen!
             </Typography>
-          </DialogContentText>
           <img
             alt="dark logo"
             src={addHomeGif}
             className={classes.addHomeImg}
           />
-          <DialogContentText
-            id="alert-dialog-description"
-            className={classes.textEntireBody}
-          >
             <Typography variant="body2" className={classes.textBody}>
               <strong>For IOS devices: </strong> Make sure you're on Safari and
               then tap the Share button at the bottom of your screen. Then tap
@@ -112,7 +105,6 @@ export default function DarkModeModal() {
               the rop right corner, then slide down and tap "Add to Home
               Screen".
             </Typography>
-          </DialogContentText>
           <Button
             onClick={() => {
               handleClose();
