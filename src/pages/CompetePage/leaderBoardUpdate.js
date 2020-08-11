@@ -3,7 +3,7 @@ import {getDorm} from "../../services/Firebase";
 function assignRanking(data) {
     localStorage.setItem('ranking', data.rank)
   }  
-
+// I'm guessing Jess wrote this? Can you comment it bc I don't fully understand what's going on -Kobe
 function leaderBoardUpdate() {
     const updates = []
 

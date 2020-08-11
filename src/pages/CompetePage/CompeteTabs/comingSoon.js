@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./comingSoon.module.css";
 
 import Typography from "@material-ui/core/Typography";
-
+// Wooden sign on Challenges Page as temporary placeholder
 const ComingSoon = () => {
   return (
     <div className={styles.fancyBorder}>
