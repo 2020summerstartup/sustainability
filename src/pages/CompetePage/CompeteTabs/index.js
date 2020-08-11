@@ -180,7 +180,7 @@ function CompeteTabs(props, { authUser }) {
               <SusLogo1 className={classes.logo} />
               <Typography variant="h6" className={classes.title} noWrap>
                 Compete
-          </Typography>
+              </Typography>
             </Toolbar>
             {/* Tabs directly underneath header */}
             <Tabs
