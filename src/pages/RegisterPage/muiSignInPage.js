@@ -108,36 +108,44 @@ class SignInFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+
   onSubmit = (event) => {
     localStorage.clear();
     const { email, password } = this.state;
 
+    // begins the sign in process by checking if the user is authenticated in firebase
     firebase.auth()
       .signInWithEmailAndPassword(email, password)
       .catch((error) => {
+        // if there is an issue, log it to the console
         this.setState({ error });
         console.log(error);
       });
 
+      // pulls all necessary user & school data from firebase
+      // IMPORTANT: this is async because getting data from firebase takes time & we need to make sure everythign in local storage is 
+      // initalized before loading page or there will be MANY errors & points/favs/badges will not display properly 
       async function getUserData (email){
+        // to give authentication check some time to run --> user needs to be authenticated to access the data
         await waitOneSec();
-        // console.log(this.props, this.props.history)
         // initalizes user's impact points in local storage 
         getUserImpact(email);
+        // initaizes the school's impact points in local storage 
         getSchoolImpact();
+        // to give these functions some time to run 
         await waitOneSec();
+        // gets user's points, mastered & favroited actions from firebase & sets them all in local storage
         getUser(email).onSnapshot(
           (docSnapshot) => {
             // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
             if(docSnapshot.data()) {
+              // this function is where all the user's info is parsed through and set in local storage 
               assignData(docSnapshot.data());  
             }
           },
         );
+        // give this function somt time to run 
         await waitOneSec();
-        
-        // refresh needed to have points initially displayed
-        // window.location.reload();
       }
       
     
@@ -145,17 +153,14 @@ class SignInFormBase extends Component {
       event.preventDefault();
     // takes user to home page
     async function goHome(props, email) {
-      console.log('one')
+      // wait for getUserData async function to run and set all of the user's info in local storage
       await getUserData(email);
-      console.log('two')
-      // await waitOneSec();
+      // then we can route to home & everything will disaply properly 
       props.history.push(ROUTES.HOME);
-      // await waitOneSec();
-      console.log('three')
     }
 
     goHome(this.props, email)
-      .then(() => console.log('here'))
+      // clear all the input fields on the sign in form 
       .then(() => {this.setState({ ...INITIAL_STATE });})
       
       
