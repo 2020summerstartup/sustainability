@@ -208,6 +208,9 @@ class SignUpFormBase extends Component {
       dorm,
       passwordOne,
       passwordTwo,
+      // isAdmin is unused (the code associated with it is a checkbox, commented out below), so it throws a warning.
+      // The following comment prevents the warning from displaying.
+      // eslint-disable-next-line
       isAdmin,
       error,
     } = this.state;
@@ -315,8 +318,9 @@ class SignUpFormBase extends Component {
               value={passwordTwo}
               onChange={this.onChange}
             />
-            {/* Added in admin checkbox */}
-            <label>
+            {/* Added in admin checkbox. I've commented out this checkbox because we don't want it in the final product. But it can be useful
+            for testing, so I'm leaving the code here. -KJ */}
+            {/* <label>
               Admin:
               <input
                 name="isAdmin"
@@ -324,7 +328,7 @@ class SignUpFormBase extends Component {
                 checked={isAdmin}
                 onChange={this.onChangeCheckbox}
               />
-            </label>
+            </label> */}
             {/* Throws error for invalid inputs */}
             {error && (
               <Typography
