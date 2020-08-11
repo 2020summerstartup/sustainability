@@ -1,7 +1,6 @@
 import React from "react";
 import points from "../../../img/points.svg";
 import { AuthUserContext } from "../../../services/Session";
-import SignOutButton from "../../../components/SignOut";
 // Import Galaxy Card Styles and Material UI
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -123,7 +122,6 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
             {/* Displays number of actions and overall impact */}
             <TotalBuzz />
             <EnvImpactCards />
-            <SignOutButton />
           </>
         )}
       </AuthUserContext.Consumer>

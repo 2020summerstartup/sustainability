@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./badges.module.css";
 import ActionData from "../../HomePage/actionData.json";
 import fansImg from "../../../img/fans.svg";
-import SignOutButtom from "../../../components/SignOut";
 // Material UI and galaxy card imports
 import Typography from "@material-ui/core/Typography";
 import GoogleFontLoader from "react-google-font-loader";
@@ -320,7 +319,6 @@ getStyling() {
             </Typography>
           </div>
         )}
-        <SignOutButtom />
       </>
     );
   }

@@ -3,9 +3,7 @@ import React from "react";
 import Chart from "react-google-charts";
 import dormImg from "../../../img/dorm.svg";
 import styles from "./college.module.css";
-
 import { AuthUserContext } from "../../../services/Session";
-import SignOutButton from "../../../components/SignOut";
 
 // Material UI imports
 import GoogleFontLoader from "react-google-font-loader";
@@ -221,7 +219,6 @@ export const DormCard = React.memo(function GalaxyCard() {
             </div>
           </Grid>
           <EnvImpactCardsSchool />
-          <SignOutButton />
         </>
       )}
     </AuthUserContext.Consumer>
