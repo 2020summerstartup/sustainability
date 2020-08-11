@@ -143,7 +143,7 @@ class EnvImpactCardsSchool extends React.Component {
     return (
       <>
         <Typography variant="h6" className={styles.chartTitle}>
-          Harvey Mudd's Positive Sustainability Impacts!
+          <b>Harvey Mudd's Positive Sustainability Impacts!</b>
         </Typography>
         <Chart
           chartType="ColumnChart"
@@ -151,13 +151,6 @@ class EnvImpactCardsSchool extends React.Component {
           options={options}
           style={{ margin: "auto", maxWidth: "50rem" }}
         />
-        {/* <Chart
-          chartType="PieChart"
-          loader={<div>Loading Impact Chart...</div>}
-          data={data}
-          options={options}
-          style={{ margin: "auto" }}
-        /> */}
       </>
     );
   }
