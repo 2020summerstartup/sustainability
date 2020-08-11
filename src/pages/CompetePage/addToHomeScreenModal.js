@@ -87,7 +87,7 @@ export default function DarkModeModal() {
       >
         {/* NOTE: dialogContent is styles in module.css to display the animated gradient background */}
         <DialogContent className={styles.dialogContentAddHome}>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText>
             <Typography variant="h5" className={classes.textTitle}>
               Hey {localStorage.getItem("name")}! Make sure you add our app to
               your homescreen!
