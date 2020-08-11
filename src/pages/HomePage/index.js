@@ -413,7 +413,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function HomePage(props) {
   const [progressModalIsOpen, setProgressModalIsOpen] = useState(false);
-  const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(false);
+  const [badgeModalIsOpen, setBadgeModalIsOpen] = useState(true);
   const [badgeAction, setBadgeAction] = useState("");
   const [badgeActionCount, setBadgeActionCount] = useState("");
   const authContext = useContext(AuthUserContext);
@@ -588,12 +588,14 @@ function HomePage(props) {
     }
   };
 
+  // called when user clicks "got it" button to close the modal
   const handleClose = () => {
     setBadgeModalIsOpen(false);
   };
 
+  // called when user clicks on "see my badge" button to go to badge tab in profile page
   const handleClickSeeBadge = () => {
-    history.push(`/profile/badge`);
+    history.push(`/profile/badges`);
   }
 
   // Initialize the color of each favorite button
