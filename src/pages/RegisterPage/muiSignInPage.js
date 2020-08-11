@@ -131,7 +131,6 @@ class SignInFormBase extends Component {
         // await waitOneSec();
         // initalizes user's impact points in local storage 
         getUserImpact(email);
-        console.log('inside')
         // initaizes the school's impact points in local storage 
         getSchoolImpact();
 
