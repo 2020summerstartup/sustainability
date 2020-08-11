@@ -14,6 +14,8 @@ import Container from "@material-ui/core/Container";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../../HomePage/toastify.css";
+
 
 // Sounds
 import toastNotify from "../../../sounds/notification_simple-01.wav";
