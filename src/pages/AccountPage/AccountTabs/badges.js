@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./badges.module.css";
 import ActionData from "../../HomePage/actionData.json";
 import fansImg from "../../../img/fans.svg";
-
 import SignOutButtom from "../../../components/SignOut";
+// Material UI and galaxy card imports
 import Typography from "@material-ui/core/Typography";
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -19,15 +19,17 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-
+// Styles for Badge Galaxy Card
 const useStyles = makeStyles((theme) => ({
   galaxyCard: {
     borderRadius: "1rem",
     boxShadow: "none",
     position: "relative",
     margin: "auto",
+    // Important for fitting card on the screen
     maxWidth: "60rem",
     minHeight: "15rem",
+    // Everything above "small" screen
     [theme.breakpoints.up("sm")]: {
       maxWidth: "60rem",
       minHeight: "20rem",
@@ -51,7 +53,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
 }));
-
+// Array stores actions that have already been mastered, calls local storage
+// Calculates the length of the array aka number of actions mastered
 var masteredActions = [];
 masteredActions = localStorage.getItem("firestoreMastered");
 var masterLength;
@@ -132,7 +135,7 @@ for (const el in ActionData) {
     masterBadgesArray.push(masteredActionProps);
   }
 }
-
+// Displays text for back of leaf depending on how many actions have been mastered
 var backText;
 const leafBackSay = () => {
   if (masterLength === 1) {
@@ -149,10 +152,10 @@ const leafBackSay = () => {
     );
   }
 };
-
+// Need to call function for it to run
 leafBackSay();
 
-// Main component - Galaxy Card for badges
+// Galaxy Card for badges
 export const BadgesCard = React.memo(function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
@@ -187,7 +190,7 @@ export const BadgesCard = React.memo(function GalaxyCard() {
     </>
   );
 });
-
+// Main Component - displays galaxy card and leaf badges for mastered actions
 class Badges extends React.Component {
   constructor() {
     super();

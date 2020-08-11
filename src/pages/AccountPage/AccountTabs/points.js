@@ -2,7 +2,7 @@ import React from "react";
 import points from "../../../img/points.svg";
 import { AuthUserContext } from "../../../services/Session";
 import SignOutButton from "../../../components/SignOut";
-
+// Import Galaxy Card Styles and Material UI
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
 import { makeStyles } from "@material-ui/core/styles";
@@ -97,7 +97,7 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
       <AuthUserContext.Consumer>
         {(authUser) => (
           <>
-          {/* Galaxy Card */}
+          {/* Dorm Galaxy Card */}
             <NoSsr>
               <GoogleFontLoader
                 fonts={[

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+// Firebase Imports
 import { Axios } from "../../services/Firebase/firebase";
 import { firestore } from "../../services/Firebase";
 import "firebase/firestore";
-
+// Material UI Imports
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -17,6 +18,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import MessageIcon from "@material-ui/icons/Message";
 import SendIcon from "@material-ui/icons/Send";
 
+// Styles for contact form
 const useStyles = makeStyles((theme) => ({
   paper: {
     maxWidth: "35rem",
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// Main Component 
 const FBContactForm = () => {
   const classes = useStyles();
   const [formData, setFormData] = useState({});
@@ -55,6 +58,7 @@ const FBContactForm = () => {
       [e.target.name]: e.target.value,
     });
   };
+  // Sends email to support team and stores in firestore on submit
   const handleSubmit = (event) => {
     event.preventDefault();
     sendEmail();
@@ -64,11 +68,14 @@ const FBContactForm = () => {
       message: "",
     });
   };
+  // Function for sending email with info to support team
   const sendEmail = () => {
+    // Uses cloud function and axios to send email 
     Axios.post(
       "https://us-central1-sustainabilitycompetition.cloudfunctions.net/submit",
       formData
     )
+    // Stores info and message inside firebase
       .then((res) => {
         firestore.collection("emails").add({
           name: formData.name,
@@ -86,6 +93,7 @@ const FBContactForm = () => {
     <div className="base-container">
       <Paper elevation={5} className={classes.paper}>
         <CssBaseline />
+        {/* Header of Contact Form */}
         <div className={classes.formWrapper}>
           <Avatar className={classes.avatar}>
             <QuestionAnswerIcon />
@@ -98,7 +106,9 @@ const FBContactForm = () => {
             to see in the future! Or any other general questions, comments, and
             concerns.
           </Typography>
+          {/* Contact us form */}
           <form onSubmit={handleSubmit} id="contact" className={classes.form}>
+            {/* Name input */}
             <TextField
               color="secondary"
               variant="outlined"

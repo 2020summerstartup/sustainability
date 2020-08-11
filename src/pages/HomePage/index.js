@@ -572,7 +572,7 @@ function HomePage(props) {
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
           action.toMaster - actionTotal / action.points
-        } buzzes away from mastering the ${action.title} action!`;
+          } buzzes away from mastering the ${action.title} action!`;
       } else {
         displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
       }
@@ -1016,13 +1016,13 @@ function HomePage(props) {
                       😢
                     </span>
                   </Typography>
-                  <Typography variant="body1">
-                    Feel free to fill out the "contact us" form in settings if
+                    <Typography variant="body1">
+                      Feel free to fill out the "contact us" form in settings if
                     you would like us to add "{searchQuery}" as a sustainable
                     action!
                   </Typography>
-                </>
-              )}
+                  </>
+                )}
             </Grid>
           </TabPanel>
 

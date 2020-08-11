@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   listItemText: {
     marginRight: "1.5rem",
   },
+  // Trash can at bottom of drawer
   deleteIcon: {
     minWidth: "2.5rem",
     color: theme.palette.error.main,
@@ -83,7 +84,7 @@ const MuteSwitch = withStyles((theme) => ({
   },
   checked: {},
 }))(Switch);
-
+// Main Component - Settings on top right corner of profile page
 function SettingsDrawer(props) {
   const classes = useStyles();
   const { darkMode, setDarkMode } = props;
@@ -203,6 +204,7 @@ function SettingsDrawer(props) {
         {/* <ListItem className={classes.settingsSignOut}>
           <SignOutButton />
         </ListItem> */}
+        
       {/* Account Deletion */}
         <ListItem
           button
