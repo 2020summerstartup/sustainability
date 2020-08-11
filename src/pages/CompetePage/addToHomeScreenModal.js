@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     left: "50%",
     transform: "translate(-50%, 0)",
+    margin: "0.5rem 0",
   },
   textEntireBody: {
     color: "white",

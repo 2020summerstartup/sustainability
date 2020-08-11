@@ -10,7 +10,7 @@ import "firebase/auth";
 import { withFirebase, getUser, getUserImpact, getSchoolImpact } from "../../services/Firebase";
 import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
-import signinImg from "../../img/login3.svg";
+import signinImg from "../../img/signin.svg";
 
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";

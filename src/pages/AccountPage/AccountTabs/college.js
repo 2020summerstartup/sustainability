@@ -1,7 +1,7 @@
 import React from "react";
 // Image import
 import Chart from "react-google-charts";
-import dorm4 from "../../../img/dorm4.svg";
+import dormImg from "../../../img/dorm.svg";
 import styles from "./college.module.css";
 
 import { AuthUserContext } from "../../../services/Session";
@@ -179,7 +179,7 @@ export const DormCard = React.memo(function GalaxyCard() {
             />
           </NoSsr>
           <Card className={classes.card}>
-            <CardMedia classes={mediaStyles} image={dorm4} />
+            <CardMedia classes={mediaStyles} image={dormImg} />
             <Box py={3} px={2} className={classes.content}>
               <Info useStyles={useGalaxyInfoStyles}>
                 <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
