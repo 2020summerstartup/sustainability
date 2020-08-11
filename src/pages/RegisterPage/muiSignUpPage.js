@@ -16,7 +16,6 @@ import * as ROUTES from "../../constants/routes";
 // For PasswordOne data
 import { PasswordInput } from "./muiSignInPage";
 import { ReactComponent as SignUp } from "../../img/signup.svg";
-// import signupImg from "../../img/signup.svg";
 // Material UI Imports
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";

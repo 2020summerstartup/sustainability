@@ -1,20 +1,19 @@
 import React, { Component } from "react";
-import PasswordChangeForm from "./formChangePw";
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import { withFirebase } from "../../../services/Firebase";
 import accountImg from "../../../img/account.svg";
 import { PasswordInput } from "../../RegisterPage/muiSignInPage";
 import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../../HomePage/toastify.css";
+
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "../../HomePage/toastify.css";
 
 
 // Sounds
@@ -163,7 +162,5 @@ const condition = (authUser) => !!authUser;
 const PasswordChangeFormStyled = withStyles(useStyles)(PasswordChangeFormBase);
 // Wraps in Firebase
 const PasswordChange = withFirebase(PasswordChangeFormStyled);
-
-export { PasswordChangeForm };
 
 export default withAuthorization(condition)(ChangePW);
