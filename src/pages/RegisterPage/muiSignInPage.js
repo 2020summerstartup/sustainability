@@ -99,8 +99,8 @@ const INITIAL_STATE = {
 function waitOneSec() {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve("resolved");
-    }, 700);
+      resolve('resolved');
+    }, 1000);
   });
 }
 

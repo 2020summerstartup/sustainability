@@ -98,13 +98,12 @@ function notify() {
   });
 }
 
-// Do we still need this code?? It was commented out -Amy
-// get current challenge data from local storage
+// THIS IS NOT CURRENTLY IN USE BUT WOULD BE USED IF WE WANT TO GIVE ADMIN CHALLENGE ADDING PRIVELEGES
+// It will get the challenge data from local storage which we can then use to display the challenges on the page
 // var data = localStorage.getItem('challengeData');
 // console.log('data', data);
 // // convert challenge data from string to object
 // var challengeData = JSON.parse(data)
-// console.log('challenge data', challengeData);
 
 class ChallengeCards extends React.Component {
   render() {

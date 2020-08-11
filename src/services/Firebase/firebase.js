@@ -1,4 +1,5 @@
-import firebase from 'firebase/app'; // Used to import { auth }, but it was never used so I removed it. -Katie
+// file commented by JM, most functions written by JM or LL
+import firebase from 'firebase/app';  // Used to import { auth }, but it was never used so I removed it. -Katie
 import app from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
@@ -22,27 +23,31 @@ const config = {
 };
 
 app.initializeApp(config);
-// firebase.initializeApp(config)
 const firestore = app.firestore();
 
-// var UserUidVar;
 
-// sync with firebasse RT database changes
+// sync data for challenges with firebasse RT database changes
 // NOTE: must refresh page/sign in/sign up to get the updated challenges bc even though local storage updates, 
 // the text that is displayed does not
-async function getChallengeData() {
-  // reference to where all the challenge data is stored
-  const dbRefObject = firebase.database().ref('1N2PhiprrCvWWYbyjEFwNjR18k13GOYhlkY34luOJe-w/ChallengeData');
-  // when any field relating to challenge data within the Firebase RT database changes the following function will be called
-  dbRefObject.on('value', function(snap){
-    // get the array containing an object for each challenge from firebase RT database
-    const challengeDataArray = snap.val();
-    // set this array to local storage so we can access it on the challenge pages
-    localStorage.setItem('challengeData', JSON.stringify(challengeDataArray))
-  })
-}
-getChallengeData();
+// not being called anywhere because we are not yet implementing the challenges made by admin
+// async function getChallengeData() {
+//   // reference to where all the challenge data is stored
+//   console.log('challenge data')
+//   const dbRefObject = firebase.database().ref('1N2PhiprrCvWWYbyjEFwNjR18k13GOYhlkY34luOJe-w/ChallengeData');
+//   // when any field relating to challenge data within the Firebase RT database changes the following function will be called
+//   // for example: when we verify a new challenge and add it to the google sheet --> firebase RT DB updates with new challenge
+//   dbRefObject.on('value', function(snap){
+//     // get the array containing an object for each challenge from firebase RT database
+//     const challengeDataArray = snap.val();
+//     // set this array to local storage so we can access it on the challenge pages
+//     // must be set to a string to keep the array format in local storage 
+//     localStorage.setItem('challengeData', JSON.stringify(challengeDataArray))
+//   })
+// }
+// getChallengeData();
 
+
+// set a gloabl variable for the user's uid --> this becomes a field in firestore when the user is created 
 var authUserID;
 
 class Firebase {
@@ -57,6 +62,7 @@ class Firebase {
   }
 
   // *** Auth API ***
+  // each function below uses the firebase auth api to preform their function (Names are pretty descriptive)
   doCreateUserWithEmailAndPassword = (email, password) =>
   this.auth.createUserWithEmailAndPassword(email, password);
 
@@ -74,8 +80,11 @@ class Firebase {
   // *** Merge Auth and DB User API *** //
 
  
+  // called when preforming authentication & authorization 
+  // NOT ENTIRELY SURE WHAT ALL OF THIS FUNCTION IS DOING? -JM 
   onAuthUserListener = (next, fallback) =>
     this.auth.onAuthStateChanged(authUser => {
+      // if the user is authenticated 
       if (authUser) {
         authUserID = authUser.uid
         this.user(authUser.uid)
@@ -83,7 +92,7 @@ class Firebase {
           .then(snapshot => {
             const dbUser = snapshot.val();
  
-            // default empty roles
+            // If user is not an admin, then default to giving them empty roles
             if (!dbUser.roles) {
               dbUser.roles = {};
             }
@@ -112,10 +121,18 @@ class Firebase {
 
 export default Firebase;
 
+
+// called when a new user signs up in muiSignUpPage
+// receives userEmail, userName, and dorm from sign up input forms to set those unique tokens in firestore, 
+// all other field have a default start (ex: points, total, impact all default to starting at 0)
 export const createUser = (userEmail, userName, dorm) => {
   console.log("creating...")
+  // refernce to user document --> creates a document that belongs to the user bc it does not yet exist when user signs up
   return firestore.collection('users').doc(userEmail)
       .set({
+        // these are the data fields that will be a part of the user's firestore document (stored as key: value pairs )
+        // NOTE: favorites, masteredActions, points & impact are each arrays
+        // number values appear as integers, all else are booleans (false) or strings (userEmail, userName, dorm, authUserID)
           created: app.firestore.FieldValue.serverTimestamp(),
           name: userName,
           createdBy: userEmail,
@@ -154,100 +171,127 @@ export const createUser = (userEmail, userName, dorm) => {
             "energy": 0,
             "buzzes":0,
           },
-      }, {merge: true});
+      }, 
+      // means that it will merge this data with any existing data already in the document
+      // should never really be necessary --> maybe only used if there was an issue with deleting the user's firestore document 
+      {merge: true});
 };
 
+// BELOW ARE FUNCTIONS THAT MAKE REFERENCES TO FIRESTORE & ARE USED THROUGHOUT THE APP FOR VARIOUS FUNCTIONS
+
 // fetches the user collection from firestore
+// often called as a shorter way to start the call to get a specific piece of firestore data
 // meant to be called then added to (ex: getUser().onSnapshot( (snap) => {..code here...}))
 export const getUser = (userEmail) => {
+  // IDK why but the compete page gets upset when this line (LS set) is not there?
   localStorage.setItem('email', userEmail)
   return firestore.collection('users').doc(userEmail)
 }
 
 // fetches the dorm collection from firestore
-// meant to be called then added to (ex: getDorm().doc('North'))
+// meant to be called then added to (ex: getDorm().doc('North').onSnapshot( (snap) => {...code here...}))
 export const getDorm = () => {
   return firestore.collection('dorms')
 }
 
-// this method is called to increase points
+// this method is when user increments an action called to increase points (both the individual action & the total)
+// parameters are needed to make sure that the changes are made to the correct document & field, by the correct value
 export const updateUserPoint = (userEmail, userAction, actionPoint) => {
   return firestore.collection('users').doc(userEmail).update({
+    // references the specific action field within firestore's points array then increments the specified number of points
     ['points.' + userAction]: app.firestore.FieldValue.increment(actionPoint),
+    // updates the user's total point field in firestore by the specified number of points
     total: app.firestore.FieldValue.increment(actionPoint),
   })
 }
 
-//this method is meant to update the dorm total
+//this method is called when a user increments and action, it updates the dorm total
+// NOTE: this function allows all users in a single dorm to increment the firestore field 'score' without necessarily having the correct score 
+// in their local storage --> protects us from conflicting values that may exists across different people's devices at a single point in time 
 export const updateDormPoint = (userDorm, actionPoint) => {
   return firestore.collection('dorms').doc(userDorm).update({
+    // refernces the score field in the specified dorm document to increment their total by the action's point value
     score: app.firestore.FieldValue.increment(actionPoint),
   })
 }
 
-// these two methods are called to synchronize local storage with Firestore
-export const uploadUserPoint = (userEmail, userAction, actionPoint) => {
-  return firestore.collection('users').doc(userEmail).update({
-    ['points.' + userAction]: app.firestore.FieldValue.increment(actionPoint),
-  })
-}
-export const uploadUserTotalPoint = (userEmail, actionPoint) =>{
-  return firestore.collection('users').doc(userEmail).update({
-    total: app.firestore.FieldValue.increment(actionPoint),
-  })
-}
 
-// for changing which dorm you are affilaited with 
-export const updateUserDorm = (userEmail, value) => {
+// called when user uses the change dorm form (part of the setting page) to change the dorm the user is affilaited with 
+export const updateUserDorm = (userEmail, newDorm) => {
   return firestore.collection('users').doc(userEmail).update({
-    userDorm: value,
+    // makes a refernce to the userDorm field of the user's firestore document & sets it to the new dorm 
+    userDorm: newDorm,
   })
 }
 
 
-// updates firestore & local storage when a user favorites an action
+// called when user favorites a previously unfavorited actions to updated the favorites array in firestore 
+// NOTE: local storage is updated in the same area that the function is called (homepage)
+// NOTE: the susAction parameter is the action's shortened title name --> ex: recycling a water bottle is waterBottle in the array
 export const addFav = (userEmail, susAction) => {
   return firestore.collection('users').doc(userEmail).update({
+    // makes a refernece to the favroites array of the user's firestore document & add the specified favorited action
+    // .arrayUnion is a firestore command that is essentailly an array push
     favorites: app.firestore.FieldValue.arrayUnion(susAction)
   })
 }
 
-// updates firestore & local storage array when a user deletes a favorite
+// called when user unfavorites a previously favorited actions to updated the favorites array in firestore 
+// NOTE: local storage is updated in the same area that the function is called (homepage)
+// NOTE: the susAction parameter is the action's shortened title name --> ex: recycling a water bottle is waterBottle in the array
 export const deleteFav = (userEmail, susAction) => {
   return firestore.collection('users').doc(userEmail).update({
+    // makes a refernece to the favroites array of the user's firestore document & removes the specified action
+    // .arrayRemove is a firestore command that removes the specified value from the array 
     favorites: app.firestore.FieldValue.arrayRemove(susAction)
   })
 }
 
-// adds action to mastered list in firestore when called (user has mastered action)
+// called when a user masteres an action to add the action to the masterActions array in firestore
+// NOTE: local storage is updated in the same area that the function is called (homepage)
+// NOTE: the susAction parameter is the action's shortened title name --> ex: recycling a water bottle is waterBottle in the array
 export const actionMastered = (userEmail, susAction) => {
   return firestore.collection('users').doc(userEmail).update({
+    // makes a refernece to the masteredAction array of the user's firestore document & adds the specified mastered action
+    // .arrayUnion is a firestore command that is essentailly an array push
     masteredActions: app.firestore.FieldValue.arrayUnion(susAction)
   })
 }
 
-// gets user's impact data from firestore and sets in in local storage
+// called when a returning user signs in 
+// this function reads the user's impact from firestore & sets those values in local storage
+// needed to render the correct display for impact suns on points page
 export const getUserImpact = (userEmail) => {
+  // takes a snapshot of the user's firestore document so we can read the fields of the impact array 
   getUser(userEmail).onSnapshot( (snap) => {
-    const firestoreCoEmiss = snap.get('impact.coEmiss')
-    localStorage.setItem('coEmiss', firestoreCoEmiss);
-    const firestoreEnergy = snap.get('impact.energy')
-    localStorage.setItem('energy', firestoreEnergy);
-    const firestoreWater = snap.get('impact.water')
-    localStorage.setItem('water', firestoreWater);
-    const firestoreBuzzes = snap.get('impact.buzzes')
-    localStorage.setItem('buzzes', firestoreBuzzes);
+    // set local storage items to specific fields of firestore impact array 
+    localStorage.setItem('coEmiss', snap.get('impact.coEmiss'));
+    localStorage.setItem('energy', snap.get('impact.energy'));
+    localStorage.setItem('water', snap.get('impact.water'));
+    localStorage.setItem('buzzes', snap.get('impact.buzzes'));
   })
 }
 
-// updates all the necessary impact fields when a user logs an action
+// called when a returning user signs in 
+// this function reads the school's impact from firestore & sets those values in local storage
+// needed to render the correct display for mudd impact bar graph on dorm/school page
+export const getSchoolImpact = () => {
+  firestore.collection('dorms').doc('wholeSchool').onSnapshot( (snap) => {
+    localStorage.setItem('SchoolCoEmiss', snap.get('coEmiss'));
+    localStorage.setItem('SchoolEnergy', snap.get('energy'));
+    localStorage.setItem('SchoolWater', snap.get('water'));
+    localStorage.setItem('SchoolBuzzes', snap.get('buzzes'));
+  })
+}
+
+// called each time a user increments an action to update the user's impact points 
 export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact) => {
-    //updates local storage with incremented impact data
+    //updates local storage with incremented impact data by adding specified amount to each impact category
     localStorage.setItem('coEmiss', (parseInt(localStorage.getItem('coEmiss'))+ parseInt(coImpact)));
     localStorage.setItem('energy', (parseInt(localStorage.getItem('energy'))+ parseInt(energyImpact)));
     localStorage.setItem('water', (parseInt(localStorage.getItem('water'))+ parseInt(waterImpact)));
     localStorage.setItem('buzzes', (parseInt(localStorage.getItem('buzzes'))+ 1));
-  //updates firestore with incremented impact data
+  // updates firestore with incremented impact data by incrementing the specified amount to each impact category 
   return firestore.collection('users').doc(userEmail).update({
     'impact.coEmiss': app.firestore.FieldValue.increment(coImpact),
     'impact.energy': app.firestore.FieldValue.increment(energyImpact),
@@ -256,19 +300,14 @@ export const updateUserImpact = (userEmail, coImpact, energyImpact, waterImpact)
   })
 }
 
-export const DarkModeOpened = (userEmail) => {
-  localStorage.setItem('darkPop_done', true)
-  return firestore.doc('users/' + userEmail).update({
-    "darkPop_done": true,
-  })
-}
+// called each time a user increments an action to update the school's impact points 
 export const updateSchoolImpact = (coImpact, energyImpact, waterImpact) => {
-  // updates local storage with incremented impact data
+  //updates local storage with incremented impact data by adding specified amount to each impact category
   localStorage.setItem('SchoolCoEmiss', (parseInt(localStorage.getItem('SchoolCoEmiss'))+ parseInt(coImpact)));
   localStorage.setItem('SchoolEnergy', (parseInt(localStorage.getItem('SchoolEnergy'))+ parseInt(energyImpact)));
   localStorage.setItem('SchoolWater', (parseInt(localStorage.getItem('SchoolWater'))+ parseInt(waterImpact)));
   localStorage.setItem('SchoolBuzzes', (parseInt(localStorage.getItem('SchoolBuzzes'))+ 1));
-//updates firestore with incremented impact data
+  // updates firestore with incremented impact data by incrementing the specified amount to each impact category 
 return firestore.collection('dorms').doc('wholeSchool').update({
   'coEmiss': app.firestore.FieldValue.increment(coImpact),
   'energy': app.firestore.FieldValue.increment(energyImpact),
@@ -277,25 +316,26 @@ return firestore.collection('dorms').doc('wholeSchool').update({
 })
 }
 
+
+// called the first time someone visits the compete page & views the add to home modal 
 export const AddHomeOpened = (userEmail) => {
+  // changes locla storage to reflect that add to home modal has been viewed
   localStorage.setItem('addHomePop_done', true)
+  // updates the addHomePop field in the user's firestore doc to reflect that the dark mode modal has been seen 
   return firestore.doc('users/' + userEmail).update({
     "addHomePop_done": true,
   })
 }
 
-// gets user's impact data from firestore and sets in in local storage
-export const getSchoolImpact = () => {
-  firestore.collection('dorms').doc('wholeSchool').onSnapshot( (snap) => {
-    const firestoreCoEmiss = snap.get('coEmiss')
-    localStorage.setItem('SchoolCoEmiss', firestoreCoEmiss);
-    const firestoreEnergy = snap.get('energy')
-    localStorage.setItem('SchoolEnergy', firestoreEnergy);
-    const firestoreWater = snap.get('water')
-    localStorage.setItem('SchoolWater', firestoreWater);
-    const firestoreBuzzes = snap.get('buzzes')
-    localStorage.setItem('SchoolBuzzes', firestoreBuzzes);
+// called the first time someone visits the account page & views the dark mode modal
+export const DarkModeOpened = (userEmail) => {
+  // changes local storage to reflect that dark mode modal has been viewed
+  localStorage.setItem('darkPop_done', true)
+  // updates the darkPop field in the user's firestore doc to reflect that the dark mode modal has been seen 
+  return firestore.doc('users/' + userEmail).update({
+    "darkPop_done": true,
   })
 }
+
 
 export {Axios, firestore};
