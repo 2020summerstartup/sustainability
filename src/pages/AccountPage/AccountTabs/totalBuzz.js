@@ -19,7 +19,6 @@ totalBuzzDisplay();
 class TotalBuzz extends React.Component {
   render() {
     return (
-      // Banner for message
       <div className={styles.bannerShape}>
         <Grid
           container
