@@ -143,7 +143,8 @@ class SignUpFormBase extends Component {
   onSubmit = (event) => {
     localStorage.clear();
     // Start of admin actions
-    const { username, email, passwordOne, dorm, isAdmin } = this.state;
+    var { username, email, passwordOne, dorm, isAdmin } = this.state;
+    email = email.toLowerCase();
     const roles = {};
 
     if (isAdmin) {
