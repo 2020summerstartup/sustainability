@@ -29,7 +29,7 @@ const theme = createMuiTheme({
     },
     MuiInputBase: {
       root: {
-        color: "var(--icon_color)",
+        color: "#6b6b6b", // darkish grey
       },
     },
   },

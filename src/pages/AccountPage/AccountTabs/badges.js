@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./badges.module.css";
 import ActionData from "../../HomePage/actionData.json";
 import fansImg from "../../../img/fans.svg";
-import SignOutButtom from "../../../components/SignOut";
 // Material UI and galaxy card imports
 import Typography from "@material-ui/core/Typography";
 import GoogleFontLoader from "react-google-font-loader";
@@ -288,7 +287,6 @@ getStyling() {
             <div key={badge.id}>
               <div className={styles.column}>
                 <div
-                  // if badge id is the selected one and the badge state is true, then we flip the badge
                   className={`${
                     badge.id === selectedBadgeId && selectedBadgeState
                       ? `${badge.flipStatus}`
@@ -320,7 +318,6 @@ getStyling() {
             </Typography>
           </div>
         )}
-        <SignOutButtom />
       </>
     );
   }

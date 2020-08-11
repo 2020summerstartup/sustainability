@@ -15,7 +15,8 @@ import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 // For PasswordOne data
 import { PasswordInput } from "./muiSignInPage";
-import signupImg from "../../img/login2.svg";
+import { ReactComponent as SignUp } from "../../img/signup.svg";
+// import signupImg from "../../img/signup.svg";
 // Material UI Imports
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -45,7 +46,7 @@ import signup from "../../sounds/hero_simple-celebration-03.wav";
 // The value displayed in the dorm dropdown menu.
 var dormValue = "Select your dorm...";
 
-// Main Component 
+// Main Component
 const SignUpPage = () => (
   <div className="base-container">
     <SignUpForm />
@@ -143,7 +144,8 @@ class SignUpFormBase extends Component {
   onSubmit = (event) => {
     localStorage.clear();
     // Start of admin actions
-    const { username, email, passwordOne, dorm, isAdmin } = this.state;
+    var { username, email, passwordOne, dorm, isAdmin } = this.state;
+    email = email.toLowerCase();
     const roles = {};
 
     if (isAdmin) {
@@ -152,9 +154,6 @@ class SignUpFormBase extends Component {
       roles[ROLES.USER] = ROLES.USER;
     }
     // End of admin actions
-
-    // Commented out code is from before admin stuff
-    // const { username, email, passwordOne, dorm } = this.state;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -208,6 +207,9 @@ class SignUpFormBase extends Component {
       dorm,
       passwordOne,
       passwordTwo,
+      // isAdmin is unused (the code associated with it is a checkbox, commented out below), so it throws a warning.
+      // The following comment prevents the warning from displaying.
+      // eslint-disable-next-line
       isAdmin,
       error,
     } = this.state;
@@ -244,9 +246,8 @@ class SignUpFormBase extends Component {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          <div className="image">
-            <img alt="sign up" src={signupImg} />
-          </div>
+          <SignUp className="image"/>
+          {/* <img alt="sign up" src={signupImg} /> */}
           {/* SignUp form, on submit creates firebase user */}
           <form
             onSubmit={this.onSubmit}
@@ -315,8 +316,9 @@ class SignUpFormBase extends Component {
               value={passwordTwo}
               onChange={this.onChange}
             />
-            {/* Added in admin checkbox */}
-            <label>
+            {/* Added in admin checkbox. I've commented out this checkbox because we don't want it in the final product. But it can be useful
+            for testing, so I'm leaving the code here. -KJ */}
+            {/* <label>
               Admin:
               <input
                 name="isAdmin"
@@ -324,7 +326,7 @@ class SignUpFormBase extends Component {
                 checked={isAdmin}
                 onChange={this.onChangeCheckbox}
               />
-            </label>
+            </label> */}
             {/* Throws error for invalid inputs */}
             {error && (
               <Typography

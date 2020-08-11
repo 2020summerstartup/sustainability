@@ -1,11 +1,9 @@
 import React from "react";
 // Image import
 import Chart from "react-google-charts";
-import dorm4 from "../../../img/dorm4.svg";
-import styles from "./dorm.module.css";
-
+import dormImg from "../../../img/dorm.svg";
+import styles from "./college.module.css";
 import { AuthUserContext } from "../../../services/Session";
-import SignOutButton from "../../../components/SignOut";
 
 // Material UI imports
 import GoogleFontLoader from "react-google-font-loader";
@@ -137,63 +135,20 @@ const options = {
   legend: { position: "none" },
 };
 
-// FOR PIE CHART!
-// const data = [
-//   ["Impact", "Quantity"],
-//   [`${coEmissImpact} Pounds of CO2 Saved`, 5000],
-//   [`${energyImpact} Kilojoules of Energy Saved`, energyImpact],
-//   [`${waterImpact} Gallons of Water Saved`, waterImpact], // CSS-style declaration
-// ];
-// const options = {
-//   // title: "Harvey Mudd's Positive Sustainability Impacts!",
-//   height: "350px",
-//   width: "100%",
-//   slices: [
-//     { color: "rgb(255, 184, 24)" },
-//     { color: "rgb(75, 179, 11)" },
-//     { color: "rgb(26, 97, 168)" },
-//   ],
-//   is3D: true,
-//   tooltip: {
-//     showColorCode: true,
-//   },
-//   chartArea: {
-//     left: "0",
-//     width: "100%",
-//   },
-//   legend: {
-//     maxLines: 10,
-//     position: "right",
-//     alignment: "center",
-//     textStyle: {
-//       color: "233238",
-//       fontSize: 14,
-//     },
-//   },
-// };
-
 // Cards to be rendered in profile/dorm
 class EnvImpactCardsSchool extends React.Component {
   render() {
     return (
       <>
         <Typography variant="h6" className={styles.chartTitle}>
-          Harvey Mudd's Positive Sustainability Impacts!
+          <b>Harvey Mudd's Positive Sustainability Impacts!</b>
         </Typography>
         <Chart
           chartType="ColumnChart"
-          // loader={<div>Loading Impact Chart...</div>}
           data={data}
           options={options}
           style={{ margin: "auto", maxWidth: "50rem" }}
         />
-        {/* <Chart
-          chartType="PieChart"
-          loader={<div>Loading Impact Chart...</div>}
-          data={data}
-          options={options}
-          style={{ margin: "auto" }}
-        /> */}
       </>
     );
   }
@@ -208,7 +163,6 @@ export const DormCard = React.memo(function GalaxyCard() {
   rankDisplay();
   totalBuzzDisplay();
   return (
-    // Authorized users only
     <AuthUserContext.Consumer>
       {(authUser) => (
         <>
@@ -222,7 +176,7 @@ export const DormCard = React.memo(function GalaxyCard() {
             />
           </NoSsr>
           <Card className={classes.card}>
-            <CardMedia classes={mediaStyles} image={dorm4} />
+            <CardMedia classes={mediaStyles} image={dormImg} />
             <Box py={3} px={2} className={classes.content}>
               <Info useStyles={useGalaxyInfoStyles}>
                 <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
@@ -264,7 +218,6 @@ export const DormCard = React.memo(function GalaxyCard() {
             </div>
           </Grid>
           <EnvImpactCardsSchool />
-          <SignOutButton />
         </>
       )}
     </AuthUserContext.Consumer>

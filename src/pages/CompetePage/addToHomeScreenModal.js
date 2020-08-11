@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     left: "50%",
     transform: "translate(-50%, 0)",
+    margin: "0.5rem 0",
   },
   textEntireBody: {
     color: "white",
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Main Component - used to prompt users about dark mode
+// Main Component - used to prompt users about adding app to homescreen
 export default function DarkModeModal() {
   const classes = useStyles();
   // Visibility of modal

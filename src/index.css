@@ -1,20 +1,8 @@
+/* styles for app.js- wrapping everything */
 .main {
   margin: 0;
   padding: 0;
 }
-
-/* Styles so that when mobile user turns phone landscape, app will stay portrait */
-/* @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
-  body {
-    transform: rotate(-90deg);
-    transform-origin: left top;
-    width: 100vh;
-    overflow-x: hidden;
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
-} */
 
 body {
   margin: 0px 0px;
@@ -25,7 +13,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* -webkit-overflow-scrolling: auto; */
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -35,17 +22,14 @@ html {
   overflow: hidden;
   position: relative;
 }
+
 body {
   height  : 100%;
   overflow: auto;
   position: relative;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
+/* BASE-CONTAINER wrapper for everything except for navbar */
 /* Large screens */
 @media only screen and (min-width: 600px) {
   .base-container {
@@ -76,6 +60,7 @@ code {
   text-align: center;
 }
 
+/* TAB-CONTAINER wrapper for everything inside tabs */
 /* Large screens */
 @media only screen and (min-width: 600px) {
   .tab-container {
@@ -104,15 +89,7 @@ code {
   text-align: center;
 }
 
-.top-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  text-align: center;
-}
-
+/* TOP-CONTAINER wraps total points and check progress on homepage */
 /* Large screens */
 @media only screen and (min-width: 600px) {
   .top-container {
@@ -123,7 +100,16 @@ code {
   }
 }
 
-/* mobile landscape */
+.top-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  text-align: center;
+}
+
+/* MOBILE LANDSCAPE */
 @media only screen and (min-width: 320px) and (max-width: 766px) and (orientation: landscape) {
   .base-container,
   .tab-container,
@@ -135,64 +121,6 @@ code {
   .top-container {
     margin-bottom: 0 !important;
   }
-}
-
-input {
-  margin-top: 6px;
-  min-width: 15em;
-  height: 37px;
-  padding: 0px 10px;
-  font-size: 16px;
-  font-family: "Open Sans", sans-serif;
-  background-color: #f3f3f3;
-  border: 0;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  transition: all 250ms ease-in-out;
-}
-
-input:focus {
-  outline: none;
-}
-
-/* Trying to add new fonts to the app */
-
-body {
-  font-family: "Open Sans", sans-serif;
-}
-.heading {
-  font-weight: 700;
-}
-.subheading {
-  font-weight: 400;
-}
-
-/* Better native app experience  */
-@media only screen and (max-width: 991px) {
-  html,
-  body {
-    width: 100vw;
-    height: 100vh;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-overflow-scrolling: touch;
-    /* suppposed to not allow the screen to overscroll on mobile */
-    overscroll-behavior: none;
-  }
-  *::-webkit-scrollbar {
-    width: 0px;
-  }
-}
-
-/* styles for signup and signin forms! */
-:root {
-  --form_bg: #ffffff;
-  --input_bg: #e5e5e5;
-  --input_hover: #eaeaea;
-  --submit_bg: #1fcc44;
-  --submit_hover: #40e263;
-  --icon_color: #6b6b6b;
 }
 
 .image {
