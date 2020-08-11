@@ -215,7 +215,8 @@ function CompeteTabs(props, { authUser }) {
                 <Tab
                   label={
                     <div className={classes.tabText}>
-                      <SupervisorAccountIcon className={classes.tabIcon} /> Admin{" "}
+                      {/* All the extra spaces are around admin to make it appear as a longer word so that the spacing matches "challenges" and "leaderboard" */}
+                      <SupervisorAccountIcon className={classes.tabIcon} /> &nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;{" "}
                     </div>
                   }
                   {...a11yProps(1)}
