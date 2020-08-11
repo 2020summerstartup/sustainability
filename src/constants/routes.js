@@ -9,7 +9,6 @@ export const CONTACT = '/contact';
 export const PASSWORD_FORGET = '/forgetpassword';
 export const CHANGEPW = '/changepassword';
 export const CHANGEDORM = '/changedorm';
-export const OFFLINE = '/offline';
 export const DELETE_ACCOUNT = '/deleteaccount';
 // home page
 export const HOME = '/home';
