@@ -796,6 +796,7 @@ function HomePage(props) {
                 </div>
                 <img alt="badge" src={badgeImg} className={classes.badgeImg} />
                 {/* MUST ATTRIBUTE AUTHOR */}
+                {/* <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
                 <Typography variant="subtitle1" className={classes.textBody}>
                   You just earned a new badge for mastering the {badgeAction}{" "}
                   action! This means you have completed this action{" "}
@@ -826,24 +827,22 @@ function HomePage(props) {
               classes={{ paper: classes.dialogPaper }}
             >
               <DialogTitle
-                id="alert-dialog-slide-title"
                 style={{
                   backgroundColor: "var(--theme-secondary)",
                   color: "#FFFFFF",
                 }}
               >
-                {"Check Your Progress!"}
+                <b>Check Your Progress!</b>
               </DialogTitle>
               <DialogContent>
+                {/* react confetti */}
                 <Confetti
                   width={1500}
                   numberOfPieces={2000}
                   recycle={false}
                   opacity={0.7}
                 />
-                <DialogContentText id="alert-dialog-slide-description">
-                  {progressMessage}
-                </DialogContentText>
+                <DialogContentText>{progressMessage}</DialogContentText>
               </DialogContent>
               <DialogActions>
                 <Button

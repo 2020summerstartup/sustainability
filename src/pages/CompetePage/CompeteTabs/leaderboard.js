@@ -113,6 +113,8 @@ class Leaderboard extends React.Component {
           </Typography>
           <div className={classes.trophyWrapper}>
             <img alt="trophy" src={trophyImg} className={classes.trophy} />
+            {/* MUST ATTRIBUTE AUTHOR */}
+            {/* <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
             <Typography
               variant="h6"
               className={classes.firstDorm}

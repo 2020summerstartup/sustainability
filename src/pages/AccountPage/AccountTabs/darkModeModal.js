@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
   buttonClose: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
   },
 }));
 
@@ -55,65 +55,67 @@ export default function DarkModeModal() {
     audioFile.play();
   };
 
+  // Ran to display modal only if user has never seen it before
   useEffect(() => {
     let darkPop_done = JSON.parse(localStorage.getItem("darkPop_done"));
-    let email = localStorage.getItem('email');
+    let email = localStorage.getItem("email");
     if (!darkPop_done) {
+      // Displays modal and plays sound when it opens
       setVisible(true);
       playSound(badgeAudio);
+      // Tells firebase the action has been done
       DarkModeOpened(email);
     }
   }, [badgeAudio]);
+  // Otherwise, does nothing
   if (!visible) return null;
 
   return (
-    <div id="badgewindow">
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        {/* NOTE: dialogContent is styles in module.module.css, background wouldn't work otherwise */}
-        <DialogContent className={styles.dialogContentDarkMode}>
-          <DialogContentText>
-            <Typography variant="h5" className={classes.dialogTitle}>
-              Hey our sustainable buddy, {localStorage.getItem("name")}!
-            </Typography>
-            <Typography
-              variant="h6"
-              component={"span"}
-              className={classes.dialogTitle}
-            >
-              Make sure you check out our cool feature!{" "}
-            </Typography>
-          </DialogContentText>
-          <DarkLightModeImg className={classes.darkModeImg} />
-          <DialogContentText id="alert-dialog-description">
-            <Typography
-              variant="body1"
-              component={"span"}
-              className={classes.textBody}
-            >
-              You can now use our EcoBud app in Dark Mode! Tap on the settings
-              icon in the upper right corner on your Profile page, then go to
-              "Light Mode" to change to "Dark Mode"!
-            </Typography>
-          </DialogContentText>
-          <Button
-            onClick={() => {
-              handleClose();
-              setVisible(false);
-            }}
-            variant="contained"
-            color="secondary"
-            autoFocus
-            className={classes.buttonClose}
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      {/* NOTE: dialogContent is styles in module.module.css, background wouldn't work otherwise */}
+      <DialogContent className={styles.dialogContentDarkMode}>
+        <DialogContentText>
+          <Typography variant="h5" className={classes.dialogTitle}>
+            Hey our sustainable buddy, {localStorage.getItem("name")}!
+          </Typography>
+          <Typography
+            variant="h6"
+            component={"span"}
+            className={classes.dialogTitle}
           >
-            Got it
-          </Button>
-        </DialogContent>
-      </Dialog>
-    </div>
+            Make sure you check out our cool feature!{" "}
+          </Typography>
+        </DialogContentText>
+        <DarkLightModeImg className={classes.darkModeImg} />
+        <DialogContentText id="alert-dialog-description">
+          <Typography
+            variant="body1"
+            component={"span"}
+            className={classes.textBody}
+          >
+            You can now use our EcoBud app in Dark Mode! Tap on the settings
+            icon in the upper right corner on your Profile page, then go to
+            "Light Mode" to change to "Dark Mode"!
+          </Typography>
+        </DialogContentText>
+        <Button
+          onClick={() => {
+            handleClose();
+            setVisible(false);
+          }}
+          variant="contained"
+          color="secondary"
+          autoFocus
+          className={classes.buttonClose}
+        >
+          Got it
+        </Button>
+      </DialogContent>
+    </Dialog>
   );
 }
