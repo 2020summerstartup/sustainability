@@ -186,8 +186,9 @@ body::-webkit-scrollbar-thumb {
   }
 
   .navbar:hover .logo-text {
-    left: 0px;
+    left: 10px;
     color: var(--theme);
+    font-size: 1.5rem;
   }
 
   .navbar:hover .signout-btn {
@@ -197,13 +198,13 @@ body::-webkit-scrollbar-thumb {
     width: 50%;
   }
 
-  .nav-item:last-child {
+  /* .nav-item:last-child {
     margin-top: auto;
   }
 
   .non-auth:last-child {
     margin-top: 0;
-  }
+  } */
 
   .icons {
     visibility: visible;
