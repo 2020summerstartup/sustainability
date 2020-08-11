@@ -57,12 +57,6 @@ function TabPanel(props) {
   };
   getRole();
 
-
-
-
-
-
-
   return (
     <div
       role="tabpanel"
@@ -243,7 +237,7 @@ function CompeteTabs(props, { authUser }) {
             </Suspense>
           </TabPanel>
 
-          {/* ADMIN TAB */}
+          {/* ADMIN TAB - only displays for admin roles */}
           {!!authUser.roles[ROLES.ADMIN] && (
             <TabPanel value={tabNumber} index={2} className="tab-container">
               <Suspense fallback={<ProgressCircle />}>

@@ -77,20 +77,6 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
   // For message created with thePoints
   pointsDisplay();
 
-  // getUser(authContext.email).onSnapshot(
-  //   (docSnapshot) => {
-  //     if (docSnapshot.exists) {
-  //       assignData(docSnapshot.data());
-  //     } else {
-  //       console.log(null);
-  //       // alert("Sorry You don't have any data yet, please go to Home page");
-  //     }
-  //   },
-  //   (err) => {
-  //     console.log(`Encountered error: ${err}`);
-  //   }
-  // );
-
   return (
     <>
       {/* Only authorized users cna view points */}

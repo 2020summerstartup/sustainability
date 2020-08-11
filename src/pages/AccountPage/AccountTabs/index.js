@@ -69,9 +69,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "0",
     },
   },
-  bar: {
-    padding: 0,
-  },
   tabIcon: {
     position: "relative",
     top: "0.4rem",

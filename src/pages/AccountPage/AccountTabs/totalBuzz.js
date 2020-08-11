@@ -15,15 +15,6 @@ const totalBuzzDisplay = () => {
 };
 totalBuzzDisplay();
 
-const useStyles = (theme) => ({
-  //   borderBottom: {
-  //     "&:after": {
-  //       borderBottom: theme.palette.background.paper,
-  //       //   borderBottom: "13px solid",
-  //     },
-  //   },
-});
-
 // Cards to be rendered on the points page in profile
 class TotalBuzz extends React.Component {
   render() {
@@ -53,4 +44,4 @@ class TotalBuzz extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(TotalBuzz);
+export default TotalBuzz;
