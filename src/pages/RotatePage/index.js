@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 // Image and Gif Imports
 import suslogoroundImg from "../../img/suslogo_roundedcorners.svg";
-import addToHomeGif from "../../img/addToHome.GIF";
-import competeGif from "../../img/compete.gif";
 import earnGif from "../../img/earn.gif";
+import competeGif from "../../img/compete.gif";
+import addtohomeGif from "../../img/addToHome.GIF";
 
 // Landing Page Carousel 
 export class Rotate extends Component {
@@ -73,7 +73,6 @@ export class Rotate extends Component {
               }}
             />
           }
-            //   media={<img src={Swipe} class="responsive"/>}
             mediaBackgroundStyle={{ backgroundColor: "#24a133" }}
             style={{ backgroundColor: "#24a133" }}
             title="Compete Across Dorms!"
@@ -82,7 +81,7 @@ export class Rotate extends Component {
 
           {/* Add To Home Screen Slide */}
           <Slide
-            media={<img alt="" src={addToHomeGif} class="snapgrid" style={{
+            media={<img alt="" src={addtohomeGif} class="snapgrid" style={{
               paddingTop: "2rem",
               width: "auto",
             }}

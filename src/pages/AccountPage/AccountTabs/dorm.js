@@ -182,7 +182,6 @@ class EnvImpactCardsSchool extends React.Component {
         </Typography>
         <Chart
           chartType="ColumnChart"
-          // loader={<div>Loading Impact Chart...</div>}
           data={data}
           options={options}
           style={{ margin: "auto", maxWidth: "50rem" }}
