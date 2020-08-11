@@ -388,18 +388,20 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontWeight: "bold",
   },
-  textTitle: {
-    color: "black",
-  },
   badgeImg: {
     width: "50%",
     height: "50%",
     margin: "1rem",
   },
-  textBody: {
+  dialogBody: {
     color: "black",
+    fontWeight: "bold",
   },
   buttonClose: {
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(2),
+  },
+  buttonBadge: {
     marginTop: theme.spacing(2),
   },
 }));
@@ -442,39 +444,29 @@ function HomePage(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(indexToTabName[page]);
   const [expandedId, setExpandedId] = React.useState(-1);
-  // const [height, setHeight] = React.useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  toast.configure(); // Configure for toast messages later (not actually sure what this does tbh, but it was in
-  // the one Amy wrote so I assume it's necessary here too) -Katie
+  toast.configure(); // Configure for toast messages later
   // const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top"});
   const mediaStyles2 = useCoverCardMediaStyles({ bgPosition: "bottom" });
 
-  const handleChange = (event, newValue) => {
+  // called when user clicks on different tabs
+  const handleChangeTabs = (event, newValue) => {
     setValue(newValue);
     history.push(`/home/${tabNameToIndex[newValue]}`);
   };
 
+  // called when user clicks on the expand button
+  // tells which card to expand based on its index
   const handleExpandClick = (i) => {
-    // WILL MAYBE REVISITED TO HAVE CARDS SAME HEIGHT
-    // for (const j in ActionData) {
-    //   if (expandedId === i) {
-    //     setHeight("168px");
-    //     console.log("ID: ", i);
-    //     console.log("ID HEIGHT: ", height);
-    //   } else {
-    //     setHeight("100%");
-    //   }
-    // }
-    // console.log("ID: ", i);
-    // console.log("HEIGHT: ", height);
     setExpandedId(expandedId === i ? -1 : i);
-    // setHeight("50px")
   };
 
+  // updates letter(s) that are search everytime the user types
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
+  // called when mapping through action cards to see if there are filtered options
   const filteredOptions = ActionData.filter(
     (action) =>
       action.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -600,6 +592,10 @@ function HomePage(props) {
     setBadgeModalIsOpen(false);
   };
 
+  const handleClickSeeBadge = () => {
+    history.push(`/profile/badge`);
+  }
+
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
@@ -639,7 +635,7 @@ function HomePage(props) {
     if (storedFav) {
       // if the action is now favorited
       displayText = action.title.concat(" added to favorites");
-      favIconColor.style.color = "#f48fb1"; // Turn red
+      favIconColor.style.color = "#f48fb1"; // Turn pink
       playSound(likeAudio);
       toast.success(displayText, { autoClose: 5000 });
       addFav(email, action.susAction);
@@ -707,7 +703,7 @@ function HomePage(props) {
             {/* HOMETABS */}
             <Tabs
               value={value}
-              onChange={handleChange}
+              onChange={handleChangeTabs}
               variant="fullWidth"
               scrollButtons="off"
               aria-label="scrollable tabs"
@@ -797,21 +793,30 @@ function HomePage(props) {
                 <img alt="badge" src={badgeImg} className={classes.badgeImg} />
                 {/* MUST ATTRIBUTE AUTHOR */}
                 {/* <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
-                <Typography variant="subtitle1" className={classes.textBody}>
+                <Typography variant="body1" className={classes.dialogBody}>
                   You just earned a new badge for mastering the {badgeAction}{" "}
                   action! This means you have completed this action{" "}
                   {badgeActionCount} times. Great job, and keep being
                   sustainable!
                 </Typography>
-                <Button
-                  onClick={handleClose}
-                  variant="contained"
-                  color="primary"
-                  autoFocus
-                  className={classes.buttonClose}
-                >
-                  Got it
-                </Button>
+                {/* <div style={{ margin: "auto" }}> */}
+                  <Button
+                    onClick={handleClose}
+                    variant="contained"
+                    color="primary"
+                    className={classes.buttonClose}
+                  >
+                    Got it
+                  </Button>
+                  <Button
+                    onClick={() => handleClickSeeBadge()}
+                    variant="contained"
+                    color="secondary"
+                    className={classes.buttonBadge}
+                  >
+                    See my Badge
+                  </Button>
+                {/* </div> */}
               </DialogContent>
             </Dialog>
 

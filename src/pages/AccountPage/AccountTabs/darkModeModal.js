@@ -110,7 +110,6 @@ export default function DarkModeModal() {
           }}
           variant="contained"
           color="secondary"
-          autoFocus
           className={classes.buttonClose}
         >
           Got it
