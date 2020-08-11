@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 
@@ -87,15 +86,12 @@ export default function DarkModeModal() {
     >
       {/* NOTE: dialogContent is styles in module.css to display the animated gradient background */}
       <DialogContent className={styles.dialogContentAddHome}>
-        <DialogContentText>
           <Typography variant="h5" className={classes.dialogTitle}>
             Hey {localStorage.getItem("name")}! Make sure you add our app to
             your homescreen!
           </Typography>
-        </DialogContentText>
         {/* Gif to show user how to add our app to their homescree */}
         <img alt="dark logo" src={addHomeGif} className={classes.addHomeImg} />
-        <DialogContentText className={classes.textEntireBody}>
           <Typography variant="body2" className={classes.textBody}>
             <strong>For IOS devices: </strong> Make sure you're on Safari and
             then tap the Share button at the bottom of your screen. Then tap on
@@ -105,7 +101,6 @@ export default function DarkModeModal() {
             <strong>For Andriod devices: </strong>In Chrome, go to Settings in
             the rop right corner, then slide down and tap "Add to Home Screen".
           </Typography>
-        </DialogContentText>
         <Button
           onClick={() => {
             handleClose();
