@@ -50,9 +50,7 @@ export class Rotate extends Component {
                 alt=""
                 src={earnGif}
                 style={{
-                  marginTop: "2rem",
-                  margin: "auto",
-                  height: "auto",
+                  paddingTop: "2rem",
                   width: "auto",
                 }}
               />
@@ -70,9 +68,7 @@ export class Rotate extends Component {
               alt=""
               src={competeGif}
               style={{
-                marginTop: "2rem",
-                margin: "auto",
-                height: "auto",
+                paddingTop: "2rem",
                 width: "auto",
               }}
             />
@@ -87,9 +83,7 @@ export class Rotate extends Component {
           {/* Add To Home Screen Slide */}
           <Slide
             media={<img alt="" src={addToHomeGif} class="snapgrid" style={{
-              marginTop: "2rem",
-              margin: "auto",
-              height: "auto",
+              paddingTop: "2rem",
               width: "auto",
             }}
             />}
