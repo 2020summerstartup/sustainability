@@ -26,7 +26,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 
 import firebase from 'firebase/app';
-import { getUser } from "../../../services/Firebase";
+import { getUserDocRef } from "../../../services/Firebase";
 
 
 // Functions from Material UI for tabs
@@ -37,7 +37,7 @@ function TabPanel(props) {
   const getRole = () => {
     // Check if the email address is associated with any of the current users.
     var email = localStorage.getItem('email');
-    getUser(email).onSnapshot(
+    getUserDocRef(email).onSnapshot(
       () => {
         // console.log('docsnapshot data', docSnapshot.data());
         // Now we want to see if this user is already an admin. 

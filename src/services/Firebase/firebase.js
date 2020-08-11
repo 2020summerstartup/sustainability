@@ -210,8 +210,8 @@ export const assignData = (userData) => {
 
 // fetches the user collection from firestore
 // often called as a shorter way to start the call to get a specific piece of firestore data
-// meant to be called then added to (ex: getUser().onSnapshot( (snap) => {..code here...}))
-export const getUser = (userEmail) => {
+// meant to be called then added to (ex: getUserDocRef().onSnapshot( (snap) => {..code here...}))
+export const getUserDocRef = (userEmail) => {
   // IDK why but the compete page gets upset when this line (LS set) is not there?
   localStorage.setItem('email', userEmail)
   return firestore.collection('users').doc(userEmail)
@@ -292,7 +292,7 @@ export const actionMastered = (userEmail, susAction) => {
 // needed to render the correct display for impact suns on points page
 export const getUserImpact = (userEmail) => {
   // takes a snapshot of the user's firestore document so we can read the fields of the impact array 
-  getUser(userEmail).onSnapshot( (snap) => {
+  getUserDocRef(userEmail).onSnapshot( (snap) => {
     // set local storage items to specific fields of firestore impact array 
     localStorage.setItem('coEmiss', snap.get('impact.coEmiss'));
     localStorage.setItem('energy', snap.get('impact.energy'));

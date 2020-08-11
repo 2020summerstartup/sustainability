@@ -7,7 +7,7 @@ import { compose } from "recompose";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import { assignData, withFirebase, getUser, getUserImpact, getSchoolImpact } from "../../services/Firebase";
+import { assignData, withFirebase, getUserDocRef, getUserImpact, getSchoolImpact } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 import signinImg from "../../img/signin.svg";
 
@@ -127,7 +127,6 @@ class SignInFormBase extends Component {
       async function getUserData (email){
         // to give authentication check some time to run --> user needs to be authenticated to access the data
         await waitOneSec();
-        // await waitOneSec();
         // initalizes user's impact points in local storage 
         getUserImpact(email);
         // initaizes the school's impact points in local storage 
@@ -136,7 +135,7 @@ class SignInFormBase extends Component {
         // to give these functions some time to run 
         // await waitOneSec();
         // gets user's points, mastered & favroited actions from firebase & sets them all in local storage
-        getUser(email).onSnapshot(
+        getUserDocRef(email).onSnapshot(
           (docSnapshot) => {
             // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
             if(docSnapshot.data()) {
