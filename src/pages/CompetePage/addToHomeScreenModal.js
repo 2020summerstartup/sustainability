@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Main Component - used to prompt users about dark mode
+// Main Component - used to prompt users about adding app to homescreen
 export default function DarkModeModal() {
   const classes = useStyles();
   // Visibility of modal
