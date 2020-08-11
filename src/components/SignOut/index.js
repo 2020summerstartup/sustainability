@@ -21,6 +21,7 @@ const playSound = (audioFile) => {
 const confirmSignOut = ({ firebase }) => {
   var confirmed = window.confirm("Are you sure you want to sign out?"); // Check with the user
   if (confirmed === true) {
+    window.location.href = "/signin"
     firebase.doSignOut();
     localStorage.clear(); // Wipe the local storage
     toast.configure(); // Configure for toast messages
