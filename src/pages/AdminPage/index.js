@@ -3,7 +3,7 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import { compose } from "recompose";
 
 import Typography from "@material-ui/core/Typography";
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 
 import { withFirebase, getUser } from "../../services/Firebase";
 import * as ROLES from '../../constants/roles';
@@ -29,12 +29,17 @@ const setAdmin = (email) => {
   getUser(email).onSnapshot(
     (docSnapshot) => {
       if (docSnapshot.data()) {
-        console.log('docsnapshot data', docSnapshot.data());
+        var data = docSnapshot.data();
+        console.log('docsnapshot data', data);
         toast.info('A user with that email adress exists. Good first step!');
         // Now we want to see if this user is already an admin. 
         // Following two lines get the user id of the currenlty logged in user
-        var userId = firebase.auth().currentUser.uid;
-        console.log('userID', userId);
+        // var userId = firebase.auth().currentUser.uid;
+        // console.log('userID', userId);
+        // firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+        //   var role = (snapshot.val() && snapshot.val().roles) || 'Anonymous';
+        //   console.log('role', role);
+        // });
       } else {
         toast.error("That email address isn't associated with any user!");
       }

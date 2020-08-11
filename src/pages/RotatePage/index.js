@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+// Package for Carousel
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
+// Image and Gif Imports
 import suslogoroundImg from "../../img/suslogo_roundedcorners.svg";
-import pointsGif from "../../img/points.gif";
-import addGif from "../../img/add.gif";
+import addToHomeGif from "../../img/addToHome.GIF";
+import competeGif from "../../img/compete.gif";
+import earnGif from "../../img/earn.gif";
 
-
+// Landing Page Carousel 
 export class Rotate extends Component {
   constructor() {
     super();
@@ -19,8 +22,9 @@ export class Rotate extends Component {
           hideArrows={false}
           open={true}
           mobile={true}
+          // Pushes user to signin page
           label="Get started"
-          onStart={() => (window.location.href = "/signup")}
+          onStart={() => (window.location.href = "/signin")}
 
         >
           {/* Intro slide */}
@@ -43,7 +47,7 @@ export class Rotate extends Component {
             media={
               <img
                 alt=""
-                src={pointsGif}
+                src={earnGif}
                 style={{
                   marginTop: "2rem",
                   margin: "auto",
@@ -55,10 +59,22 @@ export class Rotate extends Component {
             mediaBackgroundStyle={{ backgroundColor: "#1c8028" }}
             style={{ backgroundColor: "#1c8028" }}
             title="Log actions, earn points."
-            subtitle="Log your actions to earn points for you and your dorm! Save your favorites! Special surprise for mastering an action ;)"
+            subtitle="Being sustainable earns points for you and your dorm! Save your favorites! Special surprise for mastering an action ;)"
           />
           {/* Leadership board */}
           <Slide
+          media={
+            <img
+              alt=""
+              src={competeGif}
+              style={{
+                marginTop: "2rem",
+                margin: "auto",
+                height: "auto",
+                width: "auto",
+              }}
+            />
+          }
             //   media={<img src={Swipe} class="responsive"/>}
             mediaBackgroundStyle={{ backgroundColor: "#24a133" }}
             style={{ backgroundColor: "#24a133" }}
@@ -66,7 +82,7 @@ export class Rotate extends Component {
             subtitle="Prizes for the most sustainable dorm!"
           />
           <Slide
-            media={<img alt="" src={addGif} class="snapgrid" style={{
+            media={<img alt="" src={addToHomeGif} class="snapgrid" style={{
               marginTop: "2rem",
               margin: "auto",
               height: "auto",

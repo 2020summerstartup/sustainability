@@ -1,10 +1,10 @@
 import React from "react";
 import { Spring } from "react-spring/renderprops";
-// import styles from './infoCard.module.css';
-// import PwaCard from "./pwa";
+import styles from "./infoCards.module.css";
 
-// list of colors for each dorm to display in a different color depending on their ranking
-// I grabbed the background color from the monochrome spread here: https://www.colorhexa.com/24a113
+import Typography from "@material-ui/core/Typography";
+
+// monochrome spread here: https://www.colorhexa.com/24a113
 let colors = ["#15601e", "var(--theme)", "#e36569", "var(--theme-secondary)"];
 
 class InfoCards extends React.Component {
@@ -26,20 +26,27 @@ class InfoCards extends React.Component {
             "The 2020 Summer Startup Team works with sustainability organizations at Harvey Mudd like ASHMC sustainability and Engineers of a Sustainable World to help promote more eco-friendly practices on our campus through friendly competition.",
         },
         {
-          id: 3,
-          title: "Challenges",
-          description:
-            "Earth Day Challenge! Waste Challenge! Food and Drink Challenge! Recycling Challenge! Check out the current challenges on the compete page.",
-        },
-        {
           id: 2,
           title: "How to Participate & Earn Points",
           description:
-            "Sign up with your HMC email! Log your sustainable actions on the home page, and earn points for your dorm by living more sustainably!",
+            "After you complete a sustainble action, log the action on the Home page by tapping the plus icon to earn points. Support your dorm by living more sustainably! See how your dorm compares with the others by checking out the Leaderboard on the Compete page!",
         },
         {
+          id: 3,
+          title: "Master Sustainable Actions & Earn Badges",
+          description:
+            "Keep logging each sustainable action multiple times to earn badges. After logging an action, there will be a pop-up notification letting you know how many more times you need to log the action in order to master it. Click the dropdown on each action card to view the number of times you need to complete the action to earn a badge. View the badges you've earned in the Badges tab in Profile!",
+        },
+        // challenges coming soon
+        // {
+        //   id: 4,
+        //   title: "Challenges",
+        //   description:
+        //     "Earth Day Challenge! Waste Challenge! Food and Drink Challenge! Recycling Challenge! Challenges coming soon on the compete page.",
+        // },
+        {
           id: 4,
-          title: "Current Rewards",
+          title: "Rewards for Being Most Sustainable ",
           description:
             "Rewards include dorm pizza parties, sustainability swag, and BRAGGING RIGHTS. Funded by ASHMC Sustainability and ESW! (Except for the bragging rights. Those are free.) NOTE: We should talk about how these prizes would actually be funded. Can we chat with ASHMC Sustainability?",
         },
@@ -60,34 +67,30 @@ class InfoCards extends React.Component {
         to={{ opacity: 1, marginTop: 0 }}
         config={{ delay: 0, duration: 2000 }}
       >
-        
         {(props) => (
-          
           <div style={props}>
             <div className="InfoCards">
               <div className="cards">
-              {/* <PwaCard /> */}
                 {this.state.cards ? (
                   this.state.cards.map((card, i) => (
-                    <div key={card.id} >
+                    <div key={card.id}>
                       <div
+                        className={styles.cardWrapper}
                         style={{
                           backgroundColor: colors[i],
-                          color: "white",
-                          padding: "1.5rem",
-                          borderRadius: "10px",
-                          margin: "0 0.5rem",
-                          maxWidth: "600px",
-                          marginTop: "2rem",
-                          boxShadow: colors[i],
-                          // boxShadow: "0px 0px 20px 10px",
                         }}
-                        // className={styles.cardWrapper}
                       >
-                        <h1 className="card-name">{card.title}</h1>
-                        <p className="card-description">{card.description}</p>
+                        <Typography
+                          variant="h5"
+                          style={{ fontWeight: "bold" }}
+                          gutterBottom
+                        >
+                          {card.title}
+                        </Typography>
+                        <Typography variant="body2">
+                          {card.description}
+                        </Typography>
                       </div>
-                      {/* </div> */}
                     </div>
                   ))
                 ) : (

@@ -9,6 +9,7 @@ import {
 import Navigation from "../components/Navigation";
 import BottomNav from "../components/Navigation/bottomNav";
 import RotatePage from "../pages/RotatePage";
+import AccountPage from "../pages/AccountPage"
 import Header, {
   HomeHeader,
   CompeteHeader,
@@ -54,14 +55,11 @@ const MuiPasswordForgetPage = lazy(() =>
   retry(() => import("../pages/RegisterPage/muiPasswordForgetPage"))
 );
 const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
-const AccountPage = lazy(() =>
-  retry(() => import("../pages/AccountPage"))
-);
+// const AccountPage = lazy(() =>
+//   retry(() => import("../pages/AccountPage"))
+// );
 const InfoPage = lazy(() => retry(() => import("../pages/InfoPage")));
 const CompetePage = lazy(() => retry(() => import("../pages/CompetePage")));
-const MuiOfflinePage = lazy(() =>
-  retry(() => import("../pages/OfflinePage/muiOfflinePage"))
-);
 const MuiChangePw = lazy(() =>
   retry(() => import("../pages/AccountPage/Settings/muiChangePw"))
 );
@@ -193,7 +191,6 @@ function AppBase() {
           />
           <Route path={ROUTES.INFO} component={InfoPage} />
           <Route path={ROUTES.CONTACT} component={ContactPage} />
-          <Route path={ROUTES.OFFLINE} component={MuiOfflinePage} />
           <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
           <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />

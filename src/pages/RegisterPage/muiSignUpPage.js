@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
+// For emoji confetti on sign up click
 import Reward from "react-rewards";
-
+// Firebase imports
 import {
   withFirebase,
   createUser,
@@ -12,9 +13,10 @@ import {
 } from "../../services/Firebase";
 import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
+// For PasswordOne data
 import { PasswordInput } from "./muiSignInPage";
 import signupImg from "../../img/login2.svg";
-
+// Material UI Imports
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -43,12 +45,14 @@ import signup from "../../sounds/hero_simple-celebration-03.wav";
 // The value displayed in the dorm dropdown menu.
 var dormValue = "Select your dorm...";
 
+// Main Component 
 const SignUpPage = () => (
   <div className="base-container">
     <SignUpForm />
   </div>
 );
 
+// Used for PasswordTwo data - Material UI
 class PasswordInput2 extends Component {
   constructor(props) {
     super(props);
@@ -65,8 +69,6 @@ class PasswordInput2 extends Component {
   };
 
   render() {
-    // Following line was unused -Katie
-    // const { classes } = this.props;
     const { passwordIsMasked } = this.state;
 
     return (
@@ -74,9 +76,9 @@ class PasswordInput2 extends Component {
         variant="outlined"
         margin="normal"
         fullWidth
-        // type="password"
         type={passwordIsMasked ? "password" : "text"}
         {...this.props}
+        // Toggle for password display
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -101,7 +103,6 @@ class PasswordInput2 extends Component {
 
 PasswordInput2.propTypes = {
   onChange: PropTypes.func.isRequired,
-  // value: PropTypes.func.isRequired,
 };
 
 // The initial state of all information to be completed by the user
@@ -113,7 +114,7 @@ const INITIAL_STATE = {
   dorm: "",
   image: null,
   points: 0,
-  // Admin
+  // Admin data
   isAdmin: false,
   error: null,
 };
@@ -126,14 +127,14 @@ const playSound = (audioFile) => {
   audioFile.play();
 };
 
+// Base - composed with firebase and routes below
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
-
     this.state = { ...INITIAL_STATE };
   }
 
-  // Used for admin stuff
+  // Checkbox for Admin status
   onChangeCheckbox = (event) => {
     this.setState({ [event.target.name]: event.target.checked });
   };
@@ -141,7 +142,7 @@ class SignUpFormBase extends Component {
   // Used to make users - "Sign Up" Button
   onSubmit = (event) => {
     localStorage.clear();
-    // Start of admin stuff
+    // Start of admin actions
     const { username, email, passwordOne, dorm, isAdmin } = this.state;
     const roles = {};
 
@@ -150,7 +151,7 @@ class SignUpFormBase extends Component {
     } else {
       roles[ROLES.USER] = ROLES.USER;
     }
-    // End of admin stuff
+    // End of admin actions
 
     // Commented out code is from before admin stuff
     // const { username, email, passwordOne, dorm } = this.state;
@@ -166,7 +167,7 @@ class SignUpFormBase extends Component {
         });
       })
       .then(() => {
-        //create user in firebase firestore database
+        // Create user in firebase firestore database
         createUser(email, username, dorm);
         localStorage.setItem("email", email);
       })
@@ -211,6 +212,7 @@ class SignUpFormBase extends Component {
       error,
     } = this.state;
 
+    // Throws error for sign up for invalid inputs
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
@@ -245,10 +247,12 @@ class SignUpFormBase extends Component {
           <div className="image">
             <img alt="sign up" src={signupImg} />
           </div>
+          {/* SignUp form, on submit creates firebase user */}
           <form
             onSubmit={this.onSubmit}
             styles={{ width: "100%", marginTop: "1rem" }}
           >
+            {/* Name input */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -262,6 +266,7 @@ class SignUpFormBase extends Component {
                 startAdornment: <PersonIcon style={{ marginRight: "1rem" }} />,
               }}
             />
+            {/* Email Input */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -275,7 +280,7 @@ class SignUpFormBase extends Component {
                 startAdornment: <EmailIcon style={{ marginRight: "1rem" }} />,
               }}
             />
-            {/* DORM DROPDOWN */}
+            {/* DORM DROPDOWN and Input */}
             <FormControl variant="outlined" fullWidth margin="normal">
               <InputLabel>Dorm</InputLabel>
               <Select
@@ -320,7 +325,7 @@ class SignUpFormBase extends Component {
                 onChange={this.onChangeCheckbox}
               />
             </label>
-
+            {/* Throws error for invalid inputs */}
             {error && (
               <Typography
                 variant="body2"
@@ -337,6 +342,7 @@ class SignUpFormBase extends Component {
               }}
               type="memphis"
             >
+              {/* Sign Up Submit Button */}
               <Button
                 type="submit"
                 fullWidth
@@ -352,7 +358,7 @@ class SignUpFormBase extends Component {
                 Sign Up
               </Button>
             </Reward>
-
+            {/* Link to Sign In Page */}
             <Grid container justify="center">
               <Grid item>
                 <Link

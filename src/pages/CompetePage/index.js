@@ -14,6 +14,7 @@ const CompetePage = (props) => (
     </AuthUserContext.Consumer>
 );
 
+// Do we still need this? It's commented out -Amy
 // function Compete(props) {
 //   const { loading = false } = props;
 

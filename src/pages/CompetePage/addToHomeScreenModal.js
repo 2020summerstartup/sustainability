@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../HomePage/modal.module.css";
 import { AddHomeOpened } from "../../services/Firebase";
-import addHomeGif from "../../img/add.gif";
+import addHomeGif from "../../img/addToHome.GIF";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -71,7 +71,7 @@ export default function DarkModeModal() {
       setVisible(true);
       playSound(badgeAudio);
       // Tells firebase the action has been done
-      //   AddHomeOpened(email);
+      AddHomeOpened(email);
     }
   }, [badgeAudio]);
   // Otherwise, does nothing
@@ -93,7 +93,11 @@ export default function DarkModeModal() {
               your homescreen!
             </Typography>
           </DialogContentText>
-          <img alt="dark logo" src={addHomeGif} className={classes.addHomeImg} />
+          <img
+            alt="dark logo"
+            src={addHomeGif}
+            className={classes.addHomeImg}
+          />
           <DialogContentText
             id="alert-dialog-description"
             className={classes.textEntireBody}
