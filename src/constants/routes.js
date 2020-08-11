@@ -23,4 +23,4 @@ export const COMPETE_ADMIN = '/compete/admin';
 export const PROFILE = '/profile';
 export const PROFILE_POINT = '/profile/points';
 export const PROFILE_DORM = '/profile/dorm';
-export const PROFILE_Badge = '/profile/badge';
+export const PROFILE_Badge = '/profile/badges';

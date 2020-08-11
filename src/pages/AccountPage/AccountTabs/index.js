@@ -136,13 +136,13 @@ const AccountTabs = props => {
   const tabNameToIndex = {
     0: "points",
     1: "college",
-    2: "badge",
+    2: "badges",
   };
 
   const indexToTabName = {
     points: 0,
     college: 1,
-    badge: 2,
+    badges: 2,
   };
 
   const [value, setValue] = React.useState(indexToTabName[page]);

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import styles from "../../HomePage/modal.module.css";
 import { ReactComponent as DarkLightModeImg } from "../../../img/darklightmode.svg";
-import { DarkModeOpened } from "../../../services/Firebase"; 
+import { DarkModeOpened } from "../../../services/Firebase";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -10,7 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
-// sound
+// sound is called badge because it plays the same sound as when badge modal is opened
 import badge from "../../../sounds/hero_simple-celebration-01.wav";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,27 +18,24 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   dialogTitle: {
-    textAlign: "center",
+    color: "white",
     fontWeight: "bold",
+    textShadow: "2px 2px 3px black",
   },
-  textTitle: {
-    color: "black",
-    fontWeight: "bold",
-  },
-  badgeImg: {
-    width: "50%",
-    height: "50%",
-    margin: "1rem",
+  darkModeImg: {
+    width: "40%",
+    height: "40%",
+    margin: "0.25rem",
+    marginBottom: "0.5rem",
   },
   textBody: {
     color: "black",
+    fontWeight: "bold",
   },
   buttonClose: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
   },
 }));
-
-// localStorage.setItem("pop_done", false);
 
 export default function DarkModeModal() {
   const [visible, setVisible] = useState(false);
@@ -58,62 +55,66 @@ export default function DarkModeModal() {
     audioFile.play();
   };
 
+  // Ran to display modal only if user has never seen it before
   useEffect(() => {
-    let darkPop_done = JSON.parse(localStorage.getItem('darkPop_done'));
-    let email = localStorage.getItem('email');
-    if (!darkPop_done ) {
+    let darkPop_done = JSON.parse(localStorage.getItem("darkPop_done"));
+    let email = localStorage.getItem("email");
+    if (!darkPop_done) {
+      // Displays modal and plays sound when it opens
       setVisible(true);
       playSound(badgeAudio);
+      // Tells firebase the action has been done
       DarkModeOpened(email);
     }
   }, [badgeAudio]);
+  // Otherwise, does nothing
   if (!visible) return null;
 
   return (
-      <div id="badgewindow">
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      {/* NOTE: dialogContent is styles in module.module.css, background wouldn't work otherwise */}
+      <DialogContent className={styles.dialogContentDarkMode}>
+        <DialogContentText>
+          <Typography variant="h5" className={classes.dialogTitle}>
+            Hey our sustainable buddy, {localStorage.getItem("name")}!
+          </Typography>
+          <Typography
+            variant="h6"
+            component={"span"}
+            className={classes.dialogTitle}
+          >
+            Make sure you check out our cool feature!{" "}
+          </Typography>
+        </DialogContentText>
+        <DarkLightModeImg className={classes.darkModeImg} />
+        <DialogContentText id="alert-dialog-description">
+          <Typography
+            variant="body1"
+            component={"span"}
+            className={classes.textBody}
+          >
+            You can now use our EcoBud app in Dark Mode! Tap on the settings
+            icon in the upper right corner on your Profile page, then go to
+            "Light Mode" to change to "Dark Mode"!
+          </Typography>
+        </DialogContentText>
+        <Button
+          onClick={() => {
+            handleClose();
+            setVisible(false);
+          }}
+          variant="contained"
+          color="secondary"
+          className={classes.buttonClose}
         >
-          {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
-          <DialogContent className={styles.dialogContentDarkMode}>
-            <DialogContentText component={'span'} id="alert-dialog-description">
-              {/* RIBBON */}
-              <div className={styles.nonSemanticProtector}>
-                <Typography className={styles.ribbon} component={'span'} variant={'body2'}>
-                  <strong className={styles.ribbonContent}>
-                    Hey our sustainable buddy, {localStorage.getItem("name")}!
-                  </strong>
-                </Typography>
-              </div>
-            </DialogContentText>
-            <DarkLightModeImg className={classes.badgeImg} />
-            <DialogContentText id="alert-dialog-description">
-              <Typography variant="body1" component={'span'} className={classes.textTitle}>
-                Make sure you check out our cool feature!{" "}
-              </Typography>
-              <Typography variant="body2" component={'span'} className={classes.textBody}>
-                You can now switch from Light Mode to Dark Mode! Just click on
-                the settings icon in the upper right corner on your profile
-                page.
-              </Typography>
-            </DialogContentText>
-            <Button
-              onClick={() => {
-                handleClose();
-                setVisible(false);
-              }}
-              variant="contained"
-              color="secondary"
-              autoFocus
-              className={classes.buttonClose}
-            >
-              Got it
-            </Button>
-          </DialogContent>
-        </Dialog>
-      </div>
+          Got it
+        </Button>
+      </DialogContent>
+    </Dialog>
   );
 }
