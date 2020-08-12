@@ -446,13 +446,15 @@ function HomePage(props) {
       !searchQuery
   );
 
+  // (JM) this initalizes a global variable (firestore mastered) that will always remain up to date with firestore and LS
+  // NOTE: use this because of the way we check to see if specific action buttons need to be disabled (can't use parse in jsx code)
   var tempMastered = localStorage.getItem("firestoreMastered");
-  var firestoreMastered = [];
+  var firestoreMastered = []; // initalize the variable
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (tempMastered != null && tempMastered.includes(stringActionName)) {
-      firestoreMastered.push(action.susAction);
+    if (tempMastered != null && tempMastered.includes(stringActionName)) { // if the action has been previously mastered (ie. is in firestore)
+      firestoreMastered.push(action.susAction); //if the action is mastered, add it to the array 
     }
   }
 
@@ -466,39 +468,24 @@ function HomePage(props) {
   };
 
   // this function is called upon increment
-  // sets the state of userTotal so that user's total point display is correct
+  // sets the state of userTotal so that user's total point display is correct (bc can't do parse int in jsx code)
   const updateDisplayTotal = (actionPoint) => {
     const newTotal =
       parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
     updateUserTotal(newTotal);
   };
 
-  // Updates all necessary values in firestore and local storage when user completes sus action
+  // (JM) Called when user clicks to increment an action --> updates necessary values in firestore and LS
   const increment = (action) => {
     // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
 
-    // allows us to increment the correct values by writing the action & value to local storage
-    // add specified number of points to the specific action point count
-    localStorage.setItem(
-      action.susAction,
-      parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
-    );
-    // add specified number of points to the user's total point count
-    localStorage.setItem(
-      "total",
-      parseInt(localStorage.getItem("total")) + parseInt(action.points)
-    );
-
-    // updates user's point in firestore
+    // updates user's doc in firestore & LS to reflect incremented action
     updateUserPoint(
       authContext.email,
       action.susAction,
       parseInt(action.points)
-    ).then(() => {
-      // THIS IS WHERE WINDOW REFRESH OCCURS!!
-      // window.location.reload(true);
-    });
+    )
 
     // add's associated impact points to user & dorm data in firestore and local storage
     updateUserImpact(
