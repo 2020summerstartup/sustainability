@@ -24,6 +24,7 @@ import ProgressCircle from "../components/ProgressCircle";
 
 import { withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
+import AudioContextProvider from "../pages/AccountPage/Settings/audioContext"
 
 function retry(fn, retriesLeft = 5, interval = 1000) {
   return new Promise((resolve, reject) => {
@@ -103,6 +104,7 @@ function AppBase() {
       </Switch>
 
       <div className="main">
+        <AudioContextProvider>
         <Navigation />
         <BottomNav />
 
@@ -195,6 +197,7 @@ function AppBase() {
           <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
         </Suspense>
+      </AudioContextProvider>
       </div>
     </Router>
   );

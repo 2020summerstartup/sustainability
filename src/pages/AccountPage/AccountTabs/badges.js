@@ -1,3 +1,4 @@
+// commented by KR & JM (several people contrubted to file)
 import React from "react";
 import styles from "./badges.module.css";
 import ActionData from "../../HomePage/actionData.json";
@@ -53,16 +54,14 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
 }));
-// Array stores actions that have already been mastered, calls local storage
-// Calculates the length of the array aka number of actions mastered
-var masteredActions = [];
-masteredActions = localStorage.getItem("firestoreMastered");
-var masterLength;
-if (masteredActions !== null && masteredActions !== "undefined") {
-  // If masteredActions is defined
+
+var masteredActions = localStorage.getItem("firestoreMastered"); // MasteredActions array contains all mastered actions (stored in LS)
+var masterLength; // initalize global variable that is length of masteredActions array 
+if (masteredActions !== null && masteredActions !== "undefined" && masteredActions !== []) {
+  // If masteredActions is defined, then it has a specific length 
   masterLength = JSON.parse(masteredActions).length;
 } else {
-  // Otherwise, zero mastered actions
+  // If masteredAction is null, then there are zero mastered actions
   masterLength = 0;
 }
 
@@ -91,11 +90,11 @@ const badgeSay = () => {
     );
     // One mastered activity
   } else if (masterLength === 1) {
-    theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
+    theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}
-        You've earned {masterLength} badge! Keep it going{" "}
+        You've earned {masterLength} badge! Keep it going.{" "}
         <span role="img" aria-label="celebration">
           🥳
         </span>
@@ -103,11 +102,11 @@ const badgeSay = () => {
     );
     // two to five mastered actions
   } else if (masterLength > 1 && masterLength < 5) {
-    theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
+    theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}
-        You've earned {masterLength} badges! That's awesome{" "}
+        You've earned {masterLength} badges! That's awesome.{" "}
         <span role="img" aria-label="heart eyes">
           😍
         </span>
@@ -115,11 +114,11 @@ const badgeSay = () => {
     );
     // More than 4 mastered actiions
   } else {
-    theCongrats = <>Omg {localStorage.getItem("name")}! </>;
+    theCongrats = <>OMG, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}
-        You've earned {masterLength} badges! That's how it's done{" "}
+        You've earned {masterLength} badges! That's how it's done.{" "}
         <span role="img" aria-label="star eyes">
           🤩
         </span>
@@ -132,12 +131,11 @@ const badgeSay = () => {
 badgeSay();
 
 var masterBadgesArray = []; // Initalize an array that will contain only the mastered actions
-for (const el in ActionData) {
-  // Iterate over every action in ActionData & determine if the action has been mastered
+for (const el in ActionData) { // Iterate over every action in ActionData & determine if the action has been mastered
   var action = ActionData[el]; // Take the current action
   var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
-  var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage when user
-  // first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds
+  var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage 
+  //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds 
 
   if (
     firestoreMastered != null && // if the array is not empty / if the array exists

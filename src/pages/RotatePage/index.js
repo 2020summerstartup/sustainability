@@ -39,7 +39,7 @@ export class Rotate extends Component {
             mediaBackgroundStyle={{ backgroundColor: "#15601e" }}
             style={{ backgroundColor: "#15601e" }}
             title="What will we achieve?"
-            subtitle="Lets be sustainable together and make this world a better place one action at a time with some healthy competition for some awesome prizes!"
+            subtitle="Let's be sustainable together and make this world a better place one action at a time with healthy competition for some awesome prizes!"
           />
 
           {/* Earn Points Slide */}

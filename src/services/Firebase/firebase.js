@@ -126,7 +126,6 @@ export default Firebase;
 // receives userEmail, userName, and dorm from sign up input forms to set those unique tokens in firestore, 
 // all other field have a default start (ex: points, total, impact all default to starting at 0)
 export const createUser = (userEmail, userName, dorm) => {
-  console.log("creating...")
   // refernce to user document --> creates a document that belongs to the user bc it does not yet exist when user signs up
   return firestore.collection('users').doc(userEmail)
       .set({
@@ -225,10 +224,13 @@ export const getDorm = () => {
 
 // this method is when user increments an action called to increase points (both the individual action & the total)
 // parameters are needed to make sure that the changes are made to the correct document & field, by the correct value
-export const updateUserPoint = (userEmail, userAction, actionPoint) => {
+export const updateUserPoint = (userEmail, action, actionPoint) => {
+  // update action count & total count in LS by replacing them with incremented value
+  localStorage.setItem(action,parseInt(localStorage.getItem(action)) + parseInt(actionPoint));
+  localStorage.setItem("total",parseInt(localStorage.getItem("total")) + parseInt(actionPoint));
   return firestore.collection('users').doc(userEmail).update({
     // references the specific action field within firestore's points array then increments the specified number of points
-    ['points.' + userAction]: app.firestore.FieldValue.increment(actionPoint),
+    ['points.' + action]: app.firestore.FieldValue.increment(actionPoint),
     // updates the user's total point field in firestore by the specified number of points
     total: app.firestore.FieldValue.increment(actionPoint),
   })

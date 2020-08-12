@@ -14,6 +14,7 @@ import {
 } from "../../services/Firebase";
 import ActionData from "./actionData.json";
 import ProgressCircle from "../../components/ProgressCircle";
+import { audioContext } from "../AccountPage/Settings/audioContext";
 
 // import outside libraries
 import CountUp from "react-countup";
@@ -93,20 +94,20 @@ const FavoriteGalaxyCard = lazy(() =>
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
 //DONT THINK WE NEED THIS ANYMORE?
-var total;
-function initPoints(email) {
-  total = 0;
-  for (const el in ActionData) {
-    var action = localStorage.getItem(ActionData[el].susAction); // Action to initialize
-    if (isNaN(action) || action == null) {
-      // If it hasn't been initialized
-      localStorage.setItem(ActionData[el].susAction, 0); // Initialize to 0
-      action = 0;
-    }
-    total += parseInt(action); // Keep track of the sum of the individual points
-  }
-  localStorage.setItem("total", total); // After initializing individual points, initialize total.
-}
+// var total;
+// function initPoints(email) {
+//   total = 0;
+//   for (const el in ActionData) {
+//     var action = localStorage.getItem(ActionData[el].susAction); // Action to initialize
+//     if (isNaN(action) || action == null) {
+//       // If it hasn't been initialized
+//       localStorage.setItem(ActionData[el].susAction, 0); // Initialize to 0
+//       action = 0;
+//     }
+//     total += parseInt(action); // Keep track of the sum of the individual points
+//   }
+//   localStorage.setItem("total", total); // After initializing individual points, initialize total.
+// }
 
 // sound play for certain buttons
 const likeAudio = new Audio(like);
@@ -115,8 +116,10 @@ const confettiAudio = new Audio(confetti);
 const incrementAudio = new Audio(increment);
 
 // called by onclick to play the audio file
-const playSound = (audioFile) => {
-  audioFile.play();
+const playSound = (audio, audioFile) => {
+  if (audio.unmute) {
+    audioFile.play();
+  }
 };
 
 function TabPanel(props) {
@@ -390,6 +393,7 @@ function HomePage(props) {
   const [badgeAction, setBadgeAction] = useState("");
   const [badgeActionCount, setBadgeActionCount] = useState("");
   const authContext = useContext(AuthUserContext);
+  const audio = useContext(audioContext);
 
   // nested routing
   let { match, history } = props;
@@ -446,13 +450,15 @@ function HomePage(props) {
       !searchQuery
   );
 
+  // (JM) this initalizes a global variable (firestore mastered) that will always remain up to date with firestore and LS
+  // NOTE: use this because of the way we check to see if specific action buttons need to be disabled (can't use parse in jsx code)
   var tempMastered = localStorage.getItem("firestoreMastered");
-  var firestoreMastered = [];
+  var firestoreMastered = []; // initalize the variable
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (tempMastered != null && tempMastered.includes(stringActionName)) {
-      firestoreMastered.push(action.susAction);
+    if (tempMastered != null && tempMastered.includes(stringActionName)) { // if the action has been previously mastered (ie. is in firestore)
+      firestoreMastered.push(action.susAction); //if the action is mastered, add it to the array 
     }
   }
 
@@ -465,99 +471,60 @@ function HomePage(props) {
     }
   };
 
-  // this function is called upon increment
-  // sets the state of userTotal so that user's total point display is correct
+  // this function is called upon confirmed increment
+  // sets the state of userTotal so that user's total point display is correct (bc can't do parse int in jsx code)
   const updateDisplayTotal = (actionPoint) => {
-    const newTotal =
-      parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
+    const newTotal = parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
     updateUserTotal(newTotal);
   };
 
-  // Updates all necessary values in firestore and local storage when user completes sus action
+  // (JM) Called when user confirms their incremented action --> updates necessary values in firestore/LS & makes call to chackMastered
   const increment = (action) => {
     // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
-
-    // allows us to increment the correct values by writing the action & value to local storage
-    // add specified number of points to the specific action point count
-    localStorage.setItem(
-      action.susAction,
-      parseInt(localStorage.getItem(action.susAction)) + parseInt(action.points)
-    );
-    // add specified number of points to the user's total point count
-    localStorage.setItem(
-      "total",
-      parseInt(localStorage.getItem("total")) + parseInt(action.points)
-    );
-
-    // updates user's point in firestore
-    updateUserPoint(
-      authContext.email,
-      action.susAction,
-      parseInt(action.points)
-    ).then(() => {
-      // THIS IS WHERE WINDOW REFRESH OCCURS!!
-      // window.location.reload(true);
-    });
-
+    // updates user's doc in firestore & LS to reflect incremented action
+    updateUserPoint(authContext.email, action.susAction, parseInt(action.points))
     // add's associated impact points to user & dorm data in firestore and local storage
-    updateUserImpact(
-      authContext.email,
-      action.coEmiss,
-      action.energy,
-      action.water
-    );
-
+    updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
     // add's associated impact points to school in firestore and local storage
     updateSchoolImpact(action.coEmiss, action.energy, action.water);
-
     // check if action has been completed enough time to be considered "mastered"
-    // also sends user a progress notifications if action has not yet been mastered
+    // also sends user a progress notification if action has not yet been mastered or modal if it has been mastered
     checkMastered(action);
-
-    // update dorm's point in firestore
+    // update dorm's point in firestore (dorm point total not stored in LS so update here is not necessary)
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
-  }; // increment
+  }; 
 
-  //This function checks if (upon increment) the action should be mastered & acts according
+
+  // (JM) called when user increments an action to check if the action has been mastered & reacts accordingly 
+  // NOTE: called after LS point has been incremented (this way the value we are checking has the most recent action point)
   const checkMastered = (action) => {
-    // Get the name and info of the stored action that we're working with
-
-    // In case the action hasn't been favorited before
-    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
-    // if (storedMaster == null) {
-    //   console.log('null')
-    // }
-    const actionTotal = localStorage.getItem(action.susAction);
+    const actionTotal = localStorage.getItem(action.susAction); // gets the point value for the action & sets as actionTotal 
     if (action.toMaster * action.points > actionTotal) {
       // If action has not been mastered, the button will remain enabled
       // send user a progress alert to tell them how many more points they need to complete the action
-      var displayText;
-      // display a different message depending on if the user needs to buzz one or several more times to complete
+      var displayText; // display a different message depending on if the user needs to buzz one or several more times to complete
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
-          action.toMaster - actionTotal / action.points
-        } buzzes away from mastering the ${action.title} action!`;
+          (action.toMaster - actionTotal / action.points)
+          } buzzes away from mastering the ${action.title} action!`; // if more than 1 buzz required to action make buzz plural
       } else {
-        displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
+        displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`; // if only one buzz left, singular buzz
       }
       toast(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
       playSound(incrementAudio);
-      setBadgeModalIsOpen(false);
+      setBadgeModalIsOpen(false); // make sure badge modal does not pop up bc action is not yet mastered
     } else if (action.toMaster * action.points <= actionTotal) {
-      actionMastered(authContext.email, action.susAction);
-      // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
-      // that action has been mastered -> will be disabled upon reload
-      setBadgeAction(action.title);
-      setBadgeActionCount(action.toMaster);
-      setBadgeModalIsOpen(true);
+      // If action has been mastered, the button will get disabled
+      // send user a modal celebrating thier new mastered action
+      actionMastered(authContext.email, action.susAction); // updates masteredAction array in firestore w/ new action included
+      setBadgeAction(action.title); // to make sure modal has correct action name
+      setBadgeActionCount(action.toMaster); // to make sure modal has correct value for times completed
+      setBadgeModalIsOpen(true); // to have badge modal display 
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
-      firestoreMastered.push(action.susAction);
-      localStorage.setItem(
-        "firestoreMastered",
-        JSON.stringify(firestoreMastered)
-      );
+      firestoreMastered.push(action.susAction); // updates the firestoreMastered global variable --> changes button to disabled
+      localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered)); // updates array in LS w/ new action included
     }
   };
 
@@ -574,15 +541,13 @@ function HomePage(props) {
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
-  for (const i in ActionData) {
-    // Iterate over every action in ActionData
+  for (const i in ActionData) { // Iterate over every action in ActionData
     var action2 = ActionData[i]; // Take the current action
     var storageName2 = action2.susAction.concat("Fav");
     var storedFav = localStorage.getItem(storageName2) === "true";
-    if (storedFav) {
-      // If the action is favorited
+    if (storedFav) { // If the action is favorited
       favIconColors[i - 1] = "var(--theme-secondary)"; // Turn red
-    } else {
+    } else { // if action is not favorited
       favIconColors[i - 1] = "#6c6c6c"; // Otherwise turn gray
     }
   }
@@ -594,36 +559,33 @@ function HomePage(props) {
     // storedFav is a boolean (is the current action favorited?)
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
     var storedFav = localStorage.getItem(storageName) === "true";
-    // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
-    if (storedFav == null) {
+    if (storedFav == null) { // In case the action hasn't been favorited before
       storedFav = false; // If not initialized, initialize here
     }
     storedFav = !storedFav; // Toggle the favorite
     // variable for getting color of fav icon
-    var favIconColor = document.getElementById(
-      "favoriteIcon".concat(action.susAction)
-    );
-    // Notify user that action was added/removed from favorites
+    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
+    // sets up variables need to send user progress toast (displayText) & access firestore user doc (email)
     var displayText;
     const email = localStorage.getItem("email");
     if (storedFav) {
       // if the action is now favorited
-      displayText = action.title.concat(" added to favorites");
+      displayText = action.title.concat(" added to favorites"); // define text to display on toast
       favIconColor.style.color = "#f48fb1"; // Turn pink
       playSound(likeAudio);
-      toast.success(displayText, { autoClose: 5000 });
-      addFav(email, action.susAction);
+      toast.success(displayText, { autoClose: 3000 });
+      addFav(email, action.susAction); // add action to firestore array of fav actions 
     } else {
       // if the action is now unfavorited
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
       playSound(unlikeAudio);
-      toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
-      deleteFav(email, action.susAction);
+      toast.warn(displayText, { autoClose: 3000 }); // It's a warning so that the window is yellow
+      deleteFav(email, action.susAction); // delete action to firestore array of fav actions
     }
-    // set local storage actionFav to either true or false depending on fav status
-    localStorage.setItem(storageName, storedFav); // Save the updated favorite value
+    localStorage.setItem(storageName, storedFav); // set local storage actionFav to either true or false depending on new fav status
+
   };
 
   // Set the "progress message" to be displayed when the user pressed "check progress"
@@ -631,9 +593,8 @@ function HomePage(props) {
   const setProgressMessage = () => {
     // initPoints has to be called here so that any values that aren't yet initialized are displayed as 0 instead
     // appearing as blank
-    initPoints(); // DO NOT REMOVE
-    for (const el in ActionData) {
-      // Loop over every action in ActionData
+    // initPoints(); // DO NOT REMOVE
+    for (const el in ActionData) { // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
       progressMessage = (
         <>
@@ -741,7 +702,7 @@ function HomePage(props) {
               variant="contained"
               onClick={() => {
                 setProgressModalIsOpen(true);
-                playSound(confettiAudio);
+                playSound(audio, confettiAudio);
               }}
               className={classes.checkProgress}
             >
@@ -965,11 +926,11 @@ function HomePage(props) {
                                 Complete this action {action.toMaster} times to
                                 earn a badge!
                               </Typography>
-                              {/* <CardMedia
+                              <CardMedia
                                 className={classes.media}
                                 image={action.image}
                                 title={action.title}
-                              /> */}
+                              />
                               <Typography
                                 variant="h5"
                                 component={"span"}
@@ -1088,11 +1049,11 @@ function HomePage(props) {
                                 Complete this action {action.toMaster} times to
                                 earn a badge!
                               </Typography>
-                              {/* <CardMedia
+                              <CardMedia
                                 className={classes.media}
                                 image={action.image}
                                 title={action.title}
-                              /> */}
+                              />
                               <Typography
                                 variant="h5"
                                 component={"span"}
@@ -1121,4 +1082,4 @@ function HomePage(props) {
 const condition = (authUser) => !!authUser;
 const HomePageAuthorized = withAuthorization(condition)(HomePage);
 export default withRouter(HomePageAuthorized);
-export { initPoints };
+// export { initPoints };

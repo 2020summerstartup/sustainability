@@ -106,7 +106,7 @@ class SignInFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    localStorage.clear();
+    // localStorage.clear();
     const { email, password } = this.state;
 
     // begins the sign in process by checking if the user is authenticated in firebase
@@ -116,49 +116,39 @@ class SignInFormBase extends Component {
       .catch((error) => {
         // if there is an issue, log it to the console
         this.setState({ error });
-        console.log(error);
+        console.log('Error:', error);
       });
 
       // pulls all necessary user & school data from firebase
       // IMPORTANT: this is async because getting data from firebase takes time & we need to make sure everythign in local storage is 
       // initalized before loading page or there will be MANY errors & points/favs/badges will not display properly 
       async function getUserData (email){
-        // to give authentication check some time to run --> user needs to be authenticated to access the data
-        await waitOneSec();
-        // initalizes user's impact points in local storage 
-        getUserImpact(email);
-        // initaizes the school's impact points in local storage 
-        getSchoolImpact();
+        await waitOneSec(); // to give authentication check some time to run --> user needs to be authenticated to access the data
+        getUserImpact(email); // initalizes user's impact points in local storage 
+        getSchoolImpact(); // initaizes the school's impact points in local storage 
 
-        // to give these functions some time to run 
-        // await waitOneSec();
         // gets user's points, mastered & favroited actions from firebase & sets them all in local storage
         getUserDocRef(email).onSnapshot(
           (docSnapshot) => {
             // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
             if(docSnapshot.data()) {
-              // this function is where all the user's info is parsed through and set in local storage 
-              assignData(docSnapshot.data());  
+              assignData(docSnapshot.data());  // this function is where all the user's info is parsed through and set in local storage 
             }
           },
         );
-        // give this function somt time to run 
-        await waitOneSec();
+        await waitOneSec(); // give this function some time to run 
       }
       
       event.preventDefault();
     // takes user to home page
     async function goHome(props, email) {
-      // wait for getUserData async function to run and set all of the user's info in local storage
-      await getUserData(email);
-      // then we can route to home & everything will disaply properly
-      props.history.push(ROUTES.HOME);
+      await getUserData(email); // wait for getUserData async function to run (2 sec) and set all of the user's info in local storage
+      props.history.push(ROUTES.HOME); // then we can route to home & everything will disaply properly
     }
 
     goHome(this.props, email)
-      // clear all the input fields on the sign in form
       .then(() => {
-        this.setState({ ...INITIAL_STATE });
+        this.setState({ ...INITIAL_STATE }); // clears all the input fields on the sign in form
       });
   };
 
@@ -174,7 +164,7 @@ class SignInFormBase extends Component {
 
   render() {
     const { email, password, error } = this.state;
-    const isInvalid = password === "" || email === "";
+    const isInvalid = password === "" || email === ""; //submit button requires something to be entered into each field 
 
     return (
       <div className="base-container">
@@ -218,7 +208,7 @@ class SignInFormBase extends Component {
               />
               {error && (
                 <Typography
-                  variant="body2"
+                  variant="body2" 
                   style={{ color: "red", marginTop: "1rem" }}
                 >
                   {error.message}

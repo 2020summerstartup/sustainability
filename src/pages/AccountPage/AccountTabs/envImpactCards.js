@@ -26,33 +26,33 @@ var theH2O;
 // Carbon Dioxide message
 const CODisplay = () => {
   if (parseInt(localStorage.getItem("coEmiss")) === 0) {
-    theCO = "Pounds of CO2 saved :("
+    theCO = "pounds of CO2 saved. :("
   } else if (parseInt(localStorage.getItem("coEmiss")) === 1) {
-    theCO = "Pound of CO2 saved!"
+    theCO = "pound of CO2 saved!"
   } else {
-    theCO = "Pounds of CO2 saved!"
+    theCO = "pounds of CO2 saved!"
   }
 };
 
 // Energy message
 const EnergyDisplay = () => {
   if (parseInt(localStorage.getItem("energy")) === 0) {
-    theEnergy = "Milojoules of energy conserved :("
+    theEnergy = "milojoules of energy conserved. :("
   } else if (parseInt(localStorage.getItem("energy")) === 1) {
-    theEnergy = "Milojoule of energy conserved!"
+    theEnergy = "milojoule of energy conserved!"
   } else {
-    theEnergy = "Milojoules of energy conserved!"
+    theEnergy = "milojoules of energy conserved!"
   }
 };
 
 // Water conserved message
 const H2ODisplay = () => {
   if (parseInt(localStorage.getItem("water")) === 0) {
-    theH2O = "Gallons of water saved :("
+    theH2O = "gallons of water saved. :("
   } else if (parseInt(localStorage.getItem("water")) === 1) {
-    theH2O = "Gallon of water saved!"
+    theH2O = "gallon of water saved!"
   } else {
-    theH2O = "Gallons of water saved"
+    theH2O = "gallons of water saved"
   }
 };
 

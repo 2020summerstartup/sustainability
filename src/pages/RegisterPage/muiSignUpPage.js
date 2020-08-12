@@ -16,6 +16,8 @@ import * as ROUTES from "../../constants/routes";
 // For PasswordOne data
 import { PasswordInput } from "./muiSignInPage";
 import { ReactComponent as SignUp } from "../../img/signup.svg";
+import { audioContext } from "../AccountPage/Settings/audioContext";
+
 // Material UI Imports
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -123,8 +125,10 @@ const INITIAL_STATE = {
 const signupAudio = new Audio(signup);
 
 // called when the user clicks sign up to play the audio file
-const playSound = (audioFile) => {
-  audioFile.play();
+const playSound = (audio, audioFile) => {
+  if (audio.unmute) {
+    audioFile.play();
+  }
 };
 
 // Base - composed with firebase and routes below
@@ -133,6 +137,7 @@ class SignUpFormBase extends Component {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
+  static contextType = audioContext;
 
   // Checkbox for Admin status
   onChangeCheckbox = (event) => {
@@ -352,7 +357,7 @@ class SignUpFormBase extends Component {
                 style={{ margin: "1rem auto 1.5rem auto" }}
                 disabled={isInvalid}
                 onClick={() => {
-                  playSound(signupAudio);
+                  playSound(this.context, signupAudio);
                   this.reward.rewardMe();
                 }}
               >

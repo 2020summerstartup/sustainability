@@ -1,3 +1,4 @@
+// commented by JM (idk who wrote this function)
 import React, { useContext } from "react";
 import { AuthUserContext } from "../../services/Session";
 import { updateUserDorm, getDorm } from "../../services/Firebase";
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 // Function that contains the dropdown menu for selecting the user's dorm
 export default function DormSelect() {
   const classes = useStyles();
-  const [dorm, setDorm] = React.useState("");
+  const [dorm, setDorm] = React.useState(""); // this is used to keep the placeholder dorm up to date
 
   // Used to make sure user is authenticated
   // Gives an alert if the user does not have a dorm selected
@@ -36,17 +37,15 @@ export default function DormSelect() {
 
   // Sets dorm by calling local storage and firebase
   const handleChange = (event) => {
-    placeholder=dorm;
-    setDorm(event.target.value);
+    placeholder=dorm; // text that is displayed on dropdown when user first sees dropdown (ie. Linde, South, etc. or select your dorm...)
+    setDorm(event.target.value); // to have placeholder dorm update w/ newly selected dorm 
     localStorage.setItem("dorm", event.target.value);
-    updateUserDorm(authContext.email, event.target.value);
-    getDorm()
-      .doc(event.target.value)
-      .onSnapshot((docSnapshot) => {
-        assignRanking(docSnapshot.data());
+    updateUserDorm(authContext.email, event.target.value); // updates user's firestore doc with new dorm
+    getDorm().doc(event.target.value).onSnapshot((docSnapshot) => {
+        assignRanking(docSnapshot.data()); // called here to make sure that ranking display reflects user's new dorm 
       });
       toast.configure();
-      toast.success('You are now part of ' + event.target.value + ' dorm!');
+      toast.success('You are now part of ' + event.target.value + ' dorm!'); // let the user know that things where successful!
   };
 
   return (

@@ -25,13 +25,11 @@ import ContactMailIcon from "@material-ui/icons/ContactMail";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
-import Switch from "@material-ui/core/Switch";
-import Grid from "@material-ui/core/Grid";
-
+import Switch from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
+import { audioContext } from "./audioContext";
 import SignOutButton from "../../../components/SignOut";
 // const SignOutButton = lazy(() => import("../../../components/SignOut"));
-
-var globalMute = false;
 
 // Styles for settings drawer
 const useStyles = makeStyles((theme) => ({
@@ -57,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MuteSwitch = withStyles((theme) => ({
+const UnmuteSwitch = withStyles((theme) => ({
   root: {
     width: 28,
     height: 16,
@@ -100,7 +98,7 @@ function SettingsDrawer(props) {
     bottom: false,
     right: false,
   });
-  const [mute, setMute] = React.useState(false);
+  const audio = React.useContext(audioContext)
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -112,11 +110,6 @@ function SettingsDrawer(props) {
     }
 
     setState({ ...state, [anchor]: open });
-  };
-
-  const handleChange = (event) => {
-    setMute(event.target.checked);
-    globalMute = event.target.checked;
   };
 
   const list = (anchor) => (
@@ -221,9 +214,9 @@ function SettingsDrawer(props) {
               <Grid component="label" container alignItems="center" spacing={1}>
                 <Grid item>Audio Off</Grid>
                 <Grid item>
-                  <MuteSwitch
-                    checked={mute}
-                    onChange={handleChange}
+                  <UnmuteSwitch
+                    checked={audio.unmute}
+                    onChange={audio.muteAudio}
                     name="mute"
                   />
                 </Grid>
@@ -290,4 +283,3 @@ function SettingsDrawer(props) {
 }
 
 export default withTheme(SettingsDrawer);
-export const audioContext = React.createContext(globalMute);
