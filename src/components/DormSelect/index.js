@@ -8,6 +8,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../../pages/HomePage/toastify.css";
+
 // Styles for dropdown menu
 const useStyles = makeStyles((theme) => ({
   // Provides context for form inputs
@@ -41,6 +45,8 @@ export default function DormSelect() {
       .onSnapshot((docSnapshot) => {
         assignRanking(docSnapshot.data());
       });
+      toast.configure();
+      toast.success('You are now part of ' + event.target.value + ' dorm!');
   };
 
   return (

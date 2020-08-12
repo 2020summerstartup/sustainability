@@ -18,13 +18,14 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
-import ContactMailIcon from '@material-ui/icons/ContactMail';
+import ContactMailIcon from "@material-ui/icons/ContactMail";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import { audioContext } from "./audioContext";
+import SignOutButton from "../../../components/SignOut";
 
 // Styles for settings drawer
 const useStyles = makeStyles((theme) => ({
@@ -55,15 +56,15 @@ const UnmuteSwitch = withStyles((theme) => ({
     width: 28,
     height: 16,
     padding: 0,
-    display: 'flex',
+    display: "flex",
   },
   switchBase: {
     padding: 2,
     color: theme.palette.grey[500],
-    '&$checked': {
-      transform: 'translateX(12px)',
+    "&$checked": {
+      transform: "translateX(12px)",
       color: theme.palette.common.white,
-      '& + $track': {
+      "& + $track": {
         opacity: 1,
         backgroundColor: theme.palette.primary.main,
         borderColor: theme.palette.primary.main,
@@ -73,7 +74,7 @@ const UnmuteSwitch = withStyles((theme) => ({
   thumb: {
     width: 12,
     height: 12,
-    boxShadow: 'none',
+    boxShadow: "none",
   },
   track: {
     border: `1px solid ${theme.palette.grey[500]}`,
@@ -114,8 +115,8 @@ function SettingsDrawer(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
+        {/* USER'S GREETING */}
         <ListItem>
-          {/* User's greeting */}
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
             <Typography variant="h6">
@@ -124,7 +125,8 @@ function SettingsDrawer(props) {
           </ListItemText>
         </ListItem>
         <Divider />
-        {/* User's email */}
+
+        {/* USER'S EMAIL */}
         <ListItem>
           <ListItemIcon className={classes.listItemIcon}>
             <EmailIcon />
@@ -137,7 +139,8 @@ function SettingsDrawer(props) {
             )}
           </AuthUserContext.Consumer>
         </ListItem>
-        {/* Password change */}
+
+        {/* CHANGE PASSWORD */}
         <ListItem button component={Link} to={ROUTES.CHANGEPW}>
           <ListItemIcon className={classes.listItemIcon}>
             <LockOpenIcon />
@@ -146,7 +149,8 @@ function SettingsDrawer(props) {
             Change password
           </ListItemText>
         </ListItem>
-        {/* Dorm change */}
+
+        {/* CHANGE YOUR DORM */}
         <ListItem button component={Link} to={ROUTES.CHANGEDORM}>
           <ListItemIcon className={classes.listItemIcon}>
             <HomeIcon />
@@ -155,7 +159,8 @@ function SettingsDrawer(props) {
             Change your dorm
           </ListItemText>
         </ListItem>
-        {/* Dark Mode */}
+
+        {/* DARK MODE TOGGLE */}
         <ListItem
           button
           checked={darkMode}
@@ -164,9 +169,11 @@ function SettingsDrawer(props) {
             window.location.reload();
           }}
         >
+          {/* toggle dark/light icons depending on if darkMode is true or false */}
           <ListItemIcon className={classes.listItemIcon}>
             {darkMode ? <Brightness4Icon /> : <Brightness7Icon />}
           </ListItemIcon>
+          {/* toggle dark/light text depending on if darkMode is true or false */}
           <ListItemText className={classes.listItemText}>
             {darkMode ? (
               <Typography>Dark Mode</Typography>
@@ -175,7 +182,8 @@ function SettingsDrawer(props) {
             )}
           </ListItemText>
         </ListItem>
-        {/* Info Page */}
+
+        {/* INFO PAGE */}
         <ListItem button component={Link} to={ROUTES.INFO}>
           <ListItemIcon className={classes.listItemIcon}>
             <InfoIcon />
@@ -184,7 +192,8 @@ function SettingsDrawer(props) {
             More Info
           </ListItemText>
         </ListItem>
-        {/* Contact us form */}
+
+        {/* CONTACT US FORM */}
         <ListItem button component={Link} to={ROUTES.CONTACT}>
           <ListItemIcon className={classes.listItemIcon}>
             <ContactMailIcon />
@@ -193,13 +202,35 @@ function SettingsDrawer(props) {
             Contact Us
           </ListItemText>
         </ListItem>
-        {/* Sign out button */}
-        {/* Moving this for now because always get error when signing out */}
-        {/* <ListItem className={classes.settingsSignOut}>
-          <SignOutButton />
-        </ListItem> */}
-        
-      {/* Account Deletion */}
+
+        {/* MUTE TOGGLE */}
+        <ListItem>
+          <ListItemText className={classes.listItemText}>
+            <Typography component="div">
+              <Grid component="label" container alignItems="center" spacing={1}>
+                <Grid item>Audio Off</Grid>
+                <Grid item>
+                  <MuteSwitch
+                    checked={mute}
+                    onChange={handleChange}
+                    name="mute"
+                  />
+                </Grid>
+                <Grid item>Audio On</Grid>
+              </Grid>
+            </Typography>
+          </ListItemText>
+        </ListItem>
+
+        {/* SIGNOUT BUTTON */}
+        <ListItem className={classes.listItemIcon}>
+          <ListItemText>
+            {/* styles for signout button are in components/Navigation/navigation.css */}
+            <SignOutButton />
+          </ListItemText>
+        </ListItem>
+
+        {/* DELETE ACCOUNT */}
         <ListItem
           button
           component={Link}
@@ -231,32 +262,30 @@ function SettingsDrawer(props) {
   );
 
   return (
-    <div align="left">
-      <React.Fragment key={"right"}>
-        <IconButton
-        // these 3 lines get rid of ripple effect!
-          disableFocusRipple
-          disableRipple
-          style={{ backgroundColor: "transparent" }}
-          className={classes.settingsIcon}
-          onClick={toggleDrawer("right", true)}
-        >
-          {<SettingsIcon />}
-        </IconButton>
-
-        <SwipeableDrawer
-          anchor={"right"}
-          open={state["right"]}
-          onClose={toggleDrawer("right", false)}
-          onOpen={toggleDrawer("right", true)}
-        >
-          {list("right")}
-        </SwipeableDrawer>
-      </React.Fragment>
-    </div>
+    <React.Fragment key={"right"}>
+      {/* SETTINGS ICON */}
+      {/* these 3 lines get rid of ripple effect! */}
+      <IconButton
+        disableFocusRipple
+        disableRipple
+        aria-label="settings icon"
+        style={{ backgroundColor: "transparent" }}
+        className={classes.settingsIcon}
+        onClick={toggleDrawer("right", true)}
+      >
+        {<SettingsIcon />}
+      </IconButton>
+      {/* SETTINGS DRAWER- opens when user clicks icon */}
+      <SwipeableDrawer
+        anchor={"right"}
+        open={state["right"]}
+        onClose={toggleDrawer("right", false)}
+        onOpen={toggleDrawer("right", true)}
+      >
+        {list("right")}
+      </SwipeableDrawer>
+    </React.Fragment>
   );
 }
 
 export default withTheme(SettingsDrawer);
-// export default SettingsDrawer;export default withTheme(SettingsDrawer);
-// export default SettingsDrawer;

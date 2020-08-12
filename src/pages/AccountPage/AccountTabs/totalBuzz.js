@@ -3,8 +3,8 @@ import styles from "./totalBuzz.module.css";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
-// Displays text for total logs based on total
+
+// Displays text for total logs based on total actions logged
 var totalBuzzText;
 const totalBuzzDisplay = () => {
   if (JSON.parse(localStorage.getItem("buzzes")) === 1) {
@@ -15,35 +15,25 @@ const totalBuzzDisplay = () => {
 };
 totalBuzzDisplay();
 
-const useStyles = (theme) => ({
-  //   borderBottom: {
-  //     "&:after": {
-  //       borderBottom: theme.palette.background.paper,
-  //       //   borderBottom: "13px solid",
-  //     },
-  //   },
-});
-
 // Cards to be rendered on the points page in profile
 class TotalBuzz extends React.Component {
   render() {
     return (
-      // Banner for message
       <div className={styles.bannerShape}>
         <Grid
           container
           justify="center"
           style={{ placeItems: "center", marginBottom: "0.5rem" }}
         >
-          <Typography
-            variant="h3"
-            style={{ marginRight: "1rem" }}
-          >
+          <Typography variant="h3" style={{ marginRight: "1rem" }}>
             <b>{localStorage.getItem("buzzes")}</b>
           </Typography>
           {totalBuzzText}
           <Grid container justify="center">
-            <Typography variant="body2">
+            <Typography
+              variant="body2"
+              style={{ textShadow: "2px 2px 3px black" }}
+            >
               Click impact cards below for a fun surprise!
             </Typography>
           </Grid>
@@ -53,4 +43,4 @@ class TotalBuzz extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(TotalBuzz);
+export default TotalBuzz;

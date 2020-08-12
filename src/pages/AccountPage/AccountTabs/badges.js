@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./badges.module.css";
 import ActionData from "../../HomePage/actionData.json";
 import fansImg from "../../../img/fans.svg";
-import SignOutButtom from "../../../components/SignOut";
 // Material UI and galaxy card imports
 import Typography from "@material-ui/core/Typography";
 import GoogleFontLoader from "react-google-font-loader";
@@ -92,16 +91,38 @@ const badgeSay = () => {
     // One mastered activity
   } else if (masterLength === 1) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
-    theBadge = <p> You've earned {masterLength} badge! Keep it going 🥳 </p>;
+    theBadge = (
+      <p>
+        {" "}
+        You've earned {masterLength} badge! Keep it going{" "}
+        <span role="img" aria-label="celebration">
+          🥳
+        </span>
+      </p>
+    );
     // two to five mastered actions
   } else if (masterLength > 1 && masterLength < 5) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
-    theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
+    theBadge = (
+      <p>
+        {" "}
+        You've earned {masterLength} badges! That's awesome{" "}
+        <span role="img" aria-label="heart eyes">
+          😍
+        </span>
+      </p>
+    );
     // More than 4 mastered actiions
   } else {
     theCongrats = <>Omg {localStorage.getItem("name")}! </>;
     theBadge = (
-      <p> You've earned {masterLength} badges! That's how it's done 🤩</p>
+      <p>
+        {" "}
+        You've earned {masterLength} badges! That's how it's done{" "}
+        <span role="img" aria-label="star eyes">
+          🤩
+        </span>
+      </p>
     );
   }
 };
@@ -217,7 +238,7 @@ class Badges extends React.Component {
     }
   };
 
-getStyling() {
+  getStyling() {
     // loop through our array of mastered badges and determines if they need to have LHS or RHS side properties
     masterBadgesArray.forEach((badge, id) => {
       if (id % 2 === 0) {
@@ -288,7 +309,6 @@ getStyling() {
             <div key={badge.id}>
               <div className={styles.column}>
                 <div
-                  // if badge id is the selected one and the badge state is true, then we flip the badge
                   className={`${
                     badge.id === selectedBadgeId && selectedBadgeState
                       ? `${badge.flipStatus}`
@@ -320,7 +340,6 @@ getStyling() {
             </Typography>
           </div>
         )}
-        <SignOutButtom />
       </>
     );
   }

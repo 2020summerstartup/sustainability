@@ -7,10 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 
 let colors = ["yellow", "green", "blue"];
-let coEmissImpact = localStorage.getItem("coEmiss");
-let energyImpact = localStorage.getItem("energy");
-let waterImpact = localStorage.getItem("water");
-// let totalBuzz = localStorage.getItem("buzzes")
 
 
 const useStyles = (theme) => ({
@@ -29,9 +25,9 @@ var theH2O;
 
 // Carbon Dioxide message
 const CODisplay = () => {
-  if (parseInt(coEmissImpact) === 0) {
+  if (parseInt(localStorage.getItem("coEmiss")) === 0) {
     theCO = "Pounds of CO2 saved :("
-  } else if (parseInt(coEmissImpact) === 1) {
+  } else if (parseInt(localStorage.getItem("coEmiss")) === 1) {
     theCO = "Pound of CO2 saved!"
   } else {
     theCO = "Pounds of CO2 saved!"
@@ -40,9 +36,9 @@ const CODisplay = () => {
 
 // Energy message
 const EnergyDisplay = () => {
-  if (parseInt(energyImpact) === 0) {
+  if (parseInt(localStorage.getItem("energy")) === 0) {
     theEnergy = "Milojoules of energy conserved :("
-  } else if (parseInt(coEmissImpact) === 1) {
+  } else if (parseInt(localStorage.getItem("energy")) === 1) {
     theEnergy = "Milojoule of energy conserved!"
   } else {
     theEnergy = "Milojoules of energy conserved!"
@@ -51,9 +47,9 @@ const EnergyDisplay = () => {
 
 // Water conserved message
 const H2ODisplay = () => {
-  if (parseInt(waterImpact) === 0) {
+  if (parseInt(localStorage.getItem("water")) === 0) {
     theH2O = "Gallons of water saved :("
-  } else if (parseInt(waterImpact) === 1) {
+  } else if (parseInt(localStorage.getItem("water")) === 1) {
     theH2O = "Gallon of water saved!"
   } else {
     theH2O = "Gallons of water saved"
@@ -72,9 +68,9 @@ class EnvImpactCards extends React.Component {
   
     this.state = {
       cards: [],
-      coEmiss: coEmissImpact,
-      energy: energyImpact,
-      water: waterImpact,
+      coEmiss: localStorage.getItem("coEmiss"),
+      energy: localStorage.getItem("energy"),
+      water: localStorage.getItem("water"),
     };
 
     this.getData = this.getData.bind(this);

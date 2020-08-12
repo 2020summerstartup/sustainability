@@ -86,7 +86,7 @@ import badge from "../../sounds/hero_simple-celebration-01.wav";
 import increment from "../../sounds/navigation_selection-complete-celebration.wav";
 
 // Lazy load the fave card
-const FavoriteCard = lazy(() => retry(() => import("./faveCard.js")));
+const FavoriteGalaxyCard = lazy(() => retry(() => import("./faveGalaxyCard.js")));
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
@@ -117,34 +117,7 @@ const playSound = (audioFile) => {
   audioFile.play();
 };
 
-// this function is meant to get each action's point value from firestore and then set each action's points in local storage
-// should only be called when page first loads, not when points are increment
-const assignData = (userData) => {
-  // the data parameter is meant to be a firestore document snapshot
-  localStorage.setItem("dorm", userData.userDorm);
-  localStorage.setItem("name", userData.name);
-  localStorage.setItem("total", userData.total);
-  localStorage.setItem("darkPop_done", userData.darkPop_done);
-  localStorage.setItem("addHomePop_done", userData.addHomePop_done);
-  // initialize mastered action
-  var firestoreMastered = userData.masteredActions;
-  localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered));
-  // initialize points
-  for (const [key, value] of Object.entries(userData.points)) {
-    localStorage.setItem(key, value);
-  }
-  // initalize favorites
-  var firestoreFavs = userData.favorites;
-  // check if action has been previously favroited --> action is favorited in firestore
-  for (const [key] of Object.entries(userData.points)) {
-    // Changed this to only get key instead of key value pair (because value is never used)
-    if (firestoreFavs.includes(key)) {
-      // if action is saved as a favorite in firestore, set actionFav in firestore to true
-      var actionFavLSName = key.concat("Fav");
-      localStorage.setItem(actionFavLSName, true);
-    }
-  }
-};
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -171,12 +144,12 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `scrollable-force-tab-${index}`,
-    "aria-controls": `scrollable-force-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `scrollable-force-tab-${index}`,
+//     "aria-controls": `scrollable-force-tabpanel-${index}`,
+//   };
+// }
 
 const useStyles = makeStyles((theme) => ({
   // styles for HomeHeader
@@ -718,7 +691,7 @@ function HomePage(props) {
                     <EcoIcon className={classes.tabIcon} /> Actions{" "}
                   </div>
                 }
-                {...a11yProps(0)}
+                // {...a11yProps(0)}
               />
               <Tab
                 label={
@@ -726,7 +699,7 @@ function HomePage(props) {
                     <FavoriteIcon className={classes.tabIcon} /> Favorites{" "}
                   </div>
                 }
-                {...a11yProps(1)}
+                // {...a11yProps(1)}
               />
             </Tabs>
           </AppBar>
@@ -1037,7 +1010,7 @@ function HomePage(props) {
             <>
               {/* lazy loading favorites galaxy card */}
               <Suspense fallback={<ProgressCircle />}>
-                <FavoriteCard />
+                <FavoriteGalaxyCard />
               </Suspense>
 
               {/* FAVORITE ACTIONS */}
@@ -1144,4 +1117,4 @@ function HomePage(props) {
 const condition = (authUser) => !!authUser;
 const HomePageAuthorized = withAuthorization(condition)(HomePage);
 export default withRouter(HomePageAuthorized);
-export { initPoints, assignData };
+export { initPoints };

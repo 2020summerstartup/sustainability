@@ -26,7 +26,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 
 import firebase from 'firebase/app';
-import { getUser } from "../../../services/Firebase";
+import { getUserDocRef } from "../../../services/Firebase";
 
 
 // Functions from Material UI for tabs
@@ -37,7 +37,7 @@ function TabPanel(props) {
   const getRole = () => {
     // Check if the email address is associated with any of the current users.
     var email = localStorage.getItem('email');
-    getUser(email).onSnapshot(
+    getUserDocRef(email).onSnapshot(
       () => {
         // console.log('docsnapshot data', docSnapshot.data());
         // Now we want to see if this user is already an admin. 
@@ -56,12 +56,6 @@ function TabPanel(props) {
     );
   };
   getRole();
-
-
-
-
-
-
 
   return (
     <div
@@ -86,12 +80,12 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `scrollable-force-tab-${index}`,
-    "aria-controls": `scrollable-force-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `scrollable-force-tab-${index}`,
+//     "aria-controls": `scrollable-force-tabpanel-${index}`,
+//   };
+// }
 
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -186,7 +180,7 @@ function CompeteTabs(props, { authUser }) {
               <SusLogo1 className={classes.logo} />
               <Typography variant="h6" className={classes.title} noWrap>
                 Compete
-          </Typography>
+              </Typography>
             </Toolbar>
             {/* Tabs directly underneath header */}
             <Tabs
@@ -204,7 +198,7 @@ function CompeteTabs(props, { authUser }) {
                     <EqualizerIcon className={classes.tabIcon} /> Leaderboard{" "}
                   </div>
                 }
-                {...a11yProps(0)}
+                // {...a11yProps(0)}
               />
 
               <Tab
@@ -213,19 +207,18 @@ function CompeteTabs(props, { authUser }) {
                     <StarIcon className={classes.tabIcon} /> Challenges{" "}
                   </div>
                 }
-                {...a11yProps(1)}
-                style={{ backgroundColor: "transparent" }}
+                // {...a11yProps(1)}
               />
               {/* Admin Tab */}
               {!!authUser.roles[ROLES.ADMIN] && (
                 <Tab
                   label={
                     <div className={classes.tabText}>
-                      <SupervisorAccountIcon className={classes.tabIcon} /> Admin{" "}
+                      {/* All the extra spaces are around admin to make it appear as a longer word so that the spacing matches "challenges" and "leaderboard" */}
+                      <SupervisorAccountIcon className={classes.tabIcon} /> &nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;{" "}
                     </div>
                   }
-                  {...a11yProps(1)}
-                  style={{ backgroundColor: "transparent" }}
+                  // {...a11yProps(1)}
                 />
               )}
             </Tabs>
@@ -243,7 +236,7 @@ function CompeteTabs(props, { authUser }) {
             </Suspense>
           </TabPanel>
 
-          {/* ADMIN TAB */}
+          {/* ADMIN TAB - only displays for admin roles */}
           {!!authUser.roles[ROLES.ADMIN] && (
             <TabPanel value={tabNumber} index={2} className="tab-container">
               <Suspense fallback={<ProgressCircle />}>

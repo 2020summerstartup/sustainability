@@ -20,7 +20,7 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
 // Styles for Galaxy Card
 const useStyles = makeStyles((theme) => ({
-    card: {
+    galaxyCard: {
         borderRadius: "1rem",
         boxShadow: "none",
         position: "relative",
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
             background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
         },
     },
-    content: {
+    galaxyContent: {
         position: "absolute",
         zIndex: 2,
         bottom: 0,
@@ -70,7 +70,7 @@ export const ActionCard = React.memo(function GalaxyCard() {
                     ]}
                 />
             </NoSsr>
-            <Card className={classes.card}>
+            <Card className={classes.galaxyCard}>
                 {/* Fireworks picture for galaxy card */}
                 <CardMedia
                     classes={mediaStyles}
@@ -78,7 +78,7 @@ export const ActionCard = React.memo(function GalaxyCard() {
                     style={{ backgroundPosition: "center center" }}
                 />
                 {/* now we can see the fireworks^ */}
-                <Box py={3} px={2} className={classes.content}>
+                <Box py={3} px={2} className={classes.galaxyContent}>
                     <Info useStyles={useGalaxyInfoStyles}>
                         <InfoSubtitle
                             style={{ color: "white", fontWeight: "bold" }}

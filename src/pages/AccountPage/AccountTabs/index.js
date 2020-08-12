@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { withRouter } from "react-router";
-import DormCard from "./dorm";
+import College from "./college";
 import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
 import Badges from "./badges";
@@ -51,12 +51,12 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `scrollable-force-tab-${index}`,
-    "aria-controls": `scrollable-force-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `scrollable-force-tab-${index}`,
+//     "aria-controls": `scrollable-force-tabpanel-${index}`,
+//   };
+// }
 
 // Styles for Tabs
 const useStyles = makeStyles((theme) => ({
@@ -68,9 +68,6 @@ const useStyles = makeStyles((theme) => ({
     [`${theme.breakpoints.down(767)} and (orientation: landscape)`]: {
       marginLeft: "0",
     },
-  },
-  bar: {
-    padding: 0,
   },
   tabIcon: {
     position: "relative",
@@ -203,7 +200,7 @@ const AccountTabs = props => {
                 </div>
               </>
             }
-            {...a11yProps(0)}
+            // {...a11yProps(0)}
           />
 
           <Tab
@@ -217,7 +214,7 @@ const AccountTabs = props => {
                 </div>
               </>
             }
-            {...a11yProps(1)}
+            // {...a11yProps(1)}
           />
 
           <Tab
@@ -231,7 +228,7 @@ const AccountTabs = props => {
                 </div>
               </>
             }
-            {...a11yProps(1)}
+            // {...a11yProps(1)}
           />
         </Tabs>
       </AppBar>
@@ -239,10 +236,10 @@ const AccountTabs = props => {
       <TabPanel value={value} index={0} className="tab-container">
          <TotalPointsCard />
       </TabPanel>
-      {/* Mudd/dorm Page */}
+      {/* Mudd/College Page */}
       <TabPanel value={value} index={1} className="tab-container">
         <Suspense fallback={<ProgressCircle />}>
-          <DormCard />
+          <College />
         </Suspense>
       </TabPanel>
       {/* Badge Page */}

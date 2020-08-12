@@ -5,7 +5,7 @@ import { compose } from "recompose";
 import Typography from "@material-ui/core/Typography";
 // import firebase from 'firebase/app';
 
-import { withFirebase, getUser } from "../../services/Firebase";
+import { withFirebase, getUserDocRef } from "../../services/Firebase";
 import * as ROLES from '../../constants/roles';
 
 import Container from "@material-ui/core/Container";
@@ -28,7 +28,7 @@ const getEmail = () => {
 const setAdmin = (email) => {
   email = email.toLowerCase(); // Make email all lower case (how the emails should all be stored in firebase)
   toast.configure(); // Configure for toast messages
-  getUser(email).onSnapshot(
+  getUserDocRef(email).onSnapshot(
     (docSnapshot) => {
       if (docSnapshot.data()) { // Code in this if statement runs if the entered email is associated with a current user
         var data = docSnapshot.data();

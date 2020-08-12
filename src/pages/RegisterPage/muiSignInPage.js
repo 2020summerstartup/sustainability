@@ -7,10 +7,9 @@ import { compose } from "recompose";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import { withFirebase, getUser, getUserImpact, getSchoolImpact } from "../../services/Firebase";
-import { assignData } from "../HomePage";
+import { assignData, withFirebase, getUserDocRef, getUserImpact, getSchoolImpact } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
-import signinImg from "../../img/login3.svg";
+import { ReactComponent as SignIn } from "../../img/signin.svg";
 
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -30,8 +29,6 @@ const SignInPage = () => (
     <SignInForm />
   </div>
 );
-
-
 
 class PasswordInput extends Component {
   constructor(props) {
@@ -93,11 +90,11 @@ const INITIAL_STATE = {
   goHome: false,
 };
 
-function waitOneSec(){
-  return new Promise(resolve => {
+function waitOneSec() {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve('resolved');
-    }, 400);
+    }, 1000);
   });
 }
 
@@ -108,13 +105,13 @@ class SignInFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-
   onSubmit = (event) => {
     localStorage.clear();
     const { email, password } = this.state;
 
     // begins the sign in process by checking if the user is authenticated in firebase
-    firebase.auth()
+    firebase
+      .auth()
       .signInWithEmailAndPassword(email, password)
       .catch((error) => {
         // if there is an issue, log it to the console
@@ -132,10 +129,11 @@ class SignInFormBase extends Component {
         getUserImpact(email);
         // initaizes the school's impact points in local storage 
         getSchoolImpact();
+
         // to give these functions some time to run 
-        await waitOneSec();
+        // await waitOneSec();
         // gets user's points, mastered & favroited actions from firebase & sets them all in local storage
-        getUser(email).onSnapshot(
+        getUserDocRef(email).onSnapshot(
           (docSnapshot) => {
             // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
             if(docSnapshot.data()) {
@@ -148,26 +146,22 @@ class SignInFormBase extends Component {
         await waitOneSec();
       }
       
-    
-      
       event.preventDefault();
     // takes user to home page
     async function goHome(props, email) {
       // wait for getUserData async function to run and set all of the user's info in local storage
       await getUserData(email);
-      // then we can route to home & everything will disaply properly 
+      // then we can route to home & everything will disaply properly
       props.history.push(ROUTES.HOME);
     }
 
     goHome(this.props, email)
-      // clear all the input fields on the sign in form 
-      .then(() => {this.setState({ ...INITIAL_STATE });})
-      
-      
+      // clear all the input fields on the sign in form
+      .then(() => {
+        this.setState({ ...INITIAL_STATE });
+      });
   };
 
-
-  
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -197,9 +191,7 @@ class SignInFormBase extends Component {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <div className="image">
-              <img alt="sign in" src={signinImg} />
-            </div>
+            <SignIn className="image" />
             <form
               onSubmit={this.onSubmit}
               style={{ width: "100%", marginTop: "1rem" }}

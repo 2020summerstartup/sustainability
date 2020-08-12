@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../../services/Session";
-import SignOutButton from "../SignOut";
+// import SignOutButton from "../SignOut"; // Wasn't used so I commented it out -Katie
 import "./navigation.css";
 
 // import your fontawesome library
@@ -30,7 +30,7 @@ const NavigationAuth = ({ authUser }) => (
       <li className="logo">
         <span href="#" className="nav-link">
           <Link to={ROUTES.HOME} className="link-text">
-            <span className="link-text logo-text">Go Green</span>
+            <span className="link-text logo-text">EcoBud</span>
             {/* the big double arrow logo that turns when navbar is hovered over */}
             <svg
               aria-hidden="true"
@@ -86,13 +86,6 @@ const NavigationAuth = ({ authUser }) => (
         </span>
       </li>
 
-      <li className="nav-item logout">
-        <span href="#" className="nav-link">
-          <FontAwesomeIcon icon="sign-out-alt" className="icons signout-icon" />
-          <SignOutButton />
-        </span>
-      </li>
-
     </ul>
   </nav>
 );
@@ -104,7 +97,7 @@ const NavigationNonAuth = () => (
       <li className="logo">
         {/* No idea why the following line needs to be "/#" when everywhere else it's fine with "#"... */}
         <a href="/#" className="nav-link">
-          <span className="link-text logo-text">Go Green!</span>
+          <span className="link-text logo-text">EcoBud</span>
           <svg
             aria-hidden="true"
             focusable="false"

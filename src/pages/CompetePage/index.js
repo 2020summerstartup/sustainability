@@ -3,6 +3,7 @@ import { AuthUserContext, withAuthorization } from "../../services/Session";
 import CompeteTabs from "./CompeteTabs";
 import AddToHomeScreenModal from "./addToHomeScreenModal";
 
+// Main Component - displays tabs with Leaderboard and Challenges
 const CompetePage = (props) => (
     <AuthUserContext.Consumer>
       {(authUser) => (
@@ -13,8 +14,9 @@ const CompetePage = (props) => (
       )}
     </AuthUserContext.Consumer>
 );
-
+//----------------Can whoever wrote this take a look?-----------------------//
 // Do we still need this? It's commented out -Amy
+// I have no idea whaat this is -Kobe
 // function Compete(props) {
 //   const { loading = false } = props;
 
