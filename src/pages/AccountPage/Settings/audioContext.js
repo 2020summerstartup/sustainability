@@ -2,9 +2,11 @@ import React, { createContext, Component } from "react";
 
 export const audioContext = createContext();
 
+const item = window.localStorage.getItem("unmute");
+
 class AudioContextProvider extends Component {
     state = {
-        unmute: true,
+        unmute: item ? JSON.parse(item) : true,
     }
 
     muteAudio = () => {

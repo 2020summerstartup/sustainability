@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import { withFirebase } from "../../../services/Firebase";
 import accountImg from "../../../img/account.svg";
 import { PasswordInput } from "../../RegisterPage/muiSignInPage";
 import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage";
+import { audioContext } from "../Settings/audioContext"
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -70,8 +71,10 @@ toast.configure();
 const toastAudio = new Audio(toastNotify);
 
 // called by onclick to play the audio file
-const playSound = (audioFile) => {
-  audioFile.play();
+const playSound = (unmute, audioFile) => {
+  if (unmute) {
+    audioFile.play();
+  }
 };
 // Base of form - styled with material ui and composed with firebase below
 class PasswordChangeFormBase extends Component {
@@ -105,6 +108,8 @@ class PasswordChangeFormBase extends Component {
     const { passwordOne, passwordTwo, error } = this.state;
     const isInvalid = passwordOne !== passwordTwo || passwordOne === "";
     const { classes } = this.props;
+
+    const audio = useContext(audioContext);
 
     return (
       <Container maxWidth="xs">
@@ -145,7 +150,7 @@ class PasswordChangeFormBase extends Component {
               color="primary"
               className={classes.submit}
               disabled={isInvalid}
-              onClick={() => playSound(toastAudio)}
+              onClick={() => playSound(audio.unmute, toastAudio)}
             >
               Change Password
             </Button>

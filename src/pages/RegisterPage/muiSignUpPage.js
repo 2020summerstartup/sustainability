@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 // For emoji confetti on sign up click
@@ -16,6 +16,8 @@ import * as ROUTES from "../../constants/routes";
 // For PasswordOne data
 import { PasswordInput } from "./muiSignInPage";
 import { ReactComponent as SignUp } from "../../img/signup.svg";
+import { audioContext } from "../AccountPage/Settings/audioContext";
+
 // Material UI Imports
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -123,8 +125,10 @@ const INITIAL_STATE = {
 const signupAudio = new Audio(signup);
 
 // called when the user clicks sign up to play the audio file
-const playSound = (audioFile) => {
-  audioFile.play();
+const playSound = (audio, audioFile) => {
+  if (audio.unmute) {
+    audioFile.play();
+  }
 };
 
 // Base - composed with firebase and routes below
@@ -231,6 +235,7 @@ class SignUpFormBase extends Component {
         dorm === "Linde" ||
         dorm === "Atwood"
       );
+    const audio = useContext(audioContext);
 
     return (
       <Container maxWidth="xs">
@@ -352,7 +357,7 @@ class SignUpFormBase extends Component {
                 style={{ margin: "1rem auto 1.5rem auto" }}
                 disabled={isInvalid}
                 onClick={() => {
-                  playSound(signupAudio);
+                  playSound(audio, signupAudio);
                   this.reward.rewardMe();
                 }}
               >
