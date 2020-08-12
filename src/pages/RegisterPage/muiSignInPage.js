@@ -116,7 +116,7 @@ class SignInFormBase extends Component {
       .catch((error) => {
         // if there is an issue, log it to the console
         this.setState({ error });
-        console.log(error);
+        console.log('Error:', error);
       });
 
       // pulls all necessary user & school data from firebase

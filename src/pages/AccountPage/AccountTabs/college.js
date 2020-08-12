@@ -119,9 +119,6 @@ const rankDisplay = () => {
 let coEmissImpact = JSON.parse(localStorage.getItem("SchoolCoEmiss"));
 let energyImpact = JSON.parse(localStorage.getItem("SchoolEnergy"));
 let waterImpact = JSON.parse(localStorage.getItem("SchoolWater"));
-console.log('coEmissImpact', coEmissImpact);
-console.log('energyImpact', energyImpact);
-console.log('waterImpact', waterImpact);
 
 // FOR BAR CHART
 // these will be used to render the cards in class EnvImpactCards

@@ -126,7 +126,6 @@ export default Firebase;
 // receives userEmail, userName, and dorm from sign up input forms to set those unique tokens in firestore, 
 // all other field have a default start (ex: points, total, impact all default to starting at 0)
 export const createUser = (userEmail, userName, dorm) => {
-  console.log("creating...")
   // refernce to user document --> creates a document that belongs to the user bc it does not yet exist when user signs up
   return firestore.collection('users').doc(userEmail)
       .set({

@@ -89,11 +89,11 @@ const badgeSay = () => {
     );
     // One mastered activity
   } else if (masterLength === 1) {
-    theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
+    theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}
-        You've earned {masterLength} badge! Keep it going{" "}
+        You've earned {masterLength} badge! Keep it going.{" "}
         <span role="img" aria-label="celebration">
           🥳
         </span>
@@ -101,11 +101,11 @@ const badgeSay = () => {
     );
     // two to five mastered actions
   } else if (masterLength > 1 && masterLength < 5) {
-    theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
+    theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}
-        You've earned {masterLength} badges! That's awesome{" "}
+        You've earned {masterLength} badges! That's awesome.{" "}
         <span role="img" aria-label="heart eyes">
           😍
         </span>
@@ -113,11 +113,11 @@ const badgeSay = () => {
     );
     // More than 4 mastered actiions
   } else {
-    theCongrats = <>Omg {localStorage.getItem("name")}! </>;
+    theCongrats = <>OMG, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}
-        You've earned {masterLength} badges! That's how it's done{" "}
+        You've earned {masterLength} badges! That's how it's done.{" "}
         <span role="img" aria-label="star eyes">
           🤩
         </span>
