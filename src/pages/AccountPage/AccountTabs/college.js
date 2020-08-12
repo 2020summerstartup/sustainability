@@ -127,7 +127,7 @@ let waterImpact = JSON.parse(localStorage.getItem("SchoolWater"));
 const data = [
   ["Impact", "Quantity", { role: "style" }],
   ["Pounds of CO2 Saved", parseInt(coEmissImpact), "rgb(255, 184, 24)"],
-  ["Kilojoules of Energy Saved", parseInt(energyImpact), "rgb(75, 179, 11)"],
+  ["Megajoules of Energy Saved", parseInt(energyImpact), "rgb(75, 179, 11)"],
   ["Gallons of Water Saved", parseInt(waterImpact), "rgb(26, 97, 168)"], // CSS-style declaration
 ];
 
