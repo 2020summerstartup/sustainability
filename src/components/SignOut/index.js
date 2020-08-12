@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { withFirebase } from "../../services/Firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { audioContext } from "../../pages/AccountPage/Settings/audioContext" 
 
 import Button from "@material-ui/core/Button";
 
@@ -18,26 +19,30 @@ const playSound = (audioFile) => {
 
 // This function is the one that is called when the user presses the sign out button. If they confirm that
 // they meant to, then this fucntion calls sign out.
-const confirmSignOut = ({ firebase }) => {
+const confirmSignOut = ({ audio, firebase }) => {
   var confirmed = window.confirm("Are you sure you want to sign out?"); // Check with the user
   if (confirmed === true) {
     firebase.doSignOut();
     localStorage.clear(); // Wipe the local storage
     toast.configure(); // Configure for toast messages
     toast.info("You have signed out. Come back soon!"); // Can play with colors here if anyone wants to. :)
-    playSound(toastAudio);
+    if (audio.unmute){
+      playSound(toastAudio)
+    };
   }
 };
 
-const SignOutButton = ({ firebase }) => (
+function SignOutButton ({ firebase }) {
+  const audio = useContext(audioContext)
+  return (
   <Button
-    onClick={() => confirmSignOut({ firebase })}
+    onClick={() => confirmSignOut({ audio, firebase })}
     variant="contained"
     color="primary"
     className="signout-btn button"
   >
     Sign Out
   </Button>
-);
+)};
 
 export default withFirebase(SignOutButton);
