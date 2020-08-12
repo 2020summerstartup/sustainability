@@ -91,16 +91,38 @@ const badgeSay = () => {
     // One mastered activity
   } else if (masterLength === 1) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
-    theBadge = <p> You've earned {masterLength} badge! Keep it going 🥳 </p>;
+    theBadge = (
+      <p>
+        {" "}
+        You've earned {masterLength} badge! Keep it going{" "}
+        <span role="img" aria-label="celebration">
+          🥳
+        </span>
+      </p>
+    );
     // two to five mastered actions
   } else if (masterLength > 1 && masterLength < 5) {
     theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
-    theBadge = <p> You've earned {masterLength} badges! That's awesome 😍</p>;
+    theBadge = (
+      <p>
+        {" "}
+        You've earned {masterLength} badges! That's awesome{" "}
+        <span role="img" aria-label="heart eyes">
+          😍
+        </span>
+      </p>
+    );
     // More than 4 mastered actiions
   } else {
     theCongrats = <>Omg {localStorage.getItem("name")}! </>;
     theBadge = (
-      <p> You've earned {masterLength} badges! That's how it's done 🤩</p>
+      <p>
+        {" "}
+        You've earned {masterLength} badges! That's how it's done{" "}
+        <span role="img" aria-label="star eyes">
+          🤩
+        </span>
+      </p>
     );
   }
 };
@@ -216,7 +238,7 @@ class Badges extends React.Component {
     }
   };
 
-getStyling() {
+  getStyling() {
     // loop through our array of mastered badges and determines if they need to have LHS or RHS side properties
     masterBadgesArray.forEach((badge, id) => {
       if (id % 2 === 0) {

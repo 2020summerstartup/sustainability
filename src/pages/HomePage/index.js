@@ -171,12 +171,12 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `scrollable-force-tab-${index}`,
-    "aria-controls": `scrollable-force-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `scrollable-force-tab-${index}`,
+//     "aria-controls": `scrollable-force-tabpanel-${index}`,
+//   };
+// }
 
 const useStyles = makeStyles((theme) => ({
   // styles for HomeHeader
@@ -718,7 +718,7 @@ function HomePage(props) {
                     <EcoIcon className={classes.tabIcon} /> Actions{" "}
                   </div>
                 }
-                {...a11yProps(0)}
+                // {...a11yProps(0)}
               />
               <Tab
                 label={
@@ -726,7 +726,7 @@ function HomePage(props) {
                     <FavoriteIcon className={classes.tabIcon} /> Favorites{" "}
                   </div>
                 }
-                {...a11yProps(1)}
+                // {...a11yProps(1)}
               />
             </Tabs>
           </AppBar>

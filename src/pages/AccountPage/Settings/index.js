@@ -262,6 +262,7 @@ function SettingsDrawer(props) {
       <IconButton
         disableFocusRipple
         disableRipple
+        aria-label="settings icon"
         style={{ backgroundColor: "transparent" }}
         className={classes.settingsIcon}
         onClick={toggleDrawer("right", true)}

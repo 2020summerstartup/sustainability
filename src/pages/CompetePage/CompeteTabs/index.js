@@ -80,12 +80,12 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `scrollable-force-tab-${index}`,
-    "aria-controls": `scrollable-force-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `scrollable-force-tab-${index}`,
+//     "aria-controls": `scrollable-force-tabpanel-${index}`,
+//   };
+// }
 
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -198,7 +198,7 @@ function CompeteTabs(props, { authUser }) {
                     <EqualizerIcon className={classes.tabIcon} /> Leaderboard{" "}
                   </div>
                 }
-                {...a11yProps(0)}
+                // {...a11yProps(0)}
               />
 
               <Tab
@@ -207,8 +207,7 @@ function CompeteTabs(props, { authUser }) {
                     <StarIcon className={classes.tabIcon} /> Challenges{" "}
                   </div>
                 }
-                {...a11yProps(1)}
-                style={{ backgroundColor: "transparent" }}
+                // {...a11yProps(1)}
               />
               {/* Admin Tab */}
               {!!authUser.roles[ROLES.ADMIN] && (
@@ -218,8 +217,7 @@ function CompeteTabs(props, { authUser }) {
                       <SupervisorAccountIcon className={classes.tabIcon} /> Admin{" "}
                     </div>
                   }
-                  {...a11yProps(1)}
-                  style={{ backgroundColor: "transparent" }}
+                  // {...a11yProps(1)}
                 />
               )}
             </Tabs>

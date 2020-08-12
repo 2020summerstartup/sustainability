@@ -51,12 +51,12 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `scrollable-force-tab-${index}`,
-    "aria-controls": `scrollable-force-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `scrollable-force-tab-${index}`,
+//     "aria-controls": `scrollable-force-tabpanel-${index}`,
+//   };
+// }
 
 // Styles for Tabs
 const useStyles = makeStyles((theme) => ({
@@ -200,7 +200,7 @@ const AccountTabs = props => {
                 </div>
               </>
             }
-            {...a11yProps(0)}
+            // {...a11yProps(0)}
           />
 
           <Tab
@@ -214,7 +214,7 @@ const AccountTabs = props => {
                 </div>
               </>
             }
-            {...a11yProps(1)}
+            // {...a11yProps(1)}
           />
 
           <Tab
@@ -228,7 +228,7 @@ const AccountTabs = props => {
                 </div>
               </>
             }
-            {...a11yProps(1)}
+            // {...a11yProps(1)}
           />
         </Tabs>
       </AppBar>

@@ -3,7 +3,8 @@ import styles from "./totalBuzz.module.css";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
+
+
 // Displays text for total logs based on total actions logged
 var totalBuzzText;
 const totalBuzzDisplay = () => {
@@ -25,15 +26,15 @@ class TotalBuzz extends React.Component {
           justify="center"
           style={{ placeItems: "center", marginBottom: "0.5rem" }}
         >
-          <Typography
-            variant="h3"
-            style={{ marginRight: "1rem" }}
-          >
+          <Typography variant="h3" style={{ marginRight: "1rem" }}>
             <b>{localStorage.getItem("buzzes")}</b>
           </Typography>
           {totalBuzzText}
           <Grid container justify="center">
-            <Typography variant="body2">
+            <Typography
+              variant="body2"
+              style={{ textShadow: "2px 2px 3px black" }}
+            >
               Click impact cards below for a fun surprise!
             </Typography>
           </Grid>
