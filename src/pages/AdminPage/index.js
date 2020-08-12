@@ -41,7 +41,7 @@ const setAdmin = (email) => {
             var confirmSetAdmin = window.confirm("Are you sure you want to make " + email + ' an admin?');
             if (confirmSetAdmin) {
               // Set ADMIN in the roles folder to have a value of ADMIN
-              firebase.database().ref('users/' + userId + '/roles').set({ // TODO: change to update instead of set
+              firebase.database().ref('users/' + userId + '/roles').set({ // NOTE: If we want to use .update instead of .set, we can use it to not override other data in firestore. Can play around with it if we want the roles folder to go away.
                 ADMIN: 'ADMIN',
               });
               toast.info(email.concat(' is now an admin!'));
