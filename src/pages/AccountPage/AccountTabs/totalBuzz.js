@@ -34,7 +34,7 @@ class TotalBuzz extends React.Component {
               variant="body2"
               style={{ textShadow: "2px 2px 3px black" }}
             >
-              Click impact cards below for a fun surprise!
+              Click the impact cards below for a fun surprise!
             </Typography>
           </Grid>
         </Grid>
