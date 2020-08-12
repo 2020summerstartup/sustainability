@@ -109,7 +109,7 @@ class Leaderboard extends React.Component {
       <>
         <div className="Leaderboard">
           <Typography variant="h5" component={"span"}>
-            Way to be sustainable Mudders!
+            Way to be sustainable, Mudders!
           </Typography>
           <div className={classes.trophyWrapper}>
             <img alt="trophy" src={trophyImg} className={classes.trophy} />
