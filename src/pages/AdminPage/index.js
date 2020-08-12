@@ -41,7 +41,7 @@ const setAdmin = (email) => {
             var confirmSetAdmin = window.confirm("Are you sure you want to make " + email + ' an admin?');
             if (confirmSetAdmin) {
               // Set ADMIN in the roles folder to have a value of ADMIN
-              firebase.database().ref('users/' + userId + '/roles').set({
+              firebase.database().ref('users/' + userId + '/roles').set({ // TODO: change to update instead of set
                 ADMIN: 'ADMIN',
               });
               toast.info(email.concat(' is now an admin!'));
