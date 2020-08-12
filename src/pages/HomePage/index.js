@@ -1045,6 +1045,10 @@ function HomePage(props) {
                             unmountOnExit
                           >
                             <CardContent>
+                              <Typography variant="h6" gutterBottom>
+                                Complete this action {action.toMaster} times to
+                                earn a badge!
+                              </Typography>
                               <CardMedia
                                 className={classes.media}
                                 image={action.image}
@@ -1057,7 +1061,7 @@ function HomePage(props) {
                               >
                                 Environmental Impact:
                               </Typography>
-                              <Typography component={"span"}>
+                              <Typography variant="body1">
                                 {action.impact}
                               </Typography>
                             </CardContent>
