@@ -7,13 +7,7 @@ import { compose } from "recompose";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import {
-  withFirebase,
-  getUser,
-  getUserImpact,
-  getSchoolImpact,
-} from "../../services/Firebase";
-import { assignData } from "../HomePage";
+import { assignData, withFirebase, getUserDocRef, getUserImpact, getSchoolImpact } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 import { ReactComponent as SignIn } from "../../img/signin.svg";
 
@@ -125,34 +119,34 @@ class SignInFormBase extends Component {
         console.log(error);
       });
 
-    // pulls all necessary user & school data from firebase
-    // IMPORTANT: this is async because getting data from firebase takes time & we need to make sure everythign in local storage is
-    // initalized before loading page or there will be MANY errors & points/favs/badges will not display properly
-    async function getUserData(email) {
-      // to give authentication check some time to run --> user needs to be authenticated to access the data
-      await waitOneSec();
-      // await waitOneSec();
-      // initalizes user's impact points in local storage
-      getUserImpact(email);
-      console.log("inside");
-      // initaizes the school's impact points in local storage
-      getSchoolImpact();
+      // pulls all necessary user & school data from firebase
+      // IMPORTANT: this is async because getting data from firebase takes time & we need to make sure everythign in local storage is 
+      // initalized before loading page or there will be MANY errors & points/favs/badges will not display properly 
+      async function getUserData (email){
+        // to give authentication check some time to run --> user needs to be authenticated to access the data
+        await waitOneSec();
+        // initalizes user's impact points in local storage 
+        getUserImpact(email);
+        // initaizes the school's impact points in local storage 
+        getSchoolImpact();
 
-      // to give these functions some time to run
-      // await waitOneSec();
-      // gets user's points, mastered & favroited actions from firebase & sets them all in local storage
-      getUser(email).onSnapshot((docSnapshot) => {
-        // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
-        if (docSnapshot.data()) {
-          // this function is where all the user's info is parsed through and set in local storage
-          assignData(docSnapshot.data());
-        }
-      });
-      // give this function somt time to run
-      await waitOneSec();
-    }
-
-    event.preventDefault();
+        // to give these functions some time to run 
+        // await waitOneSec();
+        // gets user's points, mastered & favroited actions from firebase & sets them all in local storage
+        getUserDocRef(email).onSnapshot(
+          (docSnapshot) => {
+            // Only assign data if the user was legit. (If they tried to sign up with an email address not associated with any current user, this won't run.)
+            if(docSnapshot.data()) {
+              // this function is where all the user's info is parsed through and set in local storage 
+              assignData(docSnapshot.data());  
+            }
+          },
+        );
+        // give this function somt time to run 
+        await waitOneSec();
+      }
+      
+      event.preventDefault();
     // takes user to home page
     async function goHome(props, email) {
       // wait for getUserData async function to run and set all of the user's info in local storage

@@ -6,12 +6,12 @@ import Reward from "react-rewards";
 // Firebase imports
 import {
   withFirebase,
+  assignData,
   createUser,
-  getUser,
+  getUserDocRef,
   getUserImpact,
   getSchoolImpact,
 } from "../../services/Firebase";
-import { assignData } from "../HomePage";
 import * as ROUTES from "../../constants/routes";
 // For PasswordOne data
 import { PasswordInput } from "./muiSignInPage";
@@ -172,7 +172,7 @@ class SignUpFormBase extends Component {
       .then(() => {
         // once user is created in firestore we need to pull that data and update data into local storage
         // needed to display total point, progress modal, and enable app to run withour error
-        getUser(email).onSnapshot((docSnapshot) => {
+        getUserDocRef(email).onSnapshot((docSnapshot) => {
           assignData(docSnapshot.data());
         });
         // fetches user's impact points from firestore and updates local storage

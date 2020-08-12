@@ -1,11 +1,11 @@
 import FirebaseContext, { withFirebase } from './context';
 import Firebase from './firebase';
 import {
-    firestore, createUser, getUser, updateUserPoint, updateUserDorm, updateDormPoint, getDorm, addFav, deleteFav, actionMastered, getUserImpact, updateUserImpact, DarkModeOpened, AddHomeOpened, getSchoolImpact, updateSchoolImpact
+    firestore, createUser, assignData, getUserDocRef, updateUserPoint, updateUserDorm, updateDormPoint, getDorm, addFav, deleteFav, actionMastered, getUserImpact, updateUserImpact, DarkModeOpened, AddHomeOpened, getSchoolImpact, updateSchoolImpact
 } from './firebase';
 
 export default Firebase;
 
 export { FirebaseContext, withFirebase };
 
-export { firestore, createUser, getUser, updateUserPoint, updateUserDorm, updateDormPoint, getDorm, addFav, deleteFav, actionMastered, getUserImpact, updateUserImpact, DarkModeOpened, AddHomeOpened, getSchoolImpact , updateSchoolImpact};
+export { firestore, createUser, assignData, getUserDocRef, updateUserPoint, updateUserDorm, updateDormPoint, getDorm, addFav, deleteFav, actionMastered, getUserImpact, updateUserImpact, DarkModeOpened, AddHomeOpened, getSchoolImpact , updateSchoolImpact};

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import leaderBoardUpdate, {
   assignRanking,
 } from "../CompetePage/leaderBoardUpdate";
-import { getUser, getDorm } from "../../services/Firebase";
+import { getUserDocRef, getDorm } from "../../services/Firebase";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import AccountTabs from "./AccountTabs";
 
@@ -21,7 +21,7 @@ const AccountPage = props => {
 
   const authContext = useContext(AuthUserContext);
 
-  getUser(authContext.email).onSnapshot(
+  getUserDocRef(authContext.email).onSnapshot(
     (docSnapshot) => {
       if (docSnapshot.exists) {
         assignDorm(docSnapshot.data());
