@@ -37,11 +37,11 @@ const CODisplay = () => {
 // Energy message
 const EnergyDisplay = () => {
   if (parseInt(localStorage.getItem("energy")) === 0) {
-    theEnergy = "milojoules of energy conserved. :("
+    theEnergy = "megajoules of energy conserved. :("
   } else if (parseInt(localStorage.getItem("energy")) === 1) {
-    theEnergy = "milojoule of energy conserved!"
+    theEnergy = "megajoule of energy conserved!"
   } else {
-    theEnergy = "milojoules of energy conserved!"
+    theEnergy = "megajoules of energy conserved!"
   }
 };
 
