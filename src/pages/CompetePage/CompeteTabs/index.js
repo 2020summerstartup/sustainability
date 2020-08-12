@@ -45,10 +45,12 @@ function TabPanel(props) {
         var userId = firebase.auth().currentUser.uid;
         firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
           var role = (snapshot.val() && snapshot.val().roles) || 'Anonymous';
+          // The following if statement doesn't actually achieve anything right now. It's supposed to fix the console error that occurs when
+          // a non-admin types in the URL of the admin page, but the if statement doesn't run soon enough to prevent that error.
           if (role.ADMIN || tabNumber < 2) { // If role.ADMIN is defined it means the user is an admin. And if tabnumber is less than 2 then the user is on an unrestricted tab.
-            console.log('User is on an allowed page.');
+            // User is on an allowed page
           } else {
-            console.log('Non-admin attempted to access the admin page.');
+            // Switch to an allowed page
             tabNumber = 0;
           }
         });
