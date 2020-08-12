@@ -467,35 +467,29 @@ function HomePage(props) {
     }
   };
 
-  // this function is called upon increment
+  // this function is called upon confirmed increment
   // sets the state of userTotal so that user's total point display is correct (bc can't do parse int in jsx code)
   const updateDisplayTotal = (actionPoint) => {
-    const newTotal =
-      parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
+    const newTotal = parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
     updateUserTotal(newTotal);
   };
 
-  // (JM) Called when user clicks to increment an action --> updates necessary values in firestore and LS
+  // (JM) Called when user confirms their incremented action --> updates necessary values in firestore/LS & makes call to chackMastered
   const increment = (action) => {
     // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
-
     // updates user's doc in firestore & LS to reflect incremented action
     updateUserPoint(authContext.email, action.susAction, parseInt(action.points))
-
     // add's associated impact points to user & dorm data in firestore and local storage
     updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
-
     // add's associated impact points to school in firestore and local storage
     updateSchoolImpact(action.coEmiss, action.energy, action.water);
-
     // check if action has been completed enough time to be considered "mastered"
     // also sends user a progress notification if action has not yet been mastered or modal if it has been mastered
     checkMastered(action);
-
     // update dorm's point in firestore (dorm point total not stored in LS so update here is not necessary)
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
-  }; // increment
+  }; 
 
 
   // (JM) called when user increments an action to check if the action has been mastered & reacts accordingly 
@@ -543,15 +537,13 @@ function HomePage(props) {
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
-  for (const i in ActionData) {
-    // Iterate over every action in ActionData
+  for (const i in ActionData) { // Iterate over every action in ActionData
     var action2 = ActionData[i]; // Take the current action
     var storageName2 = action2.susAction.concat("Fav");
     var storedFav = localStorage.getItem(storageName2) === "true";
-    if (storedFav) {
-      // If the action is favorited
+    if (storedFav) { // If the action is favorited
       favIconColors[i - 1] = "var(--theme-secondary)"; // Turn red
-    } else {
+    } else { // if action is not favorited
       favIconColors[i - 1] = "#6c6c6c"; // Otherwise turn gray
     }
   }
@@ -563,17 +555,14 @@ function HomePage(props) {
     // storedFav is a boolean (is the current action favorited?)
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
     var storedFav = localStorage.getItem(storageName) === "true";
-    // In case the action hasn't been favorited before
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
-    if (storedFav == null) {
+    if (storedFav == null) { // In case the action hasn't been favorited before
       storedFav = false; // If not initialized, initialize here
     }
     storedFav = !storedFav; // Toggle the favorite
     // variable for getting color of fav icon
-    var favIconColor = document.getElementById(
-      "favoriteIcon".concat(action.susAction)
-    );
-    // Notify user that action was added/removed from favorites
+    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
+    // sets up variables need to send user progress toast (displayText) & access firestore user doc (email)
     var displayText;
     const email = localStorage.getItem("email");
     if (storedFav) {
@@ -601,8 +590,7 @@ function HomePage(props) {
     // initPoints has to be called here so that any values that aren't yet initialized are displayed as 0 instead
     // appearing as blank
     // initPoints(); // DO NOT REMOVE
-    for (const el in ActionData) {
-      // Loop over every action in ActionData
+    for (const el in ActionData) { // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
       progressMessage = (
         <>
