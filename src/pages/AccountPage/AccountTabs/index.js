@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { withRouter } from "react-router";
-import College from "./college";
-import TotalPointsCard from "./points";
+// import College from "./college";
+// import TotalPointsCard from "./points";
 import ProgressCircle from "../../../components/ProgressCircle";
-import Badges from "./badges";
+// import Badges from "./badges";
 import DarkModeModal from "./darkModeModal";
 
 import PropTypes from "prop-types";
@@ -23,6 +23,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
 import { ReactComponent as SusLogo2 } from "../../../img/logo_skin2.svg";
 import SettingsDrawer from "../Settings";
+
+const College = lazy(() => import("./college"));
+const TotalPointsCard = lazy(() => import("./points"));
+const Badges = lazy(() => import("./badges"));
 
 // Tabs functions from Material UI
 function TabPanel(props) {
@@ -124,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Main component of AccountTabs file
-const AccountTabs = props => {
+const AccountTabs = (props) => {
   let { match, history } = props;
   let { params } = match;
   let { page } = params;
@@ -160,11 +164,11 @@ const AccountTabs = props => {
   }
 
   return (
-    <div> 
+    <div>
       {/* Appbar has both Header and Tabs to avoid line in between */}
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
-          <Grid justify="space-between" container style={{height: "52px"}}>
+          <Grid justify="space-between" container style={{ height: "52px" }}>
             {/* Top left corner styling with logo */}
             <Grid item style={{ margin: "auto 0", padding: 0, height: "auto" }}>
               <Typography variant="h6" className={classes.title} noWrap>
@@ -233,21 +237,23 @@ const AccountTabs = props => {
         </Tabs>
       </AppBar>
       {/* Points Page */}
-      <TabPanel value={value} index={0} className="tab-container">
-         <TotalPointsCard />
-      </TabPanel>
+      <Suspense fallback={<ProgressCircle />}>
+        <TabPanel value={value} index={0} className="tab-container">
+          <TotalPointsCard />
+        </TabPanel>
+      </Suspense>
       {/* Mudd/College Page */}
-      <TabPanel value={value} index={1} className="tab-container">
-        <Suspense fallback={<ProgressCircle />}>
+      <Suspense fallback={<ProgressCircle />}>
+        <TabPanel value={value} index={1} className="tab-container">
           <College />
-        </Suspense>
-      </TabPanel>
+        </TabPanel>
+      </Suspense>
       {/* Badge Page */}
-      <TabPanel value={value} index={2} className="tab-container">
-        <Suspense fallback={<ProgressCircle />}>
+      <Suspense fallback={<ProgressCircle />}>
+        <TabPanel value={value} index={2} className="tab-container">
           <Badges earnedBadges={firestoreMastered} />
-        </Suspense>
-      </TabPanel>
+        </TabPanel>
+      </Suspense>
     </div>
   );
 };

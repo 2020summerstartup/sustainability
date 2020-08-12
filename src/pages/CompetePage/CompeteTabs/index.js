@@ -2,15 +2,15 @@ import React, { Suspense } from "react";
 import { withRouter } from "react-router";
 // admin stuff
 import { AuthUserContext } from "../../../services/Session";
-import * as ROLES from '../../../constants/roles';
+import * as ROLES from "../../../constants/roles";
 import AdminPage from "../../AdminPage";
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 // import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import ProgressCircle from "../../../components/ProgressCircle";
 // import ChallengeCard2 from "./challengeCard2";
 import ComingSoon from "./comingSoon";
-// Material UI Imports 
+// Material UI Imports
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -25,9 +25,8 @@ import EqualizerIcon from "@material-ui/icons/Equalizer";
 import Toolbar from "@material-ui/core/Toolbar";
 import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 
-import firebase from 'firebase/app';
+import firebase from "firebase/app";
 import { getUserDocRef } from "../../../services/Firebase";
-
 
 // Functions from Material UI for tabs
 function TabPanel(props) {
@@ -36,24 +35,27 @@ function TabPanel(props) {
 
   const getRole = () => {
     // Check if the email address is associated with any of the current users.
-    var email = localStorage.getItem('email');
-    getUserDocRef(email).onSnapshot(
-      () => {
-        // console.log('docsnapshot data', docSnapshot.data());
-        // Now we want to see if this user is already an admin. 
-        // Following two lines get the user id of the currenlty logged in user
-        var userId = firebase.auth().currentUser.uid;
-        firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
-          var role = (snapshot.val() && snapshot.val().roles) || 'Anonymous';
-          if (role.ADMIN || tabNumber < 2) { // If role.ADMIN is defined it means the user is an admin. And if tabnumber is less than 2 then the user is on an unrestricted tab.
-            console.log('User is on an allowed page.');
+    var email = localStorage.getItem("email");
+    getUserDocRef(email).onSnapshot(() => {
+      // console.log('docsnapshot data', docSnapshot.data());
+      // Now we want to see if this user is already an admin.
+      // Following two lines get the user id of the currenlty logged in user
+      var userId = firebase.auth().currentUser.uid;
+      firebase
+        .database()
+        .ref("/users/" + userId)
+        .once("value")
+        .then(function (snapshot) {
+          var role = (snapshot.val() && snapshot.val().roles) || "Anonymous";
+          if (role.ADMIN || tabNumber < 2) {
+            // If role.ADMIN is defined it means the user is an admin. And if tabnumber is less than 2 then the user is on an unrestricted tab.
+            console.log("User is on an allowed page.");
           } else {
-            console.log('Non-admin attempted to access the admin page.');
+            console.log("Non-admin attempted to access the admin page.");
             tabNumber = 0;
           }
         });
-      },
-    );
+    });
   };
   getRole();
 
@@ -215,7 +217,8 @@ function CompeteTabs(props, { authUser }) {
                   label={
                     <div className={classes.tabText}>
                       {/* All the extra spaces are around admin to make it appear as a longer word so that the spacing matches "challenges" and "leaderboard" */}
-                      <SupervisorAccountIcon className={classes.tabIcon} /> &nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                      <SupervisorAccountIcon className={classes.tabIcon} />{" "}
+                      &nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;{" "}
                     </div>
                   }
                   // {...a11yProps(1)}
@@ -230,26 +233,23 @@ function CompeteTabs(props, { authUser }) {
           </TabPanel>
 
           {/* Challeneges Tab - in progress */}
-          <TabPanel value={tabNumber} index={1} className="tab-container">
-            <Suspense fallback={<ProgressCircle />}>
+          <Suspense fallback={<ProgressCircle />}>
+            <TabPanel value={tabNumber} index={1} className="tab-container">
               <ComingSoon />
-            </Suspense>
-          </TabPanel>
+            </TabPanel>
+          </Suspense>
 
           {/* ADMIN TAB - only displays for admin roles */}
-          {!!authUser.roles[ROLES.ADMIN] && (
-            <TabPanel value={tabNumber} index={2} className="tab-container">
-              <Suspense fallback={<ProgressCircle />}>
+          <Suspense fallback={<ProgressCircle />}>
+            {!!authUser.roles[ROLES.ADMIN] && (
+              <TabPanel value={tabNumber} index={2} className="tab-container">
                 <AdminPage />
-              </Suspense>
-            </TabPanel>
-          )}
-
+              </TabPanel>
+            )}
+          </Suspense>
         </div>
       )}
     </AuthUserContext.Consumer>
-
-
   );
 }
 

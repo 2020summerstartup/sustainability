@@ -86,7 +86,9 @@ import badge from "../../sounds/hero_simple-celebration-01.wav";
 import increment from "../../sounds/navigation_selection-complete-celebration.wav";
 
 // Lazy load the fave card
-const FavoriteGalaxyCard = lazy(() => retry(() => import("./faveGalaxyCard.js")));
+const FavoriteGalaxyCard = lazy(() =>
+  retry(() => import("./faveGalaxyCard.js"))
+);
 // Initiaize user's points in local storage. If the user has never logged points on this device,
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
@@ -116,8 +118,6 @@ const incrementAudio = new Audio(increment);
 const playSound = (audioFile) => {
   audioFile.play();
 };
-
-
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -537,7 +537,7 @@ function HomePage(props) {
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
           action.toMaster - actionTotal / action.points
-          } buzzes away from mastering the ${action.title} action!`;
+        } buzzes away from mastering the ${action.title} action!`;
       } else {
         displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
       }
@@ -569,7 +569,7 @@ function HomePage(props) {
   // called when user clicks on "see my badge" button to go to badge tab in profile page
   const handleClickSeeBadge = () => {
     history.push(`/profile/badges`);
-  }
+  };
 
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
@@ -775,22 +775,22 @@ function HomePage(props) {
                   sustainable!
                 </Typography>
                 {/* <div style={{ margin: "auto" }}> */}
-                  <Button
-                    onClick={handleClose}
-                    variant="contained"
-                    color="primary"
-                    className={classes.buttonClose}
-                  >
-                    Got it
-                  </Button>
-                  <Button
-                    onClick={() => handleClickSeeBadge()}
-                    variant="contained"
-                    color="secondary"
-                    className={classes.buttonBadge}
-                  >
-                    See my Badge
-                  </Button>
+                <Button
+                  onClick={handleClose}
+                  variant="contained"
+                  color="primary"
+                  className={classes.buttonClose}
+                >
+                  Got it
+                </Button>
+                <Button
+                  onClick={() => handleClickSeeBadge()}
+                  variant="contained"
+                  color="secondary"
+                  className={classes.buttonBadge}
+                >
+                  See my Badge
+                </Button>
                 {/* </div> */}
               </DialogContent>
             </Dialog>
@@ -995,13 +995,13 @@ function HomePage(props) {
                       😢
                     </span>
                   </Typography>
-                    <Typography variant="body1">
-                      Feel free to fill out the "contact us" form in settings if
+                  <Typography variant="body1">
+                    Feel free to fill out the "contact us" form in settings if
                     you would like us to add "{searchQuery}" as a sustainable
                     action!
                   </Typography>
-                  </>
-                )}
+                </>
+              )}
             </Grid>
           </TabPanel>
 
@@ -1084,6 +1084,10 @@ function HomePage(props) {
                             unmountOnExit
                           >
                             <CardContent>
+                              <Typography variant="h6" gutterBottom>
+                                Complete this action {action.toMaster} times to
+                                earn a badge!
+                              </Typography>
                               <CardMedia
                                 className={classes.media}
                                 image={action.image}
@@ -1096,7 +1100,7 @@ function HomePage(props) {
                               >
                                 Environmental Impact:
                               </Typography>
-                              <Typography component={"span"}>
+                              <Typography variant="body1">
                                 {action.impact}
                               </Typography>
                             </CardContent>

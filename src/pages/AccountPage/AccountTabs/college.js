@@ -1,4 +1,5 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
+import ProgressCircle from "../../../components/ProgressCircle";
 // Image import
 import Chart from "react-google-charts";
 import dormImg from "../../../img/dorm.svg";
@@ -28,6 +29,8 @@ import leaderBoardUpdate, {
   assignRanking,
 } from "../../CompetePage/leaderBoardUpdate";
 import { getDorm, getSchoolImpact } from "../../../services/Firebase";
+
+// const EnvImpactCardsSchool = lazy(() => import("./envImpactCards"));
 
 // synchronize school's total impact with firestore, when they remain on the page, they will not see immediate changes that other users
 // make but each time to return to the page, this function will run and new school impact points will be determined
@@ -166,7 +169,7 @@ export const DormCard = React.memo(function GalaxyCard() {
     <AuthUserContext.Consumer>
       {(authUser) => (
         <>
-        {/* Dorm Galaxy Card */}
+          {/* Dorm Galaxy Card */}
           <NoSsr>
             <GoogleFontLoader
               fonts={[
@@ -217,7 +220,9 @@ export const DormCard = React.memo(function GalaxyCard() {
               </div>
             </div>
           </Grid>
-          <EnvImpactCardsSchool />
+          <Suspense fallback={<ProgressCircle />}>
+            <EnvImpactCardsSchool />
+          </Suspense>
         </>
       )}
     </AuthUserContext.Consumer>

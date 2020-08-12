@@ -1,4 +1,5 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
+import ProgressCircle from "../../../components/ProgressCircle";
 import points from "../../../img/points.svg";
 import { AuthUserContext } from "../../../services/Session";
 // Import Galaxy Card Styles and Material UI
@@ -16,9 +17,10 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-import TotalBuzz from "./totalBuzz";
-import EnvImpactCards from "./envImpactCards";
-
+// import TotalBuzz from "./totalBuzz";
+// import EnvImpactCards from "./envImpactCards";
+const TotalBuzz = lazy(() => import("./totalBuzz"));
+const EnvImpactCards = lazy(() => import("./envImpactCards"));
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -106,8 +108,10 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
               </Box>
             </Card>
             {/* Displays number of actions and overall impact */}
-            <TotalBuzz />
-            <EnvImpactCards />
+            <Suspense fallback={<ProgressCircle />}>
+              <TotalBuzz />
+              <EnvImpactCards />
+            </Suspense>
           </>
         )}
       </AuthUserContext.Consumer>
