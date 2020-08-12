@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "../../HomePage/modal.module.css";
 import { ReactComponent as DarkLightModeImg } from "../../../img/darklightmode.svg";
 import { DarkModeOpened } from "../../../services/Firebase";
+import { audioContext } from "../Settings/audioContext"
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -43,6 +44,8 @@ export default function DarkModeModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
+  const audio = useContext(audioContext);
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -52,7 +55,9 @@ export default function DarkModeModal() {
 
   // called by onclick to play the audio file
   const playSound = (audioFile) => {
+    if (audio.unmute){
     audioFile.play();
+    }
   };
 
   // Ran to display modal only if user has never seen it before

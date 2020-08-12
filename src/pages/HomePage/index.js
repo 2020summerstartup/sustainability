@@ -14,6 +14,7 @@ import {
 } from "../../services/Firebase";
 import ActionData from "./actionData.json";
 import ProgressCircle from "../../components/ProgressCircle";
+import { audioContext } from "../AccountPage/Settings/audioContext";
 
 // import outside libraries
 import CountUp from "react-countup";
@@ -113,8 +114,10 @@ const confettiAudio = new Audio(confetti);
 const incrementAudio = new Audio(increment);
 
 // called by onclick to play the audio file
-const playSound = (audioFile) => {
-  audioFile.play();
+const playSound = (audio, audioFile) => {
+  if (audio.unmute) {
+    audioFile.play();
+  }
 };
 
 
@@ -390,6 +393,7 @@ function HomePage(props) {
   const [badgeAction, setBadgeAction] = useState("");
   const [badgeActionCount, setBadgeActionCount] = useState("");
   const authContext = useContext(AuthUserContext);
+  const audio = useContext(audioContext);
 
   // nested routing
   let { match, history } = props;
@@ -542,7 +546,7 @@ function HomePage(props) {
         displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
       }
       toast(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
-      playSound(incrementAudio);
+      playSound(audio, incrementAudio);
       setBadgeModalIsOpen(false);
     } else if (action.toMaster * action.points <= actionTotal) {
       actionMastered(authContext.email, action.susAction);
@@ -611,14 +615,14 @@ function HomePage(props) {
       // if the action is now favorited
       displayText = action.title.concat(" added to favorites");
       favIconColor.style.color = "#f48fb1"; // Turn pink
-      playSound(likeAudio);
+      playSound(audio, likeAudio);
       toast.success(displayText, { autoClose: 5000 });
       addFav(email, action.susAction);
     } else {
       // if the action is now unfavorited
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
-      playSound(unlikeAudio);
+      playSound(audio, unlikeAudio);
       toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
       deleteFav(email, action.susAction);
     }
@@ -741,7 +745,7 @@ function HomePage(props) {
               variant="contained"
               onClick={() => {
                 setProgressModalIsOpen(true);
-                playSound(confettiAudio);
+                playSound(audio, confettiAudio);
               }}
               className={classes.checkProgress}
             >

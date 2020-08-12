@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "../HomePage/modal.module.css";
 import { AddHomeOpened } from "../../services/Firebase";
 import addHomeGif from "../../img/addToHome.GIF";
+import { audioContext } from "../AccountPage/Settings/audioContext"
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -48,7 +49,8 @@ export default function DarkModeModal() {
   const classes = useStyles();
   // Visibility of modal
   const [visible, setVisible] = useState(false);
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+  const audio = useContext(audioContext)
 
   // Clicking close button on modal, makes the modal no longer visible
   const handleClose = () => {
@@ -60,7 +62,9 @@ export default function DarkModeModal() {
 
   // Called by onclick to play the audio file
   const playSound = (audioFile) => {
-    audioFile.play();
+    if (audio.unmute) {
+      audioFile.play();
+    }
   };
 
   // Ran to display modal only if user has never seen it before
