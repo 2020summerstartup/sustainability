@@ -39,7 +39,6 @@ function TabPanel(props) {
     var email = localStorage.getItem('email');
     getUserDocRef(email).onSnapshot(
       () => {
-        // console.log('docsnapshot data', docSnapshot.data());
         // Now we want to see if this user is already an admin. 
         // Following two lines get the user id of the currenlty logged in user
         var userId = firebase.auth().currentUser.uid;
