@@ -481,70 +481,52 @@ function HomePage(props) {
     updateDisplayTotal(action.points);
 
     // updates user's doc in firestore & LS to reflect incremented action
-    updateUserPoint(
-      authContext.email,
-      action.susAction,
-      parseInt(action.points)
-    )
+    updateUserPoint(authContext.email, action.susAction, parseInt(action.points))
 
     // add's associated impact points to user & dorm data in firestore and local storage
-    updateUserImpact(
-      authContext.email,
-      action.coEmiss,
-      action.energy,
-      action.water
-    );
+    updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
 
     // add's associated impact points to school in firestore and local storage
     updateSchoolImpact(action.coEmiss, action.energy, action.water);
 
     // check if action has been completed enough time to be considered "mastered"
-    // also sends user a progress notifications if action has not yet been mastered
+    // also sends user a progress notification if action has not yet been mastered or modal if it has been mastered
     checkMastered(action);
 
-    // update dorm's point in firestore
+    // update dorm's point in firestore (dorm point total not stored in LS so update here is not necessary)
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
   }; // increment
 
-  //This function checks if (upon increment) the action should be mastered & acts according
-  const checkMastered = (action) => {
-    // Get the name and info of the stored action that we're working with
 
-    // In case the action hasn't been favorited before
-    // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
-    // if (storedMaster == null) {
-    //   console.log('null')
-    // }
-    const actionTotal = localStorage.getItem(action.susAction);
+  // (JM) called when user increments an action to check if the action has been mastered & reacts accordingly 
+  // NOTE: called after LS point has been incremented (this way the value we are checking has the most recent action point)
+  const checkMastered = (action) => {
+    const actionTotal = localStorage.getItem(action.susAction); // gets the point value for the action & sets as actionTotal 
     if (action.toMaster * action.points > actionTotal) {
       // If action has not been mastered, the button will remain enabled
       // send user a progress alert to tell them how many more points they need to complete the action
-      var displayText;
-      // display a different message depending on if the user needs to buzz one or several more times to complete
+      var displayText; // display a different message depending on if the user needs to buzz one or several more times to complete
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
-          action.toMaster - actionTotal / action.points
-          } buzzes away from mastering the ${action.title} action!`;
+          (action.toMaster - actionTotal / action.points)
+          } buzzes away from mastering the ${action.title} action!`; // if more than 1 buzz required to action make buzz plural
       } else {
-        displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`;
+        displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`; // if only one buzz left, singular buzz
       }
       toast(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
       playSound(incrementAudio);
-      setBadgeModalIsOpen(false);
+      setBadgeModalIsOpen(false); // make sure badge modal does not pop up bc action is not yet mastered
     } else if (action.toMaster * action.points <= actionTotal) {
-      actionMastered(authContext.email, action.susAction);
-      // add to firestore list of mastered actions (local storage will ipdate upon page refresh) to reflect
-      // that action has been mastered -> will be disabled upon reload
-      setBadgeAction(action.title);
-      setBadgeActionCount(action.toMaster);
-      setBadgeModalIsOpen(true);
+      // If action has been mastered, the button will get disabled
+      // send user a modal celebrating thier new mastered action
+      actionMastered(authContext.email, action.susAction); // updates masteredAction array in firestore w/ new action included
+      setBadgeAction(action.title); // to make sure modal has correct action name
+      setBadgeActionCount(action.toMaster); // to make sure modal has correct value for times completed
+      setBadgeModalIsOpen(true); // to have badge modal display 
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
-      firestoreMastered.push(action.susAction);
-      localStorage.setItem(
-        "firestoreMastered",
-        JSON.stringify(firestoreMastered)
-      );
+      firestoreMastered.push(action.susAction); // updates the firestoreMastered global variable --> changes button to disabled
+      localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered)); // updates array in LS w/ new action included
     }
   };
 
@@ -596,21 +578,21 @@ function HomePage(props) {
     const email = localStorage.getItem("email");
     if (storedFav) {
       // if the action is now favorited
-      displayText = action.title.concat(" added to favorites");
+      displayText = action.title.concat(" added to favorites"); // define text to display on toast
       favIconColor.style.color = "#f48fb1"; // Turn pink
       playSound(likeAudio);
-      toast.success(displayText, { autoClose: 5000 });
-      addFav(email, action.susAction);
+      toast.success(displayText, { autoClose: 3000 });
+      addFav(email, action.susAction); // add action to firestore array of fav actions 
     } else {
       // if the action is now unfavorited
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
       playSound(unlikeAudio);
-      toast.warn(displayText, { autoClose: 5000 }); // It's a warning so that the window is yellow
-      deleteFav(email, action.susAction);
+      toast.warn(displayText, { autoClose: 3000 }); // It's a warning so that the window is yellow
+      deleteFav(email, action.susAction); // delete action to firestore array of fav actions
     }
-    // set local storage actionFav to either true or false depending on fav status
-    localStorage.setItem(storageName, storedFav); // Save the updated favorite value
+    localStorage.setItem(storageName, storedFav); // set local storage actionFav to either true or false depending on new fav status
+
   };
 
   // Set the "progress message" to be displayed when the user pressed "check progress"
