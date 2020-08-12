@@ -210,9 +210,9 @@ function SettingsDrawer(props) {
               <Grid component="label" container alignItems="center" spacing={1}>
                 <Grid item>Audio Off</Grid>
                 <Grid item>
-                  <MuteSwitch
-                    checked={mute}
-                    onChange={handleChange}
+                  <UnmuteSwitch
+                    checked={audio.unmute}
+                    onChange={audio.muteAudio}
                     name="mute"
                   />
                 </Grid>
@@ -243,19 +243,6 @@ function SettingsDrawer(props) {
           <ListItemText className={classes.listItemText}>
             Delete your account
           </ListItemText>
-        </ListItem>
-        <ListItem>
-        <ListItemText className={classes.listItemText}>
-        <Typography component="div">
-        <Grid component="label" container alignItems="center" spacing={1}>
-          <Grid item>Audio Off</Grid>
-          <Grid item>
-            <UnmuteSwitch checked={audio.unmute} onChange={audio.muteAudio} name="unmute" />
-          </Grid>
-          <Grid item>Audio On</Grid>
-        </Grid>
-      </Typography>
-        </ListItemText>
         </ListItem>
       </List>
     </div>
