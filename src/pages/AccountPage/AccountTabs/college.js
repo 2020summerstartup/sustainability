@@ -119,13 +119,16 @@ const rankDisplay = () => {
 let coEmissImpact = JSON.parse(localStorage.getItem("SchoolCoEmiss"));
 let energyImpact = JSON.parse(localStorage.getItem("SchoolEnergy"));
 let waterImpact = JSON.parse(localStorage.getItem("SchoolWater"));
+console.log('coEmissImpact', coEmissImpact);
+console.log('energyImpact', energyImpact);
+console.log('waterImpact', waterImpact);
 
 // FOR BAR CHART
 const data = [
   ["Impact", "Quantity", { role: "style" }],
-  ["Pounds of CO2 Saved", coEmissImpact, "rgb(255, 184, 24)"],
-  ["Kilojoules of Energy Saved", energyImpact, "rgb(75, 179, 11)"],
-  ["Gallons of Water Saved", waterImpact, "rgb(26, 97, 168)"], // CSS-style declaration
+  ["Pounds of CO2 Saved", parseInt(coEmissImpact), "rgb(255, 184, 24)"],
+  ["Kilojoules of Energy Saved", parseInt(energyImpact), "rgb(75, 179, 11)"],
+  ["Gallons of Water Saved", parseInt(waterImpact), "rgb(26, 97, 168)"], // CSS-style declaration
 ];
 
 const options = {
