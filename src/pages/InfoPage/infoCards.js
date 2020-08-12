@@ -29,7 +29,7 @@ class InfoCards extends React.Component {
           id: 2,
           title: "How to Participate & Earn Points",
           description:
-            "After you complete a sustainble action, log the action on the Home page by tapping the plus icon to earn points. Support your dorm by living more sustainably! See how your dorm compares with the others by checking out the Leaderboard on the Compete page!",
+            "After you complete a sustainable action, log the action on the Home page by tapping the plus icon to earn points. Support your dorm by living more sustainably! See how your dorm compares with the others by checking out the Leaderboard on the Compete page!",
         },
         {
           id: 3,
