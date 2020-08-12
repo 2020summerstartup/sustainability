@@ -43,7 +43,7 @@ export default function DormSelect() {
     getDorm()
       .doc(event.target.value)
       .onSnapshot((docSnapshot) => {
-        assignRanking(docSnapshot.data());
+        assignRanking(docSnapshot.data()); // called here to make sure that ranking display reflects user's new dorm 
       });
       toast.configure();
       toast.success('You are now part of ' + event.target.value + ' dorm!');
