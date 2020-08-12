@@ -124,6 +124,8 @@ console.log('energyImpact', energyImpact);
 console.log('waterImpact', waterImpact);
 
 // FOR BAR CHART
+// these will be used to render the cards in class EnvImpactCards
+// JSON.parse makes it a string!
 const data = [
   ["Impact", "Quantity", { role: "style" }],
   ["Pounds of CO2 Saved", parseInt(coEmissImpact), "rgb(255, 184, 24)"],
