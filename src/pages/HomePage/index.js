@@ -91,20 +91,20 @@ const FavoriteGalaxyCard = lazy(() => retry(() => import("./faveGalaxyCard.js"))
 // each local storage item will be null. To prevent "null" from displaying anywhere, we
 // initialize here.
 //DONT THINK WE NEED THIS ANYMORE?
-var total;
-function initPoints(email) {
-  total = 0;
-  for (const el in ActionData) {
-    var action = localStorage.getItem(ActionData[el].susAction); // Action to initialize
-    if (isNaN(action) || action == null) {
-      // If it hasn't been initialized
-      localStorage.setItem(ActionData[el].susAction, 0); // Initialize to 0
-      action = 0;
-    }
-    total += parseInt(action); // Keep track of the sum of the individual points
-  }
-  localStorage.setItem("total", total); // After initializing individual points, initialize total.
-}
+// var total;
+// function initPoints(email) {
+//   total = 0;
+//   for (const el in ActionData) {
+//     var action = localStorage.getItem(ActionData[el].susAction); // Action to initialize
+//     if (isNaN(action) || action == null) {
+//       // If it hasn't been initialized
+//       localStorage.setItem(ActionData[el].susAction, 0); // Initialize to 0
+//       action = 0;
+//     }
+//     total += parseInt(action); // Keep track of the sum of the individual points
+//   }
+//   localStorage.setItem("total", total); // After initializing individual points, initialize total.
+// }
 
 // sound play for certain buttons
 const likeAudio = new Audio(like);
@@ -600,7 +600,7 @@ function HomePage(props) {
   const setProgressMessage = () => {
     // initPoints has to be called here so that any values that aren't yet initialized are displayed as 0 instead
     // appearing as blank
-    initPoints(); // DO NOT REMOVE
+    // initPoints(); // DO NOT REMOVE
     for (const el in ActionData) {
       // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
@@ -1086,4 +1086,4 @@ function HomePage(props) {
 const condition = (authUser) => !!authUser;
 const HomePageAuthorized = withAuthorization(condition)(HomePage);
 export default withRouter(HomePageAuthorized);
-export { initPoints };
+// export { initPoints };
