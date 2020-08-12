@@ -90,7 +90,7 @@ const badgeSay = () => {
     );
     // One mastered activity
   } else if (masterLength === 1) {
-    theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
+    theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}
@@ -102,7 +102,7 @@ const badgeSay = () => {
     );
     // two to five mastered actions
   } else if (masterLength > 1 && masterLength < 5) {
-    theCongrats = <> Congratulations {localStorage.getItem("name")}! </>;
+    theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}

@@ -121,6 +121,8 @@ let energyImpact = JSON.parse(localStorage.getItem("SchoolEnergy"));
 let waterImpact = JSON.parse(localStorage.getItem("SchoolWater"));
 
 // FOR BAR CHART
+// these will be used to render the cards in class EnvImpactCards
+// JSON.parse makes it a string!
 const data = [
   ["Impact", "Quantity", { role: "style" }],
   ["Pounds of CO2 Saved", parseInt(coEmissImpact), "rgb(255, 184, 24)"],

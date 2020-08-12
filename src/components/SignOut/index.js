@@ -28,7 +28,6 @@ async function confirmSignOut ({ audio, firebase }) {
   if (confirmed === true) {
     window.location.href = "/signin"
     firebase.doSignOut();
-    window.location.href = "/"
     localStorage.clear(); // Wipe the local storage
     // I DON'T KNOW IF THESE LINES ARE ACTUALLY BEING CALLED
     toast.configure(); // Configure for toast messages
