@@ -178,7 +178,7 @@ const leafBackSay = () => {
 leafBackSay();
 
 // Galaxy Card for badges
-export const BadgesCard = React.memo(function GalaxyCard() {
+export const BadgesCard = function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
   const classes = useStyles();
@@ -211,7 +211,7 @@ export const BadgesCard = React.memo(function GalaxyCard() {
       </Card>
     </>
   );
-});
+};
 // Main Component - displays galaxy card and leaf badges for mastered actions
 class Badges extends React.Component {
   constructor() {

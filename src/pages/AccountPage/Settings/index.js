@@ -1,6 +1,9 @@
 import React from "react";
 import { AuthUserContext } from "../../../services/Session";
 
+import ProgressCircle from "../../../components/ProgressCircle";
+
+
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { withTheme } from "../../../components/Theme";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
@@ -26,6 +29,7 @@ import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
 
 import SignOutButton from "../../../components/SignOut";
+// const SignOutButton = lazy(() => import("../../../components/SignOut"));
 
 var globalMute = false;
 
@@ -230,12 +234,15 @@ function SettingsDrawer(props) {
         </ListItem>
 
         {/* SIGNOUT BUTTON */}
+        {/* <Suspense fallback={<ProgressCircle />}> */}
+
         <ListItem className={classes.listItemIcon}>
           <ListItemText>
             {/* styles for signout button are in components/Navigation/navigation.css */}
             <SignOutButton />
           </ListItemText>
         </ListItem>
+        {/* </Suspense> */}
 
         {/* DELETE ACCOUNT */}
         <ListItem

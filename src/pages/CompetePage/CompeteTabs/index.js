@@ -1,15 +1,15 @@
-import React, { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { withRouter } from "react-router";
+
 // admin stuff
 import { AuthUserContext } from "../../../services/Session";
 import * as ROLES from "../../../constants/roles";
-import AdminPage from "../../AdminPage";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-// import Challenges from "./challenges.js";
 import Leaderboard from "./leaderboard";
 import ProgressCircle from "../../../components/ProgressCircle";
-// import ChallengeCard2 from "./challengeCard2";
-import ComingSoon from "./comingSoon";
+// import ComingSoon from "./comingSoon";
+// import AdminPage from "../../AdminPage";
+
 // Material UI Imports
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,6 +27,9 @@ import { ReactComponent as SusLogo1 } from "../../../img/logo_skin1.svg";
 
 import firebase from "firebase/app";
 import { getUserDocRef } from "../../../services/Firebase";
+
+const ComingSoon = lazy(() => import("./comingSoon"));
+const AdminPage = lazy(() => import("../../AdminPage"));
 
 // Functions from Material UI for tabs
 function TabPanel(props) {
@@ -228,9 +231,11 @@ function CompeteTabs(props, { authUser }) {
           </AppBar>
 
           {/* LeaderBoard Tab */}
-          <TabPanel value={tabNumber} index={0} className="tab-container">
-            <Leaderboard />
-          </TabPanel>
+          <Suspense fallback={<ProgressCircle />}>
+            <TabPanel value={tabNumber} index={0} className="tab-container">
+              <Leaderboard />
+            </TabPanel>
+          </Suspense>
 
           {/* Challeneges Tab - in progress */}
           <Suspense fallback={<ProgressCircle />}>

@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Main Component
-export const ActionCard = React.memo(function GalaxyCard() {
+export const ActionCard = function GalaxyCard() {
     const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
     const classes = useStyles();
 
@@ -96,6 +96,6 @@ export const ActionCard = React.memo(function GalaxyCard() {
             </Card>
         </>
     );
-});
+};
 
 export default ActionCard;

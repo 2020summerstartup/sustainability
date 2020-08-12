@@ -70,7 +70,7 @@ const pointsDisplay = () => {
 };
 
 // Main compoenent - Displays the number of points user has
-export const TotalPointsCard = React.memo(function GalaxyCard() {
+export const TotalPointsCard = function GalaxyCard() {
   // Image's top portion is prioritized to display
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   // Grabs styles defined above
@@ -117,5 +117,5 @@ export const TotalPointsCard = React.memo(function GalaxyCard() {
       </AuthUserContext.Consumer>
     </>
   );
-});
+};
 export default TotalPointsCard;

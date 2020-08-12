@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import ProgressCircle from "../../../components/ProgressCircle";
 // Image import
 import Chart from "react-google-charts";
@@ -29,8 +29,6 @@ import leaderBoardUpdate, {
   assignRanking,
 } from "../../CompetePage/leaderBoardUpdate";
 import { getDorm, getSchoolImpact } from "../../../services/Firebase";
-
-// const EnvImpactCardsSchool = lazy(() => import("./envImpactCards"));
 
 // synchronize school's total impact with firestore, when they remain on the page, they will not see immediate changes that other users
 // make but each time to return to the page, this function will run and new school impact points will be determined
@@ -157,7 +155,7 @@ class EnvImpactCardsSchool extends React.Component {
   }
 }
 // Dorm Galaxy Card
-export const DormCard = React.memo(function GalaxyCard() {
+export const DormCard = function GalaxyCard() {
   // Image aligned on top, styles called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
@@ -227,6 +225,6 @@ export const DormCard = React.memo(function GalaxyCard() {
       )}
     </AuthUserContext.Consumer>
   );
-});
+};
 
 export default DormCard;
