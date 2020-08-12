@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 // For emoji confetti on sign up click
@@ -137,6 +137,7 @@ class SignUpFormBase extends Component {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
+  static contextType = audioContext;
 
   // Checkbox for Admin status
   onChangeCheckbox = (event) => {
@@ -235,7 +236,6 @@ class SignUpFormBase extends Component {
         dorm === "Linde" ||
         dorm === "Atwood"
       );
-    const audio = useContext(audioContext);
 
     return (
       <Container maxWidth="xs">
@@ -357,7 +357,7 @@ class SignUpFormBase extends Component {
                 style={{ margin: "1rem auto 1.5rem auto" }}
                 disabled={isInvalid}
                 onClick={() => {
-                  playSound(audio, signupAudio);
+                  playSound(this.context, signupAudio);
                   this.reward.rewardMe();
                 }}
               >
