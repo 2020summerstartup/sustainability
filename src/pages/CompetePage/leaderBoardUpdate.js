@@ -7,8 +7,8 @@ function assignRanking(dormData) { // param is snapshot of user's dorm doc in do
     localStorage.setItem('ranking', dormData.rank)
   }  
 
-// this function is called when 
-//
+// this function updates the ranking of the dorms so that they are accurate & update to date
+// called anywhere we need to display user's dorm rank or other dorm ranks/scores
 function leaderBoardUpdate() {
     const updates = [] // defines update --> var that 
 
@@ -24,7 +24,6 @@ function leaderBoardUpdate() {
             }));
             i++; // increase the count 
         });
-        // return Promise.all(updates); // not entirely sure what this does but pretty sure its not necessary 
         })
         .then(() => {
         getDorm().doc(localStorage.getItem('dorm')).get().then((snapShot) => {
