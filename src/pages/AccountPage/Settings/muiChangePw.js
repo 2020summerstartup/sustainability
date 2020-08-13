@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import { withFirebase } from "../../../services/Firebase";
 import accountImg from "../../../img/account.svg";
@@ -109,10 +109,10 @@ class PasswordChangeFormBase extends Component {
     const isInvalid = passwordOne !== passwordTwo || passwordOne === "";
     const { classes } = this.props;
 
-    const audio = useContext(audioContext);
-
     return (
-      <Container maxWidth="xs">
+      <audioContext.Consumer>
+      {({unmute, muteAudio}) => (
+        <Container maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -150,13 +150,15 @@ class PasswordChangeFormBase extends Component {
               color="primary"
               className={classes.submit}
               disabled={isInvalid}
-              onClick={() => playSound(audio.unmute, toastAudio)}
+              onClick={() => playSound(unmute, toastAudio)}
             >
               Change Password
             </Button>
           </form>
         </div>
       </Container>
+    )}
+  </audioContext.Consumer>
     );
   }
 }
