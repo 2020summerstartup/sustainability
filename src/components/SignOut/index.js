@@ -28,13 +28,14 @@ async function confirmSignOut ({ audio, firebase }) {
   if (confirmed === true) {
     window.location.href = "/signin"
     firebase.doSignOut();
-    localStorage.clear(); // Wipe the local storage
     // I DON'T KNOW IF THESE LINES ARE ACTUALLY BEING CALLED
     toast.configure(); // Configure for toast messages
     toast.info("You have signed out. Come back soon!"); // Can play with colors here if anyone wants to. :)
     if (audio.unmute){
+      console.log("play")
       playSound(toastAudio)
     };
+    localStorage.clear(); // Wipe the local storage
   }
 };
 
