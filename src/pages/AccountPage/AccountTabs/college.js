@@ -1,3 +1,4 @@
+// commented by JM
 import React, { Suspense } from "react";
 import ProgressCircle from "../../../components/ProgressCircle";
 // Image import
@@ -150,7 +151,7 @@ export const DormCard = React.memo(function GalaxyCard() {
   // update the dorm rank text & total school buzz text
   rankDisplay();
   totalBuzzDisplay();
-  
+
   return (
     <AuthUserContext.Consumer>
       {(authUser) => (
