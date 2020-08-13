@@ -91,7 +91,7 @@ function BottomNavAuth() {
 // BottomNav users that are NOT logged into thier account
 function BottomNavNonAuth() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
 
   return (
     <BottomNavigation
