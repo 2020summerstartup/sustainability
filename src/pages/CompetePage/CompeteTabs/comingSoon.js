@@ -7,7 +7,7 @@ const ComingSoon = () => {
   return (
     <div className={styles.fancyBorder}>
       <Typography
-        variant="h4"
+        variant="h5"
         style={{
           color: "white",
           justify: "center",
