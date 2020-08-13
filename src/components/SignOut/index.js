@@ -40,7 +40,6 @@ async function confirmSignOut ({ audio, firebase }) {
 
 function SignOutButton ({ firebase }) {
   const audio = useContext(audioContext)
-  console.log(audio)
   return (
   <Button
     onClick={() => confirmSignOut({ audio, firebase })}
