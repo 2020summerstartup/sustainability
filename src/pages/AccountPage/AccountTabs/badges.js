@@ -250,6 +250,7 @@ class Badges extends React.Component {
     }
   };
 
+  // function to get different styling for [left & right && front and back] for title, leaf position
   getStyling() {
     // loop through our array of mastered badges and determines if they need to have LHS or RHS side properties
     masterBadgesArray.forEach((badge, id) => {
@@ -320,6 +321,7 @@ class Badges extends React.Component {
           this.state.badges.map((badge, i) => (
             <div key={badge.id}>
               <div className={styles.column}>
+                {/* only flip the leaf with id of badge that was clicked */}
                 <div
                   className={`${
                     badge.id === selectedBadgeId && selectedBadgeState
@@ -328,6 +330,8 @@ class Badges extends React.Component {
                   } ${badge.leafStyling}`}
                   onClick={() => this.cardClick(badge.id)}
                 >
+
+                  {/* FRONT of BADGE */}
                   <div className={styles.leafFront}>
                     <Typography
                       variant="h6"
@@ -339,6 +343,8 @@ class Badges extends React.Component {
                       &nbsp;
                     </Typography>
                   </div>
+                  
+                  {/* BACK fo BADGE */}
                   <div className={styles.leafBack}>
                     <Typography variant="h6" className={badge.titleStylingBack}>
                       <center>

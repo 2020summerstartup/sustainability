@@ -1,3 +1,4 @@
+/* STYLINGS FOR LEAF BADGES */
 /* Regular Phone Screen */
 .column {
   display: flex;
@@ -83,14 +84,6 @@ div.right {
     rgba(38, 172, 51, 1) 50.1%,
     rgba(57, 227, 74, 1) 100%
   );
-  /* background: rgb(6, 110, 10);
-  background: linear-gradient(
-    45deg,
-    rgba(6, 110, 10, 1) 0%,
-    rgba(41, 201, 47, 1) 49.9%,
-    rgba(57, 227, 74, 1) 50.1%,
-    rgba(38, 172, 51, 1) 100%
-  ); */
 }
 
 .flipLeft {
@@ -100,14 +93,6 @@ div.right {
 .flipRight {
   transform: rotate3d(-1, -1, 0, 180deg);
 }
-
-/* div.left:hover {
-  transform: rotate3d(1, -1, 0, 180deg);
-}
-
-div.right:hover {
-  transform: rotate3d(-1, -1, 0, 180deg);
-} */
 
 .leafFront,
 .leafBack {
@@ -137,6 +122,7 @@ div.right:hover {
   color: white;
   text-shadow: 2px 2px 5px black;
 }
+
 
 /* LEAF ANIMATIONS */
 .leaves {

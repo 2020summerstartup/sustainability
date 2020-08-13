@@ -1,5 +1,5 @@
 import React from "react";
-import trophyImg from "../../../img/trophy.svg";
+import { ReactComponent as TrophyImg } from "../../../img/trophy.svg";
 import "./leaderboard.css";
 import { firestore } from "../../../services/Firebase";
 import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
@@ -112,7 +112,7 @@ class Leaderboard extends React.Component {
             Way to be sustainable, Mudders!
           </Typography>
           <div className={classes.trophyWrapper}>
-            <img alt="trophy" src={trophyImg} className={classes.trophy} />
+            <TrophyImg className={classes.trophy} />
             {/* MUST ATTRIBUTE AUTHOR */}
             {/* <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
             <Typography
