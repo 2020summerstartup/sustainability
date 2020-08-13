@@ -131,6 +131,34 @@ const badgeSay = () => {
 badgeSay();
 
 var masterBadgesArray = []; // Initalize global variable array that will contain only the mastered actions
+// called when user goes to badges tab --> displays the correct, updated badges by adding badge action info to array that is looped through
+const getUpdatedBadges = () => { 
+  masterBadgesArray = [];
+  for (const el in ActionData) { // Iterate over every action in ActionData & determine if the action has been mastered
+    var action = ActionData[el]; // Take the current action
+    var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
+    var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage 
+    //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds 
+  
+    if (
+      firestoreMastered != null && // if the array is not empty / if the array exists
+      firestoreMastered.includes(stringActionName) // if the array contains the actions --> the action is mastered
+    ) {
+      // sets attributes for the specific action
+      const masteredActionProps = {
+        id: action.id,
+        title: action.badgeName,
+        titleStylingFront: null,
+        titleStylingBack: null,
+        leafStyling: null, //float left or right
+        flipStatus: null, //show back or front
+        toMaster: action.toMaster,
+      };
+      // adds the necessary attributes to the masterBadgesArray that we will loop through to render the cards later
+      masterBadgesArray.push(masteredActionProps);
+    }
+  }
+} 
 
 
 // The following function is no longer used, because it displays the wrong number of times to master a badge (instead of times to master,
@@ -202,7 +230,6 @@ class Badges extends React.Component {
       selectedBadgeState: false, // state of the badge that use clicks on
     };
     this.getStyling = this.getStyling.bind(this);
-    this.getUpdatedBadges = this.getUpdatedBadges.bind(this);
   }
 
   // function for when user clicks on card with specific id
@@ -219,34 +246,6 @@ class Badges extends React.Component {
       });
     }
   };
-
-  getUpdatedBadges = () => { // to have badges appear automatically, this function must be here
-    masterBadgesArray = [];
-    for (const el in ActionData) { // Iterate over every action in ActionData & determine if the action has been mastered
-      var action = ActionData[el]; // Take the current action
-      var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
-      var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage 
-      //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds 
-    
-      if (
-        firestoreMastered != null && // if the array is not empty / if the array exists
-        firestoreMastered.includes(stringActionName) // if the array contains the actions --> the action is mastered
-      ) {
-        // sets attributes for the specific action
-        const masteredActionProps = {
-          id: action.id,
-          title: action.badgeName,
-          titleStylingFront: null,
-          titleStylingBack: null,
-          leafStyling: null, //float left or right
-          flipStatus: null, //show back or front
-          toMaster: action.toMaster,
-        };
-        // adds the necessary attributes to the masterBadgesArray that we will loop through to render the cards later
-        masterBadgesArray.push(masteredActionProps);
-      }
-    }
-    } 
 
 
   getStyling() {
@@ -279,7 +278,7 @@ class Badges extends React.Component {
   }
 
   componentDidMount() {
-    this.getUpdatedBadges(); // get updated badges each time user goes to badges tab
+    getUpdatedBadges(); // get updated badges each time user goes to badges tab
     this.getStyling(); 
   }
 
