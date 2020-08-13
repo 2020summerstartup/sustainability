@@ -320,7 +320,7 @@ class Badges extends React.Component {
                       variant="h6"
                       className={badge.titleStylingFront}
                     >
-                      {badge.title}
+                      <br />{badge.title}<br />&nbsp;
                     </Typography>
                   </div>
                   <div className={styles.leafBack}>
@@ -335,7 +335,7 @@ class Badges extends React.Component {
         ) : (
           <div className="empty">
             <Typography variant="h5">
-              You haven't earned any badges yet :(
+              You haven't earned any badges yet. :(
             </Typography>
           </div>
         )}
