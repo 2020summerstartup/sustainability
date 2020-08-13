@@ -22,8 +22,8 @@ import ContactMailIcon from "@material-ui/icons/ContactMail";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
-import Switch from '@material-ui/core/Switch';
-import Grid from '@material-ui/core/Grid';
+import Switch from "@material-ui/core/Switch";
+import Grid from "@material-ui/core/Grid";
 import AudioContextProvider, { audioContext } from "./audioContext";
 import SignOutButton from "../../../components/SignOut";
 // const SignOutButton = lazy(() => import("../../../components/SignOut"));
@@ -85,6 +85,7 @@ const UnmuteSwitch = withStyles((theme) => ({
   },
   checked: {},
 }))(Switch);
+
 // Main Component - Settings on top right corner of profile page
 function SettingsDrawer(props) {
   const classes = useStyles();
@@ -161,6 +162,26 @@ function SettingsDrawer(props) {
           </ListItemText>
         </ListItem>
 
+        {/* INFO PAGE */}
+        <ListItem button component={Link} to={ROUTES.INFO}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            More Info
+          </ListItemText>
+        </ListItem>
+
+        {/* CONTACT US FORM */}
+        <ListItem button component={Link} to={ROUTES.CONTACT}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <ContactMailIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>
+            Contact Us
+          </ListItemText>
+        </ListItem>
+
         {/* DARK MODE TOGGLE */}
         <ListItem
           button
@@ -184,26 +205,6 @@ function SettingsDrawer(props) {
           </ListItemText>
         </ListItem>
 
-        {/* INFO PAGE */}
-        <ListItem button component={Link} to={ROUTES.INFO}>
-          <ListItemIcon className={classes.listItemIcon}>
-            <InfoIcon />
-          </ListItemIcon>
-          <ListItemText className={classes.listItemText}>
-            More Info
-          </ListItemText>
-        </ListItem>
-
-        {/* CONTACT US FORM */}
-        <ListItem button component={Link} to={ROUTES.CONTACT}>
-          <ListItemIcon className={classes.listItemIcon}>
-            <ContactMailIcon />
-          </ListItemIcon>
-          <ListItemText className={classes.listItemText}>
-            Contact Us
-          </ListItemText>
-        </ListItem>
-
         {/* MUTE TOGGLE */}
         <ListItem>
           <ListItemText className={classes.listItemText}>
@@ -224,15 +225,12 @@ function SettingsDrawer(props) {
         </ListItem>
 
         {/* SIGNOUT BUTTON */}
-        {/* <Suspense fallback={<ProgressCircle />}> */}
-
         <ListItem className={classes.listItemIcon}>
           <ListItemText>
             {/* styles for signout button are in components/Navigation/navigation.css */}
             <SignOutButton />
           </ListItemText>
         </ListItem>
-        {/* </Suspense> */}
 
         {/* DELETE ACCOUNT */}
         <ListItem
@@ -254,27 +252,27 @@ function SettingsDrawer(props) {
 
   return (
     <AudioContextProvider>
-    <React.Fragment key={"right"}>
-      <IconButton
-        disableFocusRipple
-        disableRipple
-        aria-label="settings icon"
-        style={{ backgroundColor: "transparent" }}
-        className={classes.settingsIcon}
-        onClick={toggleDrawer("right", true)}
-      >
-        {<SettingsIcon />}
-      </IconButton>
-      <SwipeableDrawer
-        anchor={"right"}
-        open={state["right"]}
-        onClose={toggleDrawer("right", false)}
-        onOpen={toggleDrawer("right", true)}
-      >
-        {list("right")}
-      </SwipeableDrawer>
-    </React.Fragment>
-  </AudioContextProvider>
+      <React.Fragment key={"right"}>
+        <IconButton
+          disableFocusRipple
+          disableRipple
+          aria-label="settings icon"
+          style={{ backgroundColor: "transparent" }}
+          className={classes.settingsIcon}
+          onClick={toggleDrawer("right", true)}
+        >
+          {<SettingsIcon />}
+        </IconButton>
+        <SwipeableDrawer
+          anchor={"right"}
+          open={state["right"]}
+          onClose={toggleDrawer("right", false)}
+          onOpen={toggleDrawer("right", true)}
+        >
+          {list("right")}
+        </SwipeableDrawer>
+      </React.Fragment>
+    </AudioContextProvider>
   );
 }
 

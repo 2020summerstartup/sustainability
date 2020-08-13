@@ -244,7 +244,7 @@ function CompeteTabs(props, { authUser }) {
             </TabPanel>
           </Suspense>
 
-          {/* Challeneges Tab - in progress */}
+          {/* Challeneges Tab - coming soon */}
           <Suspense
             fallback={
               <div className="base-container">

@@ -56,9 +56,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 var masteredActions = localStorage.getItem("firestoreMastered"); // MasteredActions array contains all mastered actions (stored in LS)
-var masterLength; // initalize global variable that is length of masteredActions array 
-if (masteredActions !== null && masteredActions !== "undefined" && masteredActions !== []) {
-  // If masteredActions is defined, then it has a specific length 
+var masterLength; // initalize global variable that is length of masteredActions array
+if (
+  masteredActions !== null &&
+  masteredActions !== "undefined" &&
+  masteredActions !== []
+) {
+  // If masteredActions is defined, then it has a specific length
   masterLength = JSON.parse(masteredActions).length;
 } else {
   // If masteredAction is null, then there are zero mastered actions
@@ -130,31 +134,36 @@ const badgeSay = () => {
 // Call function so theCongrats and theBadge can be updated
 badgeSay();
 
-var masterBadgesArray = []; // Initalize an array that will contain only the mastered actions
-for (const el in ActionData) { // Iterate over every action in ActionData & determine if the action has been mastered
-  var action = ActionData[el]; // Take the current action
-  var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
-  var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage 
-  //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds 
-
-  if (
-    firestoreMastered != null && // if the array is not empty / if the array exists
-    firestoreMastered.includes(stringActionName) // if the array contains the actions --> the action is mastered
-  ) {
-    // sets attributes for the specific action
-    const masteredActionProps = {
-      id: action.id,
-      title: action.badgeName,
-      titleStylingFront: null,
-      titleStylingBack: null,
-      leafStyling: null, //float left or right
-      flipStatus: null, //show back or front
-      toMaster: action.toMaster,
-    };
-    // adds the necessary attributes to the masterBadgesArray that we will loop through to render the cards later
-    masterBadgesArray.push(masteredActionProps);
+var masterBadgesArray = []; // Initalize global variable array that will contain only the mastered actions
+// called when user goes to badges tab --> displays the correct, updated badges by adding badge action info to array that is looped through
+const getUpdatedBadges = () => { 
+  masterBadgesArray = [];
+  for (const el in ActionData) { // Iterate over every action in ActionData & determine if the action has been mastered
+    var action = ActionData[el]; // Take the current action
+    var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
+    var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage 
+    //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds 
+  
+    if (
+      firestoreMastered != null && // if the array is not empty / if the array exists
+      firestoreMastered.includes(stringActionName) // if the array contains the actions --> the action is mastered
+    ) {
+      // sets attributes for the specific action
+      const masteredActionProps = {
+        id: action.id,
+        title: action.badgeName,
+        titleStylingFront: null,
+        titleStylingBack: null,
+        leafStyling: null, //float left or right
+        flipStatus: null, //show back or front
+        toMaster: action.toMaster,
+      };
+      // adds the necessary attributes to the masterBadgesArray that we will loop through to render the cards later
+      masterBadgesArray.push(masteredActionProps);
+    }
   }
-}
+} 
+
 
 // The following function is no longer used, because it displays the wrong number of times to master a badge (instead of times to master,
 // it displays the number of badges currently earned). I'm leaving the code here because the skeleton of it might be useful for something else.
@@ -179,7 +188,8 @@ for (const el in ActionData) { // Iterate over every action in ActionData & dete
 // leafBackSay();
 
 // Galaxy Card for badges
-export const BadgesCard = function GalaxyCard() {
+// React.memo keep our app from over rendering when it doesn't need to
+export const BadgesCard = React.memo(function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
   const classes = useStyles();
@@ -212,7 +222,9 @@ export const BadgesCard = function GalaxyCard() {
       </Card>
     </>
   );
-};
+});
+
+
 // Main Component - displays galaxy card and leaf badges for mastered actions
 class Badges extends React.Component {
   constructor() {
@@ -239,6 +251,7 @@ class Badges extends React.Component {
       });
     }
   };
+
 
   getStyling() {
     // loop through our array of mastered badges and determines if they need to have LHS or RHS side properties
@@ -270,7 +283,8 @@ class Badges extends React.Component {
   }
 
   componentDidMount() {
-    this.getStyling();
+    getUpdatedBadges(); // get updated badges each time user goes to badges tab
+    this.getStyling(); 
   }
 
   render() {
@@ -323,7 +337,10 @@ class Badges extends React.Component {
                       variant="h6"
                       className={badge.titleStylingFront}
                     >
-                      <br />{badge.title}<br />&nbsp;
+                      <br />
+                      {badge.title}
+                      <br />
+                      &nbsp;
                     </Typography>
                   </div>
                   <div className={styles.leafBack}>

@@ -17,7 +17,7 @@ export class Rotate extends Component {
     return (
       <div>
         <AutoRotatingCarousel
-          autoplay={false}
+          autoplay={true}
           interval={7000}
           hideArrows={false}
           open={true}
@@ -32,7 +32,7 @@ export class Rotate extends Component {
               <img
                 alt=""
                 src={suslogoroundImg}
-                class="responsive"
+                className="responsive"
                 style={{ width: "80%", height: "80%" }}
               />
             }
@@ -84,7 +84,7 @@ export class Rotate extends Component {
               <img
                 alt=""
                 src={addtohomeGif}
-                class="snapgrid"
+                className="snapgrid"
                 style={{
                   paddingTop: "2rem",
                   width: "auto",
