@@ -116,9 +116,8 @@ const confettiAudio = new Audio(confetti);
 const incrementAudio = new Audio(increment);
 
 // called by onclick to play the audio file
-const playSound = (unmute, audioFile) => {
-  console.log(unmute)
-  if (unmute) {
+const playSound = (audio, audioFile) => {
+  if (audio.unmute) {
     audioFile.play();
   }
 };
@@ -468,7 +467,7 @@ function HomePage(props) {
   const confirmIncrement = (unmute, action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
     if (confirmed === true) {
-      increment(action); // If user meant to, call the function to actually increment user's points
+      increment(unmute, action); // If user meant to, call the function to actually increment user's points
     }
   };
 
