@@ -155,25 +155,28 @@ for (const el in ActionData) { // Iterate over every action in ActionData & dete
     masterBadgesArray.push(masteredActionProps);
   }
 }
-// Displays text for back of leaf depending on how many actions have been mastered
-var backText;
-const leafBackSay = () => {
-  if (masterLength === 1) {
-    backText = (
-      <center>
-        Completed <br /> 1 <br /> Time!
-      </center>
-    );
-  } else {
-    backText = (
-      <center>
-        Completed <br /> {masterBadgesArray.length} <br /> Times!
-      </center>
-    );
-  }
-};
-// Need to call function for it to run
-leafBackSay();
+
+// The following function is no longer used, because it displays the wrong number of times to master a badge (instead of times to master,
+// it displays the number of badges currently earned). I'm leaving the code here because the skeleton of it might be useful for something else.
+// // Displays text for back of leaf depending on how many actions have been mastered
+// var backText;
+// const leafBackSay = () => {
+//   if (masterLength === 1) {
+//     backText = (
+//       <center>
+//         Completed <br /> 1 <br /> Time!
+//       </center>
+//     );
+//   } else {
+//     backText = (
+//       <center>
+//         Completed <br /> {masterBadgesArray.length} <br /> Times!
+//       </center>
+//     );
+//   }
+// };
+// // Need to call function for it to run
+// leafBackSay();
 
 // Galaxy Card for badges
 export const BadgesCard = function GalaxyCard() {
@@ -325,7 +328,13 @@ class Badges extends React.Component {
                   </div>
                   <div className={styles.leafBack}>
                     <Typography variant="h6" className={badge.titleStylingBack}>
-                      {backText}
+                      <center>
+                        Completed
+                        <br />
+                        {badge.toMaster}
+                        <br />
+                        Times!
+                      </center>
                     </Typography>
                   </div>
                 </div>
