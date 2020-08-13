@@ -24,7 +24,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 // import svg & css files
 import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
-import actionTab from "../../img/actionTab.svg";
 import badgeImg from "../../img/badge.svg";
 import styles from "./modal.module.css";
 import "./toastify.css";
@@ -66,19 +65,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 
 import Collapse from "@material-ui/core/Collapse";
-import NoSsr from "@material-ui/core/NoSsr";
-import GoogleFontLoader from "react-google-font-loader";
-import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
 import clsx from "clsx";
-import {
-  Info,
-  InfoCaption,
-  InfoSubtitle,
-  InfoTitle,
-} from "@mui-treasury/components/info";
-import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
-
 // Sounds
 import like from "../../sounds/state-change_confirm-up.wav";
 import unlike from "../../sounds/state-change_confirm-down.wav";
@@ -86,6 +74,10 @@ import confetti from "../../sounds/hero_decorative-celebration-02.wav";
 import badge from "../../sounds/hero_simple-celebration-01.wav";
 import increment from "../../sounds/navigation_selection-complete-celebration.wav";
 
+// import ActionGalaxyCard from "./actionGalaxyCard";
+const ActionGalaxyCard = lazy(() =>
+retry(() => import("./actionGalaxyCard.js"))
+);
 // Lazy load the fave card
 const FavoriteGalaxyCard = lazy(() =>
   retry(() => import("./faveGalaxyCard.js"))
@@ -423,7 +415,6 @@ function HomePage(props) {
   const [searchQuery, setSearchQuery] = useState("");
   toast.configure(); // Configure for toast messages later
   // const mediaStyles1 = useCoverCardMediaStyles({ bgPosition: "top"});
-  const mediaStyles2 = useCoverCardMediaStyles({ bgPosition: "bottom" });
 
   // called when user clicks on different tabs
   const handleChangeTabs = (event, newValue) => {
@@ -836,43 +827,8 @@ function HomePage(props) {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-
-            {/* FONTS for ACTION GALAXY CARD */}
-            <NoSsr>
-              <GoogleFontLoader
-                fonts={[
-                  { font: "Spartan", weights: [300] },
-                  { font: "Montserrat", weights: [200, 400, 700] },
-                ]}
-              />
-            </NoSsr>
-            {/* ACTION GALAXY CARD */}
-            <Card className={classes.galaxyCard}>
-              <CardMedia
-                classes={mediaStyles2}
-                image={actionTab}
-                style={{ backgroundPosition: "center center" }}
-              />
-              <Box py={3} px={2} className={classes.galaxyContent}>
-                <Info useStyles={useGalaxyInfoStyles}>
-                  <InfoTitle>Sustainable actions!</InfoTitle>
-                  <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
-                    Click the{" "}
-                    <span role="img" aria-label="plus">
-                      ➕
-                    </span>{" "}
-                    plus icon once you've completed the action!
-                  </InfoSubtitle>
-                  <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
-                    Tap the drop down menu to find out more
-                    <span role="img" aria-label="down arrow">
-                      🔽
-                    </span>
-                  </InfoCaption>
-                </Info>
-              </Box>
-            </Card>
-
+            {/* Action Galaxy Card to display */}
+            <ActionGalaxyCard/>
             {/* ACTION CARDS */}
             <Grid container justify="center" spacing={2}>
               {/* All actions (this loops using search- toLowerCase makes it non-case sensitive) */}
