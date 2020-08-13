@@ -23,7 +23,7 @@ class InfoCards extends React.Component {
           id: 1,
           title: "About Us",
           description:
-            "The 2020 Summer Startup Team works with sustainability organizations at Harvey Mudd like ASHMC sustainability and Engineers of a Sustainable World to help promote more eco-friendly practices on our campus through friendly competition.",
+            "The 2020 Summer Startup Team works with sustainability organizations at Harvey Mudd like ASHMC Sustainability to help promote more eco-friendly practices on our campus through friendly competition.",
         },
         {
           id: 2,
@@ -48,7 +48,7 @@ class InfoCards extends React.Component {
           id: 4,
           title: "Rewards for Being Most Sustainable ",
           description:
-            "Rewards include dorm pizza parties, sustainability swag, and BRAGGING RIGHTS.",
+            "Rewards include dorm pizza parties, sustainability swag, BRAGGING RIGHTS, and more!",
         },
       ],
     };
