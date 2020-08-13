@@ -102,6 +102,8 @@ function BottomNavNonAuth() {
   const tabNameToIndex = (pathname) => {
     if (pathname.includes("signin")){
       return 1
+    }else{
+      return 0
     }
   };
   
