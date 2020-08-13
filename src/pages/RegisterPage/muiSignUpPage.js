@@ -263,7 +263,7 @@ class SignUpFormBase extends Component {
               margin="normal"
               fullWidth
               id="username"
-              label="Full Name"
+              label="First Name"
               name="username"
               autoComplete="name"
               onChange={this.onChange}
