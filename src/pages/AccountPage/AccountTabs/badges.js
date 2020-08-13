@@ -184,6 +184,7 @@ for (const el in ActionData) {
 // leafBackSay();
 
 // Galaxy Card for badges
+// React.memo keep our app from over rendering when it doesn't need to
 export const BadgesCard = React.memo(function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });

@@ -157,7 +157,7 @@ class EnvImpactCardsSchool extends React.Component {
   }
 }
 // Dorm Galaxy Card
-export const DormCard = function GalaxyCard() {
+export const DormCard = React.memo(function GalaxyCard() {
   // Image aligned on top, styles called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
@@ -233,6 +233,6 @@ export const DormCard = function GalaxyCard() {
       )}
     </AuthUserContext.Consumer>
   );
-};
+});
 
 export default DormCard;
