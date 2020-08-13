@@ -184,7 +184,7 @@ for (const el in ActionData) {
 // leafBackSay();
 
 // Galaxy Card for badges
-// React.memo keep our app from over rendering when it doesn't need to
+// React.memo keep our app from over rendering when it doesn't need to (like when badge is clicked)
 export const BadgesCard = React.memo(function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
@@ -211,7 +211,10 @@ export const BadgesCard = React.memo(function GalaxyCard() {
             <InfoTitle>{theBadge}</InfoTitle>
             <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
               {" "}
-              Click on the badges for another surprise! 🍃
+              Click on the badges for another surprise!{" "}
+              <span role="img" aria-label="leaf">
+                🍃
+              </span>
             </InfoCaption>
           </Info>
         </Box>

@@ -56,7 +56,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Main Component
-export const ActionCard = function GalaxyCard() {
+// React.memo keep our app from over rendering when it doesn't need to
+export const ActionCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const classes = useStyles();
 
@@ -81,14 +82,26 @@ export const ActionCard = function GalaxyCard() {
         <Box py={3} px={2} className={classes.galaxyContent}>
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoTitle>Sustainable actions!</InfoTitle>
-            <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
+            <InfoSubtitle
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                marginTop: "0.25rem",
+              }}
+            >
               Click the{" "}
               <span role="img" aria-label="plus">
                 ➕
               </span>{" "}
               plus icon once you've completed the action!
             </InfoSubtitle>
-            <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
+            <InfoCaption
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                marginTop: "0.5rem",
+              }}
+            >
               Tap the drop down menu to find out more
               <span role="img" aria-label="down arrow">
                 🔽
@@ -99,6 +112,6 @@ export const ActionCard = function GalaxyCard() {
       </Card>
     </>
   );
-};
+});
 
 export default ActionCard;

@@ -827,8 +827,10 @@ function HomePage(props) {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
+            
             {/* Action Galaxy Card to display */}
             <ActionGalaxyCard/>
+
             {/* ACTION CARDS */}
             <Grid container justify="center" spacing={2}>
               {/* All actions (this loops using search- toLowerCase makes it non-case sensitive) */}
