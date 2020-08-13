@@ -91,10 +91,10 @@ function AdminPage() {
             <Typography variant="body1" style={{ marginTop: "1rem" }}>
               Want to remove a challenge? Email the developers at &nbsp;
               <a
-                href="mailto:suscompetitionteam@gmail.com"
+                href="mailto:ecobudapp@gmail.com"
                 style={{}}
               >
-                suscompetitionteam@gmail.com
+                ecobudapp@gmail.com
               </a>
               &nbsp;(or by completing the "contact us" form in settings), and we'll
               get to it as soon as we can!
