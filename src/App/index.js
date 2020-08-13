@@ -127,6 +127,12 @@ function AppBase() {
               path="/home/:page?"
               render={(props) => <HomePage {...props} />}
             />
+            <Route 
+              exact 
+              path={ROUTES.NULL}
+              redirectTo={ROUTES.HOME_ACTION}
+              render={(props) => <HomePage {...props} />}
+            />
           </Switch>
         </Suspense>
 
