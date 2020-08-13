@@ -457,8 +457,9 @@ function HomePage(props) {
   for (const el in ActionData) {
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction);
-    if (tempMastered != null && tempMastered.includes(stringActionName)) { // if the action has been previously mastered (ie. is in firestore)
-      firestoreMastered.push(action.susAction); //if the action is mastered, add it to the array 
+    if (tempMastered != null && tempMastered.includes(stringActionName)) {
+      // if the action has been previously mastered (ie. is in firestore)
+      firestoreMastered.push(action.susAction); //if the action is mastered, add it to the array
     }
   }
 
@@ -474,7 +475,8 @@ function HomePage(props) {
   // this function is called upon confirmed increment
   // sets the state of userTotal so that user's total point display is correct (bc can't do parse int in jsx code)
   const updateDisplayTotal = (actionPoint) => {
-    const newTotal = parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
+    const newTotal =
+      parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
     updateUserTotal(newTotal);
   };
 
@@ -483,9 +485,18 @@ function HomePage(props) {
     // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
     // updates user's doc in firestore & LS to reflect incremented action
-    updateUserPoint(authContext.email, action.susAction, parseInt(action.points))
+    updateUserPoint(
+      authContext.email,
+      action.susAction,
+      parseInt(action.points)
+    );
     // add's associated impact points to user & dorm data in firestore and local storage
-    updateUserImpact(authContext.email, action.coEmiss, action.energy, action.water);
+    updateUserImpact(
+      authContext.email,
+      action.coEmiss,
+      action.energy,
+      action.water
+    );
     // add's associated impact points to school in firestore and local storage
     updateSchoolImpact(action.coEmiss, action.energy, action.water);
     // check if action has been completed enough time to be considered "mastered"
@@ -493,21 +504,20 @@ function HomePage(props) {
     checkMastered(action);
     // update dorm's point in firestore (dorm point total not stored in LS so update here is not necessary)
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
-  }; 
+  };
 
-
-  // (JM) called when user increments an action to check if the action has been mastered & reacts accordingly 
+  // (JM) called when user increments an action to check if the action has been mastered & reacts accordingly
   // NOTE: called after LS point has been incremented (this way the value we are checking has the most recent action point)
   const checkMastered = (action) => {
-    const actionTotal = localStorage.getItem(action.susAction); // gets the point value for the action & sets as actionTotal 
+    const actionTotal = localStorage.getItem(action.susAction); // gets the point value for the action & sets as actionTotal
     if (action.toMaster * action.points > actionTotal) {
       // If action has not been mastered, the button will remain enabled
       // send user a progress alert to tell them how many more points they need to complete the action
       var displayText; // display a different message depending on if the user needs to buzz one or several more times to complete
       if (action.toMaster - actionTotal / action.points !== 1) {
         displayText = `You are ${
-          (action.toMaster - actionTotal / action.points)
-          } buzzes away from mastering the ${action.title} action!`; // if more than 1 buzz required to action make buzz plural
+          action.toMaster - actionTotal / action.points
+        } buzzes away from mastering the ${action.title} action!`; // if more than 1 buzz required to action make buzz plural
       } else {
         displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`; // if only one buzz left, singular buzz
       }
@@ -520,11 +530,14 @@ function HomePage(props) {
       actionMastered(authContext.email, action.susAction); // updates masteredAction array in firestore w/ new action included
       setBadgeAction(action.title); // to make sure modal has correct action name
       setBadgeActionCount(action.toMaster); // to make sure modal has correct value for times completed
-      setBadgeModalIsOpen(true); // to have badge modal display 
+      setBadgeModalIsOpen(true); // to have badge modal display
       const badgeAudio = new Audio(badge);
       badgeAudio.play();
       firestoreMastered.push(action.susAction); // updates the firestoreMastered global variable --> changes button to disabled
-      localStorage.setItem("firestoreMastered", JSON.stringify(firestoreMastered)); // updates array in LS w/ new action included
+      localStorage.setItem(
+        "firestoreMastered",
+        JSON.stringify(firestoreMastered)
+      ); // updates array in LS w/ new action included
     }
   };
 
@@ -541,13 +554,16 @@ function HomePage(props) {
   // Initialize the color of each favorite button
   // This isn't in a const because I can't call the const when I want using html. Could go in a const and then be called with JS.
   var favIconColors = []; // Initalize array of the color for each favIcon
-  for (const i in ActionData) { // Iterate over every action in ActionData
+  for (const i in ActionData) {
+    // Iterate over every action in ActionData
     var action2 = ActionData[i]; // Take the current action
     var storageName2 = action2.susAction.concat("Fav");
     var storedFav = localStorage.getItem(storageName2) === "true";
-    if (storedFav) { // If the action is favorited
+    if (storedFav) {
+      // If the action is favorited
       favIconColors[i - 1] = "var(--theme-secondary)"; // Turn red
-    } else { // if action is not favorited
+    } else {
+      // if action is not favorited
       favIconColors[i - 1] = "#6c6c6c"; // Otherwise turn gray
     }
   }
@@ -560,12 +576,15 @@ function HomePage(props) {
     // NOTE: the item in storage is a string, so the following line forces it to evaluate as a boolean
     var storedFav = localStorage.getItem(storageName) === "true";
     // NOTE: false is NaN, so here I don't check if the boolean is NaN because it often is. (I wonder if true is NaN too?)
-    if (storedFav == null) { // In case the action hasn't been favorited before
+    if (storedFav == null) {
+      // In case the action hasn't been favorited before
       storedFav = false; // If not initialized, initialize here
     }
     storedFav = !storedFav; // Toggle the favorite
     // variable for getting color of fav icon
-    var favIconColor = document.getElementById("favoriteIcon".concat(action.susAction));
+    var favIconColor = document.getElementById(
+      "favoriteIcon".concat(action.susAction)
+    );
     // sets up variables need to send user progress toast (displayText) & access firestore user doc (email)
     var displayText;
     const email = localStorage.getItem("email");
@@ -575,7 +594,7 @@ function HomePage(props) {
       favIconColor.style.color = "#f48fb1"; // Turn pink
       playSound(likeAudio);
       toast.success(displayText, { autoClose: 3000 });
-      addFav(email, action.susAction); // add action to firestore array of fav actions 
+      addFav(email, action.susAction); // add action to firestore array of fav actions
     } else {
       // if the action is now unfavorited
       displayText = action.title.concat(" removed from favorites");
@@ -585,7 +604,6 @@ function HomePage(props) {
       deleteFav(email, action.susAction); // delete action to firestore array of fav actions
     }
     localStorage.setItem(storageName, storedFav); // set local storage actionFav to either true or false depending on new fav status
-
   };
 
   // Set the "progress message" to be displayed when the user pressed "check progress"
@@ -594,7 +612,8 @@ function HomePage(props) {
     // initPoints has to be called here so that any values that aren't yet initialized are displayed as 0 instead
     // appearing as blank
     // initPoints(); // DO NOT REMOVE
-    for (const el in ActionData) { // Loop over every action in ActionData
+    for (const el in ActionData) {
+      // Loop over every action in ActionData
       var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
       progressMessage = (
         <>
@@ -835,10 +854,14 @@ function HomePage(props) {
               />
               <Box py={3} px={2} className={classes.galaxyContent}>
                 <Info useStyles={useGalaxyInfoStyles}>
-                  <InfoSubtitle
-                    style={{ color: "white", fontWeight: "bold" }}
-                  ></InfoSubtitle>
-                  <InfoTitle>Log your actions here!</InfoTitle>
+                  <InfoTitle>Sustainable actions!</InfoTitle>
+                  <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
+                    Click the{" "}
+                    <span role="img" aria-label="plus">
+                      ➕
+                    </span>{" "}
+                    plus icon once you've completed the action!
+                  </InfoSubtitle>
                   <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
                     Tap the drop down menu to find out more
                     <span role="img" aria-label="down arrow">
