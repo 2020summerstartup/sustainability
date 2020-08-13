@@ -1,9 +1,6 @@
 import React, { useContext } from "react";
 import { AuthUserContext } from "../../../services/Session";
 
-import ProgressCircle from "../../../components/ProgressCircle";
-
-
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { withTheme } from "../../../components/Theme";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
