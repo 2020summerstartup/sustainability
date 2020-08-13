@@ -335,7 +335,7 @@ class Badges extends React.Component {
         ) : (
           <div className="empty">
             <Typography variant="h5">
-              You haven't earned any badges yet :(
+              You haven't earned any badges yet. :(
             </Typography>
           </div>
         )}
