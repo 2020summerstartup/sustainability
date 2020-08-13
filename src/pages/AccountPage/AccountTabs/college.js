@@ -1,3 +1,4 @@
+// commented by JM
 import React, { Suspense } from "react";
 import ProgressCircle from "../../../components/ProgressCircle";
 // Image import
@@ -72,27 +73,16 @@ const useStyles = makeStyles((theme) => ({
     underline: "none",
   },
 }));
-// Pulls user's dorm name from local storage and updates leaderboard
-var dormName = localStorage.getItem("dorm");
-if (dormName && dormName !== "") {
-  getDorm()
-    .doc(dormName)
-    .onSnapshot((docSnapshot) => {
-      assignRanking(docSnapshot.data());
-    });
-}
-leaderBoardUpdate();
 
-// set global variable var to be displayed on pink card --> total school buzzes & assocaited text
-// May consider removing this later because it doesn't really seem like it would be that big of an issue & would likely only appear
-// for a few people only momentarily
-var totalBuzzText;
-const totalBuzzDisplay = () => {
-  if (localStorage.getItem("SchoolBuzzes") === 1) {
-    // if school has only logged one action, display this text
+
+leaderBoardUpdate(); // to make sure dorm ranking is up to date
+
+
+var totalBuzzText; // set global variable to be displayed on pink card --> total school buzzes & assocaited text
+const totalBuzzDisplay = () => { // sets action to either singular or plural 
+  if (localStorage.getItem("SchoolBuzzes") === 1) { // if school has only logged one action, display this text
     totalBuzzText = <Typography variant="h4">1 Action!</Typography>;
-  } else {
-    // once school has logged for than one action, dispaly this text
+  } else { // once school has logged for than one action, dispaly this text
     totalBuzzText = (
       <Typography variant="h4">
         <b>{localStorage.getItem("SchoolBuzzes")}</b> Actions!
@@ -101,9 +91,9 @@ const totalBuzzDisplay = () => {
   }
 };
 
-// dynamically render the text displayed for the user dorm's place depending on the ranking of their dorm
-var rank;
-const rankDisplay = () => {
+
+var rank; // set a global variable to be displayed on galaxy card --> dorm rank 
+const rankDisplay = () => { // determine rank text display for the user dorm's place depending on the rank
   if (parseInt(localStorage.getItem("ranking")) === 1) {
     rank = <p>You're in 1st place!</p>;
   } else if (parseInt(localStorage.getItem("ranking")) === 2) {
@@ -115,20 +105,16 @@ const rankDisplay = () => {
   }
 };
 
-// these variables will be use to render the cards in class EnvImpactCards
-// JSON.parse makes it a string!
-let coEmissImpact = JSON.parse(localStorage.getItem("SchoolCoEmiss"));
-let energyImpact = JSON.parse(localStorage.getItem("SchoolEnergy"));
-let waterImpact = JSON.parse(localStorage.getItem("SchoolWater"));
+
 
 // FOR BAR CHART
 // these will be used to render the cards in class EnvImpactCards
-// JSON.parse makes it a string!
+// parseInt makes it a number/integer!
 const data = [
   ["Impact", "Quantity", { role: "style" }],
-  ["Pounds of CO2 Saved", parseInt(coEmissImpact), "rgb(255, 184, 24)"],
-  ["Megajoules of Energy Saved", parseInt(energyImpact), "rgb(75, 179, 11)"],
-  ["Gallons of Water Saved", parseInt(waterImpact), "rgb(26, 97, 168)"], // CSS-style declaration
+  ["Pounds of CO2 Saved", parseInt(localStorage.getItem("SchoolCoEmiss")), "rgb(255, 184, 24)"],
+  ["Megajoules of Energy Saved", parseInt(localStorage.getItem("SchoolEnergy")), "rgb(75, 179, 11)"],
+  ["Gallons of Water Saved", parseInt(localStorage.getItem("SchoolWater")), "rgb(26, 97, 168)"], // CSS-style declaration
 ];
 
 const options = {
@@ -138,8 +124,8 @@ const options = {
   legend: { position: "none" },
 };
 
-// Cards to be rendered in profile/dorm
-class EnvImpactCardsSchool extends React.Component {
+class EnvImpactCardsSchool extends React.Component { // Cards to be rendered on dorms tab of profile page
+
   render() {
     return (
       <>
@@ -165,6 +151,7 @@ export const DormCard = React.memo(function GalaxyCard() {
   // update the dorm rank text & total school buzz text
   rankDisplay();
   totalBuzzDisplay();
+
   return (
     <AuthUserContext.Consumer>
       {(authUser) => (
