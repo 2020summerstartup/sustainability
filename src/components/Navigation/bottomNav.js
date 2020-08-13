@@ -13,11 +13,9 @@ import PersonIcon from "@material-ui/icons/Person";
 
 // users can only see certain pages when nonauthorized/authorized
 const BottomNav = ({ authUser }) => (
-  <div>
     <AuthUserContext.Consumer>
       {(authUser) => (authUser ? <BottomNavAuth /> : <BottomNavNonAuth />)}
     </AuthUserContext.Consumer>
-  </div>
 );
 
 const useStyles = makeStyles((theme) => ({

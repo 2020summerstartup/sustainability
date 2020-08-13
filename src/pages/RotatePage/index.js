@@ -17,7 +17,7 @@ export class Rotate extends Component {
     return (
       <div>
         <AutoRotatingCarousel
-          autoplay={false}
+          autoplay={true}
           interval={7000}
           hideArrows={false}
           open={true}
