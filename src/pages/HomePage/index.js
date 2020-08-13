@@ -581,7 +581,7 @@ function HomePage(props) {
     if (storedFav) {
       // if the action is now favorited
       displayText = action.title.concat(" added to favorites"); // define text to display on toast
-      favIconColor.style.color = "#f48fb1"; // Turn pink
+      favIconColor.style.color = "#E36588"; // Turn pink
       playSound(unmute, likeAudio);
       toast.success(displayText, { autoClose: 3000 });
       addFav(email, action.susAction); // add action to firestore array of fav actions
