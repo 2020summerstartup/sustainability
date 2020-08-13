@@ -220,7 +220,13 @@ export const DormCard = function GalaxyCard() {
               </div>
             </div>
           </Grid>
-          <Suspense fallback={<ProgressCircle />}>
+          <Suspense
+            fallback={
+              <div className="base-container">
+                <ProgressCircle />
+              </div>
+            }
+          >
             <EnvImpactCardsSchool />
           </Suspense>
         </>

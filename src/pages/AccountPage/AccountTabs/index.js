@@ -237,19 +237,37 @@ const AccountTabs = (props) => {
         </Tabs>
       </AppBar>
       {/* Points Page */}
-      <Suspense fallback={<ProgressCircle />}>
+      <Suspense
+        fallback={
+          <div className="base-container">
+            <ProgressCircle />
+          </div>
+        }
+      >
         <TabPanel value={value} index={0} className="tab-container">
           <TotalPointsCard />
         </TabPanel>
       </Suspense>
       {/* Mudd/College Page */}
-      <Suspense fallback={<ProgressCircle />}>
+      <Suspense
+        fallback={
+          <div className="base-container">
+            <ProgressCircle />
+          </div>
+        }
+      >
         <TabPanel value={value} index={1} className="tab-container">
           <College />
         </TabPanel>
       </Suspense>
       {/* Badge Page */}
-      <Suspense fallback={<ProgressCircle />}>
+      <Suspense
+        fallback={
+          <div className="base-container">
+            <ProgressCircle />
+          </div>
+        }
+      >
         <TabPanel value={value} index={2} className="tab-container">
           <Badges earnedBadges={firestoreMastered} />
         </TabPanel>

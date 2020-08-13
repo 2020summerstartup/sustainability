@@ -84,7 +84,7 @@ export const TotalPointsCard = function GalaxyCard() {
       <AuthUserContext.Consumer>
         {(authUser) => (
           <>
-          {/* Dorm Galaxy Card */}
+            {/* Dorm Galaxy Card */}
             <NoSsr>
               <GoogleFontLoader
                 fonts={[
@@ -108,7 +108,13 @@ export const TotalPointsCard = function GalaxyCard() {
               </Box>
             </Card>
             {/* Displays number of actions and overall impact */}
-            <Suspense fallback={<ProgressCircle />}>
+            <Suspense
+              fallback={
+                <div className="base-container">
+                  <ProgressCircle />
+                </div>
+              }
+            >
               <TotalBuzz />
               <EnvImpactCards />
             </Suspense>
