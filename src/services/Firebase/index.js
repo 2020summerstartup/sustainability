@@ -119,7 +119,6 @@ class Firebase {
   users = () => this.db.ref('users');
   }
 
-// export default Firebase;
 
 
 // called when a new user signs up in muiSignUpPage
@@ -369,9 +368,8 @@ export const DarkModeOpened = (userEmail) => {
 }
 
 
-export {Axios, firestore};
 
 export default Firebase;
 
-export { FirebaseContext, withFirebase };
+export { FirebaseContext, withFirebase, Axios, firestore };
 
