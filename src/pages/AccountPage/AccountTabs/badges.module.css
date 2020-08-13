@@ -19,7 +19,7 @@
 
 .titleLeftFront {
   position: relative;
-  transform: rotate(-45deg) translate(5%, -35%);
+  transform: rotate(-45deg) translate(17%, -32%);
   top: 45%;
   color: white;
   text-shadow: 2px 2px 5px black;
@@ -27,7 +27,7 @@
 
 .titleRightFront {
   position: relative;
-  transform: rotate(45deg) translate(-5%, -25%);
+  transform: rotate(45deg) translate(-17%, -32%);
   top: 45%;
   color: white;
   text-shadow: 2px 2px 5px black;

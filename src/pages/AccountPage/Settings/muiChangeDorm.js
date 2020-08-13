@@ -33,7 +33,6 @@ function ChangeDorm() {
               <div className="image">
                 <img alt="your account" src={changedormImg} />
               </div>
-              <Typography variant="h6">Change your dorm here!</Typography>
               <DormSelect />
             </div>
           </div>

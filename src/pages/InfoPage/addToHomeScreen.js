@@ -18,7 +18,7 @@ class AddToHomeScreen extends React.Component {
         <Typography variant="body2">
           <strong>For IOS devices: </strong>Make sure you're on Safari and then tap the Share
           button at the bottom of your screen. Then tap on the "Add to Home
-          Screen" button and our app will appear!
+          Screen" button, and our app will appear!
         </Typography>
         <Typography variant="body2">
           <strong>For Andriod devices: </strong>In Chrome, go to Settings in the rop right

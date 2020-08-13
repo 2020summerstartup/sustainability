@@ -56,9 +56,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 var masteredActions = localStorage.getItem("firestoreMastered"); // MasteredActions array contains all mastered actions (stored in LS)
-var masterLength; // initalize global variable that is length of masteredActions array 
-if (masteredActions !== null && masteredActions !== "undefined" && masteredActions !== []) {
-  // If masteredActions is defined, then it has a specific length 
+var masterLength; // initalize global variable that is length of masteredActions array
+if (
+  masteredActions !== null &&
+  masteredActions !== "undefined" &&
+  masteredActions !== []
+) {
+  // If masteredActions is defined, then it has a specific length
   masterLength = JSON.parse(masteredActions).length;
 } else {
   // If masteredAction is null, then there are zero mastered actions
@@ -131,11 +135,12 @@ const badgeSay = () => {
 badgeSay();
 
 var masterBadgesArray = []; // Initalize an array that will contain only the mastered actions
-for (const el in ActionData) { // Iterate over every action in ActionData & determine if the action has been mastered
+for (const el in ActionData) {
+  // Iterate over every action in ActionData & determine if the action has been mastered
   var action = ActionData[el]; // Take the current action
   var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
-  var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage 
-  //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds 
+  var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage
+  //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds
 
   if (
     firestoreMastered != null && // if the array is not empty / if the array exists
@@ -155,28 +160,32 @@ for (const el in ActionData) { // Iterate over every action in ActionData & dete
     masterBadgesArray.push(masteredActionProps);
   }
 }
-// Displays text for back of leaf depending on how many actions have been mastered
-var backText;
-const leafBackSay = () => {
-  if (masterLength === 1) {
-    backText = (
-      <center>
-        Completed <br /> 1 <br /> Time!
-      </center>
-    );
-  } else {
-    backText = (
-      <center>
-        Completed <br /> {masterBadgesArray.length} <br /> Times!
-      </center>
-    );
-  }
-};
-// Need to call function for it to run
-leafBackSay();
+
+// The following function is no longer used, because it displays the wrong number of times to master a badge (instead of times to master,
+// it displays the number of badges currently earned). I'm leaving the code here because the skeleton of it might be useful for something else.
+// // Displays text for back of leaf depending on how many actions have been mastered
+// var backText;
+// const leafBackSay = () => {
+//   if (masterLength === 1) {
+//     backText = (
+//       <center>
+//         Completed <br /> 1 <br /> Time!
+//       </center>
+//     );
+//   } else {
+//     backText = (
+//       <center>
+//         Completed <br /> {masterBadgesArray.length} <br /> Times!
+//       </center>
+//     );
+//   }
+// };
+// // Need to call function for it to run
+// leafBackSay();
 
 // Galaxy Card for badges
-export const BadgesCard = function GalaxyCard() {
+// React.memo keep our app from over rendering when it doesn't need to
+export const BadgesCard = React.memo(function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
   const classes = useStyles();
@@ -209,7 +218,8 @@ export const BadgesCard = function GalaxyCard() {
       </Card>
     </>
   );
-};
+});
+
 // Main Component - displays galaxy card and leaf badges for mastered actions
 class Badges extends React.Component {
   constructor() {
@@ -320,12 +330,21 @@ class Badges extends React.Component {
                       variant="h6"
                       className={badge.titleStylingFront}
                     >
-                      <br />{badge.title}<br />&nbsp;
+                      <br />
+                      {badge.title}
+                      <br />
+                      &nbsp;
                     </Typography>
                   </div>
                   <div className={styles.leafBack}>
                     <Typography variant="h6" className={badge.titleStylingBack}>
-                      {backText}
+                      <center>
+                        Completed
+                        <br />
+                        {badge.toMaster}
+                        <br />
+                        Times!
+                      </center>
                     </Typography>
                   </div>
                 </div>
