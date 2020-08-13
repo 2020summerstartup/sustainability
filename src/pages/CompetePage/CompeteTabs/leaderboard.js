@@ -1,7 +1,7 @@
 import React from "react";
 import trophyImg from "../../../img/trophy.svg";
 import "./leaderboard.css";
-import { firestore } from "../../../services/Firebase/firebase";
+import { firestore } from "../../../services/Firebase";
 import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
 
 import Typography from "@material-ui/core/Typography";

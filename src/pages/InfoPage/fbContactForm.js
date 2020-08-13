@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // Firebase Imports
-import { Axios } from "../../services/Firebase/firebase";
+import { Axios } from "../../services/Firebase";
 import { firestore } from "../../services/Firebase";
 import "firebase/firestore";
 // Material UI Imports
