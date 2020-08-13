@@ -75,6 +75,7 @@ const ContactPage = lazy(() => retry (() => import("../pages/InfoPage/fbContactF
 
 function AppBase() {
   return (
+    <AudioContextProvider>
     <Router>
       <Switch>
         {/* FOR PAGES WITH SPECIAL HEADERS */}
@@ -104,7 +105,6 @@ function AppBase() {
       </Switch>
 
       <div className="main">
-        <AudioContextProvider>
         <Navigation />
         <BottomNav />
 
@@ -197,9 +197,9 @@ function AppBase() {
           <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
         </Suspense>
-      </AudioContextProvider>
       </div>
     </Router>
+    </AudioContextProvider>
   );
 }
 

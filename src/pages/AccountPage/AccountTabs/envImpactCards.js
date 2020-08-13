@@ -42,7 +42,7 @@ const EnergyDisplay = () => {
     theEnergy = "Megajoule of energy conserved!"
   } else {
     theEnergy = "Megajoules of energy conserved!"
-  }
+  };
 };
 
 // Water conserved message

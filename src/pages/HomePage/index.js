@@ -116,8 +116,9 @@ const confettiAudio = new Audio(confetti);
 const incrementAudio = new Audio(increment);
 
 // called by onclick to play the audio file
-const playSound = (audio, audioFile) => {
-  if (audio.unmute) {
+const playSound = (unmute, audioFile) => {
+  console.log(unmute)
+  if (unmute) {
     audioFile.play();
   }
 };
@@ -393,7 +394,6 @@ function HomePage(props) {
   const [badgeAction, setBadgeAction] = useState("");
   const [badgeActionCount, setBadgeActionCount] = useState("");
   const authContext = useContext(AuthUserContext);
-  const audio = useContext(audioContext);
 
   // nested routing
   let { match, history } = props;
@@ -465,7 +465,7 @@ function HomePage(props) {
 
   // This function is the one that is called when the user presses the increment susAction button. If they confirm that
   // they meant to, then this function calls increment.
-  const confirmIncrement = (action) => {
+  const confirmIncrement = (unmute, action) => {
     var confirmed = window.confirm("Are you sure you want to log this action?"); // Check with the user (did they mean to increment?)
     if (confirmed === true) {
       increment(action); // If user meant to, call the function to actually increment user's points
@@ -481,7 +481,7 @@ function HomePage(props) {
   };
 
   // (JM) Called when user confirms their incremented action --> updates necessary values in firestore/LS & makes call to chackMastered
-  const increment = (action) => {
+  const increment = (unmute, action) => {
     // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
     // updates user's doc in firestore & LS to reflect incremented action
@@ -501,15 +501,15 @@ function HomePage(props) {
     updateSchoolImpact(action.coEmiss, action.energy, action.water);
     // check if action has been completed enough time to be considered "mastered"
     // also sends user a progress notification if action has not yet been mastered or modal if it has been mastered
-    checkMastered(action);
+    checkMastered(unmute, action);
     // update dorm's point in firestore (dorm point total not stored in LS so update here is not necessary)
     updateDormPoint(localStorage.getItem("dorm"), parseInt(action.points));
   };
 
   // (JM) called when user increments an action to check if the action has been mastered & reacts accordingly
   // NOTE: called after LS point has been incremented (this way the value we are checking has the most recent action point)
-  const checkMastered = (action) => {
-    const actionTotal = localStorage.getItem(action.susAction); // gets the point value for the action & sets as actionTotal
+  const checkMastered = (unmute, action) => {
+    const actionTotal = localStorage.getItem(action.susAction); // gets the point value for the action & sets as actionTotal 
     if (action.toMaster * action.points > actionTotal) {
       // If action has not been mastered, the button will remain enabled
       // send user a progress alert to tell them how many more points they need to complete the action
@@ -522,7 +522,7 @@ function HomePage(props) {
         displayText = `You are only 1 buzz away from mastering the ${action.title} action! You got this!`; // if only one buzz left, singular buzz
       }
       toast(displayText, { autoClose: 5000 }); // It's "success" so that the toast is pink
-      playSound(incrementAudio);
+      playSound(unmute, incrementAudio);
       setBadgeModalIsOpen(false); // make sure badge modal does not pop up bc action is not yet mastered
     } else if (action.toMaster * action.points <= actionTotal) {
       // If action has been mastered, the button will get disabled
@@ -569,7 +569,7 @@ function HomePage(props) {
   }
 
   // to flip the status of favorited action --> so that color changes
-  const favAction = (action) => {
+  const favAction = (unmute, action) => {
     // Get the name and info of the stored action that we're working with
     var storageName = action.susAction.concat("Fav");
     // storedFav is a boolean (is the current action favorited?)
@@ -592,14 +592,14 @@ function HomePage(props) {
       // if the action is now favorited
       displayText = action.title.concat(" added to favorites"); // define text to display on toast
       favIconColor.style.color = "#f48fb1"; // Turn pink
-      playSound(likeAudio);
+      playSound(unmute, likeAudio);
       toast.success(displayText, { autoClose: 3000 });
       addFav(email, action.susAction); // add action to firestore array of fav actions
     } else {
       // if the action is now unfavorited
       displayText = action.title.concat(" removed from favorites");
       favIconColor.style.color = "#6c6c6c"; // Back to grey
-      playSound(unlikeAudio);
+      playSound(unmute, unlikeAudio);
       toast.warn(displayText, { autoClose: 3000 }); // It's a warning so that the window is yellow
       deleteFav(email, action.susAction); // delete action to firestore array of fav actions
     }
@@ -642,7 +642,9 @@ function HomePage(props) {
   setProgressMessage();
 
   return (
-    <AuthUserContext.Consumer>
+    <audioContext.Consumer>
+    {(unmute, muteAudio) => (
+      <AuthUserContext.Consumer>
       {(authUser) => (
         <>
           {/* BOTH ACTIONS AND FAVORITES TABS DISPLAY SAME TOP PART- up to galaxy card */}
@@ -721,7 +723,7 @@ function HomePage(props) {
               variant="contained"
               onClick={() => {
                 setProgressModalIsOpen(true);
-                playSound(audio, confettiAudio);
+                playSound(unmute, confettiAudio);
               }}
               className={classes.checkProgress}
             >
@@ -891,7 +893,7 @@ function HomePage(props) {
                                 disabled={firestoreMastered.includes(
                                   action.susAction
                                 )}
-                                onClick={() => confirmIncrement(action)} // Call function to check if user meant to increment susAction
+                                onClick={() => confirmIncrement(unmute, action)} // Call function to check if user meant to increment susAction
                                 aria-label="increment"
                                 title="Complete this sustainable action"
                               >
@@ -916,7 +918,7 @@ function HomePage(props) {
                               style={{
                                 color: favIconColors[i - 1],
                               }} // Set the favIcon color (i-1 prevents off-by-one error)
-                              onClick={() => favAction(action)}
+                              onClick={() => favAction(unmute, action)}
                               id={"favoriteIcon".concat(action.susAction)}
                               className={classes.favoriteIcon}
                             >
@@ -1019,7 +1021,7 @@ function HomePage(props) {
                                 disabled={firestoreMastered.includes(
                                   action.susAction
                                 )}
-                                onClick={() => confirmIncrement(action)}
+                                onClick={() => confirmIncrement(unmute, action)}
                                 aria-label="settings"
                                 title="Complete this sustainable action"
                               >
@@ -1042,7 +1044,7 @@ function HomePage(props) {
                                 color: "var(--theme-secondary)",
                                 backgroundColor: "transparent",
                               }} // Set the favIcon color (i-1 prevents off-by-one error)
-                              onClick={() => favAction(action)}
+                              onClick={() => favAction(unmute, action)}
                               id={"favoriteIcon".concat(action.susAction)}
                               className={classes.favoriteIcon}
                             >
@@ -1099,6 +1101,8 @@ function HomePage(props) {
         </>
       )}
     </AuthUserContext.Consumer>
+    )}
+    </audioContext.Consumer>
   ); // end of return statement
 } // end of function
 

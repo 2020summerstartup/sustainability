@@ -18,6 +18,7 @@ import { ReactComponent as SusLogo } from "../../img/suslogo.svg";
 import { ReactComponent as SusLogo1 } from "../../img/logo_skin1.svg";
 import { ReactComponent as SusLogo2 } from "../../img/logo_skin2.svg";
 import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
+import AudioContextProvider from "../../pages/AccountPage/Settings/audioContext";
 
 // Styles for ALL Headers
 const useStyles = makeStyles((theme) => ({
@@ -92,14 +93,16 @@ const HomeHeader = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <SusLogo3 className={classes.logo} />
-          <Typography className={classes.title} variant="h6">
-            Home
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <AudioContextProvider>
+        <AppBar position="static">
+          <Toolbar>
+            <SusLogo3 className={classes.logo} />
+            <Typography className={classes.title} variant="h6">
+              Home
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </AudioContextProvider>
     </div>
   );
 };
@@ -109,6 +112,7 @@ const CompeteHeader = () => {
   const classes = useStyles();
   return (
     <>
+    <AudioContextProvider>
       <AppBar position="static" className={classes.header} elevation={0}>
         <Toolbar className={classes.toolbar}>
           <SusLogo1 className={classes.logo} />
@@ -117,6 +121,7 @@ const CompeteHeader = () => {
           </Typography>
         </Toolbar>
       </AppBar>
+    </AudioContextProvider>
     </>
   );
 };
@@ -152,6 +157,7 @@ const BackArrowHeader = () => {
   const classes = useStyles();
   return (
     <>
+    <AudioContextProvider>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           {/* Back Button using history */}
@@ -172,6 +178,7 @@ const BackArrowHeader = () => {
           </Grid>
         </Toolbar>
       </AppBar>
+    </AudioContextProvider>
     </>
   );
 };
@@ -182,6 +189,7 @@ const BackArrowSettingsHeader = () => {
   const classes = useStyles();
   return (
     <>
+    <AudioContextProvider>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           {/* Back Button using history */}
@@ -208,6 +216,7 @@ const BackArrowSettingsHeader = () => {
           </Grid>
         </Toolbar>
       </AppBar>
+    </AudioContextProvider>
     </>
   );
 };
@@ -218,6 +227,7 @@ const BackArrowSettingsHeader2 = () => {
   const classes = useStyles();
   return (
     <>
+    <AudioContextProvider>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           {/* Back Button using history */}
@@ -245,6 +255,7 @@ const BackArrowSettingsHeader2 = () => {
           </Grid>
         </Toolbar>
       </AppBar>
+    </AudioContextProvider>
     </>
   );
 };
@@ -255,6 +266,7 @@ const BackArrowSettingsHeader3 = () => {
   const classes = useStyles();
   return (
     <>
+    <AudioContextProvider>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.toolbar}>
           {/* Back Button using history */}
@@ -282,6 +294,7 @@ const BackArrowSettingsHeader3 = () => {
           </Grid>
         </Toolbar>
       </AppBar>
+    </AudioContextProvider>
     </>
   );
 };

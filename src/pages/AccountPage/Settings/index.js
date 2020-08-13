@@ -1,8 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AuthUserContext } from "../../../services/Session";
-
-import ProgressCircle from "../../../components/ProgressCircle";
-
 
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { withTheme } from "../../../components/Theme";
@@ -27,7 +24,7 @@ import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
-import { audioContext } from "./audioContext";
+import AudioContextProvider, { audioContext } from "./audioContext";
 import SignOutButton from "../../../components/SignOut";
 // const SignOutButton = lazy(() => import("../../../components/SignOut"));
 
@@ -98,7 +95,7 @@ function SettingsDrawer(props) {
     bottom: false,
     right: false,
   });
-  const audio = React.useContext(audioContext)
+  const audio = useContext(audioContext);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -217,7 +214,7 @@ function SettingsDrawer(props) {
                   <UnmuteSwitch
                     checked={audio.unmute}
                     onChange={audio.muteAudio}
-                    name="mute"
+                    name="unmute"
                   />
                 </Grid>
                 <Grid item>Audio On</Grid>
@@ -256,9 +253,8 @@ function SettingsDrawer(props) {
   );
 
   return (
+    <AudioContextProvider>
     <React.Fragment key={"right"}>
-      {/* SETTINGS ICON */}
-      {/* these 3 lines get rid of ripple effect! */}
       <IconButton
         disableFocusRipple
         disableRipple
@@ -269,7 +265,6 @@ function SettingsDrawer(props) {
       >
         {<SettingsIcon />}
       </IconButton>
-      {/* SETTINGS DRAWER- opens when user clicks icon */}
       <SwipeableDrawer
         anchor={"right"}
         open={state["right"]}
@@ -279,6 +274,7 @@ function SettingsDrawer(props) {
         {list("right")}
       </SwipeableDrawer>
     </React.Fragment>
+  </AudioContextProvider>
   );
 }
 
