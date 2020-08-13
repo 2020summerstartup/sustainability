@@ -32,7 +32,6 @@ async function confirmSignOut ({ audio, firebase }) {
     toast.configure(); // Configure for toast messages
     toast.info("You have signed out. Come back soon!"); // Can play with colors here if anyone wants to. :)
     if (audio.unmute){
-      console.log("play")
       playSound(toastAudio)
     };
     localStorage.clear(); // Wipe the local storage
