@@ -212,7 +212,7 @@ function SettingsDrawer(props) {
                 <Grid item>Audio Off</Grid>
                 <Grid item>
                   <UnmuteSwitch
-                    checked={audio ? audio.unmute : localStorage.getItem("unmute")}
+                    checked={audio.unmute}
                     onChange={audio.muteAudio}
                     name="unmute"
                   />

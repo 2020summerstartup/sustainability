@@ -13,10 +13,11 @@ class AudioContextProvider extends Component {
         this.setState({
             unmute: !this.state.unmute
         })
+        localStorage.setItem("unmute", !this.state.unmute)
     }
 
     render(){
-        localStorage.setItem("unmute", this.state.unmute)
+        // localStorage.setItem("unmute", this.state.unmute)
         return (
             <audioContext.Provider value={{...this.state, muteAudio: this.muteAudio}}>
                 {this.props.children}

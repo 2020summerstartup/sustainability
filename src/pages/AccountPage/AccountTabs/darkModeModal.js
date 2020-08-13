@@ -85,7 +85,7 @@ export default function DarkModeModal() {
       {/* NOTE: dialogContent is styles in module.module.css, background wouldn't work otherwise */}
       <DialogContent className={styles.dialogContentDarkMode}>
         <DialogContentText>
-          <Typography variant="h5" className={classes.dialogTitle}>
+          <Typography variant="h5" component={"span"} className={classes.dialogTitle}>
             Hey our sustainable buddy, {localStorage.getItem("name")}!
           </Typography>
           <Typography
