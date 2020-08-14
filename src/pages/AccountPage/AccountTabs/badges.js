@@ -96,10 +96,9 @@ const badgeSay = (badgeLength) => {
     );
   }
 };
-badgeSay(JSON.parse(localStorage.getItem('firestoreMastered')).length)
 
 // Call function so theCongrats and theBadge can be updated
-// badgeSay(masterLength);
+badgeSay(masterLength);
 
 var masterBadgesArray = []; // Initalize global variable array that will contain only the mastered actions
 // called when user goes to badges tab --> displays the correct, updated badges by adding badge action info to array that is looped through
