@@ -1,3 +1,4 @@
+// commented by KR & JM
 import React from "react";
 import Reward from "react-rewards";
 import styles from "./envImpactCards.module.css";
@@ -18,7 +19,7 @@ const useStyles = (theme) => ({
 });
 
 // Changes display message depnding on user's impact
-// Intializes variables for text to be displayed on impact cards
+// Intializes variables for text/title to be displayed on impact cards
 var theCO;
 var theEnergy;
 var theH2O;
@@ -26,7 +27,7 @@ var theH2O;
 // Carbon Dioxide message
 const CODisplay = () => {
   if (parseInt(localStorage.getItem("coEmiss")) === 0) {
-    theCO = "Pounds of CO2 saved. :("
+    theCO = "Pounds of CO2 saved."
   } else if (parseInt(localStorage.getItem("coEmiss")) === 1) {
     theCO = "Pound of CO2 saved!"
   } else {
@@ -37,7 +38,7 @@ const CODisplay = () => {
 // Energy message
 const EnergyDisplay = () => {
   if (parseInt(localStorage.getItem("energy")) === 0) {
-    theEnergy = "Megajoules of energy conserved. :("
+    theEnergy = "Megajoules of energy conserved."
   } else if (parseInt(localStorage.getItem("energy")) === 1) {
     theEnergy = "Megajoule of energy conserved!"
   } else {
@@ -48,7 +49,7 @@ const EnergyDisplay = () => {
 // Water conserved message
 const H2ODisplay = () => {
   if (parseInt(localStorage.getItem("water")) === 0) {
-    theH2O = "Gallons of water saved. :("
+    theH2O = "Gallons of water saved."
   } else if (parseInt(localStorage.getItem("water")) === 1) {
     theH2O = "Gallon of water saved!"
   } else {
@@ -56,7 +57,7 @@ const H2ODisplay = () => {
   }
 };
 
-// Need to call functions, either inside or outside of class
+// Call the functions to make sure title display on cards (suns) are updated
 CODisplay();
 EnergyDisplay();
 H2ODisplay();

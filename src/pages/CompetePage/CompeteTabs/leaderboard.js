@@ -1,3 +1,4 @@
+// commented by JM, many people contributed
 import React from "react";
 import { ReactComponent as TrophyImg } from "../../../img/trophy.svg";
 import "./leaderboard.css";
@@ -31,7 +32,7 @@ let colors = [
   "#FFD700", //gold
   "#C0C0C0", //silver
   "#cd7f32", //bronze
-  "#7A7574", //gray
+  "#7A7574", //gray 
   "#7A7574",
   "#7A7574",
   "#7A7574",
@@ -39,13 +40,13 @@ let colors = [
   "#7A7574",
 ];
 
-leaderBoardUpdate();
+leaderBoardUpdate(); // called to make sure ranking & scores are correct/ up-to-date
 
 class Leaderboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      leaders: [],
+      leaders: [], // initalize array variable that will be populated with dorms in rank order
     };
     this.getData = this.getData.bind(this);
   }
@@ -55,29 +56,27 @@ class Leaderboard extends React.Component {
     // find the document/dorm that has rank 1 --> is in first place
     firestore
       .collection("dorms")
-      .where("rank", "==", 1)
+      .where("rank", "==", 1) // only want the dorm that has rank 1 --> updated by leaderBoardUpdate() above
       .get()
       .then((snapshot) => {
         // set the maxPoints state to rank 1 dorm's score
-        snapshot.forEach((doc) => {
-          const leaderScore = doc.data().score;
+        snapshot.forEach((doc) => { // this is a forEach loop bc I don't know how to do it any other way (will only have 1 dorm in it)
+          const leaderScore = doc.data().score; // total points of dorm in first place
           this.setState({
-            maxPoints: leaderScore,
-            firstDorm: doc.id,
+            maxPoints: leaderScore, 
+            firstDorm: doc.id, // doc.id is the dorm's name (ie. north has a doc.id of "North")
           });
         });
       });
   }
-  getData() {
+
+  getData() { // this function is called every 3 minutes when user is signed in 
     //import the real dorm score data from firestore
     const getLeaders = () => {
-      const newLeaders = [];
-      firestore
-        .collection("dorms")
-        .get()
-        .then((snapshot) => {
+      const newLeaders = []; // initalize array variable that will contain dorms in rank order & used to set state of leaders
+      firestore.collection("dorms").get().then((snapshot) => { // fetches a snapshot of the dorms collection in firestore w/ all the dorm data
           snapshot.docs.forEach((doc) => {
-            if (doc.id !== "wholeSchool") {
+            if (doc.id !== "wholeSchool") { // only want the dorms (prevents wholeSchool from displaying as a dorm on the leaderboard)
               newLeaders.push({
                 id: 1,
                 name: doc.id,
@@ -85,21 +84,19 @@ class Leaderboard extends React.Component {
               });
             }
           });
-          // orders by decreasing points property
-          newLeaders.sort((a, b) => b.points - a.points);
+          newLeaders.sort((a, b) => b.points - a.points); // orders by decreasing points property
           this.setState({
-            leaders: newLeaders,
+            leaders: newLeaders, // update the leaders array state
           });
         });
     };
-    this.getLeaderScore();
-    getLeaders();
+    this.getLeaderScore(); // find the first place dorm & set that as the maxScore
+    getLeaders(); // function call
   }
 
   componentDidMount() {
     this.getData();
-    /*data is refreshing every 3 minutes*/
-    setInterval(this.getData, 180000);
+    setInterval(this.getData, 180000);  // data is refreshing every 3 minutes --> prevents continuous refreshing & exceeding firestore limits
   }
 
   render() {

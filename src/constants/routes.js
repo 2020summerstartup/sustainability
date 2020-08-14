@@ -24,3 +24,5 @@ export const PROFILE = '/profile';
 export const PROFILE_POINT = '/profile/points';
 export const PROFILE_DORM = '/profile/dorm';
 export const PROFILE_Badge = '/profile/badges';
+
+export const NULL = '';

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { AuthUserContext } from "../../services/Session";
 
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -12,11 +11,21 @@ import EcoIcon from "@material-ui/icons/Eco";
 import PersonIcon from "@material-ui/icons/Person";
 
 // users can only see certain pages when nonauthorized/authorized
-const BottomNav = ({ authUser }) => (
-    <AuthUserContext.Consumer>
-      {(authUser) => (authUser ? <BottomNavAuth /> : <BottomNavNonAuth />)}
-    </AuthUserContext.Consumer>
-);
+const BottomNav = () => {
+  const pathname = window.location.pathname
+  var navigation;
+  if (pathname.includes("signin")){
+    navigation = <BottomNavNonAuth />
+  }else if (pathname.includes("index")){
+    navigation = <BottomNavNonAuth />
+  }else{
+    navigation = <BottomNavAuth />
+  }
+  return (
+  <div>
+    {navigation}
+  </div>
+)};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +61,8 @@ function BottomNavAuth() {
     }
   };
   
-  const [value, setValue] = React.useState(tabNameToIndex(pathname));
+  const pathvalue = tabNameToIndex(pathname) ? tabNameToIndex(pathname) : 0
+  const [value, setValue] = React.useState(pathvalue);
 
   return (
     <BottomNavigation
@@ -89,7 +99,20 @@ function BottomNavAuth() {
 // BottomNav users that are NOT logged into thier account
 function BottomNavNonAuth() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const pathname = window.location.pathname;
+  
+  const tabNameToIndex = (pathname) => {
+    if (pathname.includes("signin")){
+      return 1
+    }if (pathname.includes("index")){
+      return 1
+    }else{
+      return 0
+    }
+  };
+  
+  const pathvalue = tabNameToIndex(pathname) ? tabNameToIndex(pathname) : 0
+  const [value, setValue] = React.useState(pathvalue);
 
   return (
     <BottomNavigation
