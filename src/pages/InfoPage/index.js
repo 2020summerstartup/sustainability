@@ -5,7 +5,7 @@ import AddtoHomeScreen from "./addToHomeScreen";
 const InfoPage = () => (
   <div className="base-container">
     <InfoCards />
-    {/* Modal for adding app to home screen */}
+    {/* Fancy card for adding app to home screen */}
     <AddtoHomeScreen />
   </div>
 );

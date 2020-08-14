@@ -76,7 +76,7 @@ import increment from "../../sounds/navigation_selection-complete-celebration.wa
 
 // import ActionGalaxyCard from "./actionGalaxyCard";
 const ActionGalaxyCard = lazy(() =>
-retry(() => import("./actionGalaxyCard.js"))
+  retry(() => import("./actionGalaxyCard.js"))
 );
 // Lazy load the fave card
 const FavoriteGalaxyCard = lazy(() =>
@@ -260,37 +260,6 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     top: "0.5rem",
     fontWeight: "bold",
-  },
-  // styles for action tab galaxycard (fave galaxy card is lazy loaded from its own file)
-  galaxyCard: {
-    borderRadius: "1rem",
-    boxShadow: "none",
-    position: "relative",
-    margin: "auto",
-    marginBottom: "1rem",
-    maxWidth: "36rem",
-    minHeight: "15rem",
-    zIndex: 0,
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "75vh",
-      minHeight: "40vh",
-    },
-    "&:after": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      bottom: 0,
-      zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },
-  },
-  galaxyContent: {
-    position: "absolute",
-    zIndex: 2,
-    bottom: 0,
-    width: "100%",
   },
   // styles for actioncards
   actionCard: {
@@ -499,7 +468,7 @@ function HomePage(props) {
   // (JM) called when user increments an action to check if the action has been mastered & reacts accordingly
   // NOTE: called after LS point has been incremented (this way the value we are checking has the most recent action point)
   const checkMastered = (unmute, action) => {
-    const actionTotal = localStorage.getItem(action.susAction); // gets the point value for the action & sets as actionTotal 
+    const actionTotal = localStorage.getItem(action.susAction); // gets the point value for the action & sets as actionTotal
     if (action.toMaster * action.points > actionTotal) {
       // If action has not been mastered, the button will remain enabled
       // send user a progress alert to tell them how many more points they need to complete the action
@@ -633,432 +602,442 @@ function HomePage(props) {
 
   return (
     <audioContext.Consumer>
-    {(unmute, muteAudio) => (
-      <AuthUserContext.Consumer>
-      {(authUser) => (
-        <>
-          {/* BOTH ACTIONS AND FAVORITES TABS DISPLAY SAME TOP PART- up to galaxy card */}
-          {/* HOMEHEADER */}
-          <AppBar position="static">
-            <Toolbar className={classes.toolbar}>
-              <SusLogo3 className={classes.logo} />
-              <Typography className={classes.title} variant="h6">
-                Home
-              </Typography>
-            </Toolbar>
-
-            {/* HOMETABS */}
-            <Tabs
-              value={value}
-              onChange={handleChangeTabs}
-              variant="fullWidth"
-              scrollButtons="off"
-              aria-label="scrollable tabs"
-              className={classes.tabs}
-              TabIndicatorProps={{ className: classes.indicator }}
-            >
-              <Tab
-                label={
-                  <div className={classes.tabText}>
-                    <EcoIcon className={classes.tabIcon} /> Actions{" "}
-                  </div>
-                }
-                // {...a11yProps(0)}
-              />
-              <Tab
-                label={
-                  <div className={classes.tabText}>
-                    <FavoriteIcon className={classes.tabIcon} /> Favorites{" "}
-                  </div>
-                }
-                // {...a11yProps(1)}
-              />
-            </Tabs>
-          </AppBar>
-
-          {/* top-container includes total points & check progress */}
-          <div className="top-container">
-            {/* TOTAL POINTS */}
-            <Typography
-              variant="h5"
-              style={{ marginTop: "1rem" }}
-              component={"span"}
-            >
-              You have earned&nbsp;
-              {
-                <CountUp
-                  start={0}
-                  end={parseInt(userTotal)}
-                  duration={1}
-                ></CountUp>
-              }{" "}
-              points!
-            </Typography>
-
-            {/* Mobile Screens- floating action button */}
-            <Fab
-              variant="extended"
-              size="medium"
-              color="secondary"
-              onClick={() => setProgressModalIsOpen(true)}
-              aria-label="check progress"
-              className={classes.fab}
-            >
-              <CheckIcon />
-              &nbsp;Progress
-            </Fab>
-            {/* Large Screens- regular button under total points*/}
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={() => {
-                setProgressModalIsOpen(true);
-                playSound(unmute, confettiAudio);
-              }}
-              className={classes.checkProgress}
-            >
-              Check Progress
-            </Button>
-
-            {/* BADGE MODAL- opens when user logs their last action to master the badge! */}
-            <Dialog
-              open={badgeModalIsOpen}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
-              <DialogContent className={styles.dialogContent}>
-                {/* RIBBON */}
-                <div className={styles.ribbonWrapper}>
-                  <h1 className={styles.ribbon}>
-                    <strong className={styles.ribbonContent}>
-                      Congratulations {localStorage.getItem("name")}!
-                    </strong>
-                  </h1>
-                </div>
-                <img alt="badge" src={badgeImg} className={classes.badgeImg} />
-                {/* MUST ATTRIBUTE AUTHOR */}
-                {/* <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
-                <Typography variant="body1" className={classes.dialogBody}>
-                  You just earned a new badge for mastering the {badgeAction}{" "}
-                  action! This means you have completed this action{" "}
-                  {badgeActionCount} times. Great job, and keep being
-                  sustainable!
-                </Typography>
-                {/* <div style={{ margin: "auto" }}> */}
-                <Button
-                  onClick={handleClose}
-                  variant="contained"
-                  color="primary"
-                  className={classes.buttonClose}
-                >
-                  Got it
-                </Button>
-                <Button
-                  onClick={() => handleClickSeeBadge()}
-                  variant="contained"
-                  color="secondary"
-                  className={classes.buttonBadge}
-                >
-                  See my Badge
-                </Button>
-                {/* </div> */}
-              </DialogContent>
-            </Dialog>
-
-            {/* CHECK PROGRESS MODAL */}
-            <Dialog
-              open={progressModalIsOpen}
-              onClose={() => setProgressModalIsOpen(false)}
-              TransitionComponent={Transition}
-              keepMounted
-              fullWidth
-              aria-labelledby="alert-dialog-slide-title"
-              aria-describedby="alert-dialog-slide-description"
-              classes={{ paper: classes.dialogPaper }}
-            >
-              <DialogTitle
-                style={{
-                  backgroundColor: "var(--theme-secondary)",
-                  color: "#FFFFFF",
-                }}
-              >
-                <b>Check Your Progress!</b>
-              </DialogTitle>
-              <DialogContent>
-                {/* react confetti */}
-                <Confetti
-                  width={1500}
-                  numberOfPieces={2000}
-                  recycle={false}
-                  opacity={0.7}
-                />
-                <DialogContentText>{progressMessage}</DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  onClick={() => {
-                    setProgressModalIsOpen(false);
-                  }}
-                  variant="contained"
-                  color="secondary"
-                >
-                  Close
-                </Button>
-              </DialogActions>
-            </Dialog>
-          </div>
-
-          {/* ACTIONS TAB */}
-          <TabPanel value={value} index={0} className="tab-container">
-            {/* SEARCH BAR for ACTIONS */}
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                onChange={handleSearchChange}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
-            
-            {/* Action Galaxy Card to display */}
-            <ActionGalaxyCard/>
-
-            {/* ACTION CARDS */}
-            <Grid container justify="center" spacing={2}>
-              {/* All actions (this loops using search- toLowerCase makes it non-case sensitive) */}
-              {filteredOptions.length ? (
-                ActionData.map(
-                  (action, i) =>
-                    action.title
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase()) && (
-                      <Grid item xs={12} md={6} lg={4} key={i}>
-                        <Card className={classes.actionCard}>
-                          {/* Top part of the action card- title, points, add icon */}
-                          <CardHeader
-                            className={classes.cardContent}
-                            action={
-                              <IconButton
-                                disabled={firestoreMastered.includes(
-                                  action.susAction
-                                )}
-                                onClick={() => confirmIncrement(unmute, action)} // Call function to check if user meant to increment susAction
-                                aria-label="increment"
-                                title="Complete this sustainable action"
-                              >
-                                <AddCircleIcon fontSize="large" />
-                              </IconButton>
-                            }
-                            title={action.title}
-                            subheader={"Earn ".concat(
-                              action.points,
-                              " Points!"
-                            )}
-                          />
-
-                          {/* Bottom part of the action card- favorites icon & expand icon */}
-                          <CardActions
-                            disableSpacing
-                            className={classes.cardActions}
-                          >
-                            <IconButton
-                              title="Add to favorites"
-                              aria-label="add to favorites"
-                              style={{
-                                color: favIconColors[i - 1],
-                              }} // Set the favIcon color (i-1 prevents off-by-one error)
-                              onClick={() => favAction(unmute, action)}
-                              id={"favoriteIcon".concat(action.susAction)}
-                              className={classes.favoriteIcon}
-                            >
-                              <FavoriteIcon />
-                            </IconButton>
-                            {/* cards expand one by one since we pass in the index parament */}
-                            <IconButton
-                              className={clsx(classes.expand, {
-                                [classes.expandOpen]: !expandedId,
-                              })}
-                              onClick={() => {
-                                handleExpandClick(i);
-                              }}
-                              aria-expanded={expandedId === i}
-                              aria-label="Show More"
-                              title="Learn more"
-                            >
-                              <ExpandMoreIcon />
-                            </IconButton>
-                          </CardActions>
-
-                          {/* Expanded part of the action card- #times to master action, image, & impact */}
-                          <Collapse
-                            in={expandedId === i}
-                            timeout="auto"
-                            unmountOnExit
-                          >
-                            <CardContent>
-                              <Typography variant="h6" gutterBottom>
-                                Complete this action {action.toMaster} times to
-                                earn a badge!
-                              </Typography>
-                              <CardMedia
-                                className={classes.media}
-                                image={action.image}
-                                title={action.title}
-                              />
-                              <Typography
-                                variant="h5"
-                                component={"span"}
-                                gutterBottom
-                              >
-                                Environmental Impact:
-                              </Typography>
-                              <Typography variant="body1">
-                                {action.impact}
-                              </Typography>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                      </Grid>
-                    )
-                )
-              ) : (
-                <>
-                  {/* IF NO RESULTS FROM SEARCH */}
-                  <Typography variant="h6" gutterBottom>
-                    Sorry no actions found for "{searchQuery}"{" "}
-                    <span role="img" aria-label="sad face">
-                      😢
-                    </span>
-                  </Typography>
-                  <Typography variant="body1">
-                    Feel free to fill out the "contact us" form in settings if
-                    you would like us to add "{searchQuery}" as a sustainable
-                    action!
-                  </Typography>
-                </>
-              )}
-            </Grid>
-          </TabPanel>
-
-          {/* FAVORITES TAB */}
-          <TabPanel value={value} index={1} className="tab-container">
+      {(unmute, muteAudio) => (
+        <AuthUserContext.Consumer>
+          {(authUser) => (
             <>
-              {/* lazy loading favorites galaxy card */}
-              <Suspense fallback={<ProgressCircle />}>
-                <FavoriteGalaxyCard />
-              </Suspense>
+              {/* BOTH ACTIONS AND FAVORITES TABS DISPLAY SAME TOP PART- up to galaxy card */}
+              {/* HOMEHEADER */}
+              <AppBar position="static">
+                <Toolbar className={classes.toolbar}>
+                  <SusLogo3 className={classes.logo} />
+                  <Typography className={classes.title} variant="h6">
+                    Home
+                  </Typography>
+                </Toolbar>
 
-              {/* FAVORITE ACTIONS */}
-              <Grid
-                container
-                justify="center"
-                spacing={2}
-                className={classes.actionContainer}
-              >
-                {/* Favorite actions (this loops using favs) */}
-                {ActionData.map(
-                  (action, i) =>
-                    localStorage.getItem(action.susAction.concat("Fav")) ===
-                      "true" && (
-                      <Grid item xs={12} md={6} lg={4} key={i}>
-                        {/* Top part of the action card- title, points, add icon */}
-                        <Card className={classes.actionCard}>
-                          <CardHeader
-                            className={classes.cardContent}
-                            action={
-                              <IconButton
-                                disabled={firestoreMastered.includes(
-                                  action.susAction
-                                )}
-                                onClick={() => confirmIncrement(unmute, action)}
-                                aria-label="settings"
-                                title="Complete this sustainable action"
-                              >
-                                <AddCircleIcon fontSize="large" />
-                              </IconButton>
-                            }
-                            title={action.title}
-                            subheader={"Earn ".concat(
-                              action.points,
-                              " Points!"
-                            )}
-                          />
+                {/* HOMETABS */}
+                <Tabs
+                  value={value}
+                  onChange={handleChangeTabs}
+                  variant="fullWidth"
+                  scrollButtons="off"
+                  aria-label="scrollable tabs"
+                  className={classes.tabs}
+                  TabIndicatorProps={{ className: classes.indicator }}
+                >
+                  <Tab
+                    label={
+                      <div className={classes.tabText}>
+                        <EcoIcon className={classes.tabIcon} /> Actions{" "}
+                      </div>
+                    }
+                    // {...a11yProps(0)}
+                  />
+                  <Tab
+                    label={
+                      <div className={classes.tabText}>
+                        <FavoriteIcon className={classes.tabIcon} /> Favorites{" "}
+                      </div>
+                    }
+                    // {...a11yProps(1)}
+                  />
+                </Tabs>
+              </AppBar>
 
-                          {/* Bottom part of the action card- favorites icon & expand icon */}
-                          <CardActions disableSpacing>
-                            <IconButton
-                              title="Add to favorites"
-                              aria-label="add to favorites"
-                              style={{
-                                color: "var(--theme-secondary)",
-                                backgroundColor: "transparent",
-                              }} // Set the favIcon color (i-1 prevents off-by-one error)
-                              onClick={() => favAction(unmute, action)}
-                              id={"favoriteIcon".concat(action.susAction)}
-                              className={classes.favoriteIcon}
-                            >
-                              <FavoriteIcon />
-                            </IconButton>
-                            <IconButton
-                              className={clsx(classes.expand, {
-                                [classes.expandOpen]: !expandedId,
-                              })}
-                              onClick={() => handleExpandClick(i)}
-                              aria-expanded={expandedId === i}
-                              aria-label="Show More"
-                              title="Learn more"
-                            >
-                              <ExpandMoreIcon />
-                            </IconButton>
-                          </CardActions>
+              {/* top-container includes total points & check progress */}
+              <div className="top-container">
+                {/* TOTAL POINTS */}
+                <Typography
+                  variant="h5"
+                  style={{ marginTop: "1rem" }}
+                  component={"span"}
+                >
+                  You have earned&nbsp;
+                  <b>
+                    {
+                      <CountUp
+                        start={0}
+                        end={parseInt(userTotal)}
+                        duration={1}
+                      ></CountUp>
+                    }
+                  </b>{" "}
+                  points!
+                </Typography>
 
-                          {/* Expanded part of the action card- #times to master action, image, & impact */}
-                          <Collapse
-                            in={expandedId === i}
-                            timeout="auto"
-                            unmountOnExit
-                          >
-                            <CardContent>
-                              <Typography variant="h6" gutterBottom>
-                                Complete this action {action.toMaster} times to
-                                earn a badge!
-                              </Typography>
-                              <CardMedia
-                                className={classes.media}
-                                image={action.image}
+                {/* Mobile Screens- floating action button */}
+                <Fab
+                  variant="extended"
+                  size="medium"
+                  color="secondary"
+                  onClick={() => setProgressModalIsOpen(true)}
+                  aria-label="check progress"
+                  className={classes.fab}
+                >
+                  <CheckIcon />
+                  &nbsp;Progress
+                </Fab>
+                {/* Large Screens- regular button under total points*/}
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  onClick={() => {
+                    setProgressModalIsOpen(true);
+                    playSound(unmute, confettiAudio);
+                  }}
+                  className={classes.checkProgress}
+                >
+                  Check Progress
+                </Button>
+
+                {/* BADGE MODAL- opens when user logs their last action to master the badge! */}
+                <Dialog
+                  open={badgeModalIsOpen}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  {/* NOTE: dialogContent is styles in module.css, background wouldn't work otherwise */}
+                  <DialogContent className={styles.dialogContent}>
+                    {/* RIBBON */}
+                    <div className={styles.ribbonWrapper}>
+                      <h1 className={styles.ribbon}>
+                        <strong className={styles.ribbonContent}>
+                          Congratulations {localStorage.getItem("name")}!
+                        </strong>
+                      </h1>
+                    </div>
+                    <img
+                      alt="badge"
+                      src={badgeImg}
+                      className={classes.badgeImg}
+                    />
+                    {/* MUST ATTRIBUTE AUTHOR */}
+                    {/* <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
+                    <Typography variant="body1" className={classes.dialogBody}>
+                      You just earned a new badge for mastering the{" "}
+                      {badgeAction} action! This means you have completed this
+                      action {badgeActionCount} times. Great job, and keep being
+                      sustainable!
+                    </Typography>
+                    {/* <div style={{ margin: "auto" }}> */}
+                    <Button
+                      onClick={handleClose}
+                      variant="contained"
+                      color="primary"
+                      className={classes.buttonClose}
+                    >
+                      Got it
+                    </Button>
+                    <Button
+                      onClick={() => handleClickSeeBadge()}
+                      variant="contained"
+                      color="secondary"
+                      className={classes.buttonBadge}
+                    >
+                      See my Badge
+                    </Button>
+                    {/* </div> */}
+                  </DialogContent>
+                </Dialog>
+
+                {/* CHECK PROGRESS MODAL */}
+                <Dialog
+                  open={progressModalIsOpen}
+                  onClose={() => setProgressModalIsOpen(false)}
+                  TransitionComponent={Transition}
+                  keepMounted
+                  fullWidth
+                  aria-labelledby="alert-dialog-slide-title"
+                  aria-describedby="alert-dialog-slide-description"
+                  classes={{ paper: classes.dialogPaper }}
+                >
+                  <DialogTitle
+                    style={{
+                      backgroundColor: "var(--theme-secondary)",
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    <b>Check Your Progress!</b>
+                  </DialogTitle>
+                  <DialogContent>
+                    {/* react confetti */}
+                    <Confetti
+                      width={1500}
+                      numberOfPieces={2000}
+                      recycle={false}
+                      opacity={0.7}
+                    />
+                    <DialogContentText>{progressMessage}</DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button
+                      onClick={() => {
+                        setProgressModalIsOpen(false);
+                      }}
+                      variant="contained"
+                      color="secondary"
+                    >
+                      Close
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
+
+              {/* ACTIONS TAB */}
+              <TabPanel value={value} index={0} className="tab-container">
+                {/* SEARCH BAR for ACTIONS */}
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder="Search…"
+                    onChange={handleSearchChange}
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    inputProps={{ "aria-label": "search" }}
+                  />
+                </div>
+
+                {/* Action Galaxy Card to display */}
+                <ActionGalaxyCard />
+
+                {/* ACTION CARDS */}
+                <Grid container justify="center" spacing={2}>
+                  {/* All actions (this loops using search- toLowerCase makes it non-case sensitive) */}
+                  {filteredOptions.length ? (
+                    ActionData.map(
+                      (action, i) =>
+                        action.title
+                          .toLowerCase()
+                          .includes(searchQuery.toLowerCase()) && (
+                          <Grid item xs={12} md={6} lg={4} key={i}>
+                            <Card className={classes.actionCard}>
+                              {/* Top part of the action card- title, points, add icon */}
+                              <CardHeader
+                                className={classes.cardContent}
+                                action={
+                                  <IconButton
+                                    disabled={firestoreMastered.includes(
+                                      action.susAction
+                                    )}
+                                    onClick={() =>
+                                      confirmIncrement(unmute, action)
+                                    } // Call function to check if user meant to increment susAction
+                                    aria-label="increment"
+                                    title="Complete this sustainable action"
+                                  >
+                                    <AddCircleIcon fontSize="large" />
+                                  </IconButton>
+                                }
                                 title={action.title}
+                                subheader={"Earn ".concat(
+                                  action.points,
+                                  " Points!"
+                                )}
                               />
-                              <Typography
-                                variant="h5"
-                                component={"span"}
-                                gutterBottom
+
+                              {/* Bottom part of the action card- favorites icon & expand icon */}
+                              <CardActions
+                                disableSpacing
+                                className={classes.cardActions}
                               >
-                                Environmental Impact:
-                              </Typography>
-                              <Typography variant="body1">
-                                {action.impact}
-                              </Typography>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                      </Grid>
+                                <IconButton
+                                  title="Add to favorites"
+                                  aria-label="add to favorites"
+                                  style={{
+                                    color: favIconColors[i - 1],
+                                  }} // Set the favIcon color (i-1 prevents off-by-one error)
+                                  onClick={() => favAction(unmute, action)}
+                                  id={"favoriteIcon".concat(action.susAction)}
+                                  className={classes.favoriteIcon}
+                                >
+                                  <FavoriteIcon />
+                                </IconButton>
+                                {/* cards expand one by one since we pass in the index parament */}
+                                <IconButton
+                                  className={clsx(classes.expand, {
+                                    [classes.expandOpen]: !expandedId,
+                                  })}
+                                  onClick={() => {
+                                    handleExpandClick(i);
+                                  }}
+                                  aria-expanded={expandedId === i}
+                                  aria-label="Show More"
+                                  title="Learn more"
+                                >
+                                  <ExpandMoreIcon />
+                                </IconButton>
+                              </CardActions>
+
+                              {/* Expanded part of the action card- #times to master action, image, & impact */}
+                              <Collapse
+                                in={expandedId === i}
+                                timeout="auto"
+                                unmountOnExit
+                              >
+                                <CardContent>
+                                  <Typography variant="h6" gutterBottom>
+                                    Complete this action {action.toMaster} times
+                                    to earn a badge!
+                                  </Typography>
+                                  <CardMedia
+                                    className={classes.media}
+                                    image={action.image}
+                                    title={action.title}
+                                  />
+                                  <Typography
+                                    variant="h5"
+                                    component={"span"}
+                                    gutterBottom
+                                  >
+                                    Environmental Impact:
+                                  </Typography>
+                                  <Typography variant="body1">
+                                    {action.impact}
+                                  </Typography>
+                                </CardContent>
+                              </Collapse>
+                            </Card>
+                          </Grid>
+                        )
                     )
-                )}
-              </Grid>
+                  ) : (
+                    <>
+                      {/* IF NO RESULTS FROM SEARCH */}
+                      <Typography variant="h6" gutterBottom>
+                        Sorry no actions found for "{searchQuery}"{" "}
+                        <span role="img" aria-label="sad face">
+                          😢
+                        </span>
+                      </Typography>
+                      <Typography variant="body1">
+                        Feel free to fill out the "contact us" form in settings
+                        if you would like us to add "{searchQuery}" as a
+                        sustainable action!
+                      </Typography>
+                    </>
+                  )}
+                </Grid>
+              </TabPanel>
+
+              {/* FAVORITES TAB */}
+              <TabPanel value={value} index={1} className="tab-container">
+                <>
+                  {/* lazy loading favorites galaxy card */}
+                  <Suspense fallback={<ProgressCircle />}>
+                    <FavoriteGalaxyCard />
+                  </Suspense>
+
+                  {/* FAVORITE ACTIONS */}
+                  <Grid
+                    container
+                    justify="center"
+                    spacing={2}
+                    className={classes.actionContainer}
+                  >
+                    {/* Favorite actions (this loops using favs) */}
+                    {ActionData.map(
+                      (action, i) =>
+                        localStorage.getItem(action.susAction.concat("Fav")) ===
+                          "true" && (
+                          <Grid item xs={12} md={6} lg={4} key={i}>
+                            {/* Top part of the action card- title, points, add icon */}
+                            <Card className={classes.actionCard}>
+                              <CardHeader
+                                className={classes.cardContent}
+                                action={
+                                  <IconButton
+                                    disabled={firestoreMastered.includes(
+                                      action.susAction
+                                    )}
+                                    onClick={() =>
+                                      confirmIncrement(unmute, action)
+                                    }
+                                    aria-label="settings"
+                                    title="Complete this sustainable action"
+                                  >
+                                    <AddCircleIcon fontSize="large" />
+                                  </IconButton>
+                                }
+                                title={action.title}
+                                subheader={"Earn ".concat(
+                                  action.points,
+                                  " Points!"
+                                )}
+                              />
+
+                              {/* Bottom part of the action card- favorites icon & expand icon */}
+                              <CardActions disableSpacing>
+                                <IconButton
+                                  title="Add to favorites"
+                                  aria-label="add to favorites"
+                                  style={{
+                                    color: "var(--theme-secondary)",
+                                    backgroundColor: "transparent",
+                                  }} // Set the favIcon color (i-1 prevents off-by-one error)
+                                  onClick={() => favAction(unmute, action)}
+                                  id={"favoriteIcon".concat(action.susAction)}
+                                  className={classes.favoriteIcon}
+                                >
+                                  <FavoriteIcon />
+                                </IconButton>
+                                <IconButton
+                                  className={clsx(classes.expand, {
+                                    [classes.expandOpen]: !expandedId,
+                                  })}
+                                  onClick={() => handleExpandClick(i)}
+                                  aria-expanded={expandedId === i}
+                                  aria-label="Show More"
+                                  title="Learn more"
+                                >
+                                  <ExpandMoreIcon />
+                                </IconButton>
+                              </CardActions>
+
+                              {/* Expanded part of the action card- #times to master action, image, & impact */}
+                              <Collapse
+                                in={expandedId === i}
+                                timeout="auto"
+                                unmountOnExit
+                              >
+                                <CardContent>
+                                  <Typography variant="h6" gutterBottom>
+                                    Complete this action {action.toMaster} times
+                                    to earn a badge!
+                                  </Typography>
+                                  <CardMedia
+                                    className={classes.media}
+                                    image={action.image}
+                                    title={action.title}
+                                  />
+                                  <Typography
+                                    variant="h5"
+                                    component={"span"}
+                                    gutterBottom
+                                  >
+                                    Environmental Impact:
+                                  </Typography>
+                                  <Typography variant="body1">
+                                    {action.impact}
+                                  </Typography>
+                                </CardContent>
+                              </Collapse>
+                            </Card>
+                          </Grid>
+                        )
+                    )}
+                  </Grid>
+                </>
+              </TabPanel>
             </>
-          </TabPanel>
-        </>
+          )}
+        </AuthUserContext.Consumer>
       )}
-    </AuthUserContext.Consumer>
-    )}
     </audioContext.Consumer>
   ); // end of return statement
 } // end of function

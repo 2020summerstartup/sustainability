@@ -1,4 +1,5 @@
 import React from "react";
+import "../../components/GalaxyCards/galaxyCards.css";
 // Image import
 import actionImg from "../../img/actionTab.svg";
 // Material UI Imports
@@ -18,48 +19,10 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
-// Styles for Galaxy Card
-const useStyles = makeStyles((theme) => ({
-  galaxyCard: {
-    borderRadius: "1rem",
-    boxShadow: "none",
-    position: "relative",
-    margin: "auto",
-    marginBottom: "1rem",
-    // Width and Height are important for fitting on the screen
-    maxWidth: "36rem",
-    minHeight: "15rem",
-    zIndex: 0,
-    // For everything above "small" screen
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "75vh",
-      minHeight: "40vh",
-    },
-    "&:after": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      bottom: 0,
-      zIndex: 1,
-      // Black to transparent background
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },
-  },
-  galaxyContent: {
-    position: "absolute",
-    zIndex: 2,
-    bottom: 0,
-    width: "100%",
-  },
-}));
-
 // Main Component
 // React.memo keep our app from over rendering when it doesn't need to
 export const ActionCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
-  const classes = useStyles();
 
   return (
     <>
@@ -71,7 +34,7 @@ export const ActionCard = React.memo(function GalaxyCard() {
           ]}
         />
       </NoSsr>
-      <Card className={classes.galaxyCard}>
+      <Card className="galaxyCard homeGalaxyCard">
         {/* Fireworks picture for galaxy card */}
         <CardMedia
           classes={mediaStyles}
@@ -79,14 +42,14 @@ export const ActionCard = React.memo(function GalaxyCard() {
           style={{ backgroundPosition: "center center" }}
         />
         {/* now we can see the fireworks^ */}
-        <Box py={3} px={2} className={classes.galaxyContent}>
+        <Box py={3} px={2} className="galaxyContent">
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoTitle>Sustainable actions!</InfoTitle>
             <InfoSubtitle
               style={{
                 color: "white",
                 fontWeight: "bold",
-                marginTop: "0.25rem",
+                marginTop: "0.5rem",
               }}
             >
               Click the{" "}
@@ -99,7 +62,7 @@ export const ActionCard = React.memo(function GalaxyCard() {
               style={{
                 color: "white",
                 fontWeight: "bold",
-                marginTop: "0.5rem",
+                marginTop: "0.75rem",
               }}
             >
               Tap the drop down menu to find out more

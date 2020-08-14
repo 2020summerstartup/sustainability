@@ -2,6 +2,7 @@
 import React, { Suspense } from "react";
 import ProgressCircle from "../../../components/ProgressCircle";
 // Image import
+import "../../../components/GalaxyCards/galaxyCards.css";
 import Chart from "react-google-charts";
 import dormImg from "../../../img/dorm.svg";
 import styles from "./college.module.css";
@@ -35,34 +36,6 @@ getSchoolImpact();
 
 // Styles used for Dorm Galaxy Card
 const useStyles = makeStyles((theme) => ({
-  card: {
-    borderRadius: "1rem",
-    boxShadow: "none",
-    position: "relative",
-    margin: "auto",
-    maxWidth: "60rem",
-    minHeight: "15rem",
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "60rem",
-      minHeight: "20rem",
-    },
-    "&:after": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      bottom: 0,
-      zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },
-  },
-  content: {
-    position: "absolute",
-    zIndex: 2,
-    bottom: 0,
-    width: "100%",
-  },
   linkText: {
     color: "white",
   },
@@ -163,9 +136,9 @@ export const DormCard = React.memo(function GalaxyCard() {
               ]}
             />
           </NoSsr>
-          <Card className={classes.card}>
+          <Card className="galaxyCard">
             <CardMedia classes={mediaStyles} image={dormImg} />
-            <Box py={3} px={2} className={classes.content}>
+            <Box py={3} px={2} className="galaxyContent">
               <Info useStyles={useGalaxyInfoStyles}>
                 <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
                   {localStorage.getItem("name")}, you're representing{" "}

@@ -14,7 +14,7 @@ import {
 } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 // For PasswordOne data
-import { PasswordInput } from "./muiSignInPage";
+import { PasswordInput } from "./signInPage";
 import { ReactComponent as SignUp } from "../../img/signup.svg";
 import { audioContext } from "../AccountPage/Settings/audioContext";
 
