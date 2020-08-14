@@ -99,7 +99,7 @@
     "toMaster": 10,
     "coEmiss": 12,
     "energy": 0,
-    "water": 0,
+    "water": 12,
     "image": "https://images.unsplash.com/photo-1556386470-bcdc6a5e9b9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "Reducing consumption of meat can help contain production of greenhouse gases that impact climate change. It can also help lessen the demand for precious environmental resources such as land, water, and energy. If you can't pass up the Hoch's Monday steak night, choose a different day of the week to go meatless."
   },
@@ -164,9 +164,9 @@
     "susAction": "climateClass",
     "badgeName": "Climate Class",
     "toMaster": 2,
-    "coEmiss": 0,
-    "energy": 0,
-    "water": 0,
+    "coEmiss": 15,
+    "energy": 15,
+    "water": 15,
     "image": "https://images.unsplash.com/photo-1477238134895-98438ad85c30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60",
     "impact": "The 5Cs have tons of classes focused on climate change! Interested in learning more about the topic? Register for one next semester!"
   },
@@ -268,9 +268,9 @@
     "susAction": "referFriend",
     "badgeName": "Refer Friend",
     "toMaster": 5,
-    "coEmiss": 0,
-    "energy": 0,
-    "water": 0,
+    "coEmiss": 2,
+    "energy": 2,
+    "water": 2,
     "image": "https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80",
     "impact": "Tell your friends about EcoBud, and help more people start living sustainably!"
   }
