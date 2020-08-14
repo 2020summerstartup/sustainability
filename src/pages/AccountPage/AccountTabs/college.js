@@ -26,10 +26,8 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-import leaderBoardUpdate, {
-  assignRanking,
-} from "../../CompetePage/leaderBoardUpdate";
-import { getDorm, getSchoolImpact } from "../../../services/Firebase";
+import leaderBoardUpdate from "../../CompetePage/leaderBoardUpdate";
+import { getSchoolImpact } from "../../../services/Firebase";
 
 // synchronize school's total impact with firestore, when they remain on the page, they will not see immediate changes that other users
 // make but each time to return to the page, this function will run and new school impact points will be determined
