@@ -18,22 +18,7 @@
   }
 }
 
-.titleLeftFront {
-  position: relative;
-  transform: rotate(-45deg) translate(17%, -32%);
-  top: 45%;
-  color: white;
-  text-shadow: 2px 2px 5px black;
-}
-
-.titleRightFront {
-  position: relative;
-  transform: rotate(45deg) translate(-17%, -32%);
-  top: 45%;
-  color: white;
-  text-shadow: 2px 2px 5px black;
-}
-
+/* STYLES FOR FRONTSIDE LEFT & RIGHT BADGES */
 div.left,
 div.right {
   width: 10rem;
@@ -60,14 +45,6 @@ div.left {
     rgba(38, 172, 51, 1) 50.1%,
     rgba(57, 227, 74, 1) 100%
   );
-  /* background: rgb(6, 110, 10);
-  background: linear-gradient(
-    -45deg,
-    rgba(6, 110, 10, 1) 0%,
-    rgba(41, 201, 47, 1) 49.9%,
-    rgba(57, 227, 74, 1) 50.1%,
-    rgba(38, 172, 51, 1) 100%
-  ); */
 }
 
 div.right {
@@ -86,14 +63,24 @@ div.right {
   );
 }
 
-.flipLeft {
-  transform: rotate3d(1, -1, 0, 180deg);
+/* STYLES FOR LEFT & RIGHT TITLES */
+.titleLeftFront {
+  position: relative;
+  transform: rotate(-45deg) translate(17%, -32%);
+  top: 45%;
+  color: white;
+  text-shadow: 2px 2px 5px black;
 }
 
-.flipRight {
-  transform: rotate3d(-1, -1, 0, 180deg);
+.titleRightFront {
+  position: relative;
+  transform: rotate(45deg) translate(-17%, -32%);
+  top: 45%;
+  color: white;
+  text-shadow: 2px 2px 5px black;
 }
 
+/* FRONT & BACK OF LEAF */
 .leafFront,
 .leafBack {
   position: absolute;
@@ -107,6 +94,16 @@ div.right {
   transform: rotateY(180deg);
 }
 
+/* WHEN CLICKED BADGE WILL FLIP LEFT OR RIGHT */
+.flipLeft {
+  transform: rotate3d(1, -1, 0, 180deg);
+}
+
+.flipRight {
+  transform: rotate3d(-1, -1, 0, 180deg);
+}
+
+/* STYLES FOR BACKSIDE LEFT & RIGHT TITLES */
 .titleLeftBack {
   position: relative;
   transform: rotate(-135deg) translate(17%, 30%);
@@ -124,7 +121,7 @@ div.right {
 }
 
 
-/* LEAF ANIMATIONS */
+/* FALLING LEAF ANIMATIONS IN THE BACKGROUND */
 .leaves {
   position: relative;
   top: -5rem;
@@ -307,6 +304,7 @@ div.right {
   animation-timing-function: ease-in-out;
 }
 
+/* differetion animations for falling leaves so it's more realistic */
 @keyframes falling {
   0% {
     transform: translate3d(300, 0, 0) rotate(0deg);

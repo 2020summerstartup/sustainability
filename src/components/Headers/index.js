@@ -151,7 +151,7 @@ const AccountHeader = () => {
 };
 
 // SPECIAL HEADERS
-// Header for SIGNUP PAGE - only need back arrow not settings icon
+// Header for sign up page - only need back arrow not settings icon
 const BackArrowHeader = () => {
   let history = useHistory();
   const classes = useStyles();
@@ -172,7 +172,7 @@ const BackArrowHeader = () => {
           <Grid justify="flex-start" container>
             <Grid item>
               <Typography variant="h6" className={classes.title} noWrap>
-                Sign Up
+                EcoBud 
               </Typography>
             </Grid>
           </Grid>

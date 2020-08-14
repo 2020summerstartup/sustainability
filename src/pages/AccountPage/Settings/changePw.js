@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { AuthUserContext, withAuthorization } from "../../../services/Session";
 import { withFirebase } from "../../../services/Firebase";
 import accountImg from "../../../img/account.svg";
-import { PasswordInput } from "../../RegisterPage/muiSignInPage";
-import { PasswordInput2 } from "../../RegisterPage/muiSignUpPage";
-import { audioContext } from "../Settings/audioContext"
+import { PasswordInput } from "../../RegisterPage/signInPage";
+import { PasswordInput2 } from "../../RegisterPage/signUpPage";
+import { audioContext } from "./audioContext"
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
