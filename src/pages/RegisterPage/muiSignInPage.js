@@ -106,7 +106,7 @@ class SignInFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    // localStorage.clear();
+    localStorage.clear();
     const { email, password } = this.state;
 
     // begins the sign in process by checking if the user is authenticated in firebase
