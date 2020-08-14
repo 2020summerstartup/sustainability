@@ -491,7 +491,7 @@ function HomePage(props) {
       setBadgeActionCount(action.toMaster); // to make sure modal has correct value for times completed
       setBadgeModalIsOpen(true); // to have badge modal display
       const badgeAudio = new Audio(badge);
-      badgeAudio.play();
+      playSound(unmute, badgeAudio);
       firestoreMastered.push(action.susAction); // updates the firestoreMastered global variable --> changes button to disabled
       localStorage.setItem(
         "firestoreMastered",
