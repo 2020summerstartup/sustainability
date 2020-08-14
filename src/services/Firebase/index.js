@@ -121,7 +121,7 @@ class Firebase {
 
 
 
-// called when a new user signs up in muiSignUpPage
+// called when a new user signs up in SignUpPage
 // receives userEmail, userName, and dorm from sign up input forms to set those unique tokens in firestore, 
 // all other field have a default start (ex: points, total, impact all default to starting at 0)
 export const createUser = (userEmail, userName, dorm) => {

@@ -1,5 +1,6 @@
 import React from "react";
 import favorite2 from "../../img/favorite2.svg";
+import "../../components/GalaxyCards/galaxyCards.css";
 // Material UI Imprts
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
@@ -17,55 +18,9 @@ import {
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
-// Styles for Galaxy Card
-const useStyles = makeStyles((theme) => ({
-  card: {
-    borderRadius: "1rem",
-    boxShadow: "none",
-    position: "relative",
-    margin: "auto",
-    marginBottom: "1rem",
-    // Width and Height are important for fitting on the screen
-    maxWidth: "36rem",
-    minHeight: "15rem",
-    zIndex: 0,
-    // For everything above "small" screen
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "75vh",
-      minHeight: "40vh",
-    },
-    "&:after": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      bottom: 0,
-      zIndex: 1,
-      // Black to transparent background
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },
-  },
-  content: {
-    position: "absolute",
-    zIndex: 2,
-    bottom: 0,
-    width: "100%",
-  },
-  // Style for Change Dorm link
-  linkText: {
-    color: "white",
-  },
-  link: {
-    textDecoration: "none",
-    underline: "none",
-  },
-}));
-
 // Main Component, exported to 
-export const FavoriteGalaxyCard = function GalaxyCard() {
+export const FavoriteGalaxyCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
-  const classes = useStyles();
 
   return (
     <>
@@ -77,9 +32,9 @@ export const FavoriteGalaxyCard = function GalaxyCard() {
           ]}
         />
       </NoSsr>
-      <Card className={classes.card}>
+      <Card className="galaxyCard homeGalaxyCard">
         <CardMedia classes={mediaStyles} image={favorite2} />
-        <Box py={3} px={2} className={classes.content}>
+        <Box py={3} px={2} className="galaxyContent">
           <Info useStyles={useGalaxyInfoStyles}>
             <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
               Your faves are here{" "}
@@ -98,6 +53,6 @@ export const FavoriteGalaxyCard = function GalaxyCard() {
       </Card>
     </>
   );
-};
+});
 
 export default FavoriteGalaxyCard;

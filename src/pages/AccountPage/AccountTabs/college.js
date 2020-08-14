@@ -2,6 +2,7 @@
 import React, { Suspense } from "react";
 import ProgressCircle from "../../../components/ProgressCircle";
 // Image import
+import "../../../components/GalaxyCards/galaxyCards.css";
 import Chart from "react-google-charts";
 import dormImg from "../../../img/dorm.svg";
 import styles from "./college.module.css";
@@ -26,10 +27,8 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-import leaderBoardUpdate, {
-  assignRanking,
-} from "../../CompetePage/leaderBoardUpdate";
-import { getDorm, getSchoolImpact } from "../../../services/Firebase";
+import leaderBoardUpdate from "../../CompetePage/leaderBoardUpdate";
+import { getSchoolImpact } from "../../../services/Firebase";
 
 // synchronize school's total impact with firestore, when they remain on the page, they will not see immediate changes that other users
 // make but each time to return to the page, this function will run and new school impact points will be determined
@@ -37,34 +36,6 @@ getSchoolImpact();
 
 // Styles used for Dorm Galaxy Card
 const useStyles = makeStyles((theme) => ({
-  card: {
-    borderRadius: "1rem",
-    boxShadow: "none",
-    position: "relative",
-    margin: "auto",
-    maxWidth: "60rem",
-    minHeight: "15rem",
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "60rem",
-      minHeight: "20rem",
-    },
-    "&:after": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      bottom: 0,
-      zIndex: 1,
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },
-  },
-  content: {
-    position: "absolute",
-    zIndex: 2,
-    bottom: 0,
-    width: "100%",
-  },
   linkText: {
     color: "white",
   },
@@ -165,9 +136,9 @@ export const DormCard = React.memo(function GalaxyCard() {
               ]}
             />
           </NoSsr>
-          <Card className={classes.card}>
+          <Card className="galaxyCard">
             <CardMedia classes={mediaStyles} image={dormImg} />
-            <Box py={3} px={2} className={classes.content}>
+            <Box py={3} px={2} className="galaxyContent">
               <Info useStyles={useGalaxyInfoStyles}>
                 <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
                   {localStorage.getItem("name")}, you're representing{" "}

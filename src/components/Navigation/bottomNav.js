@@ -16,6 +16,8 @@ const BottomNav = () => {
   var navigation;
   if (pathname.includes("signin")){
     navigation = <BottomNavNonAuth />
+  }else if (pathname.includes("index")){
+    navigation = <BottomNavNonAuth />
   }else{
     navigation = <BottomNavAuth />
   }
@@ -102,6 +104,10 @@ function BottomNavNonAuth() {
   const tabNameToIndex = (pathname) => {
     if (pathname.includes("signin")){
       return 1
+    }if (pathname.includes("index")){
+      return 1
+    }else{
+      return 0
     }
   };
   

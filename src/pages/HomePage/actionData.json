@@ -2,7 +2,7 @@
   {
     "title": "Recycle Water Bottle",
     "id": 1,
-    "points": 10,
+    "points": 5,
     "susAction": "waterBottle",
     "badgeName": "Recycling",
     "toMaster": 30,
@@ -44,7 +44,7 @@
     "points": 10,
     "susAction": "reuseBag",
     "badgeName": "Reusable Bag",
-    "toMaster": 20,
+    "toMaster": 30,
     "coEmiss": 1,
     "energy": 0,
     "water": 0,
@@ -67,10 +67,10 @@
   {
     "title": "Re-brew Tea Leaves",
     "id": 6,
-    "points": 10,
+    "points": 5,
     "susAction": "rebrewTea",
     "badgeName": "Re-brew Tea",
-    "toMaster": 15,
+    "toMaster": 20,
     "coEmiss": 0,
     "energy": 0,
     "water": 0,
@@ -91,7 +91,7 @@
     "impact": "Reducing food waste is environmentally important, because it keeps food out of landfills. It makes economic sense on a small scale, by lowering household food bills and at the large scale by reducing disposal costs for restaurants, processors and farmers. Finally, reducing food waste is socially important when the rescued food is redirected to emergency food providers working to eliminate hunger in our communities."
   },
   {
-    "title": "Participate in Meatless-Mondays",
+    "title": "Vegetarian for the Day",
     "id": 8,
     "points": 20,
     "susAction": "meatlessMon",
@@ -106,7 +106,7 @@
   {
     "title": "Eco-friendly Cleaning Products",
     "id": 9,
-    "points": 10,
+    "points": 15,
     "susAction": "ecoClean",
     "badgeName": "Eco-Cleaning",
     "toMaster": 20,
@@ -119,7 +119,7 @@
   {
     "title": "Use Public Transportation",
     "id": 10,
-    "points": 15,
+    "points": 20,
     "susAction": "publicTransit",
     "badgeName": "Transportation",
     "toMaster": 20,
@@ -133,7 +133,7 @@
   {
     "title": "Buy Second-hand Clothes",
     "id": 11,
-    "points": 20,
+    "points": 25,
     "susAction": "usedClothes",
     "badgeName": "Clothing",
     "toMaster": 15,
@@ -147,7 +147,7 @@
   {
     "title": "Hang Your Clothes to Dry",
     "id": 12,
-    "points": 10,
+    "points": 15,
     "susAction": "hangDry",
     "badgeName": "Air Dry Clothes",
     "toMaster": 15,
@@ -215,7 +215,7 @@
     "points": 25,
     "susAction": "donateClothes",
     "badgeName": "Donation",
-    "toMaster": 10,
+    "toMaster": 2,
     "coEmiss": 0,
     "energy": 5,
     "water": 15,
@@ -260,5 +260,18 @@
     "water": 0,
     "image": "https://images.unsplash.com/photo-1557200134-90327ee9fafa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     "impact": "Many stores and resturants now give you the option to have a digital receipt emailed to you. This will help eliminate some of your paper waste (and you won't lose any important receipts)!"
+  },
+  {
+    "title": "Get a friend to sign up for EcoBud!",
+    "id": 21,
+    "points": 10,
+    "susAction": "referFriend",
+    "badgeName": "Refer Friend",
+    "toMaster": 5,
+    "coEmiss": 0,
+    "energy": 0,
+    "water": 0,
+    "image": "https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80",
+    "impact": "Tell your friends about EcoBud, and help more people start living sustainably!"
   }
 ]
