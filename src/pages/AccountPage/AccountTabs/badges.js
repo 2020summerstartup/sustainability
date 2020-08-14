@@ -55,31 +55,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-var masteredActions = localStorage.getItem("firestoreMastered"); // MasteredActions array contains all mastered actions (stored in LS)
-var masterLength; // initalize global variable that is length of masteredActions array
-const setMasteredLength = () => {
-  if (
-    masteredActions !== null &&
-    masteredActions !== "undefined" &&
-    masteredActions !== []
-  ) {
-    // If masteredActions is defined, then it has a specific length
-    masterLength = JSON.parse(masteredActions).length;
-  } else {
-    // If masteredAction is null, then there are zero mastered actions
-    masterLength = 0;
-  }
-}
-setMasteredLength();
 
 // Stores messages for Galaxy card
 var theBadge;
 var theCongrats;
 
 // Determines message depending on number of badges the user has for Galaxy Card
-const badgeSay = () => {
+const badgeSay = (badgeLength) => {
   // No mastered actions
-  if (masterLength === 0) {
+  if (badgeLength === 0) {
     theCongrats = (
       <>
         {" "}
@@ -96,24 +80,24 @@ const badgeSay = () => {
       </p>
     );
     // One mastered activity
-  } else if (masterLength === 1) {
+  } else if (badgeLength === 1) {
     theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}
-        You've earned {masterLength} badge! Keep it going.{" "}
+        You've earned {badgeLength} badge! Keep it going.{" "}
         <span role="img" aria-label="celebration">
           🥳
         </span>
       </p>
     );
     // two to five mastered actions
-  } else if (masterLength > 1 && masterLength < 5) {
+  } else if (badgeLength > 1 && badgeLength < 5) {
     theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
       <p>
         {" "}
-        You've earned {masterLength} badges! That's awesome.{" "}
+        You've earned {badgeLength} badges! That's awesome.{" "}
         <span role="img" aria-label="heart eyes">
           😍
         </span>
@@ -125,7 +109,7 @@ const badgeSay = () => {
     theBadge = (
       <p>
         {" "}
-        You've earned {masterLength} badges! That's how it's done.{" "}
+        You've earned {badgeLength} badges! That's how it's done.{" "}
         <span role="img" aria-label="star eyes">
           🤩
         </span>
@@ -133,9 +117,10 @@ const badgeSay = () => {
     );
   }
 };
+badgeSay(JSON.parse(localStorage.getItem('firestoreMastered')).length)
 
 // Call function so theCongrats and theBadge can be updated
-badgeSay();
+// badgeSay(masterLength);
 
 var masterBadgesArray = []; // Initalize global variable array that will contain only the mastered actions
 // called when user goes to badges tab --> displays the correct, updated badges by adding badge action info to array that is looped through
@@ -287,6 +272,8 @@ class Badges extends React.Component {
 
   componentDidMount() {
     getUpdatedBadges(); // get updated badges each time user goes to badges tab
+    console.log(masterBadgesArray)
+    badgeSay(masterBadgesArray.length);
     this.getStyling(); 
   }
 
