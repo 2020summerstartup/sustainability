@@ -24,7 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // import svg & css files
 import { ReactComponent as SusLogo3 } from "../../img/logo_skin3.svg";
-import badgeImg from "../../img/badge.svg";
+import { ReactComponent as BadgeImg } from "../../img/badge.svg";
 import styles from "./modal.module.css";
 import "./toastify.css";
 
@@ -708,11 +708,7 @@ function HomePage(props) {
                         </strong>
                       </h1>
                     </div>
-                    <img
-                      alt="badge"
-                      src={badgeImg}
-                      className={classes.badgeImg}
-                    />
+                    <BadgeImg className={classes.badgeImg} />
                     {/* MUST ATTRIBUTE AUTHOR */}
                     {/* <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
                     <Typography variant="body1" className={classes.dialogBody}>
