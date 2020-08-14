@@ -18,7 +18,7 @@
   }
 }
 
-/* STYLES FOR LEFT & RIGHT BADGES */
+/* STYLES FOR FRONTSIDE LEFT & RIGHT BADGES */
 div.left,
 div.right {
   width: 10rem;
@@ -103,6 +103,7 @@ div.right {
   transform: rotate3d(-1, -1, 0, 180deg);
 }
 
+/* STYLES FOR BACKSIDE LEFT & RIGHT TITLES */
 .titleLeftBack {
   position: relative;
   transform: rotate(-135deg) translate(17%, 30%);
@@ -303,6 +304,7 @@ div.right {
   animation-timing-function: ease-in-out;
 }
 
+/* differetion animations for falling leaves so it's more realistic */
 @keyframes falling {
   0% {
     transform: translate3d(300, 0, 0) rotate(0deg);

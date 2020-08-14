@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./badges.module.css";
 import ActionData from "../../HomePage/actionData.json";
 import fansImg from "../../../img/fans.svg";
+import "../../../components/GalaxyCards/galaxyCards.css";
 // Material UI and galaxy card imports
 import Typography from "@material-ui/core/Typography";
 import GoogleFontLoader from "react-google-font-loader";
@@ -19,41 +20,6 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-
-// Styles for Badge Galaxy Card
-const useStyles = makeStyles((theme) => ({
-  galaxyCard: {
-    borderRadius: "1rem",
-    boxShadow: "none",
-    position: "relative",
-    margin: "auto",
-    // Important for fitting card on the screen
-    maxWidth: "60rem",
-    minHeight: "15rem",
-    // Everything above "small" screen
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "60rem",
-      minHeight: "20rem",
-    },
-    "&:after": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      bottom: 0,
-      zIndex: 1,
-      borderRadius: "black",
-      background: "linear-gradient(to top, #000, rgba(0,0,0,0))",
-    },
-  },
-  galaxyContent: {
-    position: "absolute",
-    zIndex: 2,
-    bottom: 0,
-    width: "100%",
-  },
-}));
 
 var masteredActions = localStorage.getItem("firestoreMastered"); // MasteredActions array contains all mastered actions (stored in LS)
 var masterLength; // initalize global variable that is length of masteredActions array
@@ -85,36 +51,36 @@ const badgeSay = () => {
       </>
     );
     theBadge = (
-      <p>
+      <>
         I believe in you{" "}
         <span role="img" aria-label="hug">
           🤗
         </span>
-      </p>
+      </>
     );
     // One mastered activity
   } else if (masterLength === 1) {
     theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
-      <p>
+      <>
         {" "}
         You've earned {masterLength} badge! Keep it going.{" "}
         <span role="img" aria-label="celebration">
           🥳
         </span>
-      </p>
+      </>
     );
     // two to five mastered actions
   } else if (masterLength > 1 && masterLength < 5) {
     theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
     theBadge = (
-      <p>
+      <>
         {" "}
         You've earned {masterLength} badges! That's awesome.{" "}
         <span role="img" aria-label="heart eyes">
           😍
         </span>
-      </p>
+      </>
     );
     // More than 4 mastered actiions
   } else {
@@ -135,14 +101,15 @@ badgeSay();
 
 var masterBadgesArray = []; // Initalize global variable array that will contain only the mastered actions
 // called when user goes to badges tab --> displays the correct, updated badges by adding badge action info to array that is looped through
-const getUpdatedBadges = () => { 
+const getUpdatedBadges = () => {
   masterBadgesArray = [];
-  for (const el in ActionData) { // Iterate over every action in ActionData & determine if the action has been mastered
+  for (const el in ActionData) {
+    // Iterate over every action in ActionData & determine if the action has been mastered
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
-    var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage 
-    //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds 
-  
+    var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage
+    //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds
+
     if (
       firestoreMastered != null && // if the array is not empty / if the array exists
       firestoreMastered.includes(stringActionName) // if the array contains the actions --> the action is mastered
@@ -161,15 +128,13 @@ const getUpdatedBadges = () => {
       masterBadgesArray.push(masteredActionProps);
     }
   }
-} 
+};
 
 // Galaxy Card for badges
 // React.memo keep our app from over rendering when it doesn't need to (like when badge is clicked)
 export const BadgesCard = React.memo(function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
-  const classes = useStyles();
-
   return (
     <>
       {/* Badges Galaxy Card */}
@@ -181,15 +146,27 @@ export const BadgesCard = React.memo(function GalaxyCard() {
           ]}
         />
       </NoSsr>
-      <Card className={classes.galaxyCard}>
+      <Card className="galaxyCard">
         <CardMedia classes={mediaStyles} image={fansImg} />
-        <Box py={3} px={2} className={classes.galaxyContent}>
+        <Box py={3} px={2} className="galaxyContent">
           <Info useStyles={useGalaxyInfoStyles}>
-            <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
+            <InfoSubtitle
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                // marginTop: "0.25rem",
+              }}
+            >
               {theCongrats}
             </InfoSubtitle>
             <InfoTitle>{theBadge}</InfoTitle>
-            <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
+            <InfoCaption
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                // marginTop: "0.5rem",
+              }}
+            >
               {" "}
               Click on the badges for another surprise!{" "}
               <span role="img" aria-label="leaf">
@@ -202,7 +179,6 @@ export const BadgesCard = React.memo(function GalaxyCard() {
     </>
   );
 });
-
 
 // Main Component - displays galaxy card and leaf badges for mastered actions
 class Badges extends React.Component {
@@ -263,7 +239,7 @@ class Badges extends React.Component {
 
   componentDidMount() {
     getUpdatedBadges(); // get updated badges each time user goes to badges tab
-    this.getStyling(); // get updated badges each time user goes to badges tab
+    this.getStyling(); // get styling for left/right badges each time user goes to badges tab
   }
 
   render() {
@@ -312,7 +288,6 @@ class Badges extends React.Component {
                   } ${badge.leafStyling}`}
                   onClick={() => this.cardClick(badge.id)}
                 >
-
                   {/* FRONT of BADGE */}
                   <div className={styles.leafFront}>
                     <Typography
@@ -325,7 +300,7 @@ class Badges extends React.Component {
                       &nbsp;
                     </Typography>
                   </div>
-                  
+
                   {/* BACK of BADGE */}
                   <div className={styles.leafBack}>
                     <Typography variant="h6" className={badge.titleStylingBack}>

@@ -215,7 +215,7 @@
     "points": 25,
     "susAction": "donateClothes",
     "badgeName": "Donation",
-    "toMaster": 10,
+    "toMaster": 2,
     "coEmiss": 0,
     "energy": 5,
     "water": 15,
