@@ -14,7 +14,7 @@ import PersonIcon from "@material-ui/icons/Person";
 const BottomNav = () => {
   const pathname = window.location.pathname
   var navigation;
-  if (pathname.includes("signin")){
+  if (pathname.includes("signin") || pathname.includes("index") ){
     navigation = <BottomNavNonAuth />
   }else{
     navigation = <BottomNavAuth />

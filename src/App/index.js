@@ -22,9 +22,10 @@ import Header, {
 import * as ROUTES from "../constants/routes";
 import ProgressCircle from "../components/ProgressCircle";
 
-import { withAuthentication } from "../services/Session";
+import { AuthUserContext, withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
 import AudioContextProvider from "../pages/AccountPage/Settings/audioContext"
+import MuiSignInPage1 from "../pages/RegisterPage/muiSignInPage";
 
 function retry(fn, retriesLeft = 5, interval = 1000) {
   return new Promise((resolve, reject) => {
@@ -76,7 +77,9 @@ const ContactPage = lazy(() => retry (() => import("../pages/InfoPage/fbContactF
 function AppBase() {
   return (
     <AudioContextProvider>
-    <Router>
+    <AuthUserContext.Consumer>
+    {(authUser) => (
+      <Router>
       <Switch>
         {/* FOR PAGES WITH SPECIAL HEADERS */}
         {/* home, compete & profile headers not here because they the fallback Suspense in each pages's content*/}
@@ -100,7 +103,7 @@ function AppBase() {
         />
         <Route exact path="/info" component={BackArrowSettingsHeader3} />
         <Route exact path="/contact" component={BackArrowSettingsHeader} />
-        <Route exact path="/index.html" render={(props) => <HomePage {...props}/>} alias={ROUTES.HOME}/>
+        <Route exact path="/index.html" component={MuiSignInPage1} alias={ROUTES.SIGN_IN}/>
 
         {/* <Route component={Header} /> */}
       </Switch>
@@ -200,6 +203,8 @@ function AppBase() {
         </Suspense>
       </div>
     </Router>
+    )}
+    </AuthUserContext.Consumer>
     </AudioContextProvider>
   );
 }
