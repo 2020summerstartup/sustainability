@@ -100,6 +100,7 @@ function AppBase() {
         />
         <Route exact path="/info" component={BackArrowSettingsHeader3} />
         <Route exact path="/contact" component={BackArrowSettingsHeader} />
+        <Route exact path="/index.html" render={(props) => <HomePage {...props}/>} alias={ROUTES.HOME}/>
 
         {/* <Route component={Header} /> */}
       </Switch>
