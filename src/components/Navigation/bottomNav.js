@@ -14,7 +14,9 @@ import PersonIcon from "@material-ui/icons/Person";
 const BottomNav = () => {
   const pathname = window.location.pathname
   var navigation;
-  if (pathname.includes("signin") || pathname.includes("index") ){
+  if (pathname.includes("signin")){
+    navigation = <BottomNavNonAuth />
+  }else if (pathname.includes("index")){
     navigation = <BottomNavNonAuth />
   }else{
     navigation = <BottomNavAuth />
@@ -101,6 +103,8 @@ function BottomNavNonAuth() {
   
   const tabNameToIndex = (pathname) => {
     if (pathname.includes("signin")){
+      return 1
+    }if (pathname.includes("index")){
       return 1
     }else{
       return 0

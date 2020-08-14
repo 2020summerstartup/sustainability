@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
-import { AuthUserContext } from "../../services/Session";
 // import SignOutButton from "../SignOut"; // Wasn't used so I commented it out -Katie
 import "./navigation.css";
 
@@ -12,19 +11,24 @@ import "../FontAwesomeIcons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // users can only see certain pages when nonauthorized/authorized
-const Navigation = ({ authUser }) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => (authUser ? (
-      <NavigationAuth authUser={authUser} />
-    ) : (
-        <NavigationNonAuth />
-      )
-    )}
-  </AuthUserContext.Consumer>
-);
+const Navigation = () => {
+  const pathname = window.location.pathname
+  var navigation;
+  if (pathname.includes("signin")){
+    navigation = <NavigationNonAuth />
+  } else if (pathname.includes("index")){
+    navigation = <NavigationNonAuth />
+  } else{
+    navigation = <NavigationAuth />
+  }
+  return (
+  <div>
+    {navigation}
+  </div>
+)};
 
 // Navbar displayed when user is authorized
-const NavigationAuth = ({ authUser }) => (
+const NavigationAuth = () => (
   <nav className="navbar">
     <ul className="navbar-nav">
       <li className="logo">
@@ -145,4 +149,4 @@ const NavigationNonAuth = () => (
   </nav>
 );
 
-export default Navigation;
+export default withRouter(Navigation);
