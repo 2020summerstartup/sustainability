@@ -8,13 +8,18 @@ import Typography from "@material-ui/core/Typography";
 // Displays text for total logs based on total actions logged --> plural vs. singular action(s)
 var totalBuzzText; // defining a global variable to be set in the function & called in the render
 const totalBuzzDisplay = () => {
-  if (JSON.parse(localStorage.getItem("buzzes")) === 1) {
+  var buzzes = localStorage.getItem('buzzes');
+  if(buzzes && buzzes !== 'undefined') { // if buzzes is defined
+  if (JSON.parse(buzzes) === 1) {
     // if only one action logged --> action
-    totalBuzzText = <Typography variant="h5">Action Logged!</Typography>;
+    totalBuzzText = <Typography variant="h5"><b>1</b> Action Logged!</Typography>;
   } else {
     // if many actions logged --> actions
-    totalBuzzText = <Typography variant="h5">Actions Logged!</Typography>;
+    totalBuzzText = <Typography variant="h5"><b>{buzzes}</b> Actions Logged!</Typography>;
   }
+} else {
+  totalBuzzText = <Typography variant="h5"> No Actions Logged Yet.</Typography>;
+}
 };
 totalBuzzDisplay(); // call function to make sure that it runs & sets totalBuzzText to display properly
 
@@ -29,9 +34,6 @@ class TotalBuzz extends React.Component {
           justify="center"
           style={{ placeItems: "center", marginBottom: "0.5rem" }}
         >
-          <Typography variant="h4" style={{ marginRight: "1rem" }}>
-            <b>{localStorage.getItem("buzzes")}</b>
-          </Typography>
           {totalBuzzText}
           <Grid container justify="center">
             <Typography
