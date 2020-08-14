@@ -8,7 +8,7 @@ import "../../../components/GalaxyCards/galaxyCards.css";
 import Typography from "@material-ui/core/Typography";
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -96,10 +96,9 @@ const badgeSay = (badgeLength) => {
     );
   }
 };
-badgeSay(JSON.parse(localStorage.getItem('firestoreMastered')).length)
 
 // Call function so theCongrats and theBadge can be updated
-// badgeSay(masterLength);
+badgeSay(masterLength);
 
 var masterBadgesArray = []; // Initalize global variable array that will contain only the mastered actions
 // called when user goes to badges tab --> displays the correct, updated badges by adding badge action info to array that is looped through
