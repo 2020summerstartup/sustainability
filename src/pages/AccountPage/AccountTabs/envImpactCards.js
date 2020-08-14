@@ -10,7 +10,7 @@ import { withStyles } from "@material-ui/core/styles";
 let colors = ["yellow", "green", "blue"];
 
 
-const useStyles = (theme) => ({
+const useStyles = () => ({
   color: {
     "&:after": {
       backgroundColor: `${colors}`,

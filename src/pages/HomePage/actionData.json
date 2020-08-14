@@ -260,5 +260,18 @@
     "water": 0,
     "image": "https://images.unsplash.com/photo-1557200134-90327ee9fafa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     "impact": "Many stores and resturants now give you the option to have a digital receipt emailed to you. This will help eliminate some of your paper waste (and you won't lose any important receipts)!"
+  },
+  {
+    "title": "Get a friend to sign up for EcoBud!",
+    "id": 21,
+    "points": 10,
+    "susAction": "referFriend",
+    "badgeName": "Refer Friend",
+    "toMaster": 5,
+    "coEmiss": 0,
+    "energy": 0,
+    "water": 0,
+    "image": "https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80",
+    "impact": "Tell your friends about EcoBud, and help more people start living sustainably!"
   }
 ]
