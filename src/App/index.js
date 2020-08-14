@@ -102,7 +102,7 @@ function AppBase() {
         />
         <Route exact path="/info" component={BackArrowSettingsHeader3} />
         <Route exact path="/contact" component={BackArrowSettingsHeader} />
-        <Route exact path="/index.html" component={SignInPage} alias={ROUTES.SIGN_IN}/>
+        <Route exact path="/index.html" component={Header}/>
 
         {/* <Route component={Header} /> */}
       </Switch>
@@ -199,6 +199,7 @@ function AppBase() {
           <Route path={ROUTES.CHANGEPW} component={ChangePw} />
           <Route path={ROUTES.CHANGEDORM} component={ChangeDorm} />
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
+          <Route exact path="/index.html" component={SignInPage} alias={ROUTES.SIGN_IN}/>
         </Suspense>
       </div>
     </Router>

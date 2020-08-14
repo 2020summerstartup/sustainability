@@ -130,7 +130,6 @@ const badgeSay = () => {
     );
   }
 };
-
 // Call function so theCongrats and theBadge can be updated
 badgeSay();
 
@@ -152,10 +151,10 @@ const getUpdatedBadges = () => {
       const masteredActionProps = {
         id: action.id,
         title: action.badgeName,
-        titleStylingFront: null,
-        titleStylingBack: null,
+        titleStylingFront: null, // styles for title left or right
+        titleStylingBack: null, //styles for backside title left or right
         leafStyling: null, //float left or right
-        flipStatus: null, //show back or front
+        flipStatus: null, //flip left or right
         toMaster: action.toMaster,
       };
       // adds the necessary attributes to the masterBadgesArray that we will loop through to render the cards later
@@ -163,29 +162,6 @@ const getUpdatedBadges = () => {
     }
   }
 } 
-
-
-// The following function is no longer used, because it displays the wrong number of times to master a badge (instead of times to master,
-// it displays the number of badges currently earned). I'm leaving the code here because the skeleton of it might be useful for something else.
-// // Displays text for back of leaf depending on how many actions have been mastered
-// var backText;
-// const leafBackSay = () => {
-//   if (masterLength === 1) {
-//     backText = (
-//       <center>
-//         Completed <br /> 1 <br /> Time!
-//       </center>
-//     );
-//   } else {
-//     backText = (
-//       <center>
-//         Completed <br /> {masterBadgesArray.length} <br /> Times!
-//       </center>
-//     );
-//   }
-// };
-// // Need to call function for it to run
-// leafBackSay();
 
 // Galaxy Card for badges
 // React.memo keep our app from over rendering when it doesn't need to (like when badge is clicked)
@@ -287,7 +263,7 @@ class Badges extends React.Component {
 
   componentDidMount() {
     getUpdatedBadges(); // get updated badges each time user goes to badges tab
-    this.getStyling(); 
+    this.getStyling(); // get updated badges each time user goes to badges tab
   }
 
   render() {
@@ -350,7 +326,7 @@ class Badges extends React.Component {
                     </Typography>
                   </div>
                   
-                  {/* BACK fo BADGE */}
+                  {/* BACK of BADGE */}
                   <div className={styles.leafBack}>
                     <Typography variant="h6" className={badge.titleStylingBack}>
                       <center>
