@@ -57,17 +57,20 @@ const useStyles = makeStyles((theme) => ({
 
 var masteredActions = localStorage.getItem("firestoreMastered"); // MasteredActions array contains all mastered actions (stored in LS)
 var masterLength; // initalize global variable that is length of masteredActions array
-if (
-  masteredActions !== null &&
-  masteredActions !== "undefined" &&
-  masteredActions !== []
-) {
-  // If masteredActions is defined, then it has a specific length
-  masterLength = JSON.parse(masteredActions).length;
-} else {
-  // If masteredAction is null, then there are zero mastered actions
-  masterLength = 0;
+const setMasteredLength = () => {
+  if (
+    masteredActions !== null &&
+    masteredActions !== "undefined" &&
+    masteredActions !== []
+  ) {
+    // If masteredActions is defined, then it has a specific length
+    masterLength = JSON.parse(masteredActions).length;
+  } else {
+    // If masteredAction is null, then there are zero mastered actions
+    masterLength = 0;
+  }
 }
+setMasteredLength();
 
 // Stores messages for Galaxy card
 var theBadge;
