@@ -25,7 +25,6 @@ import ProgressCircle from "../components/ProgressCircle";
 import { AuthUserContext, withAuthentication } from "../services/Session";
 import { withTheme } from "../components/Theme";
 import AudioContextProvider from "../pages/AccountPage/Settings/audioContext"
-import MuiSignInPage1 from "../pages/RegisterPage/muiSignInPage";
 
 function retry(fn, retriesLeft = 5, interval = 1000) {
   return new Promise((resolve, reject) => {
@@ -47,14 +46,14 @@ function retry(fn, retriesLeft = 5, interval = 1000) {
 }
 
 // React lazy imports
-const MuiSignInPage = lazy(() =>
-  retry(() => import("../pages/RegisterPage/muiSignInPage"))
+const SignInPage = lazy(() =>
+  retry(() => import("../pages/RegisterPage/signInPage"))
 );
-const MuiSignUpPage = lazy(() =>
-  retry(() => import("../pages/RegisterPage/muiSignUpPage"))
+const SignUpPage = lazy(() =>
+  retry(() => import("../pages/RegisterPage/signUpPage"))
 );
-const MuiPasswordForgetPage = lazy(() =>
-  retry(() => import("../pages/RegisterPage/muiPasswordForgetPage"))
+const PasswordForgetPage = lazy(() =>
+  retry(() => import("../pages/RegisterPage/passwordForgetPage"))
 );
 const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
 // const AccountPage = lazy(() =>
@@ -62,11 +61,11 @@ const HomePage = lazy(() => retry(() => import("../pages/HomePage")));
 // );
 const InfoPage = lazy(() => retry(() => import("../pages/InfoPage")));
 const CompetePage = lazy(() => retry(() => import("../pages/CompetePage")));
-const MuiChangePw = lazy(() =>
-  retry(() => import("../pages/AccountPage/Settings/muiChangePw"))
+const ChangePw = lazy(() =>
+  retry(() => import("../pages/AccountPage/Settings/changePw"))
 );
-const MuiChangeDorm = lazy(() =>
-  retry(() => import("../pages/AccountPage/Settings/muiChangeDorm"))
+const ChangeDorm = lazy(() =>
+  retry(() => import("../pages/AccountPage/Settings/changeDorm"))
 );
 const DeleteAccount = lazy(() =>
   retry(() => import("../pages/AccountPage/Settings/deleteAccount"))
@@ -103,7 +102,7 @@ function AppBase() {
         />
         <Route exact path="/info" component={BackArrowSettingsHeader3} />
         <Route exact path="/contact" component={BackArrowSettingsHeader} />
-        <Route exact path="/index.html" component={MuiSignInPage1} alias={ROUTES.SIGN_IN}/>
+        <Route exact path="/index.html" component={SignInPage} alias={ROUTES.SIGN_IN}/>
 
         {/* <Route component={Header} /> */}
       </Switch>
@@ -189,16 +188,16 @@ function AppBase() {
           }
         >
           <Route exact path={ROUTES.LANDING} component={RotatePage} />
-          <Route path={ROUTES.SIGN_UP} component={MuiSignUpPage} />
-          <Route path={ROUTES.SIGN_IN} component={MuiSignInPage} />
+          <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+          <Route path={ROUTES.SIGN_IN} component={SignInPage} />
           <Route
             path={ROUTES.PASSWORD_FORGET}
-            component={MuiPasswordForgetPage}
+            component={PasswordForgetPage}
           />
           <Route path={ROUTES.INFO} component={InfoPage} />
           <Route path={ROUTES.CONTACT} component={ContactPage} />
-          <Route path={ROUTES.CHANGEPW} component={MuiChangePw} />
-          <Route path={ROUTES.CHANGEDORM} component={MuiChangeDorm} />
+          <Route path={ROUTES.CHANGEPW} component={ChangePw} />
+          <Route path={ROUTES.CHANGEDORM} component={ChangeDorm} />
           <Route path={ROUTES.DELETE_ACCOUNT} component={DeleteAccount} />
         </Suspense>
       </div>
