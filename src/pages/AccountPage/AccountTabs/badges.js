@@ -8,7 +8,6 @@ import "../../../components/GalaxyCards/galaxyCards.css";
 import Typography from "@material-ui/core/Typography";
 import GoogleFontLoader from "react-google-font-loader";
 import NoSsr from "@material-ui/core/NoSsr";
-// import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";

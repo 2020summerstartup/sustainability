@@ -21,7 +21,7 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
 // Main Component
 // React.memo keep our app from over rendering when it doesn't need to
-export const ActionCard = React.memo(function GalaxyCard() {
+export const ActionGalaxyCard = React.memo(function GalaxyCard() {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
 
   return (
@@ -52,11 +52,7 @@ export const ActionCard = React.memo(function GalaxyCard() {
                 marginTop: "0.5rem",
               }}
             >
-              Click the{" "}
-              <span role="img" aria-label="plus">
-                ➕
-              </span>{" "}
-              plus icon once you've completed the action!
+              Click the plus icon once you've completed the action!
             </InfoSubtitle>
             <InfoCaption
               style={{
@@ -77,4 +73,4 @@ export const ActionCard = React.memo(function GalaxyCard() {
   );
 });
 
-export default ActionCard;
+export default ActionGalaxyCard;

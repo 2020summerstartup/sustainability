@@ -139,6 +139,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
+// still not sure what this does so keep it for now in case something breaks
 // function a11yProps(index) {
 //   return {
 //     id: `scrollable-force-tab-${index}`,
