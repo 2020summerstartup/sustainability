@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthUserContext } from "../../../services/Session";
 
+import { withTheme } from "../../../components/Theme";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
@@ -237,4 +238,4 @@ function SettingsDrawer(props) {
   );
 }
 
-export default SettingsDrawer;
+export default withTheme(SettingsDrawer);
