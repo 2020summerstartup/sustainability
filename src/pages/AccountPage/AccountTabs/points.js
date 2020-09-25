@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from "react";
+import { connect } from 'react-redux';
 import ProgressCircle from "../../../components/ProgressCircle";
 import points from "../../../img/points.svg";
 import { AuthUserContext } from "../../../services/Session";
@@ -18,6 +19,7 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
+import { example } from '../../../redux/store/actions/test';
 const TotalBuzz = lazy(() => import("./totalBuzz"));
 const EnvImpactCards = lazy(() => import("./envImpactCards"));
 
@@ -35,12 +37,15 @@ const pointsDisplay = () => {
 };
 
 // Main compoenent - Displays the number of points user has
-export const TotalPointsCard = function GalaxyCard() {
+export const TotalPointsCard = function GalaxyCard(props) {
   // Image's top portion is prioritized to display
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
 
   // For message created with thePoints
   pointsDisplay();
+
+  console.log(this.props)
+  console.log()
 
   return (
     <>
@@ -88,4 +93,18 @@ export const TotalPointsCard = function GalaxyCard() {
     </>
   );
 };
-export default TotalPointsCard;
+
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    testing: state.test.example
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addData: (data) => dispatch(example(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TotalPointsCard);
