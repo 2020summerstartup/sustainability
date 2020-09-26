@@ -11,8 +11,18 @@ import thunk from 'redux-thunk';
 import { getFirestore } from 'redux-firestore';
 import { getFirebase } from 'react-redux-firebase';
 
+
+const initState = {
+  example: [
+    {name: 'Jessica', age: '19', bio:'khbfvjb'},
+    {name: 'Ash', age: '42', bio: 'kjnbdeojvb'}
+]
+}
 // names variable store for redux which takes in all of our reducers
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer, initState, 
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+ );
 
 ReactDOM.render(
   <Provider store={store}>

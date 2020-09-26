@@ -6,6 +6,7 @@ import styles from "./envImpactCards.module.css";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from 'react-redux';
 
 let colors = ["yellow", "green", "blue"];
 
@@ -76,6 +77,8 @@ class EnvImpactCards extends React.Component {
 
     this.getData = this.getData.bind(this);
   }
+
+
   // Data for impact cards
   getData() {
     let data = {
@@ -122,6 +125,9 @@ class EnvImpactCards extends React.Component {
   }
 
   render() {
+    const name = this.props;
+    console.log(name);
+
     return (
       <Grid
         container
@@ -151,7 +157,10 @@ class EnvImpactCards extends React.Component {
                     key={card.id}
                     style={{ cursor: "pointer" }}
                     className={`${styles.burstShape} ${card.colorStyling}`}
-                    onClick={() => this.reward.rewardMe(card.id)}
+                    onClick={
+                      console.log('clicked')
+                      // () => this.reward.rewardMe(card.id)
+                    }
                   >
                     <Grid container justify="center">
                       <Typography variant="h3" component="h1">
@@ -173,5 +182,22 @@ class EnvImpactCards extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    a: '42',
+    names: state.test.example
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    name: 'hi'
+    // envImpactTest: () => dispatch({ type: 'ENV_TEST'})
+  }
+}
+
+
 // Styles with Material UI
-export default withStyles(useStyles)(EnvImpactCards);
+export default connect(mapStateToProps)(EnvImpactCards);
+//  withStyles(useStyles)(styledEnvImpactCards);

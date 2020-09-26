@@ -44,8 +44,6 @@ export const TotalPointsCard = function GalaxyCard(props) {
   // For message created with thePoints
   pointsDisplay();
 
-  console.log(this.props)
-  console.log()
 
   return (
     <>
