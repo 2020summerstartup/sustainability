@@ -199,5 +199,5 @@ const mapDispatchToProps = (dispatch) => {
 
 
 // Styles with Material UI
-export default connect(mapStateToProps)(EnvImpactCards);
-//  withStyles(useStyles)(styledEnvImpactCards);
+export default withStyles(useStyles)(connect(mapStateToProps)(EnvImpactCards));
+
