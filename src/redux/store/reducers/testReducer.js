@@ -6,7 +6,13 @@ const initState = {
 }
 
 const testReducer = (state = initState, action) => {
-    return state
+    if (action.type === 'ADD_NAME') {
+        console.log(action)
+     return {...state, new: 'jiii'}
+    }
+    else{
+        return state
+    }
 }
 
 export default testReducer;

@@ -19,7 +19,6 @@ import {
 } from "@mui-treasury/components/info";
 import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
 import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
-import { example } from '../../../redux/store/actions/test';
 const TotalBuzz = lazy(() => import("./totalBuzz"));
 const EnvImpactCards = lazy(() => import("./envImpactCards"));
 
@@ -94,15 +93,10 @@ export const TotalPointsCard = function GalaxyCard(props) {
 
 const mapStateToProps = (state) => {
   console.log(state)
-  return {
-    testing: state.test.example
-  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    addData: (data) => dispatch(example(data))
-  }
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TotalPointsCard);

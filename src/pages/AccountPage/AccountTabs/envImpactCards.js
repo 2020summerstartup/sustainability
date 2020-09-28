@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
+import { addName } from '../../../redux/store/actions/test'
 
 let colors = ["yellow", "green", "blue"];
 
@@ -158,7 +159,8 @@ class EnvImpactCards extends React.Component {
                     style={{ cursor: "pointer" }}
                     className={`${styles.burstShape} ${card.colorStyling}`}
                     onClick={
-                      console.log('clicked')
+                      this.props.addName()
+                      // console.log('clicked')
                       // () => this.reward.rewardMe(card.id)
                     }
                   >
@@ -192,12 +194,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    name: 'hi'
-    // envImpactTest: () => dispatch({ type: 'ENV_TEST'})
+    addName: () => {dispatch(addName())}
   }
 }
 
 
 // Styles with Material UI
-export default withStyles(useStyles)(connect(mapStateToProps)(EnvImpactCards));
+export default withStyles(useStyles)((connect(mapStateToProps, mapDispatchToProps))(EnvImpactCards));
 
