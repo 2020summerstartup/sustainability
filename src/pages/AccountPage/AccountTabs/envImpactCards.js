@@ -159,9 +159,9 @@ class EnvImpactCards extends React.Component {
                     style={{ cursor: "pointer" }}
                     className={`${styles.burstShape} ${card.colorStyling}`}
                     onClick={
-                      this.props.addName()
+                      // this.props.addName()
                       // console.log('clicked')
-                      // () => this.reward.rewardMe(card.id)
+                      () => this.reward.rewardMe(card.id)
                     }
                   >
                     <Grid container justify="center">
