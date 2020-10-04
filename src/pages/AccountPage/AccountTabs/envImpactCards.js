@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
-import { addName } from '../../../redux/store/actions/test'
 
 let colors = ["yellow", "green", "blue"];
 
@@ -193,9 +192,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    addName: () => {dispatch(addName())}
-  }
+  return null
 }
 
 
