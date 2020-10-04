@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-// import userReducer from './userReducer';
+import userReducer from './userReducer';
 // import { firestoreReducer } from 'redux-firestore';
 // import { firebaseReducer } from 'react-redux-firebase';
 
@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
 // organized as (what I want to call it in the store): reducer's name when written
     // firebase: firebaseReducer,
     // firestore: firestoreReducer,
-    // user: userReducer,
+    user: userReducer,
 });
 
 export default rootReducer;

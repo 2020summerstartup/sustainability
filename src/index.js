@@ -5,12 +5,12 @@ import "./index.css";
 import App from "./App";
 import firebase from 'firebase/app';
 import Firebase, { FirebaseContext } from "./services/Firebase";
-import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from '../src/redux/reducers/rootReducer';
+import  rootReducer  from '../src/redux/reducers/rootReducer';
 import thunk from 'redux-thunk';
-import { reduxFirestore, getFirestore, firestoreReducer, createFirestoreInstance } from 'redux-firestore';
-import { ReactReduxFirebaseProvider, firebaseReducer, getFirebase } from 'react-redux-firebase';
+import { getFirestore,  } from 'redux-firestore';
+import {  ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 
 // config needed to link firebase & firestore to redux calls
 const config = {
@@ -46,7 +46,7 @@ const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
-  createFirestoreInstance // <- needed if using firestore
+  // createFirestoreInstance // <- needed if using firestore
 }
 
 

@@ -125,8 +125,8 @@ class EnvImpactCards extends React.Component {
   }
 
   render() {
-    const name = this.props;
-    console.log(name);
+    const userInfo = this.props;
+    console.log(userInfo);
 
     return (
       <Grid
@@ -186,8 +186,7 @@ class EnvImpactCards extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    a: '42',
-    names: state.test.example
+    userInfo: state.user
   }
 }
 
