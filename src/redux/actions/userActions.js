@@ -3,3 +3,4 @@ export const addEmailToState = (email) => {
       dispatch({ type: 'ADD_USER_EMAIL_TO_STATE', payload: email });
     };
 }
+

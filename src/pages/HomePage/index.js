@@ -1,6 +1,7 @@
 import React, { useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
 import { retry } from "../../App/index";
+import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {
@@ -12,6 +13,7 @@ import {
   updateUserImpact,
   updateSchoolImpact,
 } from "../../services/Firebase";
+import rootReducer from '../../redux/reducers/rootReducer';
 import ActionData from "./actionData.json";
 import ProgressCircle from "../../components/ProgressCircle";
 import { audioContext } from "../AccountPage/Settings/audioContext";
@@ -442,6 +444,8 @@ function HomePage(props) {
 
   // (JM) Called when user confirms their incremented action --> updates necessary values in firestore/LS & makes call to chackMastered
   const increment = (unmute, action) => {
+    console.log(props);
+    props.reduxIncrement(action);
     // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
     // updates user's doc in firestore & LS to reflect incremented action
@@ -1039,7 +1043,18 @@ function HomePage(props) {
   ); // end of return statement
 } // end of function
 
+const mapStateToProps = (state, ownProps) => ({
+  user: state //.userInfo.user
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  reduxIncrement: () => dispatch({ type: 'INCREMENT'})
+  }
+}
+
 const condition = (authUser) => !!authUser;
-const HomePageAuthorized = withAuthorization(condition)(HomePage);
+const HomePageConnected = connect(mapStateToProps, mapDispatchToProps)(HomePage);
+const HomePageAuthorized = withAuthorization(condition)(HomePageConnected);
 export default withRouter(HomePageAuthorized);
 // export { initPoints };

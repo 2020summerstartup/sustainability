@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import userReducer from './userReducer';
+import incrementReducer from './incrementReducer';
 // import { firestoreReducer } from 'redux-firestore';
 // import { firebaseReducer } from 'react-redux-firebase';
 
