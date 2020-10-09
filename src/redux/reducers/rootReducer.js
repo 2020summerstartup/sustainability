@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
     // firebase: firebaseReducer,
     // firestore: firestoreReducer,
     user: userReducer,
+    reduxIncrement: incrementReducer,
 });
 
 export default rootReducer;
