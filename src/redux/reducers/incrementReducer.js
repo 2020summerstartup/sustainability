@@ -1,11 +1,11 @@
-import store from '../../../src/index';
+import store from '../../../src';
 
-//const initState = store.getState().userInfo
-const initState = {
-    increment: [
-        {action: 'action', number: '#'}
-    ]
-  }
+const initState = store.getState().userInfo
+// const initState = {
+//     increment: [
+//         {action: 'action', number: '#'}
+//     ]
+//   }
 
 const incrementReducer = (state = initState, action) => {
     switch (action.type){
