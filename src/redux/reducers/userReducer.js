@@ -24,7 +24,7 @@ const initState = {
           let name = action.payload.susAction;
           let actionPoints = action.payload.points;
           let newPoints = state.points[name] += actionPoints
-          // let newState = {...state, ...state.user, ...state.points, newPoints }
+          let newState = {...state, ...state.user, ...state.points, newPoints }
           // state = newState;
           // actionIncremented.info = action.payload;
           // let actionPoints = {...state}.points;
@@ -55,4 +55,4 @@ const initState = {
 }
 }
   
-  export default userReducer;
+export default userReducer;

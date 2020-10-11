@@ -4,3 +4,8 @@ export const addEmailToState = (email) => {
     };
 }
 
+export const incrementAction = (action) => {
+  return { type: 'INCREMENT', payload: action}
+}
+  
+
