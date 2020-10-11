@@ -13,7 +13,7 @@ import {
   updateUserImpact,
   updateSchoolImpact,
 } from "../../services/Firebase";
-import rootReducer from '../../redux/reducers/rootReducer';
+// import rootReducer from '../../redux/reducers/rootReducer';
 import ActionData from "./actionData.json";
 import ProgressCircle from "../../components/ProgressCircle";
 import { audioContext } from "../AccountPage/Settings/audioContext";

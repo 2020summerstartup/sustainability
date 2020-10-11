@@ -21,6 +21,9 @@ const incrementReducer = (state = initState, action) => {
             let actionIncremented = {...state}.increment;
             actionIncremented.info = action.payload;
             let actionPoints = {...state}.points;
+            let actionName = actionPoints.actionIncremented;
+            let newPoints = actionPoints.actionName += action.payload.points
+            actionPoints = {...actionPoints, newPoints}
             console.log(action.payload.susAction, actionPoints);
             return state
         default:
