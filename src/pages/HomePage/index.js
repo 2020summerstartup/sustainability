@@ -1045,7 +1045,8 @@ function HomePage(props) {
 } // end of function
 
 const mapStateToProps = (state) => ({
-  test: state 
+  state,
+  action: state.reduxIncrement.increment, 
 })
 
 const mapDispatchToProps = (dispatch) => {
