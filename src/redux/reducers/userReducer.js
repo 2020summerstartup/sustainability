@@ -2,14 +2,35 @@ import points from "../../pages/AccountPage/AccountTabs/points";
 
 const initState = {
         user: {email: 'email@email.com',
+              userUID: 'userUID',
               name: 'name', 
-              dorm: 'wholeSchool'}, 
+              dorm: 'wholeSchool',
+              addHomePop_done: true,
+              darkPop_done: true}, 
+        total: 0,
+        masteredActions: {},
+        favorites: {},
         points: {
           'waterBottle': 0,
           'cmontWalk': 0,
           'reuseStraw': 0,
           'reuseBag': 0,
           'frmersMarket': 0,
+          "rebrewTea": 0,
+          "noFoodWaste": 0,
+          "meatlessMon": 0,
+          "ecoClean": 0,
+          "publicTransit": 0,
+          "usedClothes": 0,
+          "hangDry": 0,
+          "climateClass": 0,
+          "reuseBBQ": 0,
+          "reuseBottle": 0,
+          "shower5": 0,
+          "donateClothes": 0,
+          "layerCold": 0,
+          "bulkGrocery": 0,
+          "emailReceipt": 0,
       }
     }
   
@@ -20,19 +41,17 @@ const initState = {
         state.push(action.payload);
         return state;
       case 'INCREMENT':
-          console.log('reducing...', state)
           let name = action.payload.susAction;
           let actionPoints = action.payload.points;
-          let newPoints = state.points[name] += actionPoints
-          let newState = {...state, ...state.user, ...state.points, newPoints }
-          // state = newState;
-          // actionIncremented.info = action.payload;
-          // let actionPoints = {...state}.points;
-          // let actionName = actionPoints.actionIncremented;
-          // let newPoints = actionPoints.actionName += action.payload.points
-          // actionPoints = {...actionPoints, newPoints}
-          console.log(newPoints, action.payload.susAction);
-          return state
+          let newTotalPoint = state.total += actionPoints;
+          let newPoints = state.points;
+          newPoints[name] = state.total += actionPoints;
+          let newState = { ...state,
+                          user: state.user,
+                          total: newTotalPoint,
+                          points: newPoints,
+                        }
+          return newState
       default:
         return state;
     }
