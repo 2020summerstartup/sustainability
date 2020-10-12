@@ -36,42 +36,29 @@ const initState = {
   
   const userReducer = (state = initState, action) => {
     switch (action.type) {
+      
       case 'ADD_USER_EMAIL_TO_STATE':
         console.log('email in state!');
         state.push(action.payload);
         return state;
+      
       case 'INCREMENT':
           let name = action.payload.susAction;
           let actionPoints = action.payload.points;
           let newTotalPoint = state.total += actionPoints;
           let newPoints = state.points;
-          newPoints[name] = state.total += actionPoints;
+          newPoints[name] = state.points[name] += actionPoints;
           let newState = { ...state,
                           user: state.user,
                           total: newTotalPoint,
                           points: newPoints,
                         }
           return newState
-      default:
+     
+       default:
         return state;
     }
-  };
+};
 
-  const incrementReducer = (state = initState, action) => {
-    switch (action.type){
-        case 'INCREMENT':
-            console.log('reducing...', state)
-            let actionIncremented = {...state}.increment;
-            actionIncremented.info = action.payload;
-            let actionPoints = {...state}.points;
-            let actionName = actionPoints.actionIncremented;
-            let newPoints = actionPoints.actionName += action.payload.points
-            actionPoints = {...actionPoints, newPoints}
-            console.log(action.payload.susAction, actionPoints);
-            return state
-        default:
-            return state
-}
-}
   
 export default userReducer;
