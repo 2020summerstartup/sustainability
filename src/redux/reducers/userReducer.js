@@ -1,10 +1,7 @@
-import points from "../../pages/AccountPage/AccountTabs/points";
 import {firestore} from '../../services/Firebase';
 import 'firebase/firestore';
 
-// constGetInitState = (state) => {
-//   if (state. )
-// }
+
 const initState = {
         user: {email: 'email@email.com',
               userUID: 'userUID',

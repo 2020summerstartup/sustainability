@@ -5,11 +5,12 @@ import "./index.css";
 import App from "./App";
 import firebase from 'firebase/app';
 import Firebase, { FirebaseContext } from "./services/Firebase";
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import  rootReducer  from '../src/redux/reducers/rootReducer';
 import thunk from 'redux-thunk';
-import { getFirestore,  } from 'redux-firestore';
+
+import { reduxFirestore, firestoreReducer  } from 'redux-firestore';
 import {  ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 
 // config needed to link firebase & firestore to redux calls
@@ -28,14 +29,16 @@ const rrfConfig = {
   // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 }
 
+const createStoreWithFirebase = compose(
+  reduxFirestore(firebase), // firebase instance as first argument, rfConfig as optional second
+)(createStore);
 
 
-
-
+const initState = {};
 // names variable store for redux which takes in all of our reducers
-const store = createStore(rootReducer,
+const store = createStoreWithFirebase(rootReducer, initState,
   // compose(
-    applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+    applyMiddleware(thunk.withExtraArgument({getFirebase})), 
     // reactReduxFirebase(config), // redux binding for firebase
     // reduxFirestore(config) // redux bindings for firestore
   // ),
