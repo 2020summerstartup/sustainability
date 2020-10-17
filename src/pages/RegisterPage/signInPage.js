@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
-// DELETE this after we know firebase didn't break
-// import * as firebase from "firebase";
+import {connect} from 'react-redux';
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -128,6 +127,7 @@ class SignInFormBase extends Component {
         getUserImpact(email); // initalizes user's impact points in local storage 
         getSchoolImpact(); // initaizes the school's impact points in local storage 
 
+
         // gets user's points, mastered & favroited actions from firebase & sets them all in local storage
         getUserDocRef(email).onSnapshot(
           (docSnapshot) => {
@@ -139,11 +139,16 @@ class SignInFormBase extends Component {
         );
         await waitOneSec(); // give this function some time to run 
       }
+
+
+
       
       event.preventDefault();
     // takes user to home page
     async function goHome(props, email) {
       await getUserData(email); // wait for getUserData async function to run (2 sec) and set all of the user's info in local storage
+      props.reduxLogin(email);
+      console.log('redux go', props)
       props.history.push(ROUTES.HOME); // then we can route to home & everything will disaply properly
     }
 
@@ -275,7 +280,15 @@ export const signOutFirebase = () => {
     });
 };
 
-const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
+
+const mapDispatchToProps = (dispatch) => {
+  return { 
+    reduxLogin: (email) => dispatch({ type: 'USER_LOGIN', payload: email})
+  }
+}
+
+const signInFormConnected = connect(null, mapDispatchToProps)(SignInFormBase);
+const SignInForm = compose(withRouter, withFirebase)(signInFormConnected);
 
 export { SignInForm, PasswordInput };
 

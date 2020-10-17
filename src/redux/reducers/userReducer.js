@@ -1,5 +1,10 @@
 import points from "../../pages/AccountPage/AccountTabs/points";
+import {firestore} from '../../services/Firebase';
+import 'firebase/firestore';
 
+// constGetInitState = (state) => {
+//   if (state. )
+// }
 const initState = {
         user: {email: 'email@email.com',
               userUID: 'userUID',
@@ -37,12 +42,17 @@ const initState = {
   const userReducer = (state = initState, action) => {
     switch (action.type) {
       
-      case 'ADD_USER_EMAIL_TO_STATE':
-        console.log('email in state!');
-        state.push(action.payload);
-        return state;
+      case 'USER_LOGIN':
+        return firestore.collection('users').doc(action.payload).onSnapshot( (snapshot) => {
+          let firestoreState = snapshot.data();
+          console.log('redux done', snapshot.data());
+          console.log('newSTate', firestoreState)
+          return firestoreState;
+        })
+
       
       case 'INCREMENT':
+          console.log(state);
           let name = action.payload.susAction;
           let actionPoints = action.payload.points;
           let newTotalPoint = state.total += actionPoints;
