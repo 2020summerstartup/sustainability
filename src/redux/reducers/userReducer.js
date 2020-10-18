@@ -36,7 +36,7 @@ const initState = {
       }
     }
   
-  const userReducer = (state = initState, action) => {
+  const userReducer = (state = initState, action, firestoreState) => {
     switch (action.type) {
       
       case 'USER_LOGIN':

@@ -1,11 +1,12 @@
 import store from "../..";
+import {firestore} from '../../services/Firebase';
+import 'firebase/firestore';
 
 export const userLoginToState = (email) => {
-  return (dispatch) => {
-      store.firestore.get({ collection: 'users', doc: email})
-      console.log(store);
-      dispatch({ type: 'USER_LOGIN', payload: email });
-    };
+  return firestore.collection('users').doc(email).onSnapshot( (snapshot) => {
+    let firestoreState = snapshot.data();
+    dispatch({type: 'USER_LOGIN', payload: firestoreState});
+  })
 }
 
 export const incrementAction = (action) => {
