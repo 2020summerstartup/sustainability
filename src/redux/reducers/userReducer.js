@@ -36,20 +36,17 @@ const initState = {
       }
     }
   
-  const userReducer = (state = initState, action, firestoreState) => {
+  const userReducer = (state = initState, action) => {
     switch (action.type) {
       
       case 'USER_LOGIN':
-        return firestore.collection('users').doc(action.payload).onSnapshot( (snapshot) => {
-          let firestoreState = snapshot.data();
-          console.log('redux done', snapshot.data());
-          console.log('newSTate', firestoreState)
+          let firestoreState = action.payload;
+          console.log(action.payload, action.type, action.payload.newState, 'in payload');
           return firestoreState;
-        })
+        
 
       
       case 'INCREMENT':
-          console.log(state);
           let name = action.payload.susAction;
           let actionPoints = action.payload.points;
           let newTotalPoint = state.total += actionPoints;

@@ -444,7 +444,6 @@ function HomePage(props) {
 
   // (JM) Called when user confirms their incremented action --> updates necessary values in firestore/LS & makes call to chackMastered
   const increment = (unmute, action) => {
-    console.log(props);
     props.reduxIncrement(action, props);
     console.log('reducer done?', props)
     // function is what updates UserTotal state so that correct score is displayed!!
