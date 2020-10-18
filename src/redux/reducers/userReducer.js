@@ -40,13 +40,20 @@ const initState = {
     switch (action.type) {
       
       case 'USER_LOGIN':
-          let firestoreState = action.payload;
-          console.log(action.payload, action.type, action.payload.newState, 'in payload');
-          return firestoreState;
+          let firestoreState = action.payload.firestoreState;
+          console.log('should be null', action.payload)
+          return firestore.collection('users').doc(action.payload.email).onSnapshot( (snapshot) => {
+                 let firestoreState = snapshot.data();
+          console.log(action.payload, action.type, action.payload.firestoreState, 'in payload');
+          console.log({...state, firestoreState})
+          return {...state, firestoreState};
+          });
+         
         
 
       
       case 'INCREMENT':
+        console.log('start', state);
           let name = action.payload.susAction;
           let actionPoints = action.payload.points;
           let newTotalPoint = state.total += actionPoints;
