@@ -359,7 +359,7 @@ function HomePage(props) {
   const authContext = useContext(AuthUserContext);
 
   // nested routing
-  let { match, history } = props;
+  let { match, history, state } = props;
   let { params } = match;
   let { page } = params;
   const tabNameToIndex = {
@@ -444,8 +444,9 @@ function HomePage(props) {
 
   // (JM) Called when user confirms their incremented action --> updates necessary values in firestore/LS & makes call to chackMastered
   const increment = (unmute, action) => {
-    props.reduxIncrement(action, props);
-    console.log('reducer done?', props)
+    console.log('here', props)
+    // props.reduxIncrement(action, state.firestoreState);
+    console.log('reducer done?', state)
     // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
     // updates user's doc in firestore & LS to reflect incremented action
@@ -1050,7 +1051,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  reduxIncrement: (action, state) => dispatch({ type: 'INCREMENT', payload: action, state})
+  reduxIncrement: (action, state) => dispatch({ type: 'INCREMENT', payload: {action, state}})
   }
 }
 

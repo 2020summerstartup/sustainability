@@ -147,7 +147,7 @@ class SignInFormBase extends Component {
     // takes user to home page
     async function goHome(props, email) {
       await getUserData(email); // wait for getUserData async function to run (2 sec) and set all of the user's info in local storage
-      props.reduxLogin(email, null);
+      props.reduxLogin(email, props);
       console.log('redux go', props)
       props.history.push(ROUTES.HOME); // then we can route to home & everything will disaply properly
     }

@@ -46,7 +46,10 @@ const initState = {
                  let firestoreState = snapshot.data();
           console.log(action.payload, action.type, action.payload.firestoreState, 'in payload');
           console.log({...state, firestoreState})
-          return {...state, firestoreState};
+          return {...state,
+            me: 'tomato', 
+            ...state.user,
+            firestoreState};
           });
          
         
@@ -54,15 +57,16 @@ const initState = {
       
       case 'INCREMENT':
         console.log('start', state);
-          let name = action.payload.susAction;
-          let actionPoints = action.payload.points;
-          let newTotalPoint = state.total += actionPoints;
-          let newPoints = state.points;
+          let name = action.payload.action.susAction;
+          let actionPoints = action.payload.action.points;
+          let newTotalPoint = action.payload.state.total += actionPoints;
+          let newPoints = state.points += actionPoints;
           newPoints[name] = state.points[name] += actionPoints;
           let newState = { ...state,
-                          user: state.user,
-                          total: newTotalPoint,
-                          points: newPoints,
+                          ...firestoreState,
+                            user: state.user,
+                            total: newTotalPoint,
+                            points: newPoints,
                         }
           return newState
      
