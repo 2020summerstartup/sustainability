@@ -52,7 +52,9 @@ const initState = {
             firestoreState};
           });
          
-        
+      case 'USER_LOGIN_NEW':
+        console.log('user email', action.email)
+        return state
 
       
       case 'INCREMENT':

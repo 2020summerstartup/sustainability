@@ -2,6 +2,13 @@
 // import {firestore} from '../../services/Firebase';
 // import 'firebase/firestore';
 
+export const userLogin = (email) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        // make async call to database
+        dispatch({type: 'USER_LOGIN_NEW', email})
+    }
+}
+
 // export const userLoginToState = (email) => {
 //   return firestore.collection('users').doc(email).onSnapshot( (snapshot) => {
 //     let firestoreState = snapshot.data();

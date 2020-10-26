@@ -11,7 +11,7 @@ import  rootReducer  from '../src/redux/reducers/rootReducer';
 import thunk from 'redux-thunk';
 
 import { reduxFirestore, firestoreReducer  } from 'redux-firestore';
-import {  ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
+import {  ReactReduxFirebaseProvider, getFirebase, getFirestore } from 'react-redux-firebase';
 
 // config needed to link firebase & firestore to redux calls
 // const config = {
@@ -38,7 +38,7 @@ const initState = {};
 // names variable store for redux which takes in all of our reducers
 const store = createStoreWithFirebase(rootReducer, initState,
   // compose(
-    applyMiddleware(thunk.withExtraArgument({getFirebase})), 
+    applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})), 
     // reactReduxFirebase(config), // redux binding for firebase
     // reduxFirestore(config) // redux bindings for firestore
   // ),

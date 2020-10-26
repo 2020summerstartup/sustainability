@@ -10,6 +10,8 @@ import { assignData, withFirebase, getUserDocRef, getUserImpact, getSchoolImpact
 import * as ROUTES from "../../constants/routes";
 import { ReactComponent as SignIn } from "../../img/signin.svg";
 
+import {userLogin} from '../../redux/actions/userActions'
+
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -147,8 +149,7 @@ class SignInFormBase extends Component {
     // takes user to home page
     async function goHome(props, email) {
       await getUserData(email); // wait for getUserData async function to run (2 sec) and set all of the user's info in local storage
-      props.reduxLogin(email, props);
-      console.log('redux go', props)
+      props.reduxLogin(email);
       props.history.push(ROUTES.HOME); // then we can route to home & everything will disaply properly
     }
 
@@ -283,7 +284,7 @@ export const signOutFirebase = () => {
 
 const mapDispatchToProps = (dispatch) => {
   return { 
-    reduxLogin: (email, firestoreState) => dispatch({ type: 'USER_LOGIN', payload: {email, firestoreState}})
+    reduxLogin: (email) => dispatch(userLogin(email))
   }
 }
 
