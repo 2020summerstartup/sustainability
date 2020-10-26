@@ -3,7 +3,14 @@
 // import 'firebase/firestore';
 
 export const userLogin = (email) => {
+    return (dispatch) => {
+        firestore.collection('users').doc(email).onSnapshot((snap) => {
+            
+        }).then(() => dispatch({type:'USER_LOGIN_NEW', email}) )
+    }
     return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('users').doc(email).get().then((doc) => console.log(doc))
         // make async call to database
         dispatch({type: 'USER_LOGIN_NEW', email})
     }
