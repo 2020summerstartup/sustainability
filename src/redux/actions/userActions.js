@@ -1,20 +1,15 @@
 // import store from "../..";
-// import {firestore} from '../../services/Firebase';
-// import 'firebase/firestore';
+import {firestore} from '../../services/Firebase';
+import 'firebase/firestore';
 
 export const userLogin = (email) => {
     return (dispatch) => {
-        firestore.collection('users').doc(email).onSnapshot((snap) => {
-            
-        }).then(() => dispatch({type:'USER_LOGIN_NEW', email}) )
-    }
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firestore = getFirestore();
-        firestore.collection('users').doc(email).get().then((doc) => console.log(doc))
-        // make async call to database
-        dispatch({type: 'USER_LOGIN_NEW', email})
+        firestore.collection('users').doc(email).get().then((doc) => 
+            console.log(doc.data()))
+            .then(()=> dispatch({type: 'USER_LOGIN_NEW', email}))
     }
 }
+
 
 // export const userLoginToState = (email) => {
 //   return firestore.collection('users').doc(email).onSnapshot( (snapshot) => {

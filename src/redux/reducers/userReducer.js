@@ -3,6 +3,12 @@ import 'firebase/firestore';
 
 
 const initState = {
+        school: {
+          buzzes: 0,
+          water: 0,
+          coEmiss: 0,
+          energy: 0,
+        },
         user: {email: 'email@email.com',
               userUID: 'userUID',
               name: 'name', 
@@ -58,20 +64,51 @@ const initState = {
 
       
       case 'INCREMENT':
-        console.log('start', state);
+        console.log('start of increment user', state);
           let name = action.payload.action.susAction;
           let actionPoints = action.payload.action.points;
-          let newTotalPoint = action.payload.state.total += actionPoints;
-          let newPoints = state.points += actionPoints;
-          newPoints[name] = state.points[name] += actionPoints;
-          let newState = { ...state,
-                          ...firestoreState,
-                            user: state.user,
-                            total: newTotalPoint,
-                            points: newPoints,
-                        }
-          return newState
-     
+          var newSchool = {};
+          for (var key in state.school){
+            if (state.school[key] != 'buzzes'){
+              var obj = state.school[key];
+              var add = action.payload.action[key];
+              obj += add;
+              newSchool[key] = obj;
+              console.log(newSchool);
+            } else {
+              newSchool[key] = state.school[key] += 1;
+              console.log(newSchool);
+            }
+          
+          }
+          // let actionCoEmiss = action.payload.action.coEmiss;
+          // let actionEnergy = action.payload.action.energy;
+          // let actionWater = action.payload.action.water;
+          // let newSchoolCoEmiss = state.school.coEmiss + actionCoEmiss;
+          // let newSchoolEnergy = state.school.energy + actionEnergy;
+          // let newSchoolWater = state.school.water + actionWater;
+          // let newSchoolBuzzes = state.school.buzzes + 1;
+          // let newSchool = {buzzes: newSchoolBuzzes,
+          // water: newSchoolWater, energy: newSchoolEnergy, coEmiss: newSchoolCoEmiss}
+          let newState = {
+            ...state,
+            school: newSchool
+          }
+          console.log(newState);
+          // I dont know why these have a += instead of just a + ??? check on that later 
+          // let newTotalPoint = action.payload.state.total += actionPoints;
+          // let newPoints = state.points += actionPoints;
+          // newPoints[name] = state.points[name] += actionPoints;
+          // let newState = { ...state,
+          //                 ...firestoreState,
+          //                   user: state.user,
+          //                   total: newTotalPoint,
+          //                   points: newPoints,
+          //               }
+          // return newState
+
+          return newState;
+
        default:
         return state;
     }

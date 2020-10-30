@@ -445,6 +445,7 @@ function HomePage(props) {
   // (JM) Called when user confirms their incremented action --> updates necessary values in firestore/LS & makes call to chackMastered
   const increment = (unmute, action) => {
     console.log('here', props)
+    props.reduxIncrement(action)
     // props.reduxIncrement(action, state.firestoreState);
     console.log('reducer done?', state)
     // function is what updates UserTotal state so that correct score is displayed!!
@@ -1051,7 +1052,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  reduxIncrement: (action, state) => dispatch({ type: 'INCREMENT', payload: {action, state}})
+  reduxIncrement: (action, state) => dispatch(dispatch({ type: 'INCREMENT', payload: {action, state}}))
   }
 }
 
