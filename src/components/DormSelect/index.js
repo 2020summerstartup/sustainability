@@ -1,5 +1,7 @@
 // commented by JM (idk who wrote this function)
 import React, { useContext } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { changeDormRedux } from '../../redux/actions/userActions'
 import { AuthUserContext } from "../../services/Session";
 import { updateUserDorm, getDorm } from "../../services/Firebase";
 import { assignRanking } from "../../pages/CompetePage/CompeteTabs/leaderboard";
@@ -12,6 +14,7 @@ import Select from "@material-ui/core/Select";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../pages/HomePage/toastify.css";
+import changeDorm from "../../pages/AccountPage/Settings/changeDorm";
 
 // Styles for dropdown menu
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 export default function DormSelect() {
   const classes = useStyles();
   const [dorm, setDorm] = React.useState(""); // this is used to keep the placeholder dorm up to date
+  // const dormRedux = useSelector(state => state.user.dorm)
+  const dispatch = useDispatch();
 
   // Used to make sure user is authenticated
   // Gives an alert if the user does not have a dorm selected
@@ -40,6 +45,7 @@ export default function DormSelect() {
     placeholder=dorm; // text that is displayed on dropdown when user first sees dropdown (ie. Linde, South, etc. or select your dorm...)
     setDorm(event.target.value); // to have placeholder dorm update w/ newly selected dorm 
     localStorage.setItem("dorm", event.target.value);
+    dispatch(changeDormRedux(event.target.value));
     updateUserDorm(authContext.email, event.target.value); // updates user's firestore doc with new dorm
     getDorm().doc(event.target.value).onSnapshot((docSnapshot) => {
         assignRanking(docSnapshot.data()); // called here to make sure that ranking display reflects user's new dorm 
@@ -73,3 +79,11 @@ export default function DormSelect() {
     </div>
   );
 }
+
+// const mapDispatchToProps = (dispatch) => {
+// return {
+//   dormChangeRedux: (dispatch) => dispatch({type: 'CHANGE_DORM', payload: {dorm, state}})
+//  }
+// }
+
+// const ma

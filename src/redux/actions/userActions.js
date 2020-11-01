@@ -10,6 +10,12 @@ export const userLogin = (email) => {
     }
 }
 
+export const changeDormRedux = (dorm) => {
+    return (dispatch) => {
+      dispatch ( {type: 'CHANGE_DORM', payload: dorm} )
+    }
+}
+
 
 // export const userLoginToState = (email) => {
 //   return firestore.collection('users').doc(email).onSnapshot( (snapshot) => {

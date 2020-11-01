@@ -1052,7 +1052,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  reduxIncrement: (action, state) => dispatch(dispatch({ type: 'INCREMENT', payload: {action, state}}))
+  reduxIncrement: (action, state) => dispatch({ type: 'INCREMENT', payload: {action, state}})
   }
 }
 

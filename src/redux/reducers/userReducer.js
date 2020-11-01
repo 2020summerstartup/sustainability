@@ -68,46 +68,34 @@ const initState = {
           let name = action.payload.action.susAction;
           let actionPoints = action.payload.action.points;
           var newSchool = {};
+          console.log(state.school, state.school.buzzes)
           for (var key in state.school){
-            if (state.school[key] != 'buzzes'){
-              var obj = state.school[key];
-              var add = action.payload.action[key];
-              obj += add;
-              newSchool[key] = obj;
-              console.log(newSchool);
+            if (key != 'buzzes'){
+              // for anything but 'buzzes' field, need to add amount specific to the action
+              var newSchoolObj = state.school[key];
+              var addData = action.payload.action[key];
+              newSchoolObj += addData;
+              newSchool[key] = newSchoolObj;
             } else {
-              newSchool[key] = state.school[key] += 1;
-              console.log(newSchool);
+              // each action logges will an count as one buzz
+              newSchool[key] = state.school[key] + 1;
             }
-          
           }
-          // let actionCoEmiss = action.payload.action.coEmiss;
-          // let actionEnergy = action.payload.action.energy;
-          // let actionWater = action.payload.action.water;
-          // let newSchoolCoEmiss = state.school.coEmiss + actionCoEmiss;
-          // let newSchoolEnergy = state.school.energy + actionEnergy;
-          // let newSchoolWater = state.school.water + actionWater;
-          // let newSchoolBuzzes = state.school.buzzes + 1;
-          // let newSchool = {buzzes: newSchoolBuzzes,
-          // water: newSchoolWater, energy: newSchoolEnergy, coEmiss: newSchoolCoEmiss}
           let newState = {
             ...state,
             school: newSchool
           }
-          console.log(newState);
-          // I dont know why these have a += instead of just a + ??? check on that later 
-          // let newTotalPoint = action.payload.state.total += actionPoints;
-          // let newPoints = state.points += actionPoints;
-          // newPoints[name] = state.points[name] += actionPoints;
-          // let newState = { ...state,
-          //                 ...firestoreState,
-          //                   user: state.user,
-          //                   total: newTotalPoint,
-          //                   points: newPoints,
-          //               }
-          // return newState
-
+          console.log(newState)
           return newState;
+      
+      case 'CHANGE_DORM':
+        let newDorm = action.payload;
+        let newDormState = {...state,
+                        ...state.user,
+                        dorm: newDorm
+                      };
+        console.log(action.payload, newDormState);
+        return newDormState
 
        default:
         return state;
