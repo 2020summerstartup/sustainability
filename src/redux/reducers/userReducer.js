@@ -16,8 +16,8 @@ const initState = {
               addHomePop_done: true,
               darkPop_done: true}, 
         total: 0,
-        masteredActions: {},
-        favorites: {},
+        masteredActions: [],
+        favorites: [],
         points: {
           'waterBottle': 0,
           'cmontWalk': 0,
@@ -97,8 +97,28 @@ const initState = {
         console.log(action.payload, newDormState);
         return newDormState
 
-       default:
+      case 'ADD_FAV':
+        let favActionName = action.payload.action.susAction;
+        let addFavState = action.payload.state.user.favorites;
+        addFavState.push(favActionName);
+        let newFavState = {...state, ...state.user, favorites: addFavState}
+        console.log(action.payload.state.user.favorites, newFavState, action.payload.action.susAction)
+        return newFavState
+
+      case 'DELETE_FAV':
+        let delActionName = action.payload.action.susAction;
+        let delFavState = action.payload.state.user.favorites;
+        const location = delFavState.indexOf(delActionName);
+        delFavState.splice(location, 1)
+        let favState = {...state, ...state.user, favorites: delFavState}
+        console.log(action.payload.state.user.favorites, favState, action.payload.action.susAction)
+        return favState
+      
+
+
+      default:
         return state;
+      
     }
 };
 
