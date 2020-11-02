@@ -62,30 +62,46 @@ const initState = {
         console.log('user email', action.email)
         return state
 
-      
+
+      // FIRST THING NEXT WEEK: FIX THIS FUNCTION
       case 'INCREMENT':
-        console.log('start of increment user', state);
-          let name = action.payload.action.susAction;
-          let actionPoints = action.payload.action.points;
-          var newSchool = {};
-          console.log(state.school, state.school.buzzes)
+        let name = action.payload.action.susAction;
+        let actionPoint = action.payload.action.points;
+        let userObj = action.payload.state.user;
+        let userTot = userObj.total
+        let pointArray = action.payload.state.user.points;
+        let newPoint = userObj.points[name] += actionPoint;  
+        let newTot = action.payload.state.user.total += actionPoint;   
+          // this returns object with names inputed (ie. userTot is a field)
+        let newActionState = {...state, 
+                              ...state.user, 
+                              userTot: newTot, 
+                              ...pointArray, 
+                              newPoint }
+        console.log(userObj.points, newActionState);
+        // console.log(name, points, action.payload.state)
+
+      
+      case 'SCHOOL_IMPACT':
+          var newSchoolImpact = {};
+          // console.log(state.school, state.school.buzzes)
           for (var key in state.school){
             if (key != 'buzzes'){
               // for anything but 'buzzes' field, need to add amount specific to the action
               var newSchoolObj = state.school[key];
               var addData = action.payload.action[key];
               newSchoolObj += addData;
-              newSchool[key] = newSchoolObj;
+              newSchoolImpact[key] = newSchoolObj;
             } else {
               // each action logges will an count as one buzz
-              newSchool[key] = state.school[key] + 1;
+              newSchoolImpact[key] = state.school[key] + 1;
             }
           }
           let newState = {
             ...state,
-            school: newSchool
+            school: newSchoolImpact
           }
-          console.log(newState)
+          // console.log(newState)
           return newState;
       
       case 'CHANGE_DORM':
@@ -97,23 +113,7 @@ const initState = {
         console.log(action.payload, newDormState);
         return newDormState
 
-      // case 'ADD_FAV':
-      //   let favActionName = action.payload.action.susAction;
-      //   let addFavState = action.payload.state.user.favorites;
-      //   addFavState.push(favActionName);
-      //   let newFavState = {...state, ...state.user, favorites: addFavState}
-      //   console.log(action.payload.state.user.favorites, newFavState, action.payload.action.susAction)
-      //   return newFavState
 
-      // case 'DELETE_FAV':
-      //   let delActionName = action.payload.action.susAction;
-      //   let delFavState = action.payload.state.user.favorites;
-      //   const location = delFavState.indexOf(delActionName);
-      //   delFavState.splice(location, 1)
-      //   let favState = {...state, ...state.user, favorites: delFavState}
-      //   console.log(action.payload.state.user.favorites, favState, action.payload.action.susAction)
-      //   return favState
-      
       case 'CHANGE_FAV':
         let actionName = action.payload.action.susAction;
         let favState = action.payload.state.user.favorites;
@@ -123,7 +123,7 @@ const initState = {
           let newFavState = {...state, ...state.user, favorites: favState}
           console.log(action.payload.state.user.favorites, action.payload.action.susAction, newFavState)
           return newFavState
-        } else ( type === 'delete') {
+        } else  {
           const index = favState.indexOf(actionName);
           favState.splice(index, 1)
           let newFavState = {...state, ...state.user, favorites: favState}

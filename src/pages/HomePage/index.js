@@ -444,10 +444,11 @@ function HomePage(props) {
 
   // (JM) Called when user confirms their incremented action --> updates necessary values in firestore/LS & makes call to chackMastered
   const increment = (unmute, action) => {
-    console.log('here', props)
-    props.reduxIncrement(action)
+    // console.log('here', props)
+    props.reduxSchoolImpact(action, state);
+    props.reduxIncrement(action, state);
     // props.reduxIncrement(action, state.firestoreState);
-    console.log('reducer done?', state)
+    // console.log('reducer done?', state)
     // function is what updates UserTotal state so that correct score is displayed!!
     updateDisplayTotal(action.points);
     // updates user's doc in firestore & LS to reflect incremented action
@@ -560,9 +561,7 @@ function HomePage(props) {
       favIconColor.style.color = "#E36588"; // Turn pink
       playSound(unmute, likeAudio);
       toast.success(displayText, { autoClose: 3000 });
-      props.reduxChangeFav(action, state, 'add');
-      // props.reduxAddFav(action, state);
-      // put redux action call here
+      props.reduxChangeFav(action, state, 'add'); // make call to change redux state
       addFav(email, action.susAction); // add action to firestore array of fav actions
     } else {
       // if the action is now unfavorited
@@ -570,9 +569,7 @@ function HomePage(props) {
       favIconColor.style.color = "#6c6c6c"; // Back to grey
       playSound(unmute, unlikeAudio);
       toast.warn(displayText, { autoClose: 3000 }); // It's a warning so that the window is yellow
-      props.reduxChangeFav(action, state, 'delete');
-      // props.reduxDeleteFav(action, state);
-      // put reux action call here
+      props.reduxChangeFav(action, state, 'delete'); // make call to change redux state
       deleteFav(email, action.susAction); // delete action to firestore array of fav actions
     }
     localStorage.setItem(storageName, storedFav); // set local storage actionFav to either true or false depending on new fav status
@@ -1058,10 +1055,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  reduxIncrement: (action, state) => dispatch({ type: 'INCREMENT', payload: {action, state}}) ,
+  reduxSchoolImpact: (action, state) => dispatch({ type: 'SCHOOL_IMPACT', payload: {action, state}}) ,
+  reduxIncrement: (action, state) => dispatch({ type: 'INCREMENT', payload: {action, state}}),
   reduxChangeFav: (action, state, type) => dispatch({ type: 'CHANGE_FAV', payload: {action, state, type}}),
-  reduxAddFav: (action, state) => dispatch({ type: 'ADD_FAV', payload: {action, state}}) ,
-  reduxDeleteFav: (action, state) => dispatch({ type: 'DELETE_FAV', payload: {action, state}}),
   }
 }
 
