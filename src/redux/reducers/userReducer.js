@@ -97,23 +97,39 @@ const initState = {
         console.log(action.payload, newDormState);
         return newDormState
 
-      case 'ADD_FAV':
-        let favActionName = action.payload.action.susAction;
-        let addFavState = action.payload.state.user.favorites;
-        addFavState.push(favActionName);
-        let newFavState = {...state, ...state.user, favorites: addFavState}
-        console.log(action.payload.state.user.favorites, newFavState, action.payload.action.susAction)
-        return newFavState
+      // case 'ADD_FAV':
+      //   let favActionName = action.payload.action.susAction;
+      //   let addFavState = action.payload.state.user.favorites;
+      //   addFavState.push(favActionName);
+      //   let newFavState = {...state, ...state.user, favorites: addFavState}
+      //   console.log(action.payload.state.user.favorites, newFavState, action.payload.action.susAction)
+      //   return newFavState
 
-      case 'DELETE_FAV':
-        let delActionName = action.payload.action.susAction;
-        let delFavState = action.payload.state.user.favorites;
-        const location = delFavState.indexOf(delActionName);
-        delFavState.splice(location, 1)
-        let favState = {...state, ...state.user, favorites: delFavState}
-        console.log(action.payload.state.user.favorites, favState, action.payload.action.susAction)
-        return favState
+      // case 'DELETE_FAV':
+      //   let delActionName = action.payload.action.susAction;
+      //   let delFavState = action.payload.state.user.favorites;
+      //   const location = delFavState.indexOf(delActionName);
+      //   delFavState.splice(location, 1)
+      //   let favState = {...state, ...state.user, favorites: delFavState}
+      //   console.log(action.payload.state.user.favorites, favState, action.payload.action.susAction)
+      //   return favState
       
+      case 'CHANGE_FAV':
+        let actionName = action.payload.action.susAction;
+        let favState = action.payload.state.user.favorites;
+        let type = action.payload.type;
+        if (type === 'add') {
+          favState.push(actionName);
+          let newFavState = {...state, ...state.user, favorites: favState}
+          console.log(action.payload.state.user.favorites, action.payload.action.susAction, newFavState)
+          return newFavState
+        } else ( type === 'delete') {
+          const index = favState.indexOf(actionName);
+          favState.splice(index, 1)
+          let newFavState = {...state, ...state.user, favorites: favState}
+          console.log(action.payload.state.user.favorites, action.payload.action.susAction, newFavState)
+          return newFavState
+        } 
 
 
       default:

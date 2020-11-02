@@ -560,7 +560,8 @@ function HomePage(props) {
       favIconColor.style.color = "#E36588"; // Turn pink
       playSound(unmute, likeAudio);
       toast.success(displayText, { autoClose: 3000 });
-      props.reduxAddFav(action, state);
+      props.reduxChangeFav(action, state, 'add');
+      // props.reduxAddFav(action, state);
       // put redux action call here
       addFav(email, action.susAction); // add action to firestore array of fav actions
     } else {
@@ -569,7 +570,8 @@ function HomePage(props) {
       favIconColor.style.color = "#6c6c6c"; // Back to grey
       playSound(unmute, unlikeAudio);
       toast.warn(displayText, { autoClose: 3000 }); // It's a warning so that the window is yellow
-      props.reduxDeleteFav(action, state);
+      props.reduxChangeFav(action, state, 'delete');
+      // props.reduxDeleteFav(action, state);
       // put reux action call here
       deleteFav(email, action.susAction); // delete action to firestore array of fav actions
     }
@@ -1057,6 +1059,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
   reduxIncrement: (action, state) => dispatch({ type: 'INCREMENT', payload: {action, state}}) ,
+  reduxChangeFav: (action, state, type) => dispatch({ type: 'CHANGE_FAV', payload: {action, state, type}}),
   reduxAddFav: (action, state) => dispatch({ type: 'ADD_FAV', payload: {action, state}}) ,
   reduxDeleteFav: (action, state) => dispatch({ type: 'DELETE_FAV', payload: {action, state}}),
   }
