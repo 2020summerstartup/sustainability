@@ -494,6 +494,8 @@ function HomePage(props) {
     } else if (action.toMaster * action.points <= actionTotal) {
       // If action has been mastered, the button will get disabled
       // send user a modal celebrating thier new mastered action
+      // redux addBage action call!
+      props.reduxAddBadge(action.susAction, state);
       actionMastered(authContext.email, action.susAction); // updates masteredAction array in firestore w/ new action included
       setBadgeAction(action.title); // to make sure modal has correct action name
       setBadgeActionCount(action.toMaster); // to make sure modal has correct value for times completed
@@ -1058,6 +1060,7 @@ const mapDispatchToProps = (dispatch) => {
   reduxSchoolImpact: (action, state) => dispatch({ type: 'SCHOOL_IMPACT', payload: {action, state}}) ,
   reduxIncrement: (action, state) => dispatch({ type: 'INCREMENT', payload: {action, state}}),
   reduxChangeFav: (action, state, type) => dispatch({ type: 'CHANGE_FAV', payload: {action, state, type}}),
+  reduxAddBadge: (actionName, state) => dispatch({type: 'ADD_BADGE', payload: {actionName, state}})
   }
 }
 

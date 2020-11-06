@@ -128,6 +128,13 @@ const initState = {
         } 
 
 
+      case 'ADD_BADGE':
+        let userMastered = action.payload.state.user.masteredActions;
+        userMastered.push(action.payload.actionName);
+        let newMasteredState = {...state, ...state.user, masteredActions: userMastered}
+        console.log(action.payload, newMasteredState);
+        return newMasteredState;  
+
       default:
         return state;
       
