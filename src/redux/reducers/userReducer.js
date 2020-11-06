@@ -67,19 +67,15 @@ const initState = {
       case 'INCREMENT':
         let name = action.payload.action.susAction;
         let actionPoint = action.payload.action.points;
-        let userObj = action.payload.state.user;
-        let userTot = userObj.total
         let pointArray = action.payload.state.user.points;
-        let newPoint = userObj.points[name] += actionPoint;  
+        pointArray[name] = pointArray[name] += actionPoint;
         let newTot = action.payload.state.user.total += actionPoint;   
-          // this returns object with names inputed (ie. userTot is a field)
         let newActionState = {...state, 
                               ...state.user, 
-                              userTot: newTot, 
-                              ...pointArray, 
-                              newPoint }
-        console.log(userObj.points, newActionState);
-        // console.log(name, points, action.payload.state)
+                              total: newTot, 
+                              points: pointArray
+                            }
+        return newActionState;
 
       
       case 'SCHOOL_IMPACT':
