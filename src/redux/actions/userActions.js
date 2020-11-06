@@ -4,9 +4,18 @@ import 'firebase/firestore';
 
 export const userLogin = (email) => {
     return (dispatch) => {
-        firestore.collection('users').doc(email).get().then((doc) => 
-            console.log(doc.data()))
-            .then(()=> dispatch({type: 'USER_LOGIN_NEW', email}))
+        firestore.collection('users').doc(email).onSnapshot((snap) => {
+            let firestoreData = snap.data();
+            dispatch({type: 'USER_LOGIN_NEW' , payload: firestoreData})
+        })
+        
+        // get().then((doc) => 
+        //     const firestoreData = doc.data().then( () => {
+        //         dispatch({type: 'USER_LOGIN_NEW' , payload: firestoreData})
+        //     })
+            // dispatch(type: 'USER_LOGIN_NEW' , payload: firestoreData)
+            // console.log(doc.data()))
+            // .then((firestore)=> dispatch({type: 'USER_LOGIN_NEW', payload:doc.data}))
     }
 }
 

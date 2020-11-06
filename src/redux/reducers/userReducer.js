@@ -59,8 +59,8 @@ const initState = {
           });
          
       case 'USER_LOGIN_NEW':
-        console.log('user email', action.email)
-        return state
+        console.log('user firestore', action.payload)
+        return action.payload
 
 
       // FIRST THING NEXT WEEK: FIX THIS FUNCTION
