@@ -43,45 +43,35 @@ const initState = {
     }
   
   const userReducer = (state = initState, action) => {
+    // allows me to use 'case' isntead of a bunch of if and else if statements 
     switch (action.type) {
-      
-      case 'USER_LOGIN':
-          let firestoreState = action.payload.firestoreState;
-          console.log('should be null', action.payload)
-          return firestore.collection('users').doc(action.payload.email).onSnapshot( (snapshot) => {
-                 let firestoreState = snapshot.data();
-          console.log(action.payload, action.type, action.payload.firestoreState, 'in payload');
-          console.log({...state, firestoreState})
-          return {...state,
-            me: 'tomato', 
-            ...state.user,
-            firestoreState};
-          });
+
          
-      case 'USER_LOGIN_NEW':
-        console.log('user firestore', action.payload)
+      case 'USER_LOGIN':
+        // when user logs in, the redux state will become the user's firestore state document
+        // action.payload is a snapshot of the user's firestore document (ie. object containing all of user's info)
         return action.payload
 
 
-      // FIRST THING NEXT WEEK: FIX THIS FUNCTION
       case 'INCREMENT':
-        let name = action.payload.action.susAction;
-        let actionPoint = action.payload.action.points;
-        let pointArray = action.payload.state.user.points;
-        pointArray[name] = pointArray[name] += actionPoint;
-        let newTot = action.payload.state.user.total += actionPoint;   
-        let newActionState = {...state, 
-                              ...state.user, 
-                              total: newTot, 
-                              points: pointArray
+        // when user clicks to increment an action
+        let name = action.payload.action.susAction;   // action name
+        let actionPoint = action.payload.action.points;   // action's associated point value
+        let pointArray = action.payload.state.user.points;    // user's array of all actions w/ assocaited points
+        pointArray[name] = pointArray[name] += actionPoint;   // add points to the specified action within the array
+        let newTot = action.payload.state.user.total += actionPoint;   // add points to user's total point count
+        let newActionState = {...state,   //spread the state object
+                              ...state.user,    // spread the user object
+                              total: newTot,    // update the total point count
+                              points: pointArray    // update the action point array 
                             }
-        return newActionState;
+        return newActionState;    // update redux store with this new state
 
       
       case 'SCHOOL_IMPACT':
-          var newSchoolImpact = {};
-          // console.log(state.school, state.school.buzzes)
-          for (var key in state.school){
+        // called upon increment to update the school's action impact track
+          var newSchoolImpact = {};   // init new array to work with
+          for (var key in state.school){    // loop through all the properties of school impact array
             if (key != 'buzzes'){
               // for anything but 'buzzes' field, need to add amount specific to the action
               var newSchoolObj = state.school[key];
@@ -93,39 +83,41 @@ const initState = {
               newSchoolImpact[key] = state.school[key] + 1;
             }
           }
-          let newState = {
-            ...state,
-            school: newSchoolImpact
+          let newSchoolState = {
+            ...state,   // spread the state
+            school: newSchoolImpact   // update the school's impact array with up-to-date array 
           }
-          // console.log(newState)
-          return newState;
+          return newSchoolState;  //update redux store with this new state
       
       case 'CHANGE_DORM':
-        let newDorm = action.payload;
-        let newDormState = {...state,
-                        ...state.user,
-                        dorm: newDorm
+        // called when user changes dorm in settings page
+        let newDorm = action.payload;   //dorm that user wants to change to
+        let newDormState = {...state,   // spread the state
+                        ...state.user,    // spread the user object
+                        dorm: newDorm     // update dorm field of user's object
                       };
-        console.log(action.payload, newDormState);
-        return newDormState
+        return newDormState   //update redux store with this new state
 
 
       case 'CHANGE_FAV':
-        let actionName = action.payload.action.susAction;
-        let favState = action.payload.state.user.favorites;
-        let type = action.payload.type;
+        // called when user favorites or unfavorites an action
+        let actionName = action.payload.action.susAction;     // name of action they want to toggle
+        let favState = action.payload.state.user.favorites;     // object containing user's favorited actions
+        let type = action.payload.type;     // describes toggle (either add or delete)
         if (type === 'add') {
-          favState.push(actionName);
-          let newFavState = {...state, ...state.user, favorites: favState}
-          console.log(action.payload.state.user.favorites, action.payload.action.susAction, newFavState)
-          return newFavState
+          // if user wants to add action to their favorites
+          favState.push(actionName);    // add favorite to favorites array
         } else  {
+          // if user wants to delete action from their favorites 
           const index = favState.indexOf(actionName);
           favState.splice(index, 1)
-          let newFavState = {...state, ...state.user, favorites: favState}
-          console.log(action.payload.state.user.favorites, action.payload.action.susAction, newFavState)
-          return newFavState
         } 
+        let newFavState = {...state,  // spread the state
+                        ...state.user,    // spread the user object
+                        favorites: favState   // update the favorites field of the user's object
+                      };
+        return newFavState;   // update redux with the new state
+
 
 
       case 'ADD_BADGE':
