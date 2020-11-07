@@ -84,24 +84,7 @@ const ActionGalaxyCard = lazy(() =>
 const FavoriteGalaxyCard = lazy(() =>
   retry(() => import("./faveGalaxyCard.js"))
 );
-// Initiaize user's points in local storage. If the user has never logged points on this device,
-// each local storage item will be null. To prevent "null" from displaying anywhere, we
-// initialize here.
-//DONT THINK WE NEED THIS ANYMORE?
-// var total;
-// function initPoints(email) {
-//   total = 0;
-//   for (const el in ActionData) {
-//     var action = localStorage.getItem(ActionData[el].susAction); // Action to initialize
-//     if (isNaN(action) || action == null) {
-//       // If it hasn't been initialized
-//       localStorage.setItem(ActionData[el].susAction, 0); // Initialize to 0
-//       action = 0;
-//     }
-//     total += parseInt(action); // Keep track of the sum of the individual points
-//   }
-//   localStorage.setItem("total", total); // After initializing individual points, initialize total.
-// }
+
 
 // sound play for certain buttons
 const likeAudio = new Audio(like);
@@ -436,11 +419,11 @@ function HomePage(props) {
 
   // this function is called upon confirmed increment
   // sets the state of userTotal so that user's total point display is correct (bc can't do parse int in jsx code)
-  const updateDisplayTotal = (actionPoint) => {
-    const newTotal =
-      parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
-    updateUserTotal(newTotal);
-  };
+  // const updateDisplayTotal = (actionPoint) => {
+  //   const newTotal =
+  //     parseInt(localStorage.getItem("total")) + parseInt(actionPoint);
+  //   updateUserTotal(newTotal);
+  // };
 
   // (JM) Called when user confirms their incremented action --> updates necessary values in firestore/LS & makes call to chackMastered
   const increment = (unmute, action) => {
@@ -450,7 +433,7 @@ function HomePage(props) {
     // props.reduxIncrement(action, state.firestoreState);
     // console.log('reducer done?', state)
     // function is what updates UserTotal state so that correct score is displayed!!
-    updateDisplayTotal(action.points);
+    // updateDisplayTotal(action.points);
     // updates user's doc in firestore & LS to reflect incremented action
     updateUserPoint(
       authContext.email,
@@ -670,7 +653,8 @@ function HomePage(props) {
                     {
                       <CountUp
                         start={0}
-                        end={parseInt(userTotal)}
+                        end={parseInt(props.state.user.total)}
+                        // end={parseInt(userTotal)}
                         duration={1}
                       ></CountUp>
                     }
