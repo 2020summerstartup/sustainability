@@ -121,12 +121,13 @@ const initState = {
 
 
       case 'ADD_BADGE':
-        let userMastered = action.payload.state.user.masteredActions;
-        userMastered.push(action.payload.actionName);
-        let newMasteredState = {...state, ...state.user, masteredActions: userMastered}
-        console.log(action.payload, newMasteredState);
-        return newMasteredState;  
+        // called if user masters an action --> adds action to list of mastered & adds to badge
+        let userMastered = action.payload.state.user.masteredActions;   // array of mastered actions
+        userMastered.push(action.payload.actionName);   // add the action that just got mastered to the array
+        let newMasteredState = {...state, ...state.user, masteredActions: userMastered}   // update the state
+        return newMasteredState;    // update redux with the new state 
 
+      // this is needed to not throw an error, I think something about how store is initialized 
       default:
         return state;
       

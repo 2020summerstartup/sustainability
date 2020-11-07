@@ -42,7 +42,7 @@ const store = createStoreWithFirebase(rootReducer, initState,
     // reactReduxFirebase(config), // redux binding for firebase
     // reduxFirestore(config) // redux bindings for firestore
   // ),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 const rrfProps = {
