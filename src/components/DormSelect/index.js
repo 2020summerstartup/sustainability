@@ -31,11 +31,13 @@ export default function DormSelect() {
   const [dorm, setDorm] = React.useState(""); // this is used to keep the placeholder dorm up to date
   // const dormRedux = useSelector(state => state.user.dorm)
   const dispatch = useDispatch();
+  const reduxDorm = useSelector(state => state.user.userDorm);
+ 
 
   // Used to make sure user is authenticated
   // Gives an alert if the user does not have a dorm selected
   const authContext = useContext(AuthUserContext);
-  var placeholder = localStorage.getItem('dorm');
+  var placeholder = reduxDorm;
   if (placeholder == null) {
     placeholder = "Select your dorm..."
   }
@@ -80,10 +82,3 @@ export default function DormSelect() {
   );
 }
 
-// const mapDispatchToProps = (dispatch) => {
-// return {
-//   dormChangeRedux: (dispatch) => dispatch({type: 'CHANGE_DORM', payload: {dorm, state}})
-//  }
-// }
-
-// const ma

@@ -12,7 +12,7 @@ const initState = {
         user: {email: 'email@email.com',
               userUID: 'userUID',
               name: 'name', 
-              dorm: 'wholeSchool',
+              userDorm: 'wholeSchool',
               addHomePop_done: true,
               darkPop_done: true}, 
         total: 0,
@@ -118,7 +118,7 @@ const initState = {
         let newDorm = action.payload;   //dorm that user wants to change to
         let newDormState = {...state,   // spread the state
                         ...state.user,    // spread the user object
-                        dorm: newDorm     // update dorm field of user's object
+                        userDorm: newDorm     // update dorm field of user's object
                       };
         return newDormState   //update redux store with this new state
 
