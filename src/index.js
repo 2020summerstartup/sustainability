@@ -1,4 +1,5 @@
 // "The BIG index ^tm"
+// before redux persist 
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
