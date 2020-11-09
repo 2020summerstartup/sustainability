@@ -1,5 +1,4 @@
 // "The BIG index ^tm"
-// before redux persist 
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -10,6 +9,8 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import  rootReducer  from '../src/redux/reducers/rootReducer';
 import thunk from 'redux-thunk';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { reduxFirestore, firestoreReducer  } from 'redux-firestore';
 import {  ReactReduxFirebaseProvider, getFirebase, getFirestore } from 'react-redux-firebase';
@@ -46,6 +47,8 @@ const store = createStoreWithFirebase(rootReducer, initState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+const persistor = persistStore(store);
+
 const rrfProps = {
   firebase,
   config: rrfConfig,
@@ -56,11 +59,13 @@ const rrfProps = {
 
 ReactDOM.render(
   <Provider store={store}>
+  <PersistGate persistor={persistor}>
   <ReactReduxFirebaseProvider {...rrfProps}>
   <FirebaseContext.Provider value={new Firebase()}>
       <App />
   </FirebaseContext.Provider>
   </ReactReduxFirebaseProvider>
+  </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

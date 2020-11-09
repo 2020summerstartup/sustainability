@@ -2,6 +2,14 @@ import { combineReducers } from 'redux';
 import userReducer from './userReducer';
 import { firestoreReducer } from 'redux-firestore';
 import { firebaseReducer } from 'react-redux-firebase';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+const persistConfig = {
+    key: 'root',
+    storage, 
+    whitelist: ['firebase', 'firestore', 'user']
+}
 
 // combines reducers into one reducer to pass into store
 const rootReducer = combineReducers({
@@ -11,4 +19,4 @@ const rootReducer = combineReducers({
     user: userReducer,
 });
 
-export default rootReducer;
+export default persistReducer(persistConfig, rootReducer);
