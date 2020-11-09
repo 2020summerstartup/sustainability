@@ -18,6 +18,12 @@ const initState = {
         total: 0,
         masteredActions: [],
         favorites: [],
+        impact: {
+          buzzes: 0,
+          coEmiss: 0,
+          energy: 0,
+          water: 0,
+        },
         points: {
           'waterBottle': 0,
           'cmontWalk': 0,
@@ -55,16 +61,34 @@ const initState = {
 
       case 'INCREMENT':
         // when user clicks to increment an action
+        // to increment action point field & total point field
         let name = action.payload.action.susAction;   // action name
         let actionPoint = action.payload.action.points;   // action's associated point value
         let pointArray = action.payload.state.user.points;    // user's array of all actions w/ assocaited points
         pointArray[name] = pointArray[name] += actionPoint;   // add points to the specified action within the array
         let newTot = action.payload.state.user.total += actionPoint;   // add points to user's total point count
+        // to update user's impact track
+        let impactObject = action.payload.state.user.impact;
+        var newImpact = {};
+        for (var key in impactObject){    // loop through all the properties of school impact array
+          if (key != 'buzzes'){
+            // for anything but 'buzzes' field, need to add amount specific to the action
+            var newImpactObj = impactObject[key];
+            var addImpact = action.payload.action[key];
+            newImpactObj += addImpact;
+            newImpact[key] = newImpactObj;
+          } else {
+            // each action logges will an count as one buzz
+            newImpact[key] = impactObject[key] + 1;
+          }
+        }
         let newActionState = {...state,   //spread the state object
                               ...state.user,    // spread the user object
+                              impact: newImpact, // update the impact array 
                               total: newTot,    // update the total point count
                               points: pointArray    // update the action point array 
                             }
+        console.log('after all updates', newActionState)
         return newActionState;    // update redux store with this new state
 
       
