@@ -65,14 +65,15 @@ H2ODisplay();
 
 // Enviornmental impact cards for account/points page
 class EnvImpactCards extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
   
     this.state = {
       cards: [],
-      coEmiss: localStorage.getItem("coEmiss"),
-      energy: localStorage.getItem("energy"),
-      water: localStorage.getItem("water"),
+      coEmiss: this.props.reduxUserObjImpact.coEmiss,
+      energy: this.props.reduxUserObjImpact.energy,
+      water: this.props.reduxUserObjImpact.water,
     };
 
     this.getData = this.getData.bind(this);
@@ -125,8 +126,7 @@ class EnvImpactCards extends React.Component {
   }
 
   render() {
-    const userInfo = this.props;
-    console.log(userInfo);
+    // console.log(this.props.reduxUserObj);
 
     return (
       <Grid
@@ -186,15 +186,12 @@ class EnvImpactCards extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.user
+    reduxUserObjImpact: state.user.impact
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return null
-}
 
 
 // Styles with Material UI
-export default withStyles(useStyles)((connect(mapStateToProps, mapDispatchToProps))(EnvImpactCards));
+export default withStyles(useStyles)((connect(mapStateToProps))(EnvImpactCards));
 

@@ -94,12 +94,5 @@ export const TotalPointsCard = function GalaxyCard(props) {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log(state)
-}
 
-const mapDispatchToProps = (dispatch) => {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TotalPointsCard);
+export default TotalPointsCard
