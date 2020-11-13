@@ -568,7 +568,8 @@ function HomePage(props) {
     // initPoints(); // DO NOT REMOVE
     for (const el in ActionData) {
       // Loop over every action in ActionData
-      var actionPoints = localStorage.getItem(ActionData[el].susAction); // Points earned by current action
+      var actionName = ActionData[el].susAction
+      var actionPoints = props.state.user.points[actionName]; // Points earned by current action
       progressMessage = (
         <>
           {progressMessage}

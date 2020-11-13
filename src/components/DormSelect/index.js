@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 export default function DormSelect() {
   const classes = useStyles();
   const [dorm, setDorm] = React.useState(""); // this is used to keep the placeholder dorm up to date
-  // const dormRedux = useSelector(state => state.user.dorm)
   const dispatch = useDispatch();
   const reduxDorm = useSelector(state => state.user.userDorm);
  

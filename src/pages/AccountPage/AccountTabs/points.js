@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ProgressCircle from "../../../components/ProgressCircle";
 import points from "../../../img/points.svg";
 import { AuthUserContext } from "../../../services/Session";
@@ -22,23 +23,25 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 const TotalBuzz = lazy(() => import("./totalBuzz"));
 const EnvImpactCards = lazy(() => import("./envImpactCards"));
 
-// Encouraging message on bottom of card
-var thePoints;
-
-const pointsDisplay = () => {
-  if (parseInt(localStorage.getItem("total")) === 0) {
-    thePoints = " Go to the home page and log points!";
-  } else if (parseInt(localStorage.getItem("total")) < 400) {
-    thePoints = " You're amazing! Keep it up!";
-  } else {
-    thePoints = " You're a superstar 🤩 ";
-  }
-};
 
 // Main compoenent - Displays the number of points user has
 export const TotalPointsCard = function GalaxyCard(props) {
   // Image's top portion is prioritized to display
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
+  const reduxUserObj = useSelector(state => state.user);
+
+  // Encouraging message on bottom of card
+  var thePoints;
+
+  const pointsDisplay = () => {
+    if (reduxUserObj.total === 0) {
+      thePoints = " Go to the home page and log points!";
+    } else if (reduxUserObj.total < 400) {
+      thePoints = " You're amazing! Keep it up!";
+    } else {
+      thePoints = " You're a superstar 🤩 ";
+    }
+  };
 
   // For message created with thePoints
   pointsDisplay();
@@ -66,7 +69,7 @@ export const TotalPointsCard = function GalaxyCard(props) {
                   <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
                     You have earned
                   </InfoSubtitle>
-                  <InfoTitle> {localStorage.getItem("total")} Points</InfoTitle>
+                  <InfoTitle> {reduxUserObj.total} Points</InfoTitle>
                   <InfoCaption style={{ color: "white", fontWeight: "bold" }}>
                     {thePoints}{" "}
                   </InfoCaption>
