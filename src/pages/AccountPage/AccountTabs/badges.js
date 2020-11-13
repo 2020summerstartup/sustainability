@@ -1,5 +1,6 @@
 // commented by KR & JM (several people contrubted to file)
 import React from "react";
+import { useSelector } from 'react-redux';
 import styles from "./badges.module.css";
 import ActionData from "../../HomePage/actionData.json";
 import fansImg from "../../../img/fans.svg";
@@ -39,13 +40,13 @@ var theBadge;
 var theCongrats;
 
 // Determines message depending on number of badges the user has for Galaxy Card
-const badgeSay = (badgeLength) => {
+const badgeSay = (badgeLength, reduxName) => {
   // No mastered actions
   if (badgeLength === 0) {
     theCongrats = (
       <>
         {" "}
-        Hi, {localStorage.getItem("name")}! Go log more actions to earn some
+        Hi, {reduxName}! Go log more actions to earn some
         badges!
       </>
     );
@@ -59,7 +60,7 @@ const badgeSay = (badgeLength) => {
     );
     // One mastered activity
   } else if (badgeLength === 1) {
-    theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
+    theCongrats = <> Congratulations, {reduxName}! </>;
     theBadge = (
       <>
         {" "}
@@ -71,7 +72,7 @@ const badgeSay = (badgeLength) => {
     );
     // two to five mastered actions
   } else if (badgeLength > 1 && badgeLength < 5) {
-    theCongrats = <> Congratulations, {localStorage.getItem("name")}! </>;
+    theCongrats = <> Congratulations, {reduxName}! </>;
     theBadge = (
       <>
         {" "}
@@ -83,7 +84,7 @@ const badgeSay = (badgeLength) => {
     );
     // More than 4 mastered actiions
   } else {
-    theCongrats = <>OMG, {localStorage.getItem("name")}! </>;
+    theCongrats = <>OMG, {reduxName}! </>;
     theBadge = (
       <p>
         {" "}
@@ -97,7 +98,7 @@ const badgeSay = (badgeLength) => {
 };
 
 // Call function so theCongrats and theBadge can be updated
-badgeSay(masterLength);
+// badgeSay(masterLength);
 
 var masterBadgesArray = []; // Initalize global variable array that will contain only the mastered actions
 // called when user goes to badges tab --> displays the correct, updated badges by adding badge action info to array that is looped through
@@ -135,6 +136,9 @@ const getUpdatedBadges = () => {
 export const BadgesCard = React.memo(function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
+  const user = useSelector(state => state.user);
+  badgeSay(masterLength, user.name);
+
   return (
     <>
       {/* Badges Galaxy Card */}
