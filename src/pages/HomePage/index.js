@@ -1,7 +1,7 @@
 import React, { useState, useContext, lazy, Suspense } from "react";
 import { withRouter } from "react-router";
 import { retry } from "../../App/index";
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import PropTypes from "prop-types";
 import { AuthUserContext, withAuthorization } from "../../services/Session";
 import {
@@ -363,6 +363,8 @@ function HomePage(props) {
     initUserTotal = localStorage.getItem("total");
   }
   const [userTotal, updateUserTotal] = useState(initUserTotal);
+  const reduxFavs = useSelector(state => state.user.favorites);
+  console.log(reduxFavs)
 
   const classes = useStyles();
   const [value, setValue] = React.useState(indexToTabName[page]);
