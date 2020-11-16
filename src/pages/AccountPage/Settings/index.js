@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthUserContext } from "../../../services/Session";
+import {useSelector} from 'react-redux';
 
 import { withTheme } from "../../../components/Theme";
 import { makeStyles } from "@material-ui/core/styles";
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 function SettingsDrawer(props) {
   const classes = useStyles();
   const { darkMode, setDarkMode } = props;
+  const reduxName = useSelector(state => state.user.name);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -86,7 +88,7 @@ function SettingsDrawer(props) {
           <ListItemText>
             <Typography variant="h5">Settings</Typography>
             <Typography variant="h6">
-              Hi, {localStorage.getItem("name")}!
+              Hi, {reduxName}!
             </Typography>
           </ListItemText>
         </ListItem>
