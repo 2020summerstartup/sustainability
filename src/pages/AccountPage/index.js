@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useSelector } from 'react-redux';
 import leaderBoardUpdate, {
   assignRanking,
 } from "../CompetePage/leaderBoardUpdate";
@@ -11,7 +12,7 @@ function assignDorm(data) {
   if (data.userDorm === "") {
     alert("If you want to contribute to your dorm, choose your dorm in settings!");
   } else {
-    localStorage.setItem("dorm", data.userDorm);
+    // localStorage.setItem("dorm", data.userDorm);
   }
 }
 
@@ -20,6 +21,7 @@ const AccountPage = props => {
   leaderBoardUpdate();
 
   const authContext = useContext(AuthUserContext);
+  const reduxDorm = useSelector(state => state.user.dorm)
 
   getUserDocRef(authContext.email).onSnapshot(
     (docSnapshot) => {
@@ -34,7 +36,7 @@ const AccountPage = props => {
 
   // Retrieves user's dorm from firebase, otherwise throws an error
   // Assigns ranking for mudd page using dorm name
-  var dormName = localStorage.getItem("dorm")
+  var dormName = reduxDorm;
   if (dormName && dormName !== ""){
     getDorm()
     .doc(dormName)

@@ -88,7 +88,6 @@ const initState = {
                               total: newTot,    // update the total point count
                               points: pointArray    // update the action point array 
                             }
-        console.log('after all updates', newActionState)
         return newActionState;    // update redux store with this new state
 
       

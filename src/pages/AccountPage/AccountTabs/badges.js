@@ -116,7 +116,6 @@ const getUpdatedBadges = (masteredArray) => {
       firestoreMastered.includes(stringActionName) // if the array contains the actions --> the action is mastered
     ) {
       // sets attributes for the specific action
-      console.log('yes')
       const masteredActionProps = {
         id: action.id,
         title: action.badgeName,
@@ -138,7 +137,6 @@ export const BadgesCard = React.memo(function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
   const user = useSelector(state => state.user);
-  console.log(user.masteredActions);
   badgeSay(masterLength, user.name);
   getUpdatedBadges(user.masteredActions);
 

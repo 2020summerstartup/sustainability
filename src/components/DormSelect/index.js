@@ -45,7 +45,7 @@ export default function DormSelect() {
   const handleChange = (event) => {
     placeholder=dorm; // text that is displayed on dropdown when user first sees dropdown (ie. Linde, South, etc. or select your dorm...)
     setDorm(event.target.value); // to have placeholder dorm update w/ newly selected dorm 
-    localStorage.setItem("dorm", event.target.value);
+    // localStorage.setItem("dorm", event.target.value);
     dispatch(changeDormRedux(event.target.value));
     updateUserDorm(authContext.email, event.target.value); // updates user's firestore doc with new dorm
     getDorm().doc(event.target.value).onSnapshot((docSnapshot) => {
