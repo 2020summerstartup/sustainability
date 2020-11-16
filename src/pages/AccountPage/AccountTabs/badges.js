@@ -1,6 +1,6 @@
 // commented by KR & JM (several people contrubted to file)
 import React from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import styles from "./badges.module.css";
 import ActionData from "../../HomePage/actionData.json";
 import fansImg from "../../../img/fans.svg";
@@ -102,13 +102,13 @@ const badgeSay = (badgeLength, reduxName) => {
 
 var masterBadgesArray = []; // Initalize global variable array that will contain only the mastered actions
 // called when user goes to badges tab --> displays the correct, updated badges by adding badge action info to array that is looped through
-const getUpdatedBadges = () => {
+const getUpdatedBadges = (masteredArray) => {
   masterBadgesArray = [];
   for (const el in ActionData) {
     // Iterate over every action in ActionData & determine if the action has been mastered
     var action = ActionData[el]; // Take the current action
     var stringActionName = JSON.stringify(action.susAction); // variable that has action's name as a string
-    var firestoreMastered = localStorage.getItem("firestoreMastered"); //firestoreMastered is imported from firestore and set in local storage
+    var firestoreMastered = JSON.stringify(masteredArray);
     //when user first opens the app --> we are setting a var firestoreMastered equal to the array that firestore holds
 
     if (
@@ -116,6 +116,7 @@ const getUpdatedBadges = () => {
       firestoreMastered.includes(stringActionName) // if the array contains the actions --> the action is mastered
     ) {
       // sets attributes for the specific action
+      console.log('yes')
       const masteredActionProps = {
         id: action.id,
         title: action.badgeName,
@@ -137,7 +138,9 @@ export const BadgesCard = React.memo(function GalaxyCard() {
   // Image is centered and styles are called
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: "center" });
   const user = useSelector(state => state.user);
+  console.log(user.masteredActions);
   badgeSay(masterLength, user.name);
+  getUpdatedBadges(user.masteredActions);
 
   return (
     <>
@@ -242,7 +245,7 @@ class Badges extends React.Component {
   }
 
   componentDidMount() {
-    getUpdatedBadges(); // get updated badges each time user goes to badges tab
+    getUpdatedBadges(this.props.reduxMastered); // get updated badges each time user goes to badges tab
     this.getStyling(); // get styling for left/right badges each time user goes to badges tab
   }
 
@@ -333,4 +336,8 @@ class Badges extends React.Component {
   }
 }
 
-export default Badges;
+const mapStateToProps = (state) => ({
+  reduxMastered: state.user.masteredActions
+});
+
+export default connect(mapStateToProps)(Badges);
