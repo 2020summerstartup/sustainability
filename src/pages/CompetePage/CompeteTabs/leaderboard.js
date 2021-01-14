@@ -1,12 +1,13 @@
 // commented by JM, many people contributed
 import React from "react";
-import trophyImg from "../../../img/trophy.svg";
+import { ReactComponent as TrophyImg } from "../../../img/trophy.svg";
 import "./leaderboard.css";
 import { firestore } from "../../../services/Firebase";
 import leaderBoardUpdate, { assignRanking } from "../leaderBoardUpdate";
 
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import { Divider } from "@material-ui/core";
 
 const useStyles = (theme) => ({
   trophyWrapper: {
@@ -38,17 +39,56 @@ let colors = [
   "#7A7574",
   "#7A7574",
   "#7A7574",
+  "#7A7574",
+  "#7A7574",
+  "#7A7574",
 ];
 
 leaderBoardUpdate(); // called to make sure ranking & scores are correct/ up-to-date
+
+
 
 class Leaderboard extends React.Component {
   constructor() {
     super();
     this.state = {
       leaders: [], // initalize array variable that will be populated with dorms in rank order
+      div: 1,
     };
     this.getData = this.getData.bind(this);
+  }
+
+  scalePoints (dorm) {
+    // for point scaling by group size
+    var division = 1;
+    if (dorm == "North") {
+      division = 80
+    } else if (dorm == "East") {
+      division = 80
+    } else if (dorm == "West") {
+      division = 80
+    } else if (dorm == "South") {
+      division = 80
+    } else if (dorm == "Drinkward") {
+      division = 200
+    } else if (dorm == "Sontag") {
+      division = 120
+    } else if (dorm == "Case") {
+      division = 150
+    } else if (dorm == "Linde") {
+      division = 150
+    } else if (dorm == "Atwood") {
+      division = 170
+    } else if (dorm == "Staff") {
+      division = 80
+    } else if (dorm == "Faculty") {
+      division = 80
+    } else if (dorm == "Arrow Vista") {
+      division = 80
+    }
+    this.setState({
+      div: division,
+    })
   }
 
   // sets the maxScore to the leading dorm's score
@@ -62,8 +102,9 @@ class Leaderboard extends React.Component {
         // set the maxPoints state to rank 1 dorm's score
         snapshot.forEach((doc) => { // this is a forEach loop bc I don't know how to do it any other way (will only have 1 dorm in it)
           const leaderScore = doc.data().score; // total points of dorm in first place
+          this.scalePoints(doc.id)
           this.setState({
-            maxPoints: leaderScore, 
+            maxPoints: (leaderScore * 1000 ) / this.state.div , 
             firstDorm: doc.id, // doc.id is the dorm's name (ie. north has a doc.id of "North")
           });
         });
@@ -77,10 +118,11 @@ class Leaderboard extends React.Component {
       firestore.collection("dorms").get().then((snapshot) => { // fetches a snapshot of the dorms collection in firestore w/ all the dorm data
           snapshot.docs.forEach((doc) => {
             if (doc.id !== "wholeSchool") { // only want the dorms (prevents wholeSchool from displaying as a dorm on the leaderboard)
+            
               newLeaders.push({
                 id: 1,
                 name: doc.id,
-                points: doc.data().score,
+                points: ( doc.data().score * 1000) / this.state.div,
               });
             }
           });
@@ -109,7 +151,7 @@ class Leaderboard extends React.Component {
             Way to be sustainable, Mudders!
           </Typography>
           <div className={classes.trophyWrapper}>
-            <img alt="trophy" src={trophyImg} className={classes.trophy} />
+            <TrophyImg className={classes.trophy} />
             {/* MUST ATTRIBUTE AUTHOR */}
             {/* <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
             <Typography
