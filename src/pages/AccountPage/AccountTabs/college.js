@@ -142,7 +142,7 @@ export const DormCard = React.memo(function GalaxyCard() {
               <Info useStyles={useGalaxyInfoStyles}>
                 <InfoSubtitle style={{ color: "white", fontWeight: "bold" }}>
                   {localStorage.getItem("name")}, you're representing{" "}
-                  {localStorage.getItem("dorm")} Dorm
+                  {localStorage.getItem("dorm")}
                 </InfoSubtitle>
                 <InfoTitle>{rank}</InfoTitle>
                 {/* Direct link to change dorm from line on Galaxy Card */}

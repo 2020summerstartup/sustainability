@@ -60,14 +60,18 @@ export default function DormSelect() {
           style={{ width: "10rem"}}
         >
           <option aria-label="None" value="" />
-          <option value={"South"}>South</option>
-          <option value={"Case"}>Case</option>
-          <option value={"East"}>East</option>
-          <option value={"West"}>West</option>
-          <option value={"North"}>North</option>
-          <option value={"Drinkward"}>Drinkward</option>
-          <option value={"Sontag"}>Sontag</option>
-          <option value={"Linde"}>Linde</option>
+            <option value={"South"}>South</option>
+            <option value={"Case"}>Case</option>
+            <option value={"East"}>East</option>
+            <option value={"West"}>West</option>
+            <option value={"North"}>North</option>
+            <option value={"Drinkward"}>Drinkward</option>
+            <option value={"Sontag"}>Sontag</option>
+            <option value={"Linde"}>Linde</option>
+            <option value={"Atwood"}>Atwood</option>
+            <option value={"Arrow Vista"}>Arrow Vista</option>
+            <option value={"Faculty"}>Faculty</option>
+            <option value={"Staff"}>Staff</option>
         </Select>
       </FormControl>
     </div>

@@ -23,7 +23,7 @@ const useStyles = (theme) => ({
     textTransform: "uppercase",
   },
   trophy: {
-    height: "15rem",
+    height: "17rem",
   },
 });
 
@@ -113,11 +113,11 @@ class Leaderboard extends React.Component {
             {/* MUST ATTRIBUTE AUTHOR */}
             {/* <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
             <Typography
-              variant="h6"
+              variant="h7"
               className={classes.firstDorm}
               component={"span"}
             >
-              {this.state.firstDorm} <br /> Dorm
+              {this.state.firstDorm} <br />
             </Typography>
           </div>
           <div style={{ marginTop: "1rem" }}>
@@ -180,6 +180,9 @@ class Leaderboard extends React.Component {
             ) : (
               <div className="empty">No leaders</div>
             )}
+            <Typography>
+                 *Points will be scaled by the number of people in each dorm
+               </Typography>
           </div>
         </div>
       </>
