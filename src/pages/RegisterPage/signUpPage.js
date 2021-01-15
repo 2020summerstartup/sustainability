@@ -14,7 +14,7 @@ import {
 } from "../../services/Firebase";
 import * as ROUTES from "../../constants/routes";
 // For PasswordOne data
-import { PasswordInput } from "./muiSignInPage";
+import { PasswordInput } from "./signInPage";
 import { ReactComponent as SignUp } from "../../img/signup.svg";
 import { audioContext } from "../AccountPage/Settings/audioContext";
 
@@ -234,7 +234,10 @@ class SignUpFormBase extends Component {
         dorm === "Sontag" ||
         dorm === "Drinkward" ||
         dorm === "Linde" ||
-        dorm === "Atwood"
+        dorm === "Atwood" ||
+        dorm === "Arrow Vista" ||
+        dorm === "Faculty" ||
+        dorm === "Staff"
       );
 
     return (
@@ -263,7 +266,7 @@ class SignUpFormBase extends Component {
               margin="normal"
               fullWidth
               id="username"
-              label="First Name"
+              label="First and Last Name"
               name="username"
               autoComplete="name"
               onChange={this.onChange}
@@ -306,6 +309,9 @@ class SignUpFormBase extends Component {
                 <option value={"Sontag"}>Sontag</option>
                 <option value={"Linde"}>Linde</option>
                 <option value={"Atwood"}>Atwood</option>
+                <option value={"Arrow Vista"}>Arrow Vista</option>
+                <option value={"Faculty"}>Faculty</option>
+                <option value={"Staff"}>Staff</option>
               </Select>
             </FormControl>
             <PasswordInput2

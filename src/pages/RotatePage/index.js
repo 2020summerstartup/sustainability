@@ -39,7 +39,7 @@ export class Rotate extends Component {
             mediaBackgroundStyle={{ backgroundColor: "#15601e" }}
             style={{ backgroundColor: "#15601e" }}
             title="What will we achieve?"
-            subtitle="Let's be sustainable together and make this world a better place one action at a time with healthy competition for some awesome prizes!"
+            subtitle="Build sustainable habits. Learn. Compete with your friends and earn real life rewards."
           />
 
           {/* Earn Points Slide */}
@@ -56,8 +56,8 @@ export class Rotate extends Component {
             }
             mediaBackgroundStyle={{ backgroundColor: "#1c8028" }}
             style={{ backgroundColor: "#1c8028" }}
-            title="Log actions, earn points."
-            subtitle="Being sustainable earns points for you and your dorm! Save your favorites! Special surprise for mastering an action ;)"
+            title="Log Actions, Earn Points."
+            subtitle="Log actions to earn points. Save your favorites. Special surprise for mastering an action."
           />
 
           {/* Leaderboard Slide */}
@@ -74,8 +74,8 @@ export class Rotate extends Component {
             }
             mediaBackgroundStyle={{ backgroundColor: "#24a133" }}
             style={{ backgroundColor: "#24a133" }}
-            title="Compete Across Dorms!"
-            subtitle="See how your dorm stacks up against your friends' dorms! Prizes for winning dorm!"
+            title="Compete Across Dorms."
+            subtitle="See how your dorm stacks up against your friends' dorms. Prizes for winning dorm!"
           />
 
           {/* Add To Home Screen Slide */}
@@ -93,7 +93,7 @@ export class Rotate extends Component {
             }
             mediaBackgroundStyle={{ backgroundColor: "#4fb35b" }}
             style={{ backgroundColor: "#4fb35b" }}
-            title="Add to Home Screen!"
+            title="Add to Home Screen."
             subtitle="Last thing before you get started. Add our app to your home screen for easy to access to our app!"
           />
         </AutoRotatingCarousel>

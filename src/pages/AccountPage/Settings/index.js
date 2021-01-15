@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { AuthUserContext } from "../../../services/Session";
 
-import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { withTheme } from "../../../components/Theme";
+import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -23,10 +23,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Switch from "@material-ui/core/Switch";
-import Grid from "@material-ui/core/Grid";
 import AudioContextProvider, { audioContext } from "./audioContext";
 import SignOutButton from "../../../components/SignOut";
-// const SignOutButton = lazy(() => import("../../../components/SignOut"));
 
 // Styles for settings drawer
 const useStyles = makeStyles((theme) => ({
@@ -51,40 +49,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.error.main,
   },
 }));
-
-const UnmuteSwitch = withStyles((theme) => ({
-  root: {
-    width: 28,
-    height: 16,
-    padding: 0,
-    display: "flex",
-  },
-  switchBase: {
-    padding: 2,
-    color: theme.palette.grey[500],
-    "&$checked": {
-      transform: "translateX(12px)",
-      color: theme.palette.common.white,
-      "& + $track": {
-        opacity: 1,
-        backgroundColor: theme.palette.primary.main,
-        borderColor: theme.palette.primary.main,
-      },
-    },
-  },
-  thumb: {
-    width: 12,
-    height: 12,
-    boxShadow: "none",
-  },
-  track: {
-    border: `1px solid ${theme.palette.grey[500]}`,
-    borderRadius: 16 / 2,
-    opacity: 1,
-    backgroundColor: theme.palette.common.white,
-  },
-  checked: {},
-}))(Switch);
 
 // Main Component - Settings on top right corner of profile page
 function SettingsDrawer(props) {
@@ -207,21 +171,19 @@ function SettingsDrawer(props) {
 
         {/* MUTE TOGGLE */}
         <ListItem>
-          <ListItemText className={classes.listItemText}>
-            <Typography component="div">
-              <Grid component="label" container alignItems="center" spacing={1}>
-                <Grid item>Audio Off</Grid>
-                <Grid item>
-                  <UnmuteSwitch
-                    checked={audio.unmute}
-                    onChange={audio.muteAudio}
-                    name="unmute"
-                  />
-                </Grid>
-                <Grid item>Audio On</Grid>
-              </Grid>
-            </Typography>
-          </ListItemText>
+          <ListItemIcon
+            className={classes.listItemIcon}
+            style={{ transform: "translate(-25%)" }}
+          >
+            <Switch
+              size="small"
+              checked={audio.unmute}
+              onChange={audio.muteAudio}
+              name="unmute"
+              style={{ margin: 0 }}
+            />
+          </ListItemIcon>
+          <ListItemText className={classes.listItemText}>Audio On</ListItemText>
         </ListItem>
 
         {/* SIGNOUT BUTTON */}

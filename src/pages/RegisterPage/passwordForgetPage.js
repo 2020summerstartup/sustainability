@@ -12,7 +12,7 @@ import Container from "@material-ui/core/Container";
 import EmailIcon from "@material-ui/icons/Email";
 
 // Main Components
-const MuiPasswordForgetPage = () => (
+const PasswordForgetPage = () => (
   <div className="base-container">
     <PasswordForgetForm />
   </div>
@@ -117,4 +117,4 @@ const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
 
 export { PasswordForgetForm };
 
-export default MuiPasswordForgetPage;
+export default PasswordForgetPage;

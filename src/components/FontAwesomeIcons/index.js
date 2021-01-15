@@ -7,16 +7,7 @@ import {
   faLeaf,
   faUser,
   faTrophy,
-  faInfo,
   faHome,
-  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(
-  faLeaf,
-  faUser,
-  faTrophy,
-  faInfo,
-  faHome,
-  faSignOutAlt,
-);
+library.add(faLeaf, faUser, faTrophy, faHome);

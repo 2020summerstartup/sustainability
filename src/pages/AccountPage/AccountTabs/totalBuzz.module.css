@@ -1,13 +1,14 @@
 .bannerShape {
   background-color: var(--theme-secondary);
   width: 70%;
-  min-width: 19rem;
+  min-width: 17rem;
   height: 7rem;
   place-items: center;
   text-align: center;
   position: relative;
   display: flex;
-  margin: 3rem auto;
+  margin: 2.5rem auto;
+  margin-bottom: 0;
   color: #fff;
   text-shadow: 1px 1px 5px black;
 }

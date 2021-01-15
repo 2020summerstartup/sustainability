@@ -1,3 +1,4 @@
+// commented by KR & JM
 import React from "react";
 import Reward from "react-rewards";
 import styles from "./envImpactCards.module.css";
@@ -9,7 +10,7 @@ import { withStyles } from "@material-ui/core/styles";
 let colors = ["yellow", "green", "blue"];
 
 
-const useStyles = (theme) => ({
+const useStyles = () => ({
   color: {
     "&:after": {
       backgroundColor: `${colors}`,
@@ -18,7 +19,7 @@ const useStyles = (theme) => ({
 });
 
 // Changes display message depnding on user's impact
-// Intializes variables for text to be displayed on impact cards
+// Intializes variables for text/title to be displayed on impact cards
 var theCO;
 var theEnergy;
 var theH2O;
@@ -56,7 +57,7 @@ const H2ODisplay = () => {
   }
 };
 
-// Need to call functions, either inside or outside of class
+// Call the functions to make sure title display on cards (suns) are updated
 CODisplay();
 EnergyDisplay();
 H2ODisplay();

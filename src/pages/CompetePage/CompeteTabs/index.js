@@ -7,8 +7,6 @@ import * as ROLES from "../../../constants/roles";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import Leaderboard from "./leaderboard";
 import ProgressCircle from "../../../components/ProgressCircle";
-// import ComingSoon from "./comingSoon";
-// import AdminPage from "../../AdminPage";
 
 // Material UI Imports
 import PropTypes from "prop-types";
