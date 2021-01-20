@@ -86,8 +86,9 @@ export default function DarkModeModal() {
       <DialogContent className={styles.dialogContentDarkMode}>
         <DialogContentText>
           <Typography variant="h5" component={"span"} className={classes.dialogTitle}>
-            Hey our sustainable buddy, {localStorage.getItem("name")}!
+            Hey our sustainable buddy, {localStorage.getItem("name")}!{" "}
           </Typography>
+          <br />
           <Typography
             variant="h6"
             component={"span"}

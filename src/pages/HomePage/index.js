@@ -12,7 +12,7 @@ import {
   updateUserImpact,
   updateSchoolImpact,
 } from "../../services/Firebase";
-import ActionData from "./actionData.json";
+import ActionData from "./actionDataCarnival.json";
 import ProgressCircle from "../../components/ProgressCircle";
 import { audioContext } from "../AccountPage/Settings/audioContext";
 
