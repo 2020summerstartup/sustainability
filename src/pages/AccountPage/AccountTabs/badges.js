@@ -1,7 +1,7 @@
 // commented by KR & JM (several people contrubted to file)
 import React from "react";
 import styles from "./badges.module.css";
-import ActionData from "../../HomePage/actionData.json";
+import ActionData from "../../HomePage/actionDataCarnival.json";
 import fansImg from "../../../img/fans.svg";
 import "../../../components/GalaxyCards/galaxyCards.css";
 // Material UI and galaxy card imports
