@@ -104,7 +104,7 @@ class Leaderboard extends React.Component {
           const leaderScore = doc.data().score; // total points of dorm in first place
           this.scalePoints(doc.id)
           this.setState({
-            maxPoints: (leaderScore * 1000 ) / this.state.div , 
+            maxPoints: Math.round((leaderScore * 1000 ) / this.state.div) , 
             firstDorm: doc.id, // doc.id is the dorm's name (ie. north has a doc.id of "North")
           });
         });
@@ -122,7 +122,7 @@ class Leaderboard extends React.Component {
               newLeaders.push({
                 id: 1,
                 name: doc.id,
-                points: ( doc.data().score * 1000) / this.state.div,
+                points: Math.round(( doc.data().score * 1000) / this.state.div),
               });
             }
           });
@@ -223,7 +223,7 @@ class Leaderboard extends React.Component {
               <div className="empty">No leaders</div>
             )}
             <Typography>
-                 *Points will be scaled by the number of people in each dorm
+                 *Points are scaled by the number of people in each dorm
                </Typography>
           </div>
         </div>
