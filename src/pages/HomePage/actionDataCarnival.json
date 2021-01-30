@@ -10,7 +10,7 @@
         "energy": 0,
         "water": 0,
         "image": "https://www.hmc.edu/about-hmc/wp-content/uploads/sites/2/2020/02/campus-gv.jpg",
-        "impact": "Welcome to the DSA & ASHMC Sustainability Carnival! Thank you for signing up for EcoBud! We entered your name into the raffle for fun prizes!"
+        "impact": "Welcome to the DSA & ASHMC Sustainability Carnival! Thank you for signing up for EcoBud. We entered your name into the raffle for fun prizes. Have fun at the various booths at the Sustainability Carnival!"
     },
     {
         "title": "*(Re)Growing Produce/Reusing Glass",
@@ -23,7 +23,7 @@
         "energy": 0,
         "water": 0,
         "image": "https://magazine.hmc.edu/summer-2020/wp-content/uploads/sites/21/2020/09/diversity-inclusion.jpg",
-        "impact": "OID/ISS/OCE"
+        "impact": "Office of Institutional Diversity (OID)/ \nInternational Students and Scholars (ISS)/ Office of Community Engagement (OCE)"
     },
     {
         "title": "*Virtual Puzzles and Home Work Outs",
@@ -36,7 +36,7 @@
         "energy": 0,
         "water": 0,
         "image": "https://www.hmc.edu/student-life/wp-content/uploads/sites/4/2014/11/IMG_0042-1024x307.jpg",
-        "impact": "ResLife & OCL ~ identify how sustainability relates to physical health and recycling & learn how to reuse common household items!"
+        "impact": "ResLife & Office of Campus LIfe (OCL) ~ Identify how sustainability relates to physical health and recycling & learn how to reuse common household items!"
     },
     {
         "title": "*Registering for 7C Health",
@@ -49,7 +49,7 @@
         "energy": 0,
         "water": 0,
         "image": "https://i.insider.com/5978a63b5d8a2f1e008b565f?width=1200&format=jpeg",
-        "impact": "Wellness/ADARRS/Accommodations"
+        "impact": "Wellness / ADARRS / Accommodations"
     },
     {
         "title": "*Career/Leadership Sustainability Trivia/Kahoot",
@@ -62,7 +62,7 @@
         "energy": 0,
         "water": 0,
         "image": "https://www.hmc.edu/calendar/wp-content/uploads/sites/39/2020/12/OCS-staff-600w.jpg",
-        "impact": "Leadership/OCS ~ identify how sustainability relates to career paths!"
+        "impact": "Leadership / Office of Career Services  (OCS) ~ Identify how sustainability relates to career paths!"
     },
     {
         "title": "*ASHMC Sustainability / ESW",
@@ -74,8 +74,8 @@
         "coEmiss": 0,
         "energy": 0,
         "water": 0,
-        "image": "https://www.hmc.edu/about-hmc/wp-content/uploads/sites/2/2020/02/campus-gv.jpg",
-        "impact": "ASHMC Sustainability / ESW"
+        "image": "https://www.hmc.edu/hcsed/wp-content/uploads/sites/41/2017/11/MG_2399.jpg",
+        "impact": "ASHMC Sustainability / Engineers for a Sustainable World (ESW) ~ Calculate your carbon footprint and identitify ways to reduce your carbon footprint!"
     },
     {
         "title": "*Hixon Center",
@@ -87,8 +87,8 @@
         "coEmiss": 0,
         "energy": 0,
         "water": 0,
-        "image": "https://www.hmc.edu/hcsed/wp-content/uploads/sites/41/2015/07/Campus15-018-copy.jpg",
-        "impact": "Hixon Center"
+        "image": "https://www.hmc.edu/hcsed/wp-content/uploads/sites/41/2016/04/Picture1-1024x593.png",
+        "impact": "Hixon Center ~ The Hixon Center for Sustainable Environmental Design at Harvey Mudd College was created in 2015 to initiate, support and coordinate college-wide programs and activities related to sustainability research, teaching and practice. Come learn about the environmental impact of Mudd and what the Hixon center will do in the future"
     },
     {
         "title": "Recycle Bottles & Cans",
