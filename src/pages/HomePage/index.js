@@ -692,6 +692,14 @@ function HomePage(props) {
                   Check Progress
                 </Button>
 
+                <Typography
+                  variant="h8"
+                  style={{ marginTop: "1rem" }}
+                  component={"span"}
+                >
+                * All cards marked with an asterisk are Sustainability Carnival Booths that you can visit on Friday Feb. 12th from 11:30am to 1pm!
+                </Typography>
+
                 {/* BADGE MODAL- opens when user logs their last action to master the badge! */}
                 <Dialog
                   open={badgeModalIsOpen}
