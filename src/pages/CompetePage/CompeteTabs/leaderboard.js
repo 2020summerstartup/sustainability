@@ -64,25 +64,25 @@ class Leaderboard extends React.Component {
     if (dorm == "North") {
       division = 80
     } else if (dorm == "East") {
-      division = 80
+      division = 82
     } else if (dorm == "West") {
-      division = 80
+      division = 84
     } else if (dorm == "South") {
-      division = 80
+      division = 65
     } else if (dorm == "Drinkward") {
-      division = 200
+      division = 167
     } else if (dorm == "Sontag") {
-      division = 120
+      division = 77
     } else if (dorm == "Case") {
-      division = 150
+      division = 119
     } else if (dorm == "Linde") {
-      division = 150
+      division = 76
     } else if (dorm == "Atwood") {
-      division = 170
+      division = 127
     } else if (dorm == "Staff") {
-      division = 80
+      division = 231
     } else if (dorm == "Faculty") {
-      division = 80
+      division = 97
     } else if (dorm == "Arrow Vista") {
       division = 80
     }
@@ -104,7 +104,7 @@ class Leaderboard extends React.Component {
           const leaderScore = doc.data().score; // total points of dorm in first place
           this.scalePoints(doc.id)
           this.setState({
-            maxPoints: Math.round((leaderScore * 1000 ) / this.state.div) , 
+            maxPoints: Math.round((leaderScore * 100 ) / this.state.div) , 
             firstDorm: doc.id, // doc.id is the dorm's name (ie. north has a doc.id of "North")
           });
         });
@@ -122,7 +122,7 @@ class Leaderboard extends React.Component {
               newLeaders.push({
                 id: 1,
                 name: doc.id,
-                points: Math.round(( doc.data().score * 1000) / this.state.div),
+                points: Math.round(( doc.data().score * 100) / this.state.div),
               });
             }
           });
